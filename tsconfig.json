@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "experimentalDecorators": true,
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "declaration": true,
+        "sourceMap": false,
+        "alwaysStrict": true,
+        "outDir": "dist/",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "dom",
+            "es2015",
+            "es5",
+            "es6",
+            "es2017",
+            "esnext"
+        ]
+    },
+    "files": [
+        "src/types.d.ts"
+    ],
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
