@@ -1,5 +1,4 @@
 import axios from "axios";
-import { AxiosResponse } from "axios";
 import * as fs from "fs";
 import * as _ from "lodash";
 import * as moment from "moment";

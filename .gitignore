@@ -49,3 +49,5 @@ disabledIPs.txt
 /ignoreLoggingUserKeys.txt
 /node/tslint.json
 /static/tslint.json
+/test/dist
+/dist

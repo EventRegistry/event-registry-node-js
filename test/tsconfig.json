@@ -20,7 +20,7 @@
         ]
     },
     "include": [
-        "./**/*.ts"
+        "./spec/**/*.ts"
     ],
     "files": [
         "index.d.ts"

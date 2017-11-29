@@ -4,6 +4,7 @@
         "experimentalDecorators": true,
         "noImplicitAny": false,
         "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "alwaysStrict": true,
