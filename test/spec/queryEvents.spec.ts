@@ -28,18 +28,20 @@ describe("Query Events", () => {
     let query: QueryEvents;
     let requestEventsInfo: RequestEventsInfo;
 
-    beforeAll(async () => {
+    beforeAll(async (done) => {
         requestEventsInfo = new RequestEventsInfo({count: 10, returnInfo: utils.returnInfo});
         query = new QueryEvents({conceptUri: await er.getConceptUri("Obama")});
+        done();
     });
 
-    it("should test event list", async () => {
+    it("should test event list", async (done) => {
         query.setRequestedResult(requestEventsInfo);
         const response = await er.execQuery(query);
         expect(response).toBeValidGeneralEventList();
+        done();
     });
 
-    it("should test event list with source search", async () => {
+    it("should test event list with source search", async (done) => {
         const q1 = new QueryEvents({keywords: "germany"});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
@@ -53,9 +55,10 @@ describe("Query Events", () => {
         const results1 = _.sortBy(response1["events"]["results"], "id");
         const results2 = _.sortBy(response2["events"]["results"], "id");
         expect(_.size(results1)).toEqual(_.size(results2), "Keyword search should return responses of the same size");
+        done();
     });
 
-    it("should test event list with source search", async () => {
+    it("should test event list with source search", async (done) => {
         const q1 = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
@@ -69,9 +72,10 @@ describe("Query Events", () => {
         const results1 = _.sortBy(response1["events"]["results"], "id");
         const results2 = _.sortBy(response2["events"]["results"], "id");
         expect(_.size(results1)).toEqual(_.size(results2), "Source search should return responses of the same size");
+        done();
     });
 
-    it("should test event list with source search", async () => {
+    it("should test event list with source search", async (done) => {
         const q1 = new QueryEvents({categoryUri: await er.getCategoryUri("disa")});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
@@ -85,23 +89,26 @@ describe("Query Events", () => {
         const results1 = _.sortBy(response1["events"]["results"], "id");
         const results2 = _.sortBy(response2["events"]["results"], "id");
         expect(_.size(results1)).toEqual(_.size(results2), "Source search should return responses of the same size");
+        done();
     });
 
-    it("should test event list with language search", async () => {
+    it("should test event list with language search", async (done) => {
         const q1 = new QueryEvents({lang: "spa"});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
         expect(response1).toBeValidGeneralEventList();
+        done();
     });
 
-    it("should test event list with minimal articles search", async () => {
+    it("should test event list with minimal articles search", async (done) => {
         const q1 = new QueryEvents({minArticlesInEvent: 100});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
         expect(response1).toBeValidGeneralEventList();
+        done();
     });
 
-    it("should test search by keyword", async () => {
+    it("should test search by keyword", async (done) => {
         const q1 = new QueryEvents({keywords: "car"});
         const evInfo = new EventInfoFlags({ concepts: false,
                                             articleCounts: false,
@@ -146,9 +153,10 @@ describe("Query Events", () => {
             expect(_.has(event, "title")).toBeFalsy("Event should not contain title");
             expect(_.has(event, "summary")).toBeFalsy("Event should not contain summary");
         });
+        done();
     });
 
-    it("should test event list with combined search", async () => {
+    it("should test event list with combined search", async (done) => {
         const conceptUri = await er.getConceptUri("Merkel");
         const categoryUri = await er.getCategoryUri("Business");
         const q1 = new QueryEvents({keywords: "germany", lang: ["eng", "deu"], conceptUri: [conceptUri], categoryUri: [categoryUri]});
@@ -164,9 +172,10 @@ describe("Query Events", () => {
         const results1 = _.sortBy(response1["events"]["results"], "id");
         const results2 = _.sortBy(response2["events"]["results"], "id");
         expect(_.size(results1)).toEqual(_.size(results2), "Source search should return responses of the same size");
+        done();
     });
 
-    it("should test concept trends", async () => {
+    it("should test concept trends", async (done) => {
         const requestEventsConceptTrends = new RequestEventsConceptTrends({conceptCount: 5, returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventsConceptTrends);
         const response = await er.execQuery(query);
@@ -186,9 +195,10 @@ describe("Query Events", () => {
         _.each(_.get(response, "conceptTrends.conceptInfo", []), (concept) => {
             expect(concept).toBeValidConcept();
         });
+        done();
     });
 
-    it("should test concept aggregates", async () => {
+    it("should test concept aggregates", async (done) => {
         const requestEventsConceptAggr = new RequestEventsConceptAggr({conceptCount: 50, returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventsConceptAggr);
         const response = await er.execQuery(query);
@@ -199,9 +209,10 @@ describe("Query Events", () => {
         _.each(concepts, (concept) => {
             expect(concept).toBeValidConcept();
         });
+        done();
     });
 
-    it("should test keyword aggregates", async () => {
+    it("should test keyword aggregates", async (done) => {
         const requestEventsKeywordAggr = new RequestEventsKeywordAggr();
         query.setRequestedResult(requestEventsKeywordAggr);
         const response = await er.execQuery(query);
@@ -212,9 +223,10 @@ describe("Query Events", () => {
             expect(_.has(kw, "keyword")).toBeTruthy("Expected a keyword property");
             expect(_.has(kw, "weight")).toBeTruthy("Expected a weight property");
         });
+        done();
     });
 
-    it("should test category aggregates", async () => {
+    it("should test category aggregates", async (done) => {
         const requestEventsCategoryAggr = new RequestEventsCategoryAggr(utils.returnInfo);
         query.setRequestedResult(requestEventsCategoryAggr);
         const response = await er.execQuery(query);
@@ -224,9 +236,10 @@ describe("Query Events", () => {
         _.each(categories, (category) => {
             expect(category).toBeValidCategory();
         });
+        done();
     });
 
-    it("should test concept matrix", async () => {
+    it("should test concept matrix", async (done) => {
         const requestEventsConceptMatrix = new RequestEventsConceptMatrix({conceptCount: 20, returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventsConceptMatrix);
         const response = await er.execQuery(query);
@@ -241,7 +254,7 @@ describe("Query Events", () => {
         });
     });
 
-    it("should test source aggregates", async () => {
+    it("should test source aggregates", async (done) => {
         const requestEventsSourceAggr = new RequestEventsSourceAggr({sourceCount: 15, returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventsSourceAggr);
         const response = await er.execQuery(query);
@@ -254,9 +267,10 @@ describe("Query Events", () => {
             expect(_.has(sourceInfo, "counts.frequency")).toBeTruthy("Counts should contain a frequency");
             expect(_.has(sourceInfo, "counts.ratio")).toBeTruthy("Counts should contain ratio");
         });
+        done();
     });
 
-    it("should test search by source", async () => {
+    it("should test search by source", async (done) => {
         const q = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
         q.addRequestedResult(new RequestEventsUriList());
         const eventInfo = new EventInfoFlags({concepts: true, articleCounts: true, title: true, summary: true, categories: true, location: true, stories: true, imageCount: 1});
@@ -296,6 +310,7 @@ describe("Query Events", () => {
                 expect(concept.type === "wiki").toBeTruthy("Got concept of invalid type");
             });
         });
+        done();
     });
 
     it("should query events iterator (1)", async (done) => {

@@ -13,15 +13,16 @@ describe("Query Article", () => {
     const utils = new Utils();
     let query;
 
-    beforeAll(async () => {
+    beforeAll(async (done) => {
         const q = new QueryArticles({conceptUri: await er.getConceptUri("Obama")});
         const requestArticlesUriList = new RequestArticlesUriList({count: 10});
         q.setRequestedResult(requestArticlesUriList);
         const response = await er.execQuery(q);
         query = new QueryArticle(_.get(response, "uriList.results"));
+        done();
     });
 
-    it("should return articles", async () => {
+    it("should return articles", async (done) => {
         const requestArticleInfo = new RequestArticleInfo(utils.returnInfo);
         query.setRequestedResult(requestArticleInfo);
         const response = await er.execQuery(query);
@@ -53,5 +54,6 @@ describe("Query Article", () => {
                 expect(article["info"]).toBeValidArticle();
             }
         });
+        done();
     });
 });

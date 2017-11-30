@@ -23,15 +23,16 @@ describe("Query Event", () => {
     const utils = new Utils();
     let query: QueryEvent;
 
-    beforeAll(async () => {
+    beforeAll(async (done) => {
         const q = new QueryEvents({lang: "eng", conceptUri: await er.getConceptUri("Obama")});
         const requestEventsUriList = new RequestEventsUriList({count: 10});
         q.setRequestedResult(requestEventsUriList);
         const response = await er.execQuery(q);
         query = new QueryEvent(_.get(response, "uriList.results"));
+        done();
     });
 
-    it("should test article list", async () => {
+    it("should test article list", async (done) => {
         const requestEventArticles  = new RequestEventArticles({returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventArticles);
         const response = await er.execQuery(query);
@@ -40,18 +41,20 @@ describe("Query Event", () => {
                 expect(article).toBeValidArticle();
             });
         });
+        done();
     });
 
-    it("should test article uris", async () => {
+    it("should test article uris", async (done) => {
         const requestEventArticleUris  = new RequestEventArticleUris();
         query.setRequestedResult(requestEventArticleUris);
         const response = await er.execQuery(query);
         _.each(response, (event) => {
             expect(_.has(event, "articleUris")).toBeTruthy("Expected to see 'articleUris'");
         });
+        done();
     });
 
-    it("should test keywords", async () => {
+    it("should test keywords", async (done) => {
         const requestEventKeywordAggr  = new RequestEventKeywordAggr();
         query.setRequestedResult(requestEventKeywordAggr);
         const response = await er.execQuery(query);
@@ -65,27 +68,30 @@ describe("Query Event", () => {
                 expect(_.has(kw, "weight")).toBeTruthy("Weight expected");
             });
         });
+        done();
     });
 
-    it("should test source aggregates", async () => {
+    it("should test source aggregates", async (done) => {
         const requestEventSourceAggr  = new RequestEventSourceAggr();
         query.setRequestedResult(requestEventSourceAggr);
         const response = await er.execQuery(query);
         _.each(response, (event) => {
             expect(_.has(event, "sourceExAggr")).toBeTruthy("Expected to see 'sourceExAggr'");
         });
+        done();
     });
 
-    it("should test article trends", async () => {
+    it("should test article trends", async (done) => {
         const requestEventArticleTrend  = new RequestEventArticleTrend();
         query.setRequestedResult(requestEventArticleTrend);
         const response = await er.execQuery(query);
         _.each(response, (event) => {
             expect(_.has(event, "articleTrend")).toBeTruthy("Expected to see 'articleTrend'");
         });
+        done();
     });
 
-    it("should test similar events", async () => {
+    it("should test similar events", async (done) => {
         const requestEventSimilarEvents  = new RequestEventSimilarEvents({addArticleTrendInfo: true, returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventSimilarEvents);
         const response = await er.execQuery(query);
@@ -96,9 +102,10 @@ describe("Query Event", () => {
             });
             expect(_.has(event, "similarEvents.trends")).toBeTruthy("Expected to see 'trends'");
         });
+        done();
     });
 
-    it("should test similar stories", async () => {
+    it("should test similar stories", async (done) => {
         const requestEventSimilarStories  = new RequestEventSimilarStories({returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventSimilarStories);
         const response = await er.execQuery(query);
@@ -108,6 +115,7 @@ describe("Query Event", () => {
                 expect(simStory).toBeValidStory();
             });
         });
+        done();
     });
 
     // TODO: use a an event uri that actually exists in the database

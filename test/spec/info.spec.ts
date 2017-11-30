@@ -13,7 +13,7 @@ import { Utils } from "./utils";
 describe("Info", () => {
     const er = Utils.initAPI();
 
-    it("should return sources by uri", async () => {
+    it("should return sources by uri", async (done) => {
         const sources = await er.suggestNewsSources("a", {count: 10});
         const sourceUriList = _.map(sources, "uri") as string[];
         const sourceInfoFlags = new SourceInfoFlags({title: true,
@@ -38,9 +38,10 @@ describe("Info", () => {
             expect(_.has(item, "sourceGroups")).toBeTruthy("Source sourceGroups is missing");
             expect(_.has(item, "details")).toBeTruthy("Source details is missing");
         });
+        done();
     });
 
-    it("should return concepts by uri", async () => {
+    it("should return concepts by uri", async (done) => {
         const concepts = await er.suggestConcepts("a", {count: 10});
         const uriList = _.map(concepts, "uri") as string[];
         const conceptInfoFlags = new ConceptInfoFlags({type: "wiki",
@@ -80,9 +81,10 @@ describe("Info", () => {
             expect(_.has(item, "trendingHistory.news")).toBeTruthy("Concept should have trendingHistory for news");
             expect(_.has(item, "trendingHistory.social")).toBeTruthy("Concept should have trendingHistory for social");
         });
+        done();
     });
 
-    it("should return categories", async () => {
+    it("should return categories", async (done) => {
         const categories = await er.suggestCategories("a", {count: 10});
         const uriList = _.map(categories, "uri") as string[];
         const categoryInfoFlags = new CategoryInfoFlags({ parentUri: true,
@@ -108,5 +110,6 @@ describe("Info", () => {
             expect(_.has(item, "trendingHistory.news")).toBeTruthy("Category trending history for news is missing");
             expect(_.has(item, "trendingHistory.social")).toBeTruthy("Category trending history for social is missing");
         });
+        done();
     });
 });

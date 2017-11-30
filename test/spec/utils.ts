@@ -98,7 +98,7 @@ export class Utils {
                                          });
     }
 
-    public static initAPI() {
+    public static initAPI(): EventRegistry {
         return new EventRegistry();
     }
 

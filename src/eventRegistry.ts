@@ -18,7 +18,7 @@ export class EventRegistry {
     private config: ER.Config = {
         host: "http://eventregistry.org",
         logging: false,
-        minDelayBetweenRequests: 0.5,
+        minDelayBetweenRequests: 1,
         repeatFailedRequestCount: 2,
         verboseOutput: false,
     };
@@ -344,7 +344,7 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async getLocationUri(locationLabel, args: ER.GetLocationUriArguments = {}) {
-        const { lang = "eng", sources = [ "place", "country" ] as ER.SourceType[], countryUri = undefined, sortByDistanceTo = undefined } = args;
+        const { lang = "eng", sources = [ "place", "country" ] as any, countryUri = undefined, sortByDistanceTo = undefined } = args;
         const matches = await this.suggestLocations(locationLabel, { lang, sources, countryUri, sortByDistanceTo });
         return _.get(_.first(matches), "wikiUri", undefined);
     }

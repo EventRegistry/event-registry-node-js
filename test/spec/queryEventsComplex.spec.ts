@@ -18,7 +18,7 @@ describe("Query Events Complex", () => {
     let sourceUris;
     let categoryUri;
 
-    beforeAll(async () => {
+    beforeAll(async (done) => {
         conceptUris = {
             obama: await er.getConceptUri("obama"),
             trump: await er.getConceptUri("trump"),
@@ -29,9 +29,10 @@ describe("Query Events Complex", () => {
         };
 
         categoryUri = await er.getCategoryUri("business");
+        done();
     });
 
-    it("should compare same results (1)", async () => {
+    it("should compare same results (1)", async (done) => {
         const cq1 = new ComplexEventQuery(new BaseQuery({
             conceptUri: QueryItems.AND(_.values(conceptUris)),
             exclude: new BaseQuery({ lang: QueryItems.OR(["eng", "deu"]) }),
@@ -49,9 +50,10 @@ describe("Query Events Complex", () => {
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes3, "totalResults"));
+        done();
     });
 
-    it("should compare same results (2)", async () => {
+    it("should compare same results (2)", async (done) => {
         const cq1 = new ComplexEventQuery(new BaseQuery({
             sourceUri: QueryItems.OR(_.values(sourceUris)),
             exclude: new BaseQuery({ conceptUri: QueryItems.OR([conceptUris.obama]) }),
@@ -69,9 +71,10 @@ describe("Query Events Complex", () => {
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes3, "totalResults"));
+        done();
     });
 
-    it("should compare same results (3)", async () => {
+    it("should compare same results (3)", async (done) => {
         const cq1 = new ComplexEventQuery(new BaseQuery({
             dateStart: "2017-02-05",
             dateEnd: "2017-02-06",
@@ -90,9 +93,10 @@ describe("Query Events Complex", () => {
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes3, "totalResults"));
+        done();
     });
 
-    it("should compare same results (4)", async () => {
+    it("should compare same results (4)", async (done) => {
         const cq1 = QueryEvents.initWithComplexQuery(new QueryEvents(), `
             {
                 "$query": {
@@ -110,9 +114,10 @@ describe("Query Events Complex", () => {
         const listRes2 = await utils.getQueryUriListForQueryEvents(er, q);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
+        done();
     });
 
-    it("should compare same results (5)", async () => {
+    it("should compare same results (5)", async (done) => {
         const politicsUri = await er.getCategoryUri("politics");
         const cq1 = QueryEvents.initWithComplexQuery(new QueryEvents(), `
         {
@@ -146,6 +151,7 @@ describe("Query Events Complex", () => {
         const listRes2 = await utils.getEventsQueryUriListForComplexQuery(er, new QueryEvents(), cq2);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
+        done();
     });
 
     it("should get valid content", async (done) => {

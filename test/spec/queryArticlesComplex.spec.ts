@@ -66,7 +66,7 @@ describe("Query Articles Complex", () => {
         });
     });
 
-    it("should compare same results from keyword search (1)", async () => {
+    it("should compare same results from keyword search (1)", async (done) => {
         const exclude = new BaseQuery({lang: QueryItems.OR(["eng", "deu"])});
         const baseQuery1 = new BaseQuery({keyword: QueryItems.AND(["obama", "trump"]), exclude });
         const cq1 = new ComplexArticleQuery(baseQuery1);
@@ -82,9 +82,10 @@ describe("Query Articles Complex", () => {
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes3, "totalResults"));
+        done();
     });
 
-    it("should compare same results from keyword search (2)", async () => {
+    it("should compare same results from keyword search (2)", async (done) => {
         const obamaUri = await er.getConceptUri("obama");
         const bbcUri = await er.getNewsSourceUri("bbc");
         const apUri = await er.getNewsSourceUri("associated press");
@@ -108,9 +109,10 @@ describe("Query Articles Complex", () => {
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes3, "totalResults"));
+        done();
     });
 
-    it("should compare same results from keyword search (3)", async () => {
+    it("should compare same results from keyword search (3)", async (done) => {
         const exclude = new BaseQuery({categoryUri: await er.getCategoryUri("Business")});
         const baseQuery1 = new BaseQuery({dateStart: "2017-02-05", dateEnd: "2017-02-06", exclude});
         const cq1 = new ComplexArticleQuery(baseQuery1);
@@ -130,9 +132,10 @@ describe("Query Articles Complex", () => {
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes3, "totalResults"));
+        done();
     });
 
-    it("should compare same results from keyword search (4)", async () => {
+    it("should compare same results from keyword search (4)", async (done) => {
         const businessUri = await er.getCategoryUri("Business");
         const qStr = `
         {
@@ -152,9 +155,10 @@ describe("Query Articles Complex", () => {
         const listRes2 = await utils.getQueryUriListForQueryArticles(er, q);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
+        done();
     });
 
-    it("should compare same results from keyword search (5)", async () => {
+    it("should compare same results from keyword search (5)", async (done) => {
         const trumpUri = await er.getConceptUri("Trump");
         const obamaUri = await er.getConceptUri("Obama");
         const politicsUri = await er.getCategoryUri("politics");
@@ -190,9 +194,10 @@ describe("Query Articles Complex", () => {
         const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, new QueryArticles(), cq2);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
+        done();
     });
 
-    it("should compare same results from keyword search (6)", async () => {
+    it("should compare same results from keyword search (6)", async (done) => {
         const trumpUri = await er.getConceptUri("Trump");
         const obamaUri = await er.getConceptUri("Obama");
         const politicsUri = await er.getCategoryUri("politics");
@@ -241,6 +246,7 @@ describe("Query Articles Complex", () => {
         const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, new QueryArticles(), cq2);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
+        done();
     });
 
     it("should get valid content", async (done) => {

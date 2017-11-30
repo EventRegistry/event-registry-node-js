@@ -47,11 +47,11 @@ export module ER {
         /**
          * Language in which the prefix is specified
          */
-        lang?: string;
+        lang?: string | string[];
         /**
          * Languages in which the label(s) for the concepts are to be returned
          */
-        conceptLang?: string;
+        conceptLang?: string | string[];
         /**
          * Page of the results (1, 2, ...)
          */
@@ -233,7 +233,7 @@ export module ER {
         /**
          * what types of locations are we interested in.
          */
-        sources?: ER.SourceType[];
+        sources?: ER.SourceType | Array<ER.SourceType>;
         /**
          * if set, then filter the possible locations to the locations from that country
          */

@@ -358,8 +358,7 @@ describe("Query Articles", () => {
         const q = new QueryArticlesIter(er, { conceptUri, ignoreConceptUri, ignoreKeywords, ignoreSourceUri, ignoreCategoryUri, returnInfo: utils.returnInfo, maxItems: 50, articleBatchSize: 10 });
         q.execQuery((items, error) => {
             _.each(items, (item) => {
-                // TODO: Obama is not present in the result concepts
-                // expect(item).toContainConcept(conceptUri);
+                expect(item).toContainConcept(conceptUri);
                 _.each(ignoreConceptUri, (uri) => {
                     expect(item).not.toContainConcept(uri);
                 });
