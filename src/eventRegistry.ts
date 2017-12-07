@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import * as fs from "fs";
 import * as _ from "lodash";
 import * as moment from "moment";
@@ -17,10 +17,15 @@ export class EventRegistry {
     public logger;
     private config: ER.Config = {
         host: "http://eventregistry.org",
+        hostAnalytics: "http://analytics.eventregistry.org",
         logging: false,
         minDelayBetweenRequests: 1,
         repeatFailedRequestCount: 2,
         verboseOutput: false,
+    };
+    private paramsSerializer = (params) => {
+        _.set(params, "apiKey", this.config.apiKey);
+        return Qs.stringify(params, { arrayFormat: "repeat" });
     };
     private lastQueryTime = 0;
 
@@ -51,7 +56,6 @@ export class EventRegistry {
             console.info("No API key was provided. You will be allowed to perform only a very limited number of requests per day.");
         }
         this.config.minDelayBetweenRequests *= 1000;
-        axios.defaults.baseURL = config.host;
 
         axios.interceptors.response.use(undefined, (err) => {
             // If config does not exist or the retry option is not set, reject
@@ -86,6 +90,27 @@ export class EventRegistry {
         return _.get(request, "data", {});
     }
 
+    public async jsonRequestAnalytics(path, parameters?): Promise<AxiosResponse> {
+        let request;
+        try {
+            request = await axios.request({
+                url: path,
+                baseURL: this.config.hostAnalytics,
+                params: parameters,
+                paramsSerializer: this.paramsSerializer,
+                timeout: 600000,
+                responseType: "json",
+                maxRedirects: 5,
+            });
+        } catch (error) {
+            // try to print out the error that should be passed by in case the server is down or responds with errors
+            if (this.config.verboseOutput) {
+                this.logger.error(_.get(error, "errno", error));
+            }
+        }
+        return request;
+    }
+
     /**
      * Make a request for json data
      * @param path URL on Event Registry (e.g. "/json/article")
@@ -103,10 +128,7 @@ export class EventRegistry {
                 url: path,
                 baseURL: this.config.host,
                 params: parameters,
-                paramsSerializer: (params) => {
-                    _.set(params, "apiKey", this.config.apiKey);
-                    return Qs.stringify(params, { arrayFormat: "repeat" });
-                },
+                paramsSerializer: this.paramsSerializer,
                 timeout: 600000,
                 responseType: "json",
                 maxRedirects: 5,

@@ -1,4 +1,5 @@
 export * from "./eventRegistry";
+export * from "./analytics";
 export * from "./queryEvent";
 export * from "./queryEvents";
 export * from "./queryArticle";

@@ -13,5 +13,6 @@ declare namespace jasmine {
         toContainSource(test1: string): boolean;
         toContainCategory(test1: string): boolean;
         toContainBodyText(test1: string): boolean;
+        toHaveProperty(propName: string): boolean;
     }
 }

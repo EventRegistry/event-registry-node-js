@@ -5,18 +5,13 @@ export abstract class ReturnInfoFlagsBase<T extends {}> {
     protected type: string;
     private data= {};
 
-    // Initialize all the possible parameters
-    constructor(params = {}) {
-        this.init(params);
-    }
-
     public setFlag(key, obj, defaultValue) {
         if (_.has(obj, key)) {
             this.setProperty("Include" + this.type + _.upperFirst(key), obj[key], defaultValue);
         }
     }
 
-    public setValue(key, obj, defaultValue, skipKeyMod = false) {
+    public setValue(key, obj, defaultValue?, skipKeyMod = false) {
         if (_.has(obj, key)) {
             const constructedKey = skipKeyMod ? _.upperFirst(key) : this.type + _.upperFirst(key);
             this.setProperty(constructedKey, obj[key], defaultValue);
@@ -33,9 +28,7 @@ export abstract class ReturnInfoFlagsBase<T extends {}> {
         });
     }
 
-    protected abstract init(params);
-
-    private setProperty(key, value, defaultValue) {
+    private setProperty(key, value, defaultValue?) {
         if (value !== defaultValue) {
             _.set(this.data, key, value);
         }
@@ -92,7 +85,8 @@ export class ReturnInfo {
 }
 
 export class ArticleInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ArticleInfoFlags> {
-    protected init(params: ER.ReturnInfo.ArticleInfo) {
+    constructor(params: ER.ReturnInfo.ArticleInfo = {}) {
+        super();
         this.type = "Article";
         this.setValue("bodyLen", params, 300);
         this.setFlag("basicInfo", params, true);
@@ -102,39 +96,41 @@ export class ArticleInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ArticleI
         this.setFlag("eventUri", params, true);
         this.setFlag("concepts", params, false);
         this.setFlag("categories", params, false);
+        this.setFlag("links", params, false);
         this.setFlag("videos", params, false);
         this.setFlag("image", params, false);
         this.setFlag("socialScore", params, false);
+        this.setFlag("sentiment", params, false);
         this.setFlag("location", params, false);
         this.setFlag("dates", params, false);
         this.setFlag("extractedDates", params, false);
         this.setFlag("duplicateList", params, false);
         this.setFlag("originalArticle", params, false);
         this.setFlag("storyUri", params, false);
-        this.setFlag("details", params, false);
     }
 }
 
 export class StoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.StoryInfoFlags> {
-    protected init(params: ER.ReturnInfo.StoryInfo) {
+    constructor(params: ER.ReturnInfo.StoryInfo = {}) {
+        super();
         this.type = "Story";
         this.setFlag("basicStats", params, true);
         this.setFlag("location", params, true);
-        this.setFlag("categories", params, false);
         this.setFlag("date", params, false);
-        this.setFlag("concepts", params, false);
         this.setFlag("title", params, false);
         this.setFlag("summary", params, false);
+        this.setFlag("concepts", params, false);
+        this.setFlag("categories", params, false);
         this.setFlag("medoidArticle", params, false);
         this.setFlag("commonDates", params, false);
         this.setFlag("socialScore", params, false);
-        this.setFlag("details", params, false);
         this.setValue("imageCount", params, 0);
     }
 }
 
 export class EventInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.EventInfoFlags> {
-    protected init(params: ER.ReturnInfo.EventInfo) {
+    constructor(params: ER.ReturnInfo.EventInfo = {}) {
+        super();
         this.type = "Event";
         this.setFlag("title", params, true);
         this.setFlag("summary", params, true);
@@ -146,13 +142,13 @@ export class EventInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.EventInfoF
         this.setFlag("commonDates", params, false);
         this.setFlag("stories", params, false);
         this.setFlag("socialScore", params, false);
-        this.setFlag("details", params, false);
         this.setValue("imageCount", params, 0);
     }
 }
 
 export class SourceInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.SourceInfoFlags> {
-    protected init(params: ER.ReturnInfo.SourceInfo) {
+    constructor(params: ER.ReturnInfo.SourceInfo = {}) {
+        super();
         this.type = "Source";
         this.setFlag("title", params, true);
         this.setFlag("description", params, false);
@@ -160,25 +156,26 @@ export class SourceInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.SourceInf
         this.setFlag("ranking", params, false);
         this.setFlag("image", params, false);
         this.setFlag("articleCount", params, false);
+        this.setFlag("sourceMedia", params, false);
         this.setFlag("sourceGroups", params, false);
-        this.setFlag("details", params, false);
     }
 }
 
 export class CategoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.CategoryInfoFlags> {
-    protected init(params: ER.ReturnInfo.CategoryInfo) {
+    constructor(params: ER.ReturnInfo.CategoryInfo = {}) {
+        super();
         this.type = "Category";
         this.setFlag("parentUri", params, false);
         this.setFlag("childrenUris", params, false);
         this.setFlag("trendingScore", params, false);
         this.setFlag("trendingHistory", params, false);
-        this.setFlag("details", params, false);
         this.setValue("trendingSource", params, "news");
     }
 }
 
 export class ConceptInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptInfoFlags> {
-    protected init(params: ER.ReturnInfo.ConceptInfo) {
+    constructor(params: ER.ReturnInfo.ConceptInfo = {}) {
+        super();
         this.type = "Concept";
         this.setValue("type", params, "concepts");
         this.setValue("lang", params, "eng");
@@ -186,7 +183,6 @@ export class ConceptInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptI
         this.setFlag("synonyms", params, false);
         this.setFlag("image", params, false);
         this.setFlag("description", params, false);
-        this.setFlag("details", params, false);
         this.setFlag("conceptClassMembership", params, false);
         this.setFlag("conceptClassMembershipFull", params, false);
         this.setFlag("trendingScore", params, false);
@@ -198,7 +194,8 @@ export class ConceptInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptI
 }
 
 export class LocationInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.LocationInfoFlags> {
-    protected init(params: ER.ReturnInfo.LocationInfo) {
+    constructor(params: ER.ReturnInfo.LocationInfo = {}) {
+        super();
         this.type = "Location";
         this.setFlag("label", params, true);
         this.setFlag("wikiUri", params, false);
@@ -214,19 +211,19 @@ export class LocationInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.Locatio
 }
 
 export class ConceptClassInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptClassInfoFlags> {
-    protected init(params: ER.ReturnInfo.ConceptClassInfo) {
+    constructor(params: ER.ReturnInfo.ConceptClassInfo = {}) {
+        super();
         this.type = "ConceptClass";
         this.setFlag("parentLabels", params, true);
         this.setFlag("concepts", params, false);
-        this.setFlag("details", params, false);
     }
 }
 
 export class ConceptFolderInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptFolderInfoFlags> {
-    protected init(params: ER.ReturnInfo.ConceptFolderInfo) {
+    constructor(params: ER.ReturnInfo.ConceptFolderInfo = {}) {
+        super();
         this.type = "ConceptFolder";
         this.setFlag("definition", params, true);
         this.setFlag("owner", params, false);
-        this.setFlag("details", params, false);
     }
 }

@@ -14,6 +14,10 @@ export module ER {
          */
         host?: string;
         /**
+         * host address to use to perform the analytics api calls
+         */
+        hostAnalytics?: string;
+        /**
          * log all requests
          */
         logging?: boolean;
@@ -1106,145 +1110,465 @@ export module ER {
         }
     }
     export namespace ReturnInfo {
+        /**
+         * What information about an article should be returned by the API call
+         */
         interface ArticleInfo {
+            /**
+             * max length of the article body (use -1 for full body, 0 for empty)
+             */
             bodyLen?: number;
+            /**
+             * core article information -
+             */
             basicInfo?: boolean;
+            /**
+             * article title
+             */
             title?: boolean;
+            /**
+             * article body
+             */
             body?: boolean;
+            /**
+             * article url
+             */
             url?: boolean;
+            /**
+             * uri of the event to which the article belongs
+             */
             eventUri?: boolean;
+            /**
+             * the list of concepts mentioned in the article
+             */
             concepts?: boolean;
+            /**
+             * the list of categories assigned to the article
+             */
             categories?: boolean;
+            /**
+             * the list of urls of links identified in the article body
+             */
+            links?: boolean;
+            /**
+             * the list of videos assigned to the article
+             */
             videos?: boolean;
+            /**
+             * url to the image associated with the article
+             */
             image?: boolean;
+            /**
+             * information about the number of times the article was shared on facebook and linkedin, instagram, ...
+             */
             socialScore?: boolean;
+            /**
+             * sentiment about the article
+             */
+            sentiment?: boolean;
+            /**
+             * the geographic location that the event mentioned in the article is about
+             */
             location?: boolean;
+            /**
+             * the dates when the articles was crawled and the date when it was published (based on the rss feed date)
+             */
             dates?: boolean;
+            /**
+             * the list of dates found mentioned in the article
+             */
             extractedDates?: boolean;
+            /**
+             * the list of articles that are a copy of this article
+             */
             duplicateList?: boolean;
+            /**
+             * if the article is a duplicate, this will provide information about the original article
+             */
             originalArticle?: boolean;
+            /**
+             * uri of the story (cluster) to which the article belongs
+             */
             storyUri?: boolean;
-            details?: boolean;
         }
         
+        /**
+         * What information about an article should be returned by the API call
+         */
         interface ArticleInfoFlags {
+            /**
+             * max length of the article body (use -1 for full body, 0 for empty)
+             */
             ArticleBodyLen?: number;
+            /**
+             * core article information -
+             */
             IncludeArticleBasicInfo?: boolean;
+            /**
+             * article title
+             */
             IncludeArticleTitle?: boolean;
+            /**
+             * article body
+             */
             IncludeArticleBody?: boolean;
+            /**
+             * article url
+             */
             IncludeArticleUrl?: boolean;
+            /**
+             * uri of the event to which the article belongs
+             */
             IncludeArticleEventUri?: boolean;
+            /**
+             * the list of concepts mentioned in the article
+             */
             IncludeArticleConcepts?: boolean;
+            /**
+             * the list of categories assigned to the article
+             */
             IncludeArticleCategories?: boolean;
+            /**
+             * the list of urls of links identified in the article body
+             */
+            IncludeArticleLinks?: boolean;  
+            /**
+             * the list of videos assigned to the article
+             */ 
             IncludeArticleVideos?: boolean;
+            /**
+             * url to the image associated with the article
+             */
             IncludeArticleImage?: boolean;
+            /**
+             * information about the number of times the article was shared on facebook and linkedin, instagram, ...
+             */
             IncludeArticleSocialScore?: boolean;
+            /**
+             * sentiment about the article
+             */
+            IncludeArticleSentiment?: boolean;   
+            /**
+             * the geographic location that the event mentioned in the article is about
+             */
             IncludeArticleLocation?: boolean;
+            /**
+             * the dates when the articles was crawled and the date when it was published (based on the rss feed date)
+             */
             IncludeArticleDates?: boolean;
+            /**
+             * the list of dates found mentioned in the article
+             */
             IncludeArticleExtractedDates?: boolean;
+            /**
+             * the list of articles that are a copy of this article
+             */
             IncludeArticleDuplicateList?: boolean;
+            /**
+             * if the article is a duplicate, this will provide information about the original article
+             */
             IncludeArticleOriginalArticle?: boolean;
+            /**
+             * uri of the story (cluster) to which the article belongs
+             */
             IncludeArticleStoryUri?: boolean;
-            IncludeArticleDetails?: boolean;
         }
         
+        /**
+         * What information about a story (cluster of articles) should be returned by the API call
+         */
         interface StoryInfoFlags {
+            /**
+             * core stats about the story
+             */
             IncludeStoryBasicStats?: boolean;
+            /**
+             * geographic location that the story is about
+             */
             IncludeStoryLocation?: boolean;
-            IncludeStoryCategories?: boolean;
+            /**
+             * date of the story
+             */
             IncludeStoryDate?: boolean;
-            IncludeStoryConcepts?: boolean;
+            /**
+             * title of the story
+             */
             IncludeStoryTitle?: boolean;
+            /**
+             * summary of the story
+             */
             IncludeStorySummary?: boolean;
+            /**
+             * set of concepts associated with the story
+             */
+            IncludeStoryConcepts?: boolean;
+            /**
+             * categories associated with the story
+             */
+            IncludeStoryCategories?: boolean;
+            /**
+             * the article that is closest to the center of the cluster of articles assigned to the story
+             */
             IncludeStoryMedoidArticle?: boolean;
+            /**
+             * dates that were frequently identified in the articles belonging to the story
+             */
             IncludeStoryCommonDates?: boolean;
+            /**
+             * score computed based on how frequently the articles in the story were shared on social media
+             */
             IncludeStorySocialScore?: boolean;
-            IncludeStoryDetails?: boolean;
+            /**
+             * number of images to be returned for a story
+             */
             StoryImageCount?: number;
         }
         
+        /**
+         * What information about a story (cluster of articles) should be returned by the API call
+         */
         interface StoryInfo {
+            /**
+             * core stats about the story
+             */
             basicStats?: boolean;
+            /**
+             * geographic location that the story is about
+             */
             location?: boolean;
-            categories?: boolean;
+            /**
+             * date of the story
+             */
             date?: boolean;
-            concepts?: boolean;
+            /**
+             * title of the story
+             */
             title?: boolean;
+            /**
+             * summary of the story
+             */
             summary?: boolean;
+            /**
+             * set of concepts associated with the story
+             */
+            concepts?: boolean;
+            /**
+             * categories associated with the story
+             */
+            categories?: boolean;
+            /**
+             * the article that is closest to the center of the cluster of articles assigned to the story
+             */
             medoidArticle?: boolean;
+            /**
+             * dates that were frequently identified in the articles belonging to the story
+             */
             commonDates?: boolean;
+            /**
+             * score computed based on how frequently the articles in the story were shared on social media
+             */
             socialScore?: boolean;
-            details?: boolean;
+            /**
+             * number of images to be returned for a story
+             */
             imageCount?: number;
         }
         
+        /**
+         * What information about an event should be returned by the API call
+         */
         interface EventInfoFlags {
+            /**
+             * return the title of the event
+             */
             IncludeEventTitle?: boolean;
+            /**
+             * return the summary of the event
+             */
             IncludeEventSummary?: boolean;
+            /**
+             * return the number of articles that are assigned to the event
+             */
             IncludeEventArticleCounts?: boolean;
+            /**
+             * return information about the main concepts related to the event
+             */
             IncludeEventConcepts?: boolean;
+            /**
+             * return information about the categories related to the event
+             */
             IncludeEventCategories?: boolean;
+            /**
+             * return the location where the event occurred
+             */
             IncludeEventLocation?: boolean;
+            /**
+             * return information about the date of the event
+             */
             IncludeEventDate?: boolean;
+            /**
+             * return the dates that were commonly found in the articles about the event
+             */
             IncludeEventCommonDates?: boolean;
+            /**
+             * return the list of stories (clusters) that are about the event
+             */
             IncludeEventStories?: boolean;
+            /**
+             * score computed based on how frequently the articles in the event were shared on social media
+             */
             IncludeEventSocialScore?: boolean;
-            IncludeEventDetails?: boolean;
+            /**
+             * number of images to be returned for an event
+             */
             EventImageCount?: number;
         }
-        
+
+        /**
+         * What information about an event should be returned by the API call
+         */
         interface EventInfo {
+            /**
+             * return the title of the event
+             */
             title?: boolean;
+            /**
+             * return the summary of the event
+             */
             summary?: boolean;
+            /**
+             * return the number of articles that are assigned to the event
+             */
             articleCounts?: boolean;
+            /**
+             * return information about the main concepts related to the event
+             */
             concepts?: boolean;
+            /**
+             * return information about the categories related to the event
+             */
             categories?: boolean;
+            /**
+             * return the location where the event occurred
+             */
             location?: boolean;
+            /**
+             * return information about the date of the event
+             */
             date?: boolean;
+            /**
+             * return the dates that were commonly found in the articles about the event
+             */
             commonDates?: boolean;
+            /**
+             * return the list of stories (clusters) that are about the event
+             */
             stories?: boolean;
+            /**
+             * score computed based on how frequently the articles in the event were shared on social media
+             */
             socialScore?: boolean;
-            details?: boolean;
+            /**
+             * number of images to be returned for an event
+             */
             imageCount?: number;
         }
         
+        /**
+         * What information about a news source should be returned by the API call
+         */
         interface SourceInfoFlags {
+            /**
+             * title of the news source
+             */
             IncludeSourceTitle?: boolean;
+            /**
+             * description of the news source
+             */
             IncludeSourceDescription?: boolean;
+            /**
+             * geographic location of the news source
+             */
             IncludeSourceLocation?: boolean;
+            /**
+             * a set of rankings for the news source
+             */
             IncludeSourceRanking?: boolean;
+            /**
+             * different images associated with the news source
+             */
             IncludeSourceImage?: boolean;
+            /**
+             * the number of articles from this news source that are stored in Event Registry
+             */
             IncludeSourceArticleCount?: boolean;
+            /**
+             * different social media accounts used by the news source
+             */
+            IncludeSourceSocialMedia?: boolean;
+            /**
+             * info about the names of the source groups to which the source belongs to
+             */
             IncludeSourceSourceGroups?: boolean;
-            IncludeSourceDetails?: boolean;
         }
         
+        /**
+         * What information about a news source should be returned by the API call
+         */
         interface SourceInfo {
+            /**
+             * title of the news source
+             */
             title?: boolean;
+            /**
+             * description of the news source
+             */
             description?: boolean;
+            /**
+             * geographic location of the news source
+             */
             location?: boolean;
+            /**
+             * a set of rankings for the news source
+             */
             ranking?: boolean;
+            /**
+             * different images associated with the news source
+             */
             image?: boolean;
+            /**
+             * the number of articles from this news source that are stored in Event Registry
+             */
             articleCount?: boolean;
+            /**
+             * different social media accounts used by the news source
+             */
+            socialMedia?: boolean;
+            /**
+             * info about the names of the source groups to which the source belongs to
+             */
             sourceGroups?: boolean;
-            details?: boolean;
         }
         
+        /**
+         * What information about a category should be returned by the API call
+         */
         interface CategoryInfoFlags {
             IncludeCategoryParentUri?: boolean;
             IncludeCategoryChildrenUris?: boolean;
             IncludeCategoryTrendingScore?: boolean;
             IncludeCategoryTrendingHistory?: boolean;
-            IncludeCategoryDetails?: boolean;
             CategoryTrendingSource?: string | string[];
         }
-        
+
+        /**
+         * What information about a category should be returned by the API call
+         */
         interface CategoryInfo {
             parentUri?: boolean;
             childrenUris?: boolean;
             trendingScore?: boolean;
             trendingHistory?: boolean;
-            details?: boolean;
             trendingSource?: string | string[];
         }
         
@@ -1255,7 +1579,6 @@ export module ER {
             IncludeConceptSynonyms?: boolean;
             IncludeConceptImage?: boolean;
             IncludeConceptDescription?: boolean;
-            IncludeConceptDetails?: boolean;
             IncludeConceptConceptClassMembership?: boolean;
             IncludeConceptConceptClassMembershipFull?: boolean;
             IncludeConceptTrendingScore?: boolean;
@@ -1266,13 +1589,12 @@ export module ER {
         }
         
         interface ConceptInfo {
-            type?: ConceptType;
+            type?: ConceptType | ConceptType[];
             lang?: string | string[];
             label?: boolean;
             synonyms?: boolean;
             image?: boolean;
             description?: boolean;
-            details?: boolean;
             conceptClassMembership?: boolean;
             conceptClassMembershipFull?: boolean;
             trendingScore?: boolean;
@@ -1311,25 +1633,21 @@ export module ER {
         interface ConceptClassInfoFlags {
             IncludeConceptClassParentLabels?: boolean;
             IncludeConceptClassConcepts?: boolean;
-            IncludeConceptClassDetails?: boolean;
         }
         
         interface ConceptClassInfo {
             parentLabels?: boolean;
             concepts?: boolean;
-            details?: boolean;
         }
         
         interface ConceptFolderInfoFlags {
             IncludeConceptFolderDefinition?: boolean;
             IncludeConceptFolderOwner?: boolean;
-            IncludeConceptFolderDetails?: boolean;
         }
         
         interface ConceptFolderInfo {
             definition?: boolean;
             owner?: boolean;
-            details?: boolean;
         }
     }
 

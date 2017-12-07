@@ -43,9 +43,9 @@ export class QueryArticles extends Query<RequestArticles> {
         this.setQueryArrVal(keywords, "keyword", "keywordOper", "and");
         this.setQueryArrVal(conceptUri, "conceptUri", "conceptOper", "and");
         this.setQueryArrVal(categoryUri, "categoryUri", "categoryOper", "or");
-        this.setQueryArrVal(sourceUri, "sourceUri", undefined, "or");
+        this.setQueryArrVal(sourceUri, "sourceUri", "sourceOper", "or");
         this.setQueryArrVal(sourceLocationUri, "sourceLocationUri", undefined, "or");
-        this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", undefined, "or");
+        this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", "sourceGroupOper", "or");
         this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
         this.setQueryArrVal(lang, "lang", undefined, "or");
         if (!_.isUndefined(dateStart)) {

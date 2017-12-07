@@ -22,7 +22,6 @@ describe("Info", () => {
                                                      ranking: true,
                                                      articleCount: true,
                                                      sourceGroups: true,
-                                                     details: true,
                                                     });
         const returnInfo = new ReturnInfo({sourceInfo: sourceInfoFlags});
         const q = new GetSourceInfo({uriOrUriList: sourceUriList, returnInfo: returnInfo});
@@ -36,7 +35,6 @@ describe("Info", () => {
             expect(_.has(item, "ranking")).toBeTruthy("Source ranking is missing");
             expect(_.has(item, "articleCount")).toBeTruthy("Source articleCount is missing");
             expect(_.has(item, "sourceGroups")).toBeTruthy("Source sourceGroups is missing");
-            expect(_.has(item, "details")).toBeTruthy("Source details is missing");
         });
         done();
     });
@@ -50,7 +48,6 @@ describe("Info", () => {
                                                        synonyms: true,
                                                        image: true,
                                                        description: true,
-                                                       details: true,
                                                        conceptClassMembership: true,
                                                        conceptClassMembershipFull: true,
                                                        trendingScore: true,
@@ -71,7 +68,6 @@ describe("Info", () => {
             expect(_.has(item, "description")).toBeTruthy("Concept should have a description");
             expect(_.has(item, "image")).toBeTruthy("Concept should have an image");
             expect(_.has(item, "synonyms")).toBeTruthy("Concept should have synonyms");
-            expect(_.has(item, "details")).toBeTruthy("Concept should have details");
             expect(_.has(item, "conceptClassMembership")).toBeTruthy("Concept should have conceptClassMembership");
             expect(_.has(item, "conceptClassMembershipFull")).toBeTruthy("Concept should have conceptClassMembershipFull");
             expect(_.has(item, "trendingScore")).toBeTruthy("Concept should have trendingScore");

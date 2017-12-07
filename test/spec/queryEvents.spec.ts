@@ -252,6 +252,7 @@ describe("Query Events", () => {
         _.each(_.get(matrix, "concepts", []), (concept) => {
             expect(concept).toBeValidConcept();
         });
+        done();
     });
 
     it("should test source aggregates", async (done) => {

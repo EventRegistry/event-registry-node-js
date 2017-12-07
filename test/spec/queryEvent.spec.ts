@@ -5,6 +5,7 @@ import {
     QueryEvent,
     QueryEventArticlesIter,
     QueryEvents,
+    RequestArticlesInfo,
     RequestEventArticles,
     RequestEventArticleTrend,
     RequestEventArticleUris,
@@ -118,16 +119,17 @@ describe("Query Event", () => {
         done();
     });
 
-    // TODO: use a an event uri that actually exists in the database
     it("should test query event articles iterator", async (done) => {
-        const q = new QueryEventArticlesIter(er, "eng-2863607");
+        const q = new QueryEventArticlesIter(er, "eng-2863607", { maxItems: 150, articleBatchSize: 50 });
         let size = 0;
         q.execQuery((items) => {
             size += _.size(items);
         }, async () => {
             const q2 = new QueryEvent("eng-2863607");
+            const requestEventArticles = new RequestEventArticles({count: 150});
+            q2.setRequestedResult(requestEventArticles);
             const response = await er.execQuery(q2);
-            expect(_.get(response["eng-2863607"], "info.totalArticleCount")).toEqual(size);
+            expect(_.size(_.get(response["eng-2863607"], "articles.results"))).toEqual(size);
             done();
         });
     });

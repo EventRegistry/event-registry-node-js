@@ -304,14 +304,16 @@ describe("Query Articles", () => {
     it("should test query articles iterator (1)", async (done) => {
         const keywords = "trump";
         const conceptUri = await er.getConceptUri("Obama");
-        const q = new QueryArticlesIter(er, { keywords, conceptUri});
+        const q = new QueryArticlesIter(er, { keywords, conceptUri, maxItems: 150, articleBatchSize: 50});
         let articlesSize = 0;
         q.execQuery((items) => {
             articlesSize += _.size(items);
         }, async () => {
             const q2 = new QueryArticles({keywords, conceptUri});
+            const requestArticlesInfo2 = new RequestArticlesInfo({count: 150});
+            q2.setRequestedResult(requestArticlesInfo2);
             const response = await er.execQuery(q2);
-            expect(_.get(response, "articles.totalResults")).toEqual(articlesSize);
+            expect(_.size(_.get(response, "articles.results"))).toEqual(articlesSize);
             done();
         });
     });

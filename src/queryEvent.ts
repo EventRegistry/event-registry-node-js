@@ -124,7 +124,7 @@ export class QueryEventArticlesIter extends QueryEvent {
 
     private async getNextBatch(uriList, callback: (item, error) => void, doneCallback?: (error?) => void) {
         this.clearRequestedResults();
-        const uris = _.compact(_.pullAt(uriList, [0, this.batchSize])) as string[];
+        const uris = _.compact(_.pullAt(uriList, _.range(0, this.batchSize))) as string[];
         const query = new QueryArticle(uris);
         query.setRequestedResult(new RequestArticleInfo(this.returnInfo));
         try {

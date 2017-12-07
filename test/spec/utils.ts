@@ -44,21 +44,18 @@ export class Utils {
                                                   location: true,
                                                   extractedDates: true,
                                                   socialScore: true,
-                                                  details: true,
                                                 });
         this.sourceInfo = new SourceInfoFlags({ description: true,
                                                 location: true,
                                                 ranking: true,
                                                 articleCount: true,
                                                 sourceGroups: true,
-                                                details: true,
                                               });
         this.conceptInfo = new ConceptInfoFlags({ type: ["entities"],
                                                   lang: ["eng", "spa"],
                                                   synonyms: true,
                                                   image: true,
                                                   description: true,
-                                                  details: true,
                                                   conceptClassMembership: true,
                                                   trendingScore: true,
                                                   trendingHistory: true,
@@ -76,7 +73,7 @@ export class Utils {
                                                     placeCountry: true,
                                                   });
         this.categoryInfo = new CategoryInfoFlags({ parentUri: true, childrenUris: true, trendingScore: true, trendingHistory: true });
-        this.eventInfo = new EventInfoFlags({ commonDates: true, stories: true, socialScore: true, details: true, imageCount: 2 });
+        this.eventInfo = new EventInfoFlags({ commonDates: true, stories: true, socialScore: true, imageCount: 2 });
         this.storyInfo = new StoryInfoFlags({ categories: true,
                                               date: true,
                                               concepts: true,
@@ -86,7 +83,6 @@ export class Utils {
                                               commonDates: true,
                                               socialScore: true,
                                               imageCount: 2,
-                                              details: true,
                                             });
         this.returnInfo = new ReturnInfo({ articleInfo: this.articleInfo,
                                            sourceInfo: this.sourceInfo,
@@ -144,7 +140,7 @@ export class Utils {
 
     public ensureValidConcept(concept) {
         let result: ValidationObj = { pass: true };
-        const propertyNames = ["id", "uri", "label", "synonyms", "image", "details", "trendingScore"];
+        const propertyNames = ["id", "uri", "label", "synonyms", "image", "trendingScore"];
         result = this.validateProperties(concept, "concept", propertyNames);
         // TODO: Is 'wiki' part of the entity types?
         if (!_.includes(["person", "loc", "org", "wiki"], _.get(concept, "type"))) {
@@ -181,7 +177,6 @@ export class Utils {
                                 "title",
                                 "body",
                                 "source",
-                                "details",
                                 "location",
                                 "duplicateList",
                                 "originalArticle",
@@ -191,7 +186,6 @@ export class Utils {
                                 "lang",
                                 "extractedDates",
                                 "concepts",
-                                "details",
                               ];
         result = this.validateProperties(article, "article", propertyNames);
 
@@ -218,7 +212,6 @@ export class Utils {
                                 "commonDates",
                                 "stories",
                                 "socialScore",
-                                "details",
                                 "images",
                               ];
         result = this.validateProperties(event, "event", propertyNames);
@@ -252,7 +245,6 @@ export class Utils {
                                 "averageDate",
                                 "commonDates",
                                 "socialScore",
-                                "details",
                                 "images",
                               ];
         let result = this.validateProperties(story, "story", propertyNames);
@@ -290,7 +282,7 @@ export class Utils {
     }
 
     public ensureValidSource(source) {
-        const propertyNames = ["id", "uri", "location", "ranking", "articleCount", "sourceGroups", "details"];
+        const propertyNames = ["id", "uri", "location", "ranking", "articleCount", "sourceGroups"];
         return this.validateProperties(source, "source", propertyNames);
     }
 
@@ -333,6 +325,13 @@ export class Utils {
         return { pass: true };
     }
 
+    public ensureObjectContains(obj, propName: string) {
+        if (!_.has(obj, propName)) {
+            return { pass: false, message: `Specified object doesn't contain property ${propName}.`};
+        }
+        return { pass: true};
+    }
+
     private validateProperties(item: object, objectName: string, propertyNames: string[]): ValidationObj {
         for (const propName of propertyNames) {
             if (!_.has(item, propName)) {
@@ -350,7 +349,7 @@ export class Utils {
 const utils = new Utils();
 
 beforeEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     jasmine.addMatchers({
         toBeValidConcept: () => {
             return {
@@ -433,6 +432,13 @@ beforeEach(() => {
             return {
                 compare: (article, text) => {
                     return utils.ensureArticleBodyContainsText(article, text);
+                },
+            };
+        },
+        toHaveProperty: () => {
+            return {
+                compare: (obj, propName) => {
+                    return utils.ensureObjectContains(obj, propName);
                 },
             };
         },
