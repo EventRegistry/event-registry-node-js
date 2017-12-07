@@ -23,10 +23,6 @@ export class EventRegistry {
         repeatFailedRequestCount: 2,
         verboseOutput: false,
     };
-    private paramsSerializer = (params) => {
-        _.set(params, "apiKey", this.config.apiKey);
-        return Qs.stringify(params, { arrayFormat: "repeat" });
-    };
     private lastQueryTime = 0;
 
     constructor(config: ER.Config = {}) {
@@ -97,7 +93,10 @@ export class EventRegistry {
                 url: path,
                 baseURL: this.config.hostAnalytics,
                 params: parameters,
-                paramsSerializer: this.paramsSerializer,
+                paramsSerializer: (params) => {
+                    _.set(params, "apiKey", this.config.apiKey);
+                    return Qs.stringify(params, { arrayFormat: "repeat" });
+                },
                 timeout: 600000,
                 responseType: "json",
                 maxRedirects: 5,
@@ -128,7 +127,10 @@ export class EventRegistry {
                 url: path,
                 baseURL: this.config.host,
                 params: parameters,
-                paramsSerializer: this.paramsSerializer,
+                paramsSerializer: (params) => {
+                    _.set(params, "apiKey", this.config.apiKey);
+                    return Qs.stringify(params, { arrayFormat: "repeat" });
+                },
                 timeout: 600000,
                 responseType: "json",
                 maxRedirects: 5,

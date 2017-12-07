@@ -1,13 +1,13 @@
 {
   "author": "Anže Sršen",
-  "name": "event-registry-js",
+  "name": "eventregistry",
   "description": "Package containing wrapper functions for Event Registry API",
   "version": "1.0.1",
   "license": "MIT",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/EventRegistry/event-registry-node-js.git"
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",
@@ -15,6 +15,9 @@
     "tslint:global": "tslint --project tsconfig.json",
     "pretest": "tsc --project ./test/tsconfig.json",
     "test": "jasmine --config=./test/jasmine.json"
+  },
+  "engines": {
+    "node": ">=5.0.0"
   },
   "devDependencies": {
     "jasmine": "^2.8.0",
