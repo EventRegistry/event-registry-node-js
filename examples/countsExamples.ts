@@ -1,4 +1,4 @@
-import { EventRegistry, GetCounts, GetCountsEx } from "../src/index";
+import { EventRegistry, GetCounts, GetCountsEx } from "eventregistry";
 
 // examples showing how to obtain information how frequently a particular concept is mentioined in
 // the news articles, or an article is about a particular category

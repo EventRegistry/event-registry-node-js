@@ -1,7 +1,6 @@
 import * as _ from "lodash";
-import { mainLangs, Query } from "./base";
+import { mainLangs, Query, QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
-import { QueryParamsBase } from "./index";
 import { ComplexArticleQuery } from "./query";
 import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
 import { ER } from "./types";

@@ -1,4 +1,20 @@
-import { ConceptInfoFlags, EventRegistry, QueryEvents, QueryEventsIter, RequestEventsConceptAggr, RequestEventsConceptTrends, RequestEventsInfo, RequestEventsUriList, ReturnInfo, RequestEventsCategoryAggr, RequestEventsConceptGraph, CombinedQuery, ComplexEventQuery, BaseQuery, EventInfoFlags } from "../src/index";
+import {
+    BaseQuery,
+    CombinedQuery,
+    ComplexEventQuery,
+    ConceptInfoFlags,
+    EventInfoFlags,
+    EventRegistry,
+    QueryEvents,
+    QueryEventsIter,
+    RequestEventsCategoryAggr,
+    RequestEventsConceptAggr,
+    RequestEventsConceptGraph,
+    RequestEventsConceptTrends,
+    RequestEventsInfo,
+    RequestEventsUriList,
+    ReturnInfo,
+} from "eventregistry";
 
 // examples of how to search for events using different search criteria
 

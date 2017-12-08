@@ -1,4 +1,4 @@
-import { ArticleInfoFlags, EventRegistry, GetRecentArticles, ReturnInfo, sleep } from "../src/index";
+import { ArticleInfoFlags, EventRegistry, GetRecentArticles, ReturnInfo, sleep } from "eventregistry";
 
 // this is a simple script that makes a query to ER to get the feed of articles that were added
 // in the last minute (from the first to the last second of the minute).

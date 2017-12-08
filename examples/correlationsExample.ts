@@ -1,4 +1,4 @@
-import { EventRegistry, GetCounts, GetTopCorrelations, QueryArticles } from "../src/index";
+import { EventRegistry, GetCounts, GetTopCorrelations, QueryArticles } from "eventregistry";
 
 const er = new EventRegistry();
 

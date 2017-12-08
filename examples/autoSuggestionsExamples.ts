@@ -1,4 +1,4 @@
-import { EventRegistry } from "../src/index";
+import { EventRegistry } from "eventregistry";
 
 // examples showing how to use the autosuggest functionalities for
 // concepts, sources, categories, locations, ....

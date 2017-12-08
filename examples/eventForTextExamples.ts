@@ -1,5 +1,5 @@
+import { EventRegistry, GetEventForText, QueryEvent, RequestEventInfo } from "eventregistry";
 import * as _ from "lodash";
-import { EventRegistry, GetEventForText, QueryEvent, RequestEventInfo } from "../src/index";
 
 // Given some text that is related to some current event, this example demonstrates how to obtain
 // information which event is the text talking about

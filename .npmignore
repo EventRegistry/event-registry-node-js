@@ -1,0 +1,52 @@
+*.sdf
+*.exe
+*.dll
+*.class
+*.ilk
+*.pdb
+*.opensdf
+*.suo
+*.tlog
+*.log
+*.manifest
+*.obj
+*.rc
+*.manifest.res
+*.lastbuildstate
+vc100.idb
+*.exe.Err
+.svn
+node_modules
+logs
+/static/_obsolete/
+/static/.vscode
+/*.bat
+/obj/
+/*.njsproj
+/Event Registry Frontend.sln
+/Event Registry Frontend NodeVS.sln
+/static/fonts/
+/static/js/provider/temp
+/typings/
+/.ntvs_analysis.dat
+/static/html/_not used
+/static/js/_references.js
+/static/typings/*
+/.vs/*
+/node/.vscode
+/.vscode
+/sitemap
+/node_modules-old.zip
+/static/Visual Studio Code.lnk
+/static/_compiled
+settings.json
+aws_credentials.json
+services.json
+disabledIPs.txt
+/invoices
+.baseDir.ts
+.tscache/
+/ignoreLoggingUserKeys.txt
+/node/tslint.json
+/static/tslint.json
+/test/dist

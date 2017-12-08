@@ -1,5 +1,5 @@
+import { ConceptInfoFlags, EventRegistry, QueryEvent, QueryEventArticlesIter, RequestEventArticles, RequestEventArticleTrend, RequestEventInfo, RequestEventKeywordAggr, ReturnInfo } from "eventregistry";
 import * as _ from "lodash";
-import { ConceptInfoFlags, EventRegistry, QueryEvent, QueryEventArticlesIter, RequestEventArticles, RequestEventArticleTrend, RequestEventInfo, RequestEventKeywordAggr, ReturnInfo } from "../src/index";
 
 // examples that show how to obtain information about an individual event
 

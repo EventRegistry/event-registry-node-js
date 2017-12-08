@@ -1,5 +1,6 @@
 import * as _ from "lodash";
-import { ArticleInfoFlags, mainLangs, Query, ReturnInfo } from "./index";
+import {mainLangs, Query } from "./base";
+import {ArticleInfoFlags, ReturnInfo } from "./returnInfo";
 
 export class QueryStory extends Query<RequestStory> {
     constructor(storyUriOrList) {

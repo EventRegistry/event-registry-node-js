@@ -1,4 +1,4 @@
-import { ConceptInfoFlags, EventRegistry, GetTrendingConcepts, ReturnInfo, GetTrendingConceptGroups, GetTrendingCategories, CategoryInfoFlags } from "../src/index";
+import { CategoryInfoFlags, ConceptInfoFlags, EventRegistry, GetTrendingCategories, GetTrendingConceptGroups, GetTrendingConcepts, ReturnInfo } from "eventregistry";
 
 // examples that illustrate how to obtain the currently top trending concepts or categories
 // The trends can be computed based on the number of mentions in the news or based on the shares on social media

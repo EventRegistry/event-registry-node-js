@@ -1,5 +1,5 @@
+import { ArticleInfoFlags, BaseQuery, CombinedQuery, ComplexArticleQuery, EventRegistry, QueryArticle, QueryArticles, QueryArticlesIter, QueryItems, RequestArticlesInfo, RequestArticlesRecentActivity, ReturnInfo } from "eventregistry";
 import * as _ from "lodash";
-import { ArticleInfoFlags, BaseQuery, CombinedQuery, ComplexArticleQuery, EventRegistry, QueryArticle, QueryArticles, QueryArticlesIter, QueryItems, RequestArticlesInfo, RequestArticlesRecentActivity, ReturnInfo } from "../src/index";
 
 // examples that illustrate how to query articles using different search options
 

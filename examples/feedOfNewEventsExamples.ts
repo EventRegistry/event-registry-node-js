@@ -1,5 +1,5 @@
+import { EventRegistry, GetRecentEvents, sleep } from "eventregistry";
 import * as _ from "lodash";
-import { EventRegistry, GetRecentEvents, sleep } from "../src/index";
 
 // this is a simple script that makes a query to ER to get the feed of events that were added or
 // updated in the last minute.

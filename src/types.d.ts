@@ -1,4 +1,8 @@
-import { QueryItems, CombinedQuery, BaseQuery, ReturnInfo, QueryArticles, RequestArticles, RequestEvents } from "./index";
+import { ReturnInfo } from "./returnInfo";
+import { QueryArticles, RequestArticles } from "./queryArticles";
+import { RequestEvents } from "./queryEvents";
+import { QueryItems } from "./base";
+import { BaseQuery, CombinedQuery} from "./query";
 
 export module ER {
 

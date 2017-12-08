@@ -202,7 +202,7 @@ export class ComplexArticleQuery extends QueryCore {
 }
 
 /**
- * @class ComplexEventQUery
+ * @class ComplexEventQuery
  */
 export class ComplexEventQuery extends QueryCore {
     /**

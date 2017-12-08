@@ -7,7 +7,7 @@ import {
     RequestArticlesInfo,
     RequestEventsInfo,
     ReturnInfo,
-} from "../src/index";
+} from "eventregistry";
 
 // examples to obtain information what are the top fb shared articles on a particular day or
 // what are the events, for which the articles were shared the most

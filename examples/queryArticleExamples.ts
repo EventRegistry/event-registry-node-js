@@ -1,5 +1,5 @@
+import { ArticleInfoFlags, ArticleMapper, EventRegistry, QueryArticle, QueryArticles, RequestArticleInfo, RequestArticlesUriList, ReturnInfo } from "eventregistry";
 import * as _ from "lodash";
-import { ArticleInfoFlags, ArticleMapper, EventRegistry, QueryArticle, QueryArticles, RequestArticleInfo, RequestArticlesUriList, ReturnInfo } from "../src/index";
 
 // examples that download information about the individual news articles
 
