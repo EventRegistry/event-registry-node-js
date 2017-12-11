@@ -4,6 +4,7 @@ import {
     GetTopSharedArticles,
     GetTopSharedEvents,
     QueryArticles,
+    QueryEvents,
     RequestArticlesInfo,
     RequestEventsInfo,
     ReturnInfo,
@@ -43,7 +44,7 @@ er.getConceptUri("Apple").then((conceptUri) => {
 
 // get social shared information for resulting events
 er.getConceptUri("Apple").then((conceptUri) => {
-    const q4 = new QueryArticles({ conceptUri });
+    const q4 = new QueryEvents({ conceptUri });
     const returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({socialScore: true})});
     const requestEventsInfo = new RequestEventsInfo({count: 5, sortBy: "socialScore", returnInfo: returnInfo});
     q4.setRequestedResult(requestEventsInfo);

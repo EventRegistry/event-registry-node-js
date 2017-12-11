@@ -153,7 +153,7 @@ export abstract class Query<T> extends QueryParamsBase {
             if (propOperName) {
                 this.params[propOperName] = formattedOperator;
             }
-            if (_.isUndefined(propOperName) || formattedOperator !== defaultOperName) {
+            if (_.isUndefined(propOperName) && formattedOperator !== defaultOperName) {
                 throw new Error(`An invalid operator type '${formattedOperator}' was used for property '${propName}'`);
             }
         } else if (_.isString(value)) {

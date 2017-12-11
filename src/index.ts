@@ -9,6 +9,7 @@ export {
     EventRegistry,
     ArticleMapper,
 } from "./eventRegistry";
+export { sleep, mainLangs, allLangs } from "./base";
 export {
     GetSourceInfo,
     GetConceptInfo,

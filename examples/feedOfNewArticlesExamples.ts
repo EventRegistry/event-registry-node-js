@@ -1,4 +1,5 @@
 import { ArticleInfoFlags, EventRegistry, GetRecentArticles, ReturnInfo, sleep } from "eventregistry";
+import * as _ from "lodash";
 
 // this is a simple script that makes a query to ER to get the feed of articles that were added
 // in the last minute (from the first to the last second of the minute).

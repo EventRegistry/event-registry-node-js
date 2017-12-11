@@ -3,7 +3,7 @@
 
 This library contains classes that allow one to easily access the event and article information from Event Registry (http://eventregistry.org).
 
-Most of the package is quite similar to [https://github.com/EventRegistry/event-registry-python](Event Registry Python)  so for all who are already acquainted with the Python version there shouldn't be any problems with using this package.
+Most of the package is quite similar to [Event Registry Python](https://github.com/EventRegistry/event-registry-python)  so for all who are already acquainted with the Python version there shouldn't be any problems with using this package.
 
 ### Installation
 
