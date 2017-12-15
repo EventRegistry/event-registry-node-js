@@ -134,7 +134,9 @@ export class QueryEvents extends Query<RequestEvents> {
         return query;
     }
 
-    public static initWithComplexQuery(query: QueryEvents, complexQuery) {
+    public static initWithComplexQuery(...args);
+    public static initWithComplexQuery(complexQuery) {
+        const query = new QueryEvents();
         if (complexQuery instanceof ComplexEventQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
         } else if (_.isString(complexQuery)) {
@@ -190,7 +192,8 @@ export class QueryEventsIter extends QueryEvents {
         this.getNextBatch(callback, doneCallback);
     }
 
-    public static initWithComplexQuery(query, complexQuery) {
+    public static initWithComplexQuery(er, complexQuery, args: ER.QueryEvents.IteratorArguments = {}) {
+        const query = new QueryEventsIter(er, args);
         if (complexQuery instanceof ComplexEventQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
         } else if (_.isString(complexQuery)) {

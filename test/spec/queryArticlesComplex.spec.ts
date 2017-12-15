@@ -22,8 +22,7 @@ describe("Query Articles Complex", () => {
     it("should test keywords (1)", (done) => {
         const baseQuery = new BaseQuery({keyword: "obama", keywordLoc: "title"});
         const cq1 = new ComplexArticleQuery(baseQuery);
-        const queryArticlesIter = new QueryArticlesIter(er);
-        const artIter = QueryArticlesIter.initWithComplexQuery(queryArticlesIter, cq1) as QueryArticlesIter;
+        const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1) as QueryArticlesIter;
         artIter.execQuery((items) => {
             _.each(items, (item) => {
                 expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("obama");
@@ -41,8 +40,7 @@ describe("Query Articles Complex", () => {
             }
         }
         `;
-        const queryArticlesIter = new QueryArticlesIter(er);
-        const artIter = QueryArticlesIter.initWithComplexQuery(queryArticlesIter, qStr) as QueryArticlesIter;
+        const artIter = QueryArticlesIter.initWithComplexQuery(er, qStr) as QueryArticlesIter;
         artIter.execQuery((items) => {
             _.each(items, (item) => {
                 expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("obama");
@@ -55,8 +53,7 @@ describe("Query Articles Complex", () => {
     it("should test keywords (3)", (done) => {
         const baseQuery = new BaseQuery({keyword: "home", keywordLoc: "body"});
         const cq1 = new ComplexArticleQuery(baseQuery);
-        const queryArticlesIter = new QueryArticlesIter(er, {returnInfo: utils.returnInfo, maxItems: 10});
-        const artIter = QueryArticlesIter.initWithComplexQuery(queryArticlesIter, cq1) as QueryArticlesIter;
+        const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {returnInfo: utils.returnInfo, maxItems: 10}) as QueryArticlesIter;
         artIter.execQuery((items, error) => {
             _.each(items, (item) => {
                 expect(_.deburr(_.toLower(_.get(item, "body")))).toContain("home");
@@ -75,8 +72,8 @@ describe("Query Articles Complex", () => {
 
         const q = new QueryArticles({keywords: QueryItems.AND(["obama", "trump"]), ignoreLang: ["eng", "deu"]});
 
-        const listRes1 = await utils.getArticlesQueryUriListForComplexQuery(er, new QueryArticles(), cq1);
-        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, new QueryArticles(), cq2);
+        const listRes1 = await utils.getArticlesQueryUriListForComplexQuery(er, cq1);
+        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, cq2);
 
         const listRes3 = await utils.getQueryUriListForQueryArticles(er, q);
 
@@ -102,8 +99,8 @@ describe("Query Articles Complex", () => {
 
         const q = new QueryArticles({sourceUri: [bbcUri, apUri], ignoreConceptUri: obamaUri});
 
-        const listRes1 = await utils.getArticlesQueryUriListForComplexQuery(er, new QueryArticles(), cq1);
-        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, new QueryArticles(), cq2);
+        const listRes1 = await utils.getArticlesQueryUriListForComplexQuery(er, cq1);
+        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, cq2);
 
         const listRes3 = await utils.getQueryUriListForQueryArticles(er, q);
 
@@ -125,8 +122,8 @@ describe("Query Articles Complex", () => {
 
         const q = new QueryArticles({dateStart: "2017-02-05", dateEnd: "2017-02-06", ignoreCategoryUri: await er.getCategoryUri("business")});
 
-        const listRes1 = await utils.getArticlesQueryUriListForComplexQuery(er, new QueryArticles(), cq1);
-        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, new QueryArticles(), cq2);
+        const listRes1 = await utils.getArticlesQueryUriListForComplexQuery(er, cq1);
+        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, cq2);
 
         const listRes3 = await utils.getQueryUriListForQueryArticles(er, q);
 
@@ -147,7 +144,7 @@ describe("Query Articles Complex", () => {
             }
         }
         `;
-        const q1 = QueryArticles.initWithComplexQuery(new QueryArticles(), qStr);
+        const q1 = QueryArticles.initWithComplexQuery(qStr);
 
         const q = new QueryArticles({dateStart: "2017-02-05", dateEnd: "2017-02-06", ignoreCategoryUri: businessUri});
 
@@ -179,7 +176,7 @@ describe("Query Articles Complex", () => {
             }
         }
         `;
-        const q1 = QueryArticles.initWithComplexQuery(new QueryArticles(), qStr);
+        const q1 = QueryArticles.initWithComplexQuery(qStr);
 
         const cq2 = new ComplexArticleQuery(CombinedQuery.OR([
             new BaseQuery({ dateStart: "2017-02-05", dateEnd: "2017-02-05" }),
@@ -191,7 +188,7 @@ describe("Query Articles Complex", () => {
         ])));
 
         const listRes1 = await utils.getQueryUriListForQueryArticles(er, q1);
-        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, new QueryArticles(), cq2);
+        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, cq2);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
         done();
@@ -227,7 +224,7 @@ describe("Query Articles Complex", () => {
             }
         }
         `;
-        const q1 = QueryArticles.initWithComplexQuery(new QueryArticles(), qStr);
+        const q1 = QueryArticles.initWithComplexQuery(qStr);
 
         const cq2 = new ComplexArticleQuery(CombinedQuery.OR([
             new BaseQuery({ dateStart: "2017-02-04", dateEnd: "2017-02-05" }),
@@ -243,7 +240,7 @@ describe("Query Articles Complex", () => {
         ])));
 
         const listRes1 = await utils.getQueryUriListForQueryArticles(er, q1);
-        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, new QueryArticles(), cq2);
+        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, cq2);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
         done();
@@ -270,8 +267,7 @@ describe("Query Articles Complex", () => {
 
         const returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({concepts: true, categories: true})});
 
-        const queryArticlesIter = new QueryArticlesIter(er, { returnInfo, maxItems: 50 });
-        const artIter = QueryArticlesIter.initWithComplexQuery(queryArticlesIter, cq) as QueryArticlesIter;
+        const artIter = QueryArticlesIter.initWithComplexQuery(er, cq, { returnInfo, maxItems: 50 }) as QueryArticlesIter;
         artIter.execQuery((items) => {
             _.each(items, (item) => {
                 const hasConcept = _.find(_.get(item, "concepts", []), ({uri}) => uri === trumpUri);

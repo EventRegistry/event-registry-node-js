@@ -44,8 +44,8 @@ describe("Query Events Complex", () => {
 
         const q = new QueryEvents({conceptUri: QueryItems.AND(_.values(conceptUris)), ignoreLang: ["eng", "deu"]});
 
-        const listRes1 = await utils.getEventsQueryUriListForComplexQuery(er, new QueryEvents(), cq1);
-        const listRes2 = await utils.getEventsQueryUriListForComplexQuery(er, new QueryEvents(), cq2);
+        const listRes1 = await utils.getEventsQueryUriListForComplexQuery(er, cq1);
+        const listRes2 = await utils.getEventsQueryUriListForComplexQuery(er, cq2);
         const listRes3 = await utils.getQueryUriListForQueryEvents(er, q);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
@@ -65,8 +65,8 @@ describe("Query Events Complex", () => {
 
         const q = new QueryEvents({sourceUri: _.values(sourceUris), ignoreConceptUri: conceptUris.obama});
 
-        const listRes1 = await utils.getEventsQueryUriListForComplexQuery(er, new QueryEvents(), cq1);
-        const listRes2 = await utils.getEventsQueryUriListForComplexQuery(er, new QueryEvents(), cq2);
+        const listRes1 = await utils.getEventsQueryUriListForComplexQuery(er, cq1);
+        const listRes2 = await utils.getEventsQueryUriListForComplexQuery(er, cq2);
         const listRes3 = await utils.getQueryUriListForQueryEvents(er, q);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
@@ -87,8 +87,8 @@ describe("Query Events Complex", () => {
 
         const q = new QueryEvents({dateStart: "2017-02-05", dateEnd: "2017-02-06", ignoreCategoryUri: categoryUri});
 
-        const listRes1 = await utils.getEventsQueryUriListForComplexQuery(er, new QueryEvents(), cq1);
-        const listRes2 = await utils.getEventsQueryUriListForComplexQuery(er, new QueryEvents(), cq2);
+        const listRes1 = await utils.getEventsQueryUriListForComplexQuery(er, cq1);
+        const listRes2 = await utils.getEventsQueryUriListForComplexQuery(er, cq2);
         const listRes3 = await utils.getQueryUriListForQueryEvents(er, q);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
@@ -97,7 +97,7 @@ describe("Query Events Complex", () => {
     });
 
     it("should compare same results (4)", async (done) => {
-        const cq1 = QueryEvents.initWithComplexQuery(new QueryEvents(), `
+        const cq1 = QueryEvents.initWithComplexQuery(`
             {
                 "$query": {
                     "dateStart": "2017-02-05", "dateEnd": "2017-02-06",
@@ -119,7 +119,7 @@ describe("Query Events Complex", () => {
 
     it("should compare same results (5)", async (done) => {
         const politicsUri = await er.getCategoryUri("politics");
-        const cq1 = QueryEvents.initWithComplexQuery(new QueryEvents(), `
+        const cq1 = QueryEvents.initWithComplexQuery(`
         {
             "$query": {
                 "$or": [
@@ -148,7 +148,7 @@ describe("Query Events Complex", () => {
         ));
 
         const listRes1 = await utils.getQueryUriListForQueryEvents(er, cq1);
-        const listRes2 = await utils.getEventsQueryUriListForComplexQuery(er, new QueryEvents(), cq2);
+        const listRes2 = await utils.getEventsQueryUriListForComplexQuery(er, cq2);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
         done();
@@ -166,7 +166,7 @@ describe("Query Events Complex", () => {
         ]),
         ));
         const returnInfo = new ReturnInfo({eventInfo: new EventInfoFlags({concepts: true, categories: true, stories: true})});
-        const iter = QueryEventsIter.initWithComplexQuery(new QueryEventsIter(er, {returnInfo}), cq);
+        const iter = QueryEventsIter.initWithComplexQuery(er, cq, {returnInfo});
         iter.execQuery((items) => {
             _.each(items, (item) => {
                 const hasConcept = _.find(_.get(item, "concepts", []), ({uri}) => uri === conceptUris.trump);

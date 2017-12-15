@@ -98,13 +98,13 @@ export class Utils {
         return new EventRegistry();
     }
 
-    public async getArticlesQueryUriListForComplexQuery(er, query, cq) {
-        const q = QueryArticles.initWithComplexQuery(query, cq);
+    public async getArticlesQueryUriListForComplexQuery(er, cq) {
+        const q = QueryArticles.initWithComplexQuery(cq);
         return await this.getQueryUriListForQueryArticles(er, q);
     }
 
-    public async getEventsQueryUriListForComplexQuery(er, query, cq) {
-        const q = QueryEvents.initWithComplexQuery(query, cq);
+    public async getEventsQueryUriListForComplexQuery(er, cq) {
+        const q = QueryEvents.initWithComplexQuery(cq);
         return await this.getQueryUriListForQueryEvents(er, q);
     }
 

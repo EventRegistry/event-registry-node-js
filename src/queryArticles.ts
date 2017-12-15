@@ -105,7 +105,9 @@ export class QueryArticles extends Query<RequestArticles> {
         return q;
     }
 
-    public static initWithComplexQuery(query, complexQuery) {
+    public static initWithComplexQuery(...args);
+    public static initWithComplexQuery(complexQuery) {
+        const query = new QueryArticles();
         if (complexQuery instanceof ComplexArticleQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
         } else if (_.isString(complexQuery)) {
@@ -157,7 +159,8 @@ export class QueryArticlesIter extends QueryArticles {
         this.getNextBatch(callback, doneCallback);
     }
 
-    public static initWithComplexQuery(query, complexQuery) {
+    public static initWithComplexQuery(er: EventRegistry, complexQuery, args: {[name: string]: any} = {}) {
+        const query = new QueryArticlesIter(er, args);
         if (complexQuery instanceof ComplexArticleQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
         } else if (_.isString(complexQuery)) {

@@ -139,7 +139,7 @@ Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, bus
         ]),
         new BaseQuery({categoryUri: businessUri}),
     ]));
-    const query1 = QueryArticles.initWithComplexQuery(new QueryArticles(), cq1);
+    const query1 = QueryArticles.initWithComplexQuery(cq1);
     const res1 = er.execQuery(query1);
 
     // find articles that are both about Obama and Trump and are not in English or German language
@@ -147,7 +147,7 @@ Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, bus
         conceptUri: QueryItems.AND([obamaUri, trumpUri]),
         exclude: new BaseQuery({lang: QueryItems.OR(["eng", "deu"])}),
     }));
-    const query2 = QueryArticles.initWithComplexQuery(new QueryArticles(), cq2);
+    const query2 = QueryArticles.initWithComplexQuery(cq2);
     const res2 = er.execQuery(query2);
 
     // get articles that were published on 2017-02-05 or are about trump
@@ -176,6 +176,6 @@ Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, bus
         }
     }
     `;
-    const query3 = QueryArticles.initWithComplexQuery(new QueryArticles(), qStr);
+    const query3 = QueryArticles.initWithComplexQuery(qStr);
     const res3 = er.execQuery(query3);
 });

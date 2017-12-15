@@ -112,7 +112,7 @@ er.getConceptUri("Obama").then((conceptUri) => {
 
 // events that are occurred between 2017-02-05 and 2017-02-05 and are not about business
 er.getCategoryUri("Business").then((categoryUri) => {
-    const query = QueryEvents.initWithComplexQuery(new QueryEvents(), `
+    const query = QueryEvents.initWithComplexQuery(`
     {
         "$query": {
             "dateStart": "2017-02-05", "dateEnd": "2017-02-06",
@@ -158,7 +158,7 @@ Promise.all([
         }
     }
     `;
-    const q1 = QueryEvents.initWithComplexQuery(new QueryEvents(), qStr);
+    const q1 = QueryEvents.initWithComplexQuery(qStr);
     const res = er.execQuery(q1);
 
     const cq = new ComplexEventQuery(CombinedQuery.OR([
@@ -172,7 +172,7 @@ Promise.all([
 
     const returnInfo = new ReturnInfo({eventInfo: new EventInfoFlags({concepts: true, categories: true, stories: true})});
 
-    const iter = QueryEventsIter.initWithComplexQuery(new QueryEventsIter(er, {returnInfo, maxItems: 10}), cq);
+    const iter = QueryEventsIter.initWithComplexQuery(er, cq, {returnInfo, maxItems: 10});
     // example of an ITERATOR with a COMPLEX QUERY
     iter.execQuery((events) => {
         console.info(events);
