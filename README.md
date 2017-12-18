@@ -1,9 +1,8 @@
 ## Accessing Event Registry data through JS
 
-
 This library contains classes that allow one to easily access the event and article information from Event Registry (http://eventregistry.org).
 
-Most of the package is quite similar to [Event Registry Python](https://github.com/EventRegistry/event-registry-python)  so for all who are already acquainted with the Python version there shouldn't be any problems with using this package.
+Most of the package is quite similar to https://github.com/EventRegistry/event-registry-python[Event Registry Python] so for all who are already acquainted with the Python version, there shouldn't be any problems with using this package. Though we strongly suggest using a JS transpiler or Typescript to employ the latest in ECMAScript standards.
 
 ### Installation
 
@@ -17,9 +16,13 @@ and the package should be installed. Alternatively, you can also clone the packa
 
 ### Validating installation 
 
-To ensure that the package has been properly installed type the following in you JS file:
+To ensure that the package has been properly installed type the following in your Typescript file:
 
 `import { EventRegistry } from "eventregistry";`
+
+And if you are using plain Javascript.
+
+`var er = require("eventregistry");`
 
 If this doesn't produce any kind of error messages then your installation has been successful.
 
