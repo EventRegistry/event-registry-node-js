@@ -126,23 +126,23 @@ er.execQuery(q).then((response) => {
 
 Depending on your interest and existing knowledge of the `eventregistry` package you can check different things:
 
-**[Terminology](Terminology)**. There are numerous terms in the Event Registry that you will constantly see. If you don't know what we mean by an *event*, *story*, *concept* or *category*, you should definitely check this page first.
+**[Terminology](https://github.com/EventRegistry/event-registry-node-js/wiki/Terminology)**. There are numerous terms in the Event Registry that you will constantly see. If you don't know what we mean by an *event*, *story*, *concept* or *category*, you should definitely check this page first.
 
-**[Learn about `EventRegistry` class](Eventregistry-class)**. You will need to use the `EventRegistry` class whenever you will want to interact with Event Registry so you should learn about it.
+**[Learn about `EventRegistry` class](https://github.com/EventRegistry/event-registry-node-js/wiki/Eventregistry-class)**. You will need to use the `EventRegistry` class whenever you will want to interact with Event Registry so you should learn about it.
 
-**[Details about articles/events/concepts/categories/... that we can provide](ReturnInfo-class)**. When you will be requesting information about events, articles, concepts, and other things, what details can you ask for each of these?
+**[Details about articles/events/concepts/categories/... that we can provide](https://github.com/EventRegistry/event-registry-node-js/wiki/ReturnInfo-class)**. When you will be requesting information about events, articles, concepts, and other things, what details can you ask for each of these?
 
-**[Querying events](Searching-for-events)**. Check this page if you are interested in searching for events that match various search criteria, such as relevant concepts, keywords, date, location or others.
+**[Querying events](https://github.com/EventRegistry/event-registry-node-js/wiki/Searching-for-events)**. Check this page if you are interested in searching for events that match various search criteria, such as relevant concepts, keywords, date, location or others.
 
-**[Querying articles](Searching-for-articles)**. Read if you want to search for articles based on the publisher's URL, article date, mentioned concepts or others.
+**[Querying articles](https://github.com/EventRegistry/event-registry-node-js/wiki/Searching-for-articles)**. Read if you want to search for articles based on the publisher's URL, article date, mentioned concepts or others.
 
-**[Trends](Trends)**. Are you interested in finding which concepts are currently trending the most in the news? Maybe which movie actor is most popular in social media? How about trending of various news categories?
+**[Trends](https://github.com/EventRegistry/event-registry-node-js/wiki/Trends)**. Are you interested in finding which concepts are currently trending the most in the news? Maybe which movie actor is most popular in social media? How about trending of various news categories?
 
-**[Articles and events shared the most on social media](Social-shares)**. Do you want to get the list of articles that have been shared the most on Facebook and Twitter on a particular date? What about the most relevant event based on shares on social media?
+**[Articles and events shared the most on social media](https://github.com/EventRegistry/event-registry-node-js/wiki/Social-shares)**. Do you want to get the list of articles that have been shared the most on Facebook and Twitter on a particular date? What about the most relevant event based on shares on social media?
 
-**[Daily mentions and sentiment of concepts and categories](Number-of-mentions-in-news-or-social-media)**. Are you interested in knowing how often was a particular concept or category mentioned in the news in the previous two years? How about the sentiment expressed on social media about your favorite politician?
+**[Daily mentions and sentiment of concepts and categories](https://github.com/EventRegistry/event-registry-node-js/wiki/Number-of-mentions-in-news-or-social-media)**. Are you interested in knowing how often was a particular concept or category mentioned in the news in the previous two years? How about the sentiment expressed on social media about your favorite politician?
 
-**[Correlations of concepts](Correlations)**. Do you have some time series of daily measurements? Why not find the concepts that correlate the most with it based on the number of mentions in the news.
+**[Correlations of concepts](https://github.com/EventRegistry/event-registry-node-js/wiki/Correlations)**. Do you have some time series of daily measurements? Why not find the concepts that correlate the most with it based on the number of mentions in the news.
 
 ## Data access and usage restrictions
 
