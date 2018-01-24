@@ -2,7 +2,7 @@
 
 This library contains classes that allow one to easily access the event and article information from Event Registry (http://eventregistry.org).
 
-Most of the package is quite similar to https://github.com/EventRegistry/event-registry-python[Event Registry Python] so for all who are already acquainted with the Python version, there shouldn't be any problems with using this package. Though we strongly suggest using a JS transpiler or Typescript to employ the latest in ECMAScript standards.
+Most of the package is quite similar to [Event Registry Python](https://github.com/EventRegistry/event-registry-python) so for all who are already acquainted with the Python version, there shouldn't be any problems with using this package. Though we strongly suggest using a JS transpiler or Typescript to employ the latest in ECMAScript standards.
 
 ### Installation
 
@@ -14,17 +14,28 @@ and the package should be installed. Alternatively, you can also clone the packa
 
 `npm build`
 
-### Validating installation 
+### Usage
 
-To ensure that the package has been properly installed type the following in your Typescript file:
+If you are using Typescript then import the package with the following line:
 
-`import { EventRegistry } from "eventregistry";`
+``` typescript
+import {EventRegistry} from "eventregistry";
+const er = new EventRegistry();
+```
 
-And if you are using plain Javascript.
+If you are using Node.js with no ES6 support.
 
-`var er = require("eventregistry");`
+``` javascript
+var erBase = require("eventregistry");
+var er = new erBase.EventRegistry();
+```
 
-If this doesn't produce any kind of error messages then your installation has been successful.
+Or shorter with destructuring, which is available from Node.js v6 onwards.
+
+``` javascript
+const { EventRegistry } = require("eventregistry");
+const er = new EventRegistry();
+```
 
 ### Updating the package
 
@@ -36,9 +47,26 @@ As features are added to the package you will need at some point to update it. I
 
 When making queries to Event Registry you will have to use an API key that you can obtain for free. 
 
-### Three simple examples to make you interested
+### A couple of examples to make you interested
 
 **Print a list of recently added articles mentioning George Clooney**
+
+``` javascript
+var erBase = require("eventregistry");
+
+var er = new erBase.EventRegistry({apiKey: "YOUR_API_KEY"});
+
+er.getConceptUri("George Clooney").then((conceptUri) => {
+    var q = new erBase.QueryArticlesIter(er, {conceptUri: conceptUri, sortBy: "date"});
+    q.execQuery((items) => {
+        for(var item of items) {
+            console.info(item);
+        }
+    })
+});
+```
+
+Or in **Typescript**.
 
 ``` typescript
 import {EventRegistry, QueryArticlesIter} from "eventregistry";
@@ -55,7 +83,7 @@ er.getConceptUri("George Clooney").then((conceptUri) => {
 });
 ```
 
-Alternative approach using the new ES6 `async/await` pattern.
+Alternative approach in Typescript using the new ES6 `async/await` pattern.
 
 ``` typescript
 import {EventRegistry, QueryArticlesIter} from "eventregistry";
@@ -74,7 +102,25 @@ async function iterateOverArticles() {
 iterateOverArticles();
 ```
 
+
 **Search for latest events related to Star Wars**
+
+``` javascript
+var erBase = require("eventregistry");
+
+var er = new erBase.EventRegistry({apiKey: "YOUR_API_KEY"});
+
+er.getConceptUri("Star Wars").then((conceptUri) => {
+    var q = new erBase.QueryEvents({conceptUri: conceptUri});
+    var requestEventsInfo = new erBase.RequestEventsInfo({sortBy: "date", count: 10});
+    q.addRequestedResult(requestEventsInfo);
+    return er.execQuery(q);
+}).then((response) => {
+    console.info(response);
+});
+```
+
+Or in **Typescript**.
 
 ``` typescript
 import {EventRegistry, QueryEvents, RequestEventsInfo} from "eventregistry";
@@ -110,6 +156,19 @@ iterateOverEvents();
 ```
 
 **What are the currently trending topics**
+
+``` javascript
+var erBase = require("eventregistry");
+
+var er = new erBase.EventRegistry({apiKey: "YOUR_API_KEY"});
+
+var q = new erBase.GetTrendingConcepts({source: "news", count: 10});
+er.execQuery(q).then((response) => {
+    console.info(response);
+});
+```
+
+Or in **Typescript**.
 
 ``` typescript
 import {EventRegistry, GetTrendingConcepts} from "eventregistry";
