@@ -195,7 +195,7 @@ export class ComplexArticleQuery extends QueryCore {
         if (_.get(args, "eventFilter") !== "keepAll") {
             filter["hasEvent"] = _.get(args, "eventFilter");
         }
-        if (_.isEmpty(filter)) {
+        if (!_.isEmpty(filter)) {
             this.queryObj["$filter"] = filter;
         }
     }
