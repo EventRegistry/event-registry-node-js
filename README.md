@@ -45,7 +45,7 @@ As features are added to the package you will need at some point to update it. I
 
 ### Authentication and API key
 
-When making queries to Event Registry you will have to use an API key that you can obtain for free. 
+When making queries to Event Registry you will have to use an API key that you can obtain for free.
 
 ### A couple of examples to make you interested
 
@@ -113,7 +113,7 @@ var er = new erBase.EventRegistry({apiKey: "YOUR_API_KEY"});
 er.getConceptUri("Star Wars").then((conceptUri) => {
     var q = new erBase.QueryEvents({conceptUri: conceptUri});
     var requestEventsInfo = new erBase.RequestEventsInfo({sortBy: "date", count: 10});
-    q.addRequestedResult(requestEventsInfo);
+    q.setRequestedResult(requestEventsInfo);
     return er.execQuery(q);
 }).then((response) => {
     console.info(response);
@@ -130,7 +130,7 @@ const er = new EventRegistry({apiKey: "YOUR_API_KEY"});
 er.getConceptUri("Star Wars").then((conceptUri) => {
     const q = new QueryEvents({conceptUri: conceptUri});
     const requestEventsInfo = new RequestEventsInfo({sortBy: "date", count: 10});
-    q.addRequestedResult(requestEventsInfo);
+    q.setRequestedResult(requestEventsInfo);
     return er.execQuery(q);
 }).then((response) => {
     console.info(response);
@@ -148,7 +148,7 @@ const er = new EventRegistry({apiKey: "YOUR_API_KEY"});
 async function iterateOverEvents() {
     const q = new QueryEvents({conceptUri: await er.getConceptUri("Star Wars")});
     const requestEventsInfo = new RequestEventsInfo({sortBy: "date", count: 10});
-    q.addRequestedResult(requestEventsInfo);
+    q.setRequestedResult(requestEventsInfo);
     return er.execQuery(q);
 }
 

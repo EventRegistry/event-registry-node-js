@@ -1,4 +1,4 @@
-import { ArticleInfoFlags, ArticleMapper, EventRegistry, QueryArticle, QueryArticles, RequestArticleInfo, RequestArticlesUriList, ReturnInfo } from "eventregistry";
+import { ArticleInfoFlags, ArticleMapper, EventRegistry, QueryArticle, QueryArticles, RequestArticleInfo, RequestArticlesUriWgtList, ReturnInfo } from "eventregistry";
 import * as _ from "lodash";
 
 // examples that download information about the individual news articles
@@ -26,11 +26,11 @@ artMapper.getArticleUri("http://www.mynet.com/haber/guncel/share-2058597-1").the
 // first search for articles related to Apple
 er.getConceptUri("Apple").then((conceptUri) => {
     const q3 = new QueryArticles({conceptUri});
-    q3.setRequestedResult(new RequestArticlesUriList());
+    q3.setRequestedResult(new RequestArticlesUriWgtList());
     return er.execQuery(q3);
 }).then((response) => {
     // take the list of article URIs that match the search criteria (i.e. ['641565713', '641559021', '641551446', '641025492', '641548675', ...])
-    const articleUriList = _.get(response, "uriList.results", []);
+    const articleUriList = EventRegistry.getUriFromUriWgt(_.get(response, "uriWgtList.results", []));
     // take first 5 article URIs and ask for all details about these articles
     const queryUris = _.take(articleUriList, 5) as string[];
     const q4 = new QueryArticle(queryUris);

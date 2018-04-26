@@ -129,10 +129,6 @@ export abstract class Query<T> extends QueryParamsBase {
         }
     }
 
-    public clearRequestedResults() {
-        this.resultTypeList = [];
-    }
-
     public abstract setRequestedResult(args);
 
     /**

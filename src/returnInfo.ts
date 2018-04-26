@@ -3,7 +3,7 @@ import { ER } from "./types";
 
 export abstract class ReturnInfoFlagsBase<T extends {}> {
     protected type: string;
-    private data= {};
+    private data = {};
 
     public setFlag(key, obj, defaultValue) {
         if (_.has(obj, key)) {
@@ -122,6 +122,7 @@ export class StoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.StoryInfoF
         this.setFlag("concepts", params, false);
         this.setFlag("categories", params, false);
         this.setFlag("medoidArticle", params, false);
+        this.setFlag("infoArticle", params, false);
         this.setFlag("commonDates", params, false);
         this.setFlag("socialScore", params, false);
         this.setValue("imageCount", params, 0);
@@ -140,6 +141,7 @@ export class EventInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.EventInfoF
         this.setFlag("location", params, true);
         this.setFlag("date", params, true);
         this.setFlag("commonDates", params, false);
+        this.setFlag("infoArticle", params, false);
         this.setFlag("stories", params, false);
         this.setFlag("socialScore", params, false);
         this.setValue("imageCount", params, 0);

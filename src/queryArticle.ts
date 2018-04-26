@@ -25,18 +25,6 @@ export class QueryArticle extends Query<RequestArticle> {
     }
 
     /**
-     * Add a result type that you would like to be returned. In one QueryArticle you can ask for multiple result types.
-     * Result types can be the classes that extend RequestArticle base class (see classes below).
-     * @param requestArticle Determines what info should be returned as a result of the query
-     */
-    public addRequestedResult(requestArticle) {
-        if (!(requestArticle instanceof RequestArticle)) {
-            throw Error("QueryArticle class can only accept result requests that are of type RequestArticle");
-        }
-        this.resultTypeList = [..._.filter(this.resultTypeList, (item) => item["resultType"] !== requestArticle["resultType"]), requestArticle];
-    }
-
-    /**
      * Set the single result type that you would like to be returned.
      * If some other request type was previously set, it will be overwritten.
      * Result types can be the classes that extend RequestArticle base class (see classes below).

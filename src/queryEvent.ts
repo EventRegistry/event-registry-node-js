@@ -2,6 +2,7 @@ import * as _ from "lodash";
 import { mainLangs, Query } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { QueryArticle, RequestArticleInfo } from "./queryArticle";
+import { QueryArticles, RequestArticlesInfo } from "./queryArticles";
 import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
 import { ER } from "./types";
 /**
@@ -25,19 +26,6 @@ export class QueryEvent extends Query<RequestEvent> {
     }
 
     /**
-     * Add a result type that you would like to be returned.
-     * In case you are a subscribed customer you can ask for multiple result types in a single query
-     * (for free users, only a single result type can be required per call).
-     * Result types can be the classes that extend RequestEvent base class (see classes below).
-     */
-    public addRequestedResult(requestEvent: RequestEvent) {
-        if (!(requestEvent instanceof RequestEvent)) {
-            throw Error("QueryEvent class can only accept result requests that are of type RequestEvent");
-        }
-        this.resultTypeList = [..._.filter(this.resultTypeList, (item) => item["resultType"] !== requestEvent["resultType"]), requestEvent];
-    }
-
-    /**
      * Set the single result type that you would like to be returned. Any previously set result types will be overwritten.
      * Result types can be the classes that extend RequestEvent base class (see classes below).
      */
@@ -55,7 +43,7 @@ export class QueryEvent extends Query<RequestEvent> {
  * Class for iterating through all the articles in the event via callbacks
  */
 export class QueryEventArticlesIter extends QueryEvent {
-    private er;
+    private er: EventRegistry;
     private lang;
     private sortBy;
     private sortByAsc;
@@ -76,12 +64,12 @@ export class QueryEventArticlesIter extends QueryEvent {
             lang = mainLangs,
             sortBy = "cosSim",
             sortByAsc = false,
-            returnInfo = new ReturnInfo({ articleInfo: new ArticleInfoFlags({ bodyLen: 200 }) }),
-            articleBatchSize = 200,
+            returnInfo = new ReturnInfo({ articleInfo: new ArticleInfoFlags({ bodyLen: -1 }) }),
+            articleBatchSize = 100,
             maxItems = -1,
         } = args;
-        if (articleBatchSize > 200) {
-            throw new Error("You can not have a batch size > 200 items");
+        if (articleBatchSize > 100) {
+            throw new Error("You can not have a batch size > 100 items");
         }
         this.er = er;
         this.lang = lang;
@@ -92,26 +80,35 @@ export class QueryEventArticlesIter extends QueryEvent {
         this.maxItems = maxItems;
         this.eventUri = eventUri;
     }
+
+    public async count(lang = mainLangs) {
+        this.setRequestedResult(new RequestEventArticleUriWgts({lang}));
+        const response = await this.er.execQuery(this);
+        if (_.has(response, "error")) {
+            console.error(_.get(response, "error"));
+        }
+        return _.size(_.get(this.params["eventUri"], "uriWgtList.results", []));
+    }
     /**
      * Execute query and fetch batches of articles of the specified size (articleBatchSize)
      * @param callback callback function that'll be called every time we get a new batch of articles from the backend
      * @param doneCallback callback function that'll be called when everything is complete
      */
     public execQuery(callback: (item, error) => void, doneCallback?: (error) => void) {
-        this.initialDataFetch().then((uriList) => {
-            if (!_.isEmpty(uriList)) {
-                this.getNextBatch(uriList, callback, doneCallback);
+        this.initialDataFetch().then((uriWgts) => {
+            if (!_.isEmpty(uriWgts)) {
+                this.getNextBatch(uriWgts, callback, doneCallback);
             }
         });
     }
 
     private async initialDataFetch() {
-        this.setRequestedResult(new RequestEventArticleUris({lang: this.lang, sortBy: this.sortBy, sortByAsc: this.sortByAsc}));
+        this.setRequestedResult(new RequestEventArticleUriWgts({lang: this.lang, sortBy: this.sortBy, sortByAsc: this.sortByAsc}));
         const res = await this.er.execQuery(this);
         if (_.has(res, "error")) {
             console.error(_.get(res, "error"));
         }
-        return _.get(res[this.eventUri], "articleUris.results", []);
+        return _.get(res[this.eventUri], "uriWgtList.results", []);
     }
 
     private get batchSize() {
@@ -122,24 +119,23 @@ export class QueryEventArticlesIter extends QueryEvent {
         return toReturnSize < this.articleBatchSize ? toReturnSize : this.articleBatchSize;
     }
 
-    private async getNextBatch(uriList, callback: (item, error) => void, doneCallback?: (error?) => void) {
-        this.clearRequestedResults();
-        const uris = _.compact(_.pullAt(uriList, _.range(0, this.batchSize))) as string[];
-        const query = new QueryArticle(uris);
-        query.setRequestedResult(new RequestArticleInfo(this.returnInfo));
+    private async getNextBatch(uriWgts, callback: (item, error) => void, doneCallback?: (error?) => void) {
+        const uris = _.compact(_.pullAt(uriWgts, _.range(0, this.batchSize))) as string[];
+        const query = QueryArticles.initWithArticleUriWgtList(uris);
+        query.setRequestedResult(new RequestArticlesInfo({returnInfo: this.returnInfo, count: this.batchSize}));
         try {
             const res = await this.er.execQuery(query);
             const errorMessage = _.get(res, "error");
             this.returnedDataSize += _.size(uris);
-            const data = _.map(uris, (uri) => res[uri + ""].info);
+            const data = _.get(res, "articles.results", []);
             await callback(data, errorMessage);
-            if (_.isEmpty(uriList) || (this.maxItems !== -1 && this.maxItems === this.returnedDataSize)) {
+            if (_.isEmpty(uriWgts) || (this.maxItems !== -1 && this.maxItems === this.returnedDataSize)) {
                 if (doneCallback) {
                     doneCallback(errorMessage);
                 }
                 return;
             } else {
-                await this.getNextBatch(uriList, callback, doneCallback);
+                await this.getNextBatch(uriWgts, callback, doneCallback);
             }
         } catch (error) {
             console.error(error);
@@ -174,17 +170,17 @@ export class RequestEventArticles extends RequestEvent {
         super();
         const {
             page = 1,
-            count = 20,
+            count = 100,
             lang = mainLangs,
             sortBy = "cosSim",
             sortByAsc = false,
-            returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: 200})}),
+            returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: -1})}),
         } = args;
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
-        if (count > 200) {
-            throw new RangeError("At most 200 articles can be returned per call");
+        if (count > 100) {
+            throw new RangeError("At most 100 articles can be returned per call");
         }
         this.params = {};
         this.params["articlesPage"] = page;
@@ -197,14 +193,14 @@ export class RequestEventArticles extends RequestEvent {
 }
 
 /**
- * @class RequestEventArticleUris
+ * @class RequestEventArticleUriWgts
  * Return just a list of article uris
  */
-export class RequestEventArticleUris extends RequestEvent {
-    public resultType = "articleUris";
+export class RequestEventArticleUriWgts extends RequestEvent {
+    public resultType = "uriWgtList";
     public params;
 
-    constructor(args: ER.QueryEvent.RequestEventArticleUrisArguments = {}) {
+    constructor(args: ER.QueryEvent.RequestEventArticleUriWgtsArguments = {}) {
         super();
         const {
             lang = mainLangs,
@@ -212,9 +208,9 @@ export class RequestEventArticleUris extends RequestEvent {
             sortByAsc = false,
         } = args;
         this.params = {};
-        this.params["articleUrisLang"] = lang;
-        this.params["articleUrisSortBy"] = sortBy;
-        this.params["articleUrisSortByAsc"] = sortByAsc;
+        this.params["uriWgtListLang"] = lang;
+        this.params["uriWgtListSortBy"] = sortBy;
+        this.params["uriWgtListSortByAsc"] = sortByAsc;
     }
 }
 
@@ -263,15 +259,15 @@ export class RequestEventArticleTrend extends RequestEvent {
         const {
             lang = mainLangs,
             page = 1,
-            count = 200,
+            count = 100,
             minArticleCosSim = -1,
             returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: 0})}),
           } = args;
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
-        if (count > 200) {
-            throw new RangeError("At most 200 articles can be returned per call");
+        if (count > 100) {
+            throw new RangeError("At most 100 articles can be returned per call");
         }
         this.params = {};
         this.params["articleTrendLang"] = lang;
@@ -291,17 +287,23 @@ export class RequestEventSimilarEvents extends RequestEvent {
     public params;
     constructor(args: ER.QueryEvent.RequestEventSimilarEventsArguments = {}) {
         super();
-        const { count = 20,
+        const {
+            conceptInfoList,
+            count = 50,
             maxDayDiff = Number.MAX_SAFE_INTEGER, // in place of Python's `sys.maxsize`
             addArticleTrendInfo = false,
             aggrHours = 6,
             includeSelf = false,
             returnInfo = new ReturnInfo(),
           } = args;
-        if (count > 200) {
-            throw new RangeError("At most 200 similar events can be returned per call");
+        if (count > 50) {
+            throw new RangeError("At most 50 similar events can be returned per call");
+        }
+        if (!_.isArray(conceptInfoList)) {
+            throw new Error("Concept info list is not an array");
         }
         this.params = {};
+        this.params["similarEventsConcepts"] = JSON.stringify(conceptInfoList);
         this.params["similarEventsCount"] = count;
         if (maxDayDiff !== Number.MAX_SAFE_INTEGER) {
             this.params["similarEventsMaxDayDiff"] = maxDayDiff;
@@ -323,18 +325,21 @@ export class RequestEventSimilarStories extends RequestEvent {
     constructor(args: ER.QueryEvent.RequestEventSimilarStoriesArguments = {}) {
         super();
         const {
-            count = 20,
-            source = "concept",
+            conceptInfoList,
+            count = 50,
             lang = ["eng"],
             maxDayDiff = Number.MAX_SAFE_INTEGER, // in place of Python's `sys.maxsize`
             returnInfo = new ReturnInfo(),
           } = args;
-        if (count > 200) {
-            throw new RangeError("At most 200 similar stories can be returned per call");
+        if (count > 50) {
+            throw new RangeError("At most 50 similar stories can be returned per call");
+        }
+        if (!_.isArray(conceptInfoList)) {
+            throw new Error("Concept info list is not an array");
         }
         this.params = {};
+        this.params["similarStoriesConcepts"] = JSON.stringify(conceptInfoList);
         this.params["similarStoriesCount"] = count;
-        this.params["similarStoriesSource"] = source;
         this.params["similarStoriesLang"] = lang;
         if (maxDayDiff !== Number.MAX_SAFE_INTEGER) {
             this.params["similarStoriesMaxDayDiff"] = maxDayDiff;

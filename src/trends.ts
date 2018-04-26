@@ -13,6 +13,9 @@ export class GetTrendingConcepts extends TrendsBase {
         super();
         this.setVal("action", "getTrendingConcepts");
         this.setVal("source", source);
+        if (source !== "social") {
+            this.setVal("dataType", source);
+        }
         this.setVal("conceptCount", count);
         this.setVal("conceptType", conceptType);
         this.params = _.extend({}, this.params, returnInfo.getParams());
@@ -24,6 +27,9 @@ export class GetTrendingCategories extends TrendsBase {
         super();
         this.setVal("action", "getTrendingCategories");
         this.setVal("source", source);
+        if (source !== "social") {
+            this.setVal("dataType", source);
+        }
         this.setVal("categoryCount", count);
         this.params = _.extend({}, this.params, returnInfo.getParams());
     }

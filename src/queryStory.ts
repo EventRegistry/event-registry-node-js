@@ -17,13 +17,6 @@ export class QueryStory extends Query<RequestStory> {
         this.setVal("storyUri", uriOrUriList);
     }
 
-    public addRequestedResult(requestStory) {
-        if (!(requestStory instanceof RequestStory)) {
-            throw Error("QueryStory class can only accept result requests that are of type RequestStory");
-        }
-        this.resultTypeList = [..._.filter(this.resultTypeList, (item) => item["resultType"] !== requestStory["resultType"]), requestStory];
-    }
-
     public setRequestedResult(requestStory) {
         if (!(requestStory instanceof RequestStory)) {
             throw Error("QueryStory class can only accept result requests that are of type RequestStory");
@@ -50,7 +43,7 @@ export class RequestStoryArticles extends RequestStory {
     public params;
 
     constructor({ page = 1,
-                  count = 20,
+                  count = 100,
                   sortBy = "cosSim",
                   sortByAsc = false,
                   returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: 200})}),
@@ -59,8 +52,8 @@ export class RequestStoryArticles extends RequestStory {
         if (page < 1) {
           throw new RangeError("Page has to be >= 1");
         }
-        if (count > 200) {
-          throw new RangeError("At most 200 articles can be returned per call");
+        if (count > 100) {
+          throw new RangeError("At most 100 articles can be returned per call");
         }
         this.params = {};
         this.params["articlesPage"] = page;
@@ -105,20 +98,23 @@ export class RequestStorySimilarStories extends RequestStory {
     public resultType = "similarStories";
     public params;
 
-    constructor({ count = 20,
+    constructor({ count = 50,
                   source = "concept",
                   maxDayDiff = Number.MAX_SAFE_INTEGER,
                   addArticleTrendInfo = false,
                   returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: 0})}),
                 } = {}) {
         super();
-        this.params = {};
-        this.params["similarEventsCount"] = count;
-        this.params["similarEventsSource"] = source;
-        if (maxDayDiff !== Number.MAX_SAFE_INTEGER) {
-            this.params["similarEventsMaxDayDiff"] = maxDayDiff;
+        if (count > 50) {
+          throw new RangeError("At most 50 stories can be returned per call");
         }
-        this.params["similarEventsAddArticleTrendInfo"] = addArticleTrendInfo;
-        this.params = _.extend({}, this.params, returnInfo.getParams("similarEvents"));
+        this.params = {};
+        this.params["similarStoriesCount"] = count;
+        this.params["similarStoriesSource"] = source;
+        if (maxDayDiff !== Number.MAX_SAFE_INTEGER) {
+            this.params["similarStoriesMaxDayDiff"] = maxDayDiff;
+        }
+        this.params["similarStoriesAddArticleTrendInfo"] = addArticleTrendInfo;
+        this.params = _.extend({}, this.params, returnInfo.getParams("similarStories"));
     }
 }

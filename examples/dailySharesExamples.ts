@@ -1,5 +1,6 @@
 import {
     ArticleInfoFlags,
+    EventInfoFlags,
     EventRegistry,
     GetTopSharedArticles,
     GetTopSharedEvents,
@@ -16,13 +17,15 @@ import {
 const er = new EventRegistry();
 
 // get top shared articles for a date
-const q1 = new GetTopSharedArticles({date: "2015-05-23", count: 30});
+const q1 = new GetTopSharedArticles({date: "2015-03-01", count: 30});
+q1.setRequestedResult(new ReturnInfo({articleInfo: new ArticleInfoFlags({socialScore: true})}));
 er.execQuery(q1).then((response) => {
     console.info(response);
 });
 
 // get top shared events for a date
 const q2 = new GetTopSharedEvents({date: "2015-05-23", count: 30});
+q1.setRequestedResult(new ReturnInfo({eventInfo: new EventInfoFlags({socialScore: true})}));
 er.execQuery(q2).then((response) => {
     console.info(response);
 });

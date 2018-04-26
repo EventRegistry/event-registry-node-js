@@ -50,23 +50,9 @@ export class GetConceptInfo extends QueryParamsBase {
         const {uriOrUriList = undefined, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "getInfo");
         if (!_.isUndefined(uriOrUriList)) {
-            this.queryByUri(uriOrUriList);
+            this.setVal("uri", uriOrUriList);
         }
         this.params = _.extend({}, this.params, returnInfo.getParams("concept"));
-    }
-
-    /**
-     * search concepts by uri(s)
-     */
-    public queryByUri(uriOrUriList: string | string[]) {
-        this.setVal("uri", uriOrUriList);
-    }
-
-    /**
-     * search concepts by id(s)
-     */
-    public queryById(idOrIdList: string | string[]) {
-        this.setVal("id", idOrIdList);
     }
 
     public get path(): string {
@@ -94,13 +80,6 @@ export class GetCategoryInfo extends QueryParamsBase {
      */
     public queryByUri(uriOrUriList) {
         this.setVal("uri", uriOrUriList);
-    }
-
-    /**
-     * search concepts by id(s)
-     */
-    public queryById(idOrIdList) {
-        this.setVal("id", idOrIdList);
     }
 
     public get path(): string {

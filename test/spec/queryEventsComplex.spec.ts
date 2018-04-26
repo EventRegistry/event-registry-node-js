@@ -3,6 +3,7 @@ import {
     BaseQuery,
     CombinedQuery,
     ComplexEventQuery,
+    ConceptInfoFlags,
     EventInfoFlags,
     QueryEvents,
     QueryEventsIter,
@@ -47,7 +48,6 @@ describe("Query Events Complex", () => {
         const listRes1 = await utils.getEventsQueryUriListForComplexQuery(er, cq1);
         const listRes2 = await utils.getEventsQueryUriListForComplexQuery(er, cq2);
         const listRes3 = await utils.getQueryUriListForQueryEvents(er, q);
-
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes3, "totalResults"));
         done();
@@ -165,8 +165,11 @@ describe("Query Events Complex", () => {
             new BaseQuery({conceptUri: conceptUris.obama}),
         ]),
         ));
-        const returnInfo = new ReturnInfo({eventInfo: new EventInfoFlags({concepts: true, categories: true, stories: true})});
-        const iter = QueryEventsIter.initWithComplexQuery(er, cq, {returnInfo});
+        const returnInfo = new ReturnInfo({
+            eventInfo: new EventInfoFlags({concepts: true, categories: true, stories: true }),
+            conceptInfo: new ConceptInfoFlags({maxConceptsPerType: 100}),
+        });
+        const iter = QueryEventsIter.initWithComplexQuery(er, cq, {returnInfo, maxItems: 50});
         iter.execQuery((items) => {
             _.each(items, (item) => {
                 const hasConcept = _.find(_.get(item, "concepts", []), ({uri}) => uri === conceptUris.trump);

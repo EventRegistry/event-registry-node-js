@@ -42,11 +42,23 @@ export class Analytics {
         return _.get(await this.er.jsonRequestAnalytics("/api/v1/sentiment",  { text }), "data");
     }
 
+    public async semanticSimilarity(text1: string, text2: string, distanceMeasure: "cosine" | "jaccard" = "cosine") {
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/semanticSimilarity",  { text1, text2, distanceMeasure }), "data");
+    }
+
     /**
      * Determine the language of the given text
-     * @param text input text to analyze
+     * @param text input text to analyse
      */
     public async detectLanguage(text: string) {
         return _.get(await this.er.jsonRequestAnalytics("/api/v1/detectLanguage",  { text }), "data");
+    }
+    /**
+     * Extract all available information about an article available at url `url`.
+     * Returned information will include article title, body, authors, links in the articles,...
+     * @param url article url that'll be used for extraction
+     */
+    public async extractArticleInfo(url: string) {
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/extractArticleInfo",  { url }), "data");
     }
 }

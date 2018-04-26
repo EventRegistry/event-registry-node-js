@@ -28,7 +28,6 @@ describe("Info", () => {
         const response = await er.execQuery(q);
         expect(_.size(response)).toBe(_.size(sourceUriList), `Expected ${_.size(sourceUriList)} sources`);
         _.each(response, (item) => {
-            expect(_.has(item, "id")).toBeTruthy("Source id is missing");
             expect(_.has(item, "uri")).toBeTruthy("Source uri is missing");
             expect(_.has(item, "title")).toBeTruthy("Source title is missing");
             expect(_.has(item, "description")).toBeTruthy("Source description is missing");
@@ -59,7 +58,6 @@ describe("Info", () => {
         const response = await er.execQuery(q);
         expect(_.size(response)).toBe(_.size(uriList), `Expected ${_.size(uriList)} concepts`);
         _.each(response, (item) => {
-            expect(_.has(item, "id")).toBeTruthy("Concept id is missing");
             expect(_.has(item, "uri")).toBeTruthy("Concept uri is missing");
             expect(_.has(item, "type")).toBeTruthy("Concept type is missing");
             expect(_.has(item, "label")).toBeTruthy("Concept should have a label");
@@ -94,9 +92,7 @@ describe("Info", () => {
         const response = await er.execQuery(q);
         expect(_.size(response)).toBe(_.size(uriList), `Expected ${_.size(uriList)} categories`);
         _.each(response, (item) => {
-            expect(_.has(item, "id")).toBeTruthy("Category id is missing");
             expect(_.has(item, "uri")).toBeTruthy("Category uri is missing");
-
             expect(_.has(item, "parentUri")).toBeTruthy("Category parent uri is missing");
             expect(_.has(item, "childrenUris")).toBeTruthy("Category children uris are missing");
             expect(_.has(item, "trendingScore")).toBeTruthy("Category trending score is missing");

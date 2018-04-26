@@ -35,17 +35,19 @@ export module ER {
          */
         repeatFailedRequestCount?: number;
         /**
-         * if true, additional info about query times etc will be printed to console
+         * if true, additional info about query times etc. will be printed to console
          */
         verboseOutput?: boolean;
         settingsFName?: string;
-    }    
+    }
 
     export type ConceptType = "person" | "loc" | "org" | "wiki" | "entities" | "concepts"  | "conceptClass" | "conceptFolder";
-    
+
     export type SourceType = "place" | "country";
-    
+
     export type ConceptClassType = "dbpedia" | "custom";
+
+    export type DataType = "news" | "pr";
 
     export interface SuggestConceptsArguments {
         /**
@@ -73,7 +75,7 @@ export module ER {
          */
         returnInfo?: ReturnInfo;
     }
-    
+
     export interface SuggestCategoriesArguments {
         /**
          * page of the results (1, 2, ...)
@@ -88,7 +90,7 @@ export module ER {
          */
         returnInfo?: ReturnInfo;
     }
-    
+
     export interface SuggestNewsSourcesArguments {
         /**
          * page of the results (1, 2, ...)
@@ -98,8 +100,12 @@ export module ER {
          * number of returned suggestions
          */
         count?: number;
+        /**
+         * Suggest sources that provide content in these data types
+         */
+        dataType?: ER.DataType[] | ER.DataType;
     }
-    
+
     export interface SuggestSourceGroupsArguments {
         /**
          * page of the results (1, 2, ...)
@@ -110,7 +116,7 @@ export module ER {
          */
         count?: number;
     }
-    
+
     export interface SuggestLocationsArguments {
         /**
          * What types of locations are we interested in.
@@ -137,7 +143,7 @@ export module ER {
          */
         returnInfo?: ReturnInfo;
     }
-    
+
     export interface SuggestLocationsAtCoordinateArguments {
         /**
          * Limit the set of results only to cities (true) or also to general places (false)
@@ -160,7 +166,7 @@ export module ER {
          */
         returnInfo?: ReturnInfo;
     }
-    
+
     export interface SuggestSourcesAtPlaceArguments {
         /**
          * page of the results (1, 2, ...)
@@ -171,7 +177,7 @@ export module ER {
          */
         count?: number;
     }
-    
+
     export interface SuggestConceptClassesArguments {
         /**
          * language in which the prefix is specified
@@ -198,7 +204,7 @@ export module ER {
          */
         returnInfo?: ReturnInfo;
     }
-    
+
     export interface SuggestCustomConceptsArguments {
         /**
          * language in which the prefix is specified
@@ -221,7 +227,7 @@ export module ER {
          */
         returnInfo?: ReturnInfo;
     }
-    
+
     export interface GetConceptUriArguments {
         /**
          * language in which the prefix is specified
@@ -232,7 +238,7 @@ export module ER {
          */
         sources?: ER.ConceptType[];
     }
-    
+
     export interface GetLocationUriArguments {
         /**
          * language in which the prefix is specified
@@ -251,7 +257,7 @@ export module ER {
          */
         sortByDistanceTo?: number[];
     }
-    
+
     export interface GetStatsArguments {
         addDailyArticles?: boolean;
         addDailyAnnArticles?: boolean;
@@ -287,7 +293,7 @@ export module ER {
              */
             returnInfo?: ReturnInfo;
         }
-        
+
         export interface TopCategoryArguments {
             /**
              * the number of returned categories for which the exact value of the correlation is computed
@@ -317,11 +323,11 @@ export module ER {
             /**
              * Starting date from which to provide counts onwards (format: YYYY-MM-DD).
              */
-            startDate?: string | Date;
+            dateStart?: string | Date;
             /**
              * Ending date until which to provide counts (format: YYYY-MM-DD).
              */
-            endDate?: string;
+            dateEnd?: string;
             /**
              * What details should be included in the returned information.
              */
@@ -357,7 +363,7 @@ export module ER {
              */
             returnInfo?: ReturnInfo;
         }
-        
+
         export interface GetConceptInfoArguments {
             /**
              * single concept uri or a list of concept uris for which to return information
@@ -368,7 +374,7 @@ export module ER {
              */
             returnInfo?: ReturnInfo;
         }
-        
+
         export interface  GetCategoryInfoArguments {
             /**
              * single category uri or a list of category uris for which to return information
@@ -444,7 +450,7 @@ export module ER {
              */
             exclude?: BaseQuery | CombinedQuery;
         }
-        
+
         export interface ComplexArticleQueryArguments {
             /**
              * Some articles can be duplicates of other articles. What should be done with them.
@@ -470,6 +476,11 @@ export module ER {
              *  - "keepAll" (no filtering, default)
              */
             eventFilter?: "skipArticlesWithoutEvent" | "keepOnlyArticlesWithoutEvent" | "keepAll";
+            /**
+             * Data type to search for. Possible values are "news" (news content), "pr" (PR content) or "blogs".
+             * If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
+             */
+            dataType?: ER.DataType[] | ER.DataType;
         }
     }
 
@@ -523,33 +534,141 @@ export module ER {
 
     export namespace QueryArticles {
         interface Arguments {
+            /**
+             * Find articles that mention the specified keywords.
+             * A single keyword/phrase can be provided as a string, multiple keywords/phrases can be provided as a list of strings.
+             * Use QueryItems.AND() if *all* provided keywords/phrases should be mentioned, or QueryItems.OR() if *any* of the keywords/phrases should be mentioned.
+             * or QueryItems.OR() to specify a list of keywords where any of the keywords have to appear
+             */
             keywords?: string | string[] | QueryItems;
+            /**
+             * Find articles where the concept with concept uri is mentioned.
+             * A single concept uri can be provided as a string, multiple concept uris can be provided as a list of strings.
+             * Use QueryItems.AND() if *all* provided concepts should be mentioned, or QueryItems.OR() if *any* of the concepts should be mentioned.
+             * To obtain a concept uri using a concept label use EventRegistry.getConceptUri().
+             */
             conceptUri?: string | string[] | QueryItems;
+            /**
+             * Find articles that are assigned into a particular category.
+             * A single category can be provided as a string, while multiple categories can be provided as a list in QueryItems.AND() or QueryItems.OR().
+             * A category uri can be obtained from a category name using EventRegistry.getCategoryUri().
+             */
             categoryUri?: string | string[] | QueryItems;
+            /**
+             * find articles that were written by a news source sourceUri.
+             * If multiple sources should be considered use QueryItems.OR() to provide the list of sources.
+             * Source uri for a given news source name can be obtained using EventRegistry.getNewsSourceUri().
+             */
             sourceUri?: string | string[] | QueryItems;
+            /**
+             * Find articles that were written by news sources located in the given geographic location.
+             * If multiple source locations are provided, then put them into a list inside QueryItems.OR()
+             * Location uri can either be a city or a country. Location uri for a given name can be obtained using EventRegistry.getLocationUri().
+             */
             sourceLocationUri?: string | string[] | QueryItems;
+            /**
+             * Find articles that were written by news sources that are assigned to the specified source group.
+             * If multiple source groups are provided, then put them into a list inside QueryItems.OR()
+             * Source group uri for a given name can be obtained using EventRegistry.getSourceGroupUri().
+             */
             sourceGroupUri?: string | string[] | QueryItems;
+            /**
+             * find articles that describe something that occured at a particular location.
+             * If value can be a string or a list of strings provided in QueryItems.OR().
+             * Location uri can either be a city or a country. Location uri for a given name can be obtained using EventRegistry.getLocationUri().
+             */
             locationUri?: string | string[] | QueryItems;
+            /**
+             * find articles that are written in the specified language.
+             * If more than one language is specified, resulting articles has to be written in *any* of the languages.
+             */
             lang?: string | string[];
+            /**
+             * Find articles that were written on or after dateStart. Date should be provided in YYYY-MM-DD format.
+             */
             dateStart?: string | Date;
+            /**
+             * Find articles that occurred before or on dateEnd. Date should be provided in YYYY-MM-DD format.
+             */
             dateEnd?: string | Date;
+            /**
+             * Find articles that explicitly mention a date that is equal or greater than dateMentionStart.
+             */
             dateMentionStart?: string | Date;
+            /**
+             * Find articles that explicitly mention a date that is lower or equal to dateMentionEnd.
+             */
             dateMentionEnd?: string | Date;
+            /**
+             * Ignore articles that mention all provided keywords.
+             */
             ignoreKeywords?: string | string[] | QueryItems;
+            /**
+             * Ignore articles that mention all provided concepts.
+             */
             ignoreConceptUri?: string | string[] | QueryItems;
+            /**
+             * Ignore articles that are assigned to a particular category.
+             */
             ignoreCategoryUri?: string | string[] | QueryItems;
+            /**
+             * Ignore articles that have been written by *any* of the specified news sources.
+             */
             ignoreSourceUri?: string | string[] | QueryItems;
+            /**
+             * Ignore articles that have been written by sources located at *any* of the specified locations.
+             */
             ignoreSourceLocationUri?: string | string[] | QueryItems;
+            /**
+             * Ignore articles that have been written by sources in *any* of the specified source groups.
+             */
             ignoreSourceGroupUri?: string | string[] | QueryItems;
+            /**
+             * Ignore articles that occurred in any of the provided locations. A location can be a city or a place.
+             */
             ignoreLocationUri?: string | string[] | QueryItems;
+            /**
+             * Ignore articles that are written in *any* of the provided languages.
+             */
             ignoreLang?: string | string[] | QueryItems;
+            /**
+             * Where should we look when searching using the keywords provided by "keywords" parameter. "body" (default), "title", or "body,title".
+             */
             keywordsLoc?: "body" | "title" | "body,title";
+            /**
+             * Where should we look when data should be used when searching using the keywords provided by "ignoreKeywords" parameter. "body" (default), "title", or "body,title".
+             */
             ignoreKeywordsLoc?: "body" | "title" | "body,title";
-            categoryIncludeSub?: boolean;
-            ignoreCategoryIncludeSub?: boolean;
+            /**
+             * Some articles can be duplicates of other articles. What should be done with them. Possible values are:
+             *   "skipDuplicates" (skip the resulting articles that are duplicates of other articles)
+             *   "keepOnlyDuplicates" (return only the duplicate articles)
+             *   "keepAll" (no filtering, default)
+             */
             isDuplicateFilter?: "skipDuplicates" | "keepOnlyDuplicates" | "keepAll";
+            /**
+             * Some articles are later copied by others. What should be done with such articles. Possible values are:
+             *   "skipHasDuplicates" (skip the resulting articles that have been later copied by others)
+             *   "keepOnlyHasDuplicates" (return only the articles that have been later copied by others)
+             *   "keepAll" (no filtering, default)
+             */
             hasDuplicateFilter?: "skipHasDuplicates" | "keepOnlyHasDuplicates" | "keepAll";
+            /**
+             * Some articles describe a known event and some don't. This filter allows you to filter the resulting articles based on this criteria.
+             *   Possible values are:
+             *   "skipArticlesWithoutEvent" (skip articles that are not describing any known event in ER)
+             *   "keepOnlyArticlesWithoutEvent" (return only the articles that are not describing any known event in ER)
+             *   "keepAll" (no filtering, default)
+             */
             eventFilter?: "skipArticlesWithoutEvent" | "keepOnlyArticlesWithoutEvent" | "keepAll";
+            /**
+             * what data types should we search? "news" (news content, default), "pr" (press releases), or "blogs".
+             *   If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
+             */
+            dataType?: ER.DataType[] | ER.DataType;
+            /**
+             * The information to return as the result of the query. By default return the list of matching articles.
+             */
             requestedResult?: RequestArticles;
         }
     }
@@ -557,15 +676,15 @@ export module ER {
     export namespace QueryEvent {
 
         /**
-         * Sorting options: 
-         *  - undefined (no specific sorting), 
-         *  - id (internal id), date (published date), 
-         *  - cosSim (closeness to event centroid), 
-         *  - sourceImportance (manually curated score of source importance - high value, 
-         *  - high importance), sourceImportanceRank (reverse of sourceImportance), 
-         *  - sourceAlexaGlobalRank (global rank of the news source), 
-         *  - sourceAlexaCountryRank (country rank of the news source), 
-         *  - socialScore (total shares on social media), 
+         * Sorting options:
+         *  - undefined (no specific sorting),
+         *  - id (internal id), date (published date),
+         *  - cosSim (closeness to event centroid),
+         *  - sourceImportance (manually curated score of source importance - high value,
+         *  - high importance), sourceImportanceRank (reverse of sourceImportance),
+         *  - sourceAlexaGlobalRank (global rank of the news source),
+         *  - sourceAlexaCountryRank (country rank of the news source),
+         *  - socialScore (total shares on social media),
          *  - facebookShares (shares on Facebook only)
          */
         export type SortByOptions = "id" | "date" | "cosSim" | "sourceImportance" | "sourceImportanceRank" | "sourceAlexaGlobalRank" | "sourceAlexaCountryRank" | "socialScore" | "facebookShares";
@@ -588,7 +707,7 @@ export module ER {
              */
             returnInfo?: ReturnInfo;
             /**
-             * Number of articles to download at once (we are not downloading article by article) (at most 200)
+             * Number of articles to download at once (we are not downloading article by article) (at most 100)
              */
             articleBatchSize?: number;
             /**
@@ -624,7 +743,7 @@ export module ER {
             returnInfo?: ReturnInfo;
         }
 
-        export interface RequestEventArticleUrisArguments {
+        export interface RequestEventArticleUriWgtsArguments {
             /**
              * a single language or an array of languages in which to return the articles
              */
@@ -664,7 +783,11 @@ export module ER {
 
         export interface RequestEventSimilarEventsArguments {
             /**
-             * number of similar events to return (at most 200)
+             * array of concepts and their importance, e.g. [{ "uri": "http://en.wikipedia.org/wiki/Barack_Obama", "wgt": 100 }, ...]
+             */
+            conceptInfoList?: Array<{uri: string, wgt: number}>;
+            /**
+             * number of similar events to return (at most 50)
              */
             count?: number;
             /**
@@ -690,13 +813,13 @@ export module ER {
         }
         export interface RequestEventSimilarStoriesArguments {
             /**
-             * number of similar stories to return (at most 200)
+             * array of concepts and their importance, e.g. [{ "uri": "http://en.wikipedia.org/wiki/Barack_Obama", "wgt": 100 }, ...]
+             */
+            conceptInfoList?: Array<{uri: string, wgt: number}>;
+            /**
+             * number of similar stories to return (at most 5')
              */
             count?: number;
-            /**
-             * show is the similarity with other stories computed.
-             */
-            source?: "concept" | "cca";
             /**
              * in what language(s) should be the returned stories
              */
@@ -715,26 +838,26 @@ export module ER {
         export interface Arguments {
             /**
              * find events where articles mention all the specified keywords.
-             * A single keyword/phrase can be provided as a string, 
+             * A single keyword/phrase can be provided as a string,
              * multiple keywords/phrases can be provided as a list of strings.
-             * Use QueryItems.AND() if *all* provided keywords/phrases should be mentioned, 
+             * Use QueryItems.AND() if *all* provided keywords/phrases should be mentioned,
              * or QueryItems.OR() if *any* of the keywords/phrases should be mentioned.
              */
             keywords?: string | string[] | QueryItems;
             /**
              *  find events where the concept with concept uri is important.
-             * A single concept uri can be provided as a string, multiple concept uris 
+             * A single concept uri can be provided as a string, multiple concept uris
              * can be provided as a list of strings.
-             * Use QueryItems.AND() if *all* provided concepts should be mentioned, or QueryItems.OR() 
+             * Use QueryItems.AND() if *all* provided concepts should be mentioned, or QueryItems.OR()
              * if *any* of the concepts should be mentioned.
              * To obtain a concept uri using a concept label use EventRegistry.getConceptUri().
              */
             conceptUri?: string | string[] | QueryItems;
             /**
              * find events that are assigned into a particular category.
-             * A single category uri can be provided as a string, multiple category uris 
+             * A single category uri can be provided as a string, multiple category uris
              * can be provided as a list of strings.
-             * Use QueryItems.AND() if *all* provided categories should be mentioned, or QueryItems.OR() 
+             * Use QueryItems.AND() if *all* provided categories should be mentioned, or QueryItems.OR()
              * if *any* of the categories should be mentioned.
              * A category uri can be obtained from a category name using EventRegistry.getCategoryUri().
              */
@@ -746,15 +869,15 @@ export module ER {
              */
             sourceUri?: string | string[] | QueryItems;
             /**
-             * find events that contain one or more articles that were written 
+             * find events that contain one or more articles that were written
              * by news sources located in the given geographic location.
              * If multiple source locations are provided, then put them into a list inside QueryItems.OR()
-             * Location uri can either be a city or a country. 
+             * Location uri can either be a city or a country.
              * Location uri for a given name can be obtained using EventRegistry.getLocationUri().
              */
             sourceLocationUri?: string | string[] | QueryItems;
             /**
-             * find events that contain one or more articles that were written 
+             * find events that contain one or more articles that were written
              * by news sources that are assigned to the specified source group.
              * If multiple source groups are provided, then put them into a list inside QueryItems.OR()
              * Source group uri for a given name can be obtained using EventRegistry.getSourceGroupUri().
@@ -763,7 +886,7 @@ export module ER {
             /**
              * find events that occurred at a particular location.
              * If value can be a string or a list of strings provided in QueryItems.OR().
-             * Location uri can either be a city or a country. 
+             * Location uri can either be a city or a country.
              * Location uri for a given name can be obtained using EventRegistry.getLocationUri().
              */
             locationUri?: string | string[] | QueryItems;
@@ -851,10 +974,10 @@ export module ER {
         }
         export interface IteratorArguments extends Arguments {
             /**
-             * how should the resulting events be sorted. Options: 
+             * how should the resulting events be sorted. Options:
              *  - none (no specific sorting),
-             *  - date (by event date), 
-             *  - rel (relevance to the query), 
+             *  - date (by event date),
+             *  - rel (relevance to the query),
              *  - size (number of articles),
              *  - socialScore (amount of shares in social media)
              */
@@ -883,10 +1006,10 @@ export module ER {
              */
             count?: number;
             /**
-             * how should the resulting events be sorted. Options: 
+             * how should the resulting events be sorted. Options:
              *  - none (no specific sorting),
-             *  - date (by event date), 
-             *  - rel (relevance to the query), 
+             *  - date (by event date),
+             *  - rel (relevance to the query),
              *  - size (number of articles),
              *  - socialScore (amount of shares in social media)
              */
@@ -910,10 +1033,10 @@ export module ER {
              */
             count?: number;
             /**
-             * how should the resulting events be sorted. Options: 
+             * how should the resulting events be sorted. Options:
              *  - none (no specific sorting),
-             *  - date (by event date), 
-             *  - rel (relevance to the query), 
+             *  - date (by event date),
+             *  - rel (relevance to the query),
              *  - size (number of articles),
              *  - socialScore (amount of shares in social media)
              */
@@ -934,10 +1057,10 @@ export module ER {
              */
             count?: number;
             /**
-             * how should the resulting events be sorted. Options: 
+             * how should the resulting events be sorted. Options:
              *  - none (no specific sorting),
-             *  - date (by event date), 
-             *  - rel (relevance to the query), 
+             *  - date (by event date),
+             *  - rel (relevance to the query),
              *  - size (number of articles),
              *  - socialScore (amount of shares in social media)
              */
@@ -1069,7 +1192,7 @@ export module ER {
 
         export interface RequestEventsEventClustersArguments {
             /**
-             * number of keywords to report in each of the clusters 
+             * number of keywords to report in each of the clusters
              */
             keywordCount?: number;
             /**
@@ -1084,7 +1207,7 @@ export module ER {
 
         export interface RequestEventsRecentActivityArguments {
             /**
-             * max events to return 
+             * max events to return
              */
             maxEventCount?: number;
             /**
@@ -1195,7 +1318,7 @@ export module ER {
              */
             storyUri?: boolean;
         }
-        
+
         /**
          * What information about an article should be returned by the API call
          */
@@ -1235,10 +1358,10 @@ export module ER {
             /**
              * the list of urls of links identified in the article body
              */
-            IncludeArticleLinks?: boolean;  
+            IncludeArticleLinks?: boolean;
             /**
              * the list of videos assigned to the article
-             */ 
+             */
             IncludeArticleVideos?: boolean;
             /**
              * url to the image associated with the article
@@ -1251,7 +1374,7 @@ export module ER {
             /**
              * sentiment about the article
              */
-            IncludeArticleSentiment?: boolean;   
+            IncludeArticleSentiment?: boolean;
             /**
              * the geographic location that the event mentioned in the article is about
              */
@@ -1277,7 +1400,7 @@ export module ER {
              */
             IncludeArticleStoryUri?: boolean;
         }
-        
+
         /**
          * What information about a story (cluster of articles) should be returned by the API call
          */
@@ -1327,7 +1450,7 @@ export module ER {
              */
             StoryImageCount?: number;
         }
-        
+
         /**
          * What information about a story (cluster of articles) should be returned by the API call
          */
@@ -1365,6 +1488,10 @@ export module ER {
              */
             medoidArticle?: boolean;
             /**
+             * the article from which we have extracted the title and summary for the story
+             */
+            infoArticle?: boolean;
+            /**
              * dates that were frequently identified in the articles belonging to the story
              */
             commonDates?: boolean;
@@ -1377,7 +1504,7 @@ export module ER {
              */
             imageCount?: number;
         }
-        
+
         /**
          * What information about an event should be returned by the API call
          */
@@ -1465,6 +1592,10 @@ export module ER {
              */
             commonDates?: boolean;
             /**
+             * return for each language the article from which we have extracted the summary and title for event for that language
+             */
+            articleInfo?: boolean;
+            /**
              * return the list of stories (clusters) that are about the event
              */
             stories?: boolean;
@@ -1477,7 +1608,7 @@ export module ER {
              */
             imageCount?: number;
         }
-        
+
         /**
          * What information about a news source should be returned by the API call
          */
@@ -1515,7 +1646,7 @@ export module ER {
              */
             IncludeSourceSourceGroups?: boolean;
         }
-        
+
         /**
          * What information about a news source should be returned by the API call
          */
@@ -1553,7 +1684,7 @@ export module ER {
              */
             sourceGroups?: boolean;
         }
-        
+
         /**
          * What information about a category should be returned by the API call
          */
@@ -1575,7 +1706,7 @@ export module ER {
             trendingHistory?: boolean;
             trendingSource?: string | string[];
         }
-        
+
         interface ConceptInfoFlags {
             ConceptType?: ConceptType;
             lang?: string | string[];
@@ -1591,7 +1722,7 @@ export module ER {
             ConceptTrendingSource?: string | string[];
             MaxConceptsPerType?: number;
         }
-        
+
         interface ConceptInfo {
             type?: ConceptType | ConceptType[];
             lang?: string | string[];
@@ -1607,7 +1738,7 @@ export module ER {
             trendingSource?: string | string[];
             maxConceptsPerType?: number;
         }
-        
+
         interface LocationInfoFlags {
             label?: boolean;
             wikiUri?: boolean;
@@ -1620,7 +1751,7 @@ export module ER {
             placeFeatureCode?: boolean;
             placeCountry?: boolean;
         }
-        
+
         interface LocationInfo {
             label?: boolean;
             wikiUri?: boolean;
@@ -1633,22 +1764,22 @@ export module ER {
             placeFeatureCode?: boolean;
             placeCountry?: boolean;
         }
-        
+
         interface ConceptClassInfoFlags {
             IncludeConceptClassParentLabels?: boolean;
             IncludeConceptClassConcepts?: boolean;
         }
-        
+
         interface ConceptClassInfo {
             parentLabels?: boolean;
             concepts?: boolean;
         }
-        
+
         interface ConceptFolderInfoFlags {
             IncludeConceptFolderDefinition?: boolean;
             IncludeConceptFolderOwner?: boolean;
         }
-        
+
         interface ConceptFolderInfo {
             definition?: boolean;
             owner?: boolean;

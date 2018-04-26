@@ -51,16 +51,16 @@ export abstract class CountsBase extends QueryParamsBase {
 export class GetCounts extends CountsBase {
     constructor(uriOrUriList: string | string[], args: ER.Counts.Arguments = {}) {
         super();
-        const {source = "news", type = "concept", startDate = undefined, endDate = undefined, returnInfo = new ReturnInfo()} = args;
+        const {source = "news", type = "concept", dateStart = undefined, dateEnd = undefined, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "getCounts");
         this.setVal("source", source);
         this.setVal("type", type);
         this.setVal("uri", uriOrUriList);
-        if (!_.isUndefined(startDate)) {
-            this.setDateVal("startDate", startDate);
+        if (!_.isUndefined(dateStart)) {
+            this.setDateVal("dateStart", dateStart);
         }
-        if (!_.isUndefined(endDate)) {
-            this.setDateVal("startDate", endDate);
+        if (!_.isUndefined(dateEnd)) {
+            this.setDateVal("dateEnd", dateEnd);
         }
         this.params = _.extend({}, this.params, returnInfo.getParams());
     }
@@ -103,16 +103,16 @@ export class GetCounts extends CountsBase {
 export class GetCountsEx extends CountsBase {
     constructor(uriOrUriList: string | string[], args: ER.Counts.Arguments = {}) {
         super();
-        const {source = "news", type = "concept", startDate = undefined, endDate = undefined, returnInfo = new ReturnInfo()} = args;
+        const {source = "news", type = "concept", dateStart = undefined, dateEnd = undefined, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "GetCountsEx");
         this.setVal("source", source);
         this.setVal("type", type);
         this.setVal("uri", uriOrUriList);
-        if (!_.isUndefined(startDate)) {
-            this.setDateVal("startDate", startDate);
+        if (!_.isUndefined(dateStart)) {
+            this.setDateVal("dateStart", dateStart);
         }
-        if (!_.isUndefined(endDate)) {
-            this.setDateVal("startDate", endDate);
+        if (!_.isUndefined(dateEnd)) {
+            this.setDateVal("dateEnd", dateEnd);
         }
         this.params = _.extend({}, this.params, returnInfo.getParams());
     }

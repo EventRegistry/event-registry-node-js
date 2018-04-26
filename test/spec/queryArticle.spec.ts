@@ -1,24 +1,25 @@
 import * as _ from "lodash";
 import {
     ArticleMapper,
+    EventRegistry,
     QueryArticle,
     QueryArticles,
     RequestArticleInfo,
-    RequestArticlesUriList,
+    RequestArticlesUriWgtList,
 } from "../../src/index";
 import { Utils } from "./utils";
 
-describe("Query Article", () => {
+xdescribe("Query Article", () => {
     const er = Utils.initAPI();
     const utils = new Utils();
     let query;
 
     beforeAll(async (done) => {
         const q = new QueryArticles({conceptUri: await er.getConceptUri("Obama")});
-        const requestArticlesUriList = new RequestArticlesUriList({count: 10});
-        q.setRequestedResult(requestArticlesUriList);
+        const requestArticlesUriWgtList = new RequestArticlesUriWgtList({count: 10});
+        q.setRequestedResult(requestArticlesUriWgtList);
         const response = await er.execQuery(q);
-        query = new QueryArticle(_.get(response, "uriList.results"));
+        query = new QueryArticle(EventRegistry.getUriFromUriWgt(_.get(response, "uriWgtList.results")));
         done();
     });
 
@@ -35,7 +36,7 @@ describe("Query Article", () => {
         const uniqueUrls = _.uniq(urls);
         const mapper = new ArticleMapper(er);
         const mappedUris = await Promise.all(_.map(uniqueUrls, (url) => mapper.getArticleUri(url)));
-        const q = new QueryArticle(mappedUris);
+        const q = new QueryArticle(_.compact(mappedUris));
         q.setRequestedResult(new RequestArticleInfo(utils.returnInfo));
         const res = await er.execQuery(q);
         _.each(res, (article) => {

@@ -177,6 +177,7 @@ export class ComplexArticleQuery extends QueryCore {
     constructor(query: CombinedQuery | BaseQuery, args: ER.Query.ComplexArticleQueryArguments = {}) {
         super();
         _.defaults(args, {
+            dataType: "news",
             isDuplicateFilter: "keepAll",
             hasDuplicateFilter: "keepAll",
             eventFilter: "keepAll",
@@ -186,6 +187,9 @@ export class ComplexArticleQuery extends QueryCore {
         }
         this.queryObj["$query"] = query.getQuery();
         const filter = {};
+        if (_.get(args, "dataType") !== "news") {
+            filter["dataType"] = _.get(args, "dataType");
+        }
         if (_.get(args, "isDuplicateFilter") !== "keepAll") {
             filter["isDuplicate"] = _.get(args, "isDuplicateFilter");
         }

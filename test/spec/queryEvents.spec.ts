@@ -17,7 +17,7 @@ import {
     RequestEventsInfo,
     RequestEventsKeywordAggr,
     RequestEventsSourceAggr,
-    RequestEventsUriList,
+    RequestEventsUriWgtList,
     ReturnInfo,
 } from "../../src/index";
 import { Utils } from "./utils";
@@ -41,7 +41,7 @@ describe("Query Events", () => {
         done();
     });
 
-    it("should test event list with source search", async (done) => {
+    it("should test event list with keyword search", async (done) => {
         const q1 = new QueryEvents({keywords: "germany"});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
@@ -75,7 +75,7 @@ describe("Query Events", () => {
         done();
     });
 
-    it("should test event list with source search", async (done) => {
+    it("should test event list with category search", async (done) => {
         const q1 = new QueryEvents({categoryUri: await er.getCategoryUri("disa")});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
@@ -123,22 +123,50 @@ describe("Query Events", () => {
         const reqEvInfo = new RequestEventsInfo({ page: 1,
                                                   count: 10,
                                                   sortBy: "date",
+                                                  sortByAsc: true,
+                                                  returnInfo: retInfo1,
+                                                });
+        q1.setRequestedResult(reqEvInfo);
+        const response = await er.execQuery(q1);
+        expect(_.has(response, "events")).toBeTruthy("Results should contain events");
+        const events = _.get(response, "events.results", []);
+        let lastEventDate = _.isEmpty(events) ? "" : _.get(_.first(events), "eventDate");
+        _.each(events, (event) => {
+            expect(event.eventDate >= lastEventDate).toBeTruthy("Events are not sorted by date");
+            lastEventDate = event.eventDate;
+            expect(_.has(event, "articleCounts")).toBeFalsy("Event should not contain articleCounts");
+            expect(_.has(event, "categories")).toBeFalsy("Event should not contain categories");
+            expect(_.has(event, "concepts")).toBeFalsy("Event should not contain concepts");
+            expect(_.has(event, "location")).toBeFalsy("Event should not contain location");
+            expect(_.has(event, "stories")).toBeFalsy("Event should not contain stories");
+            expect(_.has(event, "images")).toBeFalsy("Event should not contain images");
+            expect(_.has(event, "title")).toBeFalsy("Event should not contain title");
+            expect(_.has(event, "summary")).toBeFalsy("Event should not contain summary");
+        });
+        done();
+    });
+
+    it("should test search by keyword rev", async (done) => {
+        const q1 = new QueryEvents({keywords: "car"});
+        const evInfo = new EventInfoFlags({ concepts: false,
+                                            articleCounts: false,
+                                            title: false,
+                                            summary: false,
+                                            categories: false,
+                                            location: false,
+                                            stories: false,
+                                            imageCount: 0,
+                                        });
+        const retInfo1 = new ReturnInfo({ conceptInfo: new ConceptInfoFlags({type: "org"}), eventInfo: evInfo});
+        const reqEvInfo = new RequestEventsInfo({ page: 1,
+                                                  count: 10,
+                                                  sortBy: "date",
                                                   sortByAsc: false,
                                                   returnInfo: retInfo1,
                                                 });
-        q1.addRequestedResult(reqEvInfo);
-        const retInfo2 = new ReturnInfo({ conceptInfo: new ConceptInfoFlags({type: ["org", "loc"], lang: "spa"})});
-        const reqEvConceptsTrends = new RequestEventsConceptTrends({returnInfo: retInfo2});
-        q1.addRequestedResult(reqEvConceptsTrends);
-
+        q1.setRequestedResult(reqEvInfo);
         const response = await er.execQuery(q1);
         expect(_.has(response, "events")).toBeTruthy("Results should contain events");
-        expect(_.has(response, "conceptTrends")).toBeTruthy("Results should contain conceptAggr");
-
-        _.each(_.get(response, "conceptTrends.conceptInfo", []), (concept) => {
-            expect(concept.type === "loc" || concept.type === "org").toBeTruthy("Got concept of invalid type");
-            expect(_.has(concept, "label.spa")).toBeTruthy("Concept did not contain label in expected language");
-        });
         const events = _.get(response, "events.results", []);
         let lastEventDate = _.isEmpty(events) ? "" : _.get(_.first(events), "eventDate");
         _.each(events, (event) => {
@@ -152,6 +180,33 @@ describe("Query Events", () => {
             expect(_.has(event, "images")).toBeFalsy("Event should not contain images");
             expect(_.has(event, "title")).toBeFalsy("Event should not contain title");
             expect(_.has(event, "summary")).toBeFalsy("Event should not contain summary");
+        });
+        done();
+    });
+
+    it("should test search by keyword (2)", async (done) => {
+        const q1 = new QueryEvents({keywords: "car"});
+        const returnInfo = new ReturnInfo({ conceptInfo: new ConceptInfoFlags({type: ["org", "loc"], lang: "spa"})});
+        const reqEvConceptsTrends = new RequestEventsConceptTrends({conceptCount: 5, returnInfo});
+        q1.setRequestedResult(reqEvConceptsTrends);
+        const response = await er.execQuery(q1);
+        expect(_.has(response, "conceptTrends")).toBeTruthy("Results should contain conceptAggr");
+        _.each(_.get(response, "conceptTrends.conceptInfo", []), (concept) => {
+            expect(concept.type === "loc" || concept.type === "org").toBeTruthy("Got concept of invalid type");
+            expect(_.has(concept, "label.spa")).toBeTruthy("Concept did not contain label in expected language");
+        });
+        done();
+    });
+
+    it("should test search by location", async (done) => {
+        const q = new QueryEvents({locationUri: await er.getLocationUri("Germany")});
+        q.setRequestedResult(new RequestEventsInfo({sortBy: "size", sortByAsc: false}));
+        const response = await er.execQuery(q);
+        const results = _.get(response, "events.results", []);
+        let lastSize = !_.isEmpty(results) ? results[0].totalArticleCount : 0;
+        _.each(results, (event) => {
+            expect(event.totalArticleCount <= lastSize).toBeTruthy("Events are not sorted by size");
+            lastSize = event.totalArticleCount;
         });
         done();
     });
@@ -199,13 +254,13 @@ describe("Query Events", () => {
     });
 
     it("should test concept aggregates", async (done) => {
-        const requestEventsConceptAggr = new RequestEventsConceptAggr({conceptCount: 50, returnInfo: utils.returnInfo});
+        const requestEventsConceptAggr = new RequestEventsConceptAggr({conceptCount: 100, returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventsConceptAggr);
         const response = await er.execQuery(query);
         expect(_.has(response, "conceptAggr")).toBeTruthy("Expected to get 'conceptAggr'");
         const concepts = _.get(response, "conceptAggr.results", []);
         // TODO: If the ConceptCount is included then we return 150 aggregates
-        // expect(_.size(concepts)).toEqual(50, "Expected a different number of concept in conceptAggr");
+        // expect(_.size(concepts)).toEqual(100, "Expected a different number of concept in conceptAggr");
         _.each(concepts, (concept) => {
             expect(concept).toBeValidConcept();
         });
@@ -245,7 +300,7 @@ describe("Query Events", () => {
         const response = await er.execQuery(query);
         expect(_.has(response, "conceptMatrix")).toBeTruthy("Expected to get 'conceptMatrix'");
         const matrix = _.get(response, "conceptMatrix");
-        expect(_.has(matrix, "sampleSize")).toBeTruthy("Expecting 'sampleSize' property in conceptMatrix");
+        expect(_.has(matrix, "scoreMatrix")).toBeTruthy("Expecting 'scoreMatrix' property in conceptMatrix");
         expect(_.has(matrix, "freqMatrix")).toBeTruthy("Expecting 'freqMatrix' property in conceptMatrix");
         expect(_.has(matrix, "concepts")).toBeTruthy("Expecting 'concepts' property in conceptMatrix");
         expect(_.size(_.get(matrix, "concepts", []))).toEqual(20, "Expected 20 concepts");
@@ -273,22 +328,20 @@ describe("Query Events", () => {
 
     it("should test search by source", async (done) => {
         const q = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
-        q.addRequestedResult(new RequestEventsUriList());
+        q.setRequestedResult(new RequestEventsUriWgtList());
+        const response = await er.execQuery(q);
+        expect(_.has(response, "uriWgtList")).toBeTruthy("Results should contain uriWgtList");
+        done();
+    });
+
+    it("should test search by source (2)", async (done) => {
+        const q = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
         const eventInfo = new EventInfoFlags({concepts: true, articleCounts: true, title: true, summary: true, categories: true, location: true, stories: true, imageCount: 1});
         const returnInfo1 = new ReturnInfo({conceptInfo: new ConceptInfoFlags({lang: "deu", type: "wiki"}), eventInfo});
-        q.addRequestedResult(new RequestEventsInfo({page: 1, count: 100, sortBy: "size", sortByAsc: true, returnInfo: returnInfo1}));
-        q.addRequestedResult(new RequestEventsConceptAggr({conceptCount: 5, returnInfo: new ReturnInfo({conceptInfo: new ConceptInfoFlags({type: ["org", "loc"]})})}));
-
+        q.setRequestedResult(new RequestEventsInfo({page: 1, count: 100, sortBy: "size", sortByAsc: true, returnInfo: returnInfo1}));
         const response = await er.execQuery(q);
-        expect(_.has(response, "conceptAggr")).toBeTruthy("Results should contain conceptAggr");
-        expect(_.has(response, "events")).toBeTruthy("Results should contain events");
-        expect(_.has(response, "uriList")).toBeTruthy("Results should contain uriList");
 
-        const concepts = _.get(response, "conceptAggr.results", []);
-        expect(_.size(concepts)).toBeLessThanOrEqual(10, "Received a list of concepts that is too long");
-        _.each(concepts, (concept) => {
-            expect(concept.type === "loc" || concept.type === "org").toBeTruthy("Got concept of invalid type");
-        });
+        expect(_.has(response, "events")).toBeTruthy("Results should contain events");
 
         const events = _.get(response, "events.results", []);
         expect(_.size(events)).toBeLessThanOrEqual(100, "Returned list of events was too long");
@@ -310,6 +363,19 @@ describe("Query Events", () => {
                 expect(_.has(concept, "label.deu")).toBeTruthy("Concept should contain label in german language");
                 expect(concept.type === "wiki").toBeTruthy("Got concept of invalid type");
             });
+        });
+        done();
+    });
+
+    it("should test search by source (3)", async (done) => {
+        const q = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
+        q.setRequestedResult(new RequestEventsConceptAggr({conceptCount: 5, returnInfo: new ReturnInfo({conceptInfo: new ConceptInfoFlags({type: ["org", "loc"]})})}));
+        const response = await er.execQuery(q);
+        expect(_.has(response, "conceptAggr")).toBeTruthy("Results should contain conceptAggr");
+        const concepts = _.get(response, "conceptAggr.results", []);
+        expect(_.size(concepts)).toBeLessThanOrEqual(10, "Received a list of concepts that is too long");
+        _.each(concepts, (concept) => {
+            expect(concept.type === "loc" || concept.type === "org").toBeTruthy("Got concept of invalid type");
         });
         done();
     });
@@ -390,13 +456,19 @@ describe("Query Events", () => {
 
         const catBusinessUri = await er.getCategoryUri("business");
         const catPoliticsUri = await er.getCategoryUri("politics");
-        const q = new QueryEventsIter(er, { conceptUri: obamaUri,
-                                            ignoreConceptUri: [politicsUri, chinaUri, unitedStatesUri],
-                                            ignoreKeywords: ["trump", "politics", "michelle"],
-                                            ignoreSourceUri: [srcDailyCallerUri, srcAawsatUri, srcSvodkaUri],
-                                            ignoreCategoryUri: [catBusinessUri, catPoliticsUri],
-                                          });
-        q.execQuery((items) => {
+        const queryConfig = {
+            conceptUri: obamaUri,
+            maxItems: 10,
+            ignoreConceptUri: [politicsUri, chinaUri, unitedStatesUri],
+            ignoreKeywords: ["trump", "politics", "michelle"],
+            ignoreSourceUri: [srcDailyCallerUri, srcAawsatUri, srcSvodkaUri],
+            ignoreCategoryUri: [catBusinessUri, catPoliticsUri],
+        };
+        const q = new QueryEventsIter(er, queryConfig);
+        q.execQuery((items, error) => {
+            if (!_.isEmpty(error)) {
+                console.error(error);
+            }
             _.each(items, (item) => {
                 expect(item).toContainConcept(obamaUri);
                 expect(item).not.toContainConcept(politicsUri);
@@ -404,7 +476,10 @@ describe("Query Events", () => {
                 expect(item).not.toContainConcept(unitedStatesUri);
                 expect(item).not.toContainCategory(catBusinessUri);
                 expect(item).not.toContainCategory(catPoliticsUri);
-                new QueryEventArticlesIter(er, item["uri"], {returnInfo: utils.returnInfo}).execQuery((articles, error) => {
+                new QueryEventArticlesIter(er, item["uri"], {returnInfo: utils.returnInfo, lang: allLangs}).execQuery((articles, err) => {
+                    if (!_.isEmpty(err)) {
+                        console.error(err);
+                    }
                     _.each(articles, (article) => {
                         const text = _.deburr(_.toLower(_.get(article, "body")));
                         expect(text).not.toContain("trump");

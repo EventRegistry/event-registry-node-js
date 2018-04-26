@@ -78,7 +78,7 @@ async function fetchArticles(conceptUri) {
     while (true) {
         const response = await fetchArticlePage(query, page);
         for (const article of _.get(response, "articles.results", [])) {
-            console.info(article);
+            console.info(article.uri);
         }
         if (page >= _.get(response, "articles.pages")) {
             break;

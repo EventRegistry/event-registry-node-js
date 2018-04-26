@@ -84,27 +84,11 @@ export class QueryEvents extends Query<RequestEvents> {
 
         this.setValIfNotDefault("categoryIncludeSub", categoryIncludeSub, true);
         this.setValIfNotDefault("ignoreCategoryIncludeSub", ignoreCategoryIncludeSub, true);
-        this.addRequestedResult(requestedResult);
+        this.setRequestedResult(requestedResult);
     }
 
     public get path() {
         return "/json/event";
-    }
-
-    /**
-     *  Add a result type that you would like to be returned.
-     * In case you are a subscribed customer you can ask for multiple result types
-     * in a single query (for free users, only a single result type can be required per call).
-     * Result types can be the classes that extend RequestEvents base class (see classes below).
-     */
-    public addRequestedResult(requestEvents: RequestEvents) {
-        if (!(requestEvents instanceof RequestEvents)) {
-            throw new Error("QueryEvents class can only accept result requests that are of type RequestEvents");
-        }
-        this.resultTypeList = [
-            ..._.filter(this.resultTypeList, (item) => item["resultType"] !== requestEvents["resultType"]),
-            requestEvents,
-        ];
     }
 
     /**
@@ -129,7 +113,23 @@ export class QueryEvents extends Query<RequestEvents> {
         }
         query.params = {
             action: "getEvents",
-            eventUriList: _.join(uriList, ","),
+            eventUriList: uriList,
+        };
+        return query;
+    }
+
+    /**
+     * Set a custom list of event uris. The results will be then computed on this list - no query will be done (all conditions will be ignored).
+     */
+    public static initWithEventUriWgtList(...args);
+    public static initWithEventUriWgtList(uriWgtList: string[]) {
+        const query = new QueryEvents();
+        if (!_.isArray(uriWgtList)) {
+            throw new Error("uriWgtList has to be a list of strings that represent event uris");
+        }
+        query.params = {
+            action: "getEvents",
+            eventUriWgtList: _.join(uriWgtList, ","),
         };
         return query;
     }
@@ -155,7 +155,7 @@ export class QueryEvents extends Query<RequestEvents> {
  * Class for iterating through all the events via callbacks
  */
 export class QueryEventsIter extends QueryEvents {
-    private er;
+    private er: EventRegistry;
     private uriPage = 0;
     private uriWgtList;
     private allUriPages;
@@ -181,6 +181,15 @@ export class QueryEventsIter extends QueryEvents {
         this.returnInfo = returnInfo;
         this.eventBatchSize = eventBatchSize;
         this.maxItems = maxItems;
+    }
+
+    public async count() {
+        this.setRequestedResult(new RequestEventsUriWgtList());
+        const response = await this.er.execQuery(this);
+        if (_.has(response, "error")) {
+            console.error(_.get(response, "error"));
+        }
+        return _.get(response, "uriWgtList.totalResults", 0);
     }
 
     /**
@@ -228,7 +237,6 @@ export class QueryEventsIter extends QueryEvents {
     }
 
     private async getNextBatch(callback, doneCallback) {
-        this.clearRequestedResults();
         if (_.isEmpty(this.uriWgtList)) {
             await this.getNextUriPage();
         }
@@ -238,14 +246,12 @@ export class QueryEventsIter extends QueryEvents {
             }
             return;
         }
-        const uriWgts = _.take(this.uriWgtList, this.batchSize);
-        const uris = _.map(uriWgts, (uriWgt: string) => _.first(_.split(uriWgt, ":")));
-        this.uriWgtList = _.drop(this.uriWgtList, this.batchSize);
-        const q = QueryEvents.initWithEventUriList(uris);
+        const uriWgts = _.compact(_.pullAt(this.uriWgtList, _.range(0, this.batchSize)));
+        const q = QueryEvents.initWithEventUriWgtList(uriWgts);
         const requestEventsInfo = new RequestEventsInfo({count: this.batchSize, sortBy: "none", returnInfo: this.returnInfo});
         q.setRequestedResult(requestEventsInfo);
         const res = await this.er.execQuery(q);
-        this.returnedDataSize += _.size(uris);
+        this.returnedDataSize += _.size(uriWgts);
         callback(_.get(res, "events.results"), _.get(res, "error"));
         if (this.uriPage <= this.allUriPages) {
             this.getNextBatch(callback, doneCallback);
@@ -264,7 +270,7 @@ export class RequestEventsInfo extends RequestEvents {
     public params;
     constructor(args: ER.QueryEvents.RequestEventsInfoArguments = {}) {
         super();
-        const { page = 1, count = 20, sortBy = "rel", sortByAsc = false, returnInfo = new ReturnInfo() } = args;
+        const { page = 1, count = 50, sortBy = "rel", sortByAsc = false, returnInfo = new ReturnInfo() } = args;
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
@@ -282,38 +288,6 @@ export class RequestEventsInfo extends RequestEvents {
 
 /**
  * @class RequestEventsUriList
- * Return a simple list of event uris for resulting events.
- */
-export class RequestEventsUriList extends RequestEvents {
-    public resultType = "uriList";
-    public params;
-
-    constructor(args: ER.QueryEvents.RequestEventsUriListArguments = {}) {
-        super();
-        const { page = 1, count = 100000, sortBy = "rel", sortByAsc = false } = args;
-        if (page < 1) {
-            throw new RangeError("Page has to be >= 1");
-        }
-        if (count > 300000) {
-            throw new RangeError("At most 300000 results can be returned per call");
-        }
-        this.params = {};
-        this.params["uriListPage"] = page;
-        this.params["uriListCount"] = count;
-        this.params["uriListSortBy"] = sortBy;
-        this.params["uriListSortByAsc"] = sortByAsc;
-    }
-
-    public set page(page) {
-        if (page < 1) {
-            throw new RangeError("Page has to be >= 1");
-        }
-        _.set(this.params, "uriListPage", page);
-    }
-}
-
-/**
- * @class RequestEventsUriList
  * Return a simple list of event uris together with the scores for resulting events.
  */
 export class RequestEventsUriWgtList extends RequestEvents {
@@ -322,12 +296,12 @@ export class RequestEventsUriWgtList extends RequestEvents {
 
     constructor(args: ER.QueryEvents.RequestEventsUriWgtListArguments = {}) {
         super();
-        const { page = 1, count = 100000, sortBy = "rel", sortByAsc = false } = args;
+        const { page = 1, count = 50000, sortBy = "rel", sortByAsc = false } = args;
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
-        if (count > 300000) {
-            throw new RangeError("At most 300000 results can be returned per call");
+        if (count > 100000) {
+            throw new RangeError("At most 100000 results can be returned per call");
         }
         this.params = {};
         this.params["uriWgtListPage"] = page;
@@ -376,8 +350,8 @@ export class RequestEventsLocAggr extends RequestEvents {
     constructor(args: ER.QueryEvents.RequestEventsLocAggrArguments = {}) {
         super();
         const { eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
-        if (eventsSampleSize > 300000) {
-            throw new RangeError("At most 300000 results can be used for computing");
+        if (eventsSampleSize > 100000) {
+            throw new RangeError("At most 100000 results can be used for computing");
         }
         this.params = {};
         this.params["locAggrSampleSize"] = eventsSampleSize;
@@ -395,8 +369,8 @@ export class RequestEventsLocTimeAggr extends RequestEvents {
     constructor(args: ER.QueryEvents.RequestEventsLocTimeAggrArguments = {}) {
         super();
         const { eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
-        if (eventsSampleSize > 300000) {
-            throw new RangeError("At most 300000 results can be used for computing");
+        if (eventsSampleSize > 100000) {
+            throw new RangeError("At most 100000 results can be used for computing");
         }
         this.params = {};
         this.params["locTimeAggrSampleSize"] = eventsSampleSize;
@@ -595,7 +569,7 @@ export class RequestEventsRecentActivity extends RequestEvents {
     constructor(args: ER.QueryEvents.RequestEventsRecentActivityArguments = {}) {
         super();
         const {
-            maxEventCount = 60,
+            maxEventCount = 50,
             updatesAfterTm,
             updatesAfterMinsAgo,
             mandatoryLocation = true,
@@ -603,8 +577,8 @@ export class RequestEventsRecentActivity extends RequestEvents {
             minAvgCosSim = 0,
             returnInfo = new ReturnInfo(),
         } = args;
-        if (maxEventCount > 2000) {
-            throw new RangeError("At most 2000 events can be returned");
+        if (maxEventCount > 200) {
+            throw new RangeError("At most 200 events can be returned");
         }
         if (!_.isUndefined(updatesAfterTm) && !_.isUndefined(updatesAfterMinsAgo)) {
             throw new Error("You should specify either updatesAfterTm or updatesAfterMinsAgo parameter, but not both");

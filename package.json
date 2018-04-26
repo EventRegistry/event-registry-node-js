@@ -2,7 +2,7 @@
   "author": "Anže Sršen",
   "name": "eventregistry",
   "description": "Package containing wrapper functions for Event Registry API",
-  "version": "1.0.91",
+  "version": "1.2.1",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -21,19 +21,19 @@
     "node": ">=5.0.0"
   },
   "devDependencies": {
-    "jasmine": "^2.8.0",
-    "tslint": "5.7.0",
-    "typescript": "2.6.1"
+    "jasmine": "2.8.0",
+    "tslint": "5.9.0",
+    "typescript": "2.8.3"
   },
   "dependencies": {
-    "@types/jasmine": "^2.6.0",
-    "@types/lodash": "^4.14.79",
-    "@types/node": "^8.0.50",
-    "@types/qs": "^6.5.1",
-    "axios": "^0.17.0",
-    "lodash": "4.17.4",
-    "moment": "^2.19.1",
-    "qs": "^6.5.1",
-    "winston": "3.0.0-rc1"
+    "@types/jasmine": "2.8.6",
+    "@types/lodash": "4.14.108",
+    "@types/node": "8.0.50",
+    "@types/qs": "6.5.1",
+    "axios": "^0.18.0",
+    "lodash": "4.17.10",
+    "moment": "2.22.1",
+    "qs": "6.5.1",
+    "winston": "^3.0.0-rc5"
   }
 }

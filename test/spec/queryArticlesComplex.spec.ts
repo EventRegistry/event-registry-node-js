@@ -10,7 +10,6 @@ import {
     QueryArticlesIter,
     QueryItems,
     RequestArticleInfo,
-    RequestArticlesUriList,
     ReturnInfo,
 } from "../../src/index";
 import { Utils } from "./utils";
@@ -22,7 +21,7 @@ describe("Query Articles Complex", () => {
     it("should test keywords (1)", (done) => {
         const baseQuery = new BaseQuery({keyword: "obama", keywordLoc: "title"});
         const cq1 = new ComplexArticleQuery(baseQuery);
-        const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1) as QueryArticlesIter;
+        const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {maxItems: 2000});
         artIter.execQuery((items) => {
             _.each(items, (item) => {
                 expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("obama");
@@ -40,7 +39,7 @@ describe("Query Articles Complex", () => {
             }
         }
         `;
-        const artIter = QueryArticlesIter.initWithComplexQuery(er, qStr) as QueryArticlesIter;
+        const artIter = QueryArticlesIter.initWithComplexQuery(er, qStr, { maxItems: 2000 });
         artIter.execQuery((items) => {
             _.each(items, (item) => {
                 expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("obama");
@@ -53,7 +52,7 @@ describe("Query Articles Complex", () => {
     it("should test keywords (3)", (done) => {
         const baseQuery = new BaseQuery({keyword: "home", keywordLoc: "body"});
         const cq1 = new ComplexArticleQuery(baseQuery);
-        const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {returnInfo: utils.returnInfo, maxItems: 10}) as QueryArticlesIter;
+        const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {returnInfo: utils.returnInfo, maxItems: 2000});
         artIter.execQuery((items, error) => {
             _.each(items, (item) => {
                 expect(_.deburr(_.toLower(_.get(item, "body")))).toContain("home");
@@ -111,16 +110,16 @@ describe("Query Articles Complex", () => {
 
     it("should compare same results from keyword search (3)", async (done) => {
         const exclude = new BaseQuery({categoryUri: await er.getCategoryUri("Business")});
-        const baseQuery1 = new BaseQuery({dateStart: "2017-02-05", dateEnd: "2017-02-06", exclude});
+        const baseQuery1 = new BaseQuery({dateStart: "2017-03-05", dateEnd: "2017-03-06", exclude});
         const cq1 = new ComplexArticleQuery(baseQuery1);
 
         const combinedQuery = CombinedQuery.AND([
-            new BaseQuery({dateStart: "2017-02-05"}),
-            new BaseQuery({dateEnd: "2017-02-06"}),
+            new BaseQuery({dateStart: "2017-03-05"}),
+            new BaseQuery({dateEnd: "2017-03-06"}),
         ], exclude);
         const cq2 = new ComplexArticleQuery(combinedQuery);
 
-        const q = new QueryArticles({dateStart: "2017-02-05", dateEnd: "2017-02-06", ignoreCategoryUri: await er.getCategoryUri("business")});
+        const q = new QueryArticles({dateStart: "2017-03-05", dateEnd: "2017-03-06", ignoreCategoryUri: await er.getCategoryUri("business")});
 
         const listRes1 = await utils.getArticlesQueryUriListForComplexQuery(er, cq1);
         const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, cq2);
@@ -243,6 +242,25 @@ describe("Query Articles Complex", () => {
         const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, cq2);
 
         expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
+        done();
+    });
+
+    it("should compare same results from keyword search (7)", async (done) => {
+        const categoryUri = await er.getCategoryUri("Business");
+        const cq1 = new ComplexArticleQuery(new BaseQuery({dateStart: "2016-03-05", dateEnd: "2017-03-06", exclude: new BaseQuery({categoryUri})}));
+        const cq2 = new ComplexArticleQuery(CombinedQuery.AND([
+            new BaseQuery({ dateStart: "2016-03-05", dateEnd: "2017-05-05" }),
+            new BaseQuery({ dateStart: "2017-03-05" }),
+            new BaseQuery({ dateStart: "2016-10-05" }),
+            new BaseQuery({ dateEnd: "2017-04-05" }),
+            new BaseQuery({ dateEnd: "2017-03-06" }),
+        ], new BaseQuery({categoryUri: await er.getCategoryUri("Business")})));
+        const q = new QueryArticles({dateStart: "2017-03-05", dateEnd: "2017-03-06", ignoreCategoryUri: categoryUri});
+        const listRes1 = await utils.getArticlesQueryUriListForComplexQuery(er, cq1);
+        const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, cq2);
+        const listRes3 = await utils.getQueryUriListForQueryArticles(er, q);
+        expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes2, "totalResults"));
+        expect(_.get(listRes1, "totalResults")).toEqual(_.get(listRes3, "totalResults"));
         done();
     });
 

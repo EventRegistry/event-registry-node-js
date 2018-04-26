@@ -8,13 +8,13 @@ import {
     RequestArticlesInfo,
     RequestEventArticles,
     RequestEventArticleTrend,
-    RequestEventArticleUris,
+    RequestEventArticleUriWgts,
     RequestEventInfo,
     RequestEventKeywordAggr,
     RequestEventSimilarEvents,
     RequestEventSimilarStories,
     RequestEventSourceAggr,
-    RequestEventsUriList,
+    RequestEventsUriWgtList,
     ReturnInfo,
 } from "../../src/index";
 import { Utils } from "./utils";
@@ -22,14 +22,35 @@ import { Utils } from "./utils";
 describe("Query Event", () => {
     const er = Utils.initAPI();
     const utils = new Utils();
+    const conceptInfoList = [{ uri: "http://en.wikipedia.org/wiki/Barack_Obama", wgt: 100 }, { uri: "http://en.wikipedia.org/wiki/Donald_Trump", wgt: 80 }];
     let query: QueryEvent;
 
-    beforeAll(async (done) => {
+    async function createQuery(count = 50): Promise<QueryEvent> {
         const q = new QueryEvents({lang: "eng", conceptUri: await er.getConceptUri("Obama")});
-        const requestEventsUriList = new RequestEventsUriList({count: 10});
+        const requestEventsUriList = new RequestEventsUriWgtList({count});
         q.setRequestedResult(requestEventsUriList);
         const response = await er.execQuery(q);
-        query = new QueryEvent(_.get(response, "uriList.results"));
+        return new QueryEvent(EventRegistry.getUriFromUriWgt(_.get(response, "uriWgtList.results")));
+    }
+
+    beforeAll(async (done) => {
+        query = await createQuery();
+        done();
+    });
+
+    it("should test article count", async (done) => {
+        const q = await createQuery(10);
+        q.setRequestedResult(new RequestEventArticleUriWgts());
+        const response = await er.execQuery(q);
+        _.each(response, async (event, uri) => {
+            if (!_.has(event, "newEventUri")) {
+                return;
+            }
+            const iter = new QueryEventArticlesIter(er, uri);
+            const count = await iter.count();
+            const uriListSize = _.size(_.get(event, "urIWgtList.results", []));
+            expect(count).toBe(uriListSize, `Event did not have expected uri wgt list: expected ${count}, got ${uriListSize}`);
+        });
         done();
     });
 
@@ -46,11 +67,11 @@ describe("Query Event", () => {
     });
 
     it("should test article uris", async (done) => {
-        const requestEventArticleUris  = new RequestEventArticleUris();
-        query.setRequestedResult(requestEventArticleUris);
+        const requestEventArticleUriWgts  = new RequestEventArticleUriWgts();
+        query.setRequestedResult(requestEventArticleUriWgts);
         const response = await er.execQuery(query);
         _.each(response, (event) => {
-            expect(_.has(event, "articleUris")).toBeTruthy("Expected to see 'articleUris'");
+            expect(_.has(event, "uriWgtList")).toBeTruthy("Expected to see 'uriWgtList'");
         });
         done();
     });
@@ -93,9 +114,14 @@ describe("Query Event", () => {
     });
 
     it("should test similar events", async (done) => {
-        const requestEventSimilarEvents  = new RequestEventSimilarEvents({addArticleTrendInfo: true, returnInfo: utils.returnInfo});
-        query.setRequestedResult(requestEventSimilarEvents);
-        const response = await er.execQuery(query);
+        const q = await createQuery(1);
+        const requestEventSimilarEvents  = new RequestEventSimilarEvents({
+            conceptInfoList,
+            addArticleTrendInfo: true,
+            returnInfo: utils.returnInfo,
+        });
+        q.setRequestedResult(requestEventSimilarEvents);
+        const response = await er.execQuery(q);
         _.each(response, (event) => {
             expect(_.has(event, "similarEvents")).toBeTruthy("Expected to see 'similarEvents'");
             _.each(_.get(event, "similarEvents.results"), (simEvent) => {
@@ -107,9 +133,13 @@ describe("Query Event", () => {
     });
 
     it("should test similar stories", async (done) => {
-        const requestEventSimilarStories  = new RequestEventSimilarStories({returnInfo: utils.returnInfo});
-        query.setRequestedResult(requestEventSimilarStories);
-        const response = await er.execQuery(query);
+        const q = await createQuery(1);
+        const requestEventSimilarStories  = new RequestEventSimilarStories({
+            conceptInfoList,
+            returnInfo: utils.returnInfo,
+        });
+        q.setRequestedResult(requestEventSimilarStories);
+        const response = await er.execQuery(q);
         _.each(response, (event) => {
             expect(_.has(event, "similarStories")).toBeTruthy("Expected to see 'similarStories'");
             _.each(_.get(event, "similarStories.results"), (simStory) => {
@@ -120,16 +150,16 @@ describe("Query Event", () => {
     });
 
     it("should test query event articles iterator", async (done) => {
-        const q = new QueryEventArticlesIter(er, "eng-2863607", { maxItems: 150, articleBatchSize: 50 });
+        const q = new QueryEventArticlesIter(er, "eng-3075290", { maxItems: 10, articleBatchSize: 5 });
         let size = 0;
         q.execQuery((items) => {
             size += _.size(items);
         }, async () => {
-            const q2 = new QueryEvent("eng-2863607");
-            const requestEventArticles = new RequestEventArticles({count: 150});
+            const q2 = new QueryEvent("eng-3075290");
+            const requestEventArticles = new RequestEventArticles({count: 10});
             q2.setRequestedResult(requestEventArticles);
             const response = await er.execQuery(q2);
-            expect(_.size(_.get(response["eng-2863607"], "articles.results"))).toEqual(size);
+            expect(_.size(_.get(response["eng-3075290"], "articles.results"))).toEqual(size);
             done();
         });
     });

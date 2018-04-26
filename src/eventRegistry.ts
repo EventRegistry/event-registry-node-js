@@ -140,6 +140,7 @@ export class EventRegistry {
             // try to print out the error that should be passed by in case the server is down or responds with errors
             if (this.config.verboseOutput) {
                 this.logger.error(_.get(error, "errno", error));
+                throw new Error(error);
             }
         }
         return request;
@@ -191,11 +192,11 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async suggestNewsSources(prefix, args: ER.SuggestNewsSourcesArguments = {}) {
-        const {page = 1, count = 20} = args;
+        const {page = 1, count = 20, dataType = ["news", "pr"]} = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
         }
-        const request = await this.jsonRequest("/json/suggestSources", {prefix, page, count});
+        const request = await this.jsonRequest("/json/suggestSources", {prefix, page, dataType, count});
         return request.data;
     }
 
@@ -385,9 +386,10 @@ export class EventRegistry {
     /**
      * Return the news source that best matches the source name
      * @param sourceName partial or full name of the source or source uri for which to return source uri
+     * @param dataType: return the source uri that provides content of these data types
      */
-    public async getNewsSourceUri(sourceName: string) {
-        const matches = await this.suggestNewsSources(sourceName);
+    public async getNewsSourceUri(sourceName: string, dataType: ER.DataType[] | ER.DataType = ["news", "pr"]) {
+        const matches = await this.suggestNewsSources(sourceName, { dataType });
         return _.get(_.first(matches), "uri", undefined);
     }
 
@@ -441,22 +443,14 @@ export class EventRegistry {
         return _.get(_.first(matches), "uri", undefined);
     }
 
-    /**
-     * Get some stats about recently imported articles and events
-     */
-    public async getRecentStats() {
-        const request = await this.jsonRequest("/json/overview", { action: "getRecentStats"});
-        return request.data;
+    public static getUriFromUriWgt(uriWgtList: string[]) {
+        if (!_.isArray(uriWgtList)) {
+            throw new Error("uriWgtList has to be a list of strings that represent article uris");
+        }
+        return _.map(uriWgtList, (uriWgt) => _.first(_.split(uriWgt, ":")));
     }
 
-    /**
-     * get total statistics about all imported articles, concepts, events as well as daily counts for these
-     */
-    public async getStats(args: ER.GetStatsArguments = {}) {
-        _.defaults(args, {addDailyArticles: false, addDailyAnnArticles: false, addDailyDuplArticles: false, addDailyEvents: false});
-        const request = await this.jsonRequest("/json/overview", _.extend({}, {action: "getStats" }, args));
-        return request.data;
-    }
+    // Additional utility functions
 
     /**
      * If you have article urls and you want to query them in ER you first have to obtain their uris in the ER.
@@ -468,18 +462,6 @@ export class EventRegistry {
         }
         const request = await this.jsonRequest("/json/articleMapper", { articleUrl: articleUrls});
         return request.data;
-    }
-
-    /**
-     * Return information about the latest imported article
-     */
-    public async getLatestArticle(returnInfo = new ReturnInfo()) {
-        const stats = await this.getRecentStats();
-        const latestId = (stats["totalArticleCount"] - 1) + "";
-        const q = new QueryArticle(latestId);
-        const requestArticleInfo = new RequestArticleInfo(returnInfo);
-        const response = await this.execQuery(q);
-        return _.get(response[_.first(_.keys(response))], "info", undefined);
     }
 
     /**

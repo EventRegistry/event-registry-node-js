@@ -140,6 +140,7 @@ export class GetTopCorrelations extends QueryParamsBase {
             for (const i of _.range(0, _.size(conceptIds), 500)) {
                 const ids = _.slice(conceptIds, i, i + 500);
                 const q = new GetConceptInfo({returnInfo});
+                // @ts-ignore
                 q.queryById(ids);
                 const info = await this.er.execQuery(q);
                 conceptInfos = _.extend({}, conceptInfos, info);
@@ -184,6 +185,7 @@ export class GetTopCorrelations extends QueryParamsBase {
             for (const i of _.range(0, _.size(categoryIds), 500)) {
                 const ids = _.slice(categoryIds, i, i + 500);
                 const q = new GetCategoryInfo({ returnInfo });
+                // @ts-ignore
                 q.queryById(ids);
                 const info = this.er.execQuery(q);
                 categoryInfos = _.extend({}, categoryInfos, info);

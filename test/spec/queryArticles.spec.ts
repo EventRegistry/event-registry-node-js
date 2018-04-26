@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import {
+    ConceptInfoFlags,
     QueryArticles,
     QueryArticlesIter,
     RequestArticlesCategoryAggr,
@@ -9,6 +10,8 @@ import {
     RequestArticlesInfo,
     RequestArticlesKeywordAggr,
     RequestArticlesSourceAggr,
+    RequestArticlesUriWgtList,
+    ReturnInfo,
 } from "../../src/index";
 import { Utils } from "./utils";
 
@@ -28,6 +31,31 @@ describe("Query Articles", () => {
         query.setRequestedResult(requestArticlesInfo);
         const response = await er.execQuery(query);
         expect(response).toBeValidGeneralArticleList();
+        done();
+    });
+
+    it("should return list of article uris and weights", async (done) => {
+        const conceptUri = await er.getConceptUri("germany");
+        const iter = new QueryArticlesIter(er, {conceptUri, dateStart: "2014-10-01", dateEnd: "2018-03-01"});
+        const expectedCount = await iter.count();
+        const q = new QueryArticles({conceptUri, dateStart: "2014-10-01", dateEnd: "2018-03-01"});
+        let items = [];
+        for (let page = 1; page <= 2; page++) {
+            q.setRequestedResult(new RequestArticlesUriWgtList({page, count: 20000}));
+            const response = await er.execQuery(q);
+            items = [...items, ..._.get(response, "uriWgtList.results", [])];
+        }
+        expect(expectedCount).toBe(_.size(items), `We did not retrieve all item uris. We were expecting ${expectedCount}, but got ${_.size(items)} uris`);
+        let lastWgt;
+        for ( const item of items) {
+            const wgt = _.parseInt(_.last(_.split(item, ":")));
+            if (_.isNil(lastWgt)) {
+                lastWgt = wgt;
+            } else {
+                expect(lastWgt).toBeGreaterThanOrEqual(wgt, "Previous weight is not greater or equal to current");
+                lastWgt = wgt;
+            }
+        }
         done();
     });
 
@@ -56,7 +84,7 @@ describe("Query Articles", () => {
                 done();
             }
             _.each(items, (item) => {
-                expect(_.toLower(_.get(item, "title"))).toContain("iphone");
+                expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("iphone");
             });
         }, () => {
             done();
@@ -71,7 +99,7 @@ describe("Query Articles", () => {
                 done();
             }
             _.each(items, (item) => {
-                expect(_.toLower(_.get(item, "title"))).toContain("home");
+                expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("home");
             });
         }, () => {
             done();
@@ -202,14 +230,23 @@ describe("Query Articles", () => {
     });
 
     it("should return list of concept trends", async (done) => {
-        const requestArticlesConceptTrends = new RequestArticlesConceptTrends({count: 5, returnInfo: utils.returnInfo});
+        const conceptInfo = new ConceptInfoFlags({
+            synonyms: true,
+            image: true,
+            description: true,
+            conceptClassMembership: true,
+            trendingScore: true,
+            trendingHistory: true,
+        });
+        const returnInfo = new ReturnInfo({conceptInfo});
+        const requestArticlesConceptTrends = new RequestArticlesConceptTrends({conceptUris: [await er.getConceptUri("Obama"), await er.getConceptUri("Trump")], returnInfo});
         query.setRequestedResult(requestArticlesConceptTrends);
         const response = await er.execQuery(query);
         // Check that we get the expected properties
         expect(_.has(response, "conceptTrends")).toBeTruthy("Expected to get 'conceptTrends'");
         expect(_.has(response, "conceptTrends.trends")).toBeTruthy("Expected to get 'trends' property in conceptTrends");
         expect(_.has(response, "conceptTrends.conceptInfo")).toBeTruthy("Expected to get 'conceptInfo' property in conceptTrends");
-        expect(_.size(_.get(response, "conceptTrends.conceptInfo"))).toBe(5, "Expected to get 5 concepts in concept trends");
+        expect(_.size(_.get(response, "conceptTrends.conceptInfo"))).toBe(2, "Expected to get 2 concepts in concept trends");
 
         const trends = _.get(response, "conceptTrends.trends");
         expect(!_.isEmpty(trends)).toBeTruthy();
@@ -217,7 +254,7 @@ describe("Query Articles", () => {
             expect(_.has(trend, "date")).toBeTruthy("A trend should have a date");
             expect(_.has(trend, "conceptFreq")).toBeTruthy("A trend should have a conceptFreq");
             expect(_.has(trend, "totArts")).toBeTruthy("A trend should have a totArts property");
-            expect(_.size(_.get(trend, "conceptFreq"))).toBeLessThanOrEqual(5, "Concept frequencies should contain 5 elements - one for each concept");
+            expect(_.size(_.get(trend, "conceptFreq"))).toBeLessThanOrEqual(2, "Concept frequencies should contain 2 elements - one for each concept");
         });
 
         _.each(_.get(response, "conceptTrends.conceptInfo"), (concept) => {
@@ -304,34 +341,23 @@ describe("Query Articles", () => {
     it("should test query articles iterator (1)", async (done) => {
         const keywords = "trump";
         const conceptUri = await er.getConceptUri("Obama");
-        const q = new QueryArticlesIter(er, { keywords, conceptUri, maxItems: 150, articleBatchSize: 50});
+        const sourceUri = await er.getNewsSourceUri("los angeles times");
+        const q = new QueryArticlesIter(er, { keywords, conceptUri, sourceUri});
         let articlesSize = 0;
         q.execQuery((items) => {
             articlesSize += _.size(items);
         }, async () => {
-            const q2 = new QueryArticles({keywords, conceptUri});
-            const requestArticlesInfo2 = new RequestArticlesInfo({count: 150});
-            q2.setRequestedResult(requestArticlesInfo2);
-            const response = await er.execQuery(q2);
-            expect(_.size(_.get(response, "articles.results"))).toEqual(articlesSize);
+            expect(await q.count()).toEqual(articlesSize);
             done();
         });
     });
 
     it("should test query articles iterator (2)", async (done) => {
-        const keywords = "trump";
-        const conceptUri = await er.getConceptUri("Obama");
-        const sourceUri = await er.getNewsSourceUri("bbc");
-        const q = new QueryArticlesIter(er, { keywords, conceptUri, sourceUri, returnInfo: utils.returnInfo, maxItems: 50, articleBatchSize: 10 });
-        q.execQuery((items, error) => {
-           _.each(items, (item) => {
-               expect(item).toContainConcept(conceptUri);
-               expect(item).toContainSource(sourceUri);
-               expect(item).toContainBodyText("trump");
-           });
-        }, () => {
-            done();
-        });
+        const q = new QueryArticles({keywords: "trump"});
+        q.setRequestedResult(new RequestArticlesUriWgtList({page: 2, count: 100}));
+        const response = await er.execQuery(q);
+        expect(_.size(_.get(response, "uriWgtList.results", []))).not.toBe(0, "No results were obtained for second page of uris");
+        done();
     });
 
     it("should test query articles iterator (3)", async (done) => {
@@ -351,14 +377,28 @@ describe("Query Articles", () => {
         });
     });
 
-    it("should test query articles iterator (4)", async (done) => {
+    xit("should test query articles iterator (4)", async (done) => {
         const conceptUri = await er.getConceptUri("Obama");
         const ignoreConceptUri = [await er.getConceptUri("politics"), await er.getConceptUri("china"), await er.getConceptUri("united states")];
         const ignoreKeywords = ["trump", "politics", "michelle"];
         const ignoreSourceUri = [await er.getNewsSourceUri("daily caller"), await er.getNewsSourceUri("aawsat"), await er.getNewsSourceUri("svodka")];
         const ignoreCategoryUri = [await er.getCategoryUri("business"), await er.getCategoryUri("politics")];
-        const q = new QueryArticlesIter(er, { conceptUri, ignoreConceptUri, ignoreKeywords, ignoreSourceUri, ignoreCategoryUri, returnInfo: utils.returnInfo, maxItems: 50, articleBatchSize: 10 });
+        // const ignoreLang = "zho";
+        const queryConfig = {
+            conceptUri,
+            ignoreConceptUri,
+            ignoreKeywords,
+            ignoreSourceUri,
+            ignoreCategoryUri,
+            returnInfo: utils.returnInfo,
+            maxItems: 10,
+            articleBatchSize: 5,
+        };
+        const q = new QueryArticlesIter(er, queryConfig);
         q.execQuery((items, error) => {
+            if (!_.isEmpty(error)) {
+                console.error(error);
+            }
             _.each(items, (item) => {
                 expect(item).toContainConcept(conceptUri);
                 _.each(ignoreConceptUri, (uri) => {

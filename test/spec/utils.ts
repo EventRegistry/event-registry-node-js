@@ -6,14 +6,15 @@ import {
     EventInfoFlags,
     EventRegistry,
     LocationInfoFlags,
+    QueryArticles,
     QueryEvents,
-    RequestArticlesUriList,
-    RequestEventsUriList,
+    RequestArticlesUriWgtList,
+    RequestEventsUriWgtList,
     ReturnInfo,
     SourceInfoFlags,
     StoryInfoFlags,
+
 } from "../../src/index";
-import { QueryArticles } from "../../src/queryArticles";
 
 interface ValidationObj {
     pass: boolean;
@@ -30,9 +31,10 @@ export class Utils {
     public eventInfo;
     public storyInfo;
     public returnInfo: ReturnInfo;
-    public er;
+    public er: EventRegistry;
 
     constructor() {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         this.articleInfo = new ArticleInfoFlags({ bodyLen: -1,
                                                   concepts: true,
                                                   storyUri: true,
@@ -109,7 +111,7 @@ export class Utils {
     }
 
     public async getQueryUriListForQueryArticles(er, q) {
-        const requestArticlesUriList = new RequestArticlesUriList({count: 50000});
+        const requestArticlesUriList = new RequestArticlesUriWgtList({count: 50000});
         q.setRequestedResult(requestArticlesUriList);
         const response = await er.execQuery(q);
         if (_.has(response, "error")) {
@@ -120,11 +122,11 @@ export class Utils {
             console.warn("One of the queries had no results to match the specified search conditions");
         }
 
-        return _.get(response, "uriList");
+        return _.get(response, "uriWgtList");
     }
 
     public async getQueryUriListForQueryEvents(er, q) {
-        const requestEventsUriList = new RequestEventsUriList({count: 50000});
+        const requestEventsUriList = new RequestEventsUriWgtList({count: 50000});
         q.setRequestedResult(requestEventsUriList);
         const response = await er.execQuery(q);
         if (_.has(response, "error")) {
@@ -135,14 +137,13 @@ export class Utils {
             console.warn("One of the queries had no results to match the specified search conditions");
         }
 
-        return _.get(response, "uriList");
+        return _.get(response, "uriWgtList");
     }
 
     public ensureValidConcept(concept) {
         let result: ValidationObj = { pass: true };
-        const propertyNames = ["id", "uri", "label", "synonyms", "image", "trendingScore"];
+        const propertyNames = ["uri", "label", "synonyms", "image", "trendingScore"];
         result = this.validateProperties(concept, "concept", propertyNames);
-        // TODO: Is 'wiki' part of the entity types?
         if (!_.includes(["person", "loc", "org", "wiki"], _.get(concept, "type"))) {
             result = { pass: false, message: `Expected concept to be an entity type, but got ${_.get(concept, "type")}` };
         }
@@ -171,8 +172,7 @@ export class Utils {
 
     public ensureValidArticle(article) {
         let result: ValidationObj = { pass: true };
-        const propertyNames = [ "id",
-                                "url",
+        const propertyNames = [ "url",
                                 "uri",
                                 "title",
                                 "body",
@@ -192,7 +192,6 @@ export class Utils {
         _.each(_.get(article, "concepts", []), (concept) => {
             result = this.ensureValidConcept(concept);
         });
-
         if (!_.get(article, "isDuplicate") && !_.has(article, "eventUri")) {
             result = {pass: false, message: "Non duplicates should have event uris "};
         }
@@ -277,12 +276,12 @@ export class Utils {
     }
 
     public ensureValidCategory(category) {
-        const propertyNames = ["id", "uri", "parentUri", "trendingScore"];
+        const propertyNames = ["uri", "parentUri", "trendingScore"];
         return this.validateProperties(category, "category", propertyNames);
     }
 
     public ensureValidSource(source) {
-        const propertyNames = ["id", "uri", "location", "ranking", "articleCount", "sourceGroups"];
+        const propertyNames = ["uri", "location", "ranking", "articleCount", "sourceGroups"];
         return this.validateProperties(source, "source", propertyNames);
     }
 
