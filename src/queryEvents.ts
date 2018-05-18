@@ -172,9 +172,12 @@ export class QueryEventsIter extends QueryEvents {
             sortBy = "rel",
             sortByAsc = false,
             returnInfo = new ReturnInfo(),
-            eventBatchSize = 200,
+            eventBatchSize = 50,
             maxItems = -1,
         } = args;
+        if (eventBatchSize > 50) {
+            throw new Error("Batch size should not exceed 50");
+        }
         this.er = er;
         this.sortBy = sortBy;
         this.sortByAsc = sortByAsc;
@@ -274,8 +277,8 @@ export class RequestEventsInfo extends RequestEvents {
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
-        if (count > 200) {
-            throw new RangeError("At most 200 articles can be returned per call");
+        if (count > 50) {
+            throw new RangeError("At most 50 events can be returned per call");
         }
         this.params = {};
         this.params["eventsPage"] = page;

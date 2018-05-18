@@ -147,12 +147,12 @@ export class QueryArticlesIter extends QueryArticles {
             sortBy: "rel",
             sortByAsc: false,
             returnInfo: new ReturnInfo(),
-            articleBatchSize: 200,
+            articleBatchSize: 100,
             maxItems: -1,
         });
         const {sortBy, sortByAsc, returnInfo, articleBatchSize, maxItems} = args;
-        if (articleBatchSize > 200) {
-            throw new Error("You can not have a batch size > 200 items");
+        if (articleBatchSize > 100) {
+            throw new Error("Batch size should not exceed 100");
         }
         this.er = er;
         this.sortBy = sortBy;
@@ -259,8 +259,8 @@ export class RequestArticlesInfo extends RequestArticles {
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
         }
-        if (count > 200) {
-            throw new RangeError("at most 200 articles can be returned per call");
+        if (count > 100) {
+            throw new RangeError("at most 100 articles can be returned per call");
         }
         this.params = {};
         this.params["articlesPage"] = page;
