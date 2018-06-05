@@ -113,7 +113,7 @@ export class QueryEvents extends Query<RequestEvents> {
         }
         query.params = {
             action: "getEvents",
-            eventUriList: uriList,
+            eventUriList: _.join(uriList, ","),
         };
         return query;
     }

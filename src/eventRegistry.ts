@@ -35,7 +35,7 @@ export class EventRegistry {
         } else {
             _.extend(this.config, config);
         }
-        if (config.logging) {
+        if (this.config.logging) {
             this.logger = winston.createLogger({
                 level: "info",
                 format: winston.format.json(),
@@ -48,6 +48,7 @@ export class EventRegistry {
                 ],
             });
         }
+
         if (_.isNil(this.config.apiKey)) {
             console.info("No API key was provided. You will be allowed to perform only a very limited number of requests per day.");
         }
@@ -103,8 +104,11 @@ export class EventRegistry {
             });
         } catch (error) {
             // try to print out the error that should be passed by in case the server is down or responds with errors
-            if (this.config.verboseOutput) {
+            if (this.config.logging) {
                 this.logger.error(_.get(error, "errno", error));
+            }
+            if (this.config.verboseOutput) {
+                console.error(error);
             }
         }
         return request;
@@ -138,9 +142,11 @@ export class EventRegistry {
             } as any);
         } catch (error) {
             // try to print out the error that should be passed by in case the server is down or responds with errors
-            if (this.config.verboseOutput) {
+            if (this.config.logging) {
                 this.logger.error(_.get(error, "errno", error));
-                throw new Error(error);
+            }
+            if (this.config.verboseOutput) {
+                console.error(error);
             }
         }
         return request;

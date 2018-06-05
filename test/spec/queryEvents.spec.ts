@@ -338,13 +338,13 @@ describe("Query Events", () => {
         const q = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
         const eventInfo = new EventInfoFlags({concepts: true, articleCounts: true, title: true, summary: true, categories: true, location: true, stories: true, imageCount: 1});
         const returnInfo1 = new ReturnInfo({conceptInfo: new ConceptInfoFlags({lang: "deu", type: "wiki"}), eventInfo});
-        q.setRequestedResult(new RequestEventsInfo({page: 1, count: 100, sortBy: "size", sortByAsc: true, returnInfo: returnInfo1}));
+        q.setRequestedResult(new RequestEventsInfo({page: 1, count: 50, sortBy: "size", sortByAsc: true, returnInfo: returnInfo1}));
         const response = await er.execQuery(q);
 
         expect(_.has(response, "events")).toBeTruthy("Results should contain events");
 
         const events = _.get(response, "events.results", []);
-        expect(_.size(events)).toBeLessThanOrEqual(100, "Returned list of events was too long");
+        expect(_.size(events)).toBeLessThanOrEqual(50, "Returned list of events was too long");
 
         let lastArtCount = 0;
 
@@ -463,6 +463,7 @@ describe("Query Events", () => {
             ignoreKeywords: ["trump", "politics", "michelle"],
             ignoreSourceUri: [srcDailyCallerUri, srcAawsatUri, srcSvodkaUri],
             ignoreCategoryUri: [catBusinessUri, catPoliticsUri],
+            returnInfo: new ReturnInfo({ conceptInfo: new ConceptInfoFlags({ maxConceptsPerType: 350 })}),
         };
         const q = new QueryEventsIter(er, queryConfig);
         q.execQuery((items, error) => {

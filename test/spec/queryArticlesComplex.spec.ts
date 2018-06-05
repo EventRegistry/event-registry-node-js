@@ -52,7 +52,7 @@ describe("Query Articles Complex", () => {
     it("should test keywords (3)", (done) => {
         const baseQuery = new BaseQuery({keyword: "home", keywordLoc: "body"});
         const cq1 = new ComplexArticleQuery(baseQuery);
-        const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {returnInfo: utils.returnInfo, maxItems: 2000});
+        const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {returnInfo: utils.returnInfo, maxItems: 20});
         artIter.execQuery((items, error) => {
             _.each(items, (item) => {
                 expect(_.deburr(_.toLower(_.get(item, "body")))).toContain("home");

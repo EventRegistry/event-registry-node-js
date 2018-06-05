@@ -118,10 +118,6 @@ export class Utils {
             throw new Error(_.get(response, "error"));
         }
 
-        if (_.get(response, "info", "") === "No results match the search conditions.") {
-            console.warn("One of the queries had no results to match the specified search conditions");
-        }
-
         return _.get(response, "uriWgtList");
     }
 
@@ -131,10 +127,6 @@ export class Utils {
         const response = await er.execQuery(q);
         if (_.has(response, "error")) {
             throw new Error(_.get(response, "error"));
-        }
-
-        if (_.get(response, "info", "") === "No results match the search conditions.") {
-            console.warn("One of the queries had no results to match the specified search conditions");
         }
 
         return _.get(response, "uriWgtList");
