@@ -23,7 +23,7 @@
   "devDependencies": {
     "jasmine": "2.8.0",
     "tslint": "5.9.0",
-    "typescript": "2.8.3"
+    "typescript": "3.0.1"
   },
   "dependencies": {
     "@types/jasmine": "2.8.6",

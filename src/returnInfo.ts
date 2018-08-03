@@ -88,7 +88,7 @@ export class ArticleInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ArticleI
     constructor(params: ER.ReturnInfo.ArticleInfo = {}) {
         super();
         this.type = "Article";
-        this.setValue("bodyLen", params, 300);
+        this.setValue("bodyLen", params, -1);
         this.setFlag("basicInfo", params, true);
         this.setFlag("title", params, true);
         this.setFlag("body", params, true);

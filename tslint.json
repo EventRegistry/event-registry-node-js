@@ -7,11 +7,10 @@
 		"member-ordering": false,
 		"no-string-literal": false,
 		"no-unnecessary-initializer": false,
+		"trailing-comma": [true, {"esSpecCompliant": true}],
 		"radix": false,
 		"no-bitwise": false,
-		"max-classes-per-file": [
-			false
-		],
+		"max-classes-per-file": false,
 		"interface-name": [
 			false
 		],

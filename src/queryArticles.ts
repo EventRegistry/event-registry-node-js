@@ -130,16 +130,15 @@ export class QueryArticles extends Query<RequestArticles> {
 }
 
 export class QueryArticlesIter extends QueryArticles {
-    private er: EventRegistry;
-    private sortBy;
-    private sortByAsc;
-    private returnInfo;
-    private articleBatchSize;
-    private uriPage = 0;
-    private returnedDataSize = 0;
-    private maxItems;
-    private uriWgtList = [];
-    private allUriPages;
+    private readonly er: EventRegistry;
+    private readonly sortBy;
+    private readonly sortByAsc;
+    private readonly returnInfo;
+    private readonly maxItems;
+    private page = 0;
+    private pages = 1;
+    private items = [];
+    private returnedSoFar = 0;
 
     constructor(er: EventRegistry, args: {[name: string]: any} = {}) {
         super(args);
@@ -147,29 +146,25 @@ export class QueryArticlesIter extends QueryArticles {
             sortBy: "rel",
             sortByAsc: false,
             returnInfo: new ReturnInfo(),
-            articleBatchSize: 100,
             maxItems: -1,
         });
-        const {sortBy, sortByAsc, returnInfo, articleBatchSize, maxItems} = args;
-        if (articleBatchSize > 100) {
-            throw new Error("Batch size should not exceed 100");
-        }
+        const {sortBy, sortByAsc, returnInfo, maxItems} = args;
         this.er = er;
         this.sortBy = sortBy;
         this.sortByAsc = sortByAsc;
         this.returnInfo = returnInfo;
-        this.articleBatchSize = articleBatchSize;
         this.maxItems = maxItems;
     }
 
     public async count() {
-        this.setRequestedResult(new RequestArticlesUriWgtList());
+        this.setRequestedResult(new RequestArticlesInfo());
         const response = await this.er.execQuery(this);
 
         if (_.has(response, "error")) {
             console.error(_.get(response, "error"));
         }
-        return _.get(response, "uriWgtList.totalResults", 0);
+
+        return _.get(response, "articles.totalResults", 0);
     }
 
     public execQuery(callback: (item, error) => void, doneCallback?: (error) => void) {
@@ -177,7 +172,8 @@ export class QueryArticlesIter extends QueryArticles {
     }
 
     public static initWithComplexQuery(er: EventRegistry, complexQuery, args: {[name: string]: any} = {}) {
-        const query = new QueryArticlesIter(er, args);
+        const {dataType = "news", ...params} = args;
+        const query = new QueryArticlesIter(er, {dataType, ...params});
         if (complexQuery instanceof ComplexArticleQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
         } else if (_.isString(complexQuery)) {
@@ -190,58 +186,56 @@ export class QueryArticlesIter extends QueryArticles {
         return query;
     }
 
-    public static initWithArticleUriList(er, uriList) {
-        const query = new QueryArticlesIter(er);
-        if (!_.isArray(uriList)) {
-            throw new Error("uriList has to be a list of strings that represent article uris");
-        }
-        query.uriWgtList = _.map(uriList, (uri) => uri + ":1");
-        query.allUriPages = 1;
-        return query;
-    }
-
-    private async getNextUriPage() {
-        this.uriPage++;
-        this.uriWgtList = [];
-        if (!this.allUriPages && this.uriPage > this.allUriPages) {
-            return;
-        }
-        const requestArticlesUriWgtList = new RequestArticlesUriWgtList({page: this.uriPage, sortBy: this.sortBy, sortByAsc: this.sortByAsc});
-        this.setRequestedResult(requestArticlesUriWgtList);
-        const res = await this.er.execQuery(this);
-        this.uriWgtList = _.get(res, "uriWgtList.results", []);
-        this.allUriPages = _.get(res, "uriWgtList.pages", 0);
-    }
-
-    private get batchSize() {
-        if (this.maxItems === -1) {
-            return this.articleBatchSize;
-        }
-        const toReturnSize = this.maxItems - this.returnedDataSize;
-        return toReturnSize < this.articleBatchSize ? toReturnSize : this.articleBatchSize;
+    /**
+     * Extract the results according to maxItems
+     * @param response response from the backend
+     */
+    private extractResults(response): Array<{[name: string]: any}> {
+        const results = _.get(response, "articles.results", []);
+        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : _.size(results);
+        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Array<{}>);
     }
 
     private async getNextBatch(callback, doneCallback) {
-        if (_.isEmpty(this.uriWgtList)) {
-            await this.getNextUriPage();
-        }
-        if (_.isEmpty(this.uriWgtList) || (this.maxItems !== -1 && this.maxItems === this.returnedDataSize)) {
-            if (doneCallback) {
-                doneCallback();
+        try {
+            this.page += 1;
+            if (this.page > this.pages || (this.maxItems !== -1 && this.returnedSoFar >= this.maxItems)) {
+                if (doneCallback) {
+                    doneCallback();
+                }
+                return;
             }
+            const requestArticles = new RequestArticlesInfo({
+                page: this.page,
+                sortBy: this.sortBy,
+                sortByAsc: this.sortByAsc,
+                returnInfo: this.returnInfo,
+            });
+            this.setRequestedResult(requestArticles);
+            if (this.er.verboseOutput) {
+                console.log(`Downloading article page ${this.page}...`);
+            }
+            const response = await this.er.execQuery(this);
+            const error = _.get(response, "error", "");
+            if (error) {
+                console.error(`Error while obtaining a list of articles:  ${_.get(response, "error")}`);
+            } else {
+                this.pages = _.get(response, "articles.pages", 0);
+            }
+            const results = this.extractResults(response);
+            this.returnedSoFar += _.size(results);
+            callback(results, error);
+            this.items = [...this.items, ...results];
+            this.getNextBatch(callback, doneCallback);
+        } catch (error) {
+            if (doneCallback) {
+                doneCallback(error);
+            }
+            console.error(error);
             return;
         }
-        const uriWgts = _.compact(_.pullAt(this.uriWgtList, _.range(0, this.batchSize)));
-        const q = QueryArticles.initWithArticleUriWgtList(uriWgts);
-        const requestArticlesInfo = new RequestArticlesInfo({count: this.batchSize, sortBy: "none", returnInfo: this.returnInfo});
-        q.setRequestedResult(requestArticlesInfo);
-        const res = await this.er.execQuery(q);
-        this.returnedDataSize += _.size(uriWgts);
-        callback(_.get(res, "articles.results"), _.get(res, "error"));
-        if (this.uriPage <= this.allUriPages) {
-            this.getNextBatch(callback, doneCallback);
-        }
     }
+
 }
 
 export class RequestArticles {}
@@ -250,7 +244,7 @@ export class RequestArticlesInfo extends RequestArticles {
     public resultType = "articles";
     public params;
     constructor({page = 1,
-                 count = 100,
+                 count = 200,
                  sortBy = "date",
                  sortByAsc = false,
                  returnInfo = new ReturnInfo(),
@@ -259,8 +253,8 @@ export class RequestArticlesInfo extends RequestArticles {
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
         }
-        if (count > 100) {
-            throw new RangeError("at most 100 articles can be returned per call");
+        if (count > 200) {
+            throw new RangeError("at most 200 articles can be returned per call");
         }
         this.params = {};
         this.params["articlesPage"] = page;
@@ -362,11 +356,11 @@ export class RequestArticlesKeywordAggr extends RequestArticles {
     public resultType = "keywordAggr";
     public params;
     constructor({lang = "eng",
-                 articlesSampleSize = 10000,
+                 articlesSampleSize = 2000,
                 } = {}) {
         super();
-        if (articlesSampleSize > 50000) {
-            throw new RangeError("at most 50000 articles can be used for computation sample");
+        if (articlesSampleSize > 20000) {
+            throw new RangeError("at most 20000 articles can be used for computation sample");
         }
         this.params = {};
         this.params["keywordAggrLang"] = lang;

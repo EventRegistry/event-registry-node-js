@@ -155,16 +155,15 @@ export class QueryEvents extends Query<RequestEvents> {
  * Class for iterating through all the events via callbacks
  */
 export class QueryEventsIter extends QueryEvents {
-    private er: EventRegistry;
-    private uriPage = 0;
-    private uriWgtList;
-    private allUriPages;
-    private eventBatchSize;
-    private returnedDataSize;
-    private sortBy;
-    private sortByAsc;
-    private returnInfo;
-    private maxItems;
+    private readonly er: EventRegistry;
+    private readonly sortBy;
+    private readonly sortByAsc;
+    private readonly returnInfo;
+    private readonly maxItems;
+    private page = 0;
+    private pages = 1;
+    private items = [];
+    private returnedSoFar = 0;
 
     constructor(er: EventRegistry, args: ER.QueryEvents.IteratorArguments = {}) {
         super(args as ER.QueryEvents.Arguments);
@@ -172,27 +171,22 @@ export class QueryEventsIter extends QueryEvents {
             sortBy = "rel",
             sortByAsc = false,
             returnInfo = new ReturnInfo(),
-            eventBatchSize = 50,
             maxItems = -1,
         } = args;
-        if (eventBatchSize > 50) {
-            throw new Error("Batch size should not exceed 50");
-        }
         this.er = er;
         this.sortBy = sortBy;
         this.sortByAsc = sortByAsc;
         this.returnInfo = returnInfo;
-        this.eventBatchSize = eventBatchSize;
         this.maxItems = maxItems;
     }
 
-    public async count() {
-        this.setRequestedResult(new RequestEventsUriWgtList());
+    public async count(): Promise<number> {
+        this.setRequestedResult(new RequestEventsInfo());
         const response = await this.er.execQuery(this);
         if (_.has(response, "error")) {
             console.error(_.get(response, "error"));
         }
-        return _.get(response, "uriWgtList.totalResults", 0);
+        return _.get(response, "events.totalResults", 0);
     }
 
     /**
@@ -218,46 +212,54 @@ export class QueryEventsIter extends QueryEvents {
         return query;
     }
 
-    private async getNextUriPage() {
-        this.uriPage++;
-        this.uriWgtList = [];
-        if (!this.allUriPages && this.uriPage > this.allUriPages) {
-            return;
-        }
-        const requestEventsUriWgtList = new RequestEventsUriWgtList({page: this.uriPage, sortBy: this.sortBy, sortByAsc: this.sortByAsc});
-        this.setRequestedResult(requestEventsUriWgtList);
-        const res = await this.er.execQuery(this);
-        this.uriWgtList = _.get(res, "uriWgtList.results", []);
-        this.allUriPages = _.get(res, "uriWgtList.pages", 0);
-    }
-
-    private get batchSize() {
-        if (this.maxItems === -1) {
-            return this.eventBatchSize;
-        }
-        const toReturnSize = this.maxItems - this.returnedDataSize;
-        return toReturnSize < this.eventBatchSize ? toReturnSize : this.eventBatchSize;
+    /**
+     * Extract the results according to maxItems
+     * @param response response from the backend
+     */
+    private extractResults(response): Array<{[name: string]: any}> {
+        const results = _.get(response, "events.results", []);
+        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : _.size(results);
+        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Array<{}>);
     }
 
     private async getNextBatch(callback, doneCallback) {
-        if (_.isEmpty(this.uriWgtList)) {
-            await this.getNextUriPage();
-        }
-        if (_.isEmpty(this.uriWgtList) || (this.maxItems !== -1 && this.maxItems === this.returnedDataSize)) {
-            if (doneCallback) {
-                doneCallback();
+        try {
+            this.page += 1;
+            if (this.page > this.pages || (this.maxItems !== -1 && this.returnedSoFar >= this.maxItems)) {
+                if (doneCallback) {
+                    doneCallback();
+                }
+                return;
             }
-            return;
-        }
-        const uriWgts = _.compact(_.pullAt(this.uriWgtList, _.range(0, this.batchSize)));
-        const q = QueryEvents.initWithEventUriWgtList(uriWgts);
-        const requestEventsInfo = new RequestEventsInfo({count: this.batchSize, sortBy: "none", returnInfo: this.returnInfo});
-        q.setRequestedResult(requestEventsInfo);
-        const res = await this.er.execQuery(q);
-        this.returnedDataSize += _.size(uriWgts);
-        callback(_.get(res, "events.results"), _.get(res, "error"));
-        if (this.uriPage <= this.allUriPages) {
+            const requestEventsInfo = new RequestEventsInfo({
+                page: this.page,
+                count: 50,
+                sortBy: this.sortBy,
+                sortByAsc: this.sortByAsc,
+                returnInfo: this.returnInfo,
+            });
+            this.setRequestedResult(requestEventsInfo);
+            if (this.er.verboseOutput) {
+                console.log(`Downloading event page ${this.page}...`);
+            }
+            const response = await this.er.execQuery(this);
+            const error = _.get(response, "error", "");
+            if (error) {
+                console.error(`Error while obtaining a list of events:  ${_.get(response, "error")}`);
+            } else {
+                this.pages = _.get(response, "events.pages", 0);
+            }
+            const results = this.extractResults(response);
+            this.returnedSoFar += _.size(results);
+            callback(results, error);
+            this.items = [...this.items, ...results];
             this.getNextBatch(callback, doneCallback);
+        } catch (error) {
+            if (doneCallback) {
+                doneCallback(error);
+            }
+            console.error(error);
+            return;
         }
     }
 }
@@ -467,12 +469,15 @@ export class RequestEventsConceptTrends extends RequestEvents {
     public params;
     constructor(args: ER.QueryEvents.RequestEventsConceptTrendsArguments = {}) {
         super();
-        const { conceptCount = 10, returnInfo = new ReturnInfo() } = args;
+        const { conceptCount = 10, conceptUris = [], returnInfo = new ReturnInfo() } = args;
         if (conceptCount > 50) {
             throw new RangeError("At most 50 top concepts can be returned");
         }
         this.params = {};
         this.params["conceptTrendsConceptCount"] = conceptCount;
+        if (!_.isEmpty(conceptUris)) {
+            this.params["conceptTrendsConceptUri"] = conceptUris;
+        }
         this.params = _.extend({}, this.params, returnInfo.getParams("conceptTrends"));
     }
 }
@@ -580,8 +585,8 @@ export class RequestEventsRecentActivity extends RequestEvents {
             minAvgCosSim = 0,
             returnInfo = new ReturnInfo(),
         } = args;
-        if (maxEventCount > 200) {
-            throw new RangeError("At most 200 events can be returned");
+        if (maxEventCount > 2000) {
+            throw new RangeError("At most 2000 events can be returned");
         }
         if (!_.isUndefined(updatesAfterTm) && !_.isUndefined(updatesAfterMinsAgo)) {
             throw new Error("You should specify either updatesAfterTm or updatesAfterMinsAgo parameter, but not both");

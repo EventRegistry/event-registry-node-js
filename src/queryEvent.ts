@@ -43,15 +43,17 @@ export class QueryEvent extends Query<RequestEvent> {
  * Class for iterating through all the articles in the event via callbacks
  */
 export class QueryEventArticlesIter extends QueryEvent {
-    private er: EventRegistry;
-    private lang;
-    private sortBy;
-    private sortByAsc;
-    private returnInfo;
-    private articleBatchSize;
-    private maxItems;
-    private returnedDataSize = 0;
-    private eventUri;
+    private readonly er: EventRegistry;
+    private readonly lang;
+    private readonly sortBy;
+    private readonly sortByAsc;
+    private readonly returnInfo;
+    private readonly eventUri;
+    private readonly maxItems;
+    private page = 0;
+    private pages = 1;
+    private items = [];
+    private returnedSoFar = 0;
 
     /**
      * @param er instance of EventRegistry class. used to obtain the necessary data
@@ -65,29 +67,24 @@ export class QueryEventArticlesIter extends QueryEvent {
             sortBy = "cosSim",
             sortByAsc = false,
             returnInfo = new ReturnInfo({ articleInfo: new ArticleInfoFlags({ bodyLen: -1 }) }),
-            articleBatchSize = 100,
             maxItems = -1,
         } = args;
-        if (articleBatchSize > 100) {
-            throw new Error("You can not have a batch size > 100 items");
-        }
         this.er = er;
         this.lang = lang;
         this.sortBy = sortBy;
         this.sortByAsc = sortByAsc;
         this.returnInfo = returnInfo;
-        this.articleBatchSize = articleBatchSize;
         this.maxItems = maxItems;
         this.eventUri = eventUri;
     }
 
     public async count(lang = mainLangs) {
-        this.setRequestedResult(new RequestEventArticleUriWgts({lang}));
+        this.setRequestedResult(new RequestEventArticles({lang}));
         const response = await this.er.execQuery(this);
         if (_.has(response, "error")) {
             console.error(_.get(response, "error"));
         }
-        return _.size(_.get(this.params["eventUri"], "uriWgtList.results", []));
+        return _.get(response[this.eventUri], "articles.totalResults", 0);
     }
     /**
      * Execute query and fetch batches of articles of the specified size (articleBatchSize)
@@ -95,50 +92,58 @@ export class QueryEventArticlesIter extends QueryEvent {
      * @param doneCallback callback function that'll be called when everything is complete
      */
     public execQuery(callback: (item, error) => void, doneCallback?: (error) => void) {
-        this.initialDataFetch().then((uriWgts) => {
-            if (!_.isEmpty(uriWgts)) {
-                this.getNextBatch(uriWgts, callback, doneCallback);
-            }
-        });
+        this.getNextBatch(callback, doneCallback);
     }
 
-    private async initialDataFetch() {
-        this.setRequestedResult(new RequestEventArticleUriWgts({lang: this.lang, sortBy: this.sortBy, sortByAsc: this.sortByAsc}));
-        const res = await this.er.execQuery(this);
-        if (_.has(res, "error")) {
-            console.error(_.get(res, "error"));
-        }
-        return _.get(res[this.eventUri], "uriWgtList.results", []);
+    /**
+     * Extract the results according to maxItems
+     * @param response response from the backend
+     */
+    private extractResults(response): Array<{[name: string]: any}> {
+        const results = _.get(response[this.eventUri], "articles.results", []);
+        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : _.size(results);
+        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Array<{}>);
     }
 
-    private get batchSize() {
-        if (this.maxItems === -1) {
-            return this.articleBatchSize;
-        }
-        const toReturnSize = this.maxItems - this.returnedDataSize;
-        return toReturnSize < this.articleBatchSize ? toReturnSize : this.articleBatchSize;
-    }
-
-    private async getNextBatch(uriWgts, callback: (item, error) => void, doneCallback?: (error?) => void) {
-        const uris = _.compact(_.pullAt(uriWgts, _.range(0, this.batchSize))) as string[];
-        const query = QueryArticles.initWithArticleUriWgtList(uris);
-        query.setRequestedResult(new RequestArticlesInfo({returnInfo: this.returnInfo, count: this.batchSize}));
+    private async getNextBatch(callback: (items, error) => void, doneCallback?: (error?) => void) {
         try {
-            const res = await this.er.execQuery(query);
-            const errorMessage = _.get(res, "error");
-            this.returnedDataSize += _.size(uris);
-            const data = _.get(res, "articles.results", []);
-            await callback(data, errorMessage);
-            if (_.isEmpty(uriWgts) || (this.maxItems !== -1 && this.maxItems === this.returnedDataSize)) {
+            this.page += 1;
+            if (this.page > this.pages || (this.maxItems !== -1 && this.returnedSoFar >= this.maxItems)) {
                 if (doneCallback) {
-                    doneCallback(errorMessage);
+                    doneCallback();
                 }
                 return;
-            } else {
-                await this.getNextBatch(uriWgts, callback, doneCallback);
             }
+            const requestEventArticles = new RequestEventArticles({
+                page: this.page,
+                count: 100,
+                lang: this.lang,
+                sortBy: this.sortBy,
+                sortByAsc: this.sortByAsc,
+                returnInfo: this.returnInfo,
+            });
+            this.setRequestedResult(requestEventArticles);
+            if (this.er.verboseOutput) {
+                console.log(`Downloading page ${this.page}...`);
+            }
+            const response = await this.er.execQuery(this);
+            const error = _.get(response, "error", "");
+            if (error) {
+                console.error(`Error while obtaining a list of articles:  ${_.get(response, "error")}`);
+            } else {
+                this.pages = _.get(response[this.eventUri], "articles.pages", 0);
+            }
+            const results = this.extractResults(response);
+            this.returnedSoFar += _.size(results);
+            callback(results, error);
+            this.items = [...this.items, ...results];
+            this.getNextBatch(callback, doneCallback);
         } catch (error) {
+            if (doneCallback) {
+                doneCallback(error);
+            }
             console.error(error);
+            return;
         }
     }
 }

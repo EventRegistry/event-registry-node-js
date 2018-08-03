@@ -47,7 +47,22 @@ export module ER {
 
     export type ConceptClassType = "dbpedia" | "custom";
 
-    export type DataType = "news" | "pr";
+    export type DataType = "news" | "pr" | "blog";
+
+    /**
+     * Options:
+     *  * id (internal id),
+     *  * date (publishing date),
+     *  * cosSim (closeness to the event centroid),
+     *  * rel (relevance to the query),
+     *  * sourceImportance (manually curated score of source importance - high value, high importance),
+     *  * sourceImportanceRank (reverse of sourceImportance),
+     *  * sourceAlexaGlobalRank (global rank of the news source),
+     *  * sourceAlexaCountryRank (country rank of the news source),
+     *  * socialScore (total shares on social media),
+     *  * facebookShares (shares on Facebook only)
+     */
+    export type SortBy = "id" | "date" | "cosSim" | "rel" | "sourceImportance" | "sourceImportanceRank" | "sourceAlexaGlobalRank" | "sourceAlexaCountryRank" | "socialScore" | "facebookShares";
 
     export interface SuggestConceptsArguments {
         /**
@@ -176,6 +191,10 @@ export module ER {
          * number of returned sources
          */
         count?: number;
+        /**
+         * type of the news source ("news", "pr", "blog" or a list of any of those)
+         */
+        dataType?: DataType;
     }
 
     export interface SuggestConceptClassesArguments {
@@ -263,6 +282,75 @@ export module ER {
         addDailyAnnArticles?: boolean;
         addDailyDuplArticles?: boolean;
         addDailyEvents?: boolean;
+    }
+
+    export interface TopicPage {
+        autoAddArticles: boolean;
+        articleHasDuplicate: "skipHasDuplicates" | "keepOnlyHasDuplicates" | "keepAll";
+        articleHasEvent: "skipArticlesWithoutEvent" | "keepOnlyArticlesWithoutEvent" | "keepAll";
+        articleIsDuplicate: "skipDuplicates" | "keepOnlyDuplicates" | "keepAll";
+        maxDaysBack: number;
+        articleTreshWgt: number;
+        eventTreshWgt: number;
+        concepts: Array<{uri: string, wgt: number}>;
+        keywords: Array<{keyword: string, wgt: number}>;
+        categories: Array<{uri: string, wgt: number}>;
+        sources: Array<{uri: string, wgt: number}>;
+        sourceGroups: Array<{uri: string, wgt: number}>;
+        sourceLocations: Array<{uri: string, wgt: number}>;
+        locations: Array<{uri: string, wgt: number}>;
+        langs: string[];
+        restrictToSetConcepts: boolean;
+        restrictToSetCategories: boolean;
+        restrictToSetSources: boolean;
+        restrictToSetLocations: boolean;
+        dataType: ER.DataType | ER.DataType[];
+    }
+
+    export interface TopicPageArticles {
+        /**
+         * Which page of the results to return (default: 1).
+         */
+        page?: number;
+        /**
+         * Number of articles to return (default: 100)
+         */
+        count?: number;
+        /**
+         * How are articles sorted
+         */
+        sortBy?: SortBy;
+        /**
+         * Should the results be sorted in ascending order (true) or descending (false)
+         */
+        sortByAsc?: boolean;
+        /**
+         * What details should be included in the returned information
+         */
+        returnInfo?: ReturnInfo;
+    }
+
+    export interface TopicPageEvents {
+        /**
+         * Which page of the results to return (default: 1).
+         */
+        page?: number;
+        /**
+         * Number of events to return (default: 50)
+         */
+        count?: number;
+        /**
+         * How are events sorted
+         */
+        sortBy?: SortBy;
+        /**
+         * Should the results be sorted in ascending order (true) or descending (false)
+         */
+        sortByAsc?: boolean;
+        /**
+         * What details should be included in the returned information
+         */
+        returnInfo?: ReturnInfo;
     }
 
     export namespace Correlations {
@@ -1154,6 +1242,10 @@ export module ER {
              * what details about the concepts should be included in the returned information
              */
             returnInfo?: ReturnInfo;
+            /**
+             * list of concept URIs for which to return trending information. If empty, then top concepts will be automatically computed.
+             */
+            conceptUris?: string[];
         }
 
         export interface RequestEventsSourceAggrArguments {

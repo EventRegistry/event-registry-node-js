@@ -74,6 +74,11 @@ export class EventRegistry {
             }).then(() => axios(err.config));
         });
     }
+
+    public get verboseOutput() {
+        return this.config.verboseOutput;
+    }
+
     /**
      * Main method for executing the search queries.
      * @param query instance of Query class
@@ -158,7 +163,7 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async suggestConcepts(prefix: string, args: ER.SuggestConceptsArguments = {}) {
-        const { sources = [ "concepts" ] as ER.ConceptType[], lang = "eng", conceptLang = "eng", page = 1, count = 20, returnInfo = new ReturnInfo() } = args;
+        const { sources = [ "concepts" ] as ER.ConceptType[], lang = "eng", conceptLang = "eng", page = 1, count = 20, returnInfo = new ReturnInfo(), ...otherParams } = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
         }
@@ -171,7 +176,7 @@ export class EventRegistry {
             page: page,
             count: count,
         };
-        params = _.extend({}, params, returnInfo.getParams());
+        params = _.extend({}, params, otherParams, returnInfo.getParams());
         const request = await this.jsonRequest("/json/suggestConcepts", params);
         return request.data;
     }
@@ -182,12 +187,12 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async suggestCategories(prefix, args: ER.SuggestCategoriesArguments = {}) {
-        const {page = 1, count = 20, returnInfo = new ReturnInfo()} = args;
+        const {page = 1, count = 20, returnInfo = new ReturnInfo(), ...otherParams} = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
         }
         let params = {prefix, page, count};
-        params = _.extend({}, params, returnInfo.getParams());
+        params = _.extend({}, params, otherParams, returnInfo.getParams());
         const request = await this.jsonRequest("/json/suggestCategories", params);
         return request.data;
     }
@@ -198,11 +203,11 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async suggestNewsSources(prefix, args: ER.SuggestNewsSourcesArguments = {}) {
-        const {page = 1, count = 20, dataType = ["news", "pr"]} = args;
+        const {page = 1, count = 20, dataType = ["news", "pr", "blog"], ...otherParams} = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
         }
-        const request = await this.jsonRequest("/json/suggestSources", {prefix, page, dataType, count});
+        const request = await this.jsonRequest("/json/suggestSources", {prefix, page, dataType, count, ...otherParams});
         return request.data;
     }
 
@@ -212,11 +217,11 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async suggestSourceGroups(prefix, args: ER.SuggestSourceGroupsArguments = {}) {
-        const {page = 1, count = 20} = args;
+        const {page = 1, count = 20, ...otherParams} = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
         }
-        const request = await this.jsonRequest("/json/suggestSourceGroups", {prefix, page, count});
+        const request = await this.jsonRequest("/json/suggestSourceGroups", {prefix, page, count, ...otherParams});
         return request.data;
     }
 
@@ -226,7 +231,15 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async suggestLocations(prefix, args: ER.SuggestLocationsArguments = {}) {
-        const {sources = ["place", "country"], lang = "eng", count = 20, countryUri = "", sortByDistanceTo = undefined, returnInfo = new ReturnInfo()} = args;
+        const {
+            sources = ["place", "country"],
+            lang = "eng",
+            count = 20,
+            countryUri = "",
+            sortByDistanceTo,
+            returnInfo = new ReturnInfo(),
+            ...otherParams
+        } = args;
         let params = {
             prefix: prefix,
             count: count,
@@ -234,7 +247,7 @@ export class EventRegistry {
             lang: lang,
             countryUri: countryUri,
         };
-        params = _.extend({}, params, returnInfo.getParams());
+        params = _.extend({}, params, otherParams, returnInfo.getParams());
         if (sortByDistanceTo) {
             if (!_.isArray(sortByDistanceTo)) {
                 throw new Error("sortByDistanceTo has to contain a tuple with latitude and longitude of the location");
@@ -259,7 +272,14 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async suggestLocationsAtCoordinate(latitude: number, longitude: number, radiusKm: number, args: ER.SuggestLocationsAtCoordinateArguments = {}) {
-        const { limitToCities = false, lang = "eng", count = 20, ignoreNonWiki = true, returnInfo = new ReturnInfo()} = args;
+        const {
+            limitToCities = false,
+            lang = "eng",
+            count = 20,
+            ignoreNonWiki = true,
+            returnInfo = new ReturnInfo(),
+            ...otherParams
+        } = args;
         if (!_.isNumber(latitude)) {
             throw new Error("The 'latitude' should be a number");
         }
@@ -275,7 +295,7 @@ export class EventRegistry {
             count: count,
             lang: lang,
         };
-        params = _.extend({}, params, returnInfo.getParams());
+        params = _.extend({}, params, otherParams, returnInfo.getParams());
         const request = await this.jsonRequest("/json/suggestLocations", params);
         return request.data;
     }
@@ -287,7 +307,7 @@ export class EventRegistry {
      * @param radiusKm radius in kilometers around the coordinates inside which the news sources should be located
      * @param count number of returned suggestions
      */
-    public async suggestSourcesAtCoordinate(latitude: number, longitude: number, radiusKm: number, count: number = 20) {
+    public async suggestSourcesAtCoordinate(latitude: number, longitude: number, radiusKm: number, count = 20, ...otherParams) {
         if (!_.isNumber(latitude)) {
             throw new Error("The 'latitude' should be a number");
         }
@@ -300,6 +320,7 @@ export class EventRegistry {
             lon: longitude,
             radius: radiusKm,
             count: count,
+            ...otherParams
         };
         const request = await this.jsonRequest("/json/suggestSources", params);
         return request.data;
@@ -311,12 +332,14 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async suggestSourcesAtPlace(conceptUri: string, args: ER.SuggestSourcesAtPlaceArguments = {}) {
-        const { page = 1, count = 20 } = args;
+        const { page = 1, count = 20, dataType = "news", ...otherParams } = args;
         const params = {
             action: "getSourcesAtPlace",
             conceptUri: conceptUri,
             page: page,
             count: count,
+            dataType: dataType,
+            ...otherParams
         };
         const request = await this.jsonRequest("/json/suggestSources", params);
         return request.data;
@@ -328,12 +351,20 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async suggestConceptClasses(prefix, args: ER.SuggestConceptClassesArguments = {}) {
-        const { lang = "eng", conceptLang = "eng", source = ["dbpedia", "custom"], page = 1, count = 20, returnInfo = new ReturnInfo() } = args;
+        const {
+            lang = "eng",
+            conceptLang = "eng",
+            source = ["dbpedia", "custom"],
+            page = 1,
+            count = 20,
+            returnInfo = new ReturnInfo(),
+            ...otherParams
+        } = args;
         if (page < 1) {
             throw new Error("page parameter should be above 0");
         }
         let params = { prefix, lang, conceptLang, source, page, count};
-        params = _.extend({}, params, returnInfo.getParams());
+        params = _.extend({}, params, otherParams, returnInfo.getParams());
         const request = await this.jsonRequest("/json/suggestConceptClasses", params);
         return request.data;
     }
@@ -346,12 +377,19 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async suggestCustomConcepts(prefix, args: ER.SuggestCustomConceptsArguments = {}) {
-        const { lang = "eng", conceptLang = "eng", page = 1, count = 20, returnInfo = new ReturnInfo() } = args;
+        const {
+            lang = "eng",
+            conceptLang = "eng",
+            page = 1,
+            count = 20,
+            returnInfo = new ReturnInfo(),
+            ...otherParams
+        } = args;
         if (page < 1) {
             throw new Error("page parameter should be above 0");
         }
         let params = { prefix, lang, conceptLang, page, count};
-        params = _.extend({}, params, returnInfo.getParams());
+        params = _.extend({}, params, otherParams, returnInfo.getParams());
         const request = await this.jsonRequest("/json/suggestCustomConcepts", params);
         return request.data;
     }
@@ -375,7 +413,7 @@ export class EventRegistry {
      * @param args Object which contains a host of optional parameters
      */
     public async getLocationUri(locationLabel, args: ER.GetLocationUriArguments = {}) {
-        const { lang = "eng", sources = [ "place", "country" ] as any, countryUri = undefined, sortByDistanceTo = undefined } = args;
+        const { lang = "eng", sources = [ "place", "country" ] as any, countryUri, sortByDistanceTo } = args;
         const matches = await this.suggestLocations(locationLabel, { lang, sources, countryUri, sortByDistanceTo });
         return _.get(_.first(matches), "wikiUri", undefined);
     }
@@ -394,7 +432,7 @@ export class EventRegistry {
      * @param sourceName partial or full name of the source or source uri for which to return source uri
      * @param dataType: return the source uri that provides content of these data types
      */
-    public async getNewsSourceUri(sourceName: string, dataType: ER.DataType[] | ER.DataType = ["news", "pr"]) {
+    public async getNewsSourceUri(sourceName: string, dataType: ER.DataType[] | ER.DataType = ["news", "pr", "blog"]) {
         const matches = await this.suggestNewsSources(sourceName, { dataType });
         return _.get(_.first(matches), "uri", undefined);
     }
@@ -413,7 +451,7 @@ export class EventRegistry {
      * @param classLabel partial or full name of the concept class for which to return class uri
      * @param lang language in which the class label is specified
      */
-    public async getConceptClassUri(classLabel: string, lang: string = "eng") {
+    public async getConceptClassUri(classLabel: string, lang = "eng") {
         const matches = await this.suggestConceptClasses(classLabel, {lang});
         return _.get(_.first(matches), "uri", undefined);
     }
@@ -444,7 +482,7 @@ export class EventRegistry {
      * @param label label of the custom concept
      * @param lang language in which the label is specified
      */
-    public async getCustomConceptUri(label: string, lang: string = "eng") {
+    public async getCustomConceptUri(label: string, lang = "eng") {
         const matches = await this.suggestCustomConcepts(label, {lang});
         return _.get(_.first(matches), "uri", undefined);
     }

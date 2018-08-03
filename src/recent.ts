@@ -24,7 +24,7 @@ export class GetRecentEvents extends QueryParamsBase {
 
     public async getUpdates() {
         const response = await this.er.execQuery(this);
-        return _.get(response, "recentActivity.events", {});
+        return _.get(response, "recentActivityEvents.activity", {});
     }
 }
 
@@ -49,6 +49,6 @@ export class GetRecentArticles extends QueryParamsBase {
 
     public async getUpdates() {
         const response = await this.er.execQuery(this);
-        return _.get(response, "recentActivity.articles.activity", []);
+        return _.get(response, "recentActivityArticles.activity", []);
     }
 }

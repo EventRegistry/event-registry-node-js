@@ -107,3 +107,6 @@ export {
     GetTrendingCustomItems,
     GetTrendingConceptGroups,
 } from "./trends";
+export {
+    TopicPage,
+} from "./topicPage";

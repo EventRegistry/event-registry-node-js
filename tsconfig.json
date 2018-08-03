@@ -5,8 +5,9 @@
         "noImplicitAny": false,
         "module": "commonjs",
         "moduleResolution": "node",
+        "downlevelIteration": true,
         "declaration": true,
-        "sourceMap": false,
+        "sourceMap": true,
         "alwaysStrict": true,
         "outDir": "dist/",
         "typeRoots": [

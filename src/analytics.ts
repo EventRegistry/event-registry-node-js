@@ -35,11 +35,15 @@ export class Analytics {
     }
 
     /**
-     * Determine the sentiment of the provided text
+     * determine the sentiment of the provided text in English language
      * @param text input text to categorize
+     * @param method method to use to compute the sentiment. possible values are "vocabulary" (vocabulary based sentiment analysis) and "rnn" (neural network based sentiment classification)
      */
-    public async sentiment(text: string) {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/sentiment",  { text }), "data");
+    public async sentiment(text: string, method = "vocabulary") {
+        if (!_.includes(["vocabulary", "rnn"], method)) {
+            throw new Error("method: Please pass in either 'vocabulary' or 'rnn'");
+        }
+        return _.get(await this.er.jsonRequestAnalytics(`/api/v1/${method === "vocabulary" ? "sentiment" : "sentimentRNN"}`,  { text }), "data");
     }
 
     public async semanticSimilarity(text1: string, text2: string, distanceMeasure: "cosine" | "jaccard" = "cosine") {
