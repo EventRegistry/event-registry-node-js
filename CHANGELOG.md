@@ -2,10 +2,15 @@
 
 This log contains changes specific to the NodeJS SDK.
 
+## [v8.3.1]() (2018-08-06)
+
+**Changed**
+- Switched to POST requests instead of GET
+
 ## [v8.3.0]() (2018-08-06)
 
 **Added**
- - Implemented all the latest changes as seen in the Python SDK.
+ - Implemented all the latest changes as seen in the Python SDK 8.3.0.
 
 **Breaking**
 - `QueryArticlesIter`, `QueryEventArticlesIter` and `QueryEventsIter` now return one item at a time instead of the whole page (array) of items.

@@ -4,8 +4,7 @@ import * as _ from "lodash";
 import * as moment from "moment";
 import * as Qs from "qs";
 import * as winston from "winston";
-import { Query, sleep } from "./base";
-import { QueryArticle, RequestArticleInfo } from "./queryArticle";
+import { sleep } from "./base";
 import { ConceptInfoFlags, ReturnInfo } from "./returnInfo";
 import { ER } from "./types";
 
@@ -96,14 +95,12 @@ export class EventRegistry {
     public async jsonRequestAnalytics(path, parameters?): Promise<AxiosResponse> {
         let request;
         try {
+            _.set(parameters, "apiKey", this.config.apiKey);
             request = await axios.request({
                 url: path,
+                method: "POST",
                 baseURL: this.config.hostAnalytics,
-                params: parameters,
-                paramsSerializer: (params) => {
-                    _.set(params, "apiKey", this.config.apiKey);
-                    return Qs.stringify(params, { arrayFormat: "repeat" });
-                },
+                data: parameters,
                 timeout: 600000,
                 responseType: "json",
                 maxRedirects: 5,
@@ -137,17 +134,15 @@ export class EventRegistry {
         }
         this.lastQueryTime = current;
         try {
+            _.set(parameters, "apiKey", this.config.apiKey);
+            if (!allowUseOfArchive) {
+                _.set(parameters, "forceMaxDataTimeWindow", 31);
+            }
             request = await axios.request({
                 url: path,
+                method: "POST",
                 baseURL: this.config.host,
-                params: parameters,
-                paramsSerializer: (params) => {
-                    _.set(params, "apiKey", this.config.apiKey);
-                    if (!allowUseOfArchive) {
-                        _.set(params, "forceMaxDataTimeWindow", 31);
-                    }
-                    return Qs.stringify(params, { arrayFormat: "repeat" });
-                },
+                data: parameters,
                 timeout: 600000,
                 responseType: "json",
                 maxRedirects: 5,
