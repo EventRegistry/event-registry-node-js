@@ -58,10 +58,8 @@ var er = new erBase.EventRegistry({apiKey: "YOUR_API_KEY"});
 
 er.getConceptUri("George Clooney").then((conceptUri) => {
     var q = new erBase.QueryArticlesIter(er, {conceptUri: conceptUri, sortBy: "date"});
-    q.execQuery((items) => {
-        for(var item of items) {
-            console.info(item);
-        }
+    q.execQuery((item) => {
+        console.info(item);
     })
 });
 ```
@@ -75,10 +73,8 @@ const er = new EventRegistry({apiKey: "YOUR_API_KEY"});
 
 er.getConceptUri("George Clooney").then((conceptUri) => {
     const q = new QueryArticlesIter(er, {conceptUri: conceptUri, sortBy: "date"});
-    q.execQuery((items) => {
-        for(const item of items) {
-            console.info(item);
-        }
+    q.execQuery((item) => {
+        console.info(item);
     })
 });
 ```
@@ -92,10 +88,8 @@ const er = new EventRegistry({apiKey: "YOUR_API_KEY"});
 
 async function iterateOverArticles() {
     const q = new QueryArticlesIter(er, {conceptUri: await er.getConceptUri("George Clooney"), sortBy: "date"});
-    q.execQuery((items) => {
-        for(const item of items) {
-            console.info(item);
-        }
+    q.execQuery((item) => {
+        console.info(item);
     })
 }
 
