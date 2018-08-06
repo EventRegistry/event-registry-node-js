@@ -22,6 +22,7 @@ export class EventRegistry {
         minDelayBetweenRequests: 1,
         repeatFailedRequestCount: 2,
         verboseOutput: false,
+        allowUseOfArchive: true,
     };
     private lastQueryTime = 0;
 
@@ -83,9 +84,9 @@ export class EventRegistry {
      * Main method for executing the search queries.
      * @param query instance of Query class
      */
-    public async execQuery(query) {
+    public async execQuery(query, allowUseOfArchive?) {
         const params = query.getQueryParams();
-        const request = await this.jsonRequest(query.path, params);
+        const request = await this.jsonRequest(query.path, params, allowUseOfArchive);
         if (!_.has(request, "data") && this.config.verboseOutput) {
             this.logger.error("Request did not return with the 'data' property.");
         }
@@ -107,13 +108,17 @@ export class EventRegistry {
                 responseType: "json",
                 maxRedirects: 5,
             });
+            const errorMessage = _.get(request, "data.error", "");
+            if (errorMessage) {
+                throw new Error(errorMessage);
+            }
         } catch (error) {
+            if (this.config.verboseOutput) {
+                console.error(error);
+            }
             // try to print out the error that should be passed by in case the server is down or responds with errors
             if (this.config.logging) {
                 this.logger.error(_.get(error, "errno", error));
-            }
-            if (this.config.verboseOutput) {
-                console.error(error);
             }
         }
         return request;
@@ -124,7 +129,7 @@ export class EventRegistry {
      * @param path URL on Event Registry (e.g. "/json/article")
      * @param parameters Optional parameters to be included in the request
      */
-    public async jsonRequest(path, parameters?) {
+    public async jsonRequest(path, parameters?, allowUseOfArchive?) {
         let request;
         const current = moment.utc().milliseconds();
         if (this.lastQueryTime && current - this.lastQueryTime < this.config.minDelayBetweenRequests) {
@@ -138,6 +143,9 @@ export class EventRegistry {
                 params: parameters,
                 paramsSerializer: (params) => {
                     _.set(params, "apiKey", this.config.apiKey);
+                    if (!allowUseOfArchive) {
+                        _.set(params, "forceMaxDataTimeWindow", 31);
+                    }
                     return Qs.stringify(params, { arrayFormat: "repeat" });
                 },
                 timeout: 600000,
@@ -145,13 +153,17 @@ export class EventRegistry {
                 maxRedirects: 5,
                 retry: this.config.repeatFailedRequestCount,
             } as any);
+            const errorMessage = _.get(request, "data.error", "");
+            if (errorMessage) {
+                throw new Error(errorMessage);
+            }
         } catch (error) {
             // try to print out the error that should be passed by in case the server is down or responds with errors
-            if (this.config.logging) {
-                this.logger.error(_.get(error, "errno", error));
-            }
             if (this.config.verboseOutput) {
                 console.error(error);
+            }
+            if (this.config.logging) {
+                this.logger.error(_.get(error, "errno", error));
             }
         }
         return request;

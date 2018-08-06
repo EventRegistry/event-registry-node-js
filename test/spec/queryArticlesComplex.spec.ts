@@ -22,10 +22,8 @@ describe("Query Articles Complex", () => {
         const baseQuery = new BaseQuery({keyword: "obama", keywordLoc: "title"});
         const cq1 = new ComplexArticleQuery(baseQuery);
         const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {maxItems: 2000});
-        artIter.execQuery((items) => {
-            _.each(items, (item) => {
-                expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("obama");
-            });
+        artIter.execQuery((item) => {
+            expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("obama");
         }, () => {
             done();
         });
@@ -40,10 +38,8 @@ describe("Query Articles Complex", () => {
         }
         `;
         const artIter = QueryArticlesIter.initWithComplexQuery(er, qStr, { maxItems: 2000 });
-        artIter.execQuery((items) => {
-            _.each(items, (item) => {
-                expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("obama");
-            });
+        artIter.execQuery((item) => {
+            expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("obama");
         }, () => {
             done();
         });
@@ -53,10 +49,8 @@ describe("Query Articles Complex", () => {
         const baseQuery = new BaseQuery({keyword: "home", keywordLoc: "body"});
         const cq1 = new ComplexArticleQuery(baseQuery);
         const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {returnInfo: utils.returnInfo, maxItems: 20});
-        artIter.execQuery((items, error) => {
-            _.each(items, (item) => {
-                expect(_.deburr(_.toLower(_.get(item, "body")))).toContain("home");
-            });
+        artIter.execQuery((item) => {
+            expect(_.deburr(_.toLower(_.get(item, "body")))).toContain("home");
         }, () => {
             done();
         });
@@ -286,19 +280,17 @@ describe("Query Articles Complex", () => {
         const returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({concepts: true, categories: true})});
 
         const artIter = QueryArticlesIter.initWithComplexQuery(er, cq, { returnInfo, maxItems: 50 }) as QueryArticlesIter;
-        artIter.execQuery((items) => {
-            _.each(items, (item) => {
-                const hasConcept = _.find(_.get(item, "concepts", []), ({uri}) => uri === trumpUri);
-                const hasCategory = _.find(_.get(item, "categories", []), ({uri}) => _.includes(uri, politicsUri));
-                const hasDate = _.get(item, "date") === "2017-02-05";
+        artIter.execQuery((item) => {
+            const hasConcept = _.find(_.get(item, "concepts", []), ({uri}) => uri === trumpUri);
+            const hasCategory = _.find(_.get(item, "categories", []), ({uri}) => _.includes(uri, politicsUri));
+            const hasDate = _.get(item, "date") === "2017-02-05";
 
-                expect(hasConcept || hasCategory || hasDate).toBeTruthy(`Invalid article ${item.uri} that should not be in the results.`);
+            expect(hasConcept || hasCategory || hasDate).toBeTruthy(`Invalid article ${item.uri} that should not be in the results.`);
 
-                _.each(_.get(item, "concepts", []), ({uri}) => {
-                    expect(uri).not.toEqual(obamaUri);
-                });
-                expect(_.get(item, "date")).not.toEqual("2017-02-04");
+            _.each(_.get(item, "concepts", []), ({uri}) => {
+                expect(uri).not.toEqual(obamaUri);
             });
+            expect(_.get(item, "date")).not.toEqual("2017-02-04");
         }, () => {
             done();
         });

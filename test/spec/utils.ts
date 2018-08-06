@@ -35,8 +35,7 @@ export class Utils {
 
     constructor() {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
-        this.articleInfo = new ArticleInfoFlags({ bodyLen: -1,
-                                                  concepts: true,
+        this.articleInfo = new ArticleInfoFlags({ concepts: true,
                                                   storyUri: true,
                                                   duplicateList: true,
                                                   originalArticle: true,
@@ -50,10 +49,12 @@ export class Utils {
         this.sourceInfo = new SourceInfoFlags({ description: true,
                                                 location: true,
                                                 ranking: true,
+                                                image: true,
                                                 articleCount: true,
+                                                socialMedia: true,
                                                 sourceGroups: true,
                                               });
-        this.conceptInfo = new ConceptInfoFlags({ type: ["entities"],
+        this.conceptInfo = new ConceptInfoFlags({ type: ["concepts", "entities"],
                                                   lang: ["eng", "spa"],
                                                   synonyms: true,
                                                   image: true,
@@ -273,7 +274,7 @@ export class Utils {
     }
 
     public ensureValidSource(source) {
-        const propertyNames = ["uri", "location", "ranking", "articleCount", "sourceGroups"];
+        const propertyNames = ["uri", "title", "description", "image", "thumbImage", "favicon", "location", "ranking", "articleCount", "sourceGroups", "socialMedia"];
         return this.validateProperties(source, "source", propertyNames);
     }
 

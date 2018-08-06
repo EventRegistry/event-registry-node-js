@@ -33,8 +33,8 @@ er.getConceptUri("Obama").then((conceptUri) => {
 // we specify maxItems to limit the results to maximum 300 results
 er.getConceptUri("Obama").then((conceptUri) => {
     const iter = new QueryEventsIter(er, {conceptUri: conceptUri, sortBy: "date", maxItems: 300});
-    iter.execQuery((events) => {
-        console.info(events);
+    iter.execQuery((event) => {
+        console.info(event);
     });
 });
 // make a query for events - specify each condition independently
@@ -174,8 +174,8 @@ Promise.all([
 
     const iter = QueryEventsIter.initWithComplexQuery(er, cq, {returnInfo, maxItems: 10});
     // example of an ITERATOR with a COMPLEX QUERY
-    iter.execQuery((events) => {
-        console.info(events);
+    iter.execQuery((event) => {
+        console.info(event);
     });
 
 });

@@ -30,7 +30,7 @@ describe("Query Event", () => {
         const requestEventsUriList = new RequestEventsUriWgtList({count});
         q.setRequestedResult(requestEventsUriList);
         const response = await er.execQuery(q);
-        return new QueryEvent(EventRegistry.getUriFromUriWgt(_.get(response, "uriWgtList.results")));
+        return new QueryEvent(_.first(EventRegistry.getUriFromUriWgt(_.get(response, "uriWgtList.results"))));
     }
 
     beforeAll(async (done) => {
@@ -152,8 +152,8 @@ describe("Query Event", () => {
     it("should test query event articles iterator", async (done) => {
         const q = new QueryEventArticlesIter(er, "eng-3075290", { maxItems: 10, articleBatchSize: 5 });
         let size = 0;
-        q.execQuery((items) => {
-            size += _.size(items);
+        q.execQuery((item) => {
+            size += 1;
         }, async () => {
             const q2 = new QueryEvent("eng-3075290");
             const requestEventArticles = new RequestEventArticles({count: 10});

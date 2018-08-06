@@ -46,6 +46,7 @@ disabledIPs.txt
 /invoices
 .baseDir.ts
 .tscache/
+.history/
 /ignoreLoggingUserKeys.txt
 /node/tslint.json
 /static/tslint.json

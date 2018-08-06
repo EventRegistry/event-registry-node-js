@@ -59,8 +59,8 @@ Promise.all([
         sourceLocationUri:  QueryItems.OR([germanyUri, laUri]),
     };
     const q5 = new QueryArticlesIter(er, iterOpts);
-    q5.execQuery((items, error) => {
-        console.info(items);
+    q5.execQuery((item) => {
+        console.info(item);
     });
 });
 

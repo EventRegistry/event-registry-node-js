@@ -8,8 +8,8 @@ const er = new EventRegistry();
 // iterate over all articles that belong to a particular event with a given URI
 // limit to only articles in English language
 const iter = new QueryEventArticlesIter(er, "eng-2940883");
-iter.execQuery((articles) => {
-    console.info(articles);
+iter.execQuery((article) => {
+    console.info(article);
 });
 
 // get event info about event with a particular uri

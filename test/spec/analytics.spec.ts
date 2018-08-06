@@ -2,7 +2,7 @@ import * as _ from "lodash";
 import { Analytics } from "../../src/index";
 import { Utils } from "./utils";
 
-describe("Analytics", () => {
+xdescribe("Analytics", () => {
     const er = Utils.initAPI();
     let analytics;
 
@@ -87,6 +87,5 @@ describe("Analytics", () => {
         // there can be other additional properties available, depending on what is available in the article
         done();
     });
-
 
 });

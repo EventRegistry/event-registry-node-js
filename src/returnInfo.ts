@@ -88,7 +88,8 @@ export class ArticleInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ArticleI
     constructor(params: ER.ReturnInfo.ArticleInfo = {}) {
         super();
         this.type = "Article";
-        this.setValue("bodyLen", params, -1);
+        params["bodyLen"] = _.defaultTo(params["bodyLen"], -1);
+        this.setValue("bodyLen", params, 300);
         this.setFlag("basicInfo", params, true);
         this.setFlag("title", params, true);
         this.setFlag("body", params, true);
@@ -158,7 +159,7 @@ export class SourceInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.SourceInf
         this.setFlag("ranking", params, false);
         this.setFlag("image", params, false);
         this.setFlag("articleCount", params, false);
-        this.setFlag("sourceMedia", params, false);
+        this.setFlag("socialMedia", params, false);
         this.setFlag("sourceGroups", params, false);
     }
 }

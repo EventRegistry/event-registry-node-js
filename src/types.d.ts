@@ -39,6 +39,7 @@ export module ER {
          */
         verboseOutput?: boolean;
         settingsFName?: string;
+        allowUseOfArchive?: boolean;
     }
 
     export type ConceptType = "person" | "loc" | "org" | "wiki" | "entities" | "concepts"  | "conceptClass" | "conceptFolder";

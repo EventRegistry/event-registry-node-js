@@ -54,6 +54,10 @@ export class QueryEventArticlesIter extends QueryEvent {
     private pages = 1;
     private items = [];
     private returnedSoFar = 0;
+    private index = 0;
+    private callback: (item) => void = _.noop;
+    private doneCallback: (error?) => void = _.noop;
+    private errorMessage;
 
     /**
      * @param er instance of EventRegistry class. used to obtain the necessary data
@@ -91,8 +95,21 @@ export class QueryEventArticlesIter extends QueryEvent {
      * @param callback callback function that'll be called every time we get a new batch of articles from the backend
      * @param doneCallback callback function that'll be called when everything is complete
      */
-    public execQuery(callback: (item, error) => void, doneCallback?: (error) => void) {
-        this.getNextBatch(callback, doneCallback);
+    public execQuery(callback: (item) => void, doneCallback?: (error) => void) {
+        if (callback) { this.callback = callback; }
+        if (doneCallback) { this.doneCallback = doneCallback; }
+        this.iterate();
+    }
+
+    private async iterate() {
+        if (this.current) {
+            this.callback(this.current);
+            this.index += 1;
+        } else if (!await this.getNextBatch()) {
+            this.doneCallback(this.errorMessage);
+            return;
+        }
+        return this.iterate();
     }
 
     /**
@@ -105,14 +122,15 @@ export class QueryEventArticlesIter extends QueryEvent {
         return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Array<{}>);
     }
 
-    private async getNextBatch(callback: (items, error) => void, doneCallback?: (error?) => void) {
+    private get current() {
+        return this.items[this.index] || undefined;
+    }
+
+    private async getNextBatch() {
         try {
             this.page += 1;
             if (this.page > this.pages || (this.maxItems !== -1 && this.returnedSoFar >= this.maxItems)) {
-                if (doneCallback) {
-                    doneCallback();
-                }
-                return;
+                return false;
             }
             const requestEventArticles = new RequestEventArticles({
                 page: this.page,
@@ -127,23 +145,19 @@ export class QueryEventArticlesIter extends QueryEvent {
                 console.log(`Downloading page ${this.page}...`);
             }
             const response = await this.er.execQuery(this);
-            const error = _.get(response, "error", "");
+            const error = _.get(response[this.eventUri], "error", "");
             if (error) {
-                console.error(`Error while obtaining a list of articles:  ${_.get(response, "error")}`);
+                this.errorMessage = `Error while obtaining a list of articles:  ${_.get(response[this.eventUri], "error")}`;
             } else {
                 this.pages = _.get(response[this.eventUri], "articles.pages", 0);
             }
             const results = this.extractResults(response);
             this.returnedSoFar += _.size(results);
-            callback(results, error);
             this.items = [...this.items, ...results];
-            this.getNextBatch(callback, doneCallback);
+            return true;
         } catch (error) {
-            if (doneCallback) {
-                doneCallback(error);
-            }
             console.error(error);
-            return;
+            return false;
         }
     }
 }

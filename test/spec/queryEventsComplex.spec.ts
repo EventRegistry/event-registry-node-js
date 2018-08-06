@@ -170,19 +170,17 @@ describe("Query Events Complex", () => {
             conceptInfo: new ConceptInfoFlags({maxConceptsPerType: 100}),
         });
         const iter = QueryEventsIter.initWithComplexQuery(er, cq, {returnInfo, maxItems: 50});
-        iter.execQuery((items) => {
-            _.each(items, (item) => {
-                const hasConcept = _.find(_.get(item, "concepts", []), ({uri}) => uri === conceptUris.trump);
-                const hasCategory = _.find(_.get(item, "categories", []), ({uri}) => _.includes(uri, politicsUri));
-                const hasDate = _.get(item, "eventDate") === "2017-02-05";
+        iter.execQuery((item) => {
+            const hasConcept = _.find(_.get(item, "concepts", []), ({uri}) => uri === conceptUris.trump);
+            const hasCategory = _.find(_.get(item, "categories", []), ({uri}) => _.includes(uri, politicsUri));
+            const hasDate = _.get(item, "eventDate") === "2017-02-05";
 
-                expect(hasConcept || hasCategory || hasDate).toBeTruthy(`Invalid article ${item.uri} that should not be in the results.`);
+            expect(hasConcept || hasCategory || hasDate).toBeTruthy(`Invalid article ${item.uri} that should not be in the results.`);
 
-                _.each(_.get(item, "concepts", []), ({uri}) => {
-                    expect(uri).not.toEqual(conceptUris.obama);
-                });
-                expect(_.get(item, "eventDate")).not.toEqual("2017-02-04");
+            _.each(_.get(item, "concepts", []), ({uri}) => {
+                expect(uri).not.toEqual(conceptUris.obama);
             });
+            expect(_.get(item, "eventDate")).not.toEqual("2017-02-04");
         }, () => {
             done();
         });

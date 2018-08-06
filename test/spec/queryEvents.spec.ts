@@ -1,6 +1,5 @@
 import * as _ from "lodash";
 import {
-    allLangs,
     ArticleInfoFlags,
     ConceptInfoFlags,
     EventInfoFlags,
@@ -214,12 +213,12 @@ describe("Query Events", () => {
     it("should test event list with combined search", async (done) => {
         const conceptUri = await er.getConceptUri("Merkel");
         const categoryUri = await er.getCategoryUri("Business");
-        const q1 = new QueryEvents({keywords: "germany", lang: ["eng", "deu"], conceptUri: [conceptUri], categoryUri: [categoryUri]});
+        const q1 = new QueryEvents({keywords: "germany", conceptUri: [conceptUri], categoryUri: [categoryUri]});
         q1.setRequestedResult(new RequestEventsInfo({count: 10, returnInfo: utils.returnInfo}));
         const response1 = await er.execQuery(q1);
         expect(response1).toBeValidGeneralEventList();
 
-        const q2 = new QueryEvents({keywords: "germany", lang: ["eng", "deu"], conceptUri, categoryUri});
+        const q2 = new QueryEvents({keywords: "germany", conceptUri, categoryUri});
         q2.setRequestedResult(new RequestEventsInfo({count: 10, returnInfo: utils.returnInfo}));
         const response2 = await er.execQuery(q2);
         expect(response2).toBeValidGeneralEventList();
@@ -237,7 +236,7 @@ describe("Query Events", () => {
         expect(_.has(response, "conceptTrends")).toBeTruthy("Expected to get 'conceptTrends'");
         expect(_.has(response, "conceptTrends.trends")).toBeTruthy("Expected to get 'trends' property in conceptTrends");
         expect(_.has(response, "conceptTrends.conceptInfo")).toBeTruthy("Expected to get 'conceptInfo' property in conceptTrends");
-        expect(_.size(_.get(response, "conceptTrends.conceptInfo", []))).toEqual(5, "Expected to get 5 concepts in concept trends");
+        expect(_.size(_.get(response, "conceptTrends.conceptInfo", []))).toBeLessThanOrEqual(5, "Expected to get 5 concepts or less in concept trends");
         const trends = _.get(response, "conceptTrends.trends");
         expect(_.isEmpty(trends)).toBeFalsy("Expected to get trends for some days");
         _.each(trends, (trend) => {
@@ -315,13 +314,17 @@ describe("Query Events", () => {
         query.setRequestedResult(requestEventsSourceAggr);
         const response = await er.execQuery(query);
         expect(_.has(response, "sourceAggr")).toBeTruthy("Expected to get 'sourceAggr'");
-        const sources = _.get(response, "sourceAggr.results", []);
+        const sources = _.get(response, "sourceAggr.countsPerSource", []);
         expect(_.size(sources)).toEqual(15, "Expected 15 sources");
         _.each(sources, (sourceInfo) => {
             expect(_.get(sourceInfo, "source")).toBeValidSource();
             expect(_.has(sourceInfo, "counts")).toBeTruthy("Source info should contain counts object");
             expect(_.has(sourceInfo, "counts.frequency")).toBeTruthy("Counts should contain a frequency");
-            expect(_.has(sourceInfo, "counts.ratio")).toBeTruthy("Counts should contain ratio");
+            expect(_.has(sourceInfo, "counts.total")).toBeTruthy("Counts should contain total");
+        });
+        _.each(_.get(response, "sourceAggr.countsPerCountry"), (country) => {
+            expect(_.get(country, "type")).toEqual("loc", "Country should be a location");
+            expect(_.get(country, "frequency")).toBeGreaterThan(0);
         });
         done();
     });
@@ -384,8 +387,8 @@ describe("Query Events", () => {
         const conceptUri = await er.getConceptUri("Obama");
         const q = new QueryEventsIter(er, {keywords: "germany", conceptUri});
         let eventsSize = 0;
-        q.execQuery((items) => {
-            eventsSize += _.size(items);
+        q.execQuery((item) => {
+            eventsSize += 1;
         }, async () => {
             const q2 = new QueryEvents({keywords: "germany", conceptUri});
             const response = await er.execQuery(q2);
@@ -396,51 +399,36 @@ describe("Query Events", () => {
 
     it("should query events iterator (2)", async (done) => {
         const conceptUri = await er.getConceptUri("Obama");
-        const q = new QueryEventsIter(er, {lang: allLangs, keywords: "germany", conceptUri: conceptUri, returnInfo: utils.returnInfo, maxItems: 10});
-        q.execQuery((items) => {
-            _.each(items, (item) => {
-                expect(item).toContainConcept(conceptUri);
-                new QueryEventArticlesIter(er, item["uri"], {lang: allLangs, returnInfo: utils.returnInfo}).execQuery((articles, error) => {
-                    let hasKeyword = false;
-                    _.each(articles, (article) => {
-                        const text = _.deburr(_.toLower(_.get(article, "body")));
-                        hasKeyword = _.includes(text, "german");
-                    });
-                    expect(hasKeyword).toBeTruthy("At least one of the articles was expected to contain 'germany'");
-                });
+        const q = new QueryEventsIter(er, { lang: ["eng"], keywords: "trump", conceptUri: conceptUri, returnInfo: utils.returnInfo, maxItems: 5 });
+        q.execQuery((item) => {
+            expect(item).toContainConcept(conceptUri);
+            let someArticlesHasText = false;
+            new QueryEventArticlesIter(er, item["uri"], { lang: ["eng"], returnInfo: utils.returnInfo, maxItems: 5 }).execQuery((article) => {
+                someArticlesHasText = someArticlesHasText || _.includes(_.deburr(_.toLower(_.get(article, "body"))), "trump");
+            }, () => {
+                expect(someArticlesHasText).toBeTruthy("At least one of the articles was expected to contain 'trump'");
+                done();
             });
-        }, () => {
-            done();
         });
     });
 
     it("should query events iterator (3)", async (done) => {
-        const sourceUri = await er.getNewsSourceUri("los angeles");
         const categoryUri = await er.getCategoryUri("business");
-        const q = new QueryEventsIter(er, {lang: allLangs, keywords: "obama trump", sourceUri, categoryUri, returnInfo: utils.returnInfo});
-        q.execQuery((items) => {
-            _.each(items, (item) => {
-                expect(item).toContainCategory(categoryUri);
-                new QueryEventArticlesIter(er, item["uri"], {lang: allLangs, returnInfo: utils.returnInfo}).execQuery((articles, error) => {
-                    if (error) {
-                        console.info(error);
-                    }
-                    let hasKeyword1 = false;
-                    let hasKeyword2 = false;
+        const q = new QueryEventsIter(er, { keywords: "obama trump", categoryUri, returnInfo: utils.returnInfo });
+        q.execQuery((item) => {
+            expect(item).toContainCategory(categoryUri);
+            let includesKeywordObama = false;
+            let includesKeywordTrump = false;
 
-                    _.each(articles, (article) => {
-                        const text = _.deburr(_.toLower(_.get(article, "body")));
-                        hasKeyword1 = _.includes(text, "obama");
-                        hasKeyword2 = _.includes(text, "trump");
-                    });
-                    expect(hasKeyword1).toBeTruthy("At least one of the articles was expected to contain 'obama'");
-                    expect(hasKeyword2).toBeTruthy("At least one of the articles was expected to contain 'trump'");
-                    const hasArticleFromSource = _.every(articles, (article) => article["source"]["uri"] === sourceUri);
-                    expect(hasArticleFromSource).toBeTruthy();
-                });
+            new QueryEventArticlesIter(er, item["uri"], { returnInfo: utils.returnInfo }).execQuery((article) => {
+                const text = _.deburr(_.toLower(_.get(article, "body")));
+                includesKeywordObama = includesKeywordObama || _.includes(text, "obama");
+                includesKeywordTrump = includesKeywordTrump || _.includes(text, "trump");
+            }, () => {
+                expect(includesKeywordObama).toBeTruthy("At least one of the articles was expected to contain 'obama'");
+                expect(includesKeywordTrump).toBeTruthy("At least one of the articles was expected to contain 'trump'");
+                done();
             });
-        }, () => {
-            done();
         });
     });
 
@@ -466,34 +454,24 @@ describe("Query Events", () => {
             returnInfo: new ReturnInfo({ conceptInfo: new ConceptInfoFlags({ maxConceptsPerType: 350 })}),
         };
         const q = new QueryEventsIter(er, queryConfig);
-        q.execQuery((items, error) => {
-            if (!_.isEmpty(error)) {
-                console.error(error);
-            }
-            _.each(items, (item) => {
-                expect(item).toContainConcept(obamaUri);
-                expect(item).not.toContainConcept(politicsUri);
-                expect(item).not.toContainConcept(chinaUri);
-                expect(item).not.toContainConcept(unitedStatesUri);
-                expect(item).not.toContainCategory(catBusinessUri);
-                expect(item).not.toContainCategory(catPoliticsUri);
-                new QueryEventArticlesIter(er, item["uri"], {returnInfo: utils.returnInfo, lang: allLangs}).execQuery((articles, err) => {
-                    if (!_.isEmpty(err)) {
-                        console.error(err);
-                    }
-                    _.each(articles, (article) => {
-                        const text = _.deburr(_.toLower(_.get(article, "body")));
-                        expect(text).not.toContain("trump");
-                        expect(text).not.toContain("politics");
-                        expect(text).not.toContain("michelle");
-                    });
-                    const hasArticleFromSource1 = _.every(articles, (article) => article["source"]["uri"] === srcDailyCallerUri);
-                    const hasArticleFromSource2 = _.every(articles, (article) => article["source"]["uri"] === srcAawsatUri);
-                    const hasArticleFromSource3 = _.every(articles, (article) => article["source"]["uri"] === srcSvodkaUri);
-                    expect(hasArticleFromSource1).toBeFalsy();
-                    expect(hasArticleFromSource2).toBeFalsy();
-                    expect(hasArticleFromSource3).toBeFalsy();
-                });
+        q.execQuery((item) => {
+            expect(item).toContainConcept(obamaUri);
+            expect(item).not.toContainConcept(politicsUri);
+            expect(item).not.toContainConcept(chinaUri);
+            expect(item).not.toContainConcept(unitedStatesUri);
+            expect(item).not.toContainCategory(catBusinessUri);
+            expect(item).not.toContainCategory(catPoliticsUri);
+            new QueryEventArticlesIter(er, item["uri"], {returnInfo: utils.returnInfo, lang: ["eng"]}).execQuery((article) => {
+                const text = _.deburr(_.toLower(_.get(article, "body")));
+                expect(text).not.toContain("trump");
+                expect(text).not.toContain("politics");
+                expect(text).not.toContain("michelle");
+                const hasArticleFromSource1 = article["source"]["uri"] === srcDailyCallerUri;
+                const hasArticleFromSource2 = article["source"]["uri"] === srcAawsatUri;
+                const hasArticleFromSource3 = article["source"]["uri"] === srcSvodkaUri;
+                expect(hasArticleFromSource1).toBeFalsy();
+                expect(hasArticleFromSource2).toBeFalsy();
+                expect(hasArticleFromSource3).toBeFalsy();
             });
         }, () => {
             done();
