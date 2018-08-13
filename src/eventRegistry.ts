@@ -23,6 +23,9 @@ export class EventRegistry {
         verboseOutput: false,
         allowUseOfArchive: true,
     };
+    private headers = {};
+    private dailyAvailableRequests = -1;
+    private remainingAvailableRequests = -1;
     private lastQueryTime = 0;
 
     constructor(config: ER.Config = {}) {
@@ -105,6 +108,10 @@ export class EventRegistry {
                 responseType: "json",
                 maxRedirects: 5,
             });
+            this.headers = _.get(request, "headers", {});
+            if (_.get(request, "status") !== 200) {
+                throw new Error(_.get(request, "statusText"));
+            }
             const errorMessage = _.get(request, "data.error", "");
             if (errorMessage) {
                 throw new Error(errorMessage);
@@ -148,6 +155,15 @@ export class EventRegistry {
                 maxRedirects: 5,
                 retry: this.config.repeatFailedRequestCount,
             } as any);
+            this.headers = _.get(request, "headers", {});
+            if (_.get(request, "status") !== 200) {
+                throw new Error(_.get(request, "statusText"));
+            }
+            if (this.getLastHeader("warning")) {
+                console.warn(`WARNING: ${this.getLastHeader("warning")}`);
+            }
+            this.dailyAvailableRequests = _.toNumber(this.getLastHeader("x-ratelimit-limit", "-1"));
+            this.remainingAvailableRequests = _.toNumber(this.getLastHeader("x-ratelimit-remaining", "-1"));
             const errorMessage = _.get(request, "data.error", "");
             if (errorMessage) {
                 throw new Error(errorMessage);
@@ -163,6 +179,51 @@ export class EventRegistry {
         }
         return request;
     }
+
+    /**
+     * get the number of requests that are still available for the user today
+     */
+    public getRemainingAvailableRequests() {
+        return this.remainingAvailableRequests;
+    }
+
+    /**
+     * get the total number of requests that the user can make in a day
+     */
+    public getDailyAvailableRequests() {
+        return this.dailyAvailableRequests;
+    }
+
+    /**
+     * Return the headers returned in the response object of the last executed request
+     */
+    public getLastHeaders() {
+        return this.headers;
+    }
+
+    /**
+     * Get a value of the header headerName that was set in the headers in the last response object
+     */
+    public getLastHeader(headerName, dfltVal?) {
+        return _.get(this.headers, headerName, dfltVal);
+    }
+
+    /**
+     * print some statistics about the last executed request
+     */
+    public printLastReqStats() {
+        console.log(`Tokens used by the request: ${this.getLastHeader("req-tokens")}`);
+        console.log(`Performed action: ${this.getLastHeader("req-action")}`);
+        console.log(`Was archive used for the query: ${this.getLastReqArchiveUse() ? "Yes" : "No"}`);
+    }
+
+    /**
+     * return true or false depending on whether the last request used the archive or not
+     */
+    public getLastReqArchiveUse() {
+        return this.getLastHeader("req-archive", "0") === "1";
+    }
+
     /**
      * Return a list of concepts that contain the given prefix.
      * Returned matching concepts are sorted based on their frequency of occurrence in news (from most to least frequent)

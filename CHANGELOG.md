@@ -2,6 +2,11 @@
 
 This log contains changes specific to the NodeJS SDK.
 
+## [v8.3.11]() (2018-08-13)
+
+**Added**
+- Missing utility methods`getRemainingAvailableRequests`, `getDailyAvailableRequests`, `getLastHeaders` and `getLastHeader`.
+
 ## [v8.3.1]() (2018-08-06)
 
 **Changed**
