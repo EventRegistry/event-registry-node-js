@@ -2,6 +2,11 @@
 
 This log contains changes specific to the NodeJS SDK.
 
+## [v8.3.12]() (2018-08-16)
+
+**Added**
+- Added `getUsageInfo` method which returns usage information. It returns an object with two properties: availableTokens and usedTokens
+
 ## [v8.3.11]() (2018-08-13)
 
 **Added**

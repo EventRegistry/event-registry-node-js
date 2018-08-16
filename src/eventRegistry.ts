@@ -225,6 +225,14 @@ export class EventRegistry {
     }
 
     /**
+     * Return usage information for the current API key.
+     */
+    public async getUsageInfo(): Promise<ER.UsageInfo> {
+        const request = await this.jsonRequest("/api/v1/usage");
+        return request.data;
+    }
+
+    /**
      * Return a list of concepts that contain the given prefix.
      * Returned matching concepts are sorted based on their frequency of occurrence in news (from most to least frequent)
      * @param prefix input text that should be contained in the concept

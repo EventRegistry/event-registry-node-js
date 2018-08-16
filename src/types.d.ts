@@ -6,6 +6,11 @@ import { BaseQuery, CombinedQuery} from "./query";
 
 export module ER {
 
+    export interface UsageInfo {
+        availableTokens: number;
+        usedTokens: number;
+    }
+
     export interface Config {
         /**
          * API key that should be used to make the requests to the Event Registry.
