@@ -189,6 +189,29 @@ describe("Query Articles", () => {
         }
     });
 
+    it("should return list with author search", async (done) => {
+        try {
+            const authorUri = await er.getAuthorUri("associated");
+            const q1 = new QueryArticles({authorUri});
+            q1.setRequestedResult(requestArticlesInfo);
+            const response = await er.execQuery(q1);
+            expect(response).toBeValidGeneralArticleList();
+            for (const article of _.get(response, "articles.results", [])) {
+                let foundAuthor = false;
+                for (const author of _.get(article, "authors")) {
+                    if (author.uri === authorUri) {
+                        foundAuthor = true;
+                    }
+                }
+                expect(foundAuthor).toBeTruthy();
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            done();
+        }
+    });
+
     it("should return list with category search", async (done) => {
         try {
             const categoryUri = await er.getCategoryUri("disa");

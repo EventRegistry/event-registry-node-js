@@ -1,6 +1,8 @@
 import * as _ from "lodash";
 import {
     ArticleInfoFlags,
+    BaseQuery,
+    ComplexEventQuery,
     ConceptInfoFlags,
     EventInfoFlags,
     EventRegistry,
@@ -88,6 +90,18 @@ describe("Query Events", () => {
         const results1 = _.sortBy(response1["events"]["results"], "id");
         const results2 = _.sortBy(response2["events"]["results"], "id");
         expect(_.size(results1)).toEqual(_.size(results2), "Source search should return responses of the same size");
+        done();
+    });
+
+    it("should test event list with author search", async (done) => {
+        const authorUri = await er.getAuthorUri("associated");
+        const q1 = new QueryEvents({authorUri});
+        const response1 = await er.execQuery(q1);
+        const q2 = QueryEvents.initWithComplexQuery(new ComplexEventQuery(new BaseQuery({authorUri})));
+        const response2 = await er.execQuery(q2);
+        const results1 = _.sortBy(response1["events"]["results"], "id");
+        const results2 = _.sortBy(response2["events"]["results"], "id");
+        expect(_.size(results1)).toEqual(_.size(results2), "Author search should return responses of the same size");
         done();
     });
 

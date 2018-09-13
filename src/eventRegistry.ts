@@ -181,14 +181,14 @@ export class EventRegistry {
     }
 
     /**
-     * get the number of requests that are still available for the user today
+     * get the number of requests that are still available for the user today. Information is only accessible after you make some query.
      */
     public getRemainingAvailableRequests() {
         return this.remainingAvailableRequests;
     }
 
     /**
-     * get the total number of requests that the user can make in a day
+     * get the total number of requests that the user can make in a day. Information is only accessible after you make some query.
      */
     public getDailyAvailableRequests() {
         return this.dailyAvailableRequests;
@@ -225,7 +225,7 @@ export class EventRegistry {
     }
 
     /**
-     * Return usage information for the current API key.
+     * Return the number of used and total available tokens. Can be used at any time (also before making queries)
      */
     public async getUsageInfo(): Promise<ER.UsageInfo> {
         const request = await this.jsonRequest("/api/v1/usage");
@@ -253,7 +253,7 @@ export class EventRegistry {
             count: count,
         };
         params = _.extend({}, params, otherParams, returnInfo.getParams());
-        const request = await this.jsonRequest("/json/suggestConcepts", params);
+        const request = await this.jsonRequest("/json/suggestConceptsFast", params);
         return request.data;
     }
 
@@ -269,7 +269,7 @@ export class EventRegistry {
         }
         let params = {prefix, page, count};
         params = _.extend({}, params, otherParams, returnInfo.getParams());
-        const request = await this.jsonRequest("/json/suggestCategories", params);
+        const request = await this.jsonRequest("/json/suggestCategoriesFast", params);
         return request.data;
     }
 
@@ -283,7 +283,7 @@ export class EventRegistry {
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
         }
-        const request = await this.jsonRequest("/json/suggestSources", {prefix, page, dataType, count, ...otherParams});
+        const request = await this.jsonRequest("/json/suggestSourcesFast", {prefix, page, dataType, count, ...otherParams});
         return request.data;
     }
 
@@ -336,7 +336,7 @@ export class EventRegistry {
             params["closeToLat"] = sortByDistanceTo[0];
             params["closeToLon"] = sortByDistanceTo[1];
         }
-        const request = await this.jsonRequest("/json/suggestLocations", params);
+        const request = await this.jsonRequest("/json/suggestLocationsFast", params);
         return request.data;
     }
 
@@ -372,7 +372,7 @@ export class EventRegistry {
             lang: lang,
         };
         params = _.extend({}, params, otherParams, returnInfo.getParams());
-        const request = await this.jsonRequest("/json/suggestLocations", params);
+        const request = await this.jsonRequest("/json/suggestLocationsFast", params);
         return request.data;
     }
 
@@ -398,7 +398,7 @@ export class EventRegistry {
             count: count,
             ...otherParams
         };
-        const request = await this.jsonRequest("/json/suggestSources", params);
+        const request = await this.jsonRequest("/json/suggestSourcesFast", params);
         return request.data;
     }
 
@@ -417,7 +417,27 @@ export class EventRegistry {
             dataType: dataType,
             ...otherParams
         };
-        const request = await this.jsonRequest("/json/suggestSources", params);
+        const request = await this.jsonRequest("/json/suggestSourcesFast", params);
+        return request.data;
+    }
+
+    /**
+     * Return a list of news sources that match the prefix
+     * @param prefix: input text that should be contained in the author name and source url
+     * @param page: page of results
+     * @param count: number of returned suggestions
+     */
+    public async suggestAuthors(prefix: string, page = 1, count = 20, ...otherParams) {
+        if (page <= 0) {
+            throw new Error("Page parameter should be above 0.");
+        }
+        const params = {
+            prefix,
+            page,
+            count,
+            ...otherParams
+        };
+        const request = await this.jsonRequest("/json/suggestAuthorsFast", params);
         return request.data;
     }
 
@@ -514,6 +534,13 @@ export class EventRegistry {
     }
 
     /**
+     * alternative (shorter) name for the method getNewsSourceUri()
+     */
+    public async getSourceUri(sourceName: string, dataType: ER.DataType[] | ER.DataType = ["news", "pr", "blog"]) {
+        return await this.getNewsSourceUri(sourceName, dataType);
+    }
+
+    /**
      * Return the URI of the source group that best matches the name
      * @param sourceGroupName partial or full name of the source group
      */
@@ -560,6 +587,16 @@ export class EventRegistry {
      */
     public async getCustomConceptUri(label: string, lang = "eng") {
         const matches = await this.suggestCustomConcepts(label, {lang});
+        return _.get(_.first(matches), "uri", undefined);
+    }
+
+    /**
+     * return author uri that that is the best match for the given author name (and potentially source url)
+     * if there are multiple matches for the given author name, they are sorted based on the number of articles they have written (from most to least frequent)
+     * @param authorName: partial or full name of the author, potentially also containing the source url (e.g. "george brown nytimes")
+     */
+    public async getAuthorUri(authorName: string) {
+        const matches = await this.suggestAuthors(authorName);
         return _.get(_.first(matches), "uri", undefined);
     }
 

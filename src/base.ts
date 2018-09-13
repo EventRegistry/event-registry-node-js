@@ -99,6 +99,45 @@ export class QueryParamsBase {
     public setDateVal(propName, val) {
         this.setVal(propName, QueryParamsBase.encodeDateTime(val, "YYYY-MM-DD"));
     }
+
+    /**
+     * Parse the value "value" and use it to set the property propName and the operator with name propOperName
+     * @param value String, QueryItems or an array.
+     * @param propName Values to be set using property name propName.
+     * @param propOperName Property to set containing the "and" or "or". Relevant only if multiple items are provided in "value". Can be None if only one value is possible.
+     * @param defaultOperName Which operator should be used in case "value" is an array. If an array, we will print also a warning to suggest use of QueryItems.
+     */
+    public setQueryArrVal(value: string | QueryItems | any[], propName: string, propOperName: string | undefined, defaultOperName) {
+        if (!value) {
+            return;
+        }
+
+        if (value instanceof QueryItems) {
+            this.params[propName] = value.getItems();
+            const formattedOperator = _.replace(value.getOper(), "$", "");
+            if (propOperName) {
+                this.params[propOperName] = formattedOperator;
+            }
+            if (_.isUndefined(propOperName) && formattedOperator !== defaultOperName) {
+                throw new Error(`An invalid operator type '${formattedOperator}' was used for property '${propName}'`);
+            }
+        } else if (_.isString(value)) {
+            this.params[propName] = value;
+        } else if (_.isArray(value)) {
+            this.params[propName] = value;
+            if (!_.isUndefined(propOperName)) {
+                this.params[propOperName] = defaultOperName;
+                if (_.size(value) > 1) {
+                    console.warn(`
+                        Warning: The value of parameter '${propName}' was provided as a list and '${defaultOperName}' operator was used implicitly between the items.
+                        We suggest specifying the list using the QueryItems.AND() or QueryItems.OR() to ensure the appropriate operator is used.
+                    `);
+                }
+            }
+        } else {
+            throw new Error(`Parameter '${propName}' was of unsupported type. It should either be None, a string or an instance of QueryItems`);
+        }
+    }
 }
 
 export abstract class Query<T> extends QueryParamsBase {
@@ -130,46 +169,6 @@ export abstract class Query<T> extends QueryParamsBase {
     }
 
     public abstract setRequestedResult(args);
-
-    /**
-     * Parse the value "value" and use it to set the property propName and the operator with name propOperName
-     * @param value String, QueryItems or an array.
-     * @param propName Values to be set using property name propName.
-     * @param propOperName Property to set containing the "and" or "or". Relevant only if multiple items are provided in "value". Can be None if only one value is possible.
-     * @param defaultOperName Which operator should be used in case "value" is an array. If an array, we will print also a warning to suggest use of QueryItems.
-     */
-    protected setQueryArrVal(value: string | QueryItems | any[], propName: string, propOperName: string | undefined, defaultOperName) {
-        if (!value) {
-            return;
-        }
-
-        if (value instanceof QueryItems) {
-            this.params[propName] = value.getItems();
-            const formattedOperator = _.replace(value.getOper(), "$", "");
-            if (propOperName) {
-                this.params[propOperName] = formattedOperator;
-            }
-            if (_.isUndefined(propOperName) && formattedOperator !== defaultOperName) {
-                throw new Error(`An invalid operator type '${formattedOperator}' was used for property '${propName}'`);
-            }
-        } else if (_.isString(value)) {
-            this.params[propName] = value;
-        } else if (_.isArray(value)) {
-            this.params[propName] = value;
-            if (!_.isUndefined(propOperName)) {
-                this.params[propOperName] = defaultOperName;
-                if (_.size(value) > 1) {
-                    console.warn(`
-                        Warning: The value of parameter '${propName}' was provided as a list and '${defaultOperName}' operator was used implicitly between the items.
-                        We suggest specifying the list using the QueryItems.AND() or QueryItems.OR() to ensure the appropriate operator is used.
-                    `);
-                }
-            }
-        } else {
-            throw new Error(`Parameter '${propName}' was of unsupported type. It should either be None, a string or an instance of QueryItems`);
-        }
-    }
-
 }
 
 /**

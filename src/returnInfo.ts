@@ -95,6 +95,7 @@ export class ArticleInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ArticleI
         this.setFlag("body", params, true);
         this.setFlag("url", params, true);
         this.setFlag("eventUri", params, true);
+        this.setFlag("authors", params, true);
         this.setFlag("concepts", params, false);
         this.setFlag("categories", params, false);
         this.setFlag("links", params, false);

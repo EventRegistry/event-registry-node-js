@@ -20,12 +20,13 @@ export class QueryEvents extends Query<RequestEvents> {
             sourceUri,
             sourceLocationUri,
             sourceGroupUri,
+            authorUri,
             locationUri,
             lang,
             dateStart,
             dateEnd,
-            minArticlesInEvent = 0,
-            maxArticlesInEvent = Number.MAX_SAFE_INTEGER, // in place of Python's `sys.maxsize`
+            minArticlesInEvent,
+            maxArticlesInEvent,
             dateMentionStart,
             dateMentionEnd,
             ignoreKeywords,
@@ -34,6 +35,7 @@ export class QueryEvents extends Query<RequestEvents> {
             ignoreSourceUri,
             ignoreSourceLocationUri,
             ignoreSourceGroupUri,
+            ignoreAuthorUri,
             ignoreLocationUri,
             ignoreLang,
             keywordsLoc = "body",
@@ -49,6 +51,7 @@ export class QueryEvents extends Query<RequestEvents> {
         this.setQueryArrVal(sourceUri, "sourceUri", undefined, "or");
         this.setQueryArrVal(sourceLocationUri, "sourceLocationUri", undefined, "or");
         this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", undefined, "or");
+        this.setQueryArrVal(authorUri, "authorUri", "authorOper", "or");
         this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
         this.setQueryArrVal(lang, "lang", undefined, "or");
         if (!_.isUndefined(dateStart)) {
@@ -75,6 +78,9 @@ export class QueryEvents extends Query<RequestEvents> {
         this.setQueryArrVal(ignoreConceptUri, "ignoreConceptUri", undefined, "or");
         this.setQueryArrVal(ignoreCategoryUri, "ignoreCategoryUri", undefined, "or");
         this.setQueryArrVal(ignoreSourceUri, "ignoreSourceUri", undefined, "or");
+        this.setQueryArrVal(ignoreSourceLocationUri, "ignoreSourceLocationUri", undefined, "or");
+        this.setQueryArrVal(ignoreSourceGroupUri, "ignoreSourceGroupUri", undefined, "or");
+        this.setQueryArrVal(ignoreAuthorUri, "ignoreAuthorUri", undefined, "or");
         this.setQueryArrVal(ignoreLocationUri, "ignoreLocationUri", undefined, "or");
 
         this.setQueryArrVal(ignoreLang, "ignoreLang", undefined, "or");
@@ -352,10 +358,15 @@ export class RequestEventsTimeAggr extends RequestEvents {
 export class RequestEventsKeywordAggr extends RequestEvents {
     public resultType = "keywordAggr";
     public params;
-    constructor(lang = "eng") {
+    /**
+     * @param lang: in which language to produce the list of top keywords. If undefined, then compute on all articles
+     */
+    constructor(lang?) {
         super();
         this.params = {};
-        this.params["keywordAggrLang"] = lang;
+        if (!_.isUndefined(lang)) {
+            this.params["keywordAggrLang"] = lang;
+        }
     }
 }
 
@@ -429,7 +440,7 @@ export class RequestEventsConceptGraph extends RequestEvents {
     public params;
     constructor(args: ER.QueryEvents.RequestEventsConceptGraphArguments = {}) {
         super();
-        const { conceptCount = 25, linkCount = 50, eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
+        const { conceptCount = 25, linkCount = 150, eventsSampleSize = 50000, returnInfo = new ReturnInfo() } = args;
         if (conceptCount > 1000) {
             throw new RangeError("At most 1000 top concepts can be returned");
         }
@@ -505,12 +516,12 @@ export class RequestEventsSourceAggr extends RequestEvents {
     public params;
     constructor(args: ER.QueryEvents.RequestEventsSourceAggrArguments = {}) {
         super();
-        const { sourceCount = 30, eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
+        const { sourceCount = 30, eventsSampleSize = 50000, returnInfo = new ReturnInfo() } = args;
         if (sourceCount > 200) {
             throw new RangeError("At most 200 top sources can be returned");
         }
-        if (eventsSampleSize > 300000) {
-            throw new RangeError("At most 300000 results can be used for computing");
+        if (eventsSampleSize > 100000) {
+            throw new RangeError("At most 100000 results can be used for computing");
         }
         this.params = {};
         this.params["sourceAggrSourceCount"] = sourceCount;

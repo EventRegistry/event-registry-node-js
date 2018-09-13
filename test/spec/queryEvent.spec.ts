@@ -38,6 +38,57 @@ describe("Query Event", () => {
         done();
     });
 
+    it("should test event articles filtering", async (done) => {
+        const q1 = new QueryEventArticlesIter(er, "eng-4167169");
+        const counts1 = await q1.count();
+        const counts2 = await (new QueryEventArticlesIter(er, "eng-4167169", {lang: "eng"})).count();
+        expect(counts1).not.toEqual(counts2, "Comparison 1 failed!");
+        const counts3 = await (new QueryEventArticlesIter(er, "eng-4167169", {conceptUri: await er.getConceptUri("United States")})).count();
+        expect(counts1).not.toEqual(counts3, "Comparison 2 failed!");
+        const counts4 = await (new QueryEventArticlesIter(er, "eng-4167169", {keywords: "United States"})).count();
+        expect(counts1).not.toEqual(counts4, "Comparison 3 failed!");
+        const counts5 = await (new QueryEventArticlesIter(er, "eng-4167169", {sourceUri: await er.getNewsSourceUri("Washington Post")})).count();
+        expect(counts1).not.toEqual(counts5, "Comparison 4 failed!");
+        const counts6 = await (new QueryEventArticlesIter(er, "eng-4167169", {lang: "eng", conceptUri: await er.getConceptUri("United States")})).count();
+        expect(counts1).not.toEqual(counts6, "Comparison 5 failed!");
+        let count = 0;
+        q1.execQuery(() => {
+            count++;
+        }, async () => {
+            expect(counts1).toEqual(count, "Comparison 6 failed!");
+            const q = new QueryEvent("eng-4167169");
+            q.setRequestedResult(new RequestEventArticles({lang: "eng", conceptUri: await er.getConceptUri("United States")}));
+            const response = await er.execQuery(q);
+            expect(counts6).toEqual(_.get(response, "eng-4167169.articles.totalResults", 0), "Comparison 7 failed!");
+            done();
+        });
+    });
+
+    it("should test article sorting", async (done) => {
+        const response = await createQuery(1);
+        const q1 = new QueryEventArticlesIter(er, _.get(response, "params.eventUri"), {sortBy: "date", sortByAsc: true});
+        let wgt = undefined;
+        q1.execQuery((article) => {
+            if (!wgt) {
+                wgt = _.get(article, "wgt");
+            }
+            expect(_.get(article, "wgt")).toBeGreaterThanOrEqual(wgt);
+            wgt = _.get(article, "wgt");
+        }, () => {
+            wgt = undefined;
+            const q2 = new QueryEventArticlesIter(er, _.get(response, "params.eventUri"), {sortBy: "date", sortByAsc: false});
+            q2.execQuery((article) => {
+                if (!wgt) {
+                    wgt = _.get(article, "wgt");
+                }
+                expect(_.get(article, "wgt")).toBeLessThanOrEqual(wgt);
+                wgt = _.get(article, "wgt");
+            }, () => {
+                done();
+            });
+        });
+    });
+
     it("should test article count", async (done) => {
         const q = await createQuery(10);
         q.setRequestedResult(new RequestEventArticleUriWgts());

@@ -59,6 +59,7 @@ export class BaseQuery extends QueryCore {
         }
         this.setQueryArrVal("sourceLocationUri", args.sourceLocationUri);
         this.setQueryArrVal("sourceGroupUri", args.sourceGroupUri);
+        this.setQueryArrVal("authorUri", args.authorUri);
 
         if (!args.categoryIncludeSub) {
             this.queryObj["categoryIncludeSub"] = false;

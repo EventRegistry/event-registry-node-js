@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { mainLangs, Query } from "./base";
+import { mainLangs, Query, QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { QueryArticle, RequestArticleInfo } from "./queryArticle";
 import { QueryArticles, RequestArticlesInfo } from "./queryArticles";
@@ -11,7 +11,7 @@ import { ER } from "./types";
  */
 export class QueryEvent extends Query<RequestEvent> {
     /**
-     * @param eventUriOrList A single event uri or a list of event uris
+     * @param eventUriOrList A single event uri or a list of event uris (max 50)
      * @param requestedResult The information to return as the result of the query. By default return the details of the event
      */
     constructor(eventUriOrList: string | string[], requestedResult = new RequestEventInfo()) {
@@ -44,7 +44,6 @@ export class QueryEvent extends Query<RequestEvent> {
  */
 export class QueryEventArticlesIter extends QueryEvent {
     private readonly er: EventRegistry;
-    private readonly lang;
     private readonly sortBy;
     private readonly sortByAsc;
     private readonly returnInfo;
@@ -67,23 +66,82 @@ export class QueryEventArticlesIter extends QueryEvent {
     constructor(er: EventRegistry, eventUri: string, args: ER.QueryEvent.IteratorArguments = {}) {
         super(eventUri);
         const {
-            lang = mainLangs,
+            lang = undefined,
             sortBy = "cosSim",
             sortByAsc = false,
             returnInfo = new ReturnInfo({ articleInfo: new ArticleInfoFlags({ bodyLen: -1 }) }),
             maxItems = -1,
+            keywords = undefined,
+            conceptUri = undefined,
+            categoryUri = undefined,
+            sourceUri = undefined,
+            sourceLocationUri = undefined,
+            sourceGroupUri = undefined,
+            authorUri = undefined,
+            locationUri = undefined,
+            dateStart = undefined,
+            dateEnd = undefined,
+            dateMentionStart = undefined,
+            dateMentionEnd = undefined,
+            keywordsLoc = "body",
+            startSourceRankPercentile = 0,
+            endSourceRankPercentile = 100
         } = args;
         this.er = er;
-        this.lang = lang;
         this.sortBy = sortBy;
         this.sortByAsc = sortByAsc;
         this.returnInfo = returnInfo;
         this.maxItems = maxItems;
         this.eventUri = eventUri;
+        this.setQueryArrVal(keywords, "keyword", "keywordOper", "and");
+        this.setQueryArrVal(conceptUri, "conceptUri", "conceptOper", "and");
+        this.setQueryArrVal(categoryUri, "categoryUri", "categoryOper", "or");
+        this.setQueryArrVal(sourceUri, "sourceUri", "sourceOper", "or");
+        this.setQueryArrVal(sourceLocationUri, "sourceLocationUri", undefined, "or");
+        this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", "sourceGroupOper", "or");
+        this.setQueryArrVal(authorUri, "authorUri", "authorOper", "or");
+        this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
+        this.setQueryArrVal(lang, "lang", undefined, "or");
+
+        if (!_.isUndefined(dateStart)) {
+            this.setDateVal("dateStart", dateStart);
+        }
+
+        if (!_.isUndefined(dateEnd)) {
+            this.setDateVal("dateEnd", dateEnd);
+        }
+
+        if (!_.isUndefined(dateMentionStart)) {
+            this.setDateVal("dateMentionStart", dateMentionStart);
+        }
+
+        if (!_.isUndefined(dateMentionEnd)) {
+            this.setDateVal("dateMentionEnd", dateMentionEnd);
+        }
+
+        this.setValIfNotDefault("keywordLoc", keywordsLoc, "body");
+
+        if (startSourceRankPercentile < 0 || startSourceRankPercentile % 10 !== 0 || startSourceRankPercentile > 100) {
+            throw new Error("StartSourceRankPercentile: Value should be in range 0-90 and divisible by 10.");
+        }
+        if (endSourceRankPercentile < 0 || endSourceRankPercentile % 10 !== 0 || endSourceRankPercentile > 100) {
+            throw new Error("EndSourceRankPercentile: Value should be in range 0-90 and divisible by 10.");
+        }
+        if (startSourceRankPercentile > endSourceRankPercentile) {
+            throw new Error("SourceRankPercentile: startSourceRankPercentile should be less than endSourceRankPercentile");
+        }
+
+        if (startSourceRankPercentile !== 0 ) {
+            this.setVal("startSourceRankPercentile", startSourceRankPercentile);
+        }
+
+        if (endSourceRankPercentile !== 100 ) {
+            this.setVal("endSourceRankPercentile", endSourceRankPercentile);
+        }
     }
 
-    public async count(lang = mainLangs) {
-        this.setRequestedResult(new RequestEventArticles({lang}));
+    public async count() {
+        this.setRequestedResult(new RequestEventArticles(this.getQueryParams()));
         const response = await this.er.execQuery(this);
         if (_.has(response, "error")) {
             console.error(_.get(response, "error"));
@@ -132,15 +190,13 @@ export class QueryEventArticlesIter extends QueryEvent {
             if (this.page > this.pages || (this.maxItems !== -1 && this.returnedSoFar >= this.maxItems)) {
                 return false;
             }
-            const requestEventArticles = new RequestEventArticles({
+            this.setRequestedResult(new RequestEventArticles({
                 page: this.page,
-                count: 100,
-                lang: this.lang,
                 sortBy: this.sortBy,
                 sortByAsc: this.sortByAsc,
                 returnInfo: this.returnInfo,
-            });
-            this.setRequestedResult(requestEventArticles);
+                ...this.getQueryParams(),
+            }));
             if (this.er.verboseOutput) {
                 console.log(`Downloading page ${this.page}...`);
             }
@@ -161,8 +217,7 @@ export class QueryEventArticlesIter extends QueryEvent {
         }
     }
 }
-
-export class RequestEvent {}
+export class RequestEvent extends QueryParamsBase {}
 
 /**
  * @class RequestEventInfo
@@ -190,7 +245,22 @@ export class RequestEventArticles extends RequestEvent {
         const {
             page = 1,
             count = 100,
-            lang = mainLangs,
+            lang = undefined,
+            keywords = undefined,
+            conceptUri = undefined,
+            categoryUri = undefined,
+            sourceUri = undefined,
+            sourceLocationUri = undefined,
+            sourceGroupUri = undefined,
+            authorUri = undefined,
+            locationUri = undefined,
+            dateStart = undefined,
+            dateEnd = undefined,
+            dateMentionStart = undefined,
+            dateMentionEnd = undefined,
+            keywordsLoc = "body",
+            startSourceRankPercentile = 0,
+            endSourceRankPercentile = 100,
             sortBy = "cosSim",
             sortByAsc = false,
             returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: -1})}),
@@ -204,10 +274,48 @@ export class RequestEventArticles extends RequestEvent {
         this.params = {};
         this.params["articlesPage"] = page;
         this.params["articlesCount"] = count;
-        this.params["articlesLang"] = lang;
         this.params["articlesSortBy"] = sortBy;
         this.params["articlesSortByAsc"] = sortByAsc;
-        this.params = _.extend({}, this.params, returnInfo.getParams("articles"));
+        this.setQueryArrVal(keywords, "keyword", "keywordOper", "and");
+        this.setQueryArrVal(conceptUri, "conceptUri", "conceptOper", "and");
+        this.setQueryArrVal(categoryUri, "categoryUri", "categoryOper", "or");
+        this.setQueryArrVal(sourceUri, "sourceUri", "sourceOper", "or");
+        this.setQueryArrVal(sourceLocationUri, "sourceLocationUri", undefined, "or");
+        this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", "sourceGroupOper", "or");
+        this.setQueryArrVal(authorUri, "authorUri", "authorOper", "or");
+        this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
+        this.setQueryArrVal(lang, "lang", undefined, "or");
+        if (!_.isUndefined(dateStart)) {
+            this.setDateVal("dateStart", dateStart);
+        }
+        if (!_.isUndefined(dateEnd)) {
+            this.setDateVal("dateEnd", dateEnd);
+        }
+        if (!_.isUndefined(dateMentionStart)) {
+            this.setDateVal("dateMentionStart", dateMentionStart);
+        }
+        if (!_.isUndefined(dateMentionEnd)) {
+            this.setDateVal("dateMentionEnd", dateMentionEnd);
+        }
+        this.setValIfNotDefault("keywordLoc", keywordsLoc, "body");
+        if (startSourceRankPercentile < 0 || startSourceRankPercentile % 10 !== 0 || startSourceRankPercentile > 100) {
+            throw new Error("StartSourceRankPercentile: Value should be in range 0-90 and divisible by 10.");
+        }
+        if (endSourceRankPercentile < 0 || endSourceRankPercentile % 10 !== 0 || endSourceRankPercentile > 100) {
+            throw new Error("EndSourceRankPercentile: Value should be in range 0-90 and divisible by 10.");
+        }
+        if (startSourceRankPercentile > endSourceRankPercentile) {
+            throw new Error("SourceRankPercentile: startSourceRankPercentile should be less than endSourceRankPercentile");
+        }
+
+        if (startSourceRankPercentile !== 0 ) {
+            this.setVal("startSourceRankPercentile", startSourceRankPercentile);
+        }
+
+        if (endSourceRankPercentile !== 100 ) {
+            this.setVal("endSourceRankPercentile", endSourceRankPercentile);
+        }
+        this.params = _.extend({}, this.params, this.getQueryParams(), returnInfo.getParams("articles"));
     }
 }
 
@@ -222,12 +330,14 @@ export class RequestEventArticleUriWgts extends RequestEvent {
     constructor(args: ER.QueryEvent.RequestEventArticleUriWgtsArguments = {}) {
         super();
         const {
-            lang = mainLangs,
+            lang = undefined,
             sortBy = "cosSim",
             sortByAsc = false,
         } = args;
         this.params = {};
-        this.params["uriWgtListLang"] = lang;
+        if (!_.isUndefined(lang)) {
+            this.params["articlesLang"] = lang;
+        }
         this.params["uriWgtListSortBy"] = sortBy;
         this.params["uriWgtListSortByAsc"] = sortByAsc;
     }
@@ -246,7 +356,7 @@ export class RequestEventKeywordAggr extends RequestEvent {
     constructor(lang = "eng") {
         super();
         this.params = {};
-        this.params["keywordAggrLang"] = lang;
+        this.params["articlesLang"] = lang;
     }
 }
 /**
@@ -276,7 +386,7 @@ export class RequestEventArticleTrend extends RequestEvent {
     constructor(args: ER.QueryEvent.RequestEventArticleTrendArguments = {}) {
         super();
         const {
-            lang = mainLangs,
+            lang = undefined,
             page = 1,
             count = 100,
             minArticleCosSim = -1,
@@ -289,7 +399,7 @@ export class RequestEventArticleTrend extends RequestEvent {
             throw new RangeError("At most 100 articles can be returned per call");
         }
         this.params = {};
-        this.params["articleTrendLang"] = lang;
+        this.params["articlesLang"] = lang;
         this.params["articleTrendPage"] = page;
         this.params["articleTrendCount"] = count;
         this.params["articleTrendMinArticleCosSim"] = minArticleCosSim;

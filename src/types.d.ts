@@ -528,6 +528,10 @@ export module ER {
              */
             sourceGroupUri?: string | string[];
             /**
+             * Author(s) to query. Either undefined, string or QueryItems.
+             */
+            authorUri?: string | string[];
+            /**
              * Should we include the subcategories of the searched categories?
              */
             categoryIncludeSub?: boolean;
@@ -667,7 +671,13 @@ export module ER {
              */
             sourceGroupUri?: string | string[] | QueryItems;
             /**
-             * find articles that describe something that occured at a particular location.
+             * Find articles that were written by a specific author.
+             * If multiple authors should be considered use QueryItems.OR() to provide the list of authors.
+             * Author uri for a given author name can be obtained using EventRegistry.getAuthorUri().
+             */
+            authorUri?: string | string[] | QueryItems;
+            /**
+             * Find articles that describe something that occured at a particular location.
              * If value can be a string or a list of strings provided in QueryItems.OR().
              * Location uri can either be a city or a country. Location uri for a given name can be obtained using EventRegistry.getLocationUri().
              */
@@ -718,6 +728,10 @@ export module ER {
              */
             ignoreSourceGroupUri?: string | string[] | QueryItems;
             /**
+             * Ignore articles that were written by *any* of the specified authors.
+             */
+            ignoreAuthorUri?: string | string[] | QueryItems;
+            /**
              * Ignore articles that occurred in any of the provided locations. A location can be a city or a place.
              */
             ignoreLocationUri?: string | string[] | QueryItems;
@@ -756,6 +770,14 @@ export module ER {
              */
             eventFilter?: "skipArticlesWithoutEvent" | "keepOnlyArticlesWithoutEvent" | "keepAll";
             /**
+             * Starting percentile of the sources to consider in the results (default: 0). Value should be in range 0-90 and divisible by 10.
+             */
+            startSourceRankPercentile?: number;
+            /**
+             * Ending percentile of the sources to consider in the results (default: 100). Value should be in range 10-100 and divisible by 10.
+             */
+            endSourceRankPercentile?: number;
+            /**
              * what data types should we search? "news" (news content, default), "pr" (press releases), or "blogs".
              *   If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
              */
@@ -783,6 +805,9 @@ export module ER {
          */
         export type SortByOptions = "id" | "date" | "cosSim" | "sourceImportance" | "sourceImportanceRank" | "sourceAlexaGlobalRank" | "sourceAlexaCountryRank" | "socialScore" | "facebookShares";
 
+        export interface RequestEvent {
+
+        }
         export interface IteratorArguments {
             /**
              * Array or a single language in which to return the list of matching articles
@@ -808,6 +833,21 @@ export module ER {
              * Maximum number of items to be returned. Used to stop iteration sooner than results run out
              */
             maxItems?: number;
+            keywords?: string | string[] | QueryItems;
+            conceptUri?: string | string[] | QueryItems;
+            categoryUri?: string | string[] | QueryItems;
+            sourceUri?: string | string[] | QueryItems;
+            sourceLocationUri?: string | string[] | QueryItems;
+            sourceGroupUri?: string | string[] | QueryItems;
+            authorUri?: string | string[] | QueryItems;
+            locationUri?: string | string[] | QueryItems;
+            dateStart?: string | string[] | QueryItems;
+            dateEnd?: string | string[] | QueryItems;
+            dateMentionStart?: string | string[] | QueryItems;
+            dateMentionEnd?: string | string[] | QueryItems;
+            keywordsLoc?: "body" | "title" | "body,title";
+            startSourceRankPercentile?: number;
+            endSourceRankPercentile?: number;
         }
 
         export interface RequestEventArticlesArguments {
@@ -835,6 +875,21 @@ export module ER {
              * what details should be included in the returned information
              */
             returnInfo?: ReturnInfo;
+            keywords?: string | string[] | QueryItems;
+            conceptUri?: string | string[] | QueryItems;
+            categoryUri?: string | string[] | QueryItems;
+            sourceUri?: string | string[] | QueryItems;
+            sourceLocationUri?: string | string[] | QueryItems;
+            sourceGroupUri?: string | string[] | QueryItems;
+            authorUri?: string | string[] | QueryItems;
+            locationUri?: string | string[] | QueryItems;
+            dateStart?: string | string[] | QueryItems;
+            dateEnd?: string | string[] | QueryItems;
+            dateMentionStart?: string | string[] | QueryItems;
+            dateMentionEnd?: string | string[] | QueryItems;
+            keywordsLoc?: "body" | "title" | "body,title";
+            startSourceRankPercentile?: number;
+            endSourceRankPercentile?: number;
         }
 
         export interface RequestEventArticleUriWgtsArguments {
@@ -978,6 +1033,12 @@ export module ER {
              */
             sourceGroupUri?: string | string[] | QueryItems;
             /**
+             * find events that contain one or more articles that have been written by a specific author.
+             * If multiple authors should be considered use QueryItems.OR() or QueryItems.AND() to provide the list of authors.
+             * Author uri for a given author name can be obtained using EventRegistry.getAuthorUri().
+             */
+            authorUri?: string | string[] | QueryItems;
+            /**
              * find events that occurred at a particular location.
              * If value can be a string or a list of strings provided in QueryItems.OR().
              * Location uri can either be a city or a country.
@@ -1037,6 +1098,10 @@ export module ER {
              * ignore events that have articles which have been written by sources in *any* of the specified source groups
              */
             ignoreSourceGroupUri?: string | string[] | QueryItems;
+            /**
+             * ignore articles that were written by *any* of the specified authors
+             */
+            ignoreAuthorUri?: string | string[] | QueryItems;
             /**
              * ignore events that occurred in any of the provided locations. A location can be a city or a place
              */
@@ -1363,6 +1428,10 @@ export module ER {
              * uri of the event to which the article belongs
              */
             eventUri?: boolean;
+            /**
+             * the list of authors of the news article
+             */
+            authors?: boolean;
             /**
              * the list of concepts mentioned in the article
              */

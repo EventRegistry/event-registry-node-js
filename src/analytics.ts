@@ -29,9 +29,12 @@ export class Analytics {
     /**
      * Determine the set of up to 5 categories the text is about. Currently, only English text can be categorized!
      * @param text input text to categorize
+     * @param taxonomy: which taxonomy use for categorization. Options:
+     *  - "dmoz" (over 5000 categories in 3 levels, English language only)
+     *  - "news" (general news categorization, 9 categories, any langauge)
      */
-    public async categorize(text: string) {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/categorize",  { text }), "data");
+    public async categorize(text: string, taxonomy: "dmoz" | "news" = "dmoz") {
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/categorize",  { text, taxonomy }), "data");
     }
 
     /**
@@ -61,8 +64,21 @@ export class Analytics {
      * Extract all available information about an article available at url `url`.
      * Returned information will include article title, body, authors, links in the articles,...
      * @param url article url that'll be used for extraction
+     * @param proxyUrl proxy that should be used for downloading article information. format: {schema}://{username}:{pass}@{proxy url/ip}
      */
-    public async extractArticleInfo(url: string) {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/extractArticleInfo",  { url }), "data");
+    public async extractArticleInfo(url: string, proxyUrl?: string) {
+        const params = { url };
+        if (proxyUrl) {
+            _.set(params, "proxyUrl", proxyUrl);
+        }
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/extractArticleInfo", params), "data");
+    }
+
+    /**
+     * Extract named entities from the provided text. Supported languages are English, German, Spanish and Chinese.
+     * @param text: text on which to extract named entities
+     */
+    public async ner(text: string) {
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/ner",  { text }), "data");
     }
 }

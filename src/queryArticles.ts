@@ -15,6 +15,7 @@ export class QueryArticles extends Query<RequestArticles> {
             sourceUri,
             sourceLocationUri,
             sourceGroupUri,
+            authorUri,
             locationUri,
             lang,
             dateStart,
@@ -27,6 +28,7 @@ export class QueryArticles extends Query<RequestArticles> {
             ignoreSourceUri,
             ignoreSourceLocationUri,
             ignoreSourceGroupUri,
+            ignoreAuthorUri,
             ignoreLocationUri,
             ignoreLang,
             keywordsLoc = "body",
@@ -34,6 +36,8 @@ export class QueryArticles extends Query<RequestArticles> {
             isDuplicateFilter = "keepAll",
             hasDuplicateFilter = "keepAll",
             eventFilter = "keepAll",
+            startSourceRankPercentile = 0,
+            endSourceRankPercentile = 100,
             dataType = "news",
             requestedResult = new RequestArticlesInfo(),
         } = args;
@@ -44,6 +48,7 @@ export class QueryArticles extends Query<RequestArticles> {
         this.setQueryArrVal(sourceUri, "sourceUri", "sourceOper", "or");
         this.setQueryArrVal(sourceLocationUri, "sourceLocationUri", undefined, "or");
         this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", "sourceGroupOper", "or");
+        this.setQueryArrVal(authorUri, "authorUri", "authorOper", "or");
         this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
         this.setQueryArrVal(lang, "lang", undefined, "or");
         if (!_.isUndefined(dateStart)) {
@@ -64,6 +69,7 @@ export class QueryArticles extends Query<RequestArticles> {
         this.setQueryArrVal(ignoreSourceUri, "ignoreSourceUri", undefined, "or");
         this.setQueryArrVal(ignoreSourceLocationUri, "ignoreSourceLocationUri", undefined, "or");
         this.setQueryArrVal(ignoreSourceGroupUri, "ignoreSourceGroupUri", undefined, "or");
+        this.setQueryArrVal(ignoreAuthorUri, "ignoreAuthorUri", undefined, "or");
         this.setQueryArrVal(ignoreLocationUri, "ignoreLocationUri", undefined, "or");
         this.setQueryArrVal(ignoreLang, "ignoreLang", undefined, "or");
         this.setValIfNotDefault("keywordLoc", keywordsLoc, "body");
@@ -71,7 +77,25 @@ export class QueryArticles extends Query<RequestArticles> {
         this.setValIfNotDefault("isDuplicateFilter", isDuplicateFilter, "keepAll");
         this.setValIfNotDefault("hasDuplicateFilter", hasDuplicateFilter, "keepAll");
         this.setValIfNotDefault("eventFilter", eventFilter, "keepAll");
-        this.setValIfNotDefault("dataType", dataType, "news");
+        if (startSourceRankPercentile < 0 || startSourceRankPercentile % 10 !== 0 || startSourceRankPercentile > 100) {
+            throw new Error("StartSourceRankPercentile: Value should be in range 0-90 and divisible by 10.");
+        }
+        if (endSourceRankPercentile < 0 || endSourceRankPercentile % 10 !== 0 || endSourceRankPercentile > 100) {
+            throw new Error("EndSourceRankPercentile: Value should be in range 0-90 and divisible by 10.");
+        }
+        if (startSourceRankPercentile > endSourceRankPercentile) {
+            throw new Error("SourceRankPercentile: startSourceRankPercentile should be less than endSourceRankPercentile");
+        }
+
+        if (startSourceRankPercentile !== 0 ) {
+            this.setVal("startSourceRankPercentile", startSourceRankPercentile);
+        }
+
+        if (endSourceRankPercentile !== 100 ) {
+            this.setVal("endSourceRankPercentile", endSourceRankPercentile);
+        }
+
+        this.setVal("dataType", dataType);
         this.setRequestedResult(requestedResult);
     }
 
@@ -316,7 +340,10 @@ export class RequestArticlesTimeAggr extends RequestArticles {
 export class RequestArticlesConceptAggr extends RequestArticles {
     public resultType = "conceptAggr";
     public params;
-    constructor({conceptCount = 25,
+    constructor({
+                 conceptCount = 25,
+                 conceptCountPerType = undefined,
+                 conceptScoring = "importance",
                  articlesSampleSize = 10000,
                  returnInfo = new ReturnInfo(),
                 } = {}) {
@@ -330,6 +357,10 @@ export class RequestArticlesConceptAggr extends RequestArticles {
         this.params = {};
         this.params["conceptAggrConceptCount"] = conceptCount;
         this.params["conceptAggrSampleSize"] = articlesSampleSize;
+        this.params["conceptAggrScoring"] = conceptScoring;
+        if (!_.isUndefined(conceptCountPerType)) {
+            this.params["conceptAggrConceptCountPerType"] = conceptCountPerType;
+        }
         this.params = _.extend({}, this.params, returnInfo.getParams("conceptAggr"));
     }
 }
@@ -353,7 +384,10 @@ export class RequestArticlesCategoryAggr extends RequestArticles {
 export class RequestArticlesSourceAggr extends RequestArticles {
     public resultType = "sourceAggr";
     public params;
-    constructor({articlesSampleSize = 20000,
+    constructor({
+                 articlesSampleSize = 20000,
+                 sourceCount = 50,
+                 normalizeBySourceArts = false,
                  returnInfo = new ReturnInfo(),
                 } = {}) {
         super();
@@ -361,6 +395,7 @@ export class RequestArticlesSourceAggr extends RequestArticles {
             throw new RangeError("at most 1000000 articles can be used for computation sample");
         }
         this.params = {};
+        this.params["sourceAggrSourceCount"] = sourceCount;
         this.params["sourceAggrSampleSize"] = articlesSampleSize;
         this.params = _.extend({}, this.params, returnInfo.getParams("sourceAggr"));
     }
@@ -369,15 +404,12 @@ export class RequestArticlesSourceAggr extends RequestArticles {
 export class RequestArticlesKeywordAggr extends RequestArticles {
     public resultType = "keywordAggr";
     public params;
-    constructor({lang = "eng",
-                 articlesSampleSize = 2000,
-                } = {}) {
+    constructor({articlesSampleSize = 2000} = {}) {
         super();
         if (articlesSampleSize > 20000) {
             throw new RangeError("at most 20000 articles can be used for computation sample");
         }
         this.params = {};
-        this.params["keywordAggrLang"] = lang;
         this.params["keywordAggrSampleSize"] = articlesSampleSize;
     }
 }
@@ -388,6 +420,7 @@ export class RequestArticlesConceptGraph extends RequestArticles {
     constructor({conceptCount = 25,
                  linkCount = 50,
                  articlesSampleSize = 10000,
+                 skipQueryConcepts = true,
                  returnInfo = new ReturnInfo(),
                 } = {}) {
         super();
@@ -404,6 +437,7 @@ export class RequestArticlesConceptGraph extends RequestArticles {
         this.params["conceptGraphConceptCount"] = conceptCount;
         this.params["conceptGraphLinkCount"] = linkCount;
         this.params["conceptGraphSampleSize"] = articlesSampleSize;
+        this.params["conceptGraphSkipQueryConcepts"] = skipQueryConcepts;
         this.params = _.extend({}, this.params, returnInfo.getParams("conceptGraph"));
     }
 }
@@ -434,13 +468,14 @@ export class RequestArticlesConceptMatrix extends RequestArticles {
 export class RequestArticlesConceptTrends extends RequestArticles {
     public resultType = "conceptTrends";
     public params;
-    constructor({conceptUris = undefined,
-                 count = 25,
+    constructor({
+                 conceptUris = undefined,
+                 conceptCount = 25,
                  articlesSampleSize = 10000,
                  returnInfo = new ReturnInfo(),
                 } = {}) {
         super();
-        if (count > 50) {
+        if (conceptCount > 50) {
             throw new RangeError("At most 50 concepts can be returned per call");
         }
         if (articlesSampleSize > 50000) {
@@ -450,7 +485,7 @@ export class RequestArticlesConceptTrends extends RequestArticles {
         if (!_.isUndefined(conceptUris)) {
             this.params["conceptTrendsConceptUri"] = conceptUris;
         }
-        this.params["conceptTrendsConceptCount"] = count;
+        this.params["conceptTrendsConceptCount"] = conceptCount;
         this.params["conceptTrendsSampleSize"] = articlesSampleSize;
         this.params = _.extend({}, this.params, returnInfo.getParams("conceptTrends"));
     }
@@ -466,6 +501,8 @@ export class RequestArticlesRecentActivity extends RequestArticles {
     constructor({maxArticleCount = 100,
                  updatesAfterTm = undefined,
                  updatesAfterMinsAgo = undefined,
+                 updatesUntilTm = undefined,
+                 updatesUntilMinsAgo = undefined,
                  lang = undefined,
                  mandatorySourceLocation = false,
                  returnInfo = new ReturnInfo(),
@@ -477,13 +514,22 @@ export class RequestArticlesRecentActivity extends RequestArticles {
         if (!_.isUndefined(updatesAfterTm) && !_.isUndefined(updatesAfterMinsAgo)) {
             throw new Error("You should specify either updatesAfterTm or updatesAfterMinsAgo parameter, but not both");
         }
+        if (!_.isUndefined(updatesUntilTm) && !_.isUndefined(updatesUntilMinsAgo)) {
+            throw new Error("You should specify either updatesUntilTm or updatesUntilMinsAgo parameter, but not both");
+        }
         this.params = {};
         this.params["recentActivityArticlesMaxArticleCount"] = maxArticleCount;
         if (!_.isUndefined(updatesAfterTm)) {
             this.params["recentActivityArticlesUpdatesAfterTm"] = QueryParamsBase.encodeDateTime(updatesAfterTm);
         }
         if (!_.isUndefined(updatesAfterMinsAgo)) {
-            this.params["recentActivityEventsUpdatesAfterMinsAgo"] = updatesAfterMinsAgo;
+            this.params["recentActivityArticlesUpdatesAfterMinsAgo"] = updatesAfterMinsAgo;
+        }
+        if (!_.isUndefined(updatesUntilTm)) {
+            this.params["recentActivityArticlesUpdatesUntilTm"] = QueryParamsBase.encodeDateTime(updatesUntilTm);
+        }
+        if (!_.isUndefined(updatesUntilMinsAgo)) {
+            this.params["recentActivityArticlesUpdatesUntilMinsAgo"] = updatesUntilMinsAgo;
         }
         if (!_.isUndefined(lang)) {
             this.params["recentActivityArticlesLang"] = lang;
