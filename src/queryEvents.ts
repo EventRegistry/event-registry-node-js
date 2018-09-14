@@ -62,8 +62,8 @@ export class QueryEvents extends Query<RequestEvents> {
             this.setDateVal("dateEnd", dateEnd);
         }
 
-        this.setValIfNotDefault("minArticlesInEvent", minArticlesInEvent, 0);
-        this.setValIfNotDefault("maxArticlesInEvent", maxArticlesInEvent, Number.MAX_SAFE_INTEGER);
+        this.setValIfNotDefault("minArticlesInEvent", minArticlesInEvent, undefined);
+        this.setValIfNotDefault("maxArticlesInEvent", maxArticlesInEvent, undefined);
 
         if (!_.isUndefined(dateMentionStart)) {
             this.setDateVal("dateMentionStart", dateMentionStart);
@@ -606,7 +606,6 @@ export class RequestEventsRecentActivity extends RequestEvents {
             updatesAfterTm,
             updatesAfterMinsAgo,
             mandatoryLocation = true,
-            lang,
             minAvgCosSim = 0,
             returnInfo = new ReturnInfo(),
         } = args;
@@ -625,10 +624,6 @@ export class RequestEventsRecentActivity extends RequestEvents {
 
         if (!_.isUndefined(updatesAfterMinsAgo)) {
             this.params["recentActivityEventsUpdatesAfterMinsAgo"] = updatesAfterMinsAgo;
-        }
-
-        if (!_.isUndefined(lang)) {
-            this.params["recentActivityEventsLang"] = lang;
         }
 
         this.params["recentActivityEventsMinAvgCosSim"] = minAvgCosSim;

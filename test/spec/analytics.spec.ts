@@ -1,8 +1,8 @@
 import * as _ from "lodash";
-import { Analytics } from "../../src/index";
+import { Analytics, sleep } from "../../src/index";
 import { Utils } from "./utils";
 
-xdescribe("Analytics", () => {
+describe("Analytics", () => {
     const er = Utils.initAPI();
     let analytics;
 
@@ -77,7 +77,7 @@ xdescribe("Analytics", () => {
         done();
     });
 
-    it("should test semantics similarity", async (done) => {
+    it("should test article information extraction", async (done) => {
         const info = await analytics.extractArticleInfo("https://www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera");
         expect(info).toHaveProperty("title");
         expect(info).toHaveProperty("body");
@@ -85,6 +85,47 @@ xdescribe("Analytics", () => {
         expect(info).toHaveProperty("datetime");
         expect(info).toHaveProperty("image");
         // there can be other additional properties available, depending on what is available in the article
+        done();
+    });
+
+    it("should train topic", async (done) => {
+        const response1 = await analytics.trainTopicCreateTopic("my topic");
+        expect(response1).toHaveProperty("uri");
+        const uri = response1["uri"];
+        // tslint:disable-next-line:max-line-length
+        await analytics.trainTopicAddDocument(uri, "Facebook has removed 18 accounts and 52 pages associated with the Myanmar military, including the page of its commander-in-chief, after a UN report accused the armed forces of genocide and war crimes.");
+        // tslint:disable-next-line:max-line-length
+        await analytics.trainTopicAddDocument(uri, "Emmanuel Macron’s climate commitment to “make this planet great again” has come under attack after his environment minister dramatically quit, saying the French president was not doing enough on climate and other environmental goals.");
+        // tslint:disable-next-line:max-line-length
+        await analytics.trainTopicAddDocument(uri, "Theresa May claimed that a no-deal Brexit “wouldn’t be the end of the world” as she sought to downplay a controversial warning made by Philip Hammond last week that it would cost £80bn in extra borrowing and inhibit long-term economic growth.");
+        // finish training of the topic
+        const response2 = await analytics.trainTopicFinishTraining(uri);
+        expect(response2).toHaveProperty("topic");
+        const topic1 = response2["topic"];
+        expect(topic1).toHaveProperty("concepts");
+        expect(_.size(_.get(topic1, "concepts", []))).toBeGreaterThan(0);
+        expect(topic1).toHaveProperty("categories");
+        expect(_.size(_.get(topic1, "categories", []))).toBeGreaterThan(0);
+        // check that we can also get the topic later on
+        const response3 = await analytics.trainTopicGetTrainedTopic(uri);
+        expect(response3).toHaveProperty("topic");
+        const topic2 = response3["topic"];
+        expect(topic2).toHaveProperty("concepts");
+        expect(_.size(_.get(topic2, "concepts", []))).toBeGreaterThan(0);
+        expect(topic2).toHaveProperty("categories");
+        expect(_.size(_.get(topic2, "categories", []))).toBeGreaterThan(0);
+        done();
+    });
+
+    // TODO: Fails for no appearent reason.
+    xit("should train topic on twitter", async (done) => {
+        const response1 = await analytics.trainTopicOnTweets("@SeanEllis", {maxConcepts: 50, maxCategories: 20, maxTweets: 400});
+        expect(response1).toHaveProperty("uri");
+        const uri = response1["uri"];
+        await sleep(5 * 1000);
+        const response2 = await analytics.trainTopicGetTrainedTopic(uri);
+        console.log(response2);
+        expect(response2).toHaveProperty("topic");
         done();
     });
 

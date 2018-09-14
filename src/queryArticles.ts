@@ -503,7 +503,6 @@ export class RequestArticlesRecentActivity extends RequestArticles {
                  updatesAfterMinsAgo = undefined,
                  updatesUntilTm = undefined,
                  updatesUntilMinsAgo = undefined,
-                 lang = undefined,
                  mandatorySourceLocation = false,
                  returnInfo = new ReturnInfo(),
                 } = {}) {
@@ -530,9 +529,6 @@ export class RequestArticlesRecentActivity extends RequestArticles {
         }
         if (!_.isUndefined(updatesUntilMinsAgo)) {
             this.params["recentActivityArticlesUpdatesUntilMinsAgo"] = updatesUntilMinsAgo;
-        }
-        if (!_.isUndefined(lang)) {
-            this.params["recentActivityArticlesLang"] = lang;
         }
         this.params["recentActivityArticlesMandatorySourceLocation"] = mandatorySourceLocation;
         this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityArticles"));

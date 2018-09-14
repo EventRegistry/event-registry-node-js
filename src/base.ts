@@ -141,9 +141,20 @@ export class QueryParamsBase {
 }
 
 export abstract class Query<T> extends QueryParamsBase {
-    public abstract path: string;
     public resultTypeList: T[];
+    /**
+     * Set it to a default path.
+     */
+    protected internalPath: string;
     protected params = {};
+
+    public get path() {
+        return this.internalPath;
+    }
+
+    public set path(path) {
+        this.internalPath = path;
+    }
 
     /**
      * Prepare the request parameters
@@ -156,11 +167,17 @@ export abstract class Query<T> extends QueryParamsBase {
         _.each(this.resultTypeList, (resultType) => {
             _.extend(allParams, _.get(resultType, "params"));
         });
-        _.set(allParams, "resultType", this.formattedResultTypeList);
+        const formattedResultTypeList = this.getFormattedResultTypeList();
+        if (!_.isEmpty(formattedResultTypeList)) {
+            _.set(allParams, "resultType", formattedResultTypeList);
+        }
         return allParams;
     }
 
-    public get formattedResultTypeList() {
+    public getFormattedResultTypeList() {
+        if (!_.every(this.resultTypeList, (result) => _.has(result, "resultType"))) {
+            return [];
+        }
         if (_.size(this.resultTypeList) === 1) {
             return _.get(_.first(this.resultTypeList), "resultType");
         } else {

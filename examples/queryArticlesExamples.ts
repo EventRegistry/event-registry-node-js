@@ -40,23 +40,83 @@ er.execQuery(q4).then((response) => {
     console.info(response);
 });
 
+// if you already have some articles that you have received from Event Registry
+// for which you would like to obtain some potentially updated metadata (shared counts, event uri)
+// you can use the query shown below. When making such a query you can specify up to 100 article uris in a call.
+const q = QueryArticles.initWithArticleUriList(["934903913", "934902493", "934902499", "934902488", "934899375", "934900984", "934890360", "934888250"])
+const res = er.execQuery(q);
+
+/**
+ * Search for articles that:
+ * - mentions the concept Samsung
+ * - mention the phrase "iphone" in the article title
+ * - by BBC or by any news source located in Germany
+ * - in English or German language
+ * - return results sorted by relevance to the query (instead of "date" which is default)
+ */
+Promise.all([
+    er.getConceptUri("Samsung"),
+    er.getSourceUri("bbc"),
+    er.getLocationUri("Germany"),
+]).then(([samsungUri, bbcUri, germanyUri]) => {
+    const query1 = new QueryArticles({
+        conceptUri: samsungUri,
+        keywords: "iphone",
+        keywordLoc: "title",
+        lang: ["eng", "deu"],
+        sourceUri: bbcUri,
+        sourceLocationUri: germanyUri,
+    });
+    query1.setRequestedResult(new RequestArticlesInfo({sortBy: "rel"}));
+    return er.execQuery(query1);
+}).then((response) => {
+    console.log(response);
+});
+
+/**
+ * Find articles that:
+ *  - are related to business (categorized into business category)
+ *  - were published between 1st and 20th August 2018
+ *  - don't mention Trump in the article title
+ *  - are not a duplicate (copy) of another article
+ *  - are from a news source that is among top 20 percentile of sources
+ *  - return results sorted from most shared on social media to least
+ */
+er.getCategoryUri("business").then((businessUri) => {
+    const query1 = new QueryArticles({
+            categoryUri: businessUri,
+            dateStart: "2018-08-01",
+            dateEnd: "2018-08-20",
+            ignoreKeywords: "Trump",
+            ignoreKeywordsLoc: "title",
+            isDuplicateFilter: "skipDuplicates",
+            startSourceRankPercentile: 0,
+            endSourceRankPercentile: 20,
+    });
+    query1.setRequestedResult(new RequestArticlesInfo({sortBy: "socialScore"}));
+    return er.execQuery(query1);
+}).then((response) => {
+    console.log(response);
+});
+
 //  USE OF ITERATOR
 //  example of using the QueryArticlesIter to easily iterate through all results matching the search
 
-//  Search for articles mentioning George Clooney that were reported from sources from Germany or sources from Los Angeles
+//  Search for articles mentioning George Clooney that were reported from sources from Spain or sources from Los Angeles
 //  iterator class simplifies retrieving and listing the list of matching articles
 //  by specifying maxItems we say that we want to retrieve maximum 500 articles (without specifying the parameter we would iterate through all results)
+//  the results will be sorted from those that are from highest ranked news sources down
 
 Promise.all([
     er.getConceptUri("George Clooney"),
-    er.getLocationUri("Germany"),
+    er.getLocationUri("Spain"),
     er.getLocationUri("Los Angeles"),
-]).then(([clooneyUri, germanyUri, laUri]) => {
+]).then(([clooneyUri, spainUri, laUri]) => {
     const iterOpts = {
-        sortBy: "date",
+        sortBy: "sourceAlexaGlobalRank",
         maxItems: 500,
         conceptUri: clooneyUri,
-        sourceLocationUri:  QueryItems.OR([germanyUri, laUri]),
+        sourceLocationUri:  QueryItems.OR([spainUri, laUri]),
     };
     const q5 = new QueryArticlesIter(er, iterOpts);
     q5.execQuery((item) => {

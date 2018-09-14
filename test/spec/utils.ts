@@ -76,7 +76,7 @@ export class Utils {
                                                     placeCountry: true,
                                                   });
         this.categoryInfo = new CategoryInfoFlags({ parentUri: true, childrenUris: true, trendingScore: true, trendingHistory: true });
-        this.eventInfo = new EventInfoFlags({ commonDates: true, stories: true, socialScore: true, imageCount: 2 });
+        this.eventInfo = new EventInfoFlags({ commonDates: true, stories: true, socialScore: true, categories: true, imageCount: 2 });
         this.storyInfo = new StoryInfoFlags({ categories: true,
                                               date: true,
                                               concepts: true,
@@ -341,7 +341,7 @@ export class Utils {
 const utils = new Utils();
 
 beforeEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 120 * 1000;
     jasmine.addMatchers({
         toBeValidConcept: () => {
             return {

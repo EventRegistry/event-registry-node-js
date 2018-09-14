@@ -446,6 +446,46 @@ export module ER {
         }
     }
 
+    export namespace Analytics {
+        export interface TrainTopicOnTweetsArguments {
+            /**
+             * Do you want to analyze the content of the tweets and extract the concepts mentioned in them?
+             * If false, only content shared in the articles in the user's tweets will be analyzed.
+             */
+            useTweetText?: boolean;
+            /**
+             * The number of concepts to save in the final topic.
+             */
+            maxConcepts?: number;
+            /**
+             * The number of categories to save in the final topic.
+             */
+            maxCategories?: number;
+            /**
+             * The maximum number of tweets to collect for the user to analyze.
+             */
+            maxTweets?: number;
+            /**
+             * When finished, should we send a notification email to this address?
+             */
+            notifyEmailAddress?: string;
+        }
+        export interface TrainTopicFinishTrainingArguments {
+            /**
+             * number of top concepts to save in the topic
+             */
+            maxConcepts?: number;
+            /**
+             * number of top categories to save in the topic
+             */
+            maxCategories?: number;
+            /**
+             * should the concepts be normalized by punishing the commonly mentioned concepts
+             */
+            idfNormalization?: boolean;
+        }
+    }
+
     export namespace Info {
         export interface GetSourceInfoArguments {
             /**
@@ -1385,10 +1425,6 @@ export module ER {
              * return only events that have a geographic location assigned to them
              */
             mandatoryLocation?: boolean;
-            /**
-             * limit the results to events that are described in the selected language (None if not filtered by any language)
-             */
-            lang?: string | string[];
             /**
              * the minimum avg cos sim of the events to be returned (events with lower quality should not be included)
              */

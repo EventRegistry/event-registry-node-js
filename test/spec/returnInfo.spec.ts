@@ -2,7 +2,7 @@ import * as _ from "lodash";
 import { QueryArticles, QueryEvents, RequestArticlesInfo, RequestEventsInfo } from "../../src";
 import { Utils } from "./utils";
 
-describe("Return Info", () => {
+fdescribe("Return Info", () => {
     const er = Utils.initAPI();
     const utils = new Utils();
     it("should have a valid article", async (done) => {

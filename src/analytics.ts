@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import { EventRegistry } from "./eventRegistry";
+import { ER } from "./types";
 
 // The Analytics class can be used for access the text analytics services provided by the Event Registry.
 // These include:
@@ -80,5 +81,77 @@ export class Analytics {
      */
     public async ner(text: string) {
         return _.get(await this.er.jsonRequestAnalytics("/api/v1/ner",  { text }), "data");
+    }
+
+    /**
+     * Create a new topic and train it using the tweets that match the twitterQuery
+     * @param twitterQuery string containing the content to search for. It can be a Twitter user account (using "@" prefix or user's Twitter url),a hash tag (using "#" prefix) or a regular keyword.
+     * @param args Object which contains a host of optional parameters
+     */
+    public async trainTopicOnTweets(twitterQuery: string, args: ER.Analytics.TrainTopicOnTweetsArguments = {}) {
+        const {
+            useTweetText = true,
+            maxConcepts = 20,
+            maxCategories = 10,
+            maxTweets = 2000,
+            notifyEmailAddress = undefined,
+        } = args;
+        if (maxTweets > 5000) {
+            throw new Error("We can analyze at most 5000 tweets");
+        }
+        const params = {twitterQuery, useTweetText, maxConcepts, maxCategories, maxTweets};
+        if (notifyEmailAddress) {
+            _.set(params, "notifyEmailAddress", notifyEmailAddress);
+        }
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopicOnTwitter",  params), "data");
+    }
+
+    /**
+     * Create a new topic to train. The user should remember the "uri" parameter returned in the result.
+     * @param name name of the topic we want to create
+     * @returns object containing the "uri" property that should be used in the follow-up call to trainTopic* methods
+     */
+    public async trainTopicCreateTopic(name: string) {
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "createTopic", name: name}), "data");
+    }
+
+    /**
+     * Add the information extracted from the provided "text" to the topic with uri "uri".
+     * @param uri uri of the topic (obtained by calling trainTopicCreateTopic method)
+     * @param text text to analyze and extract information from
+     */
+    public async trainTopicAddDocument(uri: string, text: string) {
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "addDocument", uri: uri, text: text}), "data");
+    }
+
+    /**
+     * Add the information extracted from the provided "text" to the topic with uri "uri".
+     * @param uri uri of the topic (obtained by calling trainTopicCreateTopic method)
+     * @param args Object which contains a host of optional parameters
+     * @returns returns the trained topic: { concepts: [], categories: [] }
+     */
+    public async trainTopicFinishTraining(uri: string, args: ER.Analytics.TrainTopicFinishTrainingArguments = {}) {
+        const {
+            maxConcepts = 20,
+            maxCategories = 10,
+            idfNormalization = true,
+        } = args;
+        const params = {
+            action: "finishTraining",
+            uri: uri,
+            maxConcepts: maxConcepts,
+            maxCategories: maxCategories,
+            idfNormalization: idfNormalization,
+        };
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", params), "data");
+    }
+
+    /**
+     * Retrieve topic for the topic for which you have already finished training
+     * @param uri uri of the topic (obtained by calling trainTopicCreateTopic method)
+     * @returns returns the trained topic: { concepts: [], categories: [] }
+     */
+    public async trainTopicGetTrainedTopic(uri: string) {
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "getTrainedTopic", uri: uri }), "data");
     }
 }

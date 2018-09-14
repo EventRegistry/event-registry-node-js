@@ -2,6 +2,12 @@
 
 This log contains changes specific to the NodeJS SDK.
 
+## [v8.5]() (2018-09-14)
+
+**Added**
+- Added `Analytics.trainTopicOnTweets()` method that can be used to train a topic by analyzing a group of tweets. See example of usage on the [wiki page](https://github.com/EventRegistry/event-registry-python/wiki/Text-analytics#train-a-topic-based-on-the-tweets).
+- Added a group of `Analytics.trainTopic*()` methods that can be used to analyze your own documents and build a topic from them. See example of usage on the [wiki page](https://github.com/EventRegistry/event-registry-python/wiki/Text-analytics#train-a-custom-topic).
+
 ## [v8.4.0]() (2018-09-13)
 
 **Added**

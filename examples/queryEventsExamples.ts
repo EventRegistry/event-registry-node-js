@@ -7,11 +7,14 @@ import {
     EventRegistry,
     QueryEvents,
     QueryEventsIter,
+    QueryItems,
     RequestEventsCategoryAggr,
     RequestEventsConceptAggr,
     RequestEventsConceptGraph,
     RequestEventsConceptTrends,
     RequestEventsInfo,
+    RequestEventsLocAggr,
+    RequestEventsTimeAggr,
     RequestEventsUriList,
     ReturnInfo,
 } from "eventregistry";
@@ -37,16 +40,35 @@ er.getConceptUri("Obama").then((conceptUri) => {
         console.info(event);
     });
 });
-// make a query for events - specify each condition independently
-// get events related to obama
-er.getConceptUri("Obama").then((conceptUri) => {
-    const query = new QueryEvents({conceptUri});
+/**
+ * find events that:
+ * - are about Barack Obama
+ * - that were covered also by New York Times
+ * - that occured in 2015
+ * - return events sorted by how much were articles in the event shared on social media (instead of relevance, which is default)
+ */
+Promise.all([er.getConceptUri("Obama"), er.getSourceUri("new york times")]).then(([obamaUri, nytimesUri]) => {
+    const query = new QueryEvents({conceptUri: obamaUri, dateStart: "2015-01-01", dateEnd: "2015-12-31", sourceUri: nytimesUri});
     // return a list of event URIs (i.e. ["eng-234", "deu-234", ...])
-    query.setRequestedResult(new RequestEventsUriList());
+    query.setRequestedResult(new RequestEventsInfo({sortBy: "socialScore"}));
     const res1 = er.execQuery(query);
-    // use the previous query, but change the return details to return information about 30 events that are most related to Obama
+});
+
+/**
+ * find events that:
+ * - contain articles that mention words Apple, Google and Samsung
+ * - contain at least one article from a news source that is located in Italy
+ */
+er.getLocationUri("Italy").then((italyUri) => {
+    const query = new QueryEvents({keywords: QueryItems.AND(["Apple", "Google", "Samsung"]), sourceLocationUri: italyUri});
+    const res1 = er.execQuery(query);
+
+    /**
+     * use the previous query, but change the return details to return information about 30 events sorted from latest to oldest
+     * when providing the concept information include the labels of the concept in German language
+     */
     const returnInfo = new ReturnInfo({conceptInfo: new ConceptInfoFlags({lang: "deu", type: ["person", "wiki"]})});
-    const requestEventsInfo = new RequestEventsInfo({count: 30, sortBy: "rel", sortByAsc: false, returnInfo: returnInfo});
+    const requestEventsInfo = new RequestEventsInfo({count: 30, sortBy: "date", sortByAsc: false, returnInfo: returnInfo});
     query.setRequestedResult(requestEventsInfo);
     const res2 = er.execQuery(query);
 
@@ -60,7 +82,7 @@ er.getConceptUri("Obama").then((conceptUri) => {
 // get the URI for the BBC news source
 er.getNewsSourceUri("BBC").then((sourceUri) => {
     console.info(`Source uri for 'BBC' is ${sourceUri}`);
-    // query for events reported by BBC News
+    // query for events that were reported by BBC News
     const query = new QueryEvents({sourceUri});
     // return details about 30 events that have been most recently reported by BBC
     const requestEventsInfo = new RequestEventsInfo({count: 30, sortBy: "date", sortByAsc: false});
@@ -77,6 +99,31 @@ er.getCategoryUri("society issues").then((categoryUri) => {
     const requestEventsInfo = new RequestEventsInfo({count: 30, sortBy: "size", sortByAsc: false});
     query.setRequestedResult(requestEventsInfo);
     const res = er.execQuery(query);
+});
+
+//
+// OTHER AGGREGATES (INSTEAD OF OBTAINING EVENTS)
+//
+// find events that occured in Germany between 2014-04-16 and 2014-04-28
+// from the resulting events produce:
+
+er.getLocationUri("Germany").then((germanyUri) => {
+    const q = new QueryEvents({locationUri: germanyUri, dateStart: "2017-12-16", dateEnd: "2018-01-28"});
+    // get the list of top concepts about the events that match criteria
+    q.setRequestedResult(new RequestEventsConceptAggr());
+    const res1 = er.execQuery(q);
+    // find where the events occured geographically
+    q.setRequestedResult(new RequestEventsLocAggr());
+    const res2 = er.execQuery(q);
+    // find when the events matching the criteria occurred
+    q.setRequestedResult(new RequestEventsTimeAggr());
+    const res3 = er.execQuery(q);
+    // the trending information about the top people involved in these events
+    q.setRequestedResult(new RequestEventsConceptTrends({conceptCount: 40, returnInfo: new ReturnInfo({conceptInfo: new ConceptInfoFlags({type: ["person"]})})}));
+    const res4 = er.execQuery(q);
+    // get the top categories about the same events
+    q.setRequestedResult(new RequestEventsCategoryAggr());
+    const res5 = er.execQuery(q);
 });
 
 // find events that occurred in Berlin between 2014-04-16 and 2014-04-28
@@ -125,9 +172,14 @@ er.getCategoryUri("Business").then((categoryUri) => {
     const res = er.execQuery(query);
 });
 
-// example of a complex query containing a combination of OR and AND parameters
-// get events that happened on 2017-02-05 or are about trump or are about politics or are about Merkel and business
-// and did not happen on 2017-02-05 or are about Obama
+/**
+ * get events that:
+ * - happened on 2017-02-05
+ * - are about trump, or
+ * - are about politics, or
+ * - are about Merkel and business
+ * and did not happen on 2017-02-04 or are about Obama
+ */
 Promise.all([
     er.getConceptUri("Trump"),
     er.getConceptUri("Obama"),

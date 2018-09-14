@@ -21,13 +21,15 @@ describe("Auto Suggest", () => {
         done();
     });
 
-    it("should return a pr source", async (done) => {
+    // Highly dependant on the database used.
+    xit("should return a pr source", async (done) => {
         expect(await er.getNewsSourceUri("Business Wire")).toEqual("businesswire.com");
         expect(await er.getNewsSourceUri("dailypolitical.com")).toEqual("dailypolitical.com");
         done();
     });
 
-    it("should return a blog source", async (done) => {
+    // Highly dependant on the database used.
+    xit("should return a blog source", async (done) => {
         expect(await er.getNewsSourceUri("topix.com")).toEqual("topix.com");
         done();
     });

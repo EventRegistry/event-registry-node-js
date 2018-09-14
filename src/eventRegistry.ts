@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import * as fs from "fs";
 import * as _ from "lodash";
 import * as moment from "moment";
+import Semaphore from 'semaphore-async-await';
 import * as Qs from "qs";
 import * as winston from "winston";
 import { sleep } from "./base";
@@ -27,8 +28,10 @@ export class EventRegistry {
     private dailyAvailableRequests = -1;
     private remainingAvailableRequests = -1;
     private lastQueryTime = 0;
+    private lock: Semaphore;
 
     constructor(config: ER.Config = {}) {
+        this.lock = new Semaphore(1);
         if (fs && fs.existsSync(this.config.settingsFName || "settings.json")) {
             const localConfig = JSON.parse(fs.readFileSync(this.config.settingsFName || "settings.json", "utf8"));
             _.extend(this.config, localConfig);
@@ -97,6 +100,7 @@ export class EventRegistry {
 
     public async jsonRequestAnalytics(path, parameters?): Promise<AxiosResponse> {
         let request;
+        await this.lock.acquire();
         try {
             _.set(parameters, "apiKey", this.config.apiKey);
             request = await axios.request({
@@ -124,6 +128,8 @@ export class EventRegistry {
             if (this.config.logging) {
                 this.logger.error(_.get(error, "errno", error));
             }
+        } finally {
+            this.lock.release();
         }
         return request;
     }
@@ -139,6 +145,7 @@ export class EventRegistry {
         if (this.lastQueryTime && current - this.lastQueryTime < this.config.minDelayBetweenRequests) {
             await sleep(this.config.minDelayBetweenRequests - (current - this.lastQueryTime) );
         }
+        await this.lock.acquire();
         this.lastQueryTime = current;
         try {
             _.set(parameters, "apiKey", this.config.apiKey);
@@ -176,6 +183,8 @@ export class EventRegistry {
             if (this.config.logging) {
                 this.logger.error(_.get(error, "errno", error));
             }
+        } finally {
+            this.lock.release();
         }
         return request;
     }

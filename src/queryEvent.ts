@@ -16,13 +16,8 @@ export class QueryEvent extends Query<RequestEvent> {
      */
     constructor(eventUriOrList: string | string[], requestedResult = new RequestEventInfo()) {
         super();
-        this.setVal("action", "getEvent");
         this.setVal("eventUri", eventUriOrList);
         this.setRequestedResult(requestedResult);
-    }
-
-    public get path() {
-        return "/json/event";
     }
 
     /**
@@ -33,6 +28,7 @@ export class QueryEvent extends Query<RequestEvent> {
         if (!(requestEvent instanceof RequestEvent)) {
             throw Error("QueryEvent class can only accept result requests that are of type RequestEvent");
         }
+        this.path = requestEvent.path;
         this.resultTypeList = [requestEvent];
     }
 
@@ -217,7 +213,9 @@ export class QueryEventArticlesIter extends QueryEvent {
         }
     }
 }
-export class RequestEvent extends QueryParamsBase {}
+export class RequestEvent extends QueryParamsBase {
+    public path = "/api/v1/event/getEvent";
+}
 
 /**
  * @class RequestEventInfo
@@ -412,7 +410,7 @@ export class RequestEventArticleTrend extends RequestEvent {
  * Compute and return a list of similar events.
  */
 export class RequestEventSimilarEvents extends RequestEvent {
-    public resultType = "similarEvents";
+    public path = "/api/v1/event/getSimilarEvents";
     public params;
     constructor(args: ER.QueryEvent.RequestEventSimilarEventsArguments = {}) {
         super();
@@ -432,15 +430,15 @@ export class RequestEventSimilarEvents extends RequestEvent {
             throw new Error("Concept info list is not an array");
         }
         this.params = {};
-        this.params["similarEventsConcepts"] = JSON.stringify(conceptInfoList);
-        this.params["similarEventsCount"] = count;
+        this.params["concepts"] = JSON.stringify(conceptInfoList);
+        this.params["count"] = count;
         if (maxDayDiff !== Number.MAX_SAFE_INTEGER) {
-            this.params["similarEventsMaxDayDiff"] = maxDayDiff;
+            this.params["maxDayDiff"] = maxDayDiff;
         }
-        this.params["similarEventsAddArticleTrendInfo"] = addArticleTrendInfo;
-        this.params["similarEventsAggrHours"] = aggrHours;
-        this.params["similarEventsIncludeSelf"] = includeSelf;
-        this.params = _.extend({}, this.params, returnInfo.getParams("similarEvents"));
+        this.params["addArticleTrendInfo"] = addArticleTrendInfo;
+        this.params["aggrHours"] = aggrHours;
+        this.params["includeSelf"] = includeSelf;
+        this.params = _.extend({}, this.params, returnInfo.getParams());
     }
 }
 
