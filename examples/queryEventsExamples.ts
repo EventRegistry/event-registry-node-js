@@ -15,7 +15,6 @@ import {
     RequestEventsInfo,
     RequestEventsLocAggr,
     RequestEventsTimeAggr,
-    RequestEventsUriList,
     ReturnInfo,
 } from "eventregistry";
 

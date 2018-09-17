@@ -95,5 +95,5 @@ Promise.all([
 
 // obtain in one call information about two events with given uris
 const q2 = new QueryEvent(["spa-32", "spa-45"]);
-q2.setRequestedResult(new RequestEventArticles({page: 1, count: 200}));
+q2.setRequestedResult(new RequestEventArticles({page: 1, count: 100}));
 const res7 = er.execQuery(q2);

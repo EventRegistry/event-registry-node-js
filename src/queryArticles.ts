@@ -496,7 +496,7 @@ export class RequestArticlesDateMentionAggr extends RequestArticles {
 }
 
 export class RequestArticlesRecentActivity extends RequestArticles {
-    public resultType = "recentActivity";
+    public resultType = "recentActivityArticles";
     public params;
     constructor({maxArticleCount = 100,
                  updatesAfterTm = undefined,

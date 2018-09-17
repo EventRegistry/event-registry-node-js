@@ -615,6 +615,7 @@ export class RequestEventsRecentActivity extends RequestEvents {
         if (!_.isUndefined(updatesAfterTm) && !_.isUndefined(updatesAfterMinsAgo)) {
             throw new Error("You should specify either updatesAfterTm or updatesAfterMinsAgo parameter, but not both");
         }
+        this.params = {};
         this.params["recentActivityEventsMaxEventCount"] = maxEventCount;
         this.params["recentActivityEventsMandatoryLocation"] = mandatoryLocation;
 
