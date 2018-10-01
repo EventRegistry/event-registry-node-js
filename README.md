@@ -174,7 +174,40 @@ er.execQuery(q).then((response) => {
     console.info(response);
 });
 ```
+**Search for duplicated articles in Business**
+``` javascript
+var erBase = require("eventregistry");
 
+var er = new erBase.EventRegistry({apiKey: "YOUR_API_KEY"});
+er.getCategoryUri("business").then((categoryUri) => {
+    var q = new erBase.QueryArticles({
+            categoryUri: categoryUri,
+            isDuplicateFilter: "keepOnlyDuplicates", // possible values are "skipDuplicates" or "keepOnlyDuplicates" or "keepAll";
+    });
+    return er.execQuery(q);
+}).then((response) => {
+    console.log(response);
+});
+```
+
+Or in **Typescript**.
+
+``` typescript
+import {EventRegistry, QueryArticles} from "eventregistry";
+
+const er = new EventRegistry({apiKey: "YOUR_API_KEY"});
+
+er.getCategoryUri("business").then((businessUri) => {
+    const q = new QueryArticles({
+            categoryUri: businessUri,
+            isDuplicateFilter: "keepOnlyDuplicates", // possible values are "skipDuplicates" or "keepOnlyDuplicates" or "keepAll";
+    });
+    return er.execQuery(q);
+}).then((response) => {
+    console.log(response);
+});
+
+```
 ## Where to next?
 
 Depending on your interest and existing knowledge of the `eventregistry` package you can check different things:
