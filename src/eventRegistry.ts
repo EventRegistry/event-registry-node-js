@@ -2,8 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import * as fs from "fs";
 import * as _ from "lodash";
 import * as moment from "moment";
-import Semaphore from 'semaphore-async-await';
-import * as Qs from "qs";
+import Semaphore from "semaphore-async-await";
 import * as winston from "winston";
 import { sleep } from "./base";
 import { ConceptInfoFlags, ReturnInfo } from "./returnInfo";
@@ -139,7 +138,7 @@ export class EventRegistry {
      * @param path URL on Event Registry (e.g. "/json/article")
      * @param parameters Optional parameters to be included in the request
      */
-    public async jsonRequest(path, parameters?, allowUseOfArchive?) {
+    public async jsonRequest(path, parameters?, allowUseOfArchive = this.config.allowUseOfArchive) {
         let request;
         const current = moment.utc().milliseconds();
         if (this.lastQueryTime && current - this.lastQueryTime < this.config.minDelayBetweenRequests) {
