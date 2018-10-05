@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import { QueryParamsBase } from "./base";
 import { ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 /**
  * @class GetSourceInfo
@@ -11,9 +11,9 @@ export class GetSourceInfo extends QueryParamsBase {
     /**
      * @param args Object which contains a host of optional parameters
      */
-    constructor(args: ER.Info.GetSourceInfoArguments = {}) {
+    constructor(args: EventRegistryStatic.Info.GetSourceInfoArguments = {}) {
         super();
-        const {uriOrUriList = undefined, returnInfo = new ReturnInfo()} = args;
+        const {uriOrUriList, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "getInfo");
         if (!_.isUndefined(uriOrUriList)) {
             this.queryByUri(uriOrUriList);
@@ -45,9 +45,9 @@ export class GetSourceInfo extends QueryParamsBase {
  * Obtain information about concepts
  */
 export class GetConceptInfo extends QueryParamsBase {
-    constructor(args: ER.Info.GetConceptInfoArguments = {}) {
+    constructor(args: EventRegistryStatic.Info.GetConceptInfoArguments = {}) {
         super();
-        const {uriOrUriList = undefined, returnInfo = new ReturnInfo()} = args;
+        const {uriOrUriList, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "getInfo");
         if (!_.isUndefined(uriOrUriList)) {
             this.setVal("uri", uriOrUriList);
@@ -65,9 +65,9 @@ export class GetConceptInfo extends QueryParamsBase {
  * Obtain information about categories
  */
 export class GetCategoryInfo extends QueryParamsBase {
-    constructor(args: ER.Info.GetCategoryInfoArguments = {}) {
+    constructor(args: EventRegistryStatic.Info.GetCategoryInfoArguments = {}) {
         super();
-        const {uriOrUriList = undefined, returnInfo = new ReturnInfo()} = args;
+        const {uriOrUriList, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "getInfo");
         if (!_.isUndefined(uriOrUriList)) {
             this.queryByUri(uriOrUriList);
@@ -78,7 +78,7 @@ export class GetCategoryInfo extends QueryParamsBase {
     /**
      * search concepts by uri(s)
      */
-    public queryByUri(uriOrUriList) {
+    public queryByUri(uriOrUriList: string | string[]) {
         this.setVal("uri", uriOrUriList);
     }
 
@@ -111,7 +111,7 @@ export class GetSourceStats extends QueryParamsBase {
     /**
      * get stats about one or more sources specified by their uris
      */
-    public queryByUri(uriOrUriList) {
+    public queryByUri(uriOrUriList: string | string[]) {
         this.setVal("uri", uriOrUriList);
     }
 

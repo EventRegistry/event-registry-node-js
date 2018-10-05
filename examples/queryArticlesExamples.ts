@@ -43,7 +43,7 @@ er.execQuery(q4).then((response) => {
 // if you already have some articles that you have received from Event Registry
 // for which you would like to obtain some potentially updated metadata (shared counts, event uri)
 // you can use the query shown below. When making such a query you can specify up to 100 article uris in a call.
-const q = QueryArticles.initWithArticleUriList(["934903913", "934902493", "934902499", "934902488", "934899375", "934900984", "934890360", "934888250"])
+const q = QueryArticles.initWithArticleUriList(["934903913", "934902493", "934902499", "934902488", "934899375", "934900984", "934890360", "934888250"]);
 const res = er.execQuery(q);
 
 /**
@@ -62,7 +62,7 @@ Promise.all([
     const query1 = new QueryArticles({
         conceptUri: samsungUri,
         keywords: "iphone",
-        keywordLoc: "title",
+        keywordsLoc: "title",
         lang: ["eng", "deu"],
         sourceUri: bbcUri,
         sourceLocationUri: germanyUri,

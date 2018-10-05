@@ -1,8 +1,7 @@
 import * as _ from "lodash";
-import { mainLangs, Query } from "./base";
-import { EventRegistry } from "./eventRegistry";
+import { Query } from "./base";
 import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 /**
  * @class QueryArticle
@@ -62,7 +61,7 @@ export class RequestArticleInfo extends RequestArticle {
 export class RequestArticleSimilarArticles extends RequestArticle {
     public resultType = "similarArticles";
     public params;
-    constructor(args: ER.QueryArticle.RequestArticleSimilarArticlesArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryArticle.RequestArticleSimilarArticlesArguments = {}) {
         super();
         const {
             page = 1,
@@ -70,7 +69,11 @@ export class RequestArticleSimilarArticles extends RequestArticle {
             lang = ["eng"],
             limitPerLang = -1,
             returnInfo = new ReturnInfo({ articleInfo: new ArticleInfoFlags({ bodyLen: -1 })}),
+            ...unsupported
         } = args;
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticleSimilarArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
         }
@@ -92,7 +95,7 @@ export class RequestArticleSimilarArticles extends RequestArticle {
 export class RequestArticleDuplicatedArticles extends RequestArticle {
     public resultType = "duplicatedArticles";
     public params;
-    constructor(args: ER.QueryArticle.RequestArticleDuplicatedArticlesArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryArticle.RequestArticleDuplicatedArticlesArguments = {}) {
         super();
         const {
             page = 1,
@@ -100,7 +103,11 @@ export class RequestArticleDuplicatedArticles extends RequestArticle {
             sortBy = "cosSim",
             sortByAsc = false,
             returnInfo = new ReturnInfo({ articleInfo: new ArticleInfoFlags({ bodyLen: -1 })}),
+            ...unsupported
         } = args;
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticleDuplicatedArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
         }

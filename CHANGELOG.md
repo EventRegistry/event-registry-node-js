@@ -2,6 +2,11 @@
 
 This log contains changes specific to the NodeJS SDK.
 
+## [v8.5.13]() (2018-10-10)
+
+**Changed**
+- Better exposure of Typescript type definitions (affects Typescript users)
+
 ## [v8.5.1]() (2018-09-17)
 
 **Changed**

@@ -5,7 +5,7 @@ import { EventRegistry } from "./eventRegistry";
 import { GetCategoryInfo, GetConceptInfo } from "./info";
 import { QueryArticles, RequestArticlesConceptAggr, RequestArticlesTimeAggr } from "./queryArticles";
 import { ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 /**
  * @class GetTopCorrelations
@@ -104,7 +104,7 @@ export class GetTopCorrelations extends QueryParamsBase {
      *
      * @param args Object which contains a host of optional parameters
      */
-    public async getTopConceptCorrelations(args: ER.Correlations.TopConceptArguments = {}) {
+    public async getTopConceptCorrelations(args: EventRegistryStatic.Correlations.TopConceptArguments = {}) {
         const { candidateConceptsQuery = undefined, candidatesPerType = 1000, conceptType = undefined, exactCount = 10, approxCount = 0, returnInfo = new ReturnInfo()} = args;
         this.clearVal("contextConceptIds");
         // Generate all necessary parameters (but don't update the params)
@@ -168,7 +168,7 @@ export class GetTopCorrelations extends QueryParamsBase {
      * Compute categories that correlate the most with the input data.
      * @param args Object which contains a host of optional parameters
      */
-    public async getTopCategoryCorrelations(args: ER.Correlations.TopCategoryArguments = {}) {
+    public async getTopCategoryCorrelations(args: EventRegistryStatic.Correlations.TopCategoryArguments = {}) {
         const {exactCount = 10, approxCount = 0, returnInfo = new ReturnInfo()} = args;
         const getTopCorrelations = _.cloneDeep(this);
         getTopCorrelations.clearVal("contextConceptIds");

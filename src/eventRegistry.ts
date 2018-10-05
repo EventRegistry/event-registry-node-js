@@ -6,7 +6,7 @@ import Semaphore from "semaphore-async-await";
 import * as winston from "winston";
 import { sleep } from "./base";
 import { ConceptInfoFlags, ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 /**
  * @class EventRegistry
@@ -14,7 +14,7 @@ import { ER } from "./types";
  */
 export class EventRegistry {
     public logger;
-    private config: ER.Config = {
+    private config: EventRegistryStatic.Config = {
         host: "http://eventregistry.org",
         hostAnalytics: "http://analytics.eventregistry.org",
         logging: false,
@@ -29,7 +29,7 @@ export class EventRegistry {
     private lastQueryTime = 0;
     private lock: Semaphore;
 
-    constructor(config: ER.Config = {}) {
+    constructor(config: EventRegistryStatic.Config = {}) {
         this.lock = new Semaphore(1);
         if (fs && fs.existsSync(this.config.settingsFName || "settings.json")) {
             const localConfig = JSON.parse(fs.readFileSync(this.config.settingsFName || "settings.json", "utf8"));
@@ -88,7 +88,7 @@ export class EventRegistry {
      * Main method for executing the search queries.
      * @param query instance of Query class
      */
-    public async execQuery(query, allowUseOfArchive?) {
+    public async execQuery(query, allowUseOfArchive?: boolean) {
         const params = query.getQueryParams();
         const request = await this.jsonRequest(query.path, params, allowUseOfArchive);
         if (!_.has(request, "data") && this.config.verboseOutput) {
@@ -97,7 +97,7 @@ export class EventRegistry {
         return _.get(request, "data", {});
     }
 
-    public async jsonRequestAnalytics(path, parameters?): Promise<AxiosResponse> {
+    public async jsonRequestAnalytics(path: string, parameters?): Promise<AxiosResponse> {
         let request;
         await this.lock.acquire();
         try {
@@ -138,7 +138,7 @@ export class EventRegistry {
      * @param path URL on Event Registry (e.g. "/json/article")
      * @param parameters Optional parameters to be included in the request
      */
-    public async jsonRequest(path, parameters?, allowUseOfArchive = this.config.allowUseOfArchive) {
+    public async jsonRequest(path: string, parameters?, allowUseOfArchive = this.config.allowUseOfArchive) {
         let request;
         const current = moment.utc().milliseconds();
         if (this.lastQueryTime && current - this.lastQueryTime < this.config.minDelayBetweenRequests) {
@@ -212,7 +212,7 @@ export class EventRegistry {
     /**
      * Get a value of the header headerName that was set in the headers in the last response object
      */
-    public getLastHeader(headerName, dfltVal?) {
+    public getLastHeader(headerName: string, dfltVal?) {
         return _.get(this.headers, headerName, dfltVal);
     }
 
@@ -235,7 +235,7 @@ export class EventRegistry {
     /**
      * Return the number of used and total available tokens. Can be used at any time (also before making queries)
      */
-    public async getUsageInfo(): Promise<ER.UsageInfo> {
+    public async getUsageInfo(): Promise<EventRegistryStatic.UsageInfo> {
         const request = await this.jsonRequest("/api/v1/usage");
         return request.data;
     }
@@ -246,8 +246,8 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the concept
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestConcepts(prefix: string, args: ER.SuggestConceptsArguments = {}) {
-        const { sources = [ "concepts" ] as ER.ConceptType[], lang = "eng", conceptLang = "eng", page = 1, count = 20, returnInfo = new ReturnInfo(), ...otherParams } = args;
+    public async suggestConcepts(prefix: string, args: EventRegistryStatic.SuggestConceptsArguments = {}) {
+        const { sources = [ "concepts" ] as EventRegistryStatic.ConceptType[], lang = "eng", conceptLang = "eng", page = 1, count = 20, returnInfo = new ReturnInfo(), ...otherParams } = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
         }
@@ -270,7 +270,7 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the category name
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestCategories(prefix, args: ER.SuggestCategoriesArguments = {}) {
+    public async suggestCategories(prefix: string, args: EventRegistryStatic.SuggestCategoriesArguments = {}) {
         const {page = 1, count = 20, returnInfo = new ReturnInfo(), ...otherParams} = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
@@ -286,7 +286,7 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the source name or uri
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestNewsSources(prefix, args: ER.SuggestNewsSourcesArguments = {}) {
+    public async suggestNewsSources(prefix: string, args: EventRegistryStatic.SuggestNewsSourcesArguments = {}) {
         const {page = 1, count = 20, dataType = ["news", "pr", "blog"], ...otherParams} = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
@@ -300,7 +300,7 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the source group name or uri
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestSourceGroups(prefix, args: ER.SuggestSourceGroupsArguments = {}) {
+    public async suggestSourceGroups(prefix: string, args: EventRegistryStatic.SuggestSourceGroupsArguments = {}) {
         const {page = 1, count = 20, ...otherParams} = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
@@ -314,7 +314,7 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the location name
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestLocations(prefix, args: ER.SuggestLocationsArguments = {}) {
+    public async suggestLocations(prefix: string, args: EventRegistryStatic.SuggestLocationsArguments = {}) {
         const {
             sources = ["place", "country"],
             lang = "eng",
@@ -355,7 +355,7 @@ export class EventRegistry {
      * @param radiusKm radius in kilometers around the coordinates inside which the locations should be returned
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestLocationsAtCoordinate(latitude: number, longitude: number, radiusKm: number, args: ER.SuggestLocationsAtCoordinateArguments = {}) {
+    public async suggestLocationsAtCoordinate(latitude: number, longitude: number, radiusKm: number, args: EventRegistryStatic.SuggestLocationsAtCoordinateArguments = {}) {
         const {
             limitToCities = false,
             lang = "eng",
@@ -415,7 +415,7 @@ export class EventRegistry {
      * @param conceptUri concept that represents a geographic location for which we would like to obtain a list of sources located at the place
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestSourcesAtPlace(conceptUri: string, args: ER.SuggestSourcesAtPlaceArguments = {}) {
+    public async suggestSourcesAtPlace(conceptUri: string, args: EventRegistryStatic.SuggestSourcesAtPlaceArguments = {}) {
         const { page = 1, count = 20, dataType = "news", ...otherParams } = args;
         const params = {
             action: "getSourcesAtPlace",
@@ -454,7 +454,7 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the category name
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestConceptClasses(prefix, args: ER.SuggestConceptClassesArguments = {}) {
+    public async suggestConceptClasses(prefix: string, args: EventRegistryStatic.SuggestConceptClassesArguments = {}) {
         const {
             lang = "eng",
             conceptLang = "eng",
@@ -480,7 +480,7 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the concept name
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestCustomConcepts(prefix, args: ER.SuggestCustomConceptsArguments = {}) {
+    public async suggestCustomConcepts(prefix: string, args: EventRegistryStatic.SuggestCustomConceptsArguments = {}) {
         const {
             lang = "eng",
             conceptLang = "eng",
@@ -505,8 +505,8 @@ export class EventRegistry {
      * @param conceptLabel partial or full name of the concept for which to return the concept uri
      * @param args Object which contains a host of optional parameters
      */
-    public async getConceptUri(conceptLabel, args: ER.GetConceptUriArguments = {}) {
-        const { lang = "eng", sources = [ "concepts" ] as ER.ConceptType[] } = args;
+    public async getConceptUri(conceptLabel: string, args: EventRegistryStatic.GetConceptUriArguments = {}) {
+        const { lang = "eng", sources = [ "concepts" ] as EventRegistryStatic.ConceptType[] } = args;
         const matches = await this.suggestConcepts(conceptLabel, { lang, sources });
         return _.get(_.first(matches), "uri", undefined);
     }
@@ -516,7 +516,7 @@ export class EventRegistry {
      * @param locationLabel partial or full location name for which to return the location uri
      * @param args Object which contains a host of optional parameters
      */
-    public async getLocationUri(locationLabel, args: ER.GetLocationUriArguments = {}) {
+    public async getLocationUri(locationLabel: string, args: EventRegistryStatic.GetLocationUriArguments = {}) {
         const { lang = "eng", sources = [ "place", "country" ] as any, countryUri, sortByDistanceTo } = args;
         const matches = await this.suggestLocations(locationLabel, { lang, sources, countryUri, sortByDistanceTo });
         return _.get(_.first(matches), "wikiUri", undefined);
@@ -536,7 +536,7 @@ export class EventRegistry {
      * @param sourceName partial or full name of the source or source uri for which to return source uri
      * @param dataType: return the source uri that provides content of these data types
      */
-    public async getNewsSourceUri(sourceName: string, dataType: ER.DataType[] | ER.DataType = ["news", "pr", "blog"]) {
+    public async getNewsSourceUri(sourceName: string, dataType: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType = ["news", "pr", "blog"]) {
         const matches = await this.suggestNewsSources(sourceName, { dataType });
         return _.get(_.first(matches), "uri", undefined);
     }
@@ -544,7 +544,7 @@ export class EventRegistry {
     /**
      * alternative (shorter) name for the method getNewsSourceUri()
      */
-    public async getSourceUri(sourceName: string, dataType: ER.DataType[] | ER.DataType = ["news", "pr", "blog"]) {
+    public async getSourceUri(sourceName: string, dataType: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType = ["news", "pr", "blog"]) {
         return await this.getNewsSourceUri(sourceName, dataType);
     }
 
@@ -640,7 +640,7 @@ export class EventRegistry {
     /**
      * Return info about the source group
      */
-    public async getSourceGroup(sourceGroupUri) {
+    public async getSourceGroup(sourceGroupUri: string) {
         const request = await this.jsonRequest("/json/sourceGroup", { action: "getSourceGroupInfo", uri: sourceGroupUri});
         return request.data;
     }
@@ -656,7 +656,7 @@ export class ArticleMapper {
     private articleUrlToUri = {};
     private rememberMappings = true;
 
-    constructor(er, rememberMapping = true) {
+    constructor(er: EventRegistry, rememberMapping = true) {
         this.er = er;
         this.rememberMappings = rememberMapping;
     }

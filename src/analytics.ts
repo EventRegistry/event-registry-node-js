@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import { EventRegistry } from "./eventRegistry";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 // The Analytics class can be used for access the text analytics services provided by the Event Registry.
 // These include:
@@ -88,7 +88,7 @@ export class Analytics {
      * @param twitterQuery string containing the content to search for. It can be a Twitter user account (using "@" prefix or user's Twitter url),a hash tag (using "#" prefix) or a regular keyword.
      * @param args Object which contains a host of optional parameters
      */
-    public async trainTopicOnTweets(twitterQuery: string, args: ER.Analytics.TrainTopicOnTweetsArguments = {}) {
+    public async trainTopicOnTweets(twitterQuery: string, args: EventRegistryStatic.Analytics.TrainTopicOnTweetsArguments = {}) {
         const {
             useTweetText = true,
             maxConcepts = 20,
@@ -130,7 +130,7 @@ export class Analytics {
      * @param args Object which contains a host of optional parameters
      * @returns returns the trained topic: { concepts: [], categories: [] }
      */
-    public async trainTopicFinishTraining(uri: string, args: ER.Analytics.TrainTopicFinishTrainingArguments = {}) {
+    public async trainTopicFinishTraining(uri: string, args: EventRegistryStatic.Analytics.TrainTopicFinishTrainingArguments = {}) {
         const {
             maxConcepts = 20,
             maxCategories = 10,

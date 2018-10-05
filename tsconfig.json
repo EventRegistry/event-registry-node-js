@@ -22,11 +22,9 @@
             "esnext",
         ]
     },
-    "files": [
-        "src/types.d.ts"
-    ],
     "include": [
-        "src/**/*"
+        "src/types.d.ts",
+        "src/index.ts"
     ],
     "exclude": [
         "node_modules"

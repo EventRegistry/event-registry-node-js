@@ -40,7 +40,7 @@ async function fetchUpdates() {
  * a subset that matches certain keyword, concept, location, source or other available filters in QueryEvents
  */
 async function fetchFilteredUpdates() {
-    const query = new QueryEvents({keywords: "Apple", minArticlesInevent: 30, sourceLocationUri: await er.getLocationUri("United States")})
+    const query = new QueryEvents({keywords: "Apple", minArticlesInEvent: 30, sourceLocationUri: await er.getLocationUri("United States")});
     query.setRequestedResult(
         new RequestEventsRecentActivity({
             // download at most 2000 events. if less of matching events were added/updated in last 10 minutes, less will be returned

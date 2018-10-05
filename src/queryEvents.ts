@@ -3,7 +3,7 @@ import { Query, QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { ComplexEventQuery } from "./query";
 import { ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 /**
  * @class QueryEvents
@@ -11,7 +11,7 @@ import { ER } from "./types";
  */
 export class QueryEvents extends Query<RequestEvents> {
     public params = {};
-    constructor(args: ER.QueryEvents.Arguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.Arguments = {}) {
         super();
         const {
             keywords,
@@ -44,6 +44,7 @@ export class QueryEvents extends Query<RequestEvents> {
             ignoreCategoryIncludeSub = true,
             requestedResult = new RequestEventsInfo(),
         } = args;
+
         this.setVal("action", "getEvents");
         this.setQueryArrVal(keywords, "keyword", "keywordOper", "and");
         this.setQueryArrVal(conceptUri, "conceptUri", "conceptOper", "and");
@@ -175,8 +176,8 @@ export class QueryEventsIter extends QueryEvents {
     private doneCallback: (error?) => void = _.noop;
     private errorMessage;
 
-    constructor(er: EventRegistry, args: ER.QueryEvents.IteratorArguments = {}) {
-        super(args as ER.QueryEvents.Arguments);
+    constructor(er: EventRegistry, args: EventRegistryStatic.QueryEvents.IteratorArguments = {}) {
+        super(args as EventRegistryStatic.QueryEvents.Arguments);
         const {
             sortBy = "rel",
             sortByAsc = false,
@@ -210,7 +211,7 @@ export class QueryEventsIter extends QueryEvents {
         this.iterate();
     }
 
-    public static initWithComplexQuery(er, complexQuery, args: ER.QueryEvents.IteratorArguments = {}) {
+    public static initWithComplexQuery(er, complexQuery, args: EventRegistryStatic.QueryEvents.IteratorArguments = {}) {
         const query = new QueryEventsIter(er, args);
         if (complexQuery instanceof ComplexEventQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
@@ -293,9 +294,15 @@ export class RequestEvents {}
 export class RequestEventsInfo extends RequestEvents {
     public resultType = "events";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsInfoArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsInfoArguments = {}) {
         super();
-        const { page = 1, count = 50, sortBy = "rel", sortByAsc = false, returnInfo = new ReturnInfo() } = args;
+        const {
+            page = 1,
+            count = 50,
+            sortBy = "rel",
+            sortByAsc = false,
+            returnInfo = new ReturnInfo(),
+        } = args;
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
@@ -319,9 +326,18 @@ export class RequestEventsUriWgtList extends RequestEvents {
     public resultType = "uriWgtList";
     public params;
 
-    constructor(args: ER.QueryEvents.RequestEventsUriWgtListArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsUriWgtListArguments = {}) {
         super();
-        const { page = 1, count = 50000, sortBy = "rel", sortByAsc = false } = args;
+        const {
+            page = 1,
+            count = 50000,
+            sortBy = "rel",
+            sortByAsc = false,
+            ...unsupported
+        } = args;
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestEventsUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
@@ -377,9 +393,16 @@ export class RequestEventsKeywordAggr extends RequestEvents {
 export class RequestEventsLocAggr extends RequestEvents {
     public resultType = "locAggr";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsLocAggrArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsLocAggrArguments = {}) {
         super();
-        const { eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
+        const {
+            eventsSampleSize = 100000,
+            returnInfo = new ReturnInfo(),
+            ...unsupported
+        } = args;
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestEventsLocAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (eventsSampleSize > 100000) {
             throw new RangeError("At most 100000 results can be used for computing");
         }
@@ -396,9 +419,16 @@ export class RequestEventsLocAggr extends RequestEvents {
 export class RequestEventsLocTimeAggr extends RequestEvents {
     public resultType = "locTimeAggr";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsLocTimeAggrArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsLocTimeAggrArguments = {}) {
         super();
-        const { eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
+        const {
+            eventsSampleSize = 100000,
+            returnInfo = new ReturnInfo(),
+            ...unsupported
+        } = args;
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestEventsLocTimeAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (eventsSampleSize > 100000) {
             throw new RangeError("At most 100000 results can be used for computing");
         }
@@ -415,7 +445,7 @@ export class RequestEventsLocTimeAggr extends RequestEvents {
 export class RequestEventsConceptAggr extends RequestEvents {
     public resultType = "conceptAggr";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsConceptAggrArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsConceptAggrArguments = {}) {
         super();
         const { conceptCount = 20, eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
         if (conceptCount > 200) {
@@ -438,7 +468,7 @@ export class RequestEventsConceptAggr extends RequestEvents {
 export class RequestEventsConceptGraph extends RequestEvents {
     public resultType = "conceptGraph";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsConceptGraphArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsConceptGraphArguments = {}) {
         super();
         const { conceptCount = 25, linkCount = 150, eventsSampleSize = 50000, returnInfo = new ReturnInfo() } = args;
         if (conceptCount > 1000) {
@@ -468,7 +498,7 @@ export class RequestEventsConceptGraph extends RequestEvents {
 export class RequestEventsConceptMatrix extends RequestEvents {
     public resultType = "conceptMatrix";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsConceptMatrixArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsConceptMatrixArguments = {}) {
         super();
         const { conceptCount = 25, measure = "pmi", eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
         if (conceptCount > 200) {
@@ -492,7 +522,7 @@ export class RequestEventsConceptMatrix extends RequestEvents {
 export class RequestEventsConceptTrends extends RequestEvents {
     public resultType = "conceptTrends";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsConceptTrendsArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsConceptTrendsArguments = {}) {
         super();
         const { conceptCount = 10, conceptUris = [], returnInfo = new ReturnInfo() } = args;
         if (conceptCount > 50) {
@@ -514,7 +544,7 @@ export class RequestEventsConceptTrends extends RequestEvents {
 export class RequestEventsSourceAggr extends RequestEvents {
     public resultType = "sourceAggr";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsSourceAggrArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsSourceAggrArguments = {}) {
         super();
         const { sourceCount = 30, eventsSampleSize = 50000, returnInfo = new ReturnInfo() } = args;
         if (sourceCount > 200) {
@@ -537,7 +567,7 @@ export class RequestEventsSourceAggr extends RequestEvents {
 export class RequestEventsDateMentionAggr extends RequestEvents {
     public resultType = "dateMentionAggr";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsDateMentionAggrArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsDateMentionAggrArguments = {}) {
         super();
         const {
             minDaysApart = 0,
@@ -563,7 +593,7 @@ export class RequestEventsDateMentionAggr extends RequestEvents {
 export class RequestEventsEventClusters extends RequestEvents {
     public resultType = "eventClusters";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsEventClustersArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsEventClustersArguments = {}) {
         super();
         const { keywordCount = 30, maxEventsToCluster = 10000, returnInfo = new ReturnInfo() } = args;
         if (keywordCount > 100) {
@@ -599,7 +629,7 @@ export class RequestEventsCategoryAggr extends RequestEvents {
 export class RequestEventsRecentActivity extends RequestEvents {
     public resultType = "recentActivity";
     public params;
-    constructor(args: ER.QueryEvents.RequestEventsRecentActivityArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsRecentActivityArguments = {}) {
         super();
         const {
             maxEventCount = 50,

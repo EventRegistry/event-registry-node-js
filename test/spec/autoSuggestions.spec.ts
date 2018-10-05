@@ -42,7 +42,7 @@ describe("Auto Suggest", () => {
 
     it("should return a location", async (done) => {
         expect(_.get(_.first(await er.suggestLocations("Washington")), "wikiUri")).toEqual("http://en.wikipedia.org/wiki/Washington_(state)");
-        expect(_.get(_.first(await er.suggestLocations("London")), "wikiUri")).toEqual("http://en.wikipedia.org/wiki/City_of_London");
+        expect(_.get(_.first(await er.suggestLocations("London")), "wikiUri")).toEqual("http://en.wikipedia.org/wiki/London");
         done();
     });
 

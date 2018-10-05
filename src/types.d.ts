@@ -1,10 +1,13 @@
-import { ReturnInfo } from "./returnInfo";
-import { QueryArticles, RequestArticles } from "./queryArticles";
-import { RequestEvents } from "./queryEvents";
 import { QueryItems } from "./base";
 import { BaseQuery, CombinedQuery} from "./query";
+import { QueryArticles, RequestArticles } from "./queryArticles";
+import { RequestEvents } from "./queryEvents";
+import { ReturnInfo } from "./returnInfo";
 
-export module ER {
+/**
+ * Type definitions for different classes and functions from the Event Registry Node JS SDK.
+ */
+export module EventRegistryStatic {
 
     export interface UsageInfo {
         availableTokens: number;
@@ -74,7 +77,7 @@ export module ER {
         /**
          * What types of concepts should be returned
          */
-        sources?: ER.ConceptType[];
+        sources?: EventRegistryStatic.ConceptType[];
         /**
          * Language in which the prefix is specified
          */
@@ -124,7 +127,7 @@ export module ER {
         /**
          * Suggest sources that provide content in these data types
          */
-        dataType?: ER.DataType[] | ER.DataType;
+        dataType?: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType;
     }
 
     export interface SuggestSourceGroupsArguments {
@@ -142,7 +145,7 @@ export module ER {
         /**
          * What types of locations are we interested in.
          */
-        sources?: ER.SourceType[];
+        sources?: EventRegistryStatic.SourceType[];
         /**
          * Language in which the prefix is specified
          */
@@ -215,7 +218,7 @@ export module ER {
         /**
          * what types of concepts classes should be returned.
          */
-        source?: ER.ConceptClassType[];
+        source?: EventRegistryStatic.ConceptClassType[];
         /**
          * page of the results (1, 2, ...)
          */
@@ -261,7 +264,7 @@ export module ER {
         /**
          * what types of concepts should be returned.
          */
-        sources?: ER.ConceptType[];
+        sources?: EventRegistryStatic.ConceptType[];
     }
 
     export interface GetLocationUriArguments {
@@ -272,7 +275,7 @@ export module ER {
         /**
          * what types of locations are we interested in.
          */
-        sources?: ER.SourceType | Array<ER.SourceType>;
+        sources?: EventRegistryStatic.SourceType | EventRegistryStatic.SourceType[];
         /**
          * if set, then filter the possible locations to the locations from that country
          */
@@ -310,7 +313,7 @@ export module ER {
         restrictToSetCategories: boolean;
         restrictToSetSources: boolean;
         restrictToSetLocations: boolean;
-        dataType: ER.DataType | ER.DataType[];
+        dataType: EventRegistryStatic.DataType | EventRegistryStatic.DataType[];
     }
 
     export interface TopicPageArticles {
@@ -421,7 +424,7 @@ export module ER {
             /**
              * Ending date until which to provide counts (format: YYYY-MM-DD).
              */
-            dateEnd?: string;
+            dateEnd?: string | Date;
             /**
              * What details should be included in the returned information.
              */
@@ -618,7 +621,7 @@ export module ER {
              * Data type to search for. Possible values are "news" (news content), "pr" (PR content) or "blogs".
              * If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
              */
-            dataType?: ER.DataType[] | ER.DataType;
+            dataType?: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType;
         }
     }
 
@@ -670,8 +673,9 @@ export module ER {
         }
     }
 
+    // tslint:disable-next-line:no-shadowed-variable
     export namespace QueryArticles {
-        interface Arguments {
+        export interface Arguments {
             /**
              * Find articles that mention the specified keywords.
              * A single keyword/phrase can be provided as a string, multiple keywords/phrases can be provided as a list of strings.
@@ -821,7 +825,7 @@ export module ER {
              * what data types should we search? "news" (news content, default), "pr" (press releases), or "blogs".
              *   If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
              */
-            dataType?: ER.DataType[] | ER.DataType;
+            dataType?: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType;
             /**
              * The information to return as the result of the query. By default return the list of matching articles.
              */
@@ -845,6 +849,7 @@ export module ER {
          */
         export type SortByOptions = "id" | "date" | "cosSim" | "sourceImportance" | "sourceImportanceRank" | "sourceAlexaGlobalRank" | "sourceAlexaCountryRank" | "socialScore" | "facebookShares";
 
+        // tslint:disable-next-line:no-empty-interface
         export interface RequestEvent {
 
         }
@@ -881,10 +886,10 @@ export module ER {
             sourceGroupUri?: string | string[] | QueryItems;
             authorUri?: string | string[] | QueryItems;
             locationUri?: string | string[] | QueryItems;
-            dateStart?: string | string[] | QueryItems;
-            dateEnd?: string | string[] | QueryItems;
-            dateMentionStart?: string | string[] | QueryItems;
-            dateMentionEnd?: string | string[] | QueryItems;
+            dateStart?: string | Date;
+            dateEnd?: string | Date;
+            dateMentionStart?: string | Date;
+            dateMentionEnd?: string | Date;
             keywordsLoc?: "body" | "title" | "body,title";
             startSourceRankPercentile?: number;
             endSourceRankPercentile?: number;
@@ -923,10 +928,10 @@ export module ER {
             sourceGroupUri?: string | string[] | QueryItems;
             authorUri?: string | string[] | QueryItems;
             locationUri?: string | string[] | QueryItems;
-            dateStart?: string | string[] | QueryItems;
-            dateEnd?: string | string[] | QueryItems;
-            dateMentionStart?: string | string[] | QueryItems;
-            dateMentionEnd?: string | string[] | QueryItems;
+            dateStart?: string | Date;
+            dateEnd?: string | Date;
+            dateMentionStart?: string | Date;
+            dateMentionEnd?: string | Date;
             keywordsLoc?: "body" | "title" | "body,title";
             startSourceRankPercentile?: number;
             endSourceRankPercentile?: number;
@@ -1333,7 +1338,7 @@ export module ER {
             /**
              * how should the interestingness between the selected pairs of concepts be computed. Options: pmi (pointwise mutual information), pairTfIdf (pair frequence * IDF of individual concepts), chiSquare
              */
-            measure?: "pmi" | "pairTfIdf" | "chiSquare"
+            measure?: "pmi" | "pairTfIdf" | "chiSquare";
             /**
              * on what sample of results should the aggregate be computed
              */
@@ -1435,11 +1440,12 @@ export module ER {
             returnInfo?: ReturnInfo;
         }
     }
+    // tslint:disable-next-line:no-shadowed-variable
     export namespace ReturnInfo {
         /**
          * What information about an article should be returned by the API call
          */
-        interface ArticleInfo {
+        export interface ArticleInfo {
             /**
              * max length of the article body (use -1 for full body, 0 for empty)
              */
@@ -1525,7 +1531,7 @@ export module ER {
         /**
          * What information about an article should be returned by the API call
          */
-        interface ArticleInfoFlags {
+        export interface ArticleInfoFlags {
             /**
              * max length of the article body (use -1 for full body, 0 for empty)
              */
@@ -1607,7 +1613,7 @@ export module ER {
         /**
          * What information about a story (cluster of articles) should be returned by the API call
          */
-        interface StoryInfoFlags {
+        export interface StoryInfoFlags {
             /**
              * core stats about the story
              */
@@ -1657,7 +1663,7 @@ export module ER {
         /**
          * What information about a story (cluster of articles) should be returned by the API call
          */
-        interface StoryInfo {
+        export interface StoryInfo {
             /**
              * core stats about the story
              */
@@ -1711,7 +1717,7 @@ export module ER {
         /**
          * What information about an event should be returned by the API call
          */
-        interface EventInfoFlags {
+        export interface EventInfoFlags {
             /**
              * return the title of the event
              */
@@ -1761,7 +1767,7 @@ export module ER {
         /**
          * What information about an event should be returned by the API call
          */
-        interface EventInfo {
+        export interface EventInfo {
             /**
              * return the title of the event
              */
@@ -1815,7 +1821,7 @@ export module ER {
         /**
          * What information about a news source should be returned by the API call
          */
-        interface SourceInfoFlags {
+        export interface SourceInfoFlags {
             /**
              * title of the news source
              */
@@ -1853,7 +1859,7 @@ export module ER {
         /**
          * What information about a news source should be returned by the API call
          */
-        interface SourceInfo {
+        export interface SourceInfo {
             /**
              * title of the news source
              */
@@ -1891,7 +1897,7 @@ export module ER {
         /**
          * What information about a category should be returned by the API call
          */
-        interface CategoryInfoFlags {
+        export interface CategoryInfoFlags {
             IncludeCategoryParentUri?: boolean;
             IncludeCategoryChildrenUris?: boolean;
             IncludeCategoryTrendingScore?: boolean;
@@ -1902,7 +1908,7 @@ export module ER {
         /**
          * What information about a category should be returned by the API call
          */
-        interface CategoryInfo {
+        export interface CategoryInfo {
             parentUri?: boolean;
             childrenUris?: boolean;
             trendingScore?: boolean;
@@ -1910,7 +1916,7 @@ export module ER {
             trendingSource?: string | string[];
         }
 
-        interface ConceptInfoFlags {
+        export interface ConceptInfoFlags {
             ConceptType?: ConceptType;
             lang?: string | string[];
             IncludeConceptLabel?: boolean;
@@ -1926,7 +1932,7 @@ export module ER {
             MaxConceptsPerType?: number;
         }
 
-        interface ConceptInfo {
+        export interface ConceptInfo {
             type?: ConceptType | ConceptType[];
             lang?: string | string[];
             label?: boolean;
@@ -1942,7 +1948,7 @@ export module ER {
             maxConceptsPerType?: number;
         }
 
-        interface LocationInfoFlags {
+        export interface LocationInfoFlags {
             label?: boolean;
             wikiUri?: boolean;
             geoNamesId?: boolean;
@@ -1955,7 +1961,7 @@ export module ER {
             placeCountry?: boolean;
         }
 
-        interface LocationInfo {
+        export interface LocationInfo {
             label?: boolean;
             wikiUri?: boolean;
             geoNamesId?: boolean;
@@ -1968,22 +1974,22 @@ export module ER {
             placeCountry?: boolean;
         }
 
-        interface ConceptClassInfoFlags {
+        export interface ConceptClassInfoFlags {
             IncludeConceptClassParentLabels?: boolean;
             IncludeConceptClassConcepts?: boolean;
         }
 
-        interface ConceptClassInfo {
+        export interface ConceptClassInfo {
             parentLabels?: boolean;
             concepts?: boolean;
         }
 
-        interface ConceptFolderInfoFlags {
+        export interface ConceptFolderInfoFlags {
             IncludeConceptFolderDefinition?: boolean;
             IncludeConceptFolderOwner?: boolean;
         }
 
-        interface ConceptFolderInfo {
+        export interface ConceptFolderInfo {
             definition?: boolean;
             owner?: boolean;
         }

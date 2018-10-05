@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import { QueryItems, QueryParamsBase } from "./base";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 export abstract class QueryCore {
     protected queryObj;
@@ -13,11 +13,11 @@ export abstract class QueryCore {
         return this.queryObj;
     }
 
-    public setQueryParam(paramName, val) {
+    public setQueryParam(paramName: string, val: unknown) {
         this.queryObj[paramName] = val;
     }
 
-    protected setValIfNotDefault(propName, value, defVal) {
+    protected setValIfNotDefault(propName: string, value: unknown, defVal: unknown) {
         if (value !== defVal) {
             this.queryObj[propName] = value;
         }
@@ -29,7 +29,7 @@ export class BaseQuery extends QueryCore {
     /**
      * @param args Object which contains a host of optional parameters
      */
-    constructor(args: ER.Query.BaseQueryArguments = {}) {
+    constructor(args: EventRegistryStatic.Query.BaseQueryArguments = {}) {
         super();
         _.defaults(args, {
             keywordLoc: "body",
@@ -175,7 +175,7 @@ export class ComplexArticleQuery extends QueryCore {
      * @param query An instance of CombinedQuery or BaseQuery to use to find articles that match the conditions
      * @param args Object which contains a host of optional parameters
      */
-    constructor(query: CombinedQuery | BaseQuery, args: ER.Query.ComplexArticleQueryArguments = {}) {
+    constructor(query: CombinedQuery | BaseQuery, args: EventRegistryStatic.Query.ComplexArticleQueryArguments = {}) {
         super();
         _.defaults(args, {
             dataType: "news",

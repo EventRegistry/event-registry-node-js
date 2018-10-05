@@ -58,35 +58,35 @@ export class QueryParamsBase {
     /**
      * Set a value of a property in the query.
      */
-    public setVal(key, value) {
+    public setVal(key: string, value: unknown) {
         _.set(this.params, key, value);
     }
 
     /**
      * Do we have in the query property named 'key'?
      */
-    public hasVal(key): boolean {
+    public hasVal(key: string): boolean {
         return _.has(this.params, key);
     }
 
     /**
      * Remove the value of a property key (if existing).
      */
-    public clearVal(key) {
+    public clearVal(key: string) {
         _.unset(this.params, key);
     }
 
     /**
      * Add a value to an array of values for a property.
      */
-    public addArrayVal(key, val) {
+    public addArrayVal(key: string, val: unknown) {
         _.update(this.params, key, (value) => [...(value || []), val]);
     }
 
     /**
      * Set value in query params if the 'val' is different from 'defVal'.
      */
-    public setValIfNotDefault(propName, val, defVal) {
+    public setValIfNotDefault(propName: string, val: unknown, defVal: unknown) {
         if (val !== defVal) {
             this.setVal(propName, val);
         }
@@ -96,7 +96,7 @@ export class QueryParamsBase {
      * Set a property value that represents date.
      * Value can be string in YYYY-MM-DD format or a Date object.
      */
-    public setDateVal(propName, val) {
+    public setDateVal(propName: string, val: string | Date) {
         this.setVal(propName, QueryParamsBase.encodeDateTime(val, "YYYY-MM-DD"));
     }
 
@@ -171,7 +171,7 @@ export abstract class Query<T> extends QueryParamsBase {
         if (!_.isEmpty(formattedResultTypeList)) {
             _.set(allParams, "resultType", formattedResultTypeList);
         }
-        return allParams;
+        return _.cloneDeep(allParams);
     }
 
     public getFormattedResultTypeList() {

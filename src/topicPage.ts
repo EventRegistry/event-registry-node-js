@@ -1,13 +1,13 @@
-import { QueryParamsBase } from "./base";
-import * as _ from "lodash";
-import { EventRegistry } from "./eventRegistry";
 import * as fs from "fs";
+import * as _ from "lodash";
+import { QueryParamsBase } from "./base";
+import { EventRegistry } from "./eventRegistry";
 import { ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 export class TopicPage extends QueryParamsBase {
-    private topicPage: ER.TopicPage;
-    private readonly emptyTopicPage: ER.TopicPage = {
+    private topicPage: EventRegistryStatic.TopicPage;
+    private readonly emptyTopicPage: EventRegistryStatic.TopicPage = {
         autoAddArticles: true,
         articleHasDuplicate: "keepAll",
         articleHasEvent: "keepAll",
@@ -36,11 +36,11 @@ export class TopicPage extends QueryParamsBase {
         this.topicPage = this.createEmptyTopicPage();
     }
 
-    private isTopicPage(definition: {[name: string]: any}): definition is ER.TopicPage {
+    private isTopicPage(definition: {[name: string]: any}): definition is EventRegistryStatic.TopicPage {
         return _.isEqual(_.keys(this.emptyTopicPage), _.keys(definition));
     }
 
-    private createEmptyTopicPage(): ER.TopicPage {
+    private createEmptyTopicPage(): EventRegistryStatic.TopicPage {
         return this.emptyTopicPage;
     }
 
@@ -91,7 +91,7 @@ export class TopicPage extends QueryParamsBase {
     /**
      * Return an object containing the topic page definition. you can use it to load a topic page later
      */
-    public saveTopicPageDefinition(): ER.TopicPage {
+    public saveTopicPageDefinition(): EventRegistryStatic.TopicPage {
         return this.topicPage;
     }
 
@@ -162,7 +162,7 @@ export class TopicPage extends QueryParamsBase {
      * What data types should we search? "news" (news content, default), "pr" (press releases), or "blog".
      * If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
      */
-    public set dataTypes(dataTypes: ER.DataType | ER.DataType[]) {
+    public set dataTypes(dataTypes: EventRegistryStatic.DataType | EventRegistryStatic.DataType[]) {
         this.topicPage.dataType = dataTypes;
     }
 
@@ -348,9 +348,9 @@ export class TopicPage extends QueryParamsBase {
 
     /**
      * Return a list of articles that match the topic page
-     * @param args {ER.TopicPageArticles} Object which contains a host of optional parameters
+     * @param args {EventRegistryStatic.TopicPageArticles} Object which contains a host of optional parameters
      */
-    public async getArticles(args: ER.TopicPageArticles = {}) {
+    public async getArticles(args: EventRegistryStatic.TopicPageArticles = {}) {
         const {page = 1, count = 100, sortBy = "rel", sortByAsc = false, returnInfo = new ReturnInfo()} = args;
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
@@ -373,9 +373,9 @@ export class TopicPage extends QueryParamsBase {
     }
     /**
      * Return a list of events that match the topic page
-     * @param args {ER.TopicPageEvents} Object which contains a host of optional parameters
+     * @param args {EventRegistryStatic.TopicPageEvents} Object which contains a host of optional parameters
      */
-    public async getEvents(args: ER.TopicPageEvents = {}) {
+    public async getEvents(args: EventRegistryStatic.TopicPageEvents = {}) {
         const {page = 1, count = 50, sortBy = "rel", sortByAsc = false, returnInfo = new ReturnInfo()} = args;
         if (page < 1) {
             throw new RangeError("page has to be >= 1");

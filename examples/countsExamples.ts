@@ -6,7 +6,7 @@ import { EventRegistry, GetCounts, GetCountsEx } from "eventregistry";
 const er = new EventRegistry();
 
 Promise.all([er.getConceptUri("Trump"), er.getConceptUri("ebola")]).then((conceptUris) => {
-    const q = new GetCounts(conceptUris, {startDate: "2015-05-15", endDate: "2015-05-20"});
+    const q = new GetCounts(conceptUris, {dateStart: "2015-05-15", dateEnd: "2015-05-20"});
     er.execQuery(q).then((response) => {
         console.info(response);
     });

@@ -1,10 +1,8 @@
 import * as _ from "lodash";
-import { mainLangs, Query, QueryParamsBase } from "./base";
+import { Query, QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
-import { QueryArticle, RequestArticleInfo } from "./queryArticle";
-import { QueryArticles, RequestArticlesInfo } from "./queryArticles";
 import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 /**
  * @class QueryEvent
  * Class for obtaining available info for one or more events in the Event Registry
@@ -59,7 +57,7 @@ export class QueryEventArticlesIter extends QueryEvent {
      * @param eventUri a single event for which we want to obtain the list of articles in it
      * @param args Object which contains a host of optional parameters
      */
-    constructor(er: EventRegistry, eventUri: string, args: ER.QueryEvent.IteratorArguments = {}) {
+    constructor(er: EventRegistry, eventUri: string, args: EventRegistryStatic.QueryEvent.IteratorArguments = {}) {
         super(eventUri);
         const {
             lang = undefined,
@@ -81,7 +79,7 @@ export class QueryEventArticlesIter extends QueryEvent {
             dateMentionEnd = undefined,
             keywordsLoc = "body",
             startSourceRankPercentile = 0,
-            endSourceRankPercentile = 100
+            endSourceRankPercentile = 100,
         } = args;
         this.er = er;
         this.sortBy = sortBy;
@@ -238,7 +236,7 @@ export class RequestEventArticles extends RequestEvent {
     public resultType = "articles";
     public params;
 
-    constructor(args: ER.QueryEvent.RequestEventArticlesArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvent.RequestEventArticlesArguments = {}) {
         super();
         const {
             page = 1,
@@ -263,6 +261,7 @@ export class RequestEventArticles extends RequestEvent {
             sortByAsc = false,
             returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: -1})}),
         } = args;
+
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
@@ -325,13 +324,17 @@ export class RequestEventArticleUriWgts extends RequestEvent {
     public resultType = "uriWgtList";
     public params;
 
-    constructor(args: ER.QueryEvent.RequestEventArticleUriWgtsArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvent.RequestEventArticleUriWgtsArguments = {}) {
         super();
         const {
             lang = undefined,
             sortBy = "cosSim",
             sortByAsc = false,
+            ...unsupported
         } = args;
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestEventArticleUriWgts: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         this.params = {};
         if (!_.isUndefined(lang)) {
             this.params["articlesLang"] = lang;
@@ -381,7 +384,7 @@ export class RequestEventArticleTrend extends RequestEvent {
     public resultType = "articleTrend";
     public params;
 
-    constructor(args: ER.QueryEvent.RequestEventArticleTrendArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvent.RequestEventArticleTrendArguments = {}) {
         super();
         const {
             lang = undefined,
@@ -389,7 +392,11 @@ export class RequestEventArticleTrend extends RequestEvent {
             count = 100,
             minArticleCosSim = -1,
             returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: 0})}),
+            ...unsupported
           } = args;
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestEventArticleTrend: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
@@ -412,7 +419,7 @@ export class RequestEventArticleTrend extends RequestEvent {
 export class RequestEventSimilarEvents extends RequestEvent {
     public path = "/api/v1/event/getSimilarEvents";
     public params;
-    constructor(args: ER.QueryEvent.RequestEventSimilarEventsArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvent.RequestEventSimilarEventsArguments = {}) {
         super();
         const {
             conceptInfoList,
@@ -422,7 +429,11 @@ export class RequestEventSimilarEvents extends RequestEvent {
             aggrHours = 6,
             includeSelf = false,
             returnInfo = new ReturnInfo(),
+            ...unsupported
           } = args;
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestEventSimilarEvents: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (count > 50) {
             throw new RangeError("At most 50 similar events can be returned per call");
         }
@@ -449,7 +460,7 @@ export class RequestEventSimilarEvents extends RequestEvent {
 export class RequestEventSimilarStories extends RequestEvent {
     public resultType = "similarStories";
     public params;
-    constructor(args: ER.QueryEvent.RequestEventSimilarStoriesArguments = {}) {
+    constructor(args: EventRegistryStatic.QueryEvent.RequestEventSimilarStoriesArguments = {}) {
         super();
         const {
             conceptInfoList,
@@ -457,7 +468,11 @@ export class RequestEventSimilarStories extends RequestEvent {
             lang = ["eng"],
             maxDayDiff = Number.MAX_SAFE_INTEGER, // in place of Python's `sys.maxsize`
             returnInfo = new ReturnInfo(),
+            ...unsupported
           } = args;
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestEventSimilarStories: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (count > 50) {
             throw new RangeError("At most 50 similar stories can be returned per call");
         }

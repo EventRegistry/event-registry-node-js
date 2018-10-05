@@ -47,8 +47,12 @@ export class RequestStoryArticles extends RequestStory {
                   sortBy = "cosSim",
                   sortByAsc = false,
                   returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: 200})}),
+                  ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestStoryArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (page < 1) {
           throw new RangeError("Page has to be >= 1");
         }
@@ -70,8 +74,12 @@ export class RequestStoryArticleUris extends RequestStory {
 
     constructor({ sortBy = "cosSim",
                   sortByAsc = false,
+                  ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestStoryArticleUris: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         this.params = {};
         this.params["articleUrisSortBy"] = sortBy;
         this.params["articleUrisSortByAsc"] = sortByAsc;
@@ -85,8 +93,12 @@ export class RequestStoryArticleTrend extends RequestStory {
     constructor({ lang = mainLangs,
                   minArticleCosSim = -1,
                   returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: 0})}),
+                  ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestStoryArticleTrend: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         this.params = {};
         this.params["articleTrendLang"] = lang;
         this.params["articleTrendMinArticleCosSim"] = minArticleCosSim;
@@ -103,8 +115,12 @@ export class RequestStorySimilarStories extends RequestStory {
                   maxDayDiff = Number.MAX_SAFE_INTEGER,
                   addArticleTrendInfo = false,
                   returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: 0})}),
+                  ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestStorySimilarStories: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (count > 50) {
           throw new RangeError("At most 50 stories can be returned per call");
         }

@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import { QueryParamsBase } from "./base";
 import { ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 // provides classes for obtaining information about how frequently individual concepts or categories
 // have been mentioned in news articles (if source == "news") of in social media (if source == "social")
@@ -49,7 +49,7 @@ export abstract class CountsBase extends QueryParamsBase {
  * @param args Object which contains a host of optional parameters
  */
 export class GetCounts extends CountsBase {
-    constructor(uriOrUriList: string | string[], args: ER.Counts.Arguments = {}) {
+    constructor(uriOrUriList: string | string[], args: EventRegistryStatic.Counts.Arguments = {}) {
         super();
         const {source = "news", type = "concept", dateStart = undefined, dateEnd = undefined, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "getCounts");
@@ -101,7 +101,7 @@ export class GetCounts extends CountsBase {
  * @param args Object which contains a host of optional parameters
  */
 export class GetCountsEx extends CountsBase {
-    constructor(uriOrUriList: string | string[], args: ER.Counts.Arguments = {}) {
+    constructor(uriOrUriList: string | string[], args: EventRegistryStatic.Counts.Arguments = {}) {
         super();
         const {source = "news", type = "concept", dateStart = undefined, dateEnd = undefined, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "GetCountsEx");

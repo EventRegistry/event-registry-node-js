@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 export abstract class ReturnInfoFlagsBase<T extends {}> {
     protected type: string;
@@ -56,7 +56,11 @@ export class ReturnInfo {
             storyInfo = new StoryInfoFlags(),
             conceptClassInfo = new ConceptClassInfoFlags(),
             conceptFolderInfo = new ConceptFolderInfoFlags(),
+            ...unsupported
         } = {}) {
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`ReturnInfo: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         this.articleInfo = articleInfo;
         this.eventInfo = eventInfo;
         this.sourceInfo = sourceInfo;
@@ -84,8 +88,8 @@ export class ReturnInfo {
     }
 }
 
-export class ArticleInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ArticleInfoFlags> {
-    constructor(params: ER.ReturnInfo.ArticleInfo = {}) {
+export class ArticleInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.ArticleInfoFlags> {
+    constructor(params: EventRegistryStatic.ReturnInfo.ArticleInfo = {}) {
         super();
         this.type = "Article";
         params["bodyLen"] = _.defaultTo(params["bodyLen"], -1);
@@ -112,8 +116,8 @@ export class ArticleInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ArticleI
     }
 }
 
-export class StoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.StoryInfoFlags> {
-    constructor(params: ER.ReturnInfo.StoryInfo = {}) {
+export class StoryInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.StoryInfoFlags> {
+    constructor(params: EventRegistryStatic.ReturnInfo.StoryInfo = {}) {
         super();
         this.type = "Story";
         this.setFlag("basicStats", params, true);
@@ -131,8 +135,8 @@ export class StoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.StoryInfoF
     }
 }
 
-export class EventInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.EventInfoFlags> {
-    constructor(params: ER.ReturnInfo.EventInfo = {}) {
+export class EventInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.EventInfoFlags> {
+    constructor(params: EventRegistryStatic.ReturnInfo.EventInfo = {}) {
         super();
         this.type = "Event";
         this.setFlag("title", params, true);
@@ -150,8 +154,8 @@ export class EventInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.EventInfoF
     }
 }
 
-export class SourceInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.SourceInfoFlags> {
-    constructor(params: ER.ReturnInfo.SourceInfo = {}) {
+export class SourceInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.SourceInfoFlags> {
+    constructor(params: EventRegistryStatic.ReturnInfo.SourceInfo = {}) {
         super();
         this.type = "Source";
         this.setFlag("title", params, true);
@@ -165,8 +169,8 @@ export class SourceInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.SourceInf
     }
 }
 
-export class CategoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.CategoryInfoFlags> {
-    constructor(params: ER.ReturnInfo.CategoryInfo = {}) {
+export class CategoryInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.CategoryInfoFlags> {
+    constructor(params: EventRegistryStatic.ReturnInfo.CategoryInfo = {}) {
         super();
         this.type = "Category";
         this.setFlag("parentUri", params, false);
@@ -177,8 +181,8 @@ export class CategoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.Categor
     }
 }
 
-export class ConceptInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptInfoFlags> {
-    constructor(params: ER.ReturnInfo.ConceptInfo = {}) {
+export class ConceptInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.ConceptInfoFlags> {
+    constructor(params: EventRegistryStatic.ReturnInfo.ConceptInfo = {}) {
         super();
         this.type = "Concept";
         this.setValue("type", params, "concepts");
@@ -197,8 +201,8 @@ export class ConceptInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptI
     }
 }
 
-export class LocationInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.LocationInfoFlags> {
-    constructor(params: ER.ReturnInfo.LocationInfo = {}) {
+export class LocationInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.LocationInfoFlags> {
+    constructor(params: EventRegistryStatic.ReturnInfo.LocationInfo = {}) {
         super();
         this.type = "Location";
         this.setFlag("label", params, true);
@@ -214,8 +218,8 @@ export class LocationInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.Locatio
     }
 }
 
-export class ConceptClassInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptClassInfoFlags> {
-    constructor(params: ER.ReturnInfo.ConceptClassInfo = {}) {
+export class ConceptClassInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.ConceptClassInfoFlags> {
+    constructor(params: EventRegistryStatic.ReturnInfo.ConceptClassInfo = {}) {
         super();
         this.type = "ConceptClass";
         this.setFlag("parentLabels", params, true);
@@ -223,8 +227,8 @@ export class ConceptClassInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.Con
     }
 }
 
-export class ConceptFolderInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptFolderInfoFlags> {
-    constructor(params: ER.ReturnInfo.ConceptFolderInfo = {}) {
+export class ConceptFolderInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.ConceptFolderInfoFlags> {
+    constructor(params: EventRegistryStatic.ReturnInfo.ConceptFolderInfo = {}) {
         super();
         this.type = "ConceptFolder";
         this.setFlag("definition", params, true);

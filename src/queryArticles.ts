@@ -3,10 +3,10 @@ import { mainLangs, Query, QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { ComplexArticleQuery } from "./query";
 import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 export class QueryArticles extends Query<RequestArticles> {
-    constructor(args: ER.QueryArticles.Arguments = {}) {
+    constructor(args: EventRegistryStatic.QueryArticles.Arguments = {}) {
         super();
         const {
             keywords,
@@ -40,7 +40,14 @@ export class QueryArticles extends Query<RequestArticles> {
             endSourceRankPercentile = 100,
             dataType = "news",
             requestedResult = new RequestArticlesInfo(),
+            ...unsupported
         } = args;
+        if (!_.isEmpty(unsupported)) {
+            // Check ["sortBy", "sortByAsc", "returnInfo", "maxItems"] for cases when we are coming from QueryArticlesIter
+            if (!_.some(_.keys(unsupported), (key) => _.includes(["sortBy", "sortByAsc", "returnInfo", "maxItems"], key))) {
+                console.warn(`QueryArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            }
+        }
         this.setVal("action", "getArticles");
         this.setQueryArrVal(keywords, "keyword", "keywordOper", "and");
         this.setQueryArrVal(conceptUri, "conceptUri", "conceptOper", "and");
@@ -286,8 +293,12 @@ export class RequestArticlesInfo extends RequestArticles {
                  sortBy = "date",
                  sortByAsc = false,
                  returnInfo = new ReturnInfo(),
+                 ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticlesInfo: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
         }
@@ -310,8 +321,12 @@ export class RequestArticlesUriWgtList extends RequestArticles {
                  count = 10000,
                  sortBy = "fq",
                  sortByAsc = false,
+                 ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticlesUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
         }
@@ -346,8 +361,12 @@ export class RequestArticlesConceptAggr extends RequestArticles {
                  conceptScoring = "importance",
                  articlesSampleSize = 10000,
                  returnInfo = new ReturnInfo(),
+                 ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticlesConceptAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (conceptCount > 500) {
             throw new RangeError("At most 500 concepts can be returned per call");
         }
@@ -370,8 +389,12 @@ export class RequestArticlesCategoryAggr extends RequestArticles {
     public params;
     constructor({articlesSampleSize = 20000,
                  returnInfo = new ReturnInfo(),
+                 ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticlesCategoryAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (articlesSampleSize > 50000) {
             throw new RangeError("at most 50000 articles can be used for computation sample");
         }
@@ -389,8 +412,12 @@ export class RequestArticlesSourceAggr extends RequestArticles {
                  sourceCount = 50,
                  normalizeBySourceArts = false,
                  returnInfo = new ReturnInfo(),
+                 ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticlesSourceAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (articlesSampleSize > 1000000) {
             throw new RangeError("at most 1000000 articles can be used for computation sample");
         }
@@ -404,8 +431,14 @@ export class RequestArticlesSourceAggr extends RequestArticles {
 export class RequestArticlesKeywordAggr extends RequestArticles {
     public resultType = "keywordAggr";
     public params;
-    constructor({articlesSampleSize = 2000} = {}) {
+    constructor({
+                 articlesSampleSize = 2000,
+                 ...unsupported
+                } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticlesKeywordAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (articlesSampleSize > 20000) {
             throw new RangeError("at most 20000 articles can be used for computation sample");
         }
@@ -422,8 +455,12 @@ export class RequestArticlesConceptGraph extends RequestArticles {
                  articlesSampleSize = 10000,
                  skipQueryConcepts = true,
                  returnInfo = new ReturnInfo(),
+                 ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticlesConceptGraph: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (conceptCount > 1000) {
             throw new RangeError("At most 1000 concepts can be returned per call");
         }
@@ -449,8 +486,12 @@ export class RequestArticlesConceptMatrix extends RequestArticles {
                  measure = "pmi",
                  articlesSampleSize = 10000,
                  returnInfo = new ReturnInfo(),
+                 ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticlesConceptMatrix: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (conceptCount > 200) {
             throw new RangeError("At most 200 concepts can be returned per call");
         }
@@ -473,8 +514,12 @@ export class RequestArticlesConceptTrends extends RequestArticles {
                  conceptCount = 25,
                  articlesSampleSize = 10000,
                  returnInfo = new ReturnInfo(),
+                 ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticlesConceptTrends: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (conceptCount > 50) {
             throw new RangeError("At most 50 concepts can be returned per call");
         }
@@ -505,8 +550,12 @@ export class RequestArticlesRecentActivity extends RequestArticles {
                  updatesUntilMinsAgo = undefined,
                  mandatorySourceLocation = false,
                  returnInfo = new ReturnInfo(),
+                 ...unsupported
                 } = {}) {
         super();
+        if (!_.isEmpty(unsupported)) {
+            console.warn(`RequestArticlesRecentActivity: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        }
         if (maxArticleCount > 1000) {
             throw new RangeError("At most 1000 articles can be returned per call");
         }

@@ -2,7 +2,7 @@ import * as _ from "lodash";
 import * as moment from "moment";
 import { QueryParamsBase } from "./base";
 import { ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
+import { EventRegistryStatic } from "./types";
 
 // Using the bottom classes you can obtain information about articles and events that
 // were shared the most on social media (Twitter and Facebook) on a particular day.
@@ -12,7 +12,7 @@ import { ER } from "./types";
 // Social score for an event is computed by checking 30 top shared articles in the event and averaging their social scores.
 
 export class GetTopSharedArticles extends QueryParamsBase {
-    constructor(args: ER.DailyShares.Arguments = {}) {
+    constructor(args: EventRegistryStatic.DailyShares.Arguments = {}) {
         const {date = moment().format("YYYY-MM-DD"), count = 20, returnInfo = new ReturnInfo()} = args;
         super();
         this.setVal("action", "getArticles");
@@ -30,7 +30,7 @@ export class GetTopSharedArticles extends QueryParamsBase {
 }
 
 export class GetTopSharedEvents extends QueryParamsBase {
-    constructor(args: ER.DailyShares.Arguments = {}) {
+    constructor(args: EventRegistryStatic.DailyShares.Arguments = {}) {
         const {date = moment().format("YYYY-MM-DD"), count = 20, returnInfo = new ReturnInfo()} = args;
         super();
         this.setVal("action", "getEvents");
