@@ -175,9 +175,10 @@ export class EventRegistry {
                 throw new Error(errorMessage);
             }
         } catch (error) {
+            request = { data: undefined };
             // try to print out the error that should be passed by in case the server is down or responds with errors
             if (this.config.verboseOutput) {
-                console.error(error);
+                console.error(`${_.get(error, "response.status")}: ${_.get(error, "response.statusText")} => ${_.get(error, "response.data")}`);
             }
             if (this.config.logging) {
                 this.logger.error(_.get(error, "errno", error));
