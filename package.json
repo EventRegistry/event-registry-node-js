@@ -31,7 +31,7 @@
     "@types/node": "8.0.50",
     "@types/qs": "6.5.1",
     "axios": "^0.18.0",
-    "lodash": "4.17.10",
+    "lodash": "4.17.13",
     "moment": "2.22.1",
     "semaphore-async-await": "^1.5.1",
     "winston": "^3.2.1"
