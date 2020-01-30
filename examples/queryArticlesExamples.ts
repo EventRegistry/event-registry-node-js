@@ -1,10 +1,10 @@
-import { ArticleInfoFlags, BaseQuery, CombinedQuery, ComplexArticleQuery, EventRegistry, QueryArticle, QueryArticles, QueryArticlesIter, QueryItems, RequestArticlesInfo, RequestArticlesRecentActivity, ReturnInfo } from "eventregistry";
+import { ArticleInfoFlags, BaseQuery, CombinedQuery, ComplexArticleQuery, EventRegistry, ConceptInfoFlags, QueryArticle, QueryArticles, QueryArticlesIter, QueryItems, RequestArticlesInfo, RequestArticlesRecentActivity, ReturnInfo } from "eventregistry";
 import * as _ from "lodash";
 
 // examples that illustrate how to query articles using different search options
 
 const er = new EventRegistry();
-const articleInfo = new ArticleInfoFlags({ duplicateList: true, concepts: true, categories: true, location: true, image: true });
+const articleInfo = new ArticleInfoFlags({ duplicateList: true, concepts: true, categories: true, location: true, image: true, conceptInfo: new ConceptInfoFlags({trendingScore: true}) });
 const returnInfo = new ReturnInfo({articleInfo});
 const requestArticlesInfo = new RequestArticlesInfo({count: 30, returnInfo: returnInfo});
 

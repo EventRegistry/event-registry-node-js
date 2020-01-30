@@ -1,7 +1,6 @@
 
 export { Analytics } from "./analytics";
 export { QueryItems } from "./base";
-export { GetTopCorrelations } from "./correlations";
 export { GetCounts, GetCountsEx } from "./counts";
 export { GetTopSharedArticles, GetTopSharedEvents } from "./dailyShares";
 export { GetEventForText } from "./eventForText";
@@ -57,7 +56,6 @@ export {
     RequestEventDateMentionAggr,
     RequestEventArticleTrend,
     RequestEventSimilarEvents,
-    RequestEventSimilarStories,
 } from "./queryEvent";
 export {
     QueryEvents,

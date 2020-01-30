@@ -63,7 +63,7 @@ export class QueryEventArticlesIter extends QueryEvent {
             lang = undefined,
             sortBy = "cosSim",
             sortByAsc = false,
-            returnInfo = new ReturnInfo({ articleInfo: new ArticleInfoFlags({ bodyLen: -1 }) }),
+            returnInfo = undefined,
             maxItems = -1,
             keywords = undefined,
             conceptUri = undefined,
@@ -80,6 +80,8 @@ export class QueryEventArticlesIter extends QueryEvent {
             keywordsLoc = "body",
             startSourceRankPercentile = 0,
             endSourceRankPercentile = 100,
+            minSentiment = -1,
+            maxSentiment = 1,
         } = args;
         this.er = er;
         this.sortBy = sortBy;
@@ -131,6 +133,14 @@ export class QueryEventArticlesIter extends QueryEvent {
 
         if (endSourceRankPercentile !== 100 ) {
             this.setVal("endSourceRankPercentile", endSourceRankPercentile);
+        }
+
+        if (minSentiment > -1 && minSentiment <= 1 ) {
+            this.setVal("minSentiment", minSentiment);
+        }
+
+        if (maxSentiment >= -1 && maxSentiment < 1 ) {
+            this.setVal("maxSentiment", maxSentiment);
         }
     }
 
@@ -259,7 +269,7 @@ export class RequestEventArticles extends RequestEvent {
             endSourceRankPercentile = 100,
             sortBy = "cosSim",
             sortByAsc = false,
-            returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: -1})}),
+            returnInfo = undefined,
         } = args;
 
         if (page < 1) {
@@ -312,7 +322,10 @@ export class RequestEventArticles extends RequestEvent {
         if (endSourceRankPercentile !== 100 ) {
             this.setVal("endSourceRankPercentile", endSourceRankPercentile);
         }
-        this.params = _.extend({}, this.params, this.getQueryParams(), returnInfo.getParams("articles"));
+
+        if (!!returnInfo) {
+            this.params = _.extend({}, this.params, this.getQueryParams(), returnInfo.getParams("articles"));
+        }
     }
 }
 
@@ -424,10 +437,10 @@ export class RequestEventSimilarEvents extends RequestEvent {
         const {
             conceptInfoList,
             count = 50,
-            maxDayDiff = Number.MAX_SAFE_INTEGER, // in place of Python's `sys.maxsize`
+            dateStart = undefined,
+            dateEnd = undefined,
             addArticleTrendInfo = false,
             aggrHours = 6,
-            includeSelf = false,
             returnInfo = new ReturnInfo(),
             ...unsupported
           } = args;
@@ -441,51 +454,20 @@ export class RequestEventSimilarEvents extends RequestEvent {
             throw new Error("Concept info list is not an array");
         }
         this.params = {};
+        this.params["action"] = "getSimilarEvents";
+
         this.params["concepts"] = JSON.stringify(conceptInfoList);
-        this.params["count"] = count;
-        if (maxDayDiff !== Number.MAX_SAFE_INTEGER) {
-            this.params["maxDayDiff"] = maxDayDiff;
+        // Potential problem, verify that output corresponds the REST API docs.
+        this.params["eventsCount"] = count;
+        if (!!dateStart) {
+            this.params["dateStart"] = QueryParamsBase.encodeDateTime(dateStart, "YYYY-MM-DD");
+        }
+        if (!!dateEnd) {
+            this.params["dateEnd"] = QueryParamsBase.encodeDateTime(dateEnd, "YYYY-MM-DD");
         }
         this.params["addArticleTrendInfo"] = addArticleTrendInfo;
         this.params["aggrHours"] = aggrHours;
-        this.params["includeSelf"] = includeSelf;
+        this.params["resultType"] = "similarEvents";
         this.params = _.extend({}, this.params, returnInfo.getParams());
-    }
-}
-
-/**
- * @class RequestEventSimilarStories
- * Return a list of similar stories (clusters).
- */
-export class RequestEventSimilarStories extends RequestEvent {
-    public resultType = "similarStories";
-    public params;
-    constructor(args: EventRegistryStatic.QueryEvent.RequestEventSimilarStoriesArguments = {}) {
-        super();
-        const {
-            conceptInfoList,
-            count = 50,
-            lang = ["eng"],
-            maxDayDiff = Number.MAX_SAFE_INTEGER, // in place of Python's `sys.maxsize`
-            returnInfo = new ReturnInfo(),
-            ...unsupported
-          } = args;
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestEventSimilarStories: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
-        }
-        if (count > 50) {
-            throw new RangeError("At most 50 similar stories can be returned per call");
-        }
-        if (!_.isArray(conceptInfoList)) {
-            throw new Error("Concept info list is not an array");
-        }
-        this.params = {};
-        this.params["similarStoriesConcepts"] = JSON.stringify(conceptInfoList);
-        this.params["similarStoriesCount"] = count;
-        this.params["similarStoriesLang"] = lang;
-        if (maxDayDiff !== Number.MAX_SAFE_INTEGER) {
-            this.params["similarStoriesMaxDayDiff"] = maxDayDiff;
-        }
-        this.params = _.extend({}, this.params, returnInfo.getParams("similarStories"));
     }
 }

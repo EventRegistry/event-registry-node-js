@@ -12,7 +12,6 @@ import {
     RequestEventInfo,
     RequestEventKeywordAggr,
     RequestEventSimilarEvents,
-    RequestEventSimilarStories,
     RequestEventSourceAggr,
     RequestEventsUriWgtList,
     ReturnInfo,
@@ -175,23 +174,6 @@ describe("Query Event", () => {
         const response = await er.execQuery(q);
         expect(response).toBeValidGeneralEventList();
         expect(response).toHaveProperty("articleTrendInfo");
-        done();
-    });
-    // TODO: Result type is unrecognized.
-    xit("should test similar stories", async (done) => {
-        const q = await createQuery(1);
-        const requestEventSimilarStories  = new RequestEventSimilarStories({
-            conceptInfoList,
-            returnInfo: utils.returnInfo,
-        });
-        q.setRequestedResult(requestEventSimilarStories);
-        const response = await er.execQuery(q);
-        _.each(response, (event) => {
-            expect(_.has(event, "similarStories")).toBeTruthy("Expected to see 'similarStories'");
-            _.each(_.get(event, "similarStories.results"), (simStory) => {
-                expect(simStory).toBeValidStory();
-            });
-        });
         done();
     });
 

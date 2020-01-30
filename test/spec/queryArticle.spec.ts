@@ -9,7 +9,7 @@ import {
 } from "../../src/index";
 import { Utils } from "./utils";
 
-xdescribe("Query Article", () => {
+describe("Query Article", () => {
     const er = Utils.initAPI();
     const utils = new Utils();
     let query;
@@ -36,15 +36,17 @@ xdescribe("Query Article", () => {
         const uniqueUrls = _.uniq(urls);
         const mapper = new ArticleMapper(er);
         const mappedUris = await Promise.all(_.map(uniqueUrls, (url) => mapper.getArticleUri(url)));
-        const q = new QueryArticle(_.compact(mappedUris));
-        q.setRequestedResult(new RequestArticleInfo(utils.returnInfo));
-        const res = await er.execQuery(q);
-        _.each(res, (article) => {
-            // it's possible that the article was removed from ER
-            if (!_.has(article, "error")) {
-                expect(article["info"]).toBeValidArticle();
-            }
-        });
+        if (!_.isEmpty(_.compact(mappedUris))) {
+            const q = new QueryArticle(_.compact(mappedUris));
+            q.setRequestedResult(new RequestArticleInfo(utils.returnInfo));
+            const res = await er.execQuery(q);
+            _.each(res, (article) => {
+                // it's possible that the article was removed from ER
+                if (!_.has(article, "error")) {
+                    expect(article["info"]).toBeValidArticle();
+                }
+            });
+        }
         const q1 = new QueryArticle(uris);
         q1.setRequestedResult(new RequestArticleInfo(utils.returnInfo));
         const res1 = await er.execQuery(q1);

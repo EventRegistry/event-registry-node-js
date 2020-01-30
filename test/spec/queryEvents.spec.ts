@@ -1,13 +1,9 @@
 import * as _ from "lodash";
 import {
-    ArticleInfoFlags,
     BaseQuery,
     ComplexEventQuery,
     ConceptInfoFlags,
     EventInfoFlags,
-    EventRegistry,
-    QueryArticles,
-    QueryEvent,
     QueryEventArticlesIter,
     QueryEvents,
     QueryEventsIter,
@@ -353,7 +349,7 @@ describe("Query Events", () => {
 
     it("should test search by source (2)", async (done) => {
         const q = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
-        const eventInfo = new EventInfoFlags({concepts: true, articleCounts: true, title: true, summary: true, categories: true, location: true, stories: true, imageCount: 1});
+        const eventInfo = new EventInfoFlags({concepts: true, articleCounts: true, title: true, summary: true, categories: true, stories: true, imageCount: 1});
         const returnInfo1 = new ReturnInfo({conceptInfo: new ConceptInfoFlags({lang: "deu", type: "wiki"}), eventInfo});
         q.setRequestedResult(new RequestEventsInfo({page: 1, count: 50, sortBy: "size", sortByAsc: true, returnInfo: returnInfo1}));
         const response = await er.execQuery(q);

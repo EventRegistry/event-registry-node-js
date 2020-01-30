@@ -32,10 +32,3 @@ er.getCategoryUri("Obama").then((conceptUri) => {
         console.info(response);
     });
 });
-// get the stock prices for Apple
-er.getCustomConceptUri("apple").then((customConceptUri) => {
-    const q = new GetCounts(customConceptUri, {source: "custom"});
-    er.execQuery(q).then((response) => {
-        console.info(response);
-    });
-});

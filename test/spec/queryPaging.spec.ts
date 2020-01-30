@@ -189,46 +189,58 @@ describe("Query Paging", () => {
         done();
     });
 
-    it("should test downloading of articles", async (done) => {
-        const conceptUri = await er.getConceptUri("peace");
-        const iter = new QueryArticlesIter(er, { conceptUri });
-        const count = await iter.count();
-        console.log(`Found ${count} articles by uris\nDownloading page:`);
-        let uriList1 = [];
-        let totArts1 = 0;
-        const pages1 = _.shuffle(_.range(1, _.ceil(count / 100) + 1));
-        for (const page of pages1) {
-            console.log(`${page}, `);
-            const q = new QueryArticles({ conceptUri });
-            q.setRequestedResult(new RequestArticlesInfo({page: page, count: 100}));
-            const response = await er.execQuery(q);
-            expect(_.get(response, "articles.totalResults", -1)).toEqual(count);
-            const articles = _.get(response, "articles.results", []);
-            uriList1 = [...uriList1, ..._.map(articles, "uri")];
-            expect(_.size(articles)).toBeLessThanOrEqual(100);
-            totArts1 += _.size(articles);
-        }
-        expect(_.size(uriList1)).toEqual(count);
-        expect(totArts1).toEqual(count);
+    describe("Downloading of articles", () => {
+        let conceptUri: string;
+        let count: number;
 
-        console.log(`Found ${count} articles by uris\nDownloading page:`);
-        let uriList2 = [];
-        let totArts2 = 0;
-        const pages2 = _.range(1, _.ceil(count / 100) + 1);
-        for (const page of pages2) {
-            console.log(`${page}, `);
-            const q = new QueryArticles({ conceptUri });
-            q.setRequestedResult(new RequestArticlesInfo({page: page, count: 100}));
-            const response = await er.execQuery(q);
-            expect(_.get(response, "articles.totalResults", -1)).toEqual(count);
-            const articles = _.get(response, "articles.results", []);
-            uriList2 = [...uriList2, ..._.map(articles, "uri")];
-            expect(_.size(articles)).toBeLessThanOrEqual(100);
-            totArts2 += _.size(articles);
-        }
-        expect(_.size(uriList2)).toEqual(count);
-        expect(totArts2).toEqual(count);
-        done();
+        beforeAll(async (done) => {
+            conceptUri = await er.getConceptUri("peace");
+            const iter = new QueryArticlesIter(er, { conceptUri });
+            count = await iter.count();
+            done();
+        });
+
+        it("should test downloading of articles pt. 1", async (done) => {
+            console.log(`Found ${count} articles by uris\nDownloading page:`);
+            let uriList1 = [];
+            let totArts1 = 0;
+            const pages1 = _.shuffle(_.range(1, _.ceil(count / 100) + 1));
+            for (const page of pages1) {
+                console.log(`${page}, `);
+                const q = new QueryArticles({ conceptUri });
+                q.setRequestedResult(new RequestArticlesInfo({page: page, count: 100}));
+                const response = await er.execQuery(q);
+                expect(_.get(response, "articles.totalResults", -1)).toEqual(count);
+                const articles = _.get(response, "articles.results", []);
+                uriList1 = [...uriList1, ..._.map(articles, "uri")];
+                expect(_.size(articles)).toBeLessThanOrEqual(100);
+                totArts1 += _.size(articles);
+            }
+            expect(_.size(uriList1)).toEqual(count);
+            expect(totArts1).toEqual(count);
+            done();
+        });
+
+        it("should test downloading of articles pt. 2", async (done) => {
+            console.log(`Found ${count} articles by uris\nDownloading page:`);
+            let uriList2 = [];
+            let totArts2 = 0;
+            const pages2 = _.range(1, _.ceil(count / 100) + 1);
+            for (const page of pages2) {
+                console.log(`${page}, `);
+                const q = new QueryArticles({ conceptUri });
+                q.setRequestedResult(new RequestArticlesInfo({page: page, count: 100}));
+                const response = await er.execQuery(q);
+                expect(_.get(response, "articles.totalResults", -1)).toEqual(count);
+                const articles = _.get(response, "articles.results", []);
+                uriList2 = [...uriList2, ..._.map(articles, "uri")];
+                expect(_.size(articles)).toBeLessThanOrEqual(100);
+                totArts2 += _.size(articles);
+            }
+            expect(_.size(uriList2)).toEqual(count);
+            expect(totArts2).toEqual(count);
+            done();
+        });
     });
 
     it("should test downloading of event uris", async (done) => {

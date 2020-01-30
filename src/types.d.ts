@@ -14,6 +14,10 @@ export module EventRegistryStatic {
         usedTokens: number;
     }
 
+    export interface ServiceStatus {
+        [name: string]: any;
+    }
+
     export interface Config {
         /**
          * API key that should be used to make the requests to the Event Registry.
@@ -49,6 +53,8 @@ export module EventRegistryStatic {
         settingsFName?: string;
         allowUseOfArchive?: boolean;
     }
+
+    export type BaseConceptType = "person" | "loc" | "org" | "wiki";
 
     export type ConceptType = "person" | "loc" | "org" | "wiki" | "entities" | "concepts"  | "conceptClass" | "conceptFolder";
 
@@ -309,6 +315,8 @@ export module EventRegistryStatic {
         sourceLocations: Array<{uri: string, wgt: number}>;
         locations: Array<{uri: string, wgt: number}>;
         langs: string[];
+        startSourceRankPercentile?: number;
+        endSourceRankPercentile?: number;
         restrictToSetConcepts: boolean;
         restrictToSetCategories: boolean;
         restrictToSetSources: boolean;
@@ -333,10 +341,12 @@ export module EventRegistryStatic {
          * Should the results be sorted in ascending order (true) or descending (false)
          */
         sortByAsc?: boolean;
+        dataType?: EventRegistryStatic.DataType | EventRegistryStatic.DataType[];
         /**
          * What details should be included in the returned information
          */
         returnInfo?: ReturnInfo;
+        [name: string]: (string | number | boolean | ReturnInfo) | (string | number | boolean)[];
     }
 
     export interface TopicPageEvents {
@@ -360,6 +370,7 @@ export module EventRegistryStatic {
          * What details should be included in the returned information
          */
         returnInfo?: ReturnInfo;
+        [name: string]: (string | number | boolean | ReturnInfo) | (string | number | boolean)[];
     }
 
     export namespace Correlations {
@@ -457,6 +468,14 @@ export module EventRegistryStatic {
              */
             useTweetText?: boolean;
             /**
+             * Normalize identified concepts by their IDF in the news (punish very common concepts)
+             */
+            useIdfNormalization?: boolean;
+            /**
+             * Way to normalize the concept weights ("none", "linear")
+             */
+            normalization?: "none" | "linear";
+            /**
              * The number of concepts to save in the final topic.
              */
             maxConcepts?: number;
@@ -469,22 +488,21 @@ export module EventRegistryStatic {
              */
             maxTweets?: number;
             /**
+             * maximum number of article links in the tweets to analyze (default 500, max 2000)
+             */
+            maxUsedLinks?: number;
+            /**
+             * what types of concepts you would like to ignore in the profile. options: person, org, loc, wiki or an array with those
+             */
+            ignoreConceptTypes?: BaseConceptType | BaseConceptType[];
+            /**
              * When finished, should we send a notification email to this address?
              */
             notifyEmailAddress?: string;
         }
-        export interface TrainTopicFinishTrainingArguments {
-            /**
-             * number of top concepts to save in the topic
-             */
+        export interface TrainTopicGetTrainedTopicArguments {
             maxConcepts?: number;
-            /**
-             * number of top categories to save in the topic
-             */
             maxCategories?: number;
-            /**
-             * should the concepts be normalized by punishing the commonly mentioned concepts
-             */
             idfNormalization?: boolean;
         }
     }
@@ -622,6 +640,17 @@ export module EventRegistryStatic {
              * If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
              */
             dataType?: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType;
+            minSentiment?: number;
+            maxSentiment?: number;
+            minSocialScore?: number;
+            minFacebookShares?: number;
+            startSourceRankPercentile?: number;
+            endSourceRankPercentile?: number;
+        }
+
+        export interface ComplexEventQueryArguments {
+            minSentiment?: number;
+            maxSentiment?: number;
         }
     }
 
@@ -721,7 +750,7 @@ export module EventRegistryStatic {
              */
             authorUri?: string | string[] | QueryItems;
             /**
-             * Find articles that describe something that occured at a particular location.
+             * Find articles that describe something that occurred at a particular location.
              * If value can be a string or a list of strings provided in QueryItems.OR().
              * Location uri can either be a city or a country. Location uri for a given name can be obtained using EventRegistry.getLocationUri().
              */
@@ -822,6 +851,14 @@ export module EventRegistryStatic {
              */
             endSourceRankPercentile?: number;
             /**
+             * minimum value of the sentiment, that the returned articles should have. Range [-1, 1]. Note: setting the value will remove all articles that don't have a computed value for the sentiment (all non-English articles)
+             */
+            minSentiment?: number;
+            /**
+             * maximum value of the sentiment, that the returned articles should have. Range [-1, 1]. Note: setting the value will remove all articles that don't have a computed value for the sentiment (all non-English articles)
+             */
+            maxSentiment?: number;
+            /**
              * what data types should we search? "news" (news content, default), "pr" (press releases), or "blogs".
              *   If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
              */
@@ -893,6 +930,14 @@ export module EventRegistryStatic {
             keywordsLoc?: "body" | "title" | "body,title";
             startSourceRankPercentile?: number;
             endSourceRankPercentile?: number;
+            /**
+             * minimum value of the sentiment, that the returned articles should have. Range [-1, 1]. Note: setting the value will remove all articles that don't have a computed value for the sentiment (all articles that are not reported in English language)
+             */
+            minSentiment?: number;
+            /**
+             * maximum value of the sentiment, that the returned articles should have. Range [-1, 1]. Note: setting the value will remove all articles that don't have a computed value for the sentiment (all articles that are not reported in English language)
+             */
+            maxSentiment?: number;
         }
 
         export interface RequestEventArticlesArguments {
@@ -984,10 +1029,8 @@ export module EventRegistryStatic {
              * number of similar events to return (at most 50)
              */
             count?: number;
-            /**
-             * find only those events that are at most maxDayDiff days apart from the tested event
-             */
-            maxDayDiff?: number;
+            dateStart?: string;
+            dateEnd?: string;
             /**
              * for the returned events compute how they were trending (intensity of reporting) in different time periods
              */
@@ -1103,6 +1146,14 @@ export module EventRegistryStatic {
              * find events that occurred before or on dateEnd. Date should be provided in YYYY-MM-DD format.
              */
             dateEnd?: string | Date;
+            /**
+             * minimum value of the sentiment, that the returned events should have. Range [-1, 1]. Note: setting the value will remove all events that don't have a computed value for the sentiment (all events that are not reported in English language)
+             */
+            minSentiment?: number;
+            /**
+             * maximum value of the sentiment, that the returned events should have. Range [-1, 1]. Note: setting the value will remove all events that don't have a computed value for the sentiment (all events that are not reported in English language)
+             */
+            maxSentiment?: number;
             /**
              * find events that have been reported in at least minArticlesInEvent articles (regardless of language)
              */
@@ -1515,10 +1566,6 @@ export module EventRegistryStatic {
              */
             extractedDates?: boolean;
             /**
-             * the list of articles that are a copy of this article
-             */
-            duplicateList?: boolean;
-            /**
              * if the article is a duplicate, this will provide information about the original article
              */
             originalArticle?: boolean;
@@ -1526,6 +1573,7 @@ export module EventRegistryStatic {
              * uri of the story (cluster) to which the article belongs
              */
             storyUri?: boolean;
+            [name: string]: boolean | string | number;
         }
 
         /**
@@ -1712,6 +1760,7 @@ export module EventRegistryStatic {
              * number of images to be returned for a story
              */
             imageCount?: number;
+            [name: string]: boolean | string | number;
         }
 
         /**
@@ -1789,10 +1838,6 @@ export module EventRegistryStatic {
              */
             categories?: boolean;
             /**
-             * return the location where the event occurred
-             */
-            location?: boolean;
-            /**
              * return information about the date of the event
              */
             date?: boolean;
@@ -1816,6 +1861,7 @@ export module EventRegistryStatic {
              * number of images to be returned for an event
              */
             imageCount?: number;
+            [name: string]: boolean | string | number;
         }
 
         /**
@@ -1843,17 +1889,9 @@ export module EventRegistryStatic {
              */
             IncludeSourceImage?: boolean;
             /**
-             * the number of articles from this news source that are stored in Event Registry
-             */
-            IncludeSourceArticleCount?: boolean;
-            /**
              * different social media accounts used by the news source
              */
             IncludeSourceSocialMedia?: boolean;
-            /**
-             * info about the names of the source groups to which the source belongs to
-             */
-            IncludeSourceSourceGroups?: boolean;
         }
 
         /**
@@ -1892,28 +1930,22 @@ export module EventRegistryStatic {
              * info about the names of the source groups to which the source belongs to
              */
             sourceGroups?: boolean;
+            [name: string]: boolean | string | number;
         }
 
         /**
          * What information about a category should be returned by the API call
          */
         export interface CategoryInfoFlags {
-            IncludeCategoryParentUri?: boolean;
-            IncludeCategoryChildrenUris?: boolean;
             IncludeCategoryTrendingScore?: boolean;
-            IncludeCategoryTrendingHistory?: boolean;
-            CategoryTrendingSource?: string | string[];
         }
 
         /**
          * What information about a category should be returned by the API call
          */
         export interface CategoryInfo {
-            parentUri?: boolean;
-            childrenUris?: boolean;
             trendingScore?: boolean;
-            trendingHistory?: boolean;
-            trendingSource?: string | string[];
+            [name: string]: boolean | string | number;
         }
 
         export interface ConceptInfoFlags {
@@ -1923,12 +1955,7 @@ export module EventRegistryStatic {
             IncludeConceptSynonyms?: boolean;
             IncludeConceptImage?: boolean;
             IncludeConceptDescription?: boolean;
-            IncludeConceptConceptClassMembership?: boolean;
-            IncludeConceptConceptClassMembershipFull?: boolean;
             IncludeConceptTrendingScore?: boolean;
-            IncludeConceptTrendingHistory?: boolean;
-            IncludeConceptTotalCount?: boolean;
-            ConceptTrendingSource?: string | string[];
             MaxConceptsPerType?: number;
         }
 
@@ -1939,13 +1966,9 @@ export module EventRegistryStatic {
             synonyms?: boolean;
             image?: boolean;
             description?: boolean;
-            conceptClassMembership?: boolean;
-            conceptClassMembershipFull?: boolean;
             trendingScore?: boolean;
-            trendingHistory?: boolean;
-            totalCount?: boolean;
-            trendingSource?: string | string[];
             maxConceptsPerType?: number;
+            [name: string]: boolean | string | number | (boolean | string | number)[];
         }
 
         export interface LocationInfoFlags {
@@ -1972,6 +1995,7 @@ export module EventRegistryStatic {
             countryContinent?: boolean;
             placeFeatureCode?: boolean;
             placeCountry?: boolean;
+            [name: string]: boolean | string | number;
         }
 
         export interface ConceptClassInfoFlags {
@@ -1982,6 +2006,7 @@ export module EventRegistryStatic {
         export interface ConceptClassInfo {
             parentLabels?: boolean;
             concepts?: boolean;
+            [name: string]: boolean | string | number;
         }
 
         export interface ConceptFolderInfoFlags {
@@ -1992,6 +2017,7 @@ export module EventRegistryStatic {
         export interface ConceptFolderInfo {
             definition?: boolean;
             owner?: boolean;
+            [name: string]: boolean | string | number;
         }
     }
 

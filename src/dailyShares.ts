@@ -25,7 +25,7 @@ export class GetTopSharedArticles extends QueryParamsBase {
     }
 
     public get path() {
-        return "/json/article";
+        return "/api/v1/article";
     }
 }
 
@@ -43,6 +43,6 @@ export class GetTopSharedEvents extends QueryParamsBase {
     }
 
     public get path() {
-        return "/json/event";
+        return "/api/v1/event";
     }
 }

@@ -4,7 +4,7 @@ import { ReturnInfo } from "./returnInfo";
 
 export abstract class TrendsBase extends QueryParamsBase {
     public get path() {
-        return "/json/trends";
+        return "/api/v1/trends";
     }
 }
 

@@ -36,7 +36,7 @@ export class GetSourceInfo extends QueryParamsBase {
     }
 
     public get path(): string {
-        return "/json/source";
+        return "/api/v1/source";
     }
 }
 
@@ -56,7 +56,7 @@ export class GetConceptInfo extends QueryParamsBase {
     }
 
     public get path(): string {
-        return "/json/concept";
+        return "/api/v1/concept";
     }
 }
 
@@ -83,7 +83,7 @@ export class GetCategoryInfo extends QueryParamsBase {
     }
 
     public get path(): string {
-        return "/json/category";
+        return "/api/v1/category";
     }
 }
 
@@ -116,6 +116,6 @@ export class GetSourceStats extends QueryParamsBase {
     }
 
     public get path(): string {
-        return "/json/source";
+        return "/api/v1/source";
     }
 }

@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import {mainLangs, Query } from "./base";
+import {mainLangs, Query, QueryParamsBase } from "./base";
 import {ArticleInfoFlags, ReturnInfo } from "./returnInfo";
 
 export class QueryStory extends Query<RequestStory> {
@@ -10,10 +10,13 @@ export class QueryStory extends Query<RequestStory> {
     }
 
     public get path() {
-        return "/json/story";
+        return "/api/v1/story";
     }
 
-    public queryByUri(uriOrUriList) {
+    /**
+     * Search stories by their uri(s)
+     */
+    public queryByUri(uriOrUriList: string | string[]) {
         this.setVal("storyUri", uriOrUriList);
     }
 
@@ -110,11 +113,12 @@ export class RequestStorySimilarStories extends RequestStory {
     public resultType = "similarStories";
     public params;
 
-    constructor({ count = 50,
-                  source = "concept",
-                  maxDayDiff = Number.MAX_SAFE_INTEGER,
-                  addArticleTrendInfo = false,
-                  returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: 0})}),
+    constructor({ conceptInfoList = undefined,
+                  count = 50,
+                  dateStart = undefined,
+                  dateEnd = undefined,
+                  lang = [],
+                  returnInfo = new ReturnInfo(),
                   ...unsupported
                 } = {}) {
         super();
@@ -124,13 +128,25 @@ export class RequestStorySimilarStories extends RequestStory {
         if (count > 50) {
           throw new RangeError("At most 50 stories can be returned per call");
         }
-        this.params = {};
-        this.params["similarStoriesCount"] = count;
-        this.params["similarStoriesSource"] = source;
-        if (maxDayDiff !== Number.MAX_SAFE_INTEGER) {
-            this.params["similarStoriesMaxDayDiff"] = maxDayDiff;
+        if (!_.isArray(conceptInfoList)) {
+            throw new Error("Concept list is not an array!");
         }
-        this.params["similarStoriesAddArticleTrendInfo"] = addArticleTrendInfo;
+        this.params = {};
+        this.params["action"] = "getSimilarStories";
+        this.params["concepts"] = JSON.stringify(conceptInfoList);
+        this.params["storiesCount"] = count;
+
+        if (!!dateStart) {
+            this.params["dateStart"] = QueryParamsBase.encodeDateTime( dateStart, "YYYY-MM-DD" );
+        }
+
+        if (!!dateEnd) {
+            this.params["dateEnd"] = QueryParamsBase.encodeDateTime( dateEnd, "YYYY-MM-DD" );
+        }
+
+        if (!_.isEmpty(lang)) {
+            this.params["lang"] = lang;
+        }
         this.params = _.extend({}, this.params, returnInfo.getParams("similarStories"));
     }
 }

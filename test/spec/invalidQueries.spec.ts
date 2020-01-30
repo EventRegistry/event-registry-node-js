@@ -6,7 +6,7 @@ describe("Invalid queries", () => {
     const er = Utils.initAPI();
     const utils = new Utils();
     it("should test produce an error on an invalid query", async (done) => {
-        const trumpUri = await er.getConceptUri("Trump");
+        const bushUri = await er.getConceptUri("Bush");
         const obamaUri = await er.getConceptUri("Obama");
         const politicsUri = await er.getCategoryUri("politics");
         const merkelUri = await er.getConceptUri("merkel");
@@ -17,7 +17,7 @@ describe("Invalid queries", () => {
                 "$query": {
                     "$or": [
                         { "dateStart": "2017-02-05", "dateEnd": "2017-02-05" },
-                        { "conceptUri": "${trumpUri}" },
+                        { "conceptUri": "${bushUri}" },
                         { "categoryUri": "${politicsUri}" },
                         {
                             "$and": [
@@ -43,7 +43,7 @@ describe("Invalid queries", () => {
             {
                 "$query": {
                     "$or": [
-                        { "conceptUri": "${trumpUri}" },
+                        { "conceptUri": "${bushUri}" },
                         { "categoryUri": "${politicsUri}" }
                     ],
                     "$not": {
@@ -62,7 +62,7 @@ describe("Invalid queries", () => {
             {
                 "$query": {
                     "$or": [
-                        { "conceptUri": "${trumpUri}" },
+                        { "conceptUri": "${bushUri}" },
                         { "categoryUri": "${politicsUri}" }
                     ],
                     "$not": {
@@ -79,7 +79,7 @@ describe("Invalid queries", () => {
             {
                 "$query": {
                     "$aaaaor": [
-                        { "conceptUri": "${trumpUri}" },
+                        { "conceptUri": "${bushUri}" },
                         { "categoryUri": "${politicsUri}" }
                     ],
                     "$not": {

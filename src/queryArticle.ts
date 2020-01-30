@@ -20,7 +20,7 @@ export class QueryArticle extends Query<RequestArticle> {
     }
 
     public get path() {
-        return "/json/article";
+        return "/api/v1/article";
     }
 
     /**

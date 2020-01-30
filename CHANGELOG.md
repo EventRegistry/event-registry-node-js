@@ -2,6 +2,29 @@
 
 This log contains changes specific to the NodeJS SDK.
 
+## [v8.7.0]() (2020-01-31)
+
+**Added**
+- added `EventRegistry.getServiceStatus()` method that reports status of the services
+- We added sentiment, which can now be used in querying of articles and events. The `QueryArticles`, `QueryArticlesIter`, `QueryEvents`, `QueryEventsIter` now all have additional parameters `minSentiment` and `maxSentiment` that can be used to filter the articles and events. The valid values are between -1 (very negative sentiment) and 1 (very positive sentiment). Value 0 represents neutral sentiment.
+- Sentiment was also added as a property in the returned articles and events.
+- `ComplexQueryArticles` and `ComplexQueryEvents` classes now support in the constructor additional filters like `minSentiment`, `maxSentiment`, `minFacebookShares`, `endSourceRankPercentile`, etc.
+
+**Updated**
+- `ReturnInfo` classes (`ArticleInfoFlags`, `ConceptInfoFlags`, ...) were updated. Some obsolete parameters were removed and we've also added support to directly pass any rarely used parameters, that are not a part of the typings.
+- `TopicPage.getArticles` and `TopicPage.getEvents` methods now also support passing any rarely used parameters directly, that are not a part of the typings.
+- Analytics: We updated `trainTopicOnTweets()`, `trainTopicClearTopic()` and `trainTopicGetTrainedTopic()` methods in the `Analytics` class.
+- `Analytics.annotate()` method now supports passing custom parameters that should be used when annotating the text.
+- Changed some defaults in the returned data. When searching articles, we now by default return article image and sentiment.
+- Analytics. updated `trainTopicOnTweets()`, `trainTopicClearTopic()` and `trainTopicGetTrainedTopic()` methods in the `Analytics` class.
+- `QueryArticles.initWithComplexQuery()` was updated - the parameter `dataType` was removed (since the `dataType` value should be provided in the `$filter` section of the query)
+- `TopicPage` now supports setting also the source rank percentile
+- `Analytics.extractArticleInfo` now also supports setting the headers and cookies to be used when making the requests
+
+**Removed**
+
+- removed `EventRegistry.suggestCustomConcepts()` and `EventRegistry.getCustomConceptUri()` methods. Not used anymore since we are not supporting anymore the correlation feature.
+
 ## [v8.5.13]() (2018-10-10)
 
 **Changed**

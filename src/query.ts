@@ -179,6 +179,12 @@ export class ComplexArticleQuery extends QueryCore {
         super();
         _.defaults(args, {
             dataType: "news",
+            minSentiment: undefined,
+            maxSentiment: undefined,
+            minSocialScore: 0,
+            minFacebookShares: 0,
+            startSourceRankPercentile: 0,
+            endSourceRankPercentile: 0,
             isDuplicateFilter: "keepAll",
             hasDuplicateFilter: "keepAll",
             eventFilter: "keepAll",
@@ -190,6 +196,24 @@ export class ComplexArticleQuery extends QueryCore {
         const filter = {};
         if (_.get(args, "dataType") !== "news") {
             filter["dataType"] = _.get(args, "dataType");
+        }
+        if (!!_.get(args, "minSentiment")) {
+            filter["minSentiment"] = _.get(args, "minSentiment");
+        }
+        if (!!_.get(args, "maxSentiment")) {
+            filter["maxSentiment"] = _.get(args, "maxSentiment");
+        }
+        if (_.get(args, "minSocialScore") > 0) {
+            filter["minSocialScore"] = _.get(args, "minSocialScore");
+        }
+        if (_.get(args, "minFacebookShares") > 0) {
+            filter["minFacebookShares"] = _.get(args, "minFacebookShares");
+        }
+        if (_.get(args, "startSourceRankPercentile") !== 0) {
+            filter["startSourceRankPercentile"] = _.get(args, "startSourceRankPercentile");
+        }
+        if (_.get(args, "endSourceRankPercentile") !== 0) {
+            filter["endSourceRankPercentile"] = _.get(args, "endSourceRankPercentile");
         }
         if (_.get(args, "isDuplicateFilter") !== "keepAll") {
             filter["isDuplicate"] = _.get(args, "isDuplicateFilter");
@@ -213,11 +237,21 @@ export class ComplexEventQuery extends QueryCore {
     /**
      * @param query an instance of CombinedQuery or BaseQuery to use to find events that match the conditions
      */
-    constructor(query: BaseQuery | CombinedQuery) {
+    constructor(query: BaseQuery | CombinedQuery, args: EventRegistryStatic.Query.ComplexEventQueryArguments = {}) {
         super();
         if (!(query instanceof QueryCore)) {
             throw new Error("query parameter was not a CombinedQuery or BaseQuery instance");
         }
         this.queryObj["$query"] = query.getQuery();
+        const filter = {};
+        if (!!_.get(args, "minSentiment")) {
+            filter["minSentiment"] = _.get(args, "minSentiment");
+        }
+        if (!!_.get(args, "maxSentiment")) {
+            filter["maxSentiment"] = _.get(args, "maxSentiment");
+        }
+        if (!_.isEmpty(filter)) {
+            this.queryObj["$filter"] = filter;
+        }
     }
 }

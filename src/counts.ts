@@ -8,7 +8,7 @@ import { EventRegistryStatic } from "./types";
 
 export abstract class CountsBase extends QueryParamsBase {
     public get path() {
-        return "/json/counters";
+        return "/api/v1/counters";
     }
 }
 

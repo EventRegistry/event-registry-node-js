@@ -19,7 +19,7 @@ export class GetRecentEvents extends QueryParamsBase {
     }
 
     public get path() {
-        return "/json/minuteStreamEvents";
+        return "/api/v1/minuteStreamEvents";
     }
 
     public async getUpdates() {
@@ -44,7 +44,7 @@ export class GetRecentArticles extends QueryParamsBase {
     }
 
     public get path() {
-        return "/json/minuteStreamArticles";
+        return "/api/v1/minuteStreamArticles";
     }
 
     public async getUpdates() {

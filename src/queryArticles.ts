@@ -38,6 +38,8 @@ export class QueryArticles extends Query<RequestArticles> {
             eventFilter = "keepAll",
             startSourceRankPercentile = 0,
             endSourceRankPercentile = 100,
+            minSentiment = -1,
+            maxSentiment = 1,
             dataType = "news",
             requestedResult = new RequestArticlesInfo(),
             ...unsupported
@@ -101,13 +103,19 @@ export class QueryArticles extends Query<RequestArticles> {
         if (endSourceRankPercentile !== 100 ) {
             this.setVal("endSourceRankPercentile", endSourceRankPercentile);
         }
+        if (minSentiment > -1 && minSentiment <= 1 ) {
+            this.setVal("minSentiment", minSentiment);
+        }
+        if (maxSentiment >= -1 && maxSentiment < 1 ) {
+            this.setVal("maxSentiment", maxSentiment);
+        }
 
         this.setVal("dataType", dataType);
         this.setRequestedResult(requestedResult);
     }
 
     public get path() {
-        return "/json/article";
+        return "/api/v1/article";
     }
 
     public setRequestedResult(requestArticles) {
@@ -180,7 +188,7 @@ export class QueryArticlesIter extends QueryArticles {
         _.defaults(args, {
             sortBy: "rel",
             sortByAsc: false,
-            returnInfo: new ReturnInfo(),
+            returnInfo: undefined,
             maxItems: -1,
         });
         const {sortBy, sortByAsc, returnInfo, maxItems} = args;
@@ -208,9 +216,8 @@ export class QueryArticlesIter extends QueryArticles {
         this.iterate();
     }
 
-    public static initWithComplexQuery(er: EventRegistry, complexQuery, args: {[name: string]: any} = {}) {
-        const {dataType = "news", ...params} = args;
-        const query = new QueryArticlesIter(er, {dataType, ...params});
+    public static initWithComplexQuery(er: EventRegistry, complexQuery, params: {[name: string]: any} = {}) {
+        const query = new QueryArticlesIter(er, params);
         if (complexQuery instanceof ComplexArticleQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
         } else if (_.isString(complexQuery)) {
@@ -292,7 +299,7 @@ export class RequestArticlesInfo extends RequestArticles {
                  count = 200,
                  sortBy = "date",
                  sortByAsc = false,
-                 returnInfo = new ReturnInfo(),
+                 returnInfo = undefined,
                  ...unsupported
                 } = {}) {
         super();
@@ -310,7 +317,9 @@ export class RequestArticlesInfo extends RequestArticles {
         this.params["articlesCount"] = count;
         this.params["articlesSortBy"] = sortBy;
         this.params["articlesSortByAsc"] = sortByAsc;
-        this.params = _.extend({}, this.params, returnInfo.getParams("articles"));
+        if (!!returnInfo) {
+            this.params = _.extend({}, this.params, returnInfo.getParams("articles"));
+        }
     }
 }
 
@@ -549,7 +558,7 @@ export class RequestArticlesRecentActivity extends RequestArticles {
                  updatesUntilTm = undefined,
                  updatesUntilMinsAgo = undefined,
                  mandatorySourceLocation = false,
-                 returnInfo = new ReturnInfo(),
+                 returnInfo = undefined,
                  ...unsupported
                 } = {}) {
         super();
@@ -580,6 +589,8 @@ export class RequestArticlesRecentActivity extends RequestArticles {
             this.params["recentActivityArticlesUpdatesUntilMinsAgo"] = updatesUntilMinsAgo;
         }
         this.params["recentActivityArticlesMandatorySourceLocation"] = mandatorySourceLocation;
-        this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityArticles"));
+        if (!!returnInfo) {
+            this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityArticles"));
+        }
     }
 }

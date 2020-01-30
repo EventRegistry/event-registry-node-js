@@ -47,3 +47,25 @@ async function fetchfilteredUpdates() {
     await sleep(60 * 1000);
     fetchfilteredUpdates();
 }
+
+let updatesAfterTm;
+
+async function fetchfilteredUpdatesWithParam() {
+    const query = new QueryArticles({keywords: "Trump", sourceLocationUri: await er.getLocationUri("United States")});
+    query.setRequestedResult(
+        new RequestArticlesRecentActivity({
+            maxArticleCount: 100,
+            // consider articles that were published at most 10 minutes ago
+            updatesAfterTm,
+        })
+    );
+    const articleList = await er.execQuery(query);
+    // TODO: do here whatever you need to with the articleList
+    for (const article of _.get(articleList, "recentActivityArticles.activity", [])) {
+        console.info(`Added article ${article["uri"]}: ${article["title"]}`);
+    }
+    // wait exactly a minute until next batch of new content is ready
+    await sleep(60 * 1000);
+    updatesAfterTm = articleList.recentActivityArticles.currTime;
+    fetchfilteredUpdatesWithParam();
+}

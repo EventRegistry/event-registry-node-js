@@ -95,7 +95,7 @@ describe("Query Articles", () => {
 
     it("should return list of articles with keyword title search ('iphone')", (done) => {
         try {
-            const q = new QueryArticlesIter(er, {keywords: "iphone", keywordsLoc: "title", returnInfo: new ReturnInfo({articleInfo: utils.articleInfo}), maxItems: 50});
+            const q = new QueryArticlesIter(er, {keywords: "iphone", keywordsLoc: "title", lang: "eng", returnInfo: new ReturnInfo({articleInfo: utils.articleInfo}), maxItems: 50});
             q.execQuery((item) => {
                 expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("iphone");
             }, (errorMessage) => {
@@ -112,7 +112,7 @@ describe("Query Articles", () => {
 
     it("should return list of articles with keyword title search ('home')", (done) => {
         try {
-            const q = new QueryArticlesIter(er, {keywords: "home", keywordsLoc: "title", returnInfo: new ReturnInfo({articleInfo: utils.articleInfo}), maxItems: 50});
+            const q = new QueryArticlesIter(er, {keywords: "home", keywordsLoc: "title", lang: "eng", returnInfo: new ReturnInfo({articleInfo: utils.articleInfo}), maxItems: 50});
             q.execQuery((item) => {
                 expect(_.deburr(_.toLower(_.get(item, "title")))).toContain("home");
             }, (errorMessage) => {
@@ -130,7 +130,7 @@ describe("Query Articles", () => {
     it("should return list of articles with keyword body search ('home')", (done) => {
         try {
             const returnInfo = new ReturnInfo({articleInfo: utils.articleInfo});
-            const q = new QueryArticlesIter(er, {keywords: "home", keywordsLoc: "body", returnInfo: returnInfo, maxItems: 50});
+            const q = new QueryArticlesIter(er, {keywords: "home", keywordsLoc: "body", lang: "eng", returnInfo: returnInfo, maxItems: 50});
             q.execQuery((item) => {
                 expect(item).toContainBodyText("home");
             }, (errorMessage) => {
@@ -147,7 +147,7 @@ describe("Query Articles", () => {
 
     it("should return list of articles with keyword body search ('jack')", (done) => {
         try {
-            const q = new QueryArticlesIter(er, {keywords: "jack", keywordsLoc: "body", returnInfo: new ReturnInfo({articleInfo: utils.articleInfo}), maxItems: 50});
+            const q = new QueryArticlesIter(er, {keywords: "jack", keywordsLoc: "body", lang: "eng", returnInfo: new ReturnInfo({articleInfo: utils.articleInfo}), maxItems: 50});
             q.execQuery((item) => {
                 expect(item).toContainBodyText("jack");
             }, (errorMessage) => {
@@ -310,9 +310,7 @@ describe("Query Articles", () => {
                 synonyms: true,
                 image: true,
                 description: true,
-                conceptClassMembership: true,
                 trendingScore: true,
-                trendingHistory: true,
             });
             const returnInfo = new ReturnInfo({conceptInfo});
             const requestArticlesConceptTrends = new RequestArticlesConceptTrends({conceptUris: [await er.getConceptUri("Obama"), await er.getConceptUri("Trump")], returnInfo});
@@ -497,7 +495,7 @@ describe("Query Articles", () => {
         }
     });
 
-    xit("should test query articles iterator (4)", async (done) => {
+    it("should test query articles iterator (4)", async (done) => {
         try {
             const conceptUri = await er.getConceptUri("Obama");
             const ignoreConceptUri = [await er.getConceptUri("politics"), await er.getConceptUri("china"), await er.getConceptUri("united states")];

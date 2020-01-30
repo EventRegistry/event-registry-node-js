@@ -25,6 +25,8 @@ export class QueryEvents extends Query<RequestEvents> {
             lang,
             dateStart,
             dateEnd,
+            minSentiment = -1,
+            maxSentiment = 1,
             minArticlesInEvent,
             maxArticlesInEvent,
             dateMentionStart,
@@ -63,6 +65,14 @@ export class QueryEvents extends Query<RequestEvents> {
             this.setDateVal("dateEnd", dateEnd);
         }
 
+        if (minSentiment > -1 && minSentiment <= 1 ) {
+            this.setVal("minSentiment", minSentiment);
+        }
+
+        if (maxSentiment >= -1 && maxSentiment < 1 ) {
+            this.setVal("maxSentiment", maxSentiment);
+        }
+
         this.setValIfNotDefault("minArticlesInEvent", minArticlesInEvent, undefined);
         this.setValIfNotDefault("maxArticlesInEvent", maxArticlesInEvent, undefined);
 
@@ -95,7 +105,7 @@ export class QueryEvents extends Query<RequestEvents> {
     }
 
     public get path() {
-        return "/json/event";
+        return "/api/v1/event";
     }
 
     /**
@@ -181,7 +191,7 @@ export class QueryEventsIter extends QueryEvents {
         const {
             sortBy = "rel",
             sortByAsc = false,
-            returnInfo = new ReturnInfo(),
+            returnInfo = undefined,
             maxItems = -1,
         } = args;
         this.er = er;
@@ -301,7 +311,7 @@ export class RequestEventsInfo extends RequestEvents {
             count = 50,
             sortBy = "rel",
             sortByAsc = false,
-            returnInfo = new ReturnInfo(),
+            returnInfo = undefined,
         } = args;
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
@@ -314,7 +324,9 @@ export class RequestEventsInfo extends RequestEvents {
         this.params["eventsCount"] = count;
         this.params["eventsSortBy"] = sortBy;
         this.params["eventsSortByAsc"] = sortByAsc;
-        this.params = _.extend({}, this.params, returnInfo.getParams("events"));
+        if (!!returnInfo) {
+            this.params = _.extend({}, this.params, returnInfo.getParams("events"));
+        }
     }
 }
 
@@ -637,7 +649,7 @@ export class RequestEventsRecentActivity extends RequestEvents {
             updatesAfterMinsAgo,
             mandatoryLocation = true,
             minAvgCosSim = 0,
-            returnInfo = new ReturnInfo(),
+            returnInfo = undefined,
         } = args;
         if (maxEventCount > 2000) {
             throw new RangeError("At most 2000 events can be returned");
@@ -658,6 +670,8 @@ export class RequestEventsRecentActivity extends RequestEvents {
         }
 
         this.params["recentActivityEventsMinAvgCosSim"] = minAvgCosSim;
-        this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityEvents"));
+        if (!!returnInfo) {
+            this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityEvents"));
+        }
     }
 }

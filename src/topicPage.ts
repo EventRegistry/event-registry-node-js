@@ -52,12 +52,13 @@ export class TopicPage extends QueryParamsBase {
         const params = {
             action: "getTopicPageJson",
             includeConceptDescription: true,
+            includeConceptImage: true,
             includeTopicPageDefinition: true,
             includeTopicPageOwner: true,
             uri: uri
         };
         this.topicPage = this.createEmptyTopicPage();
-        this.concept = await this.eventRegistry.jsonRequest("/json/topicPage", params);
+        this.concept = await this.eventRegistry.jsonRequest("/api/v1/topicPage", params);
         if (_.has(this.concept, "data.error")) {
             throw new Error(_.get(this.concept, "data.error", ""));
         }
@@ -166,6 +167,45 @@ export class TopicPage extends QueryParamsBase {
         this.topicPage.dataType = dataTypes;
     }
 
+    public set sourceRankStartPercentile(startPercentile: number) {
+        if (_.isUndefined(startPercentile)) {
+            startPercentile = 0;
+        }
+
+        if (startPercentile < 0 || startPercentile > 90) {
+            throw new RangeError("startPercentile is out of valid values (0 - 90)");
+        }
+
+        if (!_.isNil(this.topicPage.endSourceRankPercentile) && _.isNumber(this.topicPage.endSourceRankPercentile) && startPercentile >= this.topicPage.endSourceRankPercentile ) {
+            throw new RangeError("startPercentile has to be smaller than endPercentile");
+        }
+
+        if (startPercentile % 10 !== 0) {
+            throw new Error("startPecentile has to be a multiple of 10");
+        }
+
+        this.topicPage.startSourceRankPercentile = startPercentile;
+    }
+
+    public set sourceRankEndPercentile(endPercentile: number) {
+        if (_.isUndefined(endPercentile)) {
+            endPercentile = 100;
+        }
+
+        if (endPercentile < 10 || endPercentile > 100) {
+            throw new RangeError("endPercentile is out of valid values (10 - 100)");
+        }
+
+        if (!_.isNil(this.topicPage.startSourceRankPercentile) && _.isNumber(this.topicPage.startSourceRankPercentile) && this.topicPage.startSourceRankPercentile >= endPercentile ) {
+            throw new RangeError("startPercentile has to be smaller than endPercentile");
+        }
+
+        if (endPercentile % 10 !== 0) {
+            throw new Error("endPercentile has to be a multiple of 10");
+        }
+        this.topicPage.endSourceRankPercentile = endPercentile;
+    }
+
     /**
      * What is the maximum allowed age of the results?
      */
@@ -212,11 +252,18 @@ export class TopicPage extends QueryParamsBase {
      * @param conceptUri uri of the concept to be added
      * @param weight importance of the provided concept (typically in range 1 - 50)
      */
-    public addConcept(conceptUri: string, weight: number) {
-        if (!_.isNumber(weight)) {
+    public addConcept(uri: string, wgt: number, label?: string, conceptType?: string) {
+        if (!_.isNumber(wgt)) {
             throw new Error("Weight value has to be a positive or negative number");
         }
-        this.topicPage.concepts = [...this.topicPage.concepts, {uri: conceptUri, wgt: weight}];
+        const concept  = { uri, wgt };
+        if (!_.isUndefined(label)) {
+            _.set(concept, "label", label);
+        }
+        if (!_.isUndefined(conceptType)) {
+            _.set(concept, "type", conceptType);
+        }
+        this.topicPage.concepts = [...this.topicPage.concepts, concept];
     }
 
     /**
@@ -351,24 +398,27 @@ export class TopicPage extends QueryParamsBase {
      * @param args {EventRegistryStatic.TopicPageArticles} Object which contains a host of optional parameters
      */
     public async getArticles(args: EventRegistryStatic.TopicPageArticles = {}) {
-        const {page = 1, count = 100, sortBy = "rel", sortByAsc = false, returnInfo = new ReturnInfo()} = args;
+        const {page = 1, count = 100, sortBy = "rel", sortByAsc = false, dataType = "news", returnInfo = new ReturnInfo(), ...otherParameters} = args;
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
         }
         if (count > 100) {
             throw new RangeError("At most 100 articles can be returned at a time");
         }
-        const params = _.extend({}, {
+        let params = _.extend({}, {
             action: "getArticlesForTopicPage",
             resultType: "articles",
             dataType: this.topicPage.dataType,
             articlesCount: count,
             articlesSortBy: sortBy,
             articlesSortByAsc: sortByAsc,
-            page: page,
+            articlesPage: page,
             topicPage: JSON.stringify(this.topicPage),
         }, returnInfo.getParams());
-        const request = await this.eventRegistry.jsonRequest("/json/article", params);
+        if (!_.isEmpty(otherParameters)) {
+            params = {...params, ...otherParameters};
+        }
+        const request = await this.eventRegistry.jsonRequest("/api/v1/article", params);
         return _.get(request, "data.articles.results", []);
     }
     /**
@@ -376,24 +426,27 @@ export class TopicPage extends QueryParamsBase {
      * @param args {EventRegistryStatic.TopicPageEvents} Object which contains a host of optional parameters
      */
     public async getEvents(args: EventRegistryStatic.TopicPageEvents = {}) {
-        const {page = 1, count = 50, sortBy = "rel", sortByAsc = false, returnInfo = new ReturnInfo()} = args;
+        const {page = 1, count = 50, sortBy = "rel", sortByAsc = false, returnInfo = new ReturnInfo(), ...otherParameters} = args;
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
         }
         if (count > 50) {
             throw new RangeError("At most 50 events can be returned at a time");
         }
-        const params = _.extend({}, {
+        let params = _.extend({}, {
             action: "getEventsForTopicPage",
             resultType: "events",
             dataType: this.topicPage.dataType,
             eventsCount: count,
             eventsSortBy: sortBy,
             eventsSortByAsc: sortByAsc,
-            page: page,
+            eventsPage: page,
             topicPage: JSON.stringify(this.topicPage),
         }, returnInfo.getParams());
-        const request = await this.eventRegistry.jsonRequest("/json/event", params);
+        if (!_.isEmpty(otherParameters)) {
+            params = {...params, ...otherParameters};
+        }
+        const request = await this.eventRegistry.jsonRequest("/api/v1/event", params);
         return _.get(request, "data.events.results", []);
     }
 

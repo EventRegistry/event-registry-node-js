@@ -43,7 +43,7 @@ er.getConceptUri("Obama").then((conceptUri) => {
  * find events that:
  * - are about Barack Obama
  * - that were covered also by New York Times
- * - that occured in 2015
+ * - that occurred in 2015
  * - return events sorted by how much were articles in the event shared on social media (instead of relevance, which is default)
  */
 Promise.all([er.getConceptUri("Obama"), er.getSourceUri("new york times")]).then(([obamaUri, nytimesUri]) => {
@@ -103,7 +103,7 @@ er.getCategoryUri("society issues").then((categoryUri) => {
 //
 // OTHER AGGREGATES (INSTEAD OF OBTAINING EVENTS)
 //
-// find events that occured in Germany between 2014-04-16 and 2014-04-28
+// find events that occurred in Germany between 2014-04-16 and 2014-04-28
 // from the resulting events produce:
 
 er.getLocationUri("Germany").then((germanyUri) => {
@@ -111,7 +111,7 @@ er.getLocationUri("Germany").then((germanyUri) => {
     // get the list of top concepts about the events that match criteria
     q.setRequestedResult(new RequestEventsConceptAggr());
     const res1 = er.execQuery(q);
-    // find where the events occured geographically
+    // find where the events occurred geographically
     q.setRequestedResult(new RequestEventsLocAggr());
     const res2 = er.execQuery(q);
     // find when the events matching the criteria occurred

@@ -37,7 +37,6 @@ export class Utils {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         this.articleInfo = new ArticleInfoFlags({ concepts: true,
                                                   storyUri: true,
-                                                  duplicateList: true,
                                                   originalArticle: true,
                                                   categories: true,
                                                   videos: true,
@@ -59,9 +58,7 @@ export class Utils {
                                                   synonyms: true,
                                                   image: true,
                                                   description: true,
-                                                  conceptClassMembership: true,
                                                   trendingScore: true,
-                                                  trendingHistory: true,
                                                   maxConceptsPerType: 50,
                                                 });
         this.locationInfo = new LocationInfoFlags({ wikiUri: true,
@@ -75,7 +72,7 @@ export class Utils {
                                                     placeFeatureCode: true,
                                                     placeCountry: true,
                                                   });
-        this.categoryInfo = new CategoryInfoFlags({ parentUri: true, childrenUris: true, trendingScore: true, trendingHistory: true });
+        this.categoryInfo = new CategoryInfoFlags({ trendingScore: true });
         this.eventInfo = new EventInfoFlags({ commonDates: true, stories: true, socialScore: true, categories: true, imageCount: 2 });
         this.storyInfo = new StoryInfoFlags({ categories: true,
                                               date: true,
@@ -269,12 +266,12 @@ export class Utils {
     }
 
     public ensureValidCategory(category) {
-        const propertyNames = ["uri", "parentUri", "trendingScore"];
+        const propertyNames = ["uri", "trendingScore"];
         return this.validateProperties(category, "category", propertyNames);
     }
 
     public ensureValidSource(source) {
-        const propertyNames = ["uri", "title", "description", "image", "thumbImage", "favicon", "location", "ranking", "articleCount", "sourceGroups", "socialMedia"];
+        const propertyNames = ["uri", "title", "description", "image", "favicon", "location", "ranking", "socialMedia"];
         return this.validateProperties(source, "source", propertyNames);
     }
 

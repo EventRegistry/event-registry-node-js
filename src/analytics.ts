@@ -23,8 +23,12 @@ export class Analytics {
      * @param text input text to annotate
      * @param lang language of the provided document (can be an ISO2 or ISO3 code). If None is provided, the language will be automatically detected
      */
-    public async annotate(text: string, lang?: string[]) {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/annotate",  { lang, text }), "data");
+    public async annotate(text: string, lang?: string[], customParams?: {[name: string]: unknown}) {
+        let params = { lang, text };
+        if (!_.isUndefined(customParams)) {
+            params = {...params, ...customParams};
+        }
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/annotate", params), "data");
     }
 
     /**
@@ -43,11 +47,16 @@ export class Analytics {
      * @param text input text to categorize
      * @param method method to use to compute the sentiment. possible values are "vocabulary" (vocabulary based sentiment analysis) and "rnn" (neural network based sentiment classification)
      */
-    public async sentiment(text: string, method = "vocabulary") {
+    public async sentiment(text: string, method = "vocabulary", sentences = 10, returnSentences = true) {
         if (!_.includes(["vocabulary", "rnn"], method)) {
             throw new Error("method: Please pass in either 'vocabulary' or 'rnn'");
         }
-        return _.get(await this.er.jsonRequestAnalytics(`/api/v1/${method === "vocabulary" ? "sentiment" : "sentimentRNN"}`,  { text }), "data");
+        const params = {
+            text,
+            sentences,
+            returnSentences,
+        };
+        return _.get(await this.er.jsonRequestAnalytics(`/api/v1/${method === "vocabulary" ? "sentiment" : "sentimentRNN"}`,  params), "data");
     }
 
     public async semanticSimilarity(text1: string, text2: string, distanceMeasure: "cosine" | "jaccard" = "cosine") {
@@ -67,12 +76,12 @@ export class Analytics {
      * @param url article url that'll be used for extraction
      * @param proxyUrl proxy that should be used for downloading article information. format: {schema}://{username}:{pass}@{proxy url/ip}
      */
-    public async extractArticleInfo(url: string, proxyUrl?: string) {
+    public async extractArticleInfo(url: string, proxyUrl?: string, headers?: {[name: string]: unknown}, cookies?: {[name: string]: unknown}) {
         const params = { url };
-        if (proxyUrl) {
+        if (!!proxyUrl) {
             _.set(params, "proxyUrl", proxyUrl);
         }
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/extractArticleInfo", params), "data");
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/extractArticleInfo", params, headers, cookies), "data");
     }
 
     /**
@@ -91,17 +100,33 @@ export class Analytics {
     public async trainTopicOnTweets(twitterQuery: string, args: EventRegistryStatic.Analytics.TrainTopicOnTweetsArguments = {}) {
         const {
             useTweetText = true,
+            useIdfNormalization = true,
+            normalization = "linear",
+            maxTweets = 2000,
+            maxUsedLinks = 500,
+            ignoreConceptTypes = [],
             maxConcepts = 20,
             maxCategories = 10,
-            maxTweets = 2000,
             notifyEmailAddress = undefined,
         } = args;
         if (maxTweets > 5000) {
             throw new Error("We can analyze at most 5000 tweets");
         }
-        const params = {twitterQuery, useTweetText, maxConcepts, maxCategories, maxTweets};
+        const params = {
+            twitterQuery,
+            useTweetText,
+            useIdfNormalization,
+            normalization,
+            maxTweets,
+            maxUsedLinks,
+            maxConcepts,
+            maxCategories,
+        };
         if (notifyEmailAddress) {
             _.set(params, "notifyEmailAddress", notifyEmailAddress);
+        }
+        if (!_.isEmpty(ignoreConceptTypes)) {
+            _.set(params, "ignoreConceptTypes", ignoreConceptTypes);
         }
         return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopicOnTwitter",  params), "data");
     }
@@ -116,6 +141,14 @@ export class Analytics {
     }
 
     /**
+     * If the topic is already existing, clear the definition of the topic. Use this if you want to retrain an existing topic
+     * @param uri uri of the topic (obtained by calling trainTopicCreateTopic method) to clear
+     */
+    public async trainTopicClearTopic(uri: string) {
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "clearTopic", uri: uri}), "data");
+    }
+
+    /**
      * Add the information extracted from the provided "text" to the topic with uri "uri".
      * @param uri uri of the topic (obtained by calling trainTopicCreateTopic method)
      * @param text text to analyze and extract information from
@@ -125,33 +158,23 @@ export class Analytics {
     }
 
     /**
-     * Add the information extracted from the provided "text" to the topic with uri "uri".
+     * Retrieve topic for the topic for which you have already finished training
      * @param uri uri of the topic (obtained by calling trainTopicCreateTopic method)
-     * @param args Object which contains a host of optional parameters
      * @returns returns the trained topic: { concepts: [], categories: [] }
      */
-    public async trainTopicFinishTraining(uri: string, args: EventRegistryStatic.Analytics.TrainTopicFinishTrainingArguments = {}) {
+    public async trainTopicGetTrainedTopic(uri: string, args: EventRegistryStatic.Analytics.TrainTopicGetTrainedTopicArguments = {}) {
         const {
             maxConcepts = 20,
             maxCategories = 10,
             idfNormalization = true,
         } = args;
         const params = {
-            action: "finishTraining",
+            action: "getTrainedTopic",
             uri: uri,
             maxConcepts: maxConcepts,
             maxCategories: maxCategories,
             idfNormalization: idfNormalization,
         };
         return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", params), "data");
-    }
-
-    /**
-     * Retrieve topic for the topic for which you have already finished training
-     * @param uri uri of the topic (obtained by calling trainTopicCreateTopic method)
-     * @returns returns the trained topic: { concepts: [], categories: [] }
-     */
-    public async trainTopicGetTrainedTopic(uri: string) {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "getTrainedTopic", uri: uri }), "data");
     }
 }
