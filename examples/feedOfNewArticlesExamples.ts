@@ -28,14 +28,19 @@ async function fetchUpdates() {
  * keywords, concepts, categories, language, source, etc.
  * You can also request more than 100 articles per call.
  */
+
+let updatesAfterNewsUri;
+let updatesafterBlogUri;
+let updatesAfterPrUri;
 async function fetchfilteredUpdates() {
     const query = new QueryArticles({keywords: "Trump", sourceLocationUri: await er.getLocationUri("United States")});
     query.setRequestedResult(
         new RequestArticlesRecentActivity({
             // download at most 2000 articles. if less of matching articles were added in last 10 minutes, less will be returned
             maxArticleCount: 2000,
-            // consider articles that were published at most 10 minutes ago
-            updatesAfterMinsAgo: 10,
+            updatesAfterNewsUri: updatesAfterNewsUri,
+            updatesafterBlogUri: updatesafterBlogUri,
+            updatesAfterPrUri: updatesAfterPrUri,
         })
     );
     const articleList = await er.execQuery(query);
@@ -43,8 +48,14 @@ async function fetchfilteredUpdates() {
     for (const article of _.get(articleList, "recentActivityArticles.activity", [])) {
         console.info(`Added article ${article["uri"]}: ${article["title"]}`);
     }
-    // wait exactly a minute until next batch of new content is ready
-    await sleep(60 * 1000);
+
+    // remember what are the latest uris of the individual data items returned
+    updatesAfterNewsUri = _.get(articleList, "recentActivityArticles.newestUri.news", undefined);
+    updatesafterBlogUri = _.get(articleList, "recentActivityArticles.newestUri.blog", undefined);
+    updatesAfterPrUri = _.get(articleList, "recentActivityArticles.newestUri.pr", undefined);
+
+    // wait for 10 minutes until next batch of new content is ready
+    await sleep(600 * 1000);
     fetchfilteredUpdates();
 }
 

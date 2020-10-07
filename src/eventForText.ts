@@ -52,14 +52,10 @@ export class GetEventForText extends QueryParamsBase {
      */
     public async compute(text: string, lang: string = "eng") {
         const params = {lang: lang, text: text, topClustersCount: this.nrOfEventsToReturn};
-        const response = await this.er.jsonRequest("/api/v1/getEventForText/enqueueRequest", params);
-        const requestId = _.get(response, "requestId");
-        for (const i of _.range(10)) {
-            await sleep(1000);
-            const res = await this.er.jsonRequest("/api/v1/getEventForText/testRequest", { requestId });
-            if (_.isArray(res) && !_.isEmpty(res)) {
-                return res as any;
-            }
+        const response = await this.er.jsonRequest("/api/v1/getEventForText/getEventForText", params);
+        if (_.has(response, "topStories")) {
+            return _.get(response, "topStories", []);
         }
+        return response;
     }
 }

@@ -50,6 +50,10 @@ export module EventRegistryStatic {
          * if true, additional info about query times etc. will be printed to console
          */
         verboseOutput?: boolean;
+        /**
+         * print which urls are used as the hosts
+         */
+        printHostInfo?: boolean;
         settingsFName?: string;
         allowUseOfArchive?: boolean;
     }
@@ -1146,6 +1150,14 @@ export module EventRegistryStatic {
              * find events that occurred before or on dateEnd. Date should be provided in YYYY-MM-DD format.
              */
             dateEnd?: string | Date;
+            /**
+             * find events where the average date of the articles about this event is on or after this date. Date should be provided in YYYY-MM-DD format, datetime.time or datetime.datetime.
+             */
+            reportingDateStart?: string | Date;
+            /**
+             * find events where the average date of the articles about this event is on or before this date. Date should be provided in YYYY-MM-DD format, datetime.time or datetime.datetime.
+             */
+            reportingDateEnd?: string | Date;
             /**
              * minimum value of the sentiment, that the returned events should have. Range [-1, 1]. Note: setting the value will remove all events that don't have a computed value for the sentiment (all events that are not reported in English language)
              */

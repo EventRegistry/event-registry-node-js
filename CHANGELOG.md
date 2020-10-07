@@ -2,6 +2,14 @@
 
 This log contains changes specific to the NodeJS SDK.
 
+## [v8.8.0]() (2020-10-07)
+
+**Added**
+
+- added filters `reportingDateStart` and `reportingDateEnd` to `QueryEvents`. You can use these dates to find the events where the average date of reporting matches this date range. Note that `dateStart` and `dateEnd` will return events based on when they (supposedly) happened and it can be quite different than the reporting dates.
+- added parameters `updatesAfterNewsUri`, `updatesafterBlogUri`, `updatesAfterPrUri` to the `RequestArticlesRecentActivity`. Can be used to make sure that absolutely no article is missed when using the `QueryArticles` with `RequestArticlesRecentActivity` requested result. See [this file](https://github.com/EventRegistry/event-registry-node-js/blob/master/examples/feedOfNewArticlesExamples.ts) for an example of use.
+
+
 ## [v8.7.0]() (2020-01-31)
 
 **Added**

@@ -37,10 +37,16 @@ export class EventRegistry {
 
     constructor(config: EventRegistryStatic.Config = {}) {
         this.lock = new Semaphore(1);
+        if (!!config.apiKey && !!config.printHostInfo) {
+            console.log("using user provided API key for making requests");
+        }
         if (fs && fs.existsSync(this.config.settingsFName || "settings.json")) {
             const localConfig = JSON.parse(fs.readFileSync(this.config.settingsFName || "settings.json", "utf8"));
             _.extend(this.config, localConfig);
             if (!_.isNil(config.apiKey)) {
+                if (!!config.printHostInfo) {
+                    console.log("found apiKey in settings file which will be used for making requests");
+                }
                 this.config.apiKey = config.apiKey;
             }
         } else {
@@ -66,6 +72,10 @@ export class EventRegistry {
         if (_.isNil(this.config.apiKey)) {
             console.info("No API key was provided. You will be allowed to perform only a very limited number of requests per day.");
         }
+        if (!!config.printHostInfo) {
+            console.log(`Event Registry host: ${config.host}`);
+            console.log(`Text analytics host: ${config.hostAnalytics}`);
+        }
         this.config.minDelayBetweenRequests *= 1000;
 
         axios.interceptors.response.use(undefined, (err) => {
@@ -73,7 +83,7 @@ export class EventRegistry {
             if (!err.config || !err.config.retry) {
                 return Promise.reject(err);
             }
-            if (err.response.status === 530) {
+            if (err.response.status === 530 || err.response.status === 400 || err.response.status === 204) {
                 return Promise.reject(err);
             }
             // Set the variable for keeping track of the retry count

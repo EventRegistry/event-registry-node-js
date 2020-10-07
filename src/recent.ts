@@ -49,6 +49,13 @@ export class GetRecentArticles extends QueryParamsBase {
 
     public async getUpdates() {
         const response = await this.er.execQuery(this);
-        return _.get(response, "recentActivityArticles.activity", []);
+        if (_.has(response, "recentActivityArticles")) {
+            for (const [key, value] of _.entries(_.get(response, "recentActivityArticles.newestUri", {}))) {
+                const splitKey = _.split(key, "");
+                this.setVal("recentActivityArticles" + _.upperCase(splitKey[0]) + _.join(_.tail(splitKey)), value);
+            }
+            return _.get(response, "recentActivityArticles.activity", []);
+        }
+        return [];
     }
 }

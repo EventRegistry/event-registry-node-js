@@ -25,6 +25,8 @@ export class QueryEvents extends Query<RequestEvents> {
             lang,
             dateStart,
             dateEnd,
+            reportingDateStart,
+            reportingDateEnd,
             minSentiment = -1,
             maxSentiment = 1,
             minArticlesInEvent,
@@ -60,9 +62,14 @@ export class QueryEvents extends Query<RequestEvents> {
         if (!_.isUndefined(dateStart)) {
             this.setDateVal("dateStart", dateStart);
         }
-
         if (!_.isUndefined(dateEnd)) {
             this.setDateVal("dateEnd", dateEnd);
+        }
+        if (!_.isUndefined(reportingDateStart)) {
+            this.setDateVal("reportingDateStart", reportingDateStart);
+        }
+        if (!_.isUndefined(reportingDateEnd)) {
+            this.setDateVal("reportingDateEnd", reportingDateEnd);
         }
 
         if (minSentiment > -1 && minSentiment <= 1 ) {

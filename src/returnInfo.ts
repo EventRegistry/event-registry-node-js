@@ -143,7 +143,6 @@ export class ArticleInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.Re
             socialScore = false,
             sentiment = true,
             location = false,
-            dates = false,
             extractedDates = false,
             originalArticle = false,
             storyUri = false,
@@ -164,7 +163,6 @@ export class ArticleInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.Re
         this.setFlag("socialScore", socialScore);
         this.setFlag("sentiment", sentiment);
         this.setFlag("location", location);
-        this.setFlag("dates", dates);
         this.setFlag("extractedDates", extractedDates);
         this.setFlag("originalArticle", originalArticle);
         this.setFlag("storyUri", storyUri);

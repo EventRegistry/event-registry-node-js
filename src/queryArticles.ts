@@ -110,7 +110,7 @@ export class QueryArticles extends Query<RequestArticles> {
             this.setVal("maxSentiment", maxSentiment);
         }
 
-        this.setVal("dataType", dataType);
+        this.setValIfNotDefault("dataType", dataType, "news");
         this.setRequestedResult(requestedResult);
     }
 
@@ -417,7 +417,6 @@ export class RequestArticlesSourceAggr extends RequestArticles {
     public resultType = "sourceAggr";
     public params;
     constructor({
-                 articlesSampleSize = 20000,
                  sourceCount = 50,
                  normalizeBySourceArts = false,
                  returnInfo = new ReturnInfo(),
@@ -427,12 +426,8 @@ export class RequestArticlesSourceAggr extends RequestArticles {
         if (!_.isEmpty(unsupported)) {
             console.warn(`RequestArticlesSourceAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
-        if (articlesSampleSize > 1000000) {
-            throw new RangeError("at most 1000000 articles can be used for computation sample");
-        }
         this.params = {};
         this.params["sourceAggrSourceCount"] = sourceCount;
-        this.params["sourceAggrSampleSize"] = articlesSampleSize;
         this.params = _.extend({}, this.params, returnInfo.getParams("sourceAggr"));
     }
 }
@@ -553,6 +548,9 @@ export class RequestArticlesRecentActivity extends RequestArticles {
     public resultType = "recentActivityArticles";
     public params;
     constructor({maxArticleCount = 100,
+                 updatesAfterNewsUri = undefined,
+                 updatesafterBlogUri = undefined,
+                 updatesAfterPrUri = undefined,
                  updatesAfterTm = undefined,
                  updatesAfterMinsAgo = undefined,
                  updatesUntilTm = undefined,
@@ -565,8 +563,8 @@ export class RequestArticlesRecentActivity extends RequestArticles {
         if (!_.isEmpty(unsupported)) {
             console.warn(`RequestArticlesRecentActivity: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
-        if (maxArticleCount > 1000) {
-            throw new RangeError("At most 1000 articles can be returned per call");
+        if (maxArticleCount > 2000) {
+            throw new RangeError("At most 2000 articles can be returned per call");
         }
         if (!_.isUndefined(updatesAfterTm) && !_.isUndefined(updatesAfterMinsAgo)) {
             throw new Error("You should specify either updatesAfterTm or updatesAfterMinsAgo parameter, but not both");
@@ -587,6 +585,15 @@ export class RequestArticlesRecentActivity extends RequestArticles {
         }
         if (!_.isUndefined(updatesUntilMinsAgo)) {
             this.params["recentActivityArticlesUpdatesUntilMinsAgo"] = updatesUntilMinsAgo;
+        }
+        if (!_.isUndefined(updatesAfterNewsUri)) {
+            this.params["recentActivityArticlesNewsUpdatesAfterUri"] = updatesAfterNewsUri;
+        }
+        if (!_.isUndefined(updatesafterBlogUri)) {
+            this.params["recentActivityArticlesNewsUpdatesAfterUri"] = updatesafterBlogUri;
+        }
+        if (!_.isUndefined(updatesAfterPrUri)) {
+            this.params["recentActivityArticlesNewsUpdatesAfterUri"] = updatesAfterPrUri;
         }
         this.params["recentActivityArticlesMandatorySourceLocation"] = mandatorySourceLocation;
         if (!!returnInfo) {

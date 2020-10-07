@@ -53,10 +53,11 @@ export class Analytics {
         }
         const params = {
             text,
+            method,
             sentences,
             returnSentences,
         };
-        return _.get(await this.er.jsonRequestAnalytics(`/api/v1/${method === "vocabulary" ? "sentiment" : "sentimentRNN"}`,  params), "data");
+        return _.get(await this.er.jsonRequestAnalytics("/api/v1/sentiment",  params), "data");
     }
 
     public async semanticSimilarity(text1: string, text2: string, distanceMeasure: "cosine" | "jaccard" = "cosine") {

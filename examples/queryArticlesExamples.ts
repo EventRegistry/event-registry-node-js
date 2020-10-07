@@ -3,7 +3,7 @@ import * as _ from "lodash";
 
 // examples that illustrate how to query articles using different search options
 
-const er = new EventRegistry();
+const er = new EventRegistry({allowUseOfArchive: false});
 const articleInfo = new ArticleInfoFlags({ duplicateList: true, concepts: true, categories: true, location: true, image: true, conceptInfo: new ConceptInfoFlags({trendingScore: true}) });
 const returnInfo = new ReturnInfo({articleInfo});
 const requestArticlesInfo = new RequestArticlesInfo({count: 30, returnInfo: returnInfo});
@@ -115,6 +115,7 @@ Promise.all([
     const iterOpts = {
         sortBy: "sourceAlexaGlobalRank",
         maxItems: 500,
+        returnInfo: new ReturnInfo({articleInfo: new ArticleInfoFlags({concepts: true, categories: true, location: true, image: true})}),
         conceptUri: clooneyUri,
         sourceLocationUri:  QueryItems.OR([spainUri, laUri]),
     };
