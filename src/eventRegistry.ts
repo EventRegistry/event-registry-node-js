@@ -34,7 +34,13 @@ export class EventRegistry {
     private lastQueryTime = 0;
     private _logRequests = false;
     private readonly lock: Semaphore;
-
+    private readonly stopStatusCodes = [
+        204,
+        400,
+        401,
+        403,
+        530,
+    ];
     constructor(config: EventRegistryStatic.Config = {}) {
         this.lock = new Semaphore(1);
         if (!!config.apiKey && !!config.printHostInfo) {
@@ -83,7 +89,7 @@ export class EventRegistry {
             if (!err.config || !err.config.retry) {
                 return Promise.reject(err);
             }
-            if (err.response.status === 530 || err.response.status === 400 || err.response.status === 204) {
+            if (_.includes(this.stopStatusCodes, err.response.status)) {
                 return Promise.reject(err);
             }
             // Set the variable for keeping track of the retry count

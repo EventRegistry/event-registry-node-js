@@ -311,12 +311,12 @@ export module EventRegistryStatic {
         maxDaysBack: number;
         articleTreshWgt: number;
         eventTreshWgt: number;
-        concepts: Array<{uri: string, wgt: number}>;
-        keywords: Array<{keyword: string, wgt: number}>;
-        categories: Array<{uri: string, wgt: number}>;
-        sources: Array<{uri: string, wgt: number}>;
-        sourceGroups: Array<{uri: string, wgt: number}>;
-        sourceLocations: Array<{uri: string, wgt: number}>;
+        concepts: Array<{uri: string, wgt: number, required?: boolean, excluded?: boolean}>;
+        keywords: Array<{keyword: string, wgt: number, required?: boolean, excluded?: boolean}>;
+        categories: Array<{uri: string, wgt: number, required?: boolean, excluded?: boolean}>;
+        sources: Array<{uri: string, wgt: number, excluded?: boolean}>;
+        sourceGroups: Array<{uri: string, wgt: number, excluded?: boolean}>;
+        sourceLocations: Array<{uri: string, wgt: number, excluded?: boolean}>;
         locations: Array<{uri: string, wgt: number}>;
         langs: string[];
         startSourceRankPercentile?: number;
@@ -326,6 +326,35 @@ export module EventRegistryStatic {
         restrictToSetSources: boolean;
         restrictToSetLocations: boolean;
         dataType: EventRegistryStatic.DataType | EventRegistryStatic.DataType[];
+    }
+
+    export interface TopicPageAddConceptArguments {
+        label?: string;
+        conceptType?: string;
+        required?: boolean;
+        excluded?: boolean;
+    }
+
+    export interface TopicPageAddKeywordArguments {
+        required?: boolean;
+        excluded?: boolean;
+    }
+
+    export interface TopicPageAddCategoryArguments {
+        required?: boolean;
+        excluded?: boolean;
+    }
+
+    export interface TopicPageAddSourceArguments {
+        excluded?: boolean;
+    }
+
+    export interface TopicPageAddSourceLocationArguments {
+        excluded?: boolean;
+    }
+
+    export interface TopicPageAddSourceGroupArguments {
+        excluded?: boolean;
     }
 
     export interface TopicPageArticles {

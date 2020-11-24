@@ -2,6 +2,13 @@
 
 This log contains changes specific to the NodeJS SDK.
 
+## [v8.9]() (2020-11-24)
+
+**Added**
+
+- added `required` and `excluded` optional parameters to the TopicPage class to methods `addConcept`, `addKeyword`, `addCategory`, `addSource`, `addSourceLocation` and `addSourceGroup`.
+- exceptions are now raised by the SDK library in case of status codes 204, 400, 401, 403 and 530. The meaning of the above status codes is described on the [documentation page](https://eventregistry.org/documentation?tab=introduction).
+-
 ## [v8.8.0]() (2020-10-07)
 
 **Added**

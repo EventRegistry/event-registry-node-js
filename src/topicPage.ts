@@ -249,14 +249,23 @@ export class TopicPage extends QueryParamsBase {
 
     /**
      * Add a relevant concept to the topic page
-     * @param conceptUri uri of the concept to be added
+     * @param uri uri of the concept to be added
      * @param weight importance of the provided concept (typically in range 1 - 50)
      */
-    public addConcept(uri: string, wgt: number, label?: string, conceptType?: string) {
+    public addConcept(uri: string, wgt: number, args: EventRegistryStatic.TopicPageAddConceptArguments = {}) {
         if (!_.isNumber(wgt)) {
             throw new Error("Weight value has to be a positive or negative number");
         }
-        const concept  = { uri, wgt };
+        const {
+            label,
+            conceptType,
+            required = false,
+            excluded = false,
+        } = args;
+        if (required && excluded) {
+            throw new Error("Parameters required and excluded can not be true at the same time");
+        }
+        const concept  = { uri, wgt, required, excluded };
         if (!_.isUndefined(label)) {
             _.set(concept, "label", label);
         }
@@ -271,47 +280,61 @@ export class TopicPage extends QueryParamsBase {
      * @param keyword keyword or phrase to be added
      * @param weight importance of the provided keyword (typically in range 1 - 50)
      */
-    public addKeyword(keyword: string, weight: number) {
-        if (!_.isNumber(weight)) {
+    public addKeyword(keyword: string, wgt: number, args: EventRegistryStatic.TopicPageAddKeywordArguments = {}) {
+        if (!_.isNumber(wgt)) {
             throw new Error("Weight value has to be a positive or negative number");
         }
-        this.topicPage.keywords = [...this.topicPage.keywords, {keyword: keyword, wgt: weight}];
+        const {
+            required = false,
+            excluded = false,
+        } = args;
+        this.topicPage.keywords = [...this.topicPage.keywords, {keyword, wgt, required, excluded}];
     }
 
     /**
      * Add a relevant category to the topic page
-     * @param categoryUri uri of the category to be added
+     * @param uri uri of the category to be added
      * @param weight importance of the provided category (typically in range 1 - 50)
      */
-    public addCategory(categoryUri: string, weight: number) {
-        if (!_.isNumber(weight)) {
+    public addCategory(uri: string, wgt: number, args: EventRegistryStatic.TopicPageAddCategoryArguments = {}) {
+        if (!_.isNumber(wgt)) {
             throw new Error("Weight value has to be a positive or negative number");
         }
-        this.topicPage.categories = [...this.topicPage.categories, {uri: categoryUri, wgt: weight}];
+        const {
+            required = false,
+            excluded = false,
+        } = args;
+        this.topicPage.categories = [...this.topicPage.categories, {uri, wgt, required, excluded}];
     }
 
     /**
      * Add a news source to the topic page
-     * @param sourceUri uri of the news source to add to the topic page
+     * @param uri uri of the news source to add to the topic page
      * @param weight importance of the news source (typically in range 1 - 50)
      */
-    public addSource(sourceUri: string, weight: number) {
-        if (!_.isNumber(weight)) {
+    public addSource(uri: string, wgt: number, args: EventRegistryStatic.TopicPageAddSourceArguments = {}) {
+        if (!_.isNumber(wgt)) {
             throw new Error("Weight value has to be a positive or negative number");
         }
-        this.topicPage.sources = [...this.topicPage.sources, {uri: sourceUri, wgt: weight}];
+        const {
+            excluded = false,
+        } = args;
+        this.topicPage.sources = [...this.topicPage.sources, {uri, wgt, excluded}];
     }
 
     /**
      * Add a list of relevant sources by identifying them by their geographic location
-     * @param sourceLocationUri uri of the location where the sources should be geographically located
+     * @param uri uri of the location where the sources should be geographically located
      * @param weight importance of the provided list of sources (typically in range 1 - 50)
      */
-    public addSourceLocation(sourceLocationUri: string, weight: number) {
-        if (!_.isNumber(weight)) {
+    public addSourceLocation(uri: string, wgt: number, args: EventRegistryStatic.TopicPageAddSourceLocationArguments = {}) {
+        if (!_.isNumber(wgt)) {
             throw new Error("Weight value has to be a positive or negative number");
         }
-        this.topicPage.sourceLocations = [...this.topicPage.sourceLocations, {uri: sourceLocationUri, wgt: weight}];
+        const {
+            excluded = false,
+        } = args;
+        this.topicPage.sourceLocations = [...this.topicPage.sourceLocations, {uri, wgt, excluded}];
     }
 
     /**
@@ -319,11 +342,14 @@ export class TopicPage extends QueryParamsBase {
      * @param sourceGroupUri uri of the source group to add
      * @param weight importance of the provided list of sources (typically in range 1 - 50)
      */
-    public addSourceGroup(sourceGroupUri: string, weight: number) {
-        if (!_.isNumber(weight)) {
+    public addSourceGroup(uri: string, wgt: number, args: EventRegistryStatic.TopicPageAddSourceGroupArguments = {}) {
+        if (!_.isNumber(wgt)) {
             throw new Error("Weight value has to be a positive or negative number");
         }
-        this.topicPage.sourceGroups = [...this.topicPage.sourceGroups, {uri: sourceGroupUri, wgt: weight}];
+        const {
+            excluded = false,
+        } = args;
+        this.topicPage.sourceGroups = [...this.topicPage.sourceGroups, {uri, wgt, excluded}];
     }
 
     /**
