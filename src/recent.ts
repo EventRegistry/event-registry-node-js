@@ -31,15 +31,17 @@ export class GetRecentEvents extends QueryParamsBase {
 export class GetRecentArticles extends QueryParamsBase {
     private er: EventRegistry;
     constructor(er: EventRegistry, { mandatorySourceLocation = undefined,
-                                     articleLang = true,
+                                     lang = undefined,
                                      returnInfo = new ReturnInfo(),
+                                     ...kwargs
                                    } = {}) {
         super();
         this.er = er;
         this.setVal("recentActivityArticlesMandatorySourceLocation", mandatorySourceLocation);
-        if (!_.isUndefined(articleLang)) {
-            this.setVal("recentActivityArticlesLang", articleLang);
+        if (!_.isUndefined(lang)) {
+            this.setVal("recentActivityArticlesLang", lang);
         }
+        this.params = _.extend({}, this.params, kwargs);
         this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityArticles"));
     }
 
