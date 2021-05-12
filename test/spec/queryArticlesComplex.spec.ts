@@ -46,7 +46,7 @@ describe("Query Articles Complex", () => {
     });
 
     it("should test keywords (3)", (done) => {
-        const baseQuery = new BaseQuery({keyword: "home", keywordLoc: "body"});
+        const baseQuery = new BaseQuery({keyword: "home", lang: "eng", keywordLoc: "body"});
         const cq1 = new ComplexArticleQuery(baseQuery);
         const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {returnInfo: utils.returnInfo, maxItems: 20});
         artIter.execQuery((item) => {
@@ -244,12 +244,11 @@ describe("Query Articles Complex", () => {
         const cq1 = new ComplexArticleQuery(new BaseQuery({dateStart: "2016-03-05", dateEnd: "2017-03-06", exclude: new BaseQuery({categoryUri})}));
         const cq2 = new ComplexArticleQuery(CombinedQuery.AND([
             new BaseQuery({ dateStart: "2016-03-05", dateEnd: "2017-05-05" }),
-            new BaseQuery({ dateStart: "2017-03-05" }),
             new BaseQuery({ dateStart: "2016-10-05" }),
             new BaseQuery({ dateEnd: "2017-04-05" }),
             new BaseQuery({ dateEnd: "2017-03-06" }),
-        ], new BaseQuery({categoryUri: await er.getCategoryUri("Business")})));
-        const q = new QueryArticles({dateStart: "2017-03-05", dateEnd: "2017-03-06", ignoreCategoryUri: categoryUri});
+        ], new BaseQuery({categoryUri})));
+        const q = new QueryArticles({dateStart: "2016-03-05", dateEnd: "2017-03-06", ignoreCategoryUri: categoryUri});
         const listRes1 = await utils.getArticlesQueryUriListForComplexQuery(er, cq1);
         const listRes2 = await utils.getArticlesQueryUriListForComplexQuery(er, cq2);
         const listRes3 = await utils.getQueryUriListForQueryArticles(er, q);

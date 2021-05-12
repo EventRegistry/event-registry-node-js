@@ -75,6 +75,7 @@ describe("Info", () => {
         const response = await er.execQuery(q);
         expect(_.size(response)).toBe(_.size(uriList), `Expected ${_.size(uriList)} categories`);
         _.each(response, (item) => {
+            if (_.has(item, "error")) return;
             expect(_.has(item, "uri")).toBeTruthy("Category uri is missing");
             expect(_.has(item, "trendingScore")).toBeTruthy("Category trending score is missing");
         });

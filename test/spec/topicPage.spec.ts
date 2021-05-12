@@ -7,7 +7,7 @@ describe("Topic Page", () => {
 
     async function createTopicPage() {
         const q = new TopicPage(er);
-        await q.loadTopicPageFromER("f1cfb96c-941b-4fbe-8619-bafba42a8053");
+        await q.loadTopicPageFromER("df793a2e-615a-4630-8632-bb117e64886f");
         return q;
     }
 

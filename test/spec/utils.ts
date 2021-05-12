@@ -44,6 +44,7 @@ export class Utils {
                                                   location: true,
                                                   extractedDates: true,
                                                   socialScore: true,
+                                                  duplicateList: true,
                                                 });
         this.sourceInfo = new SourceInfoFlags({ description: true,
                                                 location: true,
@@ -331,7 +332,7 @@ export class Utils {
     }
 
     private doesContainText(text, searchQuery) {
-        return _.includes(_.deburr(_.toLower(text)), _.deburr(_.toLower(searchQuery)));
+        return _.includes(_.deburr(text), _.deburr(searchQuery));
     }
 }
 

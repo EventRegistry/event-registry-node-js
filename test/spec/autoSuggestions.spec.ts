@@ -17,7 +17,7 @@ describe("Auto Suggest", () => {
 
     it("should return a news source", async (done) => {
         expect(await er.getNewsSourceUri("nytimes")).toEqual("nytimes.com");
-        expect(await er.getNewsSourceUri("bbc")).toEqual("bbc.com");
+        expect(await er.getNewsSourceUri("bbc")).toEqual("bbc.co.uk");
         done();
     });
 
