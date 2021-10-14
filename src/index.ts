@@ -77,6 +77,20 @@ export {
     RequestEventsRecentActivity,
 } from "./queryEvents";
 export {
+    QueryMentions,
+    QueryMentionsIter,
+    RequestMentions,
+    RequestMentionsInfo,
+    RequestMentionsUriWgtList,
+    RequestMentionsTimeAggr,
+    RequestMentionsConceptAggr,
+    RequestMentionsCategoryAggr,
+    RequestMentionsSourceAggr,
+    RequestMentionsKeywordAggr,
+    RequestMentionsConceptGraph,
+    RequestMentionsRecentActivity,
+} from "./queryMentions";
+export {
     QueryStory,
     RequestStoryInfo,
     RequestStoryArticles,

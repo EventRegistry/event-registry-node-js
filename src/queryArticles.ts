@@ -157,6 +157,11 @@ export class QueryArticles extends Query<RequestArticles> {
         if (complexQuery instanceof ComplexArticleQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
         } else if (_.isString(complexQuery)) {
+            try {
+                JSON.parse(complexQuery);
+            } catch {
+                console.error("Failed to parse the provided string content as a JSON object. Please check the content provided as a parameter to the initWithComplexQuery() method");
+            }
             query.setVal("query", complexQuery);
         } else if (_.isObject(complexQuery)) {
             query.setVal("query", JSON.stringify(complexQuery));

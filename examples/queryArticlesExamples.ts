@@ -8,6 +8,12 @@ const articleInfo = new ArticleInfoFlags({ duplicateList: true, concepts: true, 
 const returnInfo = new ReturnInfo({articleInfo});
 const requestArticlesInfo = new RequestArticlesInfo({count: 30, returnInfo: returnInfo});
 
+const MAX_RESULTS = 100;
+const query = new QueryArticlesIter(er, {keywords: "Tesla Inc", maxItems: MAX_RESULTS});
+query.execQuery((item) => {
+    console.info(item);
+});
+
 // search for the phrase "Barack Obama" - both words have to appear together
 const q1 = new QueryArticles({keywords: "Barack Obama"});
 er.execQuery(q1).then((response) => {

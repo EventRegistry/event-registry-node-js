@@ -2,12 +2,20 @@
 
 This log contains changes specific to the NodeJS SDK.
 
+## [v8.10.0]() (2021-10-19)
+
+**Added**
+
+- added file `QueryMentions` that can be used to query mentions of specific event types. The class is currently in beta and not available to users unless they have permissions to use this endpoint. The classes `QueryMentions` and `QueryMentionsIter` can be used in the same way as classes for querying articles and events, except that some query parameters are added and some removed. Examples for the classes were also added.
+
+**Updated**
+- When using method `initWithComplexQuery` we now check if the provided json is valid json object and report error in case it is not
+
 ## [v8.9.2]() (2021-05-12)
 
 **Updated**
 
 - Updated dependencies of the SDK library
-
 
 ## [v8.9]() (2020-11-24)
 

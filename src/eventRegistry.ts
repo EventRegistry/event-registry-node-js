@@ -164,9 +164,9 @@ export class EventRegistry {
                 throw new Error(errorMessage);
             }
         } catch (error) {
-            console.error("Event Registry Analytics exception while executing the request.");
             request = { data: {error} };
             if (this.config.verboseOutput) {
+                console.error("Event Registry Analytics exception while executing the request.");
                 if (error && error.stack && error.message) {
                     console.error(error.message);
                 } else {
@@ -231,10 +231,10 @@ export class EventRegistry {
                 throw new Error(errorMessage);
             }
         } catch (error) {
-            console.error("Event Registry exception while executing the request.");
             request = { data: {error} };
             // try to print out the error that should be passed by in case the server is down or responds with errors
             if (this.config.verboseOutput) {
+                console.error("Event Registry exception while executing the request.");
                 if (error && error.stack && error.message) {
                     console.error(error.message);
                 } else {

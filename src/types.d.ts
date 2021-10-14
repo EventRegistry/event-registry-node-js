@@ -2,6 +2,7 @@ import { QueryItems } from "./base";
 import { BaseQuery, CombinedQuery} from "./query";
 import { QueryArticles, RequestArticles } from "./queryArticles";
 import { RequestEvents } from "./queryEvents";
+import { RequestMentions } from "./queryMentions";
 import { ReturnInfo } from "./returnInfo";
 
 /**
@@ -47,7 +48,7 @@ export module EventRegistryStatic {
          */
         repeatFailedRequestCount?: number;
         /**
-         * if true, additional info about query times etc. will be printed to console
+         * if true, additional info about errors etc. will be printed to console
          */
         verboseOutput?: boolean;
         /**
@@ -1104,6 +1105,150 @@ export module EventRegistryStatic {
             returnInfo?: ReturnInfo;
         }
     }
+    export namespace QueryMentions {
+        export interface Arguments {
+            eventTypeUri?: string | string[] | QueryItems;
+            keywords?: string | string[] | QueryItems;
+            conceptUri?: string | string[] | QueryItems;
+            categoryUri?: string | string[] | QueryItems;
+            sourceUri?: string | string[] | QueryItems;
+            sourceLocationUri?: string | string[] | QueryItems;
+            sourceGroupUri?: string | string[] | QueryItems;
+            industryUri?: string | string[] | QueryItems;
+            locationUri?: string | string[] | QueryItems;
+            lang?: string | string[];
+            dateStart?: string | Date;
+            dateEnd?: string | Date;
+            ignoreEventTypeUri?: string | string[] | QueryItems;
+            ignoreKeywords?: string | string[] | QueryItems;
+            ignoreConceptUri?: string | string[] | QueryItems;
+            ignoreCategoryUri?: string | string[] | QueryItems;
+            ignoreSourceUri?: string | string[] | QueryItems;
+            ignoreSourceLocationUri?: string | string[] | QueryItems;
+            ignoreSourceGroupUri?: string | string[] | QueryItems;
+            ignoreIndustryUri?: string | string[] | QueryItems;
+            ignoreLocationUri?: string | string[] | QueryItems;
+            ignoreLang?: string | string[];
+            showDuplicates?: boolean;
+            startSourceRankPercentile?: number;
+            endSourceRankPercentile?: number;
+            minSentiment?: number;
+            maxSentiment?: number;
+            requestedResult?: RequestMentions;
+        }
+        export interface IteratorArguments extends Arguments {
+        }
+
+        export interface RequestMentionsUriWgtListArguments {
+            /**
+             * page of the results to return (1, 2, ...)
+             */
+            page?: number;
+            /**
+             * number of results to return per page
+             */
+            count?: number;
+            /**
+             * how should the resulting events be sorted. Options:
+             *  - none (no specific sorting),
+             *  - date (by event date),
+             *  - rel (relevance to the query),
+             *  - size (number of articles),
+             *  - socialScore (amount of shares in social media)
+             */
+            sortBy?: "none" | "rel" | "date" | "size" | "socialScore";
+            /**
+             * should the results be sorted in ascending order (true) or descending (false)
+             */
+            sortByAsc?: boolean;
+        }
+
+        export interface RequestMentionsConceptAggrArguments {
+            /**
+             * number of top concepts to return
+             */
+             conceptCount?: number;
+             /**
+              * on what sample of results should the aggregate be computed
+              */
+              mentionsSampleSize?: number;
+             /**
+              * what details about the concepts should be included in the returned information
+              */
+             returnInfo?: ReturnInfo;
+             /**
+              * how should the top concepts be computed. Possible values are
+              * "importance" (takes into account how frequently a concept is mentioned and how relevant it is in an mention),
+              * "frequency" (ranks the concepts simply by how frequently the concept is mentioned in the results) and
+              * "uniqueness" (computes what are the top concepts that are frequently mentioned in the results of your search query but less frequently mentioned in the news in general)
+              */
+             conceptScoring?: "importance" | "frequency" | "uniqueness"
+             /**
+              * if you wish to limit the number of top concepts per type (person, org, loc, wiki) then set this to some number.
+              * If you want to get equal number of concepts for each type then set conceptCountPerType to conceptCount/4 (since there are 4 concept types)
+              */
+             conceptCountPerType?: number;
+        }
+
+        export interface RequestMentionsCategoryAggrArguments {
+            mentionsSampleSize?: number;
+            returnInfo?: ReturnInfo;
+        }
+
+        export interface RequestMentionsSourceAggrArguments {
+            sourceCount?: number;
+            normalizeBySourceArts?: boolean;
+            returnInfo?: ReturnInfo;
+        }
+
+        export interface RequestMentionsKeywordAggrArguments {
+            mentionsSampleSize?: number;
+        }
+
+        export interface RequestMentionsConceptGraphArguments {
+            /**
+             * number of top sources to return
+             */
+            conceptCount?: number;
+            linkCount?: number;
+            /**
+             * on what sample of results should the aggregate be computed
+             */
+             mentionsSampleSize?: number;
+            /**
+             * what details about the concepts should be included in the returned information
+             */
+            returnInfo?: ReturnInfo;
+            skipQueryConcepts?: boolean;
+        }
+
+        export interface RequestMentionsRecentActivityArguments {
+            /**
+             * max mentions to return
+             */
+             maxMentionCount?: number;
+             updatesAfterUri?: string;
+             /**
+              * the time after which the events were added/updated (returned by previous call to the same method)
+              */
+             updatesAfterTm?: string | Date;
+             /**
+              * how many minutes into the past should we check (set either this or updatesAfterTm property, but not both)
+              */
+             updatesAfterMinsAgo?: number;
+             updatesUntilTm?: string | Date;
+             updatesUntilMinsAgo?: number;
+             /**
+              * return only events that have a geographic location assigned to them
+              */
+              mandatorySourceLocation?: boolean;
+             /**
+              * what details should be included in the returned information
+              */
+             returnInfo?: ReturnInfo;
+        }
+    }
+
     export namespace QueryEvents {
         export interface Arguments {
             /**
