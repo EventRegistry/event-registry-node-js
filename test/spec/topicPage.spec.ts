@@ -15,9 +15,9 @@ describe("Topic Page", () => {
         const q = await createTopicPage();
         const uris: Set<string> = new Set();
         for (const page of _.range(1, 20)) {
-            const articles = await q.getArticles({page: page, dataType: ["news", "blog"], sortBy: "rel"})
+            const response = await q.getArticles({page: page, dataType: ["news", "blog"], sortBy: "rel"})
             let rel = Number.MAX_SAFE_INTEGER;
-            for (const {uri, wgt} of articles) {
+            for (const {uri, wgt} of _.get(response, "articles.results", [])) {
                 expect(wgt).toBeLessThanOrEqual(rel);
                 rel = wgt;
                 expect(uris.has(uri)).toBeFalsy();
@@ -31,9 +31,9 @@ describe("Topic Page", () => {
         const q = await createTopicPage();
         const uris: Set<string> = new Set();
         for (const page of _.range(1, 20)) {
-            const events = await q.getEvents({page: page, sortBy: "rel"})
+            const response = await q.getEvents({page: page, sortBy: "rel"})
             let rel = Number.MAX_SAFE_INTEGER;
-            for (const {uri, wgt} of events) {
+            for (const {uri, wgt} of _.get(response, "events.results", [])) {
                 expect(wgt).toBeLessThanOrEqual(rel);
                 rel = wgt;
                 expect(uris.has(uri)).toBeFalsy();
@@ -57,8 +57,8 @@ describe("Topic Page", () => {
         const conceptInfo = new ConceptInfoFlags({maxConceptsPerType: 500});
         const returnInfo = new ReturnInfo({articleInfo, conceptInfo});
         for (const page of _.range(1, 10)) {
-            const articles = await topic.getArticles({page, returnInfo});
-            for (const {concepts = [], categories = []} of articles) {
+            const response = await topic.getArticles({page, returnInfo});
+            for (const {concepts = [], categories = []} of _.get(response, "articles.results", [])) {
                 let foundConcept = false;
                 let foundCategory = false;
                 for (const { uri } of concepts) {

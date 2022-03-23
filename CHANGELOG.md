@@ -1,6 +1,11 @@
 # NodeJS SDK: Change Log
 
 This log contains changes specific to the NodeJS SDK.
+## [v8.10.1]() (2022-03-23)
+
+**Breaking**
+
+- `TopicPage.getArticles` and `TopicPage.getEvents` return full response with additional page/pages information (instead of simple array of articles/events).
 
 ## [v8.10.0]() (2021-10-19)
 

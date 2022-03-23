@@ -445,7 +445,7 @@ export class TopicPage extends QueryParamsBase {
             params = {...params, ...otherParameters};
         }
         const request = await this.eventRegistry.jsonRequest("/api/v1/article", params);
-        return _.get(request, "data.articles.results", []);
+        return _.get(request, "data", {articles: {results: []}});
     }
     /**
      * Return a list of events that match the topic page
@@ -473,7 +473,7 @@ export class TopicPage extends QueryParamsBase {
             params = {...params, ...otherParameters};
         }
         const request = await this.eventRegistry.jsonRequest("/api/v1/event", params);
-        return _.get(request, "data.events.results", []);
+        return _.get(request, "data", {events: {results: []}});
     }
 
 }
