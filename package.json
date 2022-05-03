@@ -10,6 +10,7 @@
     "type": "git",
     "url": "https://github.com/EventRegistry/event-registry-node-js.git"
   },
+  "files": ["dist"],
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "build:watch": "tsc --watch --project tsconfig.json",
@@ -21,15 +22,15 @@
     "node": ">=5.0.0"
   },
   "devDependencies": {
+    "@types/jasmine": "2.8.6",
+    "@types/lodash": "4.14.108",
+    "@types/node": "8.0.50",
+    "@types/qs": "6.5.1",
     "jasmine": "2.8.0",
     "tslint": "^6.0.0",
     "typescript": "3.0.1"
   },
   "dependencies": {
-    "@types/jasmine": "2.8.6",
-    "@types/lodash": "4.14.108",
-    "@types/node": "8.0.50",
-    "@types/qs": "6.5.1",
     "axios": "^0.21.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
