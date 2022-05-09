@@ -1,6 +1,9 @@
 # NodeJS SDK: Change Log
 
 This log contains changes specific to the NodeJS SDK.
+## [v8.10.2]() (2022-05-09)
+- Correctly exposed internal types and move other types to development dependencies. Thanks to the PR vorant94/master#17
+
 ## [v8.10.1]() (2022-03-23)
 
 **Breaking**
