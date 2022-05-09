@@ -35,6 +35,7 @@ logs
 /.vs/*
 /node/.vscode
 /.vscode
+/.idea
 /sitemap
 /node_modules-old.zip
 /static/Visual Studio Code.lnk
