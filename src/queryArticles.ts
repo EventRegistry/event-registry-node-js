@@ -301,7 +301,7 @@ export class RequestArticlesInfo extends RequestArticles {
     public resultType = "articles";
     public params;
     constructor({page = 1,
-                 count = 200,
+                 count = 100,
                  sortBy = "date",
                  sortByAsc = false,
                  returnInfo = undefined,

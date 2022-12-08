@@ -1,6 +1,9 @@
 # NodeJS SDK: Change Log
 
 This log contains changes specific to the NodeJS SDK.
+## [v8.10.4]() (2022-12-08)
+ - Apply correct default value for article count when querying for articles when using RequestArticlesInfo (was 200 instead of 100).
+
 ## [v8.10.3]() (2022-12-08)
  - Correctly apply allowUseOfArchive parameter when querying for articles and events with iterator classes.
 
