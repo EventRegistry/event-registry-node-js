@@ -255,7 +255,7 @@ export class QueryMentionsIter extends QueryMentions {
             if (this.er.verboseOutput) {
                 console.log(`Downloading event page ${this.page}...`);
             }
-            const response = await this.er.execQuery(this);
+            const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
             const error = _.get(response, "error", "");
             if (error) {
                 this.errorMessage = `Error while obtaining a list of events:  ${_.get(response, "error")}`;

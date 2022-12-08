@@ -48,7 +48,7 @@ export class EventRegistry {
         }
         if (fs && fs.existsSync(this.config.settingsFName || "settings.json")) {
             const localConfig = JSON.parse(fs.readFileSync(this.config.settingsFName || "settings.json", "utf8"));
-            _.extend(this.config, localConfig);
+            this.config = {...this.config, ...localConfig, ...config};
             if (!_.isNil(config.apiKey)) {
                 if (!!config.printHostInfo) {
                     console.log("found apiKey in settings file which will be used for making requests");
@@ -56,7 +56,7 @@ export class EventRegistry {
                 this.config.apiKey = config.apiKey;
             }
         } else {
-            _.extend(this.config, config);
+            this.config = {...this.config, ...config};
         }
         if (this.config.logging) {
             this.logger = winston.createLogger({
@@ -116,6 +116,10 @@ export class EventRegistry {
         this.initRequestLogger();
     }
 
+    public get allowUseOfArchive() {
+        return this.config.allowUseOfArchive;
+    }
+
     public get verboseOutput() {
         return this.config.verboseOutput;
     }
@@ -124,7 +128,7 @@ export class EventRegistry {
      * Main method for executing the search queries.
      * @param query instance of Query class
      */
-    public async execQuery(query, allowUseOfArchive?: boolean) {
+    public async execQuery(query, allowUseOfArchive: boolean = this.config.allowUseOfArchive) {
         const params = query.getQueryParams();
         const request = await this.jsonRequest(query.path, params, allowUseOfArchive);
         if (!_.has(request, "data") && this.config.verboseOutput) {

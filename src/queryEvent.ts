@@ -204,7 +204,7 @@ export class QueryEventArticlesIter extends QueryEvent {
             if (this.er.verboseOutput) {
                 console.log(`Downloading page ${this.page}...`);
             }
-            const response = await this.er.execQuery(this);
+            const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
             const error = _.get(response[this.eventUri], "error", "");
             if (error) {
                 this.errorMessage = `Error while obtaining a list of articles:  ${_.get(response[this.eventUri], "error")}`;

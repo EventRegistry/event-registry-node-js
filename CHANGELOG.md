@@ -1,6 +1,9 @@
 # NodeJS SDK: Change Log
 
 This log contains changes specific to the NodeJS SDK.
+## [v8.10.3]() (2022-12-08)
+ - Correctly apply allowUseOfArchive parameter when querying for articles and events with iterator classes.
+
 ## [v8.10.2]() (2022-05-09)
 - Correctly exposed internal types and move other types to development dependencies. Thanks to the [PR #17](https://github.com/EventRegistry/event-registry-node-js/pull/17).
 
