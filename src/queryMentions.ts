@@ -151,22 +151,22 @@ export class QueryMentions extends Query<RequestMentions> {
     }
 }
 
-export class QueryMentionsIter extends QueryMentions {
+export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Record<string, any>> {
     private readonly er: EventRegistry;
-    private readonly sortBy;
-    private readonly sortByAsc;
-    private readonly returnInfo;
-    private readonly maxItems;
-    private page = 0;
-    private pages = 1;
-    private items = [];
-    private returnedSoFar = 0;
-    private index = 0;
-    private callback: (item) => void = _.noop;
-    private doneCallback: (error?) => void = _.noop;
-    private errorMessage;
+    private readonly sortBy: "date" | "socialScore" | "none" | "rel" | "size";
+    private readonly sortByAsc: boolean;
+    private readonly returnInfo: ReturnInfo;
+    private readonly maxItems: number;
+    private page: number = 0;
+    private pages: number = 1;
+    private items: Record<string, any>[] = [];
+    private returnedSoFar: number = 0;
+    private index: number = 0;
+    private callback: (item: Record<string, any>) => void = _.noop;
+    private doneCallback: (error?: string) => void = _.noop;
+    private errorMessage: string;
 
-    constructor(er: EventRegistry, args: EventRegistryStatic.QueryEvents.IteratorArguments = {}) {
+    constructor(er: EventRegistry, args: EventRegistryStatic.QueryMentions.IteratorArguments = {}) {
         super(args as EventRegistryStatic.QueryMentions.Arguments);
         const {
             sortBy = "rel",
@@ -179,6 +179,19 @@ export class QueryMentionsIter extends QueryMentions {
         this.sortByAsc = sortByAsc;
         this.returnInfo = returnInfo;
         this.maxItems = maxItems;
+    }
+
+    [Symbol.asyncIterator](): AsyncIterator<Record<string, any>> {
+        return {
+            next: async () => {
+                if (this.index >= this.items.length) {
+                    await this.getNextBatch();
+                }
+                const item = this.items[this.index];
+                this.index++;
+                return {value: item, done: !item};
+            },
+        };
     }
 
     public async count(): Promise<number> {
@@ -244,23 +257,23 @@ export class QueryMentionsIter extends QueryMentions {
             if (this.page > this.pages || (this.maxItems !== -1 && this.returnedSoFar >= this.maxItems)) {
                 return false;
             }
-            const requestEventsInfo = new RequestMentionsInfo({
+            const requestMentionsInfo = new RequestMentionsInfo({
                 page: this.page,
                 count: 50,
                 sortBy: this.sortBy,
                 sortByAsc: this.sortByAsc,
                 returnInfo: this.returnInfo,
             });
-            this.setRequestedResult(requestEventsInfo);
+            this.setRequestedResult(requestMentionsInfo);
             if (this.er.verboseOutput) {
-                console.log(`Downloading event page ${this.page}...`);
+                console.log(`Downloading mentions page ${this.page}...`);
             }
             const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
             const error = _.get(response, "error", "");
             if (error) {
-                this.errorMessage = `Error while obtaining a list of events:  ${_.get(response, "error")}`;
+                this.errorMessage = `Error while obtaining a list of mentions:  ${_.get(response, "error")}`;
             } else {
-                this.pages = _.get(response, "events.pages", 0);
+                this.pages = _.get(response, "mentions.pages", 0);
             }
             const results = this.extractResults(response);
             this.returnedSoFar += _.size(results);

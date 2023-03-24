@@ -4,6 +4,7 @@ import { EventRegistry } from "./eventRegistry";
 import { ComplexArticleQuery } from "./query";
 import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
 import { EventRegistryStatic } from "./types";
+import { Data } from "./data";
 
 export class QueryArticles extends Query<RequestArticles> {
     constructor(args: EventRegistryStatic.QueryArticles.Arguments = {}) {
@@ -173,20 +174,20 @@ export class QueryArticles extends Query<RequestArticles> {
 
 }
 
-export class QueryArticlesIter extends QueryArticles {
+export class QueryArticlesIter extends QueryArticles implements AsyncIterable<Data.Article>  {
     private readonly er: EventRegistry;
-    private readonly sortBy;
-    private readonly sortByAsc;
-    private readonly returnInfo;
-    private readonly maxItems;
-    private page = 0;
-    private pages = 1;
-    private items = [];
-    private returnedSoFar = 0;
-    private index = 0;
-    private callback: (item) => void = _.noop;
-    private doneCallback: (error?) => void = _.noop;
-    private errorMessage;
+    private readonly sortBy: string;
+    private readonly sortByAsc: boolean;
+    private readonly returnInfo: ReturnInfo;
+    private readonly maxItems: number;
+    private page: number = 0;
+    private pages: number = 1;
+    private items: Data.Article[] = [];
+    private returnedSoFar: number = 0;
+    private index: number = 0;
+    private callback: (item: Data.Article) => void = _.noop;
+    private doneCallback: (error?: string) => void = _.noop;
+    private errorMessage: string;
 
     constructor(er: EventRegistry, args: {[name: string]: any} = {}) {
         super(args);
@@ -204,7 +205,21 @@ export class QueryArticlesIter extends QueryArticles {
         this.maxItems = maxItems;
     }
 
-    public async count() {
+    /**
+     * Async Iterator function that returns the next item in the list of articles
+     */
+    [Symbol.asyncIterator](): AsyncIterator<Data.Article> {
+        return {
+            next: async () => {
+                await this.getNextBatch();
+                const item = this.items[this.index];
+                this.index++;
+                return {value: item, done: !item};
+            },
+        };
+    }
+
+    public async count(): Promise<number> {
         this.setRequestedResult(new RequestArticlesInfo());
         const response = await this.er.execQuery(this);
 
@@ -215,13 +230,13 @@ export class QueryArticlesIter extends QueryArticles {
         return _.get(response, "articles.totalResults", 0);
     }
 
-    public execQuery(callback: (item) => void, doneCallback?: (error?) => void) {
+    public execQuery(callback: (item: Data.Article) => void, doneCallback?: (error?: string) => void): void {
         if (callback) { this.callback = callback; }
         if (doneCallback) { this.doneCallback = doneCallback; }
         this.iterate();
     }
 
-    public static initWithComplexQuery(er: EventRegistry, complexQuery, params: {[name: string]: any} = {}) {
+    public static initWithComplexQuery(er: EventRegistry, complexQuery, params: {[name: string]: any} = {}): QueryArticlesIter {
         const query = new QueryArticlesIter(er, params);
         if (complexQuery instanceof ComplexArticleQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
@@ -235,7 +250,7 @@ export class QueryArticlesIter extends QueryArticles {
         return query;
     }
 
-    private async iterate() {
+    private async iterate(): Promise<void> {
         if (this.current) {
             this.callback(this.current);
             this.index += 1;
@@ -250,17 +265,17 @@ export class QueryArticlesIter extends QueryArticles {
      * Extract the results according to maxItems
      * @param response response from the backend
      */
-    private extractResults(response): Array<{[name: string]: any}> {
+    private extractResults(response): Data.Article[] {
         const results = _.get(response, "articles.results", []);
         const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : _.size(results);
-        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Array<{}>);
+        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Data.Article[]);
     }
 
     private get current() {
         return this.items[this.index] || undefined;
     }
 
-    private async getNextBatch() {
+    private async getNextBatch(): Promise<boolean> {
         try {
             this.page += 1;
             if (this.page > this.pages || (this.maxItems !== -1 && this.returnedSoFar >= this.maxItems)) {

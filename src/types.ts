@@ -1137,6 +1137,7 @@ export module EventRegistryStatic {
             requestedResult?: RequestMentions;
         }
         export interface IteratorArguments extends Arguments {
+            [key: string]: any;
         }
 
         export interface RequestMentionsUriWgtListArguments {

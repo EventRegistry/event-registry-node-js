@@ -102,7 +102,7 @@ export class EventRegistry {
             }
             err.config.__retryCount += 1;
 
-            return new Promise((resolve) => {
+            return new Promise<void>((resolve) => {
                 setTimeout(() => resolve(), err.config.retryDelay || 1);
             }).then(() => axios(err.config));
         });

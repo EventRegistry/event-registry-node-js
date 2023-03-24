@@ -1,6 +1,20 @@
 # NodeJS SDK: Change Log
 
 This log contains changes specific to the NodeJS SDK.
+## [v8.11.1]() (2023-03-24)
+**Updated**
+ - the `QueryEventArticlesIter` class will be significantly faster in returning the articles when you specify the language filter
+ **Added**
+ - New option for usage for the following classes: `QueryEventsIter`, `QueryEventArticlesIter`, `QueryArticlesIter` and `QueryMentionsIter`. Example below shows how to use it with `QueryEventsIter` class.
+```javascript
+(async () => {
+    const er = new EventRegistry();
+    const events = new QueryEventsIter(er, { keywords: "Obama", maxItems: 30 });
+    for await (const event of events) {
+        console.info(event);
+    }
+})();
+```
 ## [v8.10.4]() (2022-12-08)
  - Apply correct default value for article count when querying for articles when using RequestArticlesInfo (was 200 instead of 100).
 

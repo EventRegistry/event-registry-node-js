@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import { Query, QueryParamsBase } from "./base";
+import { Data } from "./data";
 import { EventRegistry } from "./eventRegistry";
 import { ComplexEventQuery } from "./query";
 import { ReturnInfo } from "./returnInfo";
@@ -183,20 +184,20 @@ export class QueryEvents extends Query<RequestEvents> {
  * @class QueryEventsIter
  * Class for iterating through all the events via callbacks
  */
-export class QueryEventsIter extends QueryEvents {
+export class QueryEventsIter extends QueryEvents implements AsyncIterable<Data.Event> {
     private readonly er: EventRegistry;
-    private readonly sortBy;
-    private readonly sortByAsc;
-    private readonly returnInfo;
-    private readonly maxItems;
-    private page = 0;
-    private pages = 1;
-    private items = [];
-    private returnedSoFar = 0;
-    private index = 0;
-    private callback: (item) => void = _.noop;
-    private doneCallback: (error?) => void = _.noop;
-    private errorMessage;
+    private readonly sortBy: "none" | "rel" | "date" | "size" | "socialScore";
+    private readonly sortByAsc: boolean;
+    private readonly returnInfo: ReturnInfo;
+    private readonly maxItems: number;
+    private page: number = 0;
+    private pages: number = 1;
+    private items: Data.Event[] = [];
+    private returnedSoFar: number = 0;
+    private index: number = 0;
+    private callback: (item: Data.Event) => void = _.noop;
+    private doneCallback: (error?: string) => void = _.noop;
+    private errorMessage: string;
 
     constructor(er: EventRegistry, args: EventRegistryStatic.QueryEvents.IteratorArguments = {}) {
         super(args as EventRegistryStatic.QueryEvents.Arguments);
@@ -213,6 +214,22 @@ export class QueryEventsIter extends QueryEvents {
         this.maxItems = maxItems;
     }
 
+    /**
+     * Async Iterator function that returns the next item in the list of events
+     */
+    [Symbol.asyncIterator](): AsyncIterator<Data.Event> {
+        return {
+            next: async () => {
+                if (this.index >= this.items.length) {
+                    await this.getNextBatch();
+                }
+                const item = this.items[this.index];
+                this.index++;
+                return {value: item, done: !item};
+            },
+        };
+    }
+
     public async count(): Promise<number> {
         this.setRequestedResult(new RequestEventsInfo());
         const response = await this.er.execQuery(this);
@@ -223,11 +240,11 @@ export class QueryEventsIter extends QueryEvents {
     }
 
     /**
-     * Execute query and fetch batches of articles of the specified size (eventBatchSize)
+     * Execute query and fetch batches of events of the specified size (eventBatchSize)
      * @param callback callback function that'll be called every time we get a new batch of events from the backend
      * @param doneCallback callback function that'll be called when everything is complete
      */
-    public execQuery(callback: (item) => void, doneCallback?: (error?) => void) {
+    public execQuery(callback: (item: Data.Event) => void, doneCallback?: (error?: string) => void): void {
         if (callback) { this.callback = callback; }
         if (doneCallback) { this.doneCallback = doneCallback; }
         this.iterate();
@@ -262,10 +279,10 @@ export class QueryEventsIter extends QueryEvents {
      * Extract the results according to maxItems
      * @param response response from the backend
      */
-    private extractResults(response): Array<{[name: string]: any}> {
+    private extractResults(response): Data.Event[] {
         const results = _.get(response, "events.results", []);
         const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : _.size(results);
-        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Array<{}>);
+        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Data.Event[]);
     }
 
     private get current() {

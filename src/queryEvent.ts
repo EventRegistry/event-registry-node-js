@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import { Query, QueryParamsBase } from "./base";
+import { Data } from "./data";
 import { EventRegistry } from "./eventRegistry";
 import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
 import { EventRegistryStatic } from "./types";
@@ -36,21 +37,21 @@ export class QueryEvent extends Query<RequestEvent> {
  * @class QueryEventArticlesIter
  * Class for iterating through all the articles in the event via callbacks
  */
-export class QueryEventArticlesIter extends QueryEvent {
+export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<Data.Article> {
     private readonly er: EventRegistry;
-    private readonly sortBy;
-    private readonly sortByAsc;
-    private readonly returnInfo;
-    private readonly eventUri;
-    private readonly maxItems;
-    private page = 0;
-    private pages = 1;
-    private items = [];
-    private returnedSoFar = 0;
-    private index = 0;
-    private callback: (item) => void = _.noop;
-    private doneCallback: (error?) => void = _.noop;
-    private errorMessage;
+    private readonly sortBy: EventRegistryStatic.QueryEvent.SortByOptions;
+    private readonly sortByAsc: boolean;
+    private readonly returnInfo: ReturnInfo;
+    private readonly eventUri: string;
+    private readonly maxItems: number;
+    private page: number = 0;
+    private pages: number = 1;
+    private items: Data.Article[] = [];
+    private returnedSoFar: number = 0;
+    private index: number = 0;
+    private callback: (item: Data.Article) => void = _.noop;
+    private doneCallback: (error?: string) => void = _.noop;
+    private errorMessage: string;
 
     /**
      * @param er instance of EventRegistry class. used to obtain the necessary data
@@ -144,7 +145,23 @@ export class QueryEventArticlesIter extends QueryEvent {
         }
     }
 
-    public async count() {
+    /**
+     * Async Iterator function that returns the next item in the list of articles
+     */
+    [Symbol.asyncIterator](): AsyncIterator<Data.Article> {
+        return {
+            next: async () => {
+                if (this.index >= this.items.length) {
+                    await this.getNextBatch();
+                }
+                const item = this.items[this.index];
+                this.index++;
+                return {value: item, done: !item};
+            },
+        };
+    }
+
+    public async count(): Promise<number> {
         this.setRequestedResult(new RequestEventArticles(this.getQueryParams()));
         const response = await this.er.execQuery(this);
         if (_.has(response, "error")) {
@@ -157,13 +174,13 @@ export class QueryEventArticlesIter extends QueryEvent {
      * @param callback callback function that'll be called every time we get a new batch of articles from the backend
      * @param doneCallback callback function that'll be called when everything is complete
      */
-    public execQuery(callback: (item) => void, doneCallback?: (error) => void) {
+    public execQuery(callback: (item: Data.Article) => void, doneCallback?: (error?: string) => void): void {
         if (callback) { this.callback = callback; }
         if (doneCallback) { this.doneCallback = doneCallback; }
         this.iterate();
     }
 
-    private async iterate() {
+    private async iterate(): Promise<void> {
         if (this.current) {
             this.callback(this.current);
             this.index += 1;
@@ -178,10 +195,10 @@ export class QueryEventArticlesIter extends QueryEvent {
      * Extract the results according to maxItems
      * @param response response from the backend
      */
-    private extractResults(response): Array<{[name: string]: any}> {
+    private extractResults(response): Data.Article[] {
         const results = _.get(response[this.eventUri], "articles.results", []);
         const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : _.size(results);
-        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Array<{}>);
+        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Data.Article[]);
     }
 
     private get current() {
@@ -291,7 +308,7 @@ export class RequestEventArticles extends RequestEvent {
         this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", "sourceGroupOper", "or");
         this.setQueryArrVal(authorUri, "authorUri", "authorOper", "or");
         this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
-        this.setQueryArrVal(lang, "lang", undefined, "or");
+        this.setQueryArrVal(lang, "articlesLang", undefined, "or");
         if (!_.isUndefined(dateStart)) {
             this.setDateVal("dateStart", dateStart);
         }
