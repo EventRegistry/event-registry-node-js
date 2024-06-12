@@ -1,6 +1,10 @@
 # NodeJS SDK: Change Log
 
 This log contains changes specific to the NodeJS SDK.
+## [v8.11.1]() (2023-05-11)
+**Fixed**
+ - fixed the `RequestEventsRecentActivity` response type to the correct value.
+```
 ## [v8.11.1]() (2023-03-24)
 **Updated**
  - the `QueryEventArticlesIter` class will be significantly faster in returning the articles when you specify the language filter

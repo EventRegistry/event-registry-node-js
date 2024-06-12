@@ -668,7 +668,7 @@ export class RequestEventsCategoryAggr extends RequestEvents {
  * Return a list of recently changed events that match search conditions.
  */
 export class RequestEventsRecentActivity extends RequestEvents {
-    public resultType = "recentActivity";
+    public resultType = "recentActivityEvents";
     public params;
     constructor(args: EventRegistryStatic.QueryEvents.RequestEventsRecentActivityArguments = {}) {
         super();
