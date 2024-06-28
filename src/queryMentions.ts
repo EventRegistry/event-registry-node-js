@@ -1,12 +1,12 @@
-import * as _ from "lodash";
 import { Query, QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { ReturnInfo } from "./returnInfo";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
+import { Logger } from "./logger";
 
 export class QueryMentions extends Query<RequestMentions> {
     public params = {};
-    constructor(args: EventRegistryStatic.QueryMentions.Arguments = {}) {
+    constructor(args: ER.QueryMentions.Arguments = {}) {
         super();
         const {
             eventTypeUri,
@@ -17,6 +17,9 @@ export class QueryMentions extends Query<RequestMentions> {
             sourceLocationUri,
             sourceGroupUri,
             industryUri,
+            sdgUri,
+            sasbUri,
+            esgUri,
             locationUri,
             lang,
             dateStart,
@@ -29,6 +32,9 @@ export class QueryMentions extends Query<RequestMentions> {
             ignoreSourceLocationUri,
             ignoreSourceGroupUri,
             ignoreIndustryUri,
+            ignoreSdgUri,
+            ignoreSasbUri,
+            ignoreEsgUri,
             ignoreLocationUri,
             ignoreLang,
             showDuplicates,
@@ -36,6 +42,8 @@ export class QueryMentions extends Query<RequestMentions> {
             endSourceRankPercentile = 100,
             minSentiment = -1,
             maxSentiment = 1,
+            minSentenceIndex,
+            maxSentenceIndex,
             requestedResult = new RequestMentions(),
         } = args;
 
@@ -48,12 +56,15 @@ export class QueryMentions extends Query<RequestMentions> {
         this.setQueryArrVal(sourceLocationUri, "sourceLocationUri", undefined, "or");
         this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", undefined, "or");
         this.setQueryArrVal(industryUri, "industryUri", "industryOper", "or");
+        this.setQueryArrVal(sdgUri, "sdgUri", undefined, "or");
+        this.setQueryArrVal(sasbUri, "sasbUri", undefined, "or");
+        this.setQueryArrVal(esgUri, "esgUri", undefined, "or");
         this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
         this.setQueryArrVal(lang, "lang", undefined, "or");
-        if (!_.isUndefined(dateStart)) {
+        if (dateStart !== undefined) {
             this.setDateVal("dateStart", dateStart);
         }
-        if (!_.isUndefined(dateEnd)) {
+        if (dateEnd !== undefined) {
             this.setDateVal("dateEnd", dateEnd);
         }
 
@@ -65,6 +76,9 @@ export class QueryMentions extends Query<RequestMentions> {
         this.setQueryArrVal(ignoreSourceLocationUri, "ignoreSourceLocationUri", undefined, "or");
         this.setQueryArrVal(ignoreSourceGroupUri, "ignoreSourceGroupUri", undefined, "or");
         this.setQueryArrVal(ignoreIndustryUri, "ignoreIndustryUri", undefined, "or");
+        this.setQueryArrVal(ignoreSdgUri, "ignoreSdgUri", undefined, "or");
+        this.setQueryArrVal(ignoreSasbUri, "ignoreSasbUri", undefined, "or");
+        this.setQueryArrVal(ignoreEsgUri, "ignoreEsgUri", undefined, "or");
         this.setQueryArrVal(ignoreLocationUri, "ignoreLocationUri", undefined, "or");
 
         this.setQueryArrVal(ignoreLang, "ignoreLang", undefined, "or");
@@ -92,6 +106,12 @@ export class QueryMentions extends Query<RequestMentions> {
         if (maxSentiment >= -1 && maxSentiment < 1 ) {
             this.setVal("maxSentiment", maxSentiment);
         }
+        if (!!minSentenceIndex && minSentenceIndex > 0 ) {
+            this.setVal("minSentenceIndex", minSentenceIndex);
+        }
+        if (!!maxSentenceIndex && maxSentenceIndex > 0 ) {
+            this.setVal("maxSentenceIndex", maxSentenceIndex);
+        }
         this.setRequestedResult(requestedResult);
     }
 
@@ -115,7 +135,7 @@ export class QueryMentions extends Query<RequestMentions> {
     public static initWithMentionUriList(...args);
     public static initWithMentionUriList(uriList) {
         const q = new QueryMentions();
-        if (!_.isArray(uriList)) {
+        if (!Array.isArray(uriList)) {
             throw new Error("uriList has to be a list of strings that represent mention uris");
         }
         q.params = {
@@ -127,12 +147,12 @@ export class QueryMentions extends Query<RequestMentions> {
     public static initWithMentionUriWgtList(...args);
     public static initWithMentionUriWgtList(uriWgtList) {
         const q = new QueryMentions();
-        if (!_.isArray(uriWgtList)) {
+        if (!Array.isArray(uriWgtList)) {
             throw new Error("uriList has to be a list of strings that represent mention uris");
         }
         q.params = {
             action: "getMentions",
-            mentionUriWgtList: _.join(uriWgtList, ","),
+            mentionUriWgtList: uriWgtList.join(","),
         };
         return q;
     }
@@ -140,9 +160,9 @@ export class QueryMentions extends Query<RequestMentions> {
     public static initWithComplexQuery(...args);
     public static initWithComplexQuery(complexQuery) {
         const query = new QueryMentions();
-        if (_.isString(complexQuery)) {
+        if (typeof complexQuery === "string") {
             query.setVal("query", complexQuery);
-        } else if (_.isObject(complexQuery)) {
+        } else if (typeof complexQuery === "object" && complexQuery !== null) {
             query.setVal("query", JSON.stringify(complexQuery));
         } else {
             throw new Error("The instance of query parameter was not a string or an object");
@@ -162,12 +182,12 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
     private items: Record<string, any>[] = [];
     private returnedSoFar: number = 0;
     private index: number = 0;
-    private callback: (item: Record<string, any>) => void = _.noop;
-    private doneCallback: (error?: string) => void = _.noop;
+    private callback: (item: Record<string, any>) => void = () => {};
+    private doneCallback: (error?: string) => void = () => {};
     private errorMessage: string;
 
-    constructor(er: EventRegistry, args: EventRegistryStatic.QueryMentions.IteratorArguments = {}) {
-        super(args as EventRegistryStatic.QueryMentions.Arguments);
+    constructor(er: EventRegistry, args: ER.QueryMentions.IteratorArguments = {}) {
+        super(args as ER.QueryMentions.Arguments);
         const {
             sortBy = "rel",
             sortByAsc = false,
@@ -197,10 +217,10 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
     public async count(): Promise<number> {
         this.setRequestedResult(new RequestMentionsInfo());
         const response = await this.er.execQuery(this);
-        if (_.has(response, "error")) {
-            console.error(_.get(response, "error"));
+        if (response?.error) {
+            this.er.logger.error(response.error);
         }
-        return _.get(response, "mentions.totalResults", 0);
+        return (response.mentions as ER.Results)?.totalResults || 0;
     }
 
     /**
@@ -214,11 +234,11 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
         this.iterate();
     }
 
-    public static initWithComplexQuery(er, complexQuery, args: EventRegistryStatic.QueryMentions.IteratorArguments = {}) {
+    public static initWithComplexQuery(er, complexQuery, args: ER.QueryMentions.IteratorArguments = {}) {
         const query = new QueryMentionsIter(er, args);
-        if (_.isString(complexQuery)) {
+        if (typeof complexQuery === "string") {
             query.setVal("query", complexQuery);
-        } else if (_.isObject(complexQuery)) {
+        } else if (typeof complexQuery === "object" && complexQuery !== null) {
             query.setVal("query", JSON.stringify(complexQuery));
         } else {
             throw new Error("The instance of query parameter was not a string or an object");
@@ -242,9 +262,9 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
      * @param response response from the backend
      */
     private extractResults(response): Array<{[name: string]: any}> {
-        const results = _.get(response, "mentions.results", []);
-        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : _.size(results);
-        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Array<{}>);
+        const results = response.mentions?.results || [];
+        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : results.length;
+        return results.slice(0, extractedSize).filter(Boolean);
     }
 
     private get current() {
@@ -266,21 +286,21 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
             });
             this.setRequestedResult(requestMentionsInfo);
             if (this.er.verboseOutput) {
-                console.log(`Downloading mentions page ${this.page}...`);
+                this.er.logger.info(`Downloading mentions page ${this.page}...`);
             }
             const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
-            const error = _.get(response, "error", "");
+            const error = response?.error || "";
             if (error) {
-                this.errorMessage = `Error while obtaining a list of mentions:  ${_.get(response, "error")}`;
+                this.errorMessage = `Error while obtaining a list of mentions:  ${response?.error}`;
             } else {
-                this.pages = _.get(response, "mentions.pages", 0);
+                this.pages = (response.mentions as ER.Results)?.pages || 0;
             }
             const results = this.extractResults(response);
-            this.returnedSoFar += _.size(results);
+            this.returnedSoFar += results.length;
             this.items = [...this.items, ...results];
             return true;
         } catch (error) {
-            console.error(error);
+            this.er.logger.error(error);
             return false;
         }
     }
@@ -291,7 +311,7 @@ export class RequestMentions {}
 export class RequestMentionsInfo extends RequestMentions {
     public resultType = "mentions";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsInfoArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsInfoArguments = {}) {
         super();
         const {
             page = 1,
@@ -311,16 +331,16 @@ export class RequestMentionsInfo extends RequestMentions {
         this.params["mentionsCount"] = count;
         this.params["mentionsSortBy"] = sortBy;
         this.params["mentionsSortByAsc"] = sortByAsc;
-        if (!!returnInfo) {
-            this.params = _.extend({}, this.params, returnInfo.getParams("mentions"));
+        if (returnInfo) {
+            this.params = {...this.params, ...returnInfo.getParams("mentions")};
         }
     }
 
-    public set page(page) {
+    public set page(page: number) {
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
-        _.set(this.params, "mentionsPage", page);
+        this.params["mentionsPage"] = page;
     }
 }
 
@@ -328,7 +348,7 @@ export class RequestMentionsUriWgtList extends RequestMentions {
     public resultType = "uriWgtList";
     public params;
 
-    constructor(args: EventRegistryStatic.QueryMentions.RequestMentionsUriWgtListArguments = {}) {
+    constructor(args: ER.QueryMentions.RequestMentionsUriWgtListArguments = {}) {
         super();
         const {
             page = 1,
@@ -337,8 +357,8 @@ export class RequestMentionsUriWgtList extends RequestMentions {
             sortByAsc = false,
             ...unsupported
         } = args;
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestMentionsUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestMentionsUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
@@ -357,7 +377,7 @@ export class RequestMentionsUriWgtList extends RequestMentions {
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
-        _.set(this.params, "uriWgtListPage", page);
+        this.params["uriWgtListPage"] = page;
     }
 }
 
@@ -368,7 +388,7 @@ export class RequestMentionsTimeAggr extends RequestMentions {
 export class RequestMentionsConceptAggr extends RequestMentions {
     public resultType = "conceptAggr";
     public params;
-    constructor(args: EventRegistryStatic.QueryMentions.RequestMentionsConceptAggrArguments = {}) {
+    constructor(args: ER.QueryMentions.RequestMentionsConceptAggrArguments = {}) {
         super();
         const {
             conceptCount = 25,
@@ -390,14 +410,14 @@ export class RequestMentionsConceptAggr extends RequestMentions {
         if (!!conceptCountPerType) {
             this.params["conceptAggrConceptCountPerType"] = conceptCountPerType;
         }
-        this.params = _.extend({}, this.params, returnInfo.getParams("conceptAggr"));
+        this.params = {...this.params, ...returnInfo.getParams("conceptAggr")};
     }
 }
 
 export class RequestMentionsCategoryAggr extends RequestMentions {
     public resultType = "categoryAggr";
     public params;
-    constructor(args: EventRegistryStatic.QueryMentions.RequestMentionsCategoryAggrArguments = {}) {
+    constructor(args: ER.QueryMentions.RequestMentionsCategoryAggrArguments = {}) {
         super();
         const {
             mentionsSampleSize = 20000,
@@ -414,7 +434,7 @@ export class RequestMentionsCategoryAggr extends RequestMentions {
 export class RequestMentionsSourceAggr extends RequestMentions {
     public resultType = "sourceAggr";
     public params;
-    constructor(args: EventRegistryStatic.QueryMentions.RequestMentionsSourceAggrArguments = {}) {
+    constructor(args: ER.QueryMentions.RequestMentionsSourceAggrArguments = {}) {
         super();
         const {
             sourceCount = 50,
@@ -429,7 +449,7 @@ export class RequestMentionsSourceAggr extends RequestMentions {
 export class RequestMentionsKeywordAggr extends RequestMentions {
     public resultType = "keywordAggr";
     public params;
-    constructor(args: EventRegistryStatic.QueryMentions.RequestMentionsKeywordAggrArguments = {}) {
+    constructor(args: ER.QueryMentions.RequestMentionsKeywordAggrArguments = {}) {
         super();
         const {
             mentionsSampleSize = 2000,
@@ -445,7 +465,7 @@ export class RequestMentionsConceptGraph extends RequestMentions {
     public resultType = "conceptGraph";
     public params;
 
-    constructor(args: EventRegistryStatic.QueryMentions.RequestMentionsConceptGraphArguments = {}) {
+    constructor(args: ER.QueryMentions.RequestMentionsConceptGraphArguments = {}) {
         super();
         const {
             conceptCount = 25,
@@ -468,14 +488,14 @@ export class RequestMentionsConceptGraph extends RequestMentions {
         this.params["conceptGraphLinkCount"] = linkCount;
         this.params["conceptGraphSampleSize"] = mentionsSampleSize;
         this.params["conceptGraphSkipQueryConcepts"] = skipQueryConcepts;
-        this.params = _.extend({}, this.params, returnInfo.getParams("conceptGraph"));
+        this.params = {...this.params, ...returnInfo.getParams("conceptGraph")};
     }
 }
 
 export class RequestMentionsRecentActivity extends RequestMentions {
     public resultType = "recentActivityMentions";
     public params;
-    constructor(args: EventRegistryStatic.QueryMentions.RequestMentionsRecentActivityArguments = {}) {
+    constructor(args: ER.QueryMentions.RequestMentionsRecentActivityArguments = {}) {
         super();
         const {
             maxMentionCount = 100,
@@ -490,39 +510,39 @@ export class RequestMentionsRecentActivity extends RequestMentions {
         if (maxMentionCount > 2000) {
             throw new RangeError("At most 2000 mentions can be returned");
         }
-        if (!_.isUndefined(updatesAfterTm) && !_.isUndefined(updatesAfterMinsAgo)) {
+        if (updatesAfterTm !== undefined && updatesAfterMinsAgo !== undefined) {
             throw new Error("You should specify either updatesAfterTm or updatesAfterMinsAgo parameter, but not both");
         }
-        if (!_.isUndefined(updatesUntilTm) && !_.isUndefined(updatesUntilMinsAgo)) {
+        if (updatesUntilTm !== undefined && updatesUntilMinsAgo !== undefined) {
             throw new Error("You should specify either updatesUntilTm or updatesUntilMinsAgo parameter, but not both");
         }
         this.params = {};
         this.params["recentActivityMentionsMaxMentionCount"] = maxMentionCount;
 
-        if (!_.isUndefined(updatesAfterTm)) {
+        if (updatesAfterTm !== undefined) {
             this.params["recentActivityMentionsUpdatesAfterTm"] = QueryParamsBase.encodeDateTime(updatesAfterTm);
         }
 
-        if (!_.isUndefined(updatesAfterMinsAgo)) {
+        if (updatesAfterMinsAgo !== undefined) {
             this.params["recentActivityMentionsUpdatesAfterMinsAgo"] = updatesAfterMinsAgo;
         }
 
-        if (!_.isUndefined(updatesUntilTm)) {
+        if (updatesUntilTm !== undefined) {
             this.params["recentActivityMentionsUpdatesUntilTm"] = QueryParamsBase.encodeDateTime(updatesUntilTm);
         }
 
-        if (!_.isUndefined(updatesUntilMinsAgo)) {
+        if (updatesUntilMinsAgo !== undefined) {
             this.params["recentActivityMentionsUpdatesUntilMinsAgo"] = updatesUntilMinsAgo;
         }
 
-        if (!_.isUndefined(updatesAfterUri)) {
+        if (updatesAfterUri !== undefined) {
             this.params["recentActivityMentionsUpdatesAfterUri"] = updatesAfterUri;
         }
 
         this.params["recentActivityMentionsMandatorySourceLocation"] = mandatorySourceLocation;
 
-        if (!_.isUndefined(returnInfo)) {
-            this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityMentions"));
+        if (returnInfo !== undefined) {
+            this.params = {...this.params, ...returnInfo.getParams("recentActivityMentions")};
         }
     }
 }

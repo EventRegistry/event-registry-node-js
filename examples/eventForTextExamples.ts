@@ -1,5 +1,5 @@
 import { EventRegistry, GetEventForText, QueryEvent, RequestEventInfo } from "eventregistry";
-import * as _ from "lodash";
+
 
 // Given some text that is related to some current event, this example demonstrates how to obtain
 // information which event is the text talking about
@@ -17,11 +17,11 @@ available buses and trains, and dozens were injured in the mayhem.
     console.info(`Most similar info:`);
     console.info(response);
 
-    if (_.isEmpty(response)) {
+    if (Object.keys(response).length === 0) {
         return;
     }
     // get the events ids that are most related to the given text
-    const eventUris = _.map(response, "eventUri") as string[];
+    const eventUris = response.map((item) => item.eventUri) as string[];
     // obtain information about those events
     const q2 = new QueryEvent(eventUris);
     q2.setRequestedResult(new RequestEventInfo());

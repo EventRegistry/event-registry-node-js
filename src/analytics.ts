@@ -1,6 +1,5 @@
-import * as _ from "lodash";
 import { EventRegistry } from "./eventRegistry";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
 
 // The Analytics class can be used for access the text analytics services provided by the Event Registry.
 // These include:
@@ -23,12 +22,13 @@ export class Analytics {
      * @param text input text to annotate
      * @param lang language of the provided document (can be an ISO2 or ISO3 code). If None is provided, the language will be automatically detected
      */
-    public async annotate(text: string, lang?: string[], customParams?: {[name: string]: unknown}) {
+    public async annotate(text: string, lang?: string[], customParams?: {[name: string]: unknown}): Promise<ER.Analytics.Response.Annotate> {
         let params = { lang, text };
-        if (!_.isUndefined(customParams)) {
+        if (!!customParams) {
             params = {...params, ...customParams};
         }
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/annotate", params), "data");
+        const response = await this.er.jsonRequestAnalytics("/api/v1/annotate", params);
+        return response?.data as ER.Analytics.Response.Annotate;
     }
 
     /**
@@ -38,8 +38,9 @@ export class Analytics {
      *  - "dmoz" (over 5000 categories in 3 levels, English language only)
      *  - "news" (general news categorization, 9 categories, any langauge)
      */
-    public async categorize(text: string, taxonomy: "dmoz" | "news" = "dmoz") {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/categorize",  { text, taxonomy }), "data");
+    public async categorize(text: string, taxonomy: "dmoz" | "news" = "dmoz"): Promise<ER.Analytics.Response.Categorize> {
+        const response = await this.er.jsonRequestAnalytics("/api/v1/categorize", { text, taxonomy });
+        return response?.data as ER.Analytics.Response.Categorize;
     }
 
     /**
@@ -47,8 +48,8 @@ export class Analytics {
      * @param text input text to categorize
      * @param method method to use to compute the sentiment. possible values are "vocabulary" (vocabulary based sentiment analysis) and "rnn" (neural network based sentiment classification)
      */
-    public async sentiment(text: string, method = "vocabulary", sentences = 10, returnSentences = true) {
-        if (!_.includes(["vocabulary", "rnn"], method)) {
+    public async sentiment(text: string, method = "vocabulary", sentences = 10, returnSentences = true): Promise<ER.Analytics.Response.Sentiment> {
+        if (!["vocabulary", "rnn"].includes(method)) {
             throw new Error("method: Please pass in either 'vocabulary' or 'rnn'");
         }
         const params = {
@@ -57,19 +58,22 @@ export class Analytics {
             sentences,
             returnSentences,
         };
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/sentiment",  params), "data");
+        const response = await this.er.jsonRequestAnalytics("/api/v1/sentiment", params);
+        return response?.data as ER.Analytics.Response.Sentiment;
     }
 
-    public async semanticSimilarity(text1: string, text2: string, distanceMeasure: "cosine" | "jaccard" = "cosine") {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/semanticSimilarity",  { text1, text2, distanceMeasure }), "data");
+    public async semanticSimilarity(text1: string, text2: string, distanceMeasure: "cosine" | "jaccard" = "cosine"): Promise<ER.Analytics.Response.SentimentSimilarity> {
+        const response = await this.er.jsonRequestAnalytics("/api/v1/semanticSimilarity", { text1, text2, distanceMeasure });
+        return response?.data as ER.Analytics.Response.SentimentSimilarity;
     }
 
     /**
      * Determine the language of the given text
      * @param text input text to analyse
      */
-    public async detectLanguage(text: string) {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/detectLanguage",  { text }), "data");
+    public async detectLanguage(text: string): Promise<ER.Analytics.Response.DetectLanguage> {
+        const response = await this.er.jsonRequestAnalytics("/api/v1/detectLanguage", { text });
+        return response?.data as ER.Analytics.Response.DetectLanguage;
     }
     /**
      * Extract all available information about an article available at url `url`.
@@ -77,12 +81,13 @@ export class Analytics {
      * @param url article url that'll be used for extraction
      * @param proxyUrl proxy that should be used for downloading article information. format: {schema}://{username}:{pass}@{proxy url/ip}
      */
-    public async extractArticleInfo(url: string, proxyUrl?: string, headers?: {[name: string]: unknown}, cookies?: {[name: string]: unknown}) {
-        const params = { url };
+    public async extractArticleInfo(url: string, proxyUrl?: string, headers?: {[name: string]: unknown}, cookies?: {[name: string]: unknown}): Promise<ER.Analytics.Response.ExtractArticleInfo> {
+        const params: Record<string, string> = { url };
         if (!!proxyUrl) {
-            _.set(params, "proxyUrl", proxyUrl);
+            params.proxyUrl = proxyUrl;
         }
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/extractArticleInfo", params, headers, cookies), "data");
+        const response = await this.er.jsonRequestAnalytics("/api/v1/extractArticleInfo", params, headers, cookies);
+        return response?.data as ER.Analytics.Response.ExtractArticleInfo;
     }
 
     /**
@@ -90,7 +95,8 @@ export class Analytics {
      * @param text: text on which to extract named entities
      */
     public async ner(text: string) {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/ner",  { text }), "data");
+        const response = await this.er.jsonRequestAnalytics("/api/v1/ner", { text });
+        return response?.data;
     }
 
     /**
@@ -98,7 +104,7 @@ export class Analytics {
      * @param twitterQuery string containing the content to search for. It can be a Twitter user account (using "@" prefix or user's Twitter url),a hash tag (using "#" prefix) or a regular keyword.
      * @param args Object which contains a host of optional parameters
      */
-    public async trainTopicOnTweets(twitterQuery: string, args: EventRegistryStatic.Analytics.TrainTopicOnTweetsArguments = {}) {
+    public async trainTopicOnTweets(twitterQuery: string, args: ER.Analytics.TrainTopicOnTweetsArguments = {}): Promise<ER.Analytics.Response> {
         const {
             useTweetText = true,
             useIdfNormalization = true,
@@ -113,7 +119,7 @@ export class Analytics {
         if (maxTweets > 5000) {
             throw new Error("We can analyze at most 5000 tweets");
         }
-        const params = {
+        const params: Record<string, unknown> = {
             twitterQuery,
             useTweetText,
             useIdfNormalization,
@@ -124,12 +130,13 @@ export class Analytics {
             maxCategories,
         };
         if (notifyEmailAddress) {
-            _.set(params, "notifyEmailAddress", notifyEmailAddress);
+            params.notifyEmailAddress = notifyEmailAddress;
         }
-        if (!_.isEmpty(ignoreConceptTypes)) {
-            _.set(params, "ignoreConceptTypes", ignoreConceptTypes);
+        if (ignoreConceptTypes && Object.keys(ignoreConceptTypes).length > 0) {
+            params.ignoreConceptTypes = ignoreConceptTypes;
         }
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopicOnTwitter",  params), "data");
+        const response = await this.er.jsonRequestAnalytics("/api/v1/trainTopicOnTwitter", params);
+        return response?.data as ER.Analytics.Response;
     }
 
     /**
@@ -137,16 +144,18 @@ export class Analytics {
      * @param name name of the topic we want to create
      * @returns object containing the "uri" property that should be used in the follow-up call to trainTopic* methods
      */
-    public async trainTopicCreateTopic(name: string) {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "createTopic", name: name}), "data");
+    public async trainTopicCreateTopic(name: string): Promise<ER.Analytics.Response> {
+        const response = await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "createTopic", name });
+        return response?.data as ER.Analytics.Response;
     }
 
     /**
      * If the topic is already existing, clear the definition of the topic. Use this if you want to retrain an existing topic
      * @param uri uri of the topic (obtained by calling trainTopicCreateTopic method) to clear
      */
-    public async trainTopicClearTopic(uri: string) {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "clearTopic", uri: uri}), "data");
+    public async trainTopicClearTopic(uri: string): Promise<ER.Analytics.Response> {
+        const response = await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "clearTopic", uri });
+        return response?.data as ER.Analytics.Response;
     }
 
     /**
@@ -154,8 +163,9 @@ export class Analytics {
      * @param uri uri of the topic (obtained by calling trainTopicCreateTopic method)
      * @param text text to analyze and extract information from
      */
-    public async trainTopicAddDocument(uri: string, text: string) {
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "addDocument", uri: uri, text: text}), "data");
+    public async trainTopicAddDocument(uri: string, text: string): Promise<ER.Analytics.Response> {
+        const response = await this.er.jsonRequestAnalytics("/api/v1/trainTopic", { action: "addDocument", uri, text });
+        return response?.data as ER.Analytics.Response;
     }
 
     /**
@@ -163,7 +173,7 @@ export class Analytics {
      * @param uri uri of the topic (obtained by calling trainTopicCreateTopic method)
      * @returns returns the trained topic: { concepts: [], categories: [] }
      */
-    public async trainTopicGetTrainedTopic(uri: string, args: EventRegistryStatic.Analytics.TrainTopicGetTrainedTopicArguments = {}) {
+    public async trainTopicGetTrainedTopic(uri: string, args: ER.Analytics.TrainTopicGetTrainedTopicArguments = {}): Promise<ER.Analytics.Response> {
         const {
             maxConcepts = 20,
             maxCategories = 10,
@@ -176,6 +186,7 @@ export class Analytics {
             maxCategories: maxCategories,
             idfNormalization: idfNormalization,
         };
-        return _.get(await this.er.jsonRequestAnalytics("/api/v1/trainTopic", params), "data");
+        const response = await this.er.jsonRequestAnalytics("/api/v1/trainTopic", params);
+        return response?.data as ER.Analytics.Response;
     }
 }

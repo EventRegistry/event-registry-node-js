@@ -2,8 +2,12 @@
     "compilerOptions": {
         "target": "es5",
         "experimentalDecorators": true,
+        "skipLibCheck": true,
         "noImplicitAny": false,
         "module": "commonjs",
+        "moduleResolution": "node",
+        "downlevelIteration": true,
+        "declaration": true,
         "sourceMap": true,
         "alwaysStrict": true,
         "outDir": "dist/",
@@ -16,14 +20,12 @@
             "es5",
             "es6",
             "es2017",
-            "esnext"
+            "esnext",
         ]
     },
     "include": [
-        "./spec/**/*.ts"
-    ],
-    "files": [
-        "index.d.ts"
+        "index.d.ts",
+        "spec/**/*.ts"
     ],
     "exclude": [
         "node_modules"

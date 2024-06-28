@@ -1,5 +1,4 @@
 import { ArticleInfoFlags, ArticleMapper, EventRegistry, QueryArticle, QueryArticles, RequestArticleInfo, RequestArticlesUriWgtList, ReturnInfo } from "eventregistry";
-import * as _ from "lodash";
 
 // examples that download information about the individual news articles
 
@@ -30,9 +29,9 @@ er.getConceptUri("Apple").then((conceptUri) => {
     return er.execQuery(q3);
 }).then((response) => {
     // take the list of article URIs that match the search criteria (i.e. ['641565713', '641559021', '641551446', '641025492', '641548675', ...])
-    const articleUriList = EventRegistry.getUriFromUriWgt(_.get(response, "uriWgtList.results", []));
+    const articleUriList = EventRegistry.getUriFromUriWgt(response?.uriWgtList?.results ?? []);
     // take first 5 article URIs and ask for all details about these articles
-    const queryUris = _.take(articleUriList, 5) as string[];
+    const queryUris = articleUriList.slice(0, 5) as string[];
     const q4 = new QueryArticle(queryUris);
     const articleInfo = new ArticleInfoFlags({concepts: true, categories: true, location: true});
     const returnInfo = new ReturnInfo({articleInfo});

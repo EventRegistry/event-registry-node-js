@@ -1,6 +1,21 @@
 # NodeJS SDK: Change Log
 
 This log contains changes specific to the NodeJS SDK.
+## [v9.1]() (2024-27-06)
+**Updated**
+ - Updated several external packages used internally by the SDK.
+ - Removed `lodash` as a dependency.
+**Added**
+- added `keywordSearchMode` parameter that can be used in `QueryArticles`, `QueryArticlesIter`, `QueryEvents`, `QueryEventsIter` and `QueryEvent` constructors.
+**Updated**
+- `QueryArticles` class. Added filters `authorsFilter`, `videosFilter`, `linksFilter`
+- `QueryMentions` class. Added several filters: `industryUri`, `sdgUri`, `sasbUri`, `esgUri`, `minSentenceIndex`, `maxSentenceIndex`, `showDuplicates`
+- Changed how loggin works. If you would like to see host information or manually adjust logging level then you can do the following
+    ``` javascript
+        const er = new EventRegistry();
+        er.logger.logLevel = LogLevel.DEBUG; // or LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR
+    ```
+
 ## [v8.11.1]() (2023-05-11)
 **Fixed**
  - fixed the `RequestEventsRecentActivity` response type to the correct value.

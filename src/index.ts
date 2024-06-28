@@ -9,7 +9,7 @@ export {
     ArticleMapper,
 } from "./eventRegistry";
 export { sleep, mainLangs, allLangs } from "./base";
-export { EventRegistryStatic } from "./types";
+export { ER } from "./types";
 export {
     GetSourceInfo,
     GetConceptInfo,
@@ -123,3 +123,7 @@ export {
 export {
     TopicPage,
 } from "./topicPage";
+export {
+    LogLevel,
+    Logger,
+} from "./logger";

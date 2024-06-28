@@ -8,7 +8,32 @@ import { ReturnInfo } from "./returnInfo";
 /**
  * Type definitions for different classes and functions from the Event Registry Node JS SDK.
  */
-export module EventRegistryStatic {
+export module ER {
+
+    export type Response<T = SuccessfulResponse<unknown>, E = string> = T & ErrorResponse<E>;
+
+    export interface SuccessfulResponse<T = unknown> {
+        [name: string]: Results<T> | Record<string, Results<T>>;
+    }
+
+    export interface ErrorResponseObject {
+        message?: string;
+        response?: Record<string, string>;
+    }
+
+    export interface ErrorResponse<E = string> {
+        error?: E;
+    }
+
+    export interface Results<T = unknown> {
+        count?: number;
+        page?: number;
+        pages?: number;
+        warning?: string;
+        results: T[];
+        totalResults?: number;
+        usedResults?: number;
+    }
 
     export interface UsageInfo {
         availableTokens: number;
@@ -88,7 +113,7 @@ export module EventRegistryStatic {
         /**
          * What types of concepts should be returned
          */
-        sources?: EventRegistryStatic.ConceptType[];
+        sources?: ER.ConceptType[];
         /**
          * Language in which the prefix is specified
          */
@@ -138,7 +163,7 @@ export module EventRegistryStatic {
         /**
          * Suggest sources that provide content in these data types
          */
-        dataType?: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType;
+        dataType?: ER.DataType[] | ER.DataType;
     }
 
     export interface SuggestSourceGroupsArguments {
@@ -156,7 +181,7 @@ export module EventRegistryStatic {
         /**
          * What types of locations are we interested in.
          */
-        sources?: EventRegistryStatic.SourceType[];
+        sources?: ER.SourceType[];
         /**
          * Language in which the prefix is specified
          */
@@ -229,7 +254,7 @@ export module EventRegistryStatic {
         /**
          * what types of concepts classes should be returned.
          */
-        source?: EventRegistryStatic.ConceptClassType[];
+        source?: ER.ConceptClassType[];
         /**
          * page of the results (1, 2, ...)
          */
@@ -275,7 +300,7 @@ export module EventRegistryStatic {
         /**
          * what types of concepts should be returned.
          */
-        sources?: EventRegistryStatic.ConceptType[];
+        sources?: ER.ConceptType[];
     }
 
     export interface GetLocationUriArguments {
@@ -286,7 +311,7 @@ export module EventRegistryStatic {
         /**
          * what types of locations are we interested in.
          */
-        sources?: EventRegistryStatic.SourceType | EventRegistryStatic.SourceType[];
+        sources?: ER.SourceType | ER.SourceType[];
         /**
          * if set, then filter the possible locations to the locations from that country
          */
@@ -304,6 +329,260 @@ export module EventRegistryStatic {
         addDailyEvents?: boolean;
     }
 
+    interface Country {
+        type: string;
+        label: Label;
+    }
+
+    interface Label {
+        [name: string]: string;
+    }
+
+    export interface Location {
+        type: string;
+        wikiUri?: string;
+        label: Label;
+        country: Country;
+        lat?: number;
+        long?: number;
+    }
+
+    export interface Author {
+        uri: string;
+        name: string;
+        type: string;
+        isAgency: boolean;
+        isDisabled?: boolean;
+        articleCount?: number;
+    }
+
+    interface Shares {
+        [name: string]: number;
+    }
+
+    export interface Source {
+        uri: string;
+        dataType: string;
+        title: string;
+        location: Location;
+        private?: boolean;
+        disabled?: boolean;
+        locationValidated?: boolean;
+        articleCount?: string;
+        articles?: number;
+        importance?: string;
+        expected?: boolean;
+        actual?: number;
+        ranking?: {
+            alexaGlobalRank: string;
+            alexaCountryRank: string;
+            importanceRank: string;
+        };
+    }
+
+    interface BaseWeight {
+        wgt: number;
+        excluded?: boolean;
+    }
+
+    interface ConceptWeight extends BaseWeight {
+        label: string;
+        uri: string;
+        type: string;
+        required?: boolean;
+    }
+
+    interface KeywordWeight extends BaseWeight {
+        keyword: string;
+        keywordLoc?: string;
+        required?: boolean;
+    }
+
+    interface SourceWeight extends BaseWeight {
+        uri: string;
+        title: string;
+    }
+
+    interface CategoryWeight extends BaseWeight {
+        label: string;
+        uri: string;
+        required?: boolean;
+    }
+
+    interface LocationWeight extends BaseWeight {
+        label: string;
+        uri: string;
+        required?: boolean;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    type Weight<T = any> =
+    T extends ConceptWeight ? ConceptWeight :
+        T extends KeywordWeight ? KeywordWeight :
+            T extends SourceWeight ? SourceWeight :
+                T extends CategoryWeight ? CategoryWeight :
+                    T extends LocationWeight ? LocationWeight :
+                        T;
+
+
+    export interface Concept< T = Record<string, string> | string> {
+        id?: string;
+        label?: T;
+        title?: string;
+        score?: number;
+        frequency?: number;
+        type?: "person" | "loc" | "org" | "concepts" | "conceptClass" | "topicPage" | "collection";
+        uri?: string;
+        wgt?: number;
+        image?: string;
+        description?: string;
+        disabled?: boolean;
+        currentType?: Record<string, string>;
+        lang?: string;
+        location?: {
+            country: {
+                label: {
+                    [lang: string]: string;
+                };
+            };
+        };
+        lastUriPart?: string;
+        hierarchy?: {
+            [lang: string]: string;
+        };
+        conceptFolder?: {
+            owner: {
+                name: string;
+            };
+        };
+        conceptClass?: {
+            parentLabels: {
+                [lang: string]: string[];
+            };
+        };
+        topicPage?: {
+            visibility: number;
+            autoAddArticles?: boolean;
+            articleTreshWgt?: number | string;
+            eventTreshWgt?: number | string;
+            articleIsDuplicate?: string;
+            articleHasDuplicate?: string;
+            articleHasEvent?: string;
+            startSourceRankPercentile?: number;
+            endSourceRankPercentile?: number;
+            minSocialScore?: number;
+            minSentiment?: number;
+            maxSentiment?: number;
+            restrictToSetSources?: boolean;
+            restrictToSetLocations?: boolean;
+            restrictToSetCategories?: boolean;
+            restrictToSetConcepts?: boolean;
+            minArticlesInEvent?: number;
+            maxDaysBack?: number;
+            concepts?: Weight<ConceptWeight>[];
+            keywords?: Weight<KeywordWeight>[];
+            sources?: Weight<SourceWeight>[];
+            authors?: Weight<SourceWeight>[];
+            sourceLocations?: Weight<SourceWeight>[];
+            sourceGroups?: Weight<SourceWeight>[];
+            categories?: Weight<CategoryWeight>[];
+            locations?: Weight<LocationWeight>[];
+            langs?: string[];
+            dataType?: Array<"news" | "pr" | "blog">;
+            owner?: { uri: string };
+        };
+        collection?: {
+            visibility: number;
+        };
+        fq?: number;
+    }
+
+    export interface Keyword {
+        keyword: string;
+        weight: number;
+    }
+
+    export interface Category {
+        count: number;
+        label: string;
+        uri: string;
+    }
+
+    export interface ArticleCounts {
+        [lang: string]: number;
+    }
+
+    export interface InfoArticle {
+        [lang: string]: string;
+    }
+
+    export interface Title {
+        [lang: string]: string;
+    }
+
+    export interface Summary {
+        [lang: string]: string;
+    }
+
+
+    export interface Event {
+        id?: string;
+        uri: string;
+        concepts: Concept[];
+        langs?: number;
+        eventDate: string;
+        eventDateEnd?: string;
+        totalArticleCount: number;
+        title: Title;
+        summary: Summary;
+        rtl: boolean;
+        infoArticle: InfoArticle;
+        location: Location;
+        locationStr: string;
+        categories: Category[];
+        stories?: unknown[];
+        removed?: boolean;
+        images: string[];
+        articleCounts: ArticleCounts;
+        socialScore: number;
+        sentiment: null | number;
+        wgt: number;
+        keywords?: unknown[];
+        entities?: unknown[];
+        circleSize?: number;
+    }
+
+    export interface Article {
+        id?: string;
+        uri?: string;
+        lang?: string;
+        isDuplicate?: boolean;
+        date?: string;
+        time?: string;
+        removed?: boolean;
+        assigned?: boolean;
+        dateTime?: string;
+        dataType?: string;
+        sim?: number;
+        url?: string;
+        title?: string;
+        fullTitle?: string;
+        body?: string;
+        source?: Source;
+        authors?: Author[];
+        concepts?: Concept[];
+        image?: string;
+        eventUri?: null | string;
+        sentiment?: null | number;
+        shares?: Shares;
+        wgt?: number;
+        rtl?: boolean;
+        userHasPermissions?: boolean;
+        categories?: Category[];
+        sourceName?: string;
+        disabled?: boolean;
+    }
+
     export interface TopicPage {
         autoAddArticles: boolean;
         articleHasDuplicate: "skipHasDuplicates" | "keepOnlyHasDuplicates" | "keepAll";
@@ -312,13 +591,13 @@ export module EventRegistryStatic {
         maxDaysBack: number;
         articleTreshWgt: number;
         eventTreshWgt: number;
-        concepts: Array<{uri: string, wgt: number, required?: boolean, excluded?: boolean}>;
-        keywords: Array<{keyword: string, wgt: number, required?: boolean, excluded?: boolean}>;
-        categories: Array<{uri: string, wgt: number, required?: boolean, excluded?: boolean}>;
-        sources: Array<{uri: string, wgt: number, excluded?: boolean}>;
-        sourceGroups: Array<{uri: string, wgt: number, excluded?: boolean}>;
-        sourceLocations: Array<{uri: string, wgt: number, excluded?: boolean}>;
-        locations: Array<{uri: string, wgt: number}>;
+        concepts: Record<string, string | number | boolean>[];
+        keywords: Record<string, string | number | boolean>[];
+        categories: Record<string, string | number | boolean>[];
+        sources: Record<string, string | number | boolean>[];
+        sourceGroups: Record<string, string | number | boolean>[];
+        sourceLocations: Record<string, string | number | boolean>[];
+        locations: Record<string, string | number | boolean>[];
         langs: string[];
         startSourceRankPercentile?: number;
         endSourceRankPercentile?: number;
@@ -326,7 +605,7 @@ export module EventRegistryStatic {
         restrictToSetCategories: boolean;
         restrictToSetSources: boolean;
         restrictToSetLocations: boolean;
-        dataType: EventRegistryStatic.DataType | EventRegistryStatic.DataType[];
+        dataType: ER.DataType | ER.DataType[];
     }
 
     export interface TopicPageAddConceptArguments {
@@ -375,7 +654,7 @@ export module EventRegistryStatic {
          * Should the results be sorted in ascending order (true) or descending (false)
          */
         sortByAsc?: boolean;
-        dataType?: EventRegistryStatic.DataType | EventRegistryStatic.DataType[];
+        dataType?: ER.DataType | ER.DataType[];
         /**
          * What details should be included in the returned information
          */
@@ -495,6 +774,7 @@ export module EventRegistryStatic {
     }
 
     export namespace Analytics {
+        export type Response = ER.Response<Record<string, unknown>, ER.ErrorResponseObject>;
         export interface TrainTopicOnTweetsArguments {
             /**
              * Do you want to analyze the content of the tweets and extract the concepts mentioned in them?
@@ -538,6 +818,36 @@ export module EventRegistryStatic {
             maxConcepts?: number;
             maxCategories?: number;
             idfNormalization?: boolean;
+        }
+        export interface Language {
+            code: string;
+            name: string;
+            percent: number;
+        }
+        export namespace Response {
+            export interface Annotate {
+                [name: string]: unknown;
+            }
+            export interface Categorize {
+                categories: ER.Category[];
+            }
+            export interface Sentiment {
+                avgSent: unknown;
+                sentimentPerSent: unknown;
+            }
+            export interface SentimentSimilarity {
+                similarity: unknown;
+            }
+            export interface DetectLanguage {
+                languages: ER.Analytics.Language[];
+            }
+            export interface ExtractArticleInfo {
+                title?: string;
+                body?: string;
+                date?: string;
+                datetime?: string;
+                image?: string;
+            }
         }
     }
 
@@ -673,7 +983,7 @@ export module EventRegistryStatic {
              * Data type to search for. Possible values are "news" (news content), "pr" (PR content) or "blogs".
              * If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
              */
-            dataType?: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType;
+            dataType?: ER.DataType[] | ER.DataType;
             minSentiment?: number;
             maxSentiment?: number;
             minSocialScore?: number;
@@ -733,6 +1043,44 @@ export module EventRegistryStatic {
              * what details should be included in the returned information
              */
             returnInfo?: ReturnInfo;
+        }
+    }
+
+    export interface RequestArticlesInfoParameters {
+        page?: number;
+        count?: number;
+        sortBy?: string;
+        sortByAsc?: boolean;
+        returnInfo?: ReturnInfo;
+    }
+
+    export interface RequestArticlesUriWgtListParameters {
+        page?: number;
+        count?: number;
+        sortBy?: string;
+        sortByAsc?: boolean;
+    }
+
+    export interface RequestArticlesConceptTrendsParameters {
+        conceptUris?: string[];
+        conceptCount?: number;
+        articlesSampleSize?: number;
+        returnInfo?: ReturnInfo;
+    }
+    export namespace Aggr {
+        export namespace Source {
+            export interface CountsPerSource {
+                source: ER.Source;
+                counts: {
+                    frequency: number;
+                    total: number;
+                }
+            }
+            export interface CountsPerCountry {
+                uri: string;
+                type: string;
+                frequency: number;
+            }
         }
     }
 
@@ -850,10 +1198,12 @@ export module EventRegistryStatic {
              * Where should we look when searching using the keywords provided by "keywords" parameter. "body" (default), "title", or "body,title".
              */
             keywordsLoc?: "body" | "title" | "body,title";
+            keywordSearchMode?: "simple" | "exact" | "phrase";
             /**
              * Where should we look when data should be used when searching using the keywords provided by "ignoreKeywords" parameter. "body" (default), "title", or "body,title".
              */
             ignoreKeywordsLoc?: "body" | "title" | "body,title";
+            ignoreKeywordSearchMode?: "simple" | "exact" | "phrase";
             /**
              * Some articles can be duplicates of other articles. What should be done with them. Possible values are:
              *   "skipDuplicates" (skip the resulting articles that are duplicates of other articles)
@@ -876,6 +1226,9 @@ export module EventRegistryStatic {
              *   "keepAll" (no filtering, default)
              */
             eventFilter?: "skipArticlesWithoutEvent" | "keepOnlyArticlesWithoutEvent" | "keepAll";
+            authorsFilter?: string;
+            videosFilter?: string;
+            linksFilter?: string;
             /**
              * Starting percentile of the sources to consider in the results (default: 0). Value should be in range 0-90 and divisible by 10.
              */
@@ -896,7 +1249,7 @@ export module EventRegistryStatic {
              * what data types should we search? "news" (news content, default), "pr" (press releases), or "blogs".
              *   If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
              */
-            dataType?: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType;
+            dataType?: ER.DataType[] | ER.DataType;
             /**
              * The information to return as the result of the query. By default return the list of matching articles.
              */
@@ -962,6 +1315,7 @@ export module EventRegistryStatic {
             dateMentionStart?: string | Date;
             dateMentionEnd?: string | Date;
             keywordsLoc?: "body" | "title" | "body,title";
+            keywordSearchMode?: "simple" | "exact" | "phrase";
             startSourceRankPercentile?: number;
             endSourceRankPercentile?: number;
             /**
@@ -1115,6 +1469,9 @@ export module EventRegistryStatic {
             sourceLocationUri?: string | string[] | QueryItems;
             sourceGroupUri?: string | string[] | QueryItems;
             industryUri?: string | string[] | QueryItems;
+            sdgUri?: string | string[] | QueryItems;
+            sasbUri?: string | string[] | QueryItems;
+            esgUri?: string | string[] | QueryItems;
             locationUri?: string | string[] | QueryItems;
             lang?: string | string[];
             dateStart?: string | Date;
@@ -1127,6 +1484,9 @@ export module EventRegistryStatic {
             ignoreSourceLocationUri?: string | string[] | QueryItems;
             ignoreSourceGroupUri?: string | string[] | QueryItems;
             ignoreIndustryUri?: string | string[] | QueryItems;
+            ignoreSdgUri?: string | string[] | QueryItems;
+            ignoreSasbUri?: string | string[] | QueryItems;
+            ignoreEsgUri?: string | string[] | QueryItems;
             ignoreLocationUri?: string | string[] | QueryItems;
             ignoreLang?: string | string[];
             showDuplicates?: boolean;
@@ -1134,6 +1494,8 @@ export module EventRegistryStatic {
             endSourceRankPercentile?: number;
             minSentiment?: number;
             maxSentiment?: number;
+            minSentenceIndex?: number;
+            maxSentenceIndex?: number;
             requestedResult?: RequestMentions;
         }
         export interface IteratorArguments extends Arguments {
@@ -1401,6 +1763,8 @@ export module EventRegistryStatic {
              *  what data should be used when searching using the keywords provided by "ignoreKeywords" parameter.
              */
             ignoreKeywordsLoc?: "body" | "title" | "body,title";
+            keywordSearchMode?: "simple" | "exact" | "phrase";
+            ignoreKeywordSearchMode?: "simple" | "exact" | "phrase";
             /**
              * when a category is specified using categoryUri, should also all subcategories be included?
              */

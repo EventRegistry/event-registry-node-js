@@ -3,11 +3,11 @@ declare namespace jasmine {
     interface Matchers<T> {
         toBeValidConcept(): boolean;
         toBeValidArticle(): boolean;
-        toBeValidGeneralArticleList(): boolean;    
+        toBeValidGeneralArticleList(): boolean;
         toBeValidCategory(): boolean;
         toBeValidSource(): boolean;
         toBeValidEvent(): boolean;
-        toBeValidGeneralEventList(): boolean;    
+        toBeValidGeneralEventList(): boolean;
         toBeValidStory(): boolean;
         toContainConcept(test1: string): boolean;
         toContainSource(test1: string): boolean;

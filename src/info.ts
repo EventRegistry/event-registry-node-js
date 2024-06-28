@@ -1,7 +1,6 @@
-import * as _ from "lodash";
 import { QueryParamsBase } from "./base";
 import { ReturnInfo } from "./returnInfo";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
 
 /**
  * @class GetSourceInfo
@@ -11,14 +10,14 @@ export class GetSourceInfo extends QueryParamsBase {
     /**
      * @param args Object which contains a host of optional parameters
      */
-    constructor(args: EventRegistryStatic.Info.GetSourceInfoArguments = {}) {
+    constructor(args: ER.Info.GetSourceInfoArguments = {}) {
         super();
         const {uriOrUriList, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "getInfo");
-        if (!_.isUndefined(uriOrUriList)) {
+        if (uriOrUriList !== undefined) {
             this.queryByUri(uriOrUriList);
         }
-        this.params = _.extend({}, this.params, returnInfo.getParams("source"));
+        this.params = {...this.params, ...returnInfo.getParams("source")};
     }
 
     /**
@@ -45,14 +44,14 @@ export class GetSourceInfo extends QueryParamsBase {
  * Obtain information about concepts
  */
 export class GetConceptInfo extends QueryParamsBase {
-    constructor(args: EventRegistryStatic.Info.GetConceptInfoArguments = {}) {
+    constructor(args: ER.Info.GetConceptInfoArguments = {}) {
         super();
         const {uriOrUriList, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "getInfo");
-        if (!_.isUndefined(uriOrUriList)) {
+        if (uriOrUriList !== undefined) {
             this.setVal("uri", uriOrUriList);
         }
-        this.params = _.extend({}, this.params, returnInfo.getParams("concept"));
+        this.params = {...this.params, ...returnInfo.getParams("concept")};
     }
 
     public get path(): string {
@@ -65,14 +64,14 @@ export class GetConceptInfo extends QueryParamsBase {
  * Obtain information about categories
  */
 export class GetCategoryInfo extends QueryParamsBase {
-    constructor(args: EventRegistryStatic.Info.GetCategoryInfoArguments = {}) {
+    constructor(args: ER.Info.GetCategoryInfoArguments = {}) {
         super();
         const {uriOrUriList, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "getInfo");
-        if (!_.isUndefined(uriOrUriList)) {
+        if (uriOrUriList !== undefined) {
             this.queryByUri(uriOrUriList);
         }
-        this.params = _.extend({}, this.params, returnInfo.getParams("category"));
+        this.params = {...this.params, ...returnInfo.getParams("category")};
     }
 
     /**

@@ -1,8 +1,8 @@
-import * as _ from "lodash";
 import {
     ArticleInfoFlags,
     CategoryInfoFlags,
     ConceptInfoFlags,
+    ER,
     EventInfoFlags,
     EventRegistry,
     LocationInfoFlags,
@@ -31,7 +31,7 @@ export class Utils {
     public eventInfo;
     public storyInfo;
     public returnInfo: ReturnInfo;
-    public er: EventRegistry;
+    public er!: EventRegistry;
 
     constructor() {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
@@ -113,34 +113,34 @@ export class Utils {
         const requestArticlesUriList = new RequestArticlesUriWgtList({count: 50000});
         q.setRequestedResult(requestArticlesUriList);
         const response = await er.execQuery(q);
-        if (_.has(response, "error")) {
-            throw new Error(_.get(response, "error"));
+        if (!!response?.error) {
+            throw new Error(response?.error);
         }
 
-        return _.get(response, "uriWgtList");
+        return response?.uriWgtList;
     }
 
     public async getQueryUriListForQueryEvents(er, q) {
         const requestEventsUriList = new RequestEventsUriWgtList({count: 50000});
         q.setRequestedResult(requestEventsUriList);
         const response = await er.execQuery(q);
-        if (_.has(response, "error")) {
-            throw new Error(_.get(response, "error"));
+        if (!!response?.error) {
+            throw new Error(response?.error);
         }
 
-        return _.get(response, "uriWgtList");
+        return response?.uriWgtList;
     }
 
     public ensureValidConcept(concept) {
         let result: ValidationObj = { pass: true };
         const propertyNames = ["uri", "label", "synonyms", "image", "trendingScore"];
         result = this.validateProperties(concept, "concept", propertyNames);
-        if (!_.includes(["person", "loc", "org", "wiki"], _.get(concept, "type"))) {
-            result = { pass: false, message: `Expected concept to be an entity type, but got ${_.get(concept, "type")}` };
+        if (!["person", "loc", "org", "wiki"].includes(concept?.type)) {
+            result = { pass: false, message: `Expected concept to be an entity type, but got ${concept?.type}` };
         }
 
-        if (_.has(concept, "location") && !_.isNil(_.get(concept, "location"))) {
-            result = this.ensureValidLocation(_.get(concept, "location"));
+        if (concept?.location && concept?.location !== null) {
+            result = this.ensureValidLocation(concept?.location);
         }
 
         return result;
@@ -150,18 +150,18 @@ export class Utils {
         let result = { pass: true };
         const propertyNames = ["wikiUri", "label", "lat", "long", "geoNamesId", "population"];
         result = this.validateProperties(location, "location", propertyNames);
-        switch (_.get(location, "type")) {
+        switch (location?.type) {
             case "country":
                 result = this.validateProperties(location, "location", ["area", "code2", "code3", "webExt", "continent"]);
                 break;
             case "place":
-                result = this.validateProperties(location, "location", ["featureCode", "country"]);
+                result = this.validateProperties(location, "location", ["country"]); // featureCode can be optional
                 break;
         }
         return result;
     }
 
-    public ensureValidArticle(article) {
+    public ensureValidArticle(article: ER.Article) {
         let result: ValidationObj = { pass: true };
         const propertyNames = [ "url",
                                 "uri",
@@ -179,11 +179,12 @@ export class Utils {
                                 "concepts",
                               ];
         result = this.validateProperties(article, "article", propertyNames);
-
-        _.each(_.get(article, "concepts", []), (concept) => {
+        const concepts = article?.concepts ?? [];
+        for (const concept of concepts) {
             result = this.ensureValidConcept(concept);
-        });
-        if (!_.get(article, "isDuplicate") && !_.has(article, "eventUri")) {
+        }
+
+        if (!(article?.isDuplicate ?? false) && !article.hasOwnProperty("eventUri")) {
             result = {pass: false, message: "Non duplicates should have event uris "};
         }
         return result;
@@ -205,21 +206,27 @@ export class Utils {
                                 "images",
                               ];
         result = this.validateProperties(event, "event", propertyNames);
+        const {
+            concepts = [],
+            stories = [],
+            categories = [],
+            location,
+        } = event;
 
-        _.each(_.get(event, "concepts", []), (concept) => {
+        for (const concept of concepts) {
             result = this.ensureValidConcept(concept);
-        });
+        }
 
-        _.each(_.get(event, "stories", []), (story) => {
+        for (const story of stories) {
             result = this.ensureValidStory(story);
-        });
+        }
 
-        _.each(_.get(event, "categories", []), (category) => {
+        for (const category of categories) {
             result = this.ensureValidCategory(category);
-        });
+        }
 
-        if (_.has(event, "location") && !_.isNil(_.get(event, "location"))) {
-            result = this.ensureValidLocation(_.get(event, "location"));
+        if (!!location) {
+            result = this.ensureValidLocation(location);
         }
         return result;
     }
@@ -238,31 +245,37 @@ export class Utils {
                                 "images",
                               ];
         let result = this.validateProperties(story, "story", propertyNames);
-        if (_.has(story, "location") && !_.isNil(_.get(story, "location"))) {
-            result = this.ensureValidLocation(_.get(story, "location"));
+        const { location } = story;
+        if (!!location) {
+            result = this.ensureValidLocation(location);
         }
         return result;
     }
 
     public ensureValidGeneralArticleList(articleList) {
         let result: ValidationObj = { pass: true };
-        if (!_.has(articleList, "articles")) {
+        const { articles } = articleList;
+
+        if (!articles) {
             result = { pass: false, message: "Expected to get 'articles'" };
         }
-        _.each(_.get(articleList, "articles.results", []), (article) => {
+        const { results = [] } = articles;
+        for (const article of results) {
             result = this.ensureValidArticle(article);
-        });
+        }
         return result;
     }
 
     public ensureValidGeneralEventList(eventList) {
         let result: ValidationObj = { pass: true };
-        if (!_.has(eventList, "events")) {
+        const { events } = eventList;
+        if (!events) {
             result = { pass: false, message: "Expected to get 'events'" };
         }
-        _.each(_.get(eventList, "events.results", []), (event) => {
+        const { results = [] } = events;
+        for (const event of results) {
             result = this.ensureValidEvent(event);
-        });
+        }
         return result;
     }
 
@@ -277,62 +290,69 @@ export class Utils {
     }
 
     public ensureItemHasConcept(item, conceptUri) {
-        if (!_.has(item, "concepts")) {
+        const { concepts } = item;
+        if (!concepts) {
             return { pass: false, message: "Item doesn't contain concept array"};
         }
 
-        if (!_.find(_.get(item, "concepts", []), ({uri}) => uri === conceptUri )) {
+        if (!(concepts ?? []).find(({uri}) => uri === conceptUri )) {
             return { pass: false, message: `Item doesn't contain ${conceptUri}`};
         }
         return { pass: true };
     }
 
     public ensureItemHasCategory(item, categoryUri) {
-        if (!_.has(item, "categories")) {
+        const { categories } = item;
+
+        if (!categories) {
             return { pass: false, message: "Item doesn't contain categories array"};
         }
 
-        if (!_.some(_.get(item, "categories", []), (category) => _.includes(_.get(category, "uri"), categoryUri) )) {
+        if (!item.categories.some((category) => category.uri && category.uri.includes(categoryUri))) {
             return { pass: false, message: `Item doesn't contain ${categoryUri}`};
         }
         return { pass: true };
     }
 
     public ensureItemHasSource(item, sourceUri) {
-        if (_.get(item, "source.uri") !== sourceUri) {
+        if (item?.source?.uri !== sourceUri) {
             return {pass: false, message: `Source is not '${sourceUri}'`};
         }
         return { pass: true };
     }
 
     public ensureArticleBodyContainsText(article, text) {
-        if (!_.has(article, "body")) {
+        if (!article?.body) {
             return { pass: false, message: "Article did not contain body"};
         }
-        if (!this.doesContainText(_.get(article, "body", ""), text)) {
+        if (!this.doesContainText(article?.body ?? "", text)) {
             return { pass: false, message: `"Article body did not contain text '${text}'`};
         }
         return { pass: true };
     }
 
     public ensureObjectContains(obj, propName: string) {
-        if (!_.has(obj, propName)) {
+        if (!(propName in obj)) {
             return { pass: false, message: `Specified object doesn't contain property ${propName}.`};
         }
         return { pass: true};
     }
 
+    public normalize(text: string) {
+        return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
     private validateProperties(item: object, objectName: string, propertyNames: string[]): ValidationObj {
         for (const propName of propertyNames) {
-            if (!_.has(item, propName)) {
+            if (!item.hasOwnProperty(propName)) {
                 return { pass: false, message: `Property '${propName}' was expected in a ${objectName}.` };
             }
         }
         return { pass: true };
     }
 
-    private doesContainText(text, searchQuery) {
-        return _.includes(_.deburr(text), _.deburr(searchQuery));
+    private doesContainText(text: string, searchQuery: string) {
+        return this.normalize(text).includes(this.normalize(searchQuery));
     }
 }
 

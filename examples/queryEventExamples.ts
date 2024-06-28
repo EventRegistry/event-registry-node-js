@@ -12,7 +12,6 @@ import {
     RequestEventSourceAggr,
     ReturnInfo,
 } from "eventregistry";
-import * as _ from "lodash";
 
 //
 // NOTE: if you don't have access to historical data, you have to change the event URI

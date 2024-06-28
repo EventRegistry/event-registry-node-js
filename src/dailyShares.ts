@@ -1,8 +1,7 @@
-import * as _ from "lodash";
 import * as moment from "moment";
 import { QueryParamsBase } from "./base";
 import { ReturnInfo } from "./returnInfo";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
 
 // Using the bottom classes you can obtain information about articles and events that
 // were shared the most on social media (Twitter and Facebook) on a particular day.
@@ -12,7 +11,7 @@ import { EventRegistryStatic } from "./types";
 // Social score for an event is computed by checking 30 top shared articles in the event and averaging their social scores.
 
 export class GetTopSharedArticles extends QueryParamsBase {
-    constructor(args: EventRegistryStatic.DailyShares.Arguments = {}) {
+    constructor(args: ER.DailyShares.Arguments = {}) {
         const {date = moment().format("YYYY-MM-DD"), count = 20, returnInfo = new ReturnInfo()} = args;
         super();
         this.setVal("action", "getArticles");
@@ -21,7 +20,7 @@ export class GetTopSharedArticles extends QueryParamsBase {
         this.setVal("articlesSortBy", "socialScore");
         this.setDateVal("dateStart", date);
         this.setDateVal("dateEnd", date);
-        this.params = _.extend({}, this.params, returnInfo.getParams("articles"));
+        this.params = { ...this.params, ...returnInfo.getParams("articles") };
     }
 
     public get path() {
@@ -30,7 +29,7 @@ export class GetTopSharedArticles extends QueryParamsBase {
 }
 
 export class GetTopSharedEvents extends QueryParamsBase {
-    constructor(args: EventRegistryStatic.DailyShares.Arguments = {}) {
+    constructor(args: ER.DailyShares.Arguments = {}) {
         const {date = moment().format("YYYY-MM-DD"), count = 20, returnInfo = new ReturnInfo()} = args;
         super();
         this.setVal("action", "getEvents");
@@ -39,7 +38,7 @@ export class GetTopSharedEvents extends QueryParamsBase {
         this.setVal("eventsSortBy", "socialScore");
         this.setDateVal("dateStart", date);
         this.setDateVal("dateEnd", date);
-        this.params = _.extend({}, this.params, returnInfo.getParams("events"));
+        this.params = { ...this.params, ...returnInfo.getParams("events") };
     }
 
     public get path() {

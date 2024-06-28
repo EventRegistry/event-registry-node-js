@@ -1,7 +1,7 @@
-import * as _ from "lodash";
 import { QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { ReturnInfo } from "./returnInfo";
+import { ER } from "./types";
 
 export class GetRecentEvents extends QueryParamsBase {
     private er: EventRegistry;
@@ -12,10 +12,10 @@ export class GetRecentEvents extends QueryParamsBase {
         super();
         this.er = er;
         this.setVal("recentActivityEventsMandatoryLocation", mandatoryLocation);
-        if (!_.isUndefined(mandatoryLang)) {
+        if (mandatoryLang !== undefined) {
             this.setVal("recentActivityEventsMandatoryLang", mandatoryLang);
         }
-        this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityEvents"));
+        this.params = {...this.params, ...returnInfo.getParams("recentActivityEvents")};
     }
 
     public get path() {
@@ -24,7 +24,7 @@ export class GetRecentEvents extends QueryParamsBase {
 
     public async getUpdates() {
         const response = await this.er.execQuery(this);
-        return _.get(response, "recentActivityEvents.activity", {});
+        return (response.recentActivityEvents as Record<string, ER.Results>)?.activity || {};
     }
 }
 
@@ -38,11 +38,11 @@ export class GetRecentArticles extends QueryParamsBase {
         super();
         this.er = er;
         this.setVal("recentActivityArticlesMandatorySourceLocation", mandatorySourceLocation);
-        if (!_.isUndefined(lang)) {
+        if (lang !== undefined) {
             this.setVal("recentActivityArticlesLang", lang);
         }
-        this.params = _.extend({}, this.params, kwargs);
-        this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityArticles"));
+        this.params = {...this.params, ...kwargs};
+        this.params = {...this.params, ...returnInfo.getParams("recentActivityArticles")};
     }
 
     public get path() {
@@ -51,12 +51,12 @@ export class GetRecentArticles extends QueryParamsBase {
 
     public async getUpdates() {
         const response = await this.er.execQuery(this);
-        if (_.has(response, "recentActivityArticles")) {
-            for (const [key, value] of _.entries(_.get(response, "recentActivityArticles.newestUri", {}))) {
-                const splitKey = _.split(key, "");
-                this.setVal("recentActivityArticles" + _.upperCase(splitKey[0]) + _.join(_.tail(splitKey)), value);
+        if (response?.recentActivityArticles) {
+            for (const [key, value] of Object.entries((response.recentActivityArticles as unknown as Record<string, string>).newestUri || {})) {
+                const splitKey = key.split("");
+                this.setVal("recentActivityArticles" + splitKey[0].toUpperCase() + splitKey.slice(1).join(""), value);
             }
-            return _.get(response, "recentActivityArticles.activity", []);
+            return (response.recentActivityArticles as unknown as Record<string, unknown[]>).activity || [];
         }
         return [];
     }

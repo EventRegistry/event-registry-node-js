@@ -1,5 +1,4 @@
 import { ArticleInfoFlags, BaseQuery, CombinedQuery, ComplexArticleQuery, EventRegistry, ConceptInfoFlags, QueryArticle, QueryArticles, QueryArticlesIter, QueryItems, RequestArticlesInfo, RequestArticlesRecentActivity, ReturnInfo } from "eventregistry";
-import * as _ from "lodash";
 
 // examples that illustrate how to query articles using different search options
 
@@ -245,4 +244,72 @@ Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, bus
     `;
     const query3 = QueryArticles.initWithComplexQuery(qStr);
     const res3 = er.execQuery(query3);
+
+    const qStr4 = `
+    {
+        "$query": {
+            "keyword": "Samsung AND TV AND (LED OR LCD OR Plasma) NOT (smartphone OR phone)",
+            "keywordSearchMode": "exact",
+            "dateStart": "2023-01-01",
+            "dateEnd": "2023-01-31"
+        }
+    }
+    `;
+
+    const query4 = QueryArticles.initWithComplexQuery(qStr4);
+    const res4 = er.execQuery(query4);
+
+    const qStr5 = `
+    {
+        "$query": {
+            "keyword": "Siemens NEAR/15 (sustainability or ecology or renewable energy)",
+            "keywordSearchMode": "exact",
+            "lang": "eng"
+        }
+    }
+    `;
+
+    const query5 = QueryArticles.initWithComplexQuery(qStr5);
+    const res5 = er.execQuery(query5);
+
+    const qStr6 = `
+    {
+        "$query": {
+            "keyword": "Siemens NEXT/15 (sustainability or ecology or renewable energy)",
+            "keywordSearchMode": "exact",
+            "lang": "eng"
+        }
+    }
+    `;
+
+    const query6 = QueryArticles.initWithComplexQuery(qStr6);
+    const res6 = er.execQuery(query6);
+
+    const qStr7 = `
+    {
+        "$query": {
+            "keyword": "AI \"deep learning\" \"machine learning\" latest developments",
+            "keywordSearchMode": "simple",
+            "categoryUri": "dmoz/Computers/Artificial_Intelligence"
+        }
+    }
+    `;
+
+    const query7 = QueryArticles.initWithComplexQuery(qStr7);
+    const res7 = er.execQuery(query7);
+
+    // Phrase search is used by default, so you don't need to specify the "keywordSearchMode"
+    const qStr8 = `
+    {
+        "$query": {
+            "$or": [
+                { "keyword": "Apple iPhone" },
+                { "keyword": "Microsoft Store" }
+            ]
+        }
+    }
+    `;
+
+    const query8 = QueryArticles.initWithComplexQuery(qStr8);
+    const res8 = er.execQuery(query8);
 });

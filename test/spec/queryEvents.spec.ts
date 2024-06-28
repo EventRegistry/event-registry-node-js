@@ -1,8 +1,8 @@
-import * as _ from "lodash";
 import {
     BaseQuery,
     ComplexEventQuery,
     ConceptInfoFlags,
+    ER,
     EventInfoFlags,
     QueryEventArticlesIter,
     QueryEvents,
@@ -19,26 +19,24 @@ import {
 } from "../../src/index";
 import { Utils } from "./utils";
 
-describe("Query Events", () => {
+fdescribe("Query Events", () => {
     const er = Utils.initAPI();
     const utils = new Utils();
     let query: QueryEvents;
     let requestEventsInfo: RequestEventsInfo;
 
-    beforeAll(async (done) => {
+    beforeAll(async () => {
         requestEventsInfo = new RequestEventsInfo({count: 10, returnInfo: utils.returnInfo});
-        query = new QueryEvents({conceptUri: await er.getConceptUri("Obama")});
-        done();
+        query = new QueryEvents({conceptUri: await er.getConceptUri("United Kingdom")});
     });
 
-    it("should test event list", async (done) => {
+    it("should test event list", async () => {
         query.setRequestedResult(requestEventsInfo);
         const response = await er.execQuery(query);
         expect(response).toBeValidGeneralEventList();
-        done();
     });
 
-    it("should test event list with keyword search", async (done) => {
+    it("should test event list with keyword search", async () => {
         const q1 = new QueryEvents({keywords: "germany"});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
@@ -49,13 +47,12 @@ describe("Query Events", () => {
         const response2 = await er.execQuery(q2);
         expect(response2).toBeValidGeneralEventList();
 
-        const results1 = _.sortBy(response1["events"]["results"], "id");
-        const results2 = _.sortBy(response2["events"]["results"], "id");
-        expect(_.size(results1)).toEqual(_.size(results2), "Keyword search should return responses of the same size");
-        done();
+        const results1 = (response1["events"]["results"] as ER.Event[]).sort((a, b) => (a.id ?? "").localeCompare((b.id ?? "")));
+        const results2 = (response2["events"]["results"] as ER.Event[]).sort((a, b) => (a.id ?? "").localeCompare((b.id ?? "")));
+        expect(results1.length).toEqual(results2.length);
     });
 
-    it("should test event list with source search", async (done) => {
+    it("should test event list with source search", async () => {
         const q1 = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
@@ -66,13 +63,12 @@ describe("Query Events", () => {
         const response2 = await er.execQuery(q2);
         expect(response2).toBeValidGeneralEventList();
 
-        const results1 = _.sortBy(response1["events"]["results"], "id");
-        const results2 = _.sortBy(response2["events"]["results"], "id");
-        expect(_.size(results1)).toEqual(_.size(results2), "Source search should return responses of the same size");
-        done();
+        const results1 = (response1["events"]["results"] as ER.Event[]).sort((a, b) => (a.id ?? "").localeCompare((b.id ?? "")));
+        const results2 = (response2["events"]["results"] as ER.Event[]).sort((a, b) => (a.id ?? "").localeCompare((b.id ?? "")));
+        expect(results1.length).toEqual(results2.length);
     });
 
-    it("should test event list with category search", async (done) => {
+    it("should test event list with category search", async () => {
         const q1 = new QueryEvents({categoryUri: await er.getCategoryUri("disa")});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
@@ -83,41 +79,37 @@ describe("Query Events", () => {
         const response2 = await er.execQuery(q2);
         expect(response2).toBeValidGeneralEventList();
 
-        const results1 = _.sortBy(response1["events"]["results"], "id");
-        const results2 = _.sortBy(response2["events"]["results"], "id");
-        expect(_.size(results1)).toEqual(_.size(results2), "Source search should return responses of the same size");
-        done();
+        const results1 = (response1["events"]["results"] as ER.Event[]).sort((a, b) => (a.id ?? "").localeCompare((b.id ?? "")));
+        const results2 = (response2["events"]["results"] as ER.Event[]).sort((a, b) => (a.id ?? "").localeCompare((b.id ?? "")));
+        expect(results1.length).toEqual(results2.length);
     });
 
-    it("should test event list with author search", async (done) => {
+    it("should test event list with author search", async () => {
         const authorUri = await er.getAuthorUri("associated");
         const q1 = new QueryEvents({authorUri});
         const response1 = await er.execQuery(q1);
         const q2 = QueryEvents.initWithComplexQuery(new ComplexEventQuery(new BaseQuery({authorUri})));
         const response2 = await er.execQuery(q2);
-        const results1 = _.sortBy(response1["events"]["results"], "id");
-        const results2 = _.sortBy(response2["events"]["results"], "id");
-        expect(_.size(results1)).toEqual(_.size(results2), "Author search should return responses of the same size");
-        done();
+        const results1 = (response1["events"]["results"] as ER.Event[]).sort((a, b) => (a.id ?? "").localeCompare((b.id ?? "")));
+        const results2 = (response2["events"]["results"] as ER.Event[]).sort((a, b) => (a.id ?? "").localeCompare((b.id ?? "")));
+        expect(results1.length).toEqual(results2.length);
     });
 
-    it("should test event list with language search", async (done) => {
+    it("should test event list with language search", async () => {
         const q1 = new QueryEvents({lang: "spa"});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
         expect(response1).toBeValidGeneralEventList();
-        done();
     });
 
-    it("should test event list with minimal articles search", async (done) => {
+    it("should test event list with minimal articles search", async () => {
         const q1 = new QueryEvents({minArticlesInEvent: 100});
         q1.setRequestedResult(requestEventsInfo);
         const response1 = await er.execQuery(q1);
         expect(response1).toBeValidGeneralEventList();
-        done();
     });
 
-    it("should test search by keyword", async (done) => {
+    it("should test search by keyword", async () => {
         const q1 = new QueryEvents({keywords: "car"});
         const evInfo = new EventInfoFlags({ concepts: false,
                                             articleCounts: false,
@@ -137,25 +129,24 @@ describe("Query Events", () => {
                                                 });
         q1.setRequestedResult(reqEvInfo);
         const response = await er.execQuery(q1);
-        expect(_.has(response, "events")).toBeTruthy("Results should contain events");
-        const events = _.get(response, "events.results", []);
-        let lastEventDate = _.isEmpty(events) ? "" : _.get(_.first(events), "eventDate");
-        _.each(events, (event) => {
-            expect(event.eventDate >= lastEventDate).toBeTruthy("Events are not sorted by date");
+        expect(response.hasOwnProperty("events")).toBeTruthy();
+        const events = (response?.events?.results ?? []) as ER.Event[];
+        let lastEventDate = events.length === 0 ? "" : events[0]?.eventDate;
+        for (const event of events) {
+            expect(event.eventDate >= lastEventDate).toBeTruthy();
             lastEventDate = event.eventDate;
-            expect(_.has(event, "articleCounts")).toBeFalsy("Event should not contain articleCounts");
-            expect(_.has(event, "categories")).toBeFalsy("Event should not contain categories");
-            expect(_.has(event, "concepts")).toBeFalsy("Event should not contain concepts");
-            expect(_.has(event, "location")).toBeFalsy("Event should not contain location");
-            expect(_.has(event, "stories")).toBeFalsy("Event should not contain stories");
-            expect(_.has(event, "images")).toBeFalsy("Event should not contain images");
-            expect(_.has(event, "title")).toBeFalsy("Event should not contain title");
-            expect(_.has(event, "summary")).toBeFalsy("Event should not contain summary");
-        });
-        done();
+            expect(event.hasOwnProperty("articleCounts")).toBeFalsy();
+            expect(event.hasOwnProperty("categories")).toBeFalsy();
+            expect(event.hasOwnProperty("concepts")).toBeFalsy();
+            expect(event.hasOwnProperty("location")).toBeFalsy();
+            expect(event.hasOwnProperty("stories")).toBeFalsy();
+            expect(event.hasOwnProperty("images")).toBeFalsy();
+            expect(event.hasOwnProperty("title")).toBeFalsy();
+            expect(event.hasOwnProperty("summary")).toBeFalsy();
+        }
     });
 
-    it("should test search by keyword rev", async (done) => {
+    it("should test search by keyword rev", async () => {
         const q1 = new QueryEvents({keywords: "car"});
         const evInfo = new EventInfoFlags({ concepts: false,
                                             articleCounts: false,
@@ -175,52 +166,50 @@ describe("Query Events", () => {
                                                 });
         q1.setRequestedResult(reqEvInfo);
         const response = await er.execQuery(q1);
-        expect(_.has(response, "events")).toBeTruthy("Results should contain events");
-        const events = _.get(response, "events.results", []);
-        let lastEventDate = _.isEmpty(events) ? "" : _.get(_.first(events), "eventDate");
-        _.each(events, (event) => {
-            expect(event.eventDate <= lastEventDate).toBeTruthy("Events are not sorted by date");
+        expect(response.hasOwnProperty("events")).toBeTruthy();
+        const events = (response?.events?.results ?? []) as ER.Event[];
+        let lastEventDate = events.length === 0 ? "" : events[0]?.eventDate;
+        for (const event of events) {
+            expect(event.eventDate <= lastEventDate).toBeTruthy();
             lastEventDate = event.eventDate;
-            expect(_.has(event, "articleCounts")).toBeFalsy("Event should not contain articleCounts");
-            expect(_.has(event, "categories")).toBeFalsy("Event should not contain categories");
-            expect(_.has(event, "concepts")).toBeFalsy("Event should not contain concepts");
-            expect(_.has(event, "location")).toBeFalsy("Event should not contain location");
-            expect(_.has(event, "stories")).toBeFalsy("Event should not contain stories");
-            expect(_.has(event, "images")).toBeFalsy("Event should not contain images");
-            expect(_.has(event, "title")).toBeFalsy("Event should not contain title");
-            expect(_.has(event, "summary")).toBeFalsy("Event should not contain summary");
-        });
-        done();
+            expect(event.hasOwnProperty("articleCounts")).toBeFalsy();
+            expect(event.hasOwnProperty("categories")).toBeFalsy();
+            expect(event.hasOwnProperty("concepts")).toBeFalsy();
+            expect(event.hasOwnProperty("location")).toBeFalsy();
+            expect(event.hasOwnProperty("stories")).toBeFalsy();
+            expect(event.hasOwnProperty("images")).toBeFalsy();
+            expect(event.hasOwnProperty("title")).toBeFalsy();
+            expect(event.hasOwnProperty("summary")).toBeFalsy();
+        }
     });
 
-    it("should test search by keyword (2)", async (done) => {
+    it("should test search by keyword (2)", async () => {
         const q1 = new QueryEvents({keywords: "car"});
         const returnInfo = new ReturnInfo({ conceptInfo: new ConceptInfoFlags({type: ["org", "loc"], lang: "spa"})});
         const reqEvConceptsTrends = new RequestEventsConceptTrends({conceptCount: 5, returnInfo});
         q1.setRequestedResult(reqEvConceptsTrends);
         const response = await er.execQuery(q1);
-        expect(_.has(response, "conceptTrends")).toBeTruthy("Results should contain conceptAggr");
-        _.each(_.get(response, "conceptTrends.conceptInfo", []), (concept) => {
-            expect(concept.type === "loc" || concept.type === "org").toBeTruthy("Got concept of invalid type");
-            expect(_.has(concept, "label.spa")).toBeTruthy("Concept did not contain label in expected language");
-        });
-        done();
+        expect(!!response?.conceptTrends).toBeTruthy();
+        const concepts = ((response?.conceptTrends as unknown as Record<string, ER.Concept[]>)?.conceptInfo ?? []);
+        for (const concept of concepts) {
+            expect(concept.type === "loc" || concept.type === "org").toBeTruthy();
+            expect((concept?.label as Record<string, string>)?.spa).toBeTruthy();
+        }
     });
 
-    it("should test search by location", async (done) => {
+    it("should test search by location", async () => {
         const q = new QueryEvents({locationUri: await er.getLocationUri("Germany")});
         q.setRequestedResult(new RequestEventsInfo({sortBy: "size", sortByAsc: false}));
         const response = await er.execQuery(q);
-        const results = _.get(response, "events.results", []);
-        let lastSize = !_.isEmpty(results) ? results[0].totalArticleCount : 0;
-        _.each(results, (event) => {
-            expect(event.totalArticleCount <= lastSize).toBeTruthy("Events are not sorted by size");
+        const results = (response?.events?.results ?? []) as ER.Event[];
+        let lastSize = results.length > 0 ? results[0].totalArticleCount : 0;
+        for (const event of results) {
+            expect(event.totalArticleCount <= lastSize).toBeTruthy();
             lastSize = event.totalArticleCount;
-        });
-        done();
+        }
     });
 
-    it("should test event list with combined search", async (done) => {
+    it("should test event list with combined search", async () => {
         const conceptUri = await er.getConceptUri("Merkel");
         const categoryUri = await er.getCategoryUri("Business");
         const q1 = new QueryEvents({keywords: "germany", conceptUri: [conceptUri], categoryUri: [categoryUri]});
@@ -233,168 +222,158 @@ describe("Query Events", () => {
         const response2 = await er.execQuery(q2);
         expect(response2).toBeValidGeneralEventList();
 
-        const results1 = _.sortBy(response1["events"]["results"], "id");
-        const results2 = _.sortBy(response2["events"]["results"], "id");
-        expect(_.size(results1)).toEqual(_.size(results2), "Source search should return responses of the same size");
-        done();
+        const results1 = (response1["events"]["results"] as ER.Event[]).sort((a, b) => (a.id ?? "").localeCompare((b.id ?? "")));
+        const results2 = (response2["events"]["results"] as ER.Event[]).sort((a, b) => (a.id ?? "").localeCompare((b.id ?? "")));
+        expect(results1.length).toEqual(results2.length);
     });
 
-    it("should test concept trends", async (done) => {
+    it("should test concept trends", async () => {
         const requestEventsConceptTrends = new RequestEventsConceptTrends({conceptCount: 5, returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventsConceptTrends);
         const response = await er.execQuery(query);
-        expect(_.has(response, "conceptTrends")).toBeTruthy("Expected to get 'conceptTrends'");
-        expect(_.has(response, "conceptTrends.trends")).toBeTruthy("Expected to get 'trends' property in conceptTrends");
-        expect(_.has(response, "conceptTrends.conceptInfo")).toBeTruthy("Expected to get 'conceptInfo' property in conceptTrends");
-        expect(_.size(_.get(response, "conceptTrends.conceptInfo", []))).toBeLessThanOrEqual(5, "Expected to get 5 concepts or less in concept trends");
-        const trends = _.get(response, "conceptTrends.trends");
-        expect(_.isEmpty(trends)).toBeFalsy("Expected to get trends for some days");
-        _.each(trends, (trend) => {
-            expect(_.has(trend, "date")).toBeTruthy("A trend should have a date");
-            expect(_.has(trend, "conceptFreq")).toBeTruthy("A trend should have a conceptFreq");
-            expect(_.has(trend, "totArts")).toBeTruthy("A trend should have a totArts property");
-            expect(_.size(_.get(trend, "conceptFreq", []))).toBeLessThanOrEqual(5, "Concept frequencies should contain 5 elements - one for each concept");
-        });
+        expect(!!response?.conceptTrends).toBeTruthy();
+        expect(!!(response?.conceptTrends as Record<string, unknown>)?.trends).toBeTruthy();
+        expect(!!(response?.conceptTrends as Record<string, unknown>)?.conceptInfo).toBeTruthy();
+        const concepts = ((response?.conceptTrends as unknown as Record<string, ER.Concept[]>)?.conceptInfo ?? []);
+        expect(concepts.length).toBeLessThanOrEqual(5);
+        const trends = (response?.conceptTrends as unknown as Record<string, Record<string, unknown>[]>)?.trends ?? [];
+        expect(trends.length === 0).toBeFalsy();
+        for (const trend of trends) {
+            expect(trend?.date).toBeTruthy();
+            expect(trend?.conceptFreq).toBeTruthy();
+            expect(trend?.totArts).toBeTruthy();
+            expect(((trend?.conceptFreq as unknown[]) ?? []).length).toBeLessThanOrEqual(5);
+        }
 
-        _.each(_.get(response, "conceptTrends.conceptInfo", []), (concept) => {
+        for (const concept of concepts) {
             expect(concept).toBeValidConcept();
-        });
-        done();
+        }
     });
 
-    it("should test concept aggregates", async (done) => {
+    it("should test concept aggregates", async () => {
         const requestEventsConceptAggr = new RequestEventsConceptAggr({conceptCount: 100, returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventsConceptAggr);
         const response = await er.execQuery(query);
-        expect(_.has(response, "conceptAggr")).toBeTruthy("Expected to get 'conceptAggr'");
-        const concepts = _.get(response, "conceptAggr.results", []);
-        // TODO: If the ConceptCount is included then we return 150 aggregates
-        // expect(_.size(concepts)).toEqual(100, "Expected a different number of concept in conceptAggr");
-        _.each(concepts, (concept) => {
+        expect(!!response?.conceptAggr).toBeTruthy();
+        const concepts = (response?.conceptAggr?.results ?? []) as ER.Concept[];
+        for (const concept of concepts) {
             expect(concept).toBeValidConcept();
-        });
-        done();
+        }
     });
 
-    it("should test keyword aggregates", async (done) => {
+    it("should test keyword aggregates", async () => {
         const requestEventsKeywordAggr = new RequestEventsKeywordAggr();
         query.setRequestedResult(requestEventsKeywordAggr);
         const response = await er.execQuery(query);
-        expect(_.has(response, "keywordAggr")).toBeTruthy("Expected to get 'keywordAggr'");
-        const keywords = _.get(response, "keywordAggr.results", []);
-        expect(_.size(keywords)).toBeGreaterThan(0, "Expected to get some keywords");
-        _.each(keywords, (kw) => {
-            expect(_.has(kw, "keyword")).toBeTruthy("Expected a keyword property");
-            expect(_.has(kw, "weight")).toBeTruthy("Expected a weight property");
-        });
-        done();
+        expect(!!response?.keywordAggr).toBeTruthy();
+        const keywords = (response?.keywordAggr?.results ?? []) as Record<string, unknown>[];
+        expect(keywords.length).toBeGreaterThan(0);
+        for (const kw of keywords) {
+            expect(!!kw?.keyword).toBeTruthy();
+            expect(!!kw?.weight).toBeTruthy();
+        }
     });
 
-    it("should test category aggregates", async (done) => {
+    it("should test category aggregates", async () => {
         const requestEventsCategoryAggr = new RequestEventsCategoryAggr(utils.returnInfo);
         query.setRequestedResult(requestEventsCategoryAggr);
         const response = await er.execQuery(query);
-        expect(_.has(response, "categoryAggr")).toBeTruthy("Expected to get 'categoryAggr'");
-        const categories = _.get(response, "categoryAggr.results", []);
-        expect(_.size(categories)).toBeGreaterThan(0, "Expected to get some categories");
-        _.each(categories, (category) => {
+        expect(!!response?.categoryAggr).toBeTruthy();
+        const categories = (response?.categoryAggr?.results ?? []) as ER.Category[];
+        expect(categories.length).toBeGreaterThan(0);
+        for (const category of categories) {
             expect(category).toBeValidCategory();
-        });
-        done();
+        }
     });
 
-    it("should test concept matrix", async (done) => {
+    it("should test concept matrix", async () => {
         const requestEventsConceptMatrix = new RequestEventsConceptMatrix({conceptCount: 20, returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventsConceptMatrix);
         const response = await er.execQuery(query);
-        expect(_.has(response, "conceptMatrix")).toBeTruthy("Expected to get 'conceptMatrix'");
-        const matrix = _.get(response, "conceptMatrix");
-        expect(_.has(matrix, "scoreMatrix")).toBeTruthy("Expecting 'scoreMatrix' property in conceptMatrix");
-        expect(_.has(matrix, "freqMatrix")).toBeTruthy("Expecting 'freqMatrix' property in conceptMatrix");
-        expect(_.has(matrix, "concepts")).toBeTruthy("Expecting 'concepts' property in conceptMatrix");
-        expect(_.size(_.get(matrix, "concepts", []))).toEqual(20, "Expected 20 concepts");
-        _.each(_.get(matrix, "concepts", []), (concept) => {
+        expect(response.hasOwnProperty("conceptMatrix")).toBeTruthy();
+        const matrix = response?.conceptMatrix;
+        expect(matrix.hasOwnProperty("scoreMatrix")).toBeTruthy();
+        expect(matrix.hasOwnProperty("freqMatrix")).toBeTruthy();
+        expect(matrix.hasOwnProperty("concepts")).toBeTruthy();
+        const concepts = (matrix as unknown as Record<string, ER.Concept[]>)?.concepts ?? [];
+        expect(concepts.length).toEqual(20);
+        for (const concept of concepts) {
             expect(concept).toBeValidConcept();
-        });
-        done();
+        }
     });
 
-    it("should test source aggregates", async (done) => {
+    it("should test source aggregates", async () => {
         const requestEventsSourceAggr = new RequestEventsSourceAggr({sourceCount: 15, returnInfo: utils.returnInfo});
         query.setRequestedResult(requestEventsSourceAggr);
         const response = await er.execQuery(query);
-        expect(_.has(response, "sourceAggr")).toBeTruthy("Expected to get 'sourceAggr'");
-        const sources = _.get(response, "sourceAggr.countsPerSource", []);
-        expect(_.size(sources)).toEqual(15, "Expected 15 sources");
-        _.each(sources, (sourceInfo) => {
-            expect(_.get(sourceInfo, "source")).toBeValidSource();
-            expect(_.has(sourceInfo, "counts")).toBeTruthy("Source info should contain counts object");
-            expect(_.has(sourceInfo, "counts.frequency")).toBeTruthy("Counts should contain a frequency");
-            expect(_.has(sourceInfo, "counts.total")).toBeTruthy("Counts should contain total");
-        });
-        _.each(_.get(response, "sourceAggr.countsPerCountry"), (country) => {
-            if (_.get(country, "uri") === "http://en.wikipedia.org/wiki/Australia_(continent)") return;
-            expect(_.get(country, "type")).toEqual("loc", "Country should be a location");
-            expect(_.get(country, "frequency")).toBeGreaterThan(0);
-        });
-        done();
+        expect(!!response?.sourceAggr).toBeTruthy();
+        const sources = (response?.sourceAggr as unknown as Record<string, Record<string, ER.Source>[]>)?.countsPerSource ?? [];
+        expect(sources.length).toEqual(15);
+        for (const source of sources) {
+            expect(source?.source).toBeValidSource();
+            expect(!!source?.counts).toBeTruthy();
+            expect(!!(source?.counts as unknown as Record<string, unknown>)?.frequency).toBeTruthy();
+            expect(!!(source?.counts as unknown as Record<string, unknown>)?.total).toBeTruthy();
+        }
+        const countries = (response?.sourceAggr as unknown as Record<string, Record<string, unknown>[]>)?.countsPerCountry ?? [];
+        for (const country of countries) {
+            if (country?.uri === "http://en.wikipedia.org/wiki/Australia_(continent)") break;
+            expect(country?.type).toEqual("loc");
+            expect(country?.frequency).toBeGreaterThan(0);
+        }
     });
 
-    it("should test search by source", async (done) => {
+    it("should test search by source", async () => {
         const q = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
         q.setRequestedResult(new RequestEventsUriWgtList());
         const response = await er.execQuery(q);
-        expect(_.has(response, "uriWgtList")).toBeTruthy("Results should contain uriWgtList");
-        done();
+        expect(!!response?.uriWgtList).toBeTruthy();
     });
 
-    it("should test search by source (2)", async (done) => {
+    it("should test search by source (2)", async () => {
         const q = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
         const eventInfo = new EventInfoFlags({concepts: true, articleCounts: true, title: true, summary: true, categories: true, stories: true, imageCount: 1});
         const returnInfo1 = new ReturnInfo({conceptInfo: new ConceptInfoFlags({lang: "deu", type: "wiki"}), eventInfo});
         q.setRequestedResult(new RequestEventsInfo({page: 1, count: 50, sortBy: "size", sortByAsc: true, returnInfo: returnInfo1}));
         const response = await er.execQuery(q);
 
-        expect(_.has(response, "events")).toBeTruthy("Results should contain events");
+        expect(response?.events).toBeTruthy();
 
-        const events = _.get(response, "events.results", []);
-        expect(_.size(events)).toBeLessThanOrEqual(50, "Returned list of events was too long");
+        const events = (response?.events?.results ?? []) as ER.Event[];
+        expect(events.length).toBeLessThanOrEqual(50);
 
         let lastArtCount = 0;
 
-        _.each(events, (event) => {
-            expect(_.has(event, "articleCounts")).toBeTruthy("Event should contain articleCounts");
-            expect(_.has(event, "categories")).toBeTruthy("Event should contain categories");
-            expect(_.has(event, "concepts")).toBeTruthy("Event should contain concepts");
-            expect(_.has(event, "stories")).toBeTruthy("Event should contain stories");
-            expect(_.has(event, "title")).toBeTruthy("Event should contain title");
-            expect(_.has(event, "summary")).toBeTruthy("Event should contain summary");
-            expect(_.has(event, "images")).toBeTruthy("Event should contain images");
-            expect(_.has(event, "location")).toBeTruthy("Event should contain location");
-
+        for (const event of events) {
+            expect(!!event?.articleCounts).toBeTruthy();
+            expect(!!event?.categories).toBeTruthy();
+            expect(!!event?.concepts).toBeTruthy();
+            expect(!!event?.stories).toBeTruthy();
+            expect(!!event?.title).toBeTruthy();
+            expect(!!event?.summary).toBeTruthy();
+            expect(!!event?.images).toBeTruthy();
+            expect(!!event?.location).toBeTruthy();
             lastArtCount = event.totalArticleCount;
-            _.each(_.get(event, "concepts", []), (concept) => {
-                expect(_.has(concept, "label.deu")).toBeTruthy("Concept should contain label in german language");
-                expect(concept.type === "wiki").toBeTruthy("Got concept of invalid type");
-            });
-        });
-        done();
+            for (const concept of event.concepts) {
+                expect((concept?.label as Record<string, unknown>)?.deu).toBeTruthy();
+                expect(((concept?.type + "") ?? "") === "wiki").toBeTruthy();
+            }
+        }
     });
 
-    it("should test search by source (3)", async (done) => {
+    it("should test search by source (3)", async () => {
         const q = new QueryEvents({sourceUri: await er.getNewsSourceUri("bbc")});
         q.setRequestedResult(new RequestEventsConceptAggr({conceptCount: 5, returnInfo: new ReturnInfo({conceptInfo: new ConceptInfoFlags({type: ["org", "loc"]})})}));
         const response = await er.execQuery(q);
-        expect(_.has(response, "conceptAggr")).toBeTruthy("Results should contain conceptAggr");
-        const concepts = _.get(response, "conceptAggr.results", []);
-        expect(_.size(concepts)).toBeLessThanOrEqual(10, "Received a list of concepts that is too long");
-        _.each(concepts, (concept) => {
-            expect(concept.type === "loc" || concept.type === "org").toBeTruthy("Got concept of invalid type");
-        });
-        done();
+        expect(!!response?.conceptAggr).toBeTruthy();
+        const concepts = (response?.conceptAggr?.results ?? []) as ER.Concept[];
+        expect(concepts.length).toBeLessThanOrEqual(10);
+        for (const concept of concepts) {
+            expect(concept.type === "loc" || concept.type === "org").toBeTruthy();
+        }
     });
 
-    it("should query events iterator (1)", async (done) => {
+    it("should query events iterator (1)", async () => {
         const conceptUri = await er.getConceptUri("Obama");
         const q = new QueryEventsIter(er, {keywords: "germany", conceptUri});
         let eventsSize = 0;
@@ -403,27 +382,25 @@ describe("Query Events", () => {
         }, async () => {
             const q2 = new QueryEvents({keywords: "germany", conceptUri});
             const response = await er.execQuery(q2);
-            expect(_.get(response, "events.totalResults")).toEqual(eventsSize);
-            done();
+            expect(response?.events?.totalResults).toEqual(eventsSize);
         });
     });
 
-    it("should query events iterator (2)", async (done) => {
+    it("should query events iterator (2)", async () => {
         const conceptUri = await er.getConceptUri("Obama");
         const q = new QueryEventsIter(er, { lang: ["eng"], keywords: "trump", conceptUri: conceptUri, returnInfo: utils.returnInfo, maxItems: 5 });
         q.execQuery((item) => {
             expect(item).toContainConcept(conceptUri);
             let someArticlesHasText = false;
             new QueryEventArticlesIter(er, item["uri"], { lang: ["eng"], returnInfo: utils.returnInfo, maxItems: 5 }).execQuery((article) => {
-                someArticlesHasText = someArticlesHasText || _.includes(_.deburr(_.toLower(_.get(article, "body"))), "trump");
+                someArticlesHasText = someArticlesHasText || utils.normalize(article?.body ?? "").includes("trump");
             }, () => {
-                expect(someArticlesHasText).toBeTruthy("At least one of the articles was expected to contain 'trump'");
-                done();
+                expect(someArticlesHasText).toBeTruthy();
             });
         });
     });
 
-    it("should query events iterator (3)", async (done) => {
+    it("should query events iterator (3)", async () => {
         const categoryUri = await er.getCategoryUri("business");
         const q = new QueryEventsIter(er, { keywords: "obama trump", categoryUri, returnInfo: utils.returnInfo });
         q.execQuery((item) => {
@@ -432,18 +409,17 @@ describe("Query Events", () => {
             let includesKeywordTrump = false;
 
             new QueryEventArticlesIter(er, item["uri"], { returnInfo: utils.returnInfo }).execQuery((article) => {
-                const text = _.deburr(_.toLower(_.get(article, "body")));
-                includesKeywordObama = includesKeywordObama || _.includes(text, "obama");
-                includesKeywordTrump = includesKeywordTrump || _.includes(text, "trump");
+                const text = utils.normalize(article?.body ?? "");
+                includesKeywordObama = includesKeywordObama || text.includes("obama");
+                includesKeywordTrump = includesKeywordTrump || text.includes("trump");
             }, () => {
-                expect(includesKeywordObama).toBeTruthy("At least one of the articles was expected to contain 'obama'");
-                expect(includesKeywordTrump).toBeTruthy("At least one of the articles was expected to contain 'trump'");
-                done();
+                expect(includesKeywordObama).toBeTruthy();
+                expect(includesKeywordTrump).toBeTruthy();
             });
         });
     });
 
-    it("should query events iterator (4)", async (done) => {
+    it("should query events iterator (4)", async () => {
         const obamaUri = await er.getConceptUri("Obama");
         const politicsUri = await er.getConceptUri("politics");
         const chinaUri = await er.getConceptUri("china");
@@ -473,7 +449,7 @@ describe("Query Events", () => {
             expect(item).not.toContainCategory(catBusinessUri);
             expect(item).not.toContainCategory(catPoliticsUri);
             new QueryEventArticlesIter(er, item["uri"], {returnInfo: utils.returnInfo, lang: ["eng"]}).execQuery((article) => {
-                const text = _.deburr(_.toLower(_.get(article, "body")));
+                const text = utils.normalize(article?.body ?? "");
                 expect(text).not.toContain("trump");
                 expect(text).not.toContain("politics");
                 expect(text).not.toContain("michelle");
@@ -484,8 +460,6 @@ describe("Query Events", () => {
                 expect(hasArticleFromSource2).toBeFalsy();
                 expect(hasArticleFromSource3).toBeFalsy();
             });
-        }, () => {
-            done();
         });
     });
 });

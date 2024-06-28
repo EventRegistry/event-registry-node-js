@@ -1,13 +1,13 @@
-import * as _ from "lodash";
-import { mainLangs, Query, QueryParamsBase } from "./base";
+import { Query, QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { ComplexArticleQuery } from "./query";
-import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
-import { EventRegistryStatic } from "./types";
+import { ReturnInfo } from "./returnInfo";
+import { ER } from "./types";
 import { Data } from "./data";
+import { Logger } from "./logger";
 
 export class QueryArticles extends Query<RequestArticles> {
-    constructor(args: EventRegistryStatic.QueryArticles.Arguments = {}) {
+    constructor(args: ER.QueryArticles.Arguments = {}) {
         super();
         const {
             keywords,
@@ -33,10 +33,15 @@ export class QueryArticles extends Query<RequestArticles> {
             ignoreLocationUri,
             ignoreLang,
             keywordsLoc = "body",
+            keywordSearchMode = "phrase",
             ignoreKeywordsLoc = "body",
+            ignoreKeywordSearchMode = "phrase",
             isDuplicateFilter = "keepAll",
             hasDuplicateFilter = "keepAll",
             eventFilter = "keepAll",
+            authorsFilter = "keepAll",
+            videosFilter = "keepAll",
+            linksFilter = "keepAll",
             startSourceRankPercentile = 0,
             endSourceRankPercentile = 100,
             minSentiment = -1,
@@ -45,9 +50,9 @@ export class QueryArticles extends Query<RequestArticles> {
             requestedResult = new RequestArticlesInfo(),
             ...unsupported
         } = args;
-        if (!_.isEmpty(unsupported)) {
-            // Check ["sortBy", "sortByAsc", "returnInfo", "maxItems"] for cases when we are coming from QueryArticlesIter
-            if (!_.some(_.keys(unsupported), (key) => _.includes(["sortBy", "sortByAsc", "returnInfo", "maxItems"], key))) {
+        if (Object.keys(unsupported).length > 0) {
+            const unsupportedKeys = ["sortBy", "sortByAsc", "returnInfo", "maxItems"];
+            if (!Object.keys(unsupported).some(key => unsupportedKeys.includes(key))) {
                 console.warn(`QueryArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
             }
         }
@@ -61,16 +66,16 @@ export class QueryArticles extends Query<RequestArticles> {
         this.setQueryArrVal(authorUri, "authorUri", "authorOper", "or");
         this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
         this.setQueryArrVal(lang, "lang", undefined, "or");
-        if (!_.isUndefined(dateStart)) {
+        if (dateStart !== undefined) {
             this.setDateVal("dateStart", dateStart);
         }
-        if (!_.isUndefined(dateEnd)) {
+        if (dateEnd !== undefined) {
             this.setDateVal("dateEnd", dateEnd);
         }
-        if (!_.isUndefined(dateMentionStart)) {
+        if (dateMentionStart !== undefined) {
             this.setDateVal("dateMentionStart", dateMentionStart);
         }
-        if (!_.isUndefined(dateMentionEnd)) {
+        if (dateMentionEnd !== undefined) {
             this.setDateVal("dateMentionEnd", dateMentionEnd);
         }
         this.setQueryArrVal(ignoreKeywords, "ignoreKeyword", undefined, "or");
@@ -84,6 +89,8 @@ export class QueryArticles extends Query<RequestArticles> {
         this.setQueryArrVal(ignoreLang, "ignoreLang", undefined, "or");
         this.setValIfNotDefault("keywordLoc", keywordsLoc, "body");
         this.setValIfNotDefault("ignoreKeywordLoc", ignoreKeywordsLoc, "body");
+        this.setValIfNotDefault("keywordSearchMode", keywordSearchMode, "phrase");
+        this.setValIfNotDefault("ignoreKeywordSearchMode", ignoreKeywordSearchMode, "phrase");
         this.setValIfNotDefault("isDuplicateFilter", isDuplicateFilter, "keepAll");
         this.setValIfNotDefault("hasDuplicateFilter", hasDuplicateFilter, "keepAll");
         this.setValIfNotDefault("eventFilter", eventFilter, "keepAll");
@@ -129,7 +136,7 @@ export class QueryArticles extends Query<RequestArticles> {
     public static initWithArticleUriList(...args);
     public static initWithArticleUriList(uriList) {
         const q = new QueryArticles();
-        if (!_.isArray(uriList)) {
+        if (!Array.isArray(uriList)) {
             throw new Error("uriList has to be a list of strings that represent article uris");
         }
         q.params = {
@@ -142,12 +149,12 @@ export class QueryArticles extends Query<RequestArticles> {
     public static initWithArticleUriWgtList(...args);
     public static initWithArticleUriWgtList(uriWgtList) {
         const q = new QueryArticles();
-        if (!_.isArray(uriWgtList)) {
+        if (!Array.isArray(uriWgtList)) {
             throw new Error("uriList has to be a list of strings that represent article uris");
         }
         q.params = {
             action: "getArticles",
-            articleUriWgtList: _.join(uriWgtList, ","),
+            articleUriWgtList: uriWgtList.join(","),
         };
         return q;
     }
@@ -157,14 +164,14 @@ export class QueryArticles extends Query<RequestArticles> {
         const query = new QueryArticles();
         if (complexQuery instanceof ComplexArticleQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
-        } else if (_.isString(complexQuery)) {
+        } else if (typeof complexQuery === "string") {
             try {
                 JSON.parse(complexQuery);
             } catch {
                 console.error("Failed to parse the provided string content as a JSON object. Please check the content provided as a parameter to the initWithComplexQuery() method");
             }
             query.setVal("query", complexQuery);
-        } else if (_.isObject(complexQuery)) {
+        } else if (typeof complexQuery === "object" && complexQuery !== null) {
             query.setVal("query", JSON.stringify(complexQuery));
         } else {
             throw new Error("The instance of query parameter was not a ComplexArticleQuery, a string or an object");
@@ -185,19 +192,18 @@ export class QueryArticlesIter extends QueryArticles implements AsyncIterable<Da
     private items: Data.Article[] = [];
     private returnedSoFar: number = 0;
     private index: number = 0;
-    private callback: (item: Data.Article) => void = _.noop;
-    private doneCallback: (error?: string) => void = _.noop;
+    private callback: (item: Data.Article) => void = () => {};
+    private doneCallback: (error?: string) => void = () => {};
     private errorMessage: string;
 
     constructor(er: EventRegistry, args: {[name: string]: any} = {}) {
         super(args);
-        _.defaults(args, {
-            sortBy: "rel",
-            sortByAsc: false,
-            returnInfo: undefined,
-            maxItems: -1,
-        });
-        const {sortBy, sortByAsc, returnInfo, maxItems} = args;
+        const {
+            sortBy = "rel",
+            sortByAsc = false,
+            returnInfo = undefined,
+            maxItems = -1,
+        } = args;
         this.er = er;
         this.sortBy = sortBy;
         this.sortByAsc = sortByAsc;
@@ -223,11 +229,11 @@ export class QueryArticlesIter extends QueryArticles implements AsyncIterable<Da
         this.setRequestedResult(new RequestArticlesInfo());
         const response = await this.er.execQuery(this);
 
-        if (_.has(response, "error")) {
-            console.error(_.get(response, "error"));
+        if (response.hasOwnProperty("error")) {
+            this.er.logger.error(response.error);
         }
 
-        return _.get(response, "articles.totalResults", 0);
+        return (response.articles as ER.Results)?.totalResults || 0;
     }
 
     public execQuery(callback: (item: Data.Article) => void, doneCallback?: (error?: string) => void): void {
@@ -240,9 +246,9 @@ export class QueryArticlesIter extends QueryArticles implements AsyncIterable<Da
         const query = new QueryArticlesIter(er, params);
         if (complexQuery instanceof ComplexArticleQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
-        } else if (_.isString(complexQuery)) {
+        } else if (typeof complexQuery === 'string') {
             query.setVal("query", complexQuery);
-        } else if (_.isObject(complexQuery)) {
+        } else if (typeof complexQuery === 'object' && complexQuery !== null) {
             query.setVal("query", JSON.stringify(complexQuery));
         } else {
             throw new Error("The instance of query parameter was not a ComplexArticleQuery, a string or an object");
@@ -266,9 +272,9 @@ export class QueryArticlesIter extends QueryArticles implements AsyncIterable<Da
      * @param response response from the backend
      */
     private extractResults(response): Data.Article[] {
-        const results = _.get(response, "articles.results", []);
-        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : _.size(results);
-        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Data.Article[]);
+        const results = response?.articles?.results || [];
+        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : results.length;
+        return results.slice(0, extractedSize).filter(Boolean);
     }
 
     private get current() {
@@ -289,21 +295,21 @@ export class QueryArticlesIter extends QueryArticles implements AsyncIterable<Da
             });
             this.setRequestedResult(requestArticles);
             if (this.er.verboseOutput) {
-                console.log(`Downloading article page ${this.page}...`);
+                this.er.logger.info(`Downloading article page ${this.page}...`);
             }
             const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
-            const error = _.get(response, "error", "");
+            const error = response.error || "";
             if (error) {
                 this.errorMessage = `Error while obtaining a list of articles:  ${this.errorMessage}`;
             } else {
-                this.pages = _.get(response, "articles.pages", 0);
+                this.pages = (response.articles as ER.Results)?.pages || 0;
             }
             const results = this.extractResults(response);
-            this.returnedSoFar += _.size(results);
+            this.returnedSoFar += results.length;
             this.items = [...this.items, ...results];
             return true;
         } catch (error) {
-            console.error(error);
+            this.er.logger.error(error);
             return false;
         }
     }
@@ -315,16 +321,18 @@ export class RequestArticles {}
 export class RequestArticlesInfo extends RequestArticles {
     public resultType = "articles";
     public params;
-    constructor({page = 1,
-                 count = 100,
-                 sortBy = "date",
-                 sortByAsc = false,
-                 returnInfo = undefined,
-                 ...unsupported
-                } = {}) {
+    constructor (parameters: ER.RequestArticlesInfoParameters = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestArticlesInfo: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        const {
+            page = 1,
+            count = 100,
+            sortBy = "date",
+            sortByAsc = false,
+            returnInfo,
+            ...unsupported
+        } = parameters;
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestArticlesInfo: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
@@ -337,8 +345,8 @@ export class RequestArticlesInfo extends RequestArticles {
         this.params["articlesCount"] = count;
         this.params["articlesSortBy"] = sortBy;
         this.params["articlesSortByAsc"] = sortByAsc;
-        if (!!returnInfo) {
-            this.params = _.extend({}, this.params, returnInfo.getParams("articles"));
+        if (returnInfo) {
+            this.params = {...this.params, ...returnInfo.getParams("articles")};
         }
     }
 }
@@ -346,15 +354,18 @@ export class RequestArticlesInfo extends RequestArticles {
 export class RequestArticlesUriWgtList extends RequestArticles {
     public resultType = "uriWgtList";
     public params;
-    constructor({page = 1,
-                 count = 10000,
-                 sortBy = "fq",
-                 sortByAsc = false,
-                 ...unsupported
-                } = {}) {
+    constructor(parameters: ER.RequestArticlesUriWgtListParameters = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestArticlesUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        const {
+            page = 1,
+            count = 10000,
+            sortBy = "fq",
+            sortByAsc = false,
+            ...unsupported
+        } = parameters;
+
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestArticlesUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
@@ -393,8 +404,8 @@ export class RequestArticlesConceptAggr extends RequestArticles {
                  ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestArticlesConceptAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestArticlesConceptAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (conceptCount > 500) {
             throw new RangeError("At most 500 concepts can be returned per call");
@@ -406,10 +417,10 @@ export class RequestArticlesConceptAggr extends RequestArticles {
         this.params["conceptAggrConceptCount"] = conceptCount;
         this.params["conceptAggrSampleSize"] = articlesSampleSize;
         this.params["conceptAggrScoring"] = conceptScoring;
-        if (!_.isUndefined(conceptCountPerType)) {
+        if (conceptCountPerType !== undefined) {
             this.params["conceptAggrConceptCountPerType"] = conceptCountPerType;
         }
-        this.params = _.extend({}, this.params, returnInfo.getParams("conceptAggr"));
+        this.params = {...this.params, ...returnInfo.getParams("conceptAggr")};
     }
 }
 
@@ -421,15 +432,15 @@ export class RequestArticlesCategoryAggr extends RequestArticles {
                  ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestArticlesCategoryAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestArticlesCategoryAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (articlesSampleSize > 50000) {
             throw new RangeError("at most 50000 articles can be used for computation sample");
         }
         this.params = {};
         this.params["categoryAggrSampleSize"] = articlesSampleSize;
-        this.params = _.extend({}, this.params, returnInfo.getParams("categoryAggr"));
+        this.params = {...this.params, ...returnInfo.getParams("categoryAggr")};
     }
 }
 
@@ -443,12 +454,12 @@ export class RequestArticlesSourceAggr extends RequestArticles {
                  ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestArticlesSourceAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestArticlesSourceAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         this.params = {};
         this.params["sourceAggrSourceCount"] = sourceCount;
-        this.params = _.extend({}, this.params, returnInfo.getParams("sourceAggr"));
+        this.params = {...this.params, ...returnInfo.getParams("sourceAggr")};
     }
 }
 
@@ -460,8 +471,8 @@ export class RequestArticlesKeywordAggr extends RequestArticles {
                  ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestArticlesKeywordAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestArticlesKeywordAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (articlesSampleSize > 20000) {
             throw new RangeError("at most 20000 articles can be used for computation sample");
@@ -482,8 +493,8 @@ export class RequestArticlesConceptGraph extends RequestArticles {
                  ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestArticlesConceptGraph: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestArticlesConceptGraph: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (conceptCount > 1000) {
             throw new RangeError("At most 1000 concepts can be returned per call");
@@ -499,7 +510,7 @@ export class RequestArticlesConceptGraph extends RequestArticles {
         this.params["conceptGraphLinkCount"] = linkCount;
         this.params["conceptGraphSampleSize"] = articlesSampleSize;
         this.params["conceptGraphSkipQueryConcepts"] = skipQueryConcepts;
-        this.params = _.extend({}, this.params, returnInfo.getParams("conceptGraph"));
+        this.params = {...this.params, ...returnInfo.getParams("conceptGraph")};
     }
 }
 
@@ -513,8 +524,8 @@ export class RequestArticlesConceptMatrix extends RequestArticles {
                  ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestArticlesConceptMatrix: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestArticlesConceptMatrix: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (conceptCount > 200) {
             throw new RangeError("At most 200 concepts can be returned per call");
@@ -526,23 +537,24 @@ export class RequestArticlesConceptMatrix extends RequestArticles {
         this.params["conceptMatrixConceptCount"] = conceptCount;
         this.params["conceptMatrixMeasure"] = measure;
         this.params["conceptMatrixSampleSize"] = articlesSampleSize;
-        this.params = _.extend({}, this.params, returnInfo.getParams("conceptMatrix"));
+        this.params = {...this.params, ...returnInfo.getParams("conceptMatrix")};
     }
 }
 
 export class RequestArticlesConceptTrends extends RequestArticles {
     public resultType = "conceptTrends";
     public params;
-    constructor({
-                 conceptUris = undefined,
-                 conceptCount = 25,
-                 articlesSampleSize = 10000,
-                 returnInfo = new ReturnInfo(),
-                 ...unsupported
-                } = {}) {
+    constructor(parameters: ER.RequestArticlesConceptTrendsParameters = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestArticlesConceptTrends: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        const {
+            conceptUris,
+            conceptCount = 25,
+            articlesSampleSize = 10000,
+            returnInfo = new ReturnInfo(),
+            ...unsupported
+        } = parameters;
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestArticlesConceptTrends: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (conceptCount > 50) {
             throw new RangeError("At most 50 concepts can be returned per call");
@@ -551,12 +563,12 @@ export class RequestArticlesConceptTrends extends RequestArticles {
             throw new RangeError("at most 50000 results can be used for computation sample");
         }
         this.params = {};
-        if (!_.isUndefined(conceptUris)) {
+        if (conceptUris !== undefined) {
             this.params["conceptTrendsConceptUri"] = conceptUris;
         }
         this.params["conceptTrendsConceptCount"] = conceptCount;
         this.params["conceptTrendsSampleSize"] = articlesSampleSize;
-        this.params = _.extend({}, this.params, returnInfo.getParams("conceptTrends"));
+        this.params = {...this.params, ...returnInfo.getParams("conceptTrends")};
     }
 }
 
@@ -580,44 +592,44 @@ export class RequestArticlesRecentActivity extends RequestArticles {
                  ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestArticlesRecentActivity: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestArticlesRecentActivity: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (maxArticleCount > 2000) {
             throw new RangeError("At most 2000 articles can be returned per call");
         }
-        if (!_.isUndefined(updatesAfterTm) && !_.isUndefined(updatesAfterMinsAgo)) {
+        if (updatesAfterTm !== undefined && updatesAfterMinsAgo !== undefined) {
             throw new Error("You should specify either updatesAfterTm or updatesAfterMinsAgo parameter, but not both");
         }
-        if (!_.isUndefined(updatesUntilTm) && !_.isUndefined(updatesUntilMinsAgo)) {
+        if (updatesUntilTm !== undefined && updatesUntilMinsAgo !== undefined) {
             throw new Error("You should specify either updatesUntilTm or updatesUntilMinsAgo parameter, but not both");
         }
         this.params = {};
         this.params["recentActivityArticlesMaxArticleCount"] = maxArticleCount;
-        if (!_.isUndefined(updatesAfterTm)) {
+        if (updatesAfterTm !== undefined) {
             this.params["recentActivityArticlesUpdatesAfterTm"] = QueryParamsBase.encodeDateTime(updatesAfterTm);
         }
-        if (!_.isUndefined(updatesAfterMinsAgo)) {
+        if (updatesAfterMinsAgo !== undefined) {
             this.params["recentActivityArticlesUpdatesAfterMinsAgo"] = updatesAfterMinsAgo;
         }
-        if (!_.isUndefined(updatesUntilTm)) {
+        if (updatesUntilTm !== undefined) {
             this.params["recentActivityArticlesUpdatesUntilTm"] = QueryParamsBase.encodeDateTime(updatesUntilTm);
         }
-        if (!_.isUndefined(updatesUntilMinsAgo)) {
+        if (updatesUntilMinsAgo !== undefined) {
             this.params["recentActivityArticlesUpdatesUntilMinsAgo"] = updatesUntilMinsAgo;
         }
-        if (!_.isUndefined(updatesAfterNewsUri)) {
+        if (updatesAfterNewsUri !== undefined) {
             this.params["recentActivityArticlesNewsUpdatesAfterUri"] = updatesAfterNewsUri;
         }
-        if (!_.isUndefined(updatesafterBlogUri)) {
+        if (updatesafterBlogUri !== undefined) {
             this.params["recentActivityArticlesNewsUpdatesAfterUri"] = updatesafterBlogUri;
         }
-        if (!_.isUndefined(updatesAfterPrUri)) {
+        if (updatesAfterPrUri !== undefined) {
             this.params["recentActivityArticlesNewsUpdatesAfterUri"] = updatesAfterPrUri;
         }
         this.params["recentActivityArticlesMandatorySourceLocation"] = mandatorySourceLocation;
-        if (!!returnInfo) {
-            this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityArticles"));
+        if (returnInfo) {
+            this.params = {...this.params, ...returnInfo.getParams("recentActivityArticles")};
         }
     }
 }

@@ -1,7 +1,6 @@
-import * as _ from "lodash";
 import { QueryParamsBase } from "./base";
 import { ReturnInfo } from "./returnInfo";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
 
 // provides classes for obtaining information about how frequently individual concepts or categories
 // have been mentioned in news articles (if source == "news") of in social media (if source == "social")
@@ -41,7 +40,7 @@ export abstract class CountsBase extends QueryParamsBase {
  *                 "count": 0,
  *                 "date": "2015-05-07"
  *             },
- *             ...
+ *             ...a
  *         ]
  *     }
  *
@@ -49,20 +48,20 @@ export abstract class CountsBase extends QueryParamsBase {
  * @param args Object which contains a host of optional parameters
  */
 export class GetCounts extends CountsBase {
-    constructor(uriOrUriList: string | string[], args: EventRegistryStatic.Counts.Arguments = {}) {
+    constructor(uriOrUriList: string | string[], args: ER.Counts.Arguments = {}) {
         super();
         const {source = "news", type = "concept", dateStart = undefined, dateEnd = undefined, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "getCounts");
         this.setVal("source", source);
         this.setVal("type", type);
         this.setVal("uri", uriOrUriList);
-        if (!_.isUndefined(dateStart)) {
+        if (dateStart !== undefined) {
             this.setDateVal("dateStart", dateStart);
         }
-        if (!_.isUndefined(dateEnd)) {
+        if (dateEnd !== undefined) {
             this.setDateVal("dateEnd", dateEnd);
         }
-        this.params = _.extend({}, this.params, returnInfo.getParams());
+        this.params = { ...this.params, ...returnInfo.getParams() };
     }
 }
 
@@ -101,19 +100,19 @@ export class GetCounts extends CountsBase {
  * @param args Object which contains a host of optional parameters
  */
 export class GetCountsEx extends CountsBase {
-    constructor(uriOrUriList: string | string[], args: EventRegistryStatic.Counts.Arguments = {}) {
+    constructor(uriOrUriList: string | string[], args: ER.Counts.Arguments = {}) {
         super();
         const {source = "news", type = "concept", dateStart = undefined, dateEnd = undefined, returnInfo = new ReturnInfo()} = args;
         this.setVal("action", "GetCountsEx");
         this.setVal("source", source);
         this.setVal("type", type);
         this.setVal("uri", uriOrUriList);
-        if (!_.isUndefined(dateStart)) {
+        if (dateStart !== undefined) {
             this.setDateVal("dateStart", dateStart);
         }
-        if (!_.isUndefined(dateEnd)) {
+        if (dateEnd !== undefined) {
             this.setDateVal("dateEnd", dateEnd);
         }
-        this.params = _.extend({}, this.params, returnInfo.getParams());
+        this.params = { ...this.params, ...returnInfo.getParams() };
     }
 }

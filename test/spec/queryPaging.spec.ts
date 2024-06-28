@@ -1,318 +1,319 @@
-import * as _ from "lodash";
-import { EventRegistry, QueryArticles, QueryArticlesIter, QueryEvents, QueryEventsIter, RequestArticlesInfo, RequestArticlesUriWgtList, RequestEventsInfo, RequestEventsUriWgtList } from "../../src";
+import {
+    ER,
+    EventRegistry,
+    QueryArticles,
+    QueryArticlesIter,
+    QueryEvents,
+    QueryEventsIter,
+    RequestArticlesInfo,
+    RequestArticlesUriWgtList,
+    RequestEventsInfo,
+    RequestEventsUriWgtList
+} from "../../src";
 import { Utils } from "./utils";
+
+const getUriList = (response: Record<string, ER.Results<ER.Article>>): string[] => (response.articles?.results ?? []).map((article) => article.uri) as string[];
+
+const randommizePageRanges = (size: number, shuffle: boolean = false) => {
+    const pages = Array.from({length: size}, (_, i) => i + 1);
+    return shuffle ? pages.sort(() => Math.random() - 0.5) : pages;
+}
 
 describe("Query Paging", () => {
     const er = Utils.initAPI();
     const utils = new Utils();
 
-    it("should test paging uri 1", async (done) => {
-        let uriList1 = [];
-        const q1 = new QueryArticles({ sourceUri: "bbc.co.uk" });
+    it("should test paging uri 1", async () => {
+        let uriList1: string[] = [];
+        const q1 = new QueryArticles({ sourceUri: "bbc.com" });
         q1.setRequestedResult(new RequestArticlesUriWgtList({page: 1, count: 1000}));
         const response1 = await er.execQuery(q1);
-        uriList1 = [ ...uriList1, ...EventRegistry.getUriFromUriWgt(_.get(response1, "uriWgtList.results", []))];
+        uriList1 = [ ...uriList1, ...EventRegistry.getUriFromUriWgt((response1?.uriWgtList?.results ?? []) as string[])];
 
-        const q2 = new QueryArticles({ sourceUri: "bbc.co.uk" });
+        const q2 = new QueryArticles({ sourceUri: "bbc.com" });
         q2.setRequestedResult(new RequestArticlesUriWgtList({page: 2, count: 1000}));
         const response2 = await er.execQuery(q2);
-        uriList1 = [ ...uriList1, ...EventRegistry.getUriFromUriWgt(_.get(response2, "uriWgtList.results", []))];
+        uriList1 = [ ...uriList1, ...EventRegistry.getUriFromUriWgt((response2?.uriWgtList?.results ?? []) as string[])];
 
-        let uriList2 = [];
-        const q3 = new QueryArticles({ sourceUri: "bbc.co.uk" });
+        let uriList2: string[] = [];
+        const q3 = new QueryArticles({ sourceUri: "bbc.com" });
         q3.setRequestedResult(new RequestArticlesUriWgtList({page: 2, count: 1000}));
         const response3 = await er.execQuery(q3);
-        uriList2 = [ ...uriList2, ...EventRegistry.getUriFromUriWgt(_.get(response3, "uriWgtList.results", []))];
+        uriList2 = [ ...uriList2, ...EventRegistry.getUriFromUriWgt((response3?.uriWgtList?.results ?? []) as string[])];
 
-        const q4 = new QueryArticles({ sourceUri: "bbc.co.uk" });
+        const q4 = new QueryArticles({ sourceUri: "bbc.com" });
         q4.setRequestedResult(new RequestArticlesUriWgtList({page: 1, count: 1000}));
         const response4 = await er.execQuery(q4);
-        uriList2 = [ ...uriList2, ...EventRegistry.getUriFromUriWgt(_.get(response4, "uriWgtList.results", []))];
+        uriList2 = [ ...uriList2, ...EventRegistry.getUriFromUriWgt((response4?.uriWgtList?.results ?? []) as string[])];
 
-        uriList1 = _.sortBy(uriList1);
-        uriList2 = _.sortBy(uriList2);
-        expect(_.size(uriList1)).toEqual(_.size(uriList2));
-        for (let i = 0; i < _.size(uriList1); i++) {
+        uriList1.sort();
+        uriList2.sort();
+        expect(uriList1.length).toEqual(uriList2.length);
+        for (let i = 0; i < uriList1.length; i++) {
             expect(uriList1[i]).toEqual(uriList2[i]);
         }
-        done();
     });
 
-    it("should test paging articles 1", async (done) => {
-        let uriList1 = [];
-        const q1 = new QueryArticles({ sourceUri: "bbc.co.uk" });
+    it("should test paging articles 1", async () => {
+
+        let uriList1: string[] = [];
+        const q1 = new QueryArticles({ sourceUri: "bbc.com" });
         q1.setRequestedResult(new RequestArticlesInfo({page: 1, count: 100}));
-        const response1 = await er.execQuery(q1);
-        uriList1 = [ ...uriList1, ..._.map(_.get(response1, "articles.results", []), "uri")];
+        const response1 = await er.execQuery(q1) as Record<string, ER.Results<ER.Article>>;
+        uriList1 = [ ...uriList1, ...getUriList(response1)];
 
-        const q2 = new QueryArticles({ sourceUri: "bbc.co.uk" });
+        const q2 = new QueryArticles({ sourceUri: "bbc.com" });
         q2.setRequestedResult(new RequestArticlesInfo({page: 2, count: 100}));
-        const response2 = await er.execQuery(q2);
-        uriList1 = [ ...uriList1, ..._.map(_.get(response2, "articles.results", []), "uri")];
+        const response2 = await er.execQuery(q2) as Record<string, ER.Results<ER.Article>>;
+        uriList1 = [ ...uriList1, ...getUriList(response2)];
 
-        let uriList2 = [];
-        const q3 = new QueryArticles({ sourceUri: "bbc.co.uk" });
+        let uriList2: string[] = [];
+        const q3 = new QueryArticles({ sourceUri: "bbc.com" });
         q3.setRequestedResult(new RequestArticlesInfo({page: 2, count: 100}));
-        const response3 = await er.execQuery(q3);
-        uriList2 = [ ...uriList2, ..._.map(_.get(response3, "articles.results", []), "uri")];
+        const response3 = await er.execQuery(q3) as Record<string, ER.Results<ER.Article>>;
+        uriList2 = [ ...uriList2, ...getUriList(response3)];
 
-        const q4 = new QueryArticles({ sourceUri: "bbc.co.uk" });
+        const q4 = new QueryArticles({ sourceUri: "bbc.com" });
         q4.setRequestedResult(new RequestArticlesInfo({page: 1, count: 100}));
-        const response4 = await er.execQuery(q4);
-        uriList2 = [ ...uriList2, ..._.map(_.get(response4, "articles.results", []), "uri")];
+        const response4 = await er.execQuery(q4) as Record<string, ER.Results<ER.Article>>;
+        uriList2 = [ ...uriList2, ...getUriList(response4)];
 
-        uriList1 = _.sortBy(uriList1);
-        uriList2 = _.sortBy(uriList2);
-        expect(_.size(uriList1)).toEqual(_.size(uriList2));
-        for (let i = 0; i < _.size(uriList1); i++) {
+        uriList1.sort();
+        uriList2.sort();
+        expect(uriList1.length).toEqual(uriList2.length);
+        for (let i = 0; i < uriList1.length; i++) {
             expect(uriList1[i]).toEqual(uriList2[i]);
         }
-        done();
     });
 
-    it("should test all pages articles 1", async (done) => {
-        const q1 = new QueryArticles({ sourceUri: "bbc.co.uk" });
+    it("should test all pages articles 1", async () => {
+        const q1 = new QueryArticles({ sourceUri: "bbc.com" });
         let page1 = 1;
-        let uriList1 = [];
+        let uriList1: string[] = [];
         while (true) {
             q1.setRequestedResult(new RequestArticlesInfo({page: page1, count: 100}));
-            const response = await er.execQuery(q1);
-            const results = _.map(_.get(response, "articles.results", []), "uri");
-            uriList1 = [...uriList1, results];
+            const response = await er.execQuery(q1) as Record<string, ER.Results<ER.Article>>;
+            const results = getUriList(response);
+            uriList1 = [...uriList1, ...results];
             page1 += 1;
-            if (_.isEmpty(results)) {
+            if (results.length === 0) {
                 break;
             }
         }
 
-        const q2 = new QueryArticles({ sourceUri: "bbc.co.uk" });
+        const q2 = new QueryArticles({ sourceUri: "bbc.com" });
         let page2 = 1;
-        let uriList2 = [];
+        let uriList2: string[] = [];
         while (true) {
             q2.setRequestedResult(new RequestArticlesInfo({page: page2, count: 100}));
-            const response = await er.execQuery(q2);
-            const results = _.map(_.get(response, "articles.results", []), "uri");
-            uriList2 = [...uriList2, results];
+            const response = await er.execQuery(q2) as Record<string, ER.Results<ER.Article>>;
+            const results = getUriList(response);
+            uriList2 = [...uriList2, ...results];
             page2 += 1;
-            if (_.isEmpty(results)) {
+            if (results.length === 0) {
                 break;
             }
         }
 
-        uriList1 = _.sortBy(uriList1);
-        uriList2 = _.sortBy(uriList2);
-
-        expect(_.size(uriList1)).toEqual(_.size(uriList2));
-        for (let i = 0; i < _.size(uriList1); i++) {
+        uriList1.sort();
+        uriList2.sort();
+        expect(uriList1.length).toEqual(uriList2.length);
+        for (let i = 0; i < uriList1.length; i++) {
             expect(uriList1[i]).toEqual(uriList2[i]);
         }
-        done();
     });
 
-    it("should test downloading of article pages", async (done) => {
-        const iter = new QueryArticlesIter(er, { sourceUri: "bbc.co.uk" });
+    it("should test downloading of article pages", async () => {
+        const iter = new QueryArticlesIter(er, { sourceUri: "bbc.com" });
         const count = await iter.count();
-        console.log(`Found ${count} articles`);
         let totArts1 = 0;
-        let uriList1 = [];
-        const pages1 = _.shuffle(_.range(1, _.ceil(count / 100) + 1));
+        let uriList1: string[] = [];
+        const pages1 = randommizePageRanges(Math.ceil(count / 100) + 1, true);
         for (const page of pages1) {
-            const q = new QueryArticles({ sourceUri: "bbc.co.uk" });
+            const q = new QueryArticles({ sourceUri: "bbc.com" });
             q.setRequestedResult(new RequestArticlesInfo({page: page, count: 100}));
             const response = await er.execQuery(q);
-            expect(_.get(response, "articles.totalResults", -1)).toEqual(count);
-            const articles = _.get(response, "articles.results", []);
-            uriList1 = [...uriList1, ..._.map(articles, "uri")];
-            expect(_.size(articles)).toBeLessThanOrEqual(100);
-            totArts1 += _.size(articles);
+            const totalResults = response?.articles?.totalResults ?? -1;
+            expect(totalResults).toEqual(count);
+            const articles = (response?.articles?.results ?? []) as ER.Article[];
+            uriList1 = [...uriList1, ...(articles.map((article) => article.uri) as string[])];
+            expect(articles.length).toBeLessThanOrEqual(100);
+            totArts1 += articles.length;
         }
-        expect(_.size(uriList1)).toEqual(count);
+        expect(uriList1.length).toEqual(count);
         expect(totArts1).toEqual(count);
 
         let totArts2 = 0;
-        let uriList2 = [];
-        const pages2 = _.range(1, _.ceil(count / 100) + 1);
+        let uriList2: string[] = [];
+        const pages2 = randommizePageRanges(Math.ceil(count / 100) + 1);
         for (const page of pages2) {
-            const q = new QueryArticles({ sourceUri: "bbc.co.uk" });
+            const q = new QueryArticles({ sourceUri: "bbc.com" });
             q.setRequestedResult(new RequestArticlesInfo({page: page, count: 100}));
             const response = await er.execQuery(q);
-            expect(_.get(response, "articles.totalResults", -1)).toEqual(count);
-            const articles = _.get(response, "articles.results", []);
-            uriList2 = [...uriList2, ..._.map(articles, "uri")];
-            expect(_.size(articles)).toBeLessThanOrEqual(100);
-            totArts2 += _.size(articles);
+            const totalResults = response?.articles?.totalResults ?? -1;
+            expect(totalResults).toEqual(count);
+            const articles = (response?.articles?.results ?? []) as ER.Article[];
+            uriList2 = [...uriList2, ...(articles.map((article) => article.uri) as string[])];
+            expect(articles.length).toBeLessThanOrEqual(100);
+            totArts2 += articles.length;
         }
-        expect(_.size(uriList2)).toEqual(count);
+        expect(uriList2.length).toEqual(count);
         expect(totArts2).toEqual(count);
-        done();
     });
 
-    it("should test downloading of article uris", async (done) => {
+    it("should test downloading of article uris", async () => {
         const conceptUri = await er.getConceptUri("Trump");
         const iter = new QueryArticlesIter(er, { conceptUri });
         const count = await iter.count();
-        console.log(`Found ${count} articles by uris\nDownloading page:`);
-        let uriList1 = [];
+        let uriList1: string[] = [];
         let totArts1 = 0;
-        const pages1 = _.shuffle(_.range(1, _.ceil(count / 10000) + 1));
+        const pages1 = randommizePageRanges(Math.ceil(count / 10000) + 1, true);
         for (const page of pages1) {
-            console.log(`${page}, `);
             const q = new QueryArticles({ conceptUri });
             q.setRequestedResult(new RequestArticlesUriWgtList({page: page, count: 10000}));
             const response = await er.execQuery(q);
-            expect(_.get(response, "uriWgtList.totalResults", -1)).toEqual(count);
-            const uriWgtList = _.get(response, "uriWgtList.results", []);
-            uriList1 = [...uriList1, ..._.map(uriWgtList, (uriWgt) => _.first(_.split(uriWgt, ":")))];
-            expect(_.size(uriWgtList)).toBeLessThanOrEqual(10000);
-            totArts1 += _.size(uriWgtList);
+            const totalResults = response?.uriWgtList?.totalResults ?? -1;
+            expect(totalResults).toEqual(count);
+            const uriWgtList = (response?.uriWgtList?.results ?? []) as string[];
+            uriList1 = [...uriList1, ...uriWgtList.map((uriWgt) => uriWgt.split(":")[0])];
+            expect(uriWgtList.length).toBeLessThanOrEqual(10000);
+            totArts1 += uriWgtList.length;
         }
-        expect(_.size(uriList1)).toEqual(count);
+        expect(uriList1.length).toEqual(count);
         expect(totArts1).toEqual(count);
 
-        console.log(`Found ${count} articles by uris\nDownloading page:`);
-        let uriList2 = [];
+        let uriList2: string[] = [];
         let totArts2 = 0;
-        const pages2 = _.range(1, _.ceil(count / 10000) + 1);
+        const pages2 = randommizePageRanges(Math.ceil(count / 10000) + 1);
         for (const page of pages2) {
-            console.log(`${page}, `);
             const q = new QueryArticles({ conceptUri });
             q.setRequestedResult(new RequestArticlesUriWgtList({page: page, count: 10000}));
             const response = await er.execQuery(q);
-            expect(_.get(response, "uriWgtList.totalResults", -1)).toEqual(count);
-            const uriWgtList = _.get(response, "uriWgtList.results", []);
-            uriList2 = [...uriList2, ..._.map(uriWgtList, (uriWgt) => _.first(_.split(uriWgt, ":")))];
-            expect(_.size(uriWgtList)).toBeLessThanOrEqual(10000);
-            totArts2 += _.size(uriWgtList);
+            const totalResults = response?.uriWgtList?.totalResults ?? -1;
+            expect(totalResults).toEqual(count);
+            const uriWgtList = (response?.uriWgtList?.results ?? []) as string[];
+            uriList2 = [...uriList2, ...uriWgtList.map((uriWgt) => uriWgt.split(":")[0])];
+            expect(uriWgtList.length).toBeLessThanOrEqual(10000);
+            totArts2 += uriWgtList.length;
         }
-        expect(_.size(uriList2)).toEqual(count);
+        expect(uriList2.length).toEqual(count);
         expect(totArts2).toEqual(count);
-        done();
     });
 
     describe("Downloading of articles", () => {
         let conceptUri: string;
+        const lang: string = "ita";
         let count: number;
 
-        beforeAll(async (done) => {
-            conceptUri = await er.getConceptUri("peace");
-            const iter = new QueryArticlesIter(er, { conceptUri });
+        beforeAll(async () => {
+            conceptUri = await er.getConceptUri("Digital data");
+            const iter = new QueryArticlesIter(er, { conceptUri, lang });
             count = await iter.count();
-            done();
         });
 
-        it("should test downloading of articles pt. 1", async (done) => {
-            console.log(`Found ${count} articles by uris\nDownloading page:`);
-            let uriList1 = [];
+        it("should test downloading of articles pt. 1", async () => {
+            let uriList1: string[] = [];
             let totArts1 = 0;
-            const pages1 = _.shuffle(_.range(1, _.ceil(count / 100) + 1));
+            const pages1 = randommizePageRanges(Math.ceil(count / 100) + 1, true);
             for (const page of pages1) {
-                console.log(`${page}, `);
-                const q = new QueryArticles({ conceptUri });
+                const q = new QueryArticles({conceptUri, lang});
                 q.setRequestedResult(new RequestArticlesInfo({page: page, count: 100}));
                 const response = await er.execQuery(q);
-                expect(_.get(response, "articles.totalResults", -1)).toEqual(count);
-                const articles = _.get(response, "articles.results", []);
-                uriList1 = [...uriList1, ..._.map(articles, "uri")];
-                expect(_.size(articles)).toBeLessThanOrEqual(100);
-                totArts1 += _.size(articles);
+                const totalResults = response?.articles?.totalResults ?? -1;
+                expect(totalResults).toEqual(count);
+                const articles = (response?.articles?.results ?? []) as ER.Article[];
+                uriList1 = [...uriList1, ...(articles.map((article) => article.uri) as string[])];
+                expect(articles.length).toBeLessThanOrEqual(100);
+                totArts1 += articles.length;
             }
-            expect(_.size(uriList1)).toEqual(count);
+            expect(uriList1.length).toEqual(count);
             expect(totArts1).toEqual(count);
-            done();
         });
 
-        it("should test downloading of articles pt. 2", async (done) => {
-            console.log(`Found ${count} articles by uris\nDownloading page:`);
-            let uriList2 = [];
+        it("should test downloading of articles pt. 2", async () => {
+            let uriList2: string[] = [];
             let totArts2 = 0;
-            const pages2 = _.range(1, _.ceil(count / 100) + 1);
+            const pages2 = randommizePageRanges(Math.ceil(count / 100) + 1);
             for (const page of pages2) {
-                console.log(`${page}, `);
-                const q = new QueryArticles({ conceptUri });
+                const q = new QueryArticles({conceptUri, lang});
                 q.setRequestedResult(new RequestArticlesInfo({page: page, count: 100}));
                 const response = await er.execQuery(q);
-                expect(_.get(response, "articles.totalResults", -1)).toEqual(count);
-                const articles = _.get(response, "articles.results", []);
-                uriList2 = [...uriList2, ..._.map(articles, "uri")];
-                expect(_.size(articles)).toBeLessThanOrEqual(100);
-                totArts2 += _.size(articles);
+                const totalResults = response?.articles?.totalResults ?? -1;
+                expect(totalResults).toEqual(count);
+                const articles = (response?.articles?.results ?? []) as ER.Article[];
+                uriList2 = [...uriList2, ...(articles.map((article) => article.uri) as string[])];
+                expect(articles.length).toBeLessThanOrEqual(100);
+                totArts2 += articles.length;
             }
-            expect(_.size(uriList2)).toEqual(count);
+            expect(uriList2.length).toEqual(count);
             expect(totArts2).toEqual(count);
-            done();
         });
     });
 
-    it("should test downloading of event uris", async (done) => {
+    it("should test downloading of event uris", async () => {
         const conceptUri = await er.getConceptUri("Trump");
         const iter = new QueryEventsIter(er, { conceptUri });
         const count = await iter.count();
-        console.log(`Found ${count} events by uris\nDownloading page:`);
-        let uriList1 = [];
-        const pages1 = _.shuffle(_.range(1, _.ceil(count / 1000) + 1));
+        let uriList1: string[] = [];
+        const pages1 = randommizePageRanges(Math.ceil(count / 1000) + 1, true);
         for (const page of pages1) {
-            console.log(`${page}, `);
             const q = new QueryEvents({ conceptUri });
             q.setRequestedResult(new RequestEventsUriWgtList({page: page, count: 1000}));
             const response = await er.execQuery(q);
-            expect(_.get(response, "uriWgtList.totalResults", -1)).toEqual(count);
-            const uriWgtList = _.get(response, "uriWgtList.results", []);
-            uriList1 = [...uriList1, ..._.map(uriWgtList, (uriWgt) => _.first(_.split(uriWgt, ":")))];
-            expect(_.size(uriWgtList)).toBeLessThanOrEqual(1000);
+            const totalResults = response?.uriWgtList?.totalResults ?? -1;
+            expect(totalResults).toEqual(count);
+            const uriWgtList = (response?.uriWgtList?.results ?? []) as string[];
+            uriList1 = [...uriList1, ...uriWgtList.map((uriWgt) => uriWgt.split(":")[0])];
+            expect(uriWgtList.length).toBeLessThanOrEqual(1000);
         }
-        expect(_.size(uriList1)).toEqual(count);
+        expect(uriList1.length).toEqual(count);
 
-        console.log(`Found ${count} events by uris\nDownloading page:`);
-        let uriList2 = [];
-        const pages2 = _.range(1, _.ceil(count / 1000) + 1);
+        let uriList2: string[] = [];
+        const pages2 = randommizePageRanges(Math.ceil(count / 1000) + 1);
         for (const page of pages2) {
-            console.log(`${page}, `);
             const q = new QueryEvents({ conceptUri });
             q.setRequestedResult(new RequestEventsUriWgtList({page: page, count: 1000}));
             const response = await er.execQuery(q);
-            expect(_.get(response, "uriWgtList.totalResults", -1)).toEqual(count);
-            const uriWgtList = _.get(response, "uriWgtList.results", []);
-            uriList2 = [...uriList2, ..._.map(uriWgtList, (uriWgt) => _.first(_.split(uriWgt, ":")))];
-            expect(_.size(uriWgtList)).toBeLessThanOrEqual(1000);
+            const totalResults = response?.uriWgtList?.totalResults ?? -1;
+            expect(totalResults).toEqual(count);
+            const uriWgtList = (response?.uriWgtList?.results ?? []) as string[];
+            uriList2 = [...uriList2, ...uriWgtList.map((uriWgt) => uriWgt.split(":")[0])];
+            expect(uriWgtList.length).toBeLessThanOrEqual(1000);
         }
-        expect(_.size(uriList2)).toEqual(count);
-        done();
+        expect(uriList2.length).toEqual(count);
     });
 
-    it("should test downloading of events", async (done) => {
+    it("should test downloading of events", async () => {
         const conceptUri = await er.getConceptUri("peace");
         const iter = new QueryEventsIter(er, { conceptUri });
         const count = await iter.count();
-        console.log(`Found ${count} events\nDownloading page:`);
-        let uriList1 = [];
-        const pages1 = _.shuffle(_.range(1, _.ceil(count / 50) + 1));
+        let uriList1: string[] = [];
+        const pages1 = randommizePageRanges(Math.ceil(count / 50) + 1, true);
         for (const page of pages1) {
-            console.log(`${page}, `);
             const q = new QueryEvents({ conceptUri });
             q.setRequestedResult(new RequestEventsInfo({page: page, count: 50}));
             const response = await er.execQuery(q);
-            expect(_.get(response, "events.totalResults", -1)).toEqual(count);
-            const events = _.get(response, "events.results", []);
-            uriList1 = [...uriList1, ..._.map(events, "uri")];
-            expect(_.size(events)).toBeLessThanOrEqual(50);
+            const totalResults = response?.events?.totalResults ?? -1;
+            expect(totalResults).toEqual(count);
+            const events = (response?.events?.results ?? []) as ER.Event[];
+            uriList1 = [...uriList1, ...events.map((event) => event.uri)];
+            expect(events.length).toBeLessThanOrEqual(50);
         }
-        expect(_.size(uriList1)).toEqual(count);
+        expect(uriList1.length).toEqual(count);
 
-        console.log(`Found ${count} events by uris\nDownloading page:`);
-        let uriList2 = [];
-        const pages2 = _.range(1, _.ceil(count / 50) + 1);
+        let uriList2: string[] = [];
+        const pages2 = randommizePageRanges(Math.ceil(count / 50) + 1);
         for (const page of pages2) {
-            console.log(`${page}, `);
             const q = new QueryEvents({ conceptUri });
             q.setRequestedResult(new RequestEventsInfo({page: page, count: 50}));
             const response = await er.execQuery(q);
-            expect(_.get(response, "events.totalResults", -1)).toEqual(count);
-            const events = _.get(response, "events.results", []);
-            uriList2 = [...uriList2, ..._.map(events, "uri")];
-            expect(_.size(events)).toBeLessThanOrEqual(50);
+            const totalResults = response?.events?.totalResults ?? -1;
+            expect(totalResults).toEqual(count);
+            const events = (response?.events?.results ?? []) as ER.Event[];
+            uriList2 = [...uriList2, ...events.map((event) => event.uri)];
+            expect(events.length).toBeLessThanOrEqual(50);
         }
-        expect(_.size(uriList2)).toEqual(count);
-        done();
+        expect(uriList2.length).toEqual(count);
     });
 
 });

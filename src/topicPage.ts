@@ -1,13 +1,13 @@
 import * as fs from "fs";
-import * as _ from "lodash";
 import { QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { ReturnInfo } from "./returnInfo";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
+import { AxiosResponse } from "axios";
 
 export class TopicPage extends QueryParamsBase {
-    private topicPage: EventRegistryStatic.TopicPage;
-    private readonly emptyTopicPage: EventRegistryStatic.TopicPage = {
+    private topicPage: ER.TopicPage;
+    private readonly emptyTopicPage: ER.TopicPage = {
         autoAddArticles: true,
         articleHasDuplicate: "keepAll",
         articleHasEvent: "keepAll",
@@ -29,18 +29,18 @@ export class TopicPage extends QueryParamsBase {
         restrictToSetLocations: false,
         dataType: [ "news" ]
     };
-    private concept = {};
+    private concept: AxiosResponse<ER.Response> = {} as AxiosResponse<ER.Response>;
 
     constructor(private eventRegistry: EventRegistry) {
         super();
         this.topicPage = this.createEmptyTopicPage();
     }
 
-    private isTopicPage(definition: {[name: string]: any}): definition is EventRegistryStatic.TopicPage {
-        return _.isEqual(_.keys(this.emptyTopicPage), _.keys(definition));
+    private isTopicPage(definition: {[name: string]: any}): definition is ER.TopicPage {
+        return Object.keys(this.emptyTopicPage).sort().toString() === Object.keys(definition).sort().toString();
     }
 
-    private createEmptyTopicPage(): EventRegistryStatic.TopicPage {
+    private createEmptyTopicPage(): ER.TopicPage {
         return this.emptyTopicPage;
     }
 
@@ -59,10 +59,10 @@ export class TopicPage extends QueryParamsBase {
         };
         this.topicPage = this.createEmptyTopicPage();
         this.concept = await this.eventRegistry.jsonRequest("/api/v1/topicPage", params);
-        if (_.has(this.concept, "data.error")) {
-            throw new Error(_.get(this.concept, "data.error", ""));
+        if (this.concept?.data?.error) {
+            throw new Error(this.concept.data.error || "");
         }
-        this.topicPage = _.extend({}, this.topicPage, _.get(this.concept, "data.topicPage", {}));
+        this.topicPage = {...this.topicPage, ...(this.concept.data?.topicPage || {})};
         return this.topicPage;
     }
 
@@ -92,7 +92,7 @@ export class TopicPage extends QueryParamsBase {
     /**
      * Return an object containing the topic page definition. you can use it to load a topic page later
      */
-    public saveTopicPageDefinition(): EventRegistryStatic.TopicPage {
+    public saveTopicPageDefinition(): ER.TopicPage {
         return this.topicPage;
     }
 
@@ -108,7 +108,7 @@ export class TopicPage extends QueryParamsBase {
      * What is the minimum total weight that an article has to have in order to get it among the results?
      */
     public set articleThreshold(value: number) {
-        if (_.isNumber(value) && value >= 0) {
+        if (typeof value === "number" && value >= 0) {
             this.topicPage.articleTreshWgt = value;
         }
     }
@@ -117,7 +117,7 @@ export class TopicPage extends QueryParamsBase {
      * What is the minimum total weight that an event has to have in order to get it among the results?
      */
     public set eventThreshold(value: number) {
-        if (_.isNumber(value) && value >= 0) {
+        if (typeof value === "number" && value >= 0) {
             this.topicPage.eventTreshWgt = value;
         }
     }
@@ -163,12 +163,12 @@ export class TopicPage extends QueryParamsBase {
      * What data types should we search? "news" (news content, default), "pr" (press releases), or "blog".
      * If you want to use multiple data types, put them in an array (e.g. ["news", "pr"])
      */
-    public set dataTypes(dataTypes: EventRegistryStatic.DataType | EventRegistryStatic.DataType[]) {
+    public set dataTypes(dataTypes: ER.DataType | ER.DataType[]) {
         this.topicPage.dataType = dataTypes;
     }
 
     public set sourceRankStartPercentile(startPercentile: number) {
-        if (_.isUndefined(startPercentile)) {
+        if (startPercentile === undefined) {
             startPercentile = 0;
         }
 
@@ -176,7 +176,7 @@ export class TopicPage extends QueryParamsBase {
             throw new RangeError("startPercentile is out of valid values (0 - 90)");
         }
 
-        if (!_.isNil(this.topicPage.endSourceRankPercentile) && _.isNumber(this.topicPage.endSourceRankPercentile) && startPercentile >= this.topicPage.endSourceRankPercentile ) {
+        if (this.topicPage.endSourceRankPercentile !== null && typeof this.topicPage.endSourceRankPercentile === "number" && startPercentile >= this.topicPage.endSourceRankPercentile) {
             throw new RangeError("startPercentile has to be smaller than endPercentile");
         }
 
@@ -188,7 +188,7 @@ export class TopicPage extends QueryParamsBase {
     }
 
     public set sourceRankEndPercentile(endPercentile: number) {
-        if (_.isUndefined(endPercentile)) {
+        if (endPercentile === undefined) {
             endPercentile = 100;
         }
 
@@ -196,7 +196,7 @@ export class TopicPage extends QueryParamsBase {
             throw new RangeError("endPercentile is out of valid values (10 - 100)");
         }
 
-        if (!_.isNil(this.topicPage.startSourceRankPercentile) && _.isNumber(this.topicPage.startSourceRankPercentile) && this.topicPage.startSourceRankPercentile >= endPercentile ) {
+        if (this.topicPage.startSourceRankPercentile !== null && typeof this.topicPage.startSourceRankPercentile === 'number' && this.topicPage.startSourceRankPercentile >= endPercentile) {
             throw new RangeError("startPercentile has to be smaller than endPercentile");
         }
 
@@ -210,7 +210,7 @@ export class TopicPage extends QueryParamsBase {
      * What is the maximum allowed age of the results?
      */
     public set maxDaysBack(maxDaysBack: number) {
-        if (!_.isNumber(maxDaysBack)) {
+        if (typeof maxDaysBack !== "number" || maxDaysBack < 0) {
             throw new Error("maxDaysBack value has to be a positive number");
         }
         if (maxDaysBack <= 0) {
@@ -252,8 +252,8 @@ export class TopicPage extends QueryParamsBase {
      * @param uri uri of the concept to be added
      * @param weight importance of the provided concept (typically in range 1 - 50)
      */
-    public addConcept(uri: string, wgt: number, args: EventRegistryStatic.TopicPageAddConceptArguments = {}) {
-        if (!_.isNumber(wgt)) {
+    public addConcept(uri: string, wgt: number, args: ER.TopicPageAddConceptArguments = {}) {
+        if (typeof wgt !== "number") {
             throw new Error("Weight value has to be a positive or negative number");
         }
         const {
@@ -265,12 +265,12 @@ export class TopicPage extends QueryParamsBase {
         if (required && excluded) {
             throw new Error("Parameters required and excluded can not be true at the same time");
         }
-        const concept  = { uri, wgt, required, excluded };
-        if (!_.isUndefined(label)) {
-            _.set(concept, "label", label);
+        const concept: Record<string, string | number | boolean>  = { uri, wgt, required, excluded };
+        if (label !== undefined) {
+            concept.label = label;
         }
-        if (!_.isUndefined(conceptType)) {
-            _.set(concept, "type", conceptType);
+        if (conceptType !== undefined) {
+            concept.type = conceptType;
         }
         this.topicPage.concepts = [...this.topicPage.concepts, concept];
     }
@@ -280,8 +280,8 @@ export class TopicPage extends QueryParamsBase {
      * @param keyword keyword or phrase to be added
      * @param weight importance of the provided keyword (typically in range 1 - 50)
      */
-    public addKeyword(keyword: string, wgt: number, args: EventRegistryStatic.TopicPageAddKeywordArguments = {}) {
-        if (!_.isNumber(wgt)) {
+    public addKeyword(keyword: string, wgt: number, args: ER.TopicPageAddKeywordArguments = {}) {
+        if (typeof wgt !== "number") {
             throw new Error("Weight value has to be a positive or negative number");
         }
         const {
@@ -296,8 +296,8 @@ export class TopicPage extends QueryParamsBase {
      * @param uri uri of the category to be added
      * @param weight importance of the provided category (typically in range 1 - 50)
      */
-    public addCategory(uri: string, wgt: number, args: EventRegistryStatic.TopicPageAddCategoryArguments = {}) {
-        if (!_.isNumber(wgt)) {
+    public addCategory(uri: string, wgt: number, args: ER.TopicPageAddCategoryArguments = {}) {
+        if (typeof wgt !== "number") {
             throw new Error("Weight value has to be a positive or negative number");
         }
         const {
@@ -312,8 +312,8 @@ export class TopicPage extends QueryParamsBase {
      * @param uri uri of the news source to add to the topic page
      * @param weight importance of the news source (typically in range 1 - 50)
      */
-    public addSource(uri: string, wgt: number, args: EventRegistryStatic.TopicPageAddSourceArguments = {}) {
-        if (!_.isNumber(wgt)) {
+    public addSource(uri: string, wgt: number, args: ER.TopicPageAddSourceArguments = {}) {
+        if (typeof wgt !== "number") {
             throw new Error("Weight value has to be a positive or negative number");
         }
         const {
@@ -327,8 +327,8 @@ export class TopicPage extends QueryParamsBase {
      * @param uri uri of the location where the sources should be geographically located
      * @param weight importance of the provided list of sources (typically in range 1 - 50)
      */
-    public addSourceLocation(uri: string, wgt: number, args: EventRegistryStatic.TopicPageAddSourceLocationArguments = {}) {
-        if (!_.isNumber(wgt)) {
+    public addSourceLocation(uri: string, wgt: number, args: ER.TopicPageAddSourceLocationArguments = {}) {
+        if (typeof wgt !== "number") {
             throw new Error("Weight value has to be a positive or negative number");
         }
         const {
@@ -342,8 +342,8 @@ export class TopicPage extends QueryParamsBase {
      * @param sourceGroupUri uri of the source group to add
      * @param weight importance of the provided list of sources (typically in range 1 - 50)
      */
-    public addSourceGroup(uri: string, wgt: number, args: EventRegistryStatic.TopicPageAddSourceGroupArguments = {}) {
-        if (!_.isNumber(wgt)) {
+    public addSourceGroup(uri: string, wgt: number, args: ER.TopicPageAddSourceGroupArguments = {}) {
+        if (typeof wgt !== "number") {
             throw new Error("Weight value has to be a positive or negative number");
         }
         const {
@@ -358,7 +358,7 @@ export class TopicPage extends QueryParamsBase {
      * @param weight importance of the provided location (typically in range 1 - 50)
      */
     public addLocation(locationUri: string, weight: number) {
-        if (!_.isNumber(weight)) {
+        if (typeof weight !== "number") {
             throw new Error("Weight value has to be a positive or negative number");
         }
         this.topicPage.locations = [...this.topicPage.locations, {uri: locationUri, wgt: weight}];
@@ -368,10 +368,10 @@ export class TopicPage extends QueryParamsBase {
      * Restrict the results to the list of specified languages
      */
     public set languages(languages: string | string[]) {
-        if (!_.isArray(languages)) {
+        if (!Array.isArray(languages)) {
             languages = [languages];
         }
-        if (_.every(languages, (language) => _.size(language) === 3)) {
+        if (languages.every((language) => language.length === 3)) {
             this.topicPage.langs = languages;
         } else {
             throw new Error("Expected to get language in ISO3 code");
@@ -382,7 +382,7 @@ export class TopicPage extends QueryParamsBase {
      * if true then the results have to mention at least one of the specified concepts or keywords
      */
     public set restrictToSetConceptsAndKeywords(restrict: boolean) {
-        if (!_.isBoolean(restrict)) {
+        if (typeof restrict !== "boolean") {
             throw new Error("Restrict value has to be a boolean value");
         }
         this.topicPage.restrictToSetConcepts = restrict;
@@ -392,7 +392,7 @@ export class TopicPage extends QueryParamsBase {
      * if set to true then return only results that are assigned to one of the specified categories
      */
     public set restrictToSetCategories(restrict: boolean) {
-        if (!_.isBoolean(restrict)) {
+        if (typeof restrict !== "boolean") {
             throw new Error("Restrict value has to be a boolean value");
         }
         this.topicPage.restrictToSetCategories = restrict;
@@ -403,7 +403,7 @@ export class TopicPage extends QueryParamsBase {
      * this includes also sources set by source groups or by source locations
      */
     public set restrictToSetSources(restrict: boolean) {
-        if (!_.isBoolean(restrict)) {
+        if (typeof restrict !== "boolean") {
             throw new Error("Restrict value has to be a boolean value");
         }
         this.topicPage.restrictToSetSources = restrict;
@@ -413,7 +413,7 @@ export class TopicPage extends QueryParamsBase {
      * if set to true, then return only results that are located at one of the specified locations
      */
     public set restrictToSetLocations(restrict: boolean) {
-        if (!_.isBoolean(restrict)) {
+        if (typeof restrict !== "boolean") {
             throw new Error("Restrict value has to be a boolean value");
         }
         this.topicPage.restrictToSetLocations = restrict;
@@ -421,9 +421,9 @@ export class TopicPage extends QueryParamsBase {
 
     /**
      * Return a list of articles that match the topic page
-     * @param args {EventRegistryStatic.TopicPageArticles} Object which contains a host of optional parameters
+     * @param args {ER.TopicPageArticles} Object which contains a host of optional parameters
      */
-    public async getArticles(args: EventRegistryStatic.TopicPageArticles = {}) {
+    public async getArticles(args: ER.TopicPageArticles = {}) {
         const {page = 1, count = 100, sortBy = "rel", sortByAsc = false, dataType = "news", returnInfo = new ReturnInfo(), ...otherParameters} = args;
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
@@ -431,7 +431,7 @@ export class TopicPage extends QueryParamsBase {
         if (count > 100) {
             throw new RangeError("At most 100 articles can be returned at a time");
         }
-        let params = _.extend({}, {
+        let params = {
             action: "getArticlesForTopicPage",
             resultType: "articles",
             dataType: this.topicPage.dataType,
@@ -440,18 +440,19 @@ export class TopicPage extends QueryParamsBase {
             articlesSortByAsc: sortByAsc,
             articlesPage: page,
             topicPage: JSON.stringify(this.topicPage),
-        }, returnInfo.getParams());
-        if (!_.isEmpty(otherParameters)) {
+            ...returnInfo.getParams()
+        };
+        if (Object.keys(otherParameters).length > 0) {
             params = {...params, ...otherParameters};
         }
         const request = await this.eventRegistry.jsonRequest("/api/v1/article", params);
-        return _.get(request, "data", {articles: {results: []}});
+        return request?.data ?? {articles: {results: []}};
     }
     /**
      * Return a list of events that match the topic page
-     * @param args {EventRegistryStatic.TopicPageEvents} Object which contains a host of optional parameters
+     * @param args {ER.TopicPageEvents} Object which contains a host of optional parameters
      */
-    public async getEvents(args: EventRegistryStatic.TopicPageEvents = {}) {
+    public async getEvents(args: ER.TopicPageEvents = {}) {
         const {page = 1, count = 50, sortBy = "rel", sortByAsc = false, returnInfo = new ReturnInfo(), ...otherParameters} = args;
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
@@ -459,7 +460,7 @@ export class TopicPage extends QueryParamsBase {
         if (count > 50) {
             throw new RangeError("At most 50 events can be returned at a time");
         }
-        let params = _.extend({}, {
+        let params = {
             action: "getEventsForTopicPage",
             resultType: "events",
             dataType: this.topicPage.dataType,
@@ -468,12 +469,13 @@ export class TopicPage extends QueryParamsBase {
             eventsSortByAsc: sortByAsc,
             eventsPage: page,
             topicPage: JSON.stringify(this.topicPage),
-        }, returnInfo.getParams());
-        if (!_.isEmpty(otherParameters)) {
+            ...returnInfo.getParams()
+        };
+        if (Object.keys(otherParameters).length > 0) {
             params = {...params, ...otherParameters};
         }
         const request = await this.eventRegistry.jsonRequest("/api/v1/event", params);
-        return _.get(request, "data", {events: {results: []}});
+        return request?.data ?? {events: {results: []}};
     }
 
 }

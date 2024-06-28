@@ -1,10 +1,10 @@
-import * as _ from "lodash";
 import { Query, QueryParamsBase } from "./base";
 import { Data } from "./data";
 import { EventRegistry } from "./eventRegistry";
 import { ComplexEventQuery } from "./query";
 import { ReturnInfo } from "./returnInfo";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
+import { Logger } from "./logger";
 
 /**
  * @class QueryEvents
@@ -12,7 +12,7 @@ import { EventRegistryStatic } from "./types";
  */
 export class QueryEvents extends Query<RequestEvents> {
     public params = {};
-    constructor(args: EventRegistryStatic.QueryEvents.Arguments = {}) {
+    constructor(args: ER.QueryEvents.Arguments = {}) {
         super();
         const {
             keywords,
@@ -45,6 +45,8 @@ export class QueryEvents extends Query<RequestEvents> {
             ignoreLang,
             keywordsLoc = "body",
             ignoreKeywordsLoc = "body",
+            keywordSearchMode = "phrase",
+            ignoreKeywordSearchMode = "phrase",
             categoryIncludeSub = true,
             ignoreCategoryIncludeSub = true,
             requestedResult = new RequestEventsInfo(),
@@ -60,16 +62,16 @@ export class QueryEvents extends Query<RequestEvents> {
         this.setQueryArrVal(authorUri, "authorUri", "authorOper", "or");
         this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
         this.setQueryArrVal(lang, "lang", undefined, "or");
-        if (!_.isUndefined(dateStart)) {
+        if (dateStart !== undefined) {
             this.setDateVal("dateStart", dateStart);
         }
-        if (!_.isUndefined(dateEnd)) {
+        if (dateEnd !== undefined) {
             this.setDateVal("dateEnd", dateEnd);
         }
-        if (!_.isUndefined(reportingDateStart)) {
+        if (reportingDateStart !== undefined) {
             this.setDateVal("reportingDateStart", reportingDateStart);
         }
-        if (!_.isUndefined(reportingDateEnd)) {
+        if (reportingDateEnd !== undefined) {
             this.setDateVal("reportingDateEnd", reportingDateEnd);
         }
 
@@ -84,11 +86,10 @@ export class QueryEvents extends Query<RequestEvents> {
         this.setValIfNotDefault("minArticlesInEvent", minArticlesInEvent, undefined);
         this.setValIfNotDefault("maxArticlesInEvent", maxArticlesInEvent, undefined);
 
-        if (!_.isUndefined(dateMentionStart)) {
+        if (dateMentionStart !== undefined) {
             this.setDateVal("dateMentionStart", dateMentionStart);
         }
-
-        if (!_.isUndefined(dateMentionEnd)) {
+        if (dateMentionEnd !== undefined) {
             this.setDateVal("dateMentionEnd", dateMentionEnd);
         }
 
@@ -106,7 +107,8 @@ export class QueryEvents extends Query<RequestEvents> {
 
         this.setValIfNotDefault("keywordLoc", keywordsLoc, "body");
         this.setValIfNotDefault("ignoreKeywordLoc", ignoreKeywordsLoc, "body");
-
+        this.setValIfNotDefault("keywordSearchMode", keywordSearchMode, "phrase");
+        this.setValIfNotDefault("ignoreKeywordSearchMode", ignoreKeywordSearchMode, "phrase");
         this.setValIfNotDefault("categoryIncludeSub", categoryIncludeSub, true);
         this.setValIfNotDefault("ignoreCategoryIncludeSub", ignoreCategoryIncludeSub, true);
         this.setRequestedResult(requestedResult);
@@ -133,12 +135,12 @@ export class QueryEvents extends Query<RequestEvents> {
      */
     public static initWithEventUriList(uriList: string[]) {
         const query = new QueryEvents();
-        if (!_.isArray(uriList)) {
+        if (!Array.isArray(uriList)) {
             throw new Error("uriList has to be a list of strings that represent event uris");
         }
         query.params = {
             action: "getEvents",
-            eventUriList: _.join(uriList, ","),
+            eventUriList: uriList.join(","),
         };
         return query;
     }
@@ -149,12 +151,12 @@ export class QueryEvents extends Query<RequestEvents> {
     public static initWithEventUriWgtList(...args);
     public static initWithEventUriWgtList(uriWgtList: string[]) {
         const query = new QueryEvents();
-        if (!_.isArray(uriWgtList)) {
+        if (!Array.isArray(uriWgtList)) {
             throw new Error("uriWgtList has to be a list of strings that represent event uris");
         }
         query.params = {
             action: "getEvents",
-            eventUriWgtList: _.join(uriWgtList, ","),
+            eventUriWgtList: uriWgtList.join(","),
         };
         return query;
     }
@@ -164,14 +166,14 @@ export class QueryEvents extends Query<RequestEvents> {
         const query = new QueryEvents();
         if (complexQuery instanceof ComplexEventQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
-        } else if (_.isString(complexQuery)) {
+        } else if (typeof complexQuery === 'string') {
             try {
                 JSON.parse(complexQuery);
             } catch {
-                console.error("Failed to parse the provided string content as a JSON object. Please check the content provided as a parameter to the initWithComplexQuery() method");
+                Logger.error("Failed to parse the provided string content as a JSON object. Please check the content provided as a parameter to the initWithComplexQuery() method");
             }
             query.setVal("query", complexQuery);
-        } else if (_.isObject(complexQuery)) {
+        } else if (typeof complexQuery === 'object' && complexQuery !== null) {
             query.setVal("query", JSON.stringify(complexQuery));
         } else {
             throw new Error("The instance of query parameter was not a ComplexEventQuery, a string or an object");
@@ -195,12 +197,12 @@ export class QueryEventsIter extends QueryEvents implements AsyncIterable<Data.E
     private items: Data.Event[] = [];
     private returnedSoFar: number = 0;
     private index: number = 0;
-    private callback: (item: Data.Event) => void = _.noop;
-    private doneCallback: (error?: string) => void = _.noop;
+    private callback: (item: Data.Event) => void = () => undefined;
+    private doneCallback: (error?: string) => void = () => undefined;
     private errorMessage: string;
 
-    constructor(er: EventRegistry, args: EventRegistryStatic.QueryEvents.IteratorArguments = {}) {
-        super(args as EventRegistryStatic.QueryEvents.Arguments);
+    constructor(er: EventRegistry, args: ER.QueryEvents.IteratorArguments = {}) {
+        super(args as ER.QueryEvents.Arguments);
         const {
             sortBy = "rel",
             sortByAsc = false,
@@ -233,10 +235,10 @@ export class QueryEventsIter extends QueryEvents implements AsyncIterable<Data.E
     public async count(): Promise<number> {
         this.setRequestedResult(new RequestEventsInfo());
         const response = await this.er.execQuery(this);
-        if (_.has(response, "error")) {
-            console.error(_.get(response, "error"));
+        if (response?.error) {
+            this.er.logger.error(response.error);
         }
-        return _.get(response, "events.totalResults", 0);
+        return (response?.events as ER.Results)?.totalResults || 0;
     }
 
     /**
@@ -250,13 +252,13 @@ export class QueryEventsIter extends QueryEvents implements AsyncIterable<Data.E
         this.iterate();
     }
 
-    public static initWithComplexQuery(er, complexQuery, args: EventRegistryStatic.QueryEvents.IteratorArguments = {}) {
+    public static initWithComplexQuery(er, complexQuery, args: ER.QueryEvents.IteratorArguments = {}) {
         const query = new QueryEventsIter(er, args);
         if (complexQuery instanceof ComplexEventQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
-        } else if (_.isString(complexQuery)) {
+        } else if (typeof complexQuery === "string") {
             query.setVal("query", complexQuery);
-        } else if (_.isObject(complexQuery)) {
+        } else if (typeof complexQuery === "object" && complexQuery !== null) {
             query.setVal("query", JSON.stringify(complexQuery));
         } else {
             throw new Error("The instance of query parameter was not a ComplexEventQuery, a string or an object");
@@ -280,9 +282,9 @@ export class QueryEventsIter extends QueryEvents implements AsyncIterable<Data.E
      * @param response response from the backend
      */
     private extractResults(response): Data.Event[] {
-        const results = _.get(response, "events.results", []);
-        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : _.size(results);
-        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Data.Event[]);
+        const results = response?.events?.results || [];
+        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : results.length;
+        return results.slice(0, extractedSize).filter(Boolean);
     }
 
     private get current() {
@@ -304,21 +306,21 @@ export class QueryEventsIter extends QueryEvents implements AsyncIterable<Data.E
             });
             this.setRequestedResult(requestEventsInfo);
             if (this.er.verboseOutput) {
-                console.log(`Downloading event page ${this.page}...`);
+                this.er.logger.info(`Downloading event page ${this.page}...`);
             }
             const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
-            const error = _.get(response, "error", "");
+            const error = response.error || "";
             if (error) {
-                this.errorMessage = `Error while obtaining a list of events:  ${_.get(response, "error")}`;
+                this.errorMessage = `Error while obtaining a list of events:  ${response.error}`;
             } else {
-                this.pages = _.get(response, "events.pages", 0);
+                this.pages = (response.events as ER.Results)?.pages || 0;
             }
             const results = this.extractResults(response);
-            this.returnedSoFar += _.size(results);
+            this.returnedSoFar += results.length;
             this.items = [...this.items, ...results];
             return true;
         } catch (error) {
-            console.error(error);
+            this.er.logger.error(error);
             return false;
         }
     }
@@ -333,7 +335,7 @@ export class RequestEvents {}
 export class RequestEventsInfo extends RequestEvents {
     public resultType = "events";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsInfoArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsInfoArguments = {}) {
         super();
         const {
             page = 1,
@@ -354,7 +356,7 @@ export class RequestEventsInfo extends RequestEvents {
         this.params["eventsSortBy"] = sortBy;
         this.params["eventsSortByAsc"] = sortByAsc;
         if (!!returnInfo) {
-            this.params = _.extend({}, this.params, returnInfo.getParams("events"));
+            this.params = {...this.params, ...returnInfo.getParams("events")};
         }
     }
 }
@@ -367,7 +369,7 @@ export class RequestEventsUriWgtList extends RequestEvents {
     public resultType = "uriWgtList";
     public params;
 
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsUriWgtListArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsUriWgtListArguments = {}) {
         super();
         const {
             page = 1,
@@ -376,8 +378,8 @@ export class RequestEventsUriWgtList extends RequestEvents {
             sortByAsc = false,
             ...unsupported
         } = args;
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestEventsUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestEventsUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
@@ -392,11 +394,11 @@ export class RequestEventsUriWgtList extends RequestEvents {
         this.params["uriWgtListSortByAsc"] = sortByAsc;
     }
 
-    public set page(page) {
+    public set page(page: number) {
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
-        _.set(this.params, "uriWgtListPage", page);
+        this.params["uriWgtListPage"] = page;
     }
 }
 
@@ -421,7 +423,7 @@ export class RequestEventsKeywordAggr extends RequestEvents {
     constructor(lang?) {
         super();
         this.params = {};
-        if (!_.isUndefined(lang)) {
+        if (lang !== undefined) {
             this.params["keywordAggrLang"] = lang;
         }
     }
@@ -434,22 +436,22 @@ export class RequestEventsKeywordAggr extends RequestEvents {
 export class RequestEventsLocAggr extends RequestEvents {
     public resultType = "locAggr";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsLocAggrArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsLocAggrArguments = {}) {
         super();
         const {
             eventsSampleSize = 100000,
             returnInfo = new ReturnInfo(),
             ...unsupported
         } = args;
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestEventsLocAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestEventsLocAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (eventsSampleSize > 100000) {
             throw new RangeError("At most 100000 results can be used for computing");
         }
         this.params = {};
         this.params["locAggrSampleSize"] = eventsSampleSize;
-        this.params = _.extend({}, this.params, returnInfo.getParams("locAggr"));
+        this.params = {...this.params, ...returnInfo.getParams("locAggr")};
     }
 }
 
@@ -460,22 +462,22 @@ export class RequestEventsLocAggr extends RequestEvents {
 export class RequestEventsLocTimeAggr extends RequestEvents {
     public resultType = "locTimeAggr";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsLocTimeAggrArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsLocTimeAggrArguments = {}) {
         super();
         const {
             eventsSampleSize = 100000,
             returnInfo = new ReturnInfo(),
             ...unsupported
         } = args;
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestEventsLocTimeAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length !== 0) {
+            Logger.warn(`RequestEventsLocTimeAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (eventsSampleSize > 100000) {
             throw new RangeError("At most 100000 results can be used for computing");
         }
         this.params = {};
         this.params["locTimeAggrSampleSize"] = eventsSampleSize;
-        this.params = _.extend({}, this.params, returnInfo.getParams("locTimeAggr"));
+        this.params = {...this.params, ...returnInfo.getParams("locTimeAggr")};
     }
 }
 
@@ -486,7 +488,7 @@ export class RequestEventsLocTimeAggr extends RequestEvents {
 export class RequestEventsConceptAggr extends RequestEvents {
     public resultType = "conceptAggr";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsConceptAggrArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsConceptAggrArguments = {}) {
         super();
         const { conceptCount = 20, eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
         if (conceptCount > 200) {
@@ -498,7 +500,7 @@ export class RequestEventsConceptAggr extends RequestEvents {
         this.params = {};
         this.params["conceptAggrConceptCount"] = conceptCount;
         this.params["conceptAggrSampleSize"] = eventsSampleSize;
-        this.params = _.extend({}, this.params, returnInfo.getParams("conceptAggr"));
+        this.params = {...this.params, ...returnInfo.getParams("conceptAggr")};
     }
 }
 
@@ -509,7 +511,7 @@ export class RequestEventsConceptAggr extends RequestEvents {
 export class RequestEventsConceptGraph extends RequestEvents {
     public resultType = "conceptGraph";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsConceptGraphArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsConceptGraphArguments = {}) {
         super();
         const { conceptCount = 25, linkCount = 150, eventsSampleSize = 50000, returnInfo = new ReturnInfo() } = args;
         if (conceptCount > 1000) {
@@ -525,7 +527,7 @@ export class RequestEventsConceptGraph extends RequestEvents {
         this.params["conceptGraphConceptCount"] = conceptCount;
         this.params["conceptGraphLinkCount"] = linkCount;
         this.params["conceptGraphSampleSize"] = eventsSampleSize;
-        this.params = _.extend({}, this.params, returnInfo.getParams("conceptGraph"));
+        this.params = {...this.params, ...returnInfo.getParams("conceptGraph")};
     }
 }
 
@@ -539,7 +541,7 @@ export class RequestEventsConceptGraph extends RequestEvents {
 export class RequestEventsConceptMatrix extends RequestEvents {
     public resultType = "conceptMatrix";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsConceptMatrixArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsConceptMatrixArguments = {}) {
         super();
         const { conceptCount = 25, measure = "pmi", eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
         if (conceptCount > 200) {
@@ -552,7 +554,7 @@ export class RequestEventsConceptMatrix extends RequestEvents {
         this.params["conceptMatrixConceptCount"] = conceptCount;
         this.params["conceptMatrixMeasure"] = measure;
         this.params["conceptMatrixSampleSize"] = eventsSampleSize;
-        this.params = _.extend({}, this.params, returnInfo.getParams("conceptMatrix"));
+        this.params = {...this.params, ...returnInfo.getParams("conceptMatrix")};
     }
 }
 
@@ -563,7 +565,7 @@ export class RequestEventsConceptMatrix extends RequestEvents {
 export class RequestEventsConceptTrends extends RequestEvents {
     public resultType = "conceptTrends";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsConceptTrendsArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsConceptTrendsArguments = {}) {
         super();
         const { conceptCount = 10, conceptUris = [], returnInfo = new ReturnInfo() } = args;
         if (conceptCount > 50) {
@@ -571,10 +573,10 @@ export class RequestEventsConceptTrends extends RequestEvents {
         }
         this.params = {};
         this.params["conceptTrendsConceptCount"] = conceptCount;
-        if (!_.isEmpty(conceptUris)) {
+        if (conceptUris.length > 0) {
             this.params["conceptTrendsConceptUri"] = conceptUris;
         }
-        this.params = _.extend({}, this.params, returnInfo.getParams("conceptTrends"));
+        this.params = {...this.params, ...returnInfo.getParams("conceptTrends")};
     }
 }
 
@@ -585,7 +587,7 @@ export class RequestEventsConceptTrends extends RequestEvents {
 export class RequestEventsSourceAggr extends RequestEvents {
     public resultType = "sourceAggr";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsSourceAggrArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsSourceAggrArguments = {}) {
         super();
         const { sourceCount = 30, eventsSampleSize = 50000, returnInfo = new ReturnInfo() } = args;
         if (sourceCount > 200) {
@@ -597,7 +599,7 @@ export class RequestEventsSourceAggr extends RequestEvents {
         this.params = {};
         this.params["sourceAggrSourceCount"] = sourceCount;
         this.params["sourceAggrSampleSize"] = eventsSampleSize;
-        this.params = _.extend({}, this.params, returnInfo.getParams("sourceAggr"));
+        this.params = {...this.params, ...returnInfo.getParams("sourceAggr")};
     }
 }
 
@@ -608,7 +610,7 @@ export class RequestEventsSourceAggr extends RequestEvents {
 export class RequestEventsDateMentionAggr extends RequestEvents {
     public resultType = "dateMentionAggr";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsDateMentionAggrArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsDateMentionAggrArguments = {}) {
         super();
         const {
             minDaysApart = 0,
@@ -623,7 +625,7 @@ export class RequestEventsDateMentionAggr extends RequestEvents {
         this.params["dateMentionAggrMinDaysApart"] = minDaysApart;
         this.params["dateMentionAggrMinDateMentionCount"] = minDateMentionCount;
         this.params["dateMentionAggrSampleSize"] = eventsSampleSize;
-        this.params = _.extend({}, this.params, returnInfo.getParams("dateMentionAggr"));
+        this.params = {...this.params, ...returnInfo.getParams("dateMentionAggr")};
     }
 }
 
@@ -634,7 +636,7 @@ export class RequestEventsDateMentionAggr extends RequestEvents {
 export class RequestEventsEventClusters extends RequestEvents {
     public resultType = "eventClusters";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsEventClustersArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsEventClustersArguments = {}) {
         super();
         const { keywordCount = 30, maxEventsToCluster = 10000, returnInfo = new ReturnInfo() } = args;
         if (keywordCount > 100) {
@@ -646,7 +648,7 @@ export class RequestEventsEventClusters extends RequestEvents {
         this.params = {};
         this.params["eventClustersKeywordCount"] = keywordCount;
         this.params["eventClustersMaxEventsToCluster"] = maxEventsToCluster;
-        this.params = _.extend({}, this.params, returnInfo.getParams("eventClusters"));
+        this.params = {...this.params, ...returnInfo.getParams("eventClusters")};
     }
 }
 
@@ -670,7 +672,7 @@ export class RequestEventsCategoryAggr extends RequestEvents {
 export class RequestEventsRecentActivity extends RequestEvents {
     public resultType = "recentActivityEvents";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvents.RequestEventsRecentActivityArguments = {}) {
+    constructor(args: ER.QueryEvents.RequestEventsRecentActivityArguments = {}) {
         super();
         const {
             maxEventCount = 50,
@@ -683,24 +685,24 @@ export class RequestEventsRecentActivity extends RequestEvents {
         if (maxEventCount > 2000) {
             throw new RangeError("At most 2000 events can be returned");
         }
-        if (!_.isUndefined(updatesAfterTm) && !_.isUndefined(updatesAfterMinsAgo)) {
+        if (updatesAfterTm !== undefined && updatesAfterMinsAgo !== undefined) {
             throw new Error("You should specify either updatesAfterTm or updatesAfterMinsAgo parameter, but not both");
         }
         this.params = {};
         this.params["recentActivityEventsMaxEventCount"] = maxEventCount;
         this.params["recentActivityEventsMandatoryLocation"] = mandatoryLocation;
 
-        if (!_.isUndefined(updatesAfterTm)) {
+        if (updatesAfterTm !== undefined) {
             this.params["recentActivityEventsUpdatesAfterTm"] = QueryParamsBase.encodeDateTime(updatesAfterTm);
         }
 
-        if (!_.isUndefined(updatesAfterMinsAgo)) {
+        if (updatesAfterMinsAgo !== undefined) {
             this.params["recentActivityEventsUpdatesAfterMinsAgo"] = updatesAfterMinsAgo;
         }
 
         this.params["recentActivityEventsMinAvgCosSim"] = minAvgCosSim;
         if (!!returnInfo) {
-            this.params = _.extend({}, this.params, returnInfo.getParams("recentActivityEvents"));
+            this.params = {...this.params, ...returnInfo.getParams("recentActivityEvents")};
         }
     }
 }

@@ -1,5 +1,4 @@
-import * as _ from "lodash";
-import { QueryParamsBase, sleep } from "./base";
+import { QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 /**
  * The GetEventForText class can be used to find the event(s) that best matches the given input text.
@@ -52,9 +51,9 @@ export class GetEventForText extends QueryParamsBase {
      */
     public async compute(text: string, lang: string = "eng") {
         const params = {lang: lang, text: text, topClustersCount: this.nrOfEventsToReturn};
-        const response = await this.er.jsonRequest("/api/v1/getEventForText/getEventForText", params);
-        if (_.has(response, "topStories")) {
-            return _.get(response, "topStories", []);
+        const response = await this.er.jsonRequest<Record<string, string>>("/api/v1/getEventForText/getEventForText", params);
+        if (response?.data.topStories !== undefined) {
+            return response.data.topStories;
         }
         return response;
     }

@@ -1,25 +1,23 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 import * as fs from "fs";
-import * as _ from "lodash";
 import * as moment from "moment";
 import Semaphore from "semaphore-async-await";
-import * as winston from "winston";
 import { ConceptInfoFlags, ReturnInfo } from "./returnInfo";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
 import { QueryParamsBase, sleep } from "./base";
 import { QueryArticle } from "./queryArticle";
 import { QueryArticles } from "./queryArticles";
 import { QueryEvents } from "./queryEvents";
 import { QueryEvent } from "./queryEvent";
+import { LogLevel, Logger } from "./logger";
 
 /**
  * @class EventRegistry
  * Main class responsible for obtaining results form the Event Registry
  */
 export class EventRegistry {
-    public logger: winston.Logger;
-    public requestLogger: winston.Logger;
-    private config: EventRegistryStatic.Config = {
+    public logger: Logger;
+    private config: ER.Config = {
         host: "http://eventregistry.org",
         hostAnalytics: "http://analytics.eventregistry.org",
         logging: false,
@@ -41,47 +39,30 @@ export class EventRegistry {
         403,
         530,
     ];
-    constructor(config: EventRegistryStatic.Config = {}) {
+    constructor(config: ER.Config = {}) {
         this.lock = new Semaphore(1);
-        if (!!config.apiKey && !!config.printHostInfo) {
-            console.log("using user provided API key for making requests");
-        }
+        this._logRequests = this.config.logging;
+        this.logger = Logger.createInstance({ logging: this.config.logging, logRequests: this._logRequests });
+
         if (fs && fs.existsSync(this.config.settingsFName || "settings.json")) {
             const localConfig = JSON.parse(fs.readFileSync(this.config.settingsFName || "settings.json", "utf8"));
             this.config = {...this.config, ...localConfig, ...config};
-            if (!_.isNil(config.apiKey)) {
-                if (!!config.printHostInfo) {
-                    console.log("found apiKey in settings file which will be used for making requests");
-                }
+            if (config?.apiKey !== undefined) {
+                this.logger.debug("found apiKey in settings file which will be used for making requests");
                 this.config.apiKey = config.apiKey;
             }
         } else {
-            this.config = {...this.config, ...config};
-        }
-        if (this.config.logging) {
-            this.logger = winston.createLogger({
-                level: "info",
-                format: winston.format.json(),
-                transports: [
-                    new winston.transports.File({
-                        filename: "logs/error.log",
-                        level: "error",
-                    }),
-                    new winston.transports.File({ filename: "logs/info.log" }),
-                ],
-            });
+            this.config = { ...this.config, ...config };
+            if (!!config.apiKey) {
+                this.logger.debug("using user provided API key for making requests");
+            }
         }
 
-        this._logRequests = this.config.logging;
-        this.initRequestLogger();
-
-        if (_.isNil(this.config.apiKey)) {
-            console.info("No API key was provided. You will be allowed to perform only a very limited number of requests per day.");
+        if (this.config?.apiKey === undefined || this.config?.apiKey === null) {
+            this.logger.info("No API key was provided. You will be allowed to perform only a very limited number of requests per day.");
         }
-        if (!!config.printHostInfo) {
-            console.log(`Event Registry host: ${config.host}`);
-            console.log(`Text analytics host: ${config.hostAnalytics}`);
-        }
+        this.logger.debug(`Event Registry host: ${this.config.host}`);
+        this.logger.debug(`Text analytics host: ${this.config.hostAnalytics}`);
         this.config.minDelayBetweenRequests *= 1000;
 
         axios.interceptors.response.use(undefined, (err) => {
@@ -89,7 +70,7 @@ export class EventRegistry {
             if (!err.config || !err.config.retry) {
                 return Promise.reject(err);
             }
-            if (_.includes(this.stopStatusCodes, err.response.status)) {
+            if (this.stopStatusCodes.includes(err.response.status)) {
                 return Promise.reject(err);
             }
             // Set the variable for keeping track of the retry count
@@ -113,7 +94,7 @@ export class EventRegistry {
      */
     public setLogging(logging: boolean) {
         this._logRequests = logging;
-        this.initRequestLogger();
+        this.logger.toggleRequestLogging(logging);
     }
 
     public get allowUseOfArchive() {
@@ -128,21 +109,21 @@ export class EventRegistry {
      * Main method for executing the search queries.
      * @param query instance of Query class
      */
-    public async execQuery(query, allowUseOfArchive: boolean = this.config.allowUseOfArchive) {
+    public async execQuery<T = ER.SuccessfulResponse<unknown>>(query, allowUseOfArchive: boolean = this.config.allowUseOfArchive): Promise<ER.Response<T>> {
         const params = query.getQueryParams();
-        const request = await this.jsonRequest(query.path, params, allowUseOfArchive);
-        if (!_.has(request, "data") && this.config.verboseOutput) {
+        const request = await this.jsonRequest<ER.Response<T>>(query.path, params, allowUseOfArchive);
+        if (!request?.data && this.config?.verboseOutput) {
             this.logger.error("Request did not return with the 'data' property.");
         }
-        return _.get(request, "data", {});
+        return (request?.data || {} as ER.Response<T>);
     }
 
-    public async jsonRequestAnalytics(path: string, parameters?, headers?, cookies? ): Promise<AxiosResponse> {
-        let request;
+    public async jsonRequestAnalytics<T = unknown>(path: string, parameters?, headers?, cookies? ): Promise<AxiosResponse<T>> {
+        let request: AxiosResponse<T>;
         await this.lock.acquire();
         try {
-            _.set(parameters, "apiKey", this.config.apiKey);
-            const args = {
+            parameters = {...parameters, apiKey: this.config?.apiKey};
+            let args = {
                 url: path,
                 method: "POST",
                 baseURL: this.config.hostAnalytics,
@@ -152,34 +133,34 @@ export class EventRegistry {
                 maxRedirects: 5,
             } as AxiosRequestConfig;
             if (!!headers) {
-                _.set(args, "headers", headers);
+                args = {...args, headers: headers};
             }
             if (!!cookies) {
                 const cookieString = Object.keys(cookies).map((key) => key + "=" + cookies[key]).join(";") + ";";
-                _.set(args, "headers.Cookie", cookieString);
+                args = {...args, headers: {...args.headers, Cookie: cookieString}};
             }
-            request = await axios.request(args);
-            this.headers = _.get(request, "headers", {});
-            if (_.get(request, "status") !== 200) {
-                throw new Error(_.get(request, "statusText"));
+            request = await axios.request<unknown, AxiosResponse<T>>(args);
+            this.headers = request?.headers || {};
+            if (request?.status !== 200) {
+                throw new Error(request?.statusText);
             }
-            const errorMessage = _.get(request, "data.error", "");
+            const errorMessage = (request?.data as Record<string, string>)?.error || "";
             if (errorMessage) {
                 throw new Error(errorMessage);
             }
         } catch (error) {
-            request = { data: {error} };
+            request = { data: {error} } as AxiosResponse<T>;
             if (this.config.verboseOutput) {
-                console.error("Event Registry Analytics exception while executing the request.");
+                this.logger.error("Event Registry Analytics exception while executing the request.");
                 if (error && error.stack && error.message) {
-                    console.error(error.message);
+                    this.logger.error(error.message);
                 } else {
-                    console.error(`${_.get(error, "response.status")}: ${_.get(error, "response.statusText")} => ${_.get(error, "response.data")}`);
+                    this.logger.error(`${error?.response?.status}: ${error?.response?.statusText} => ${error?.response?.data}`);
                 }
             }
             // try to print out the error that should be passed by in case the server is down or responds with errors
-            if (this.config.logging) {
-                this.logger.error(_.get(error, "errno", error));
+            if (this.config?.logging) {
+                this.logger.error(error?.errno || error);
             }
         } finally {
             this.lock.release();
@@ -192,24 +173,25 @@ export class EventRegistry {
      * @param path url on er (e.g. "/api/v1/article")
      * @param parameters Optional parameters to be included in the request
      */
-    public async jsonRequest(path: string, parameters?, allowUseOfArchive = this.config.allowUseOfArchive) {
-        let request;
+    public async jsonRequest<T = unknown>(path: string, parameters?, allowUseOfArchive = this.config.allowUseOfArchive): Promise<AxiosResponse<T>> {
+        let request: AxiosResponse<T>;
         const current = moment.utc().milliseconds();
         if (this.lastQueryTime && current - this.lastQueryTime < this.config.minDelayBetweenRequests) {
             await sleep(this.config.minDelayBetweenRequests - (current - this.lastQueryTime) );
         }
         await this.lock.acquire();
+
         if (this._logRequests) {
-            if (!_.isEmpty(parameters)) {
-                this.requestLogger.info("# " + JSON.stringify(parameters) + "\n");
+            if (Object.keys(parameters || {}).length > 0) {
+                this.logger.logRequest("# " + JSON.stringify(parameters) + "\n");
             }
-            this.requestLogger.info(path + "\n\n");
+            this.logger.logRequest(path + "\n\n");
         }
         this.lastQueryTime = current;
         try {
-            _.set(parameters, "apiKey", this.config.apiKey);
+            parameters = { ...parameters, apiKey: this.config?.apiKey };
             if (!allowUseOfArchive) {
-                _.set(parameters, "forceMaxDataTimeWindow", 31);
+                parameters = {...parameters, forceMaxDataTimeWindow: 31};
             }
             request = await axios.request({
                 url: path,
@@ -221,32 +203,32 @@ export class EventRegistry {
                 maxRedirects: 5,
                 retry: this.config.repeatFailedRequestCount,
             } as any);
-            this.headers = _.get(request, "headers", {});
-            if (_.get(request, "status") !== 200) {
-                throw new Error(_.get(request, "statusText"));
+            this.headers = request?.headers || {};
+            if (request?.status !== 200) {
+                throw new Error(request?.statusText);
             }
             if (this.getLastHeader("warning")) {
-                console.warn(`WARNING: ${this.getLastHeader("warning")}`);
+                this.logger.warn(`WARNING: ${this.getLastHeader("warning")}`);
             }
-            this.dailyAvailableRequests = _.toNumber(this.getLastHeader("x-ratelimit-limit", "-1"));
-            this.remainingAvailableRequests = _.toNumber(this.getLastHeader("x-ratelimit-remaining", "-1"));
-            const errorMessage = _.get(request, "data.error", "");
+            this.dailyAvailableRequests = Number(this.getLastHeader("x-ratelimit-limit", "-1"));
+            this.remainingAvailableRequests = Number(this.getLastHeader("x-ratelimit-remaining", "-1"));
+            const errorMessage = (request?.data as Record<string, string>)?.error || "";
             if (errorMessage) {
                 throw new Error(errorMessage);
             }
         } catch (error) {
-            request = { data: {error} };
+            request = { data: {error} } as AxiosResponse<T>;
             // try to print out the error that should be passed by in case the server is down or responds with errors
             if (this.config.verboseOutput) {
-                console.error("Event Registry exception while executing the request.");
+                this.logger.error("Event Registry exception while executing the request.");
                 if (error && error.stack && error.message) {
-                    console.error(error.message);
+                    this.logger.error(error.message);
                 } else {
-                    console.error(`${_.get(error, "response.status")}: ${_.get(error, "response.statusText")} => ${_.get(error, "response.data")}`);
+                    this.logger.error(`${error?.response?.status}: ${error?.response?.statusText} => ${error?.response?.data}`);
                 }
             }
-            if (this.config.logging) {
-                this.logger.error(_.get(error, "errno", error));
+            if (this.config?.logging) {
+                this.logger.error(error?.errno || error);
             }
         } finally {
             this.lock.release();
@@ -278,17 +260,17 @@ export class EventRegistry {
     /**
      * Get a value of the header headerName that was set in the headers in the last response object
      */
-    public getLastHeader(headerName: string, dfltVal?) {
-        return _.get(this.headers, headerName, dfltVal);
+    public getLastHeader(headerName: string, dfltVal?: string) {
+        return this.headers?.[headerName] ?? dfltVal;
     }
 
     /**
      * print some statistics about the last executed request
      */
     public printLastReqStats() {
-        console.log(`Tokens used by the request: ${this.getLastHeader("req-tokens")}`);
-        console.log(`Performed action: ${this.getLastHeader("req-action")}`);
-        console.log(`Was archive used for the query: ${this.getLastReqArchiveUse() ? "Yes" : "No"}`);
+        this.logger.info(`Tokens used by the request: ${this.getLastHeader("req-tokens")}`);
+        this.logger.info(`Performed action: ${this.getLastHeader("req-action")}`);
+        this.logger.info(`Was archive used for the query: ${this.getLastReqArchiveUse() ? "Yes" : "No"}`);
     }
 
     /**
@@ -301,24 +283,24 @@ export class EventRegistry {
     /**
      * Return the number of used and total available tokens. Can be used at any time (also before making queries)
      */
-    public async getUsageInfo(): Promise<EventRegistryStatic.UsageInfo> {
+    public async getUsageInfo(): Promise<ER.UsageInfo> {
         const request = await this.jsonRequest("/api/v1/usage");
-        return request.data;
+        return request.data as ER.UsageInfo;
     }
 
-    public async getServiceStatus(): Promise<EventRegistryStatic.UsageInfo> {
+    public async getServiceStatus(): Promise<ER.UsageInfo> {
         const request = await this.jsonRequest("/api/v1/getServiceStatus");
-        return request.data;
+        return request.data as ER.UsageInfo;
     }
 
     public getUrl(query: QueryArticles | QueryArticle | QueryEvents | QueryEvent) {
         if (!(query instanceof QueryParamsBase)) {
             if (this.config.verboseOutput) {
-                console.warn("query parameter should be an instance of a class that has Query as a base class, such as QueryArticles or QueryEvents");
+                this.logger.warn("query parameter should be an instance of a class that has Query as a base class, such as QueryArticles or QueryEvents");
             }
         }
         const allParams = query.getQueryParams();
-        return this.config.host + query.path + "?" + _.join(_.map(_.keys(allParams), (key) => key + "=" + allParams[key]), "&");
+        return `${this.config?.host}${query?.path}?${Object.keys(allParams).map(key => `${key}=${allParams[key]}`).join("&")}`;
     }
 
     /**
@@ -327,8 +309,8 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the concept
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestConcepts(prefix: string, args: EventRegistryStatic.SuggestConceptsArguments = {}) {
-        const { sources = [ "concepts" ] as EventRegistryStatic.ConceptType[], lang = "eng", conceptLang = "eng", page = 1, count = 20, returnInfo = new ReturnInfo(), ...otherParams } = args;
+    public async suggestConcepts(prefix: string, args: ER.SuggestConceptsArguments = {}) {
+        const { sources = [ "concepts" ] as ER.ConceptType[], lang = "eng", conceptLang = "eng", page = 1, count = 20, returnInfo = new ReturnInfo(), ...otherParams } = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
         }
@@ -341,7 +323,7 @@ export class EventRegistry {
             page: page,
             count: count,
         };
-        params = _.extend({}, params, otherParams, returnInfo.getParams());
+        params = {...params, ...otherParams, ...returnInfo.getParams()};
         const request = await this.jsonRequest("/api/v1/suggestConceptsFast", params);
         return request.data;
     }
@@ -351,13 +333,13 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the category name
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestCategories(prefix: string, args: EventRegistryStatic.SuggestCategoriesArguments = {}) {
+    public async suggestCategories(prefix: string, args: ER.SuggestCategoriesArguments = {}) {
         const {page = 1, count = 20, returnInfo = new ReturnInfo(), ...otherParams} = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
         }
         let params = {prefix, page, count};
-        params = _.extend({}, params, otherParams, returnInfo.getParams());
+        params = {...params, ...otherParams, ...returnInfo.getParams()};
         const request = await this.jsonRequest("/api/v1/suggestCategoriesFast", params);
         return request.data;
     }
@@ -367,7 +349,7 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the source name or uri
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestNewsSources(prefix: string, args: EventRegistryStatic.SuggestNewsSourcesArguments = {}) {
+    public async suggestNewsSources(prefix: string, args: ER.SuggestNewsSourcesArguments = {}) {
         const {page = 1, count = 20, dataType = ["news", "pr", "blog"], ...otherParams} = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
@@ -381,7 +363,7 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the source group name or uri
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestSourceGroups(prefix: string, args: EventRegistryStatic.SuggestSourceGroupsArguments = {}) {
+    public async suggestSourceGroups(prefix: string, args: ER.SuggestSourceGroupsArguments = {}) {
         const {page = 1, count = 20, ...otherParams} = args;
         if (page <= 0) {
             throw new RangeError("page parameter should be above 0");
@@ -395,7 +377,7 @@ export class EventRegistry {
      * @param prefix input text that should be contained in the location name
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestLocations(prefix: string, args: EventRegistryStatic.SuggestLocationsArguments = {}) {
+    public async suggestLocations(prefix: string, args: ER.SuggestLocationsArguments = {}): Promise<ER.Location[]> {
         const {
             sources = ["place", "country"],
             lang = "eng",
@@ -412,13 +394,13 @@ export class EventRegistry {
             lang: lang,
             countryUri: countryUri,
         };
-        params = _.extend({}, params, otherParams, returnInfo.getParams());
+        params = {...params, ...otherParams, ...returnInfo?.getParams()};
         if (sortByDistanceTo) {
-            if (!_.isArray(sortByDistanceTo)) {
+            if (!Array.isArray(sortByDistanceTo)) {
                 throw new Error("sortByDistanceTo has to contain a tuple with latitude and longitude of the location");
             }
 
-            if (_.size(sortByDistanceTo) !== 2) {
+            if (sortByDistanceTo.length !== 2) {
                 throw new Error("The sortByDistanceTo should contain two numbers");
             }
 
@@ -426,7 +408,7 @@ export class EventRegistry {
             params["closeToLon"] = sortByDistanceTo[1];
         }
         const request = await this.jsonRequest("/api/v1/suggestLocationsFast", params);
-        return request.data;
+        return request?.data as ER.Location[];
     }
 
     /**
@@ -436,7 +418,7 @@ export class EventRegistry {
      * @param radiusKm radius in kilometers around the coordinates inside which the locations should be returned
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestLocationsAtCoordinate(latitude: number, longitude: number, radiusKm: number, args: EventRegistryStatic.SuggestLocationsAtCoordinateArguments = {}) {
+    public async suggestLocationsAtCoordinate(latitude: number, longitude: number, radiusKm: number, args: ER.SuggestLocationsAtCoordinateArguments = {}) {
         const {
             limitToCities = false,
             lang = "eng",
@@ -445,10 +427,10 @@ export class EventRegistry {
             returnInfo = new ReturnInfo(),
             ...otherParams
         } = args;
-        if (!_.isNumber(latitude)) {
+        if (typeof latitude !== "number") {
             throw new Error("The 'latitude' should be a number");
         }
-        if (!_.isNumber(longitude)) {
+        if (typeof longitude !== "number") {
             throw new Error("The 'longitude' should be a number");
         }
         let params = {
@@ -460,9 +442,9 @@ export class EventRegistry {
             count: count,
             lang: lang,
         };
-        params = _.extend({}, params, otherParams, returnInfo.getParams());
+        params = {...params, ...otherParams, ...returnInfo?.getParams()};
         const request = await this.jsonRequest("/api/v1/suggestLocationsFast", params);
-        return request.data;
+        return request?.data;
     }
 
     /**
@@ -473,10 +455,10 @@ export class EventRegistry {
      * @param count number of returned suggestions
      */
     public async suggestSourcesAtCoordinate(latitude: number, longitude: number, radiusKm: number, count = 20, ...otherParams) {
-        if (!_.isNumber(latitude)) {
+        if (typeof latitude !== "number") {
             throw new Error("The 'latitude' should be a number");
         }
-        if (!_.isNumber(longitude)) {
+        if (typeof longitude !== "number") {
             throw new Error("The 'longitude' should be a number");
         }
         const params = {
@@ -488,7 +470,7 @@ export class EventRegistry {
             ...otherParams
         };
         const request = await this.jsonRequest("/api/v1/suggestSourcesFast", params);
-        return request.data;
+        return request?.data;
     }
 
     /**
@@ -496,7 +478,7 @@ export class EventRegistry {
      * @param conceptUri concept that represents a geographic location for which we would like to obtain a list of sources located at the place
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestSourcesAtPlace(conceptUri: string, args: EventRegistryStatic.SuggestSourcesAtPlaceArguments = {}) {
+    public async suggestSourcesAtPlace(conceptUri: string, args: ER.SuggestSourcesAtPlaceArguments = {}) {
         const { page = 1, count = 20, dataType = "news", ...otherParams } = args;
         const params = {
             action: "getSourcesAtPlace",
@@ -531,11 +513,67 @@ export class EventRegistry {
     }
 
     /**
+     * Return a list of event types that match the prefix
+     * @param prefix: input text that should be contained in the industry name
+     * @param page: page of results
+     * @param count: number of returned suggestions
+     */
+    public async suggestEventTypes(prefix: string, page = 1, count = 20, ...otherParams) {
+        if (page <= 0) {
+            throw new Error("Page parameter should be above 0.");
+        }
+        const params = {
+            prefix,
+            page,
+            count,
+            ...otherParams
+        };
+        const request = await this.jsonRequest("/api/v1/eventType/suggestEventTypes", params);
+        return request.data;
+    }
+
+    /**
+     * Return a list of industries that match the prefix. Note: Industries can only be used when querying mentions (QueryMentions, QueryMentionsIter)
+     * @param prefix: input text that should be contained in the industry name
+     * @param page: page of results
+     * @param count: number of returned suggestions
+    */
+    public async suggestIndustries(prefix: string, page = 1, count = 20, ...otherParams) {
+        if (page <= 0) {
+            throw new Error("Page parameter should be above 0.");
+        }
+        const params = {
+            prefix,
+            page,
+            count,
+            ...otherParams
+        };
+        const request = await this.jsonRequest("/api/v1/eventType/suggestIndustries", params);
+        return request.data;
+    }
+
+    /**
+     * Return a list of SDG uris. Note: Industries can only be used when querying mentions (QueryMentions, QueryMentionsIter)
+     */
+    public async getSdgUris() {
+        const request = await this.jsonRequest("/api/v1/eventType/sdg/getItems");
+        return request.data;
+    }
+
+    /**
+     * Return a list of SASB uris. Note: SASB uris can only be used when querying mentions (QueryMentions, QueryMentionsIter)
+     */
+    public async getSasbUris() {
+        const request = await this.jsonRequest("/api/v1/eventType/sasb/getItems");
+        return request.data;
+    }
+
+    /**
      * Return a list of concept classes that match the given prefix
      * @param prefix input text that should be contained in the category name
      * @param args Object which contains a host of optional parameters
      */
-    public async suggestConceptClasses(prefix: string, args: EventRegistryStatic.SuggestConceptClassesArguments = {}) {
+    public async suggestConceptClasses(prefix: string, args: ER.SuggestConceptClassesArguments = {}) {
         const {
             lang = "eng",
             conceptLang = "eng",
@@ -549,9 +587,9 @@ export class EventRegistry {
             throw new Error("page parameter should be above 0");
         }
         let params = { prefix, lang, conceptLang, source, page, count};
-        params = _.extend({}, params, otherParams, returnInfo.getParams());
+        params = {...params, ...otherParams, ...returnInfo?.getParams()};
         const request = await this.jsonRequest("/api/v1/suggestConceptClasses", params);
-        return request.data;
+        return request?.data;
     }
 
     /**
@@ -561,10 +599,10 @@ export class EventRegistry {
      * @param conceptLabel partial or full name of the concept for which to return the concept uri
      * @param args Object which contains a host of optional parameters
      */
-    public async getConceptUri(conceptLabel: string, args: EventRegistryStatic.GetConceptUriArguments = {}) {
-        const { lang = "eng", sources = [ "concepts" ] as EventRegistryStatic.ConceptType[] } = args;
+    public async getConceptUri(conceptLabel: string, args: ER.GetConceptUriArguments = {}) {
+        const { lang = "eng", sources = [ "concepts" ] } = args;
         const matches = await this.suggestConcepts(conceptLabel, { lang, sources });
-        return _.get(_.first(matches), "uri", undefined);
+        return matches?.[0]?.uri;
     }
 
     /**
@@ -572,10 +610,10 @@ export class EventRegistry {
      * @param locationLabel partial or full location name for which to return the location uri
      * @param args Object which contains a host of optional parameters
      */
-    public async getLocationUri(locationLabel: string, args: EventRegistryStatic.GetLocationUriArguments = {}) {
+    public async getLocationUri(locationLabel: string, args: ER.GetLocationUriArguments = {}) {
         const { lang = "eng", sources = [ "place", "country" ] as any, countryUri, sortByDistanceTo } = args;
         const matches = await this.suggestLocations(locationLabel, { lang, sources, countryUri, sortByDistanceTo });
-        return _.get(_.first(matches), "wikiUri", undefined);
+        return matches?.[0]?.wikiUri;
     }
 
     /**
@@ -584,7 +622,7 @@ export class EventRegistry {
      */
     public async getCategoryUri(categoryLabel: string) {
         const matches = await this.suggestCategories(categoryLabel);
-        return _.get(_.first(matches), "uri", undefined);
+        return matches?.[0]?.uri;
     }
 
     /**
@@ -592,15 +630,15 @@ export class EventRegistry {
      * @param sourceName partial or full name of the source or source uri for which to return source uri
      * @param dataType: return the source uri that provides content of these data types
      */
-    public async getNewsSourceUri(sourceName: string, dataType: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType = ["news", "pr", "blog"]) {
+    public async getNewsSourceUri(sourceName: string, dataType: ER.DataType[] | ER.DataType = ["news", "pr", "blog"]) {
         const matches = await this.suggestNewsSources(sourceName, { dataType });
-        return _.get(_.first(matches), "uri", undefined);
+        return matches?.[0]?.uri;
     }
 
     /**
      * alternative (shorter) name for the method getNewsSourceUri()
      */
-    public async getSourceUri(sourceName: string, dataType: EventRegistryStatic.DataType[] | EventRegistryStatic.DataType = ["news", "pr", "blog"]) {
+    public async getSourceUri(sourceName: string, dataType: ER.DataType[] | ER.DataType = ["news", "pr", "blog"]) {
         return await this.getNewsSourceUri(sourceName, dataType);
     }
 
@@ -610,7 +648,7 @@ export class EventRegistry {
      */
     public async getSourceGroupUri(sourceGroupName: string) {
         const matches = await this.suggestSourceGroups(sourceGroupName);
-        return _.get(_.first(matches), "uri", undefined);
+        return matches?.[0]?.uri;
     }
 
     /**
@@ -620,7 +658,7 @@ export class EventRegistry {
      */
     public async getConceptClassUri(classLabel: string, lang = "eng") {
         const matches = await this.suggestConceptClasses(classLabel, {lang});
-        return _.get(_.first(matches), "uri", undefined);
+        return matches?.[0]?.uri;
     }
 
     /**
@@ -637,7 +675,7 @@ export class EventRegistry {
             uri: conceptUri,
             action: "getInfo",
         };
-        params = _.extend({}, params, returnInfo.getParams());
+        params = {...params, ...(returnInfo?.getParams() ?? {})};
         const request = await this.jsonRequest("/api/v1/concept/getInfo", params);
         return request.data;
     }
@@ -649,14 +687,14 @@ export class EventRegistry {
      */
     public async getAuthorUri(authorName: string) {
         const matches = await this.suggestAuthors(authorName);
-        return _.get(_.first(matches), "uri", undefined);
+        return matches?.[0]?.uri;
     }
 
     public static getUriFromUriWgt(uriWgtList: string[]) {
-        if (!_.isArray(uriWgtList)) {
+        if (!Array.isArray(uriWgtList)) {
             throw new Error("uriWgtList has to be a list of strings that represent article uris");
         }
-        return _.map(uriWgtList, (uriWgt) => _.first(_.split(uriWgt, ":")));
+        return uriWgtList.map((uriWgt) => uriWgt.split(":")[0]);
     }
 
     // Additional utility functions
@@ -666,7 +704,7 @@ export class EventRegistry {
      * @param articleUrls a single article url or a list of article urls
      */
     public async getArticleUris(articleUrls: string | string[]) {
-        if (!_.isArray(articleUrls) && !_.isString(articleUrls)) {
+        if (!Array.isArray(articleUrls) && typeof articleUrls !== "string") {
             throw new Error("Expected a single article url or a list of urls");
         }
         const request = await this.jsonRequest("/api/v1/articleMapper", { articleUrl: articleUrls});
@@ -687,18 +725,6 @@ export class EventRegistry {
     public async getSourceGroup(sourceGroupUri: string) {
         const request = await this.jsonRequest("/api/v1/sourceGroup/getSourceGroupInfo", { action: "getSourceGroupInfo", uri: sourceGroupUri});
         return request.data;
-    }
-
-    private initRequestLogger() {
-        if (this._logRequests && _.isUndefined(this.requestLogger)) {
-            this.requestLogger = winston.createLogger({
-                level: "info",
-                format: winston.format.json(),
-                transports: [
-                    new winston.transports.File({ filename: "logs/requests.log" }),
-                ],
-            });
-        }
     }
 }
 
@@ -724,13 +750,13 @@ export class ArticleMapper {
      * @param articleUrl string containing the article url
      */
     public async getArticleUri(articleUrl: string) {
-        if (_.has(this.articleUrlToUri, articleUrl)) {
-            return _.get(this.articleUrlToUri, articleUrl);
+        if (this.articleUrlToUri.hasOwnProperty(articleUrl)) {
+            return this.articleUrlToUri[articleUrl];
         }
         const response = await this.er.getArticleUris(articleUrl);
-        const value = _.get(response, articleUrl, undefined);
+        const value = response?.[articleUrl];
         if (this.rememberMappings && value) {
-            this.articleUrlToUri[articleUrl] = value;
+            this.articleUrlToUri = { ...this.articleUrlToUri, [articleUrl]: value };
         }
         return value;
     }

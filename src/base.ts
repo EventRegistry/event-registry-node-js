@@ -1,6 +1,5 @@
-import * as _ from "lodash";
 import * as moment from "moment";
-import { ReturnInfo } from "./returnInfo";
+import { Logger } from "./logger";
 
 export const mainLangs = ["eng", "deu", "zho", "slv", "spa"];
 export const allLangs = [ "eng", "deu", "spa", "cat", "por", "ita", "fra", "rus", "ara", "tur", "zho", "slv", "hrv", "srp" ];
@@ -35,7 +34,7 @@ export class QueryItems {
  * calls to addArrayVal() method)
  */
 export class QueryParamsBase {
-    protected params = {};
+    protected params: Record<string, unknown> = {};
 
     /**
      * Encode datetime into UTC ISO format which can be sent to ER.
@@ -45,7 +44,7 @@ export class QueryParamsBase {
         if (!datetime.isValid()) {
             throw new Error("Datetime was not recognizable. Use `new Date()` or string in ISO format");
         }
-        return _.isNil(format) ? datetime.toISOString() : datetime.format(format);
+        return (format === null || format === undefined) ? datetime.toISOString() : datetime.format(format);
     }
 
     /**
@@ -59,28 +58,28 @@ export class QueryParamsBase {
      * Set a value of a property in the query.
      */
     public setVal(key: string, value: unknown) {
-        _.set(this.params, key, value);
+        this.params[key] = value;
     }
 
     /**
      * Do we have in the query property named 'key'?
      */
     public hasVal(key: string): boolean {
-        return _.has(this.params, key);
+        return this.params.hasOwnProperty(key);
     }
 
     /**
      * Remove the value of a property key (if existing).
      */
     public clearVal(key: string) {
-        _.unset(this.params, key);
+        delete this.params[key];
     }
 
     /**
      * Add a value to an array of values for a property.
      */
     public addArrayVal(key: string, val: unknown) {
-        _.update(this.params, key, (value) => [...(value || []), val]);
+        this.params[key] = [...(this.params[key] || []) as unknown[], val];
     }
 
     /**
@@ -107,28 +106,28 @@ export class QueryParamsBase {
      * @param propOperName Property to set containing the "and" or "or". Relevant only if multiple items are provided in "value". Can be None if only one value is possible.
      * @param defaultOperName Which operator should be used in case "value" is an array. If an array, we will print also a warning to suggest use of QueryItems.
      */
-    public setQueryArrVal(value: string | QueryItems | any[], propName: string, propOperName: string | undefined, defaultOperName) {
+    public setQueryArrVal(value: string | QueryItems | any[], propName: string, propOperName: string | undefined, defaultOperName: string) {
         if (!value) {
             return;
         }
 
         if (value instanceof QueryItems) {
             this.params[propName] = value.getItems();
-            const formattedOperator = _.replace(value.getOper(), "$", "");
+            const formattedOperator = value.getOper().replace(/\$/g, "");
             if (propOperName) {
                 this.params[propOperName] = formattedOperator;
             }
-            if (_.isUndefined(propOperName) && formattedOperator !== defaultOperName) {
+            if (propOperName === undefined && formattedOperator !== defaultOperName) {
                 throw new Error(`An invalid operator type '${formattedOperator}' was used for property '${propName}'`);
             }
-        } else if (_.isString(value)) {
+        } else if (typeof value === "string") {
             this.params[propName] = value;
-        } else if (_.isArray(value)) {
+        } else if (Array.isArray(value)) {
             this.params[propName] = value;
-            if (!_.isUndefined(propOperName)) {
+            if (propOperName !== undefined) {
                 this.params[propOperName] = defaultOperName;
-                if (_.size(value) > 1) {
-                    console.warn(`
+                if (value.length > 1) {
+                    Logger.warn(`
                         Warning: The value of parameter '${propName}' was provided as a list and '${defaultOperName}' operator was used implicitly between the items.
                         We suggest specifying the list using the QueryItems.AND() or QueryItems.OR() to ensure the appropriate operator is used.
                     `);
@@ -146,7 +145,7 @@ export abstract class Query<T> extends QueryParamsBase {
      * Set it to a default path.
      */
     protected internalPath: string;
-    protected params = {};
+    protected params: Record<string, unknown> = {};
 
     public get path() {
         return this.internalPath;
@@ -160,28 +159,29 @@ export abstract class Query<T> extends QueryParamsBase {
      * Prepare the request parameters
      */
     public getQueryParams() {
-        if (_.isEmpty(this.resultTypeList)) {
+        if (this.resultTypeList.length === 0) {
             throw new Error("The query does not have any result type specified. No sense in performing such a query");
         }
-        const allParams = this.params;
-        _.each(this.resultTypeList, (resultType) => {
-            _.extend(allParams, _.get(resultType, "params"));
-        });
-        const formattedResultTypeList = this.getFormattedResultTypeList();
-        if (!_.isEmpty(formattedResultTypeList)) {
-            _.set(allParams, "resultType", formattedResultTypeList);
+        let allParams = this.params;
+        for (const resultType of this.resultTypeList) {
+            allParams = { ...allParams, ...(resultType as Record<string, Record<string, unknown>>)?.params };
         }
-        return _.cloneDeep(allParams);
+
+        const formattedResultTypeList = this.getFormattedResultTypeList();
+        if (formattedResultTypeList?.length > 0) {
+            allParams = { ...allParams, resultType: formattedResultTypeList };
+        }
+        return JSON.parse(JSON.stringify(allParams));
     }
 
     public getFormattedResultTypeList() {
-        if (!_.every(this.resultTypeList, (result) => _.has(result, "resultType"))) {
+        if (!this.resultTypeList.every((result) => (result as Record<string, string>)?.resultType !== undefined)) {
             return [];
         }
-        if (_.size(this.resultTypeList) === 1) {
-            return _.get(_.first(this.resultTypeList), "resultType");
+        if (this.resultTypeList.length === 1) {
+            return (this.resultTypeList[0] as Record<string, string>)?.resultType;
         } else {
-            return _.map(this.resultTypeList, "resultType");
+            return this.resultTypeList.map((result) => (result as Record<string, string>)?.resultType);
         }
     }
 

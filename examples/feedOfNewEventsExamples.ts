@@ -1,5 +1,4 @@
 import { EventRegistry, GetRecentEvents, QueryEvents, RequestEventsRecentActivity, sleep } from "eventregistry";
-import * as _ from "lodash";
 
 // this is a simple script that makes a query to ER to get the feed of events that were added or
 // updated in the last minute.
@@ -16,18 +15,18 @@ async function fetchUpdates() {
     const {eventInfo = {}, activity} = await recentQ.getUpdates();
     if (eventInfo) {
         console.info(`==========`);
-        console.info(`${_.size(eventInfo)} events updated since last call`);
+        console.info(`${Object.values(eventInfo).length} events updated since last call`);
         // for each updated event print the URI and the title
         // NOTE: the same event can appear multiple times in the activity array - this means that more than one article
         // about it was recently written about it
-        _.each(activity, (eventUri) => {
+        for (const eventUri of activity) {
             const event = eventInfo[eventUri];
-            console.info(`Event ${eventUri} ('${event["title"][_.first(_.keys(event["title"]))]}')`);
+            console.info(`Event ${eventUri} ('${event["title"][Object.keys(event["title"])[0]]}')`);
             // event["concepts"] contains the list of relevant concepts for the event
             // event["categories"] contains the list of categories for the event
 
             // TODO: here you can do the processing that decides if the event is relevant for you or not. if relevant, send the info to an external service
-        });
+        }
     }
     // wait exactly a minute until next batch of new content is ready
     await sleep(60 * 1000);
@@ -50,19 +49,19 @@ async function fetchFilteredUpdates() {
         })
     );
     const response = await er.execQuery(query);
-    const activity = _.get(response, "recentActivityEvents.activity", []);
-    const eventInfo = _.get(response, "recentActivityEvents.eventInfo", {});
+    const activity = response?.recentActivityEvents?.activity ?? [];
+    const eventInfo = response?.recentActivityEvents?.eventInfo ?? [];
     if (eventInfo) {
         console.info(`==========`);
-        console.info(`${_.size(eventInfo)} events updated since last call`);
+        console.info(`${Object.values(eventInfo).length} events updated since last call`);
         // for each updated event print the URI and the title
         // NOTE: the same event can appear multiple times in the activity array - this means that more than one article
         // about it was recently written about it
-        _.each(activity, (eventUri) => {
+        for (const eventUri of activity) {
             const event = eventInfo[eventUri];
-            console.info(`Event ${eventUri} ('${event["title"][_.first(_.keys(event["title"]))]}')`);
+            console.info(`Event ${eventUri} ('${event["title"][Object.keys(event["title"])[0]]}')`);
             // TODO: here you can do the processing that decides if the event is relevant for you or not. if relevant, send the info to an external service
-        });
+        }
     }
     // wait exactly a minute until next batch of new content is ready
     await sleep(60 * 1000);

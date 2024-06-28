@@ -1,11 +1,10 @@
-import * as _ from "lodash";
 import { QueryArticles } from "../../src";
 import { Utils } from "./utils";
 
 describe("Invalid queries", () => {
     const er = Utils.initAPI();
-    const utils = new Utils();
-    it("should test produce an error on an invalid query", async (done) => {
+
+    it("should test produce an error on an invalid query", async () => {
         const bushUri = await er.getConceptUri("Bush");
         const obamaUri = await er.getConceptUri("Obama");
         const politicsUri = await er.getCategoryUri("politics");
@@ -37,7 +36,7 @@ describe("Invalid queries", () => {
         `;
         const q1 = QueryArticles.initWithComplexQuery(qStr1);
         const response1 = await er.execQuery(q1);
-        expect(_.has(response1, "error")).toBeFalsy();
+        expect(response1.hasOwnProperty("error")).toBeFalsy();
 
         const qStr2 = `
             {
@@ -56,7 +55,7 @@ describe("Invalid queries", () => {
         const q2 = new QueryArticles();
         q2.setVal("query", qStr2);
         const response2 = await er.execQuery(q2);
-        expect(_.has(response2, "error")).toBeTruthy();
+        expect(response2.hasOwnProperty("error")).toBeTruthy();
 
         const qStr3 = `
             {
@@ -73,7 +72,7 @@ describe("Invalid queries", () => {
         const q3 = new QueryArticles();
         q3.setVal("query", qStr3);
         const response3 = await er.execQuery(q3);
-        expect(_.has(response3, "error")).toBeTruthy();
+        expect(response3.hasOwnProperty("error")).toBeTruthy();
 
         const qStr4 = `
             {
@@ -90,7 +89,7 @@ describe("Invalid queries", () => {
         const q4 = new QueryArticles();
         q4.setVal("query", qStr4);
         const response4 = await er.execQuery(q4);
-        expect(_.has(response4, "error")).toBeTruthy();
+        expect(response4.hasOwnProperty("error")).toBeTruthy();
 
         const qStr5 = `
             {
@@ -105,7 +104,7 @@ describe("Invalid queries", () => {
         const q5 = new QueryArticles();
         q5.setVal("query", qStr5);
         const response5 = await er.execQuery(q5);
-        expect(_.has(response5, "error")).toBeTruthy();
+        expect(response5.hasOwnProperty("error")).toBeTruthy();
 
         const qStr6 = `
             {
@@ -118,7 +117,7 @@ describe("Invalid queries", () => {
         const q6 = new QueryArticles();
         q6.setVal("query", qStr6);
         const response6 = await er.execQuery(q6);
-        expect(_.has(response6, "error")).toBeTruthy();
+        expect(response6.hasOwnProperty("error")).toBeTruthy();
 
         const qStr7 = `
             {
@@ -130,7 +129,7 @@ describe("Invalid queries", () => {
         const q7 = new QueryArticles();
         q7.setVal("query", qStr7);
         const response7 = await er.execQuery(q7);
-        expect(_.has(response7, "error")).toBeTruthy();
+        expect(response7.hasOwnProperty("error")).toBeTruthy();
 
         const qStr8 = `
             {
@@ -141,7 +140,6 @@ describe("Invalid queries", () => {
         const q8 = new QueryArticles();
         q8.setVal("query", qStr8);
         const response8 = await er.execQuery(q8);
-        expect(_.has(response8, "error")).toBeTruthy();
-        done();
+        expect(response8.hasOwnProperty("error")).toBeTruthy();
     });
 });

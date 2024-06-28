@@ -1,7 +1,6 @@
-import * as _ from "lodash";
 import { Query } from "./base";
 import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
 
 /**
  * @class QueryArticle
@@ -61,7 +60,7 @@ export class RequestArticleInfo extends RequestArticle {
 export class RequestArticleSimilarArticles extends RequestArticle {
     public resultType = "similarArticles";
     public params;
-    constructor(args: EventRegistryStatic.QueryArticle.RequestArticleSimilarArticlesArguments = {}) {
+    constructor(args: ER.QueryArticle.RequestArticleSimilarArticlesArguments = {}) {
         super();
         const {
             page = 1,
@@ -71,7 +70,7 @@ export class RequestArticleSimilarArticles extends RequestArticle {
             returnInfo = new ReturnInfo({ articleInfo: new ArticleInfoFlags({ bodyLen: -1 })}),
             ...unsupported
         } = args;
-        if (!_.isEmpty(unsupported)) {
+        if (Object.keys(unsupported).length > 0) {
             console.warn(`RequestArticleSimilarArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (page < 1) {
@@ -85,7 +84,7 @@ export class RequestArticleSimilarArticles extends RequestArticle {
         this.params["similarArticlesCount"] = count;
         this.params["similarArticlesLang"] = lang;
         this.params["similarArticlesLimitPerLang"] = limitPerLang;
-        this.params = _.extend({}, this.params, returnInfo.getParams("similarArticles"));
+        this.params = { ...this.params, ...returnInfo.getParams("similarArticles") };
     }
 }
 
@@ -95,7 +94,7 @@ export class RequestArticleSimilarArticles extends RequestArticle {
 export class RequestArticleDuplicatedArticles extends RequestArticle {
     public resultType = "duplicatedArticles";
     public params;
-    constructor(args: EventRegistryStatic.QueryArticle.RequestArticleDuplicatedArticlesArguments = {}) {
+    constructor(args: ER.QueryArticle.RequestArticleDuplicatedArticlesArguments = {}) {
         super();
         const {
             page = 1,
@@ -105,7 +104,7 @@ export class RequestArticleDuplicatedArticles extends RequestArticle {
             returnInfo = new ReturnInfo({ articleInfo: new ArticleInfoFlags({ bodyLen: -1 })}),
             ...unsupported
         } = args;
-        if (!_.isEmpty(unsupported)) {
+        if (Object.keys(unsupported).length > 0) {
             console.warn(`RequestArticleDuplicatedArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (page < 1) {
@@ -119,7 +118,7 @@ export class RequestArticleDuplicatedArticles extends RequestArticle {
         this.params["duplicatedArticlesCount"] = count;
         this.params["duplicatedArticlesSortBy"] = sortBy;
         this.params["duplicatedArticlesSortByAsc"] = sortByAsc;
-        this.params = _.extend({}, this.params, returnInfo.getParams("duplicatedArticles"));
+        this.params = { ...this.params, ...returnInfo.getParams("duplicatedArticles") };
     }
 }
 

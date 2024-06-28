@@ -1,6 +1,6 @@
-import * as _ from "lodash";
 import {mainLangs, Query, QueryParamsBase } from "./base";
 import {ArticleInfoFlags, ReturnInfo } from "./returnInfo";
+import { Logger } from "./logger";
 
 export class QueryStory extends Query<RequestStory> {
     constructor(storyUriOrList) {
@@ -53,8 +53,8 @@ export class RequestStoryArticles extends RequestStory {
                   ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestStoryArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length > 0) {
+            Logger.warn(`RequestStoryArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (page < 1) {
           throw new RangeError("Page has to be >= 1");
@@ -67,7 +67,7 @@ export class RequestStoryArticles extends RequestStory {
         this.params["articlesCount"] = count;
         this.params["articlesSortBy"] = sortBy;
         this.params["articlesSortByAsc"] = sortByAsc;
-        this.params = _.extend({}, this.params, returnInfo.getParams("articles"));
+        this.params = {...this.params, ...returnInfo.getParams("articles")};
     }
 }
 
@@ -80,8 +80,8 @@ export class RequestStoryArticleUris extends RequestStory {
                   ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestStoryArticleUris: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length > 0) {
+            Logger.warn(`RequestStoryArticleUris: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         this.params = {};
         this.params["articleUrisSortBy"] = sortBy;
@@ -99,13 +99,13 @@ export class RequestStoryArticleTrend extends RequestStory {
                   ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestStoryArticleTrend: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length > 0) {
+            Logger.warn(`RequestStoryArticleTrend: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         this.params = {};
         this.params["articleTrendLang"] = lang;
         this.params["articleTrendMinArticleCosSim"] = minArticleCosSim;
-        this.params = _.extend({}, this.params, returnInfo.getParams("articles"));
+        this.params = {...this.params, ...returnInfo.getParams("articles")};
     }
 }
 
@@ -122,13 +122,13 @@ export class RequestStorySimilarStories extends RequestStory {
                   ...unsupported
                 } = {}) {
         super();
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestStorySimilarStories: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length > 0) {
+            Logger.warn(`RequestStorySimilarStories: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (count > 50) {
           throw new RangeError("At most 50 stories can be returned per call");
         }
-        if (!_.isArray(conceptInfoList)) {
+        if (!Array.isArray(conceptInfoList)) {
             throw new Error("Concept list is not an array!");
         }
         this.params = {};
@@ -144,9 +144,9 @@ export class RequestStorySimilarStories extends RequestStory {
             this.params["dateEnd"] = QueryParamsBase.encodeDateTime( dateEnd, "YYYY-MM-DD" );
         }
 
-        if (!_.isEmpty(lang)) {
+        if (lang.length > 0) {
             this.params["lang"] = lang;
         }
-        this.params = _.extend({}, this.params, returnInfo.getParams("similarStories"));
+        this.params = {...this.params, ...returnInfo.getParams("similarStories")};
     }
 }

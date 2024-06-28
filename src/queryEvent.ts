@@ -1,9 +1,9 @@
-import * as _ from "lodash";
 import { Query, QueryParamsBase } from "./base";
 import { Data } from "./data";
 import { EventRegistry } from "./eventRegistry";
 import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
+import { Logger } from "./logger";
 /**
  * @class QueryEvent
  * Class for obtaining available info for one or more events in the Event Registry
@@ -39,7 +39,7 @@ export class QueryEvent extends Query<RequestEvent> {
  */
 export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<Data.Article> {
     private readonly er: EventRegistry;
-    private readonly sortBy: EventRegistryStatic.QueryEvent.SortByOptions;
+    private readonly sortBy: ER.QueryEvent.SortByOptions;
     private readonly sortByAsc: boolean;
     private readonly returnInfo: ReturnInfo;
     private readonly eventUri: string;
@@ -49,8 +49,8 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
     private items: Data.Article[] = [];
     private returnedSoFar: number = 0;
     private index: number = 0;
-    private callback: (item: Data.Article) => void = _.noop;
-    private doneCallback: (error?: string) => void = _.noop;
+    private callback: (item: Data.Article) => void = () => undefined;
+    private doneCallback: (error?: string) => void = () => undefined;
     private errorMessage: string;
 
     /**
@@ -58,7 +58,7 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
      * @param eventUri a single event for which we want to obtain the list of articles in it
      * @param args Object which contains a host of optional parameters
      */
-    constructor(er: EventRegistry, eventUri: string, args: EventRegistryStatic.QueryEvent.IteratorArguments = {}) {
+    constructor(er: EventRegistry, eventUri: string, args: ER.QueryEvent.IteratorArguments = {}) {
         super(eventUri);
         const {
             lang = undefined,
@@ -79,6 +79,7 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
             dateMentionStart = undefined,
             dateMentionEnd = undefined,
             keywordsLoc = "body",
+            keywordSearchMode = "phrase", // "simple", "exact", "phrase"]
             startSourceRankPercentile = 0,
             endSourceRankPercentile = 100,
             minSentiment = -1,
@@ -100,23 +101,24 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
         this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
         this.setQueryArrVal(lang, "lang", undefined, "or");
 
-        if (!_.isUndefined(dateStart)) {
+        if (dateStart !== undefined) {
             this.setDateVal("dateStart", dateStart);
         }
 
-        if (!_.isUndefined(dateEnd)) {
+        if (dateEnd !== undefined) {
             this.setDateVal("dateEnd", dateEnd);
         }
 
-        if (!_.isUndefined(dateMentionStart)) {
+        if (dateMentionStart !== undefined) {
             this.setDateVal("dateMentionStart", dateMentionStart);
         }
 
-        if (!_.isUndefined(dateMentionEnd)) {
+        if (dateMentionEnd !== undefined) {
             this.setDateVal("dateMentionEnd", dateMentionEnd);
         }
 
         this.setValIfNotDefault("keywordLoc", keywordsLoc, "body");
+        this.setValIfNotDefault("keywordSearchMode", keywordSearchMode, "phrase");
 
         if (startSourceRankPercentile < 0 || startSourceRankPercentile % 10 !== 0 || startSourceRankPercentile > 100) {
             throw new Error("StartSourceRankPercentile: Value should be in range 0-90 and divisible by 10.");
@@ -164,10 +166,10 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
     public async count(): Promise<number> {
         this.setRequestedResult(new RequestEventArticles(this.getQueryParams()));
         const response = await this.er.execQuery(this);
-        if (_.has(response, "error")) {
-            console.error(_.get(response, "error"));
+        if (!!response?.error) {
+            this.er.logger.error(response?.error ?? "Error while obtaining a list of articles");
         }
-        return _.get(response[this.eventUri], "articles.totalResults", 0);
+        return (response[this.eventUri] as Record<string, ER.Results<unknown>>)?.articles?.totalResults ?? 0;
     }
     /**
      * Execute query and fetch batches of articles of the specified size (articleBatchSize)
@@ -196,9 +198,10 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
      * @param response response from the backend
      */
     private extractResults(response): Data.Article[] {
-        const results = _.get(response[this.eventUri], "articles.results", []);
-        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : _.size(results);
-        return _.compact(_.pullAt(results, _.range(0, extractedSize)) as Data.Article[]);
+        const results = response[this.eventUri]?.articles?.results || [];
+        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : results.length;
+        const extractedResults = results.slice(0, extractedSize);
+        return extractedResults.filter(Boolean);
     }
 
     private get current() {
@@ -219,21 +222,21 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
                 ...this.getQueryParams(),
             }));
             if (this.er.verboseOutput) {
-                console.log(`Downloading page ${this.page}...`);
+                this.er.logger.info(`Downloading page ${this.page}...`);
             }
             const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
-            const error = _.get(response[this.eventUri], "error", "");
+            const error = (response[this.eventUri] as ER.ErrorResponse)?.error || "";
             if (error) {
-                this.errorMessage = `Error while obtaining a list of articles:  ${_.get(response[this.eventUri], "error")}`;
+                this.errorMessage = `Error while obtaining a list of articles:  ${(response[this.eventUri] as ER.ErrorResponse)?.error}`;
             } else {
-                this.pages = _.get(response[this.eventUri], "articles.pages", 0);
+                this.pages = (response[this.eventUri] as Record<string, ER.Results>)?.articles?.pages || 0;
             }
             const results = this.extractResults(response);
-            this.returnedSoFar += _.size(results);
+            this.returnedSoFar += results.length;
             this.items = [...this.items, ...results];
             return true;
         } catch (error) {
-            console.error(error);
+            this.er.logger.error(error);
             return false;
         }
     }
@@ -263,7 +266,7 @@ export class RequestEventArticles extends RequestEvent {
     public resultType = "articles";
     public params;
 
-    constructor(args: EventRegistryStatic.QueryEvent.RequestEventArticlesArguments = {}) {
+    constructor(args: ER.QueryEvent.RequestEventArticlesArguments = {}) {
         super();
         const {
             page = 1,
@@ -309,16 +312,16 @@ export class RequestEventArticles extends RequestEvent {
         this.setQueryArrVal(authorUri, "authorUri", "authorOper", "or");
         this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
         this.setQueryArrVal(lang, "articlesLang", undefined, "or");
-        if (!_.isUndefined(dateStart)) {
+        if (dateStart !== undefined) {
             this.setDateVal("dateStart", dateStart);
         }
-        if (!_.isUndefined(dateEnd)) {
+        if (dateEnd !== undefined) {
             this.setDateVal("dateEnd", dateEnd);
         }
-        if (!_.isUndefined(dateMentionStart)) {
+        if (dateMentionStart !== undefined) {
             this.setDateVal("dateMentionStart", dateMentionStart);
         }
-        if (!_.isUndefined(dateMentionEnd)) {
+        if (dateMentionEnd !== undefined) {
             this.setDateVal("dateMentionEnd", dateMentionEnd);
         }
         this.setValIfNotDefault("keywordLoc", keywordsLoc, "body");
@@ -340,8 +343,12 @@ export class RequestEventArticles extends RequestEvent {
             this.setVal("endSourceRankPercentile", endSourceRankPercentile);
         }
 
-        if (!!returnInfo) {
-            this.params = _.extend({}, this.params, this.getQueryParams(), returnInfo.getParams("articles"));
+        if (returnInfo) {
+            this.params = {
+                ...this.params,
+                ...this.getQueryParams(),
+                ...returnInfo.getParams("articles")
+            };
         }
     }
 }
@@ -354,7 +361,7 @@ export class RequestEventArticleUriWgts extends RequestEvent {
     public resultType = "uriWgtList";
     public params;
 
-    constructor(args: EventRegistryStatic.QueryEvent.RequestEventArticleUriWgtsArguments = {}) {
+    constructor(args: ER.QueryEvent.RequestEventArticleUriWgtsArguments = {}) {
         super();
         const {
             lang = undefined,
@@ -362,11 +369,11 @@ export class RequestEventArticleUriWgts extends RequestEvent {
             sortByAsc = false,
             ...unsupported
         } = args;
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestEventArticleUriWgts: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length > 0) {
+            Logger.warn(`RequestEventArticleUriWgts: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         this.params = {};
-        if (!_.isUndefined(lang)) {
+        if (lang !== undefined) {
             this.params["articlesLang"] = lang;
         }
         this.params["uriWgtListSortBy"] = sortBy;
@@ -414,7 +421,7 @@ export class RequestEventArticleTrend extends RequestEvent {
     public resultType = "articleTrend";
     public params;
 
-    constructor(args: EventRegistryStatic.QueryEvent.RequestEventArticleTrendArguments = {}) {
+    constructor(args: ER.QueryEvent.RequestEventArticleTrendArguments = {}) {
         super();
         const {
             lang = undefined,
@@ -423,9 +430,9 @@ export class RequestEventArticleTrend extends RequestEvent {
             minArticleCosSim = -1,
             returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({bodyLen: 0})}),
             ...unsupported
-          } = args;
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestEventArticleTrend: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        } = args;
+        if (Object.keys(unsupported).length > 0) {
+            Logger.warn(`RequestEventArticleTrend: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
@@ -438,7 +445,10 @@ export class RequestEventArticleTrend extends RequestEvent {
         this.params["articleTrendPage"] = page;
         this.params["articleTrendCount"] = count;
         this.params["articleTrendMinArticleCosSim"] = minArticleCosSim;
-        this.params = _.extend({}, this.params, returnInfo.getParams("articleTrend"));
+        this.params = {
+            ...this.params,
+            ...returnInfo.getParams("articleTrend")
+        };
     }
 }
 
@@ -449,7 +459,7 @@ export class RequestEventArticleTrend extends RequestEvent {
 export class RequestEventSimilarEvents extends RequestEvent {
     public path = "/api/v1/event/getSimilarEvents";
     public params;
-    constructor(args: EventRegistryStatic.QueryEvent.RequestEventSimilarEventsArguments = {}) {
+    constructor(args: ER.QueryEvent.RequestEventSimilarEventsArguments = {}) {
         super();
         const {
             conceptInfoList,
@@ -460,14 +470,14 @@ export class RequestEventSimilarEvents extends RequestEvent {
             aggrHours = 6,
             returnInfo = new ReturnInfo(),
             ...unsupported
-          } = args;
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`RequestEventSimilarEvents: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        } = args;
+        if (Object.keys(unsupported).length > 0) {
+            Logger.warn(`RequestEventSimilarEvents: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         if (count > 50) {
             throw new RangeError("At most 50 similar events can be returned per call");
         }
-        if (!_.isArray(conceptInfoList)) {
+        if (!Array.isArray(conceptInfoList)) {
             throw new Error("Concept info list is not an array");
         }
         this.params = {};
@@ -476,15 +486,18 @@ export class RequestEventSimilarEvents extends RequestEvent {
         this.params["concepts"] = JSON.stringify(conceptInfoList);
         // Potential problem, verify that output corresponds the REST API docs.
         this.params["eventsCount"] = count;
-        if (!!dateStart) {
+        if (dateStart) {
             this.params["dateStart"] = QueryParamsBase.encodeDateTime(dateStart, "YYYY-MM-DD");
         }
-        if (!!dateEnd) {
+        if (dateEnd) {
             this.params["dateEnd"] = QueryParamsBase.encodeDateTime(dateEnd, "YYYY-MM-DD");
         }
         this.params["addArticleTrendInfo"] = addArticleTrendInfo;
         this.params["aggrHours"] = aggrHours;
         this.params["resultType"] = "similarEvents";
-        this.params = _.extend({}, this.params, returnInfo.getParams());
+        this.params = {
+            ...this.params,
+            ...returnInfo.getParams()
+        };
     }
 }

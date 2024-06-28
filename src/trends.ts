@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import { QueryParamsBase } from "./base";
 import { ReturnInfo } from "./returnInfo";
 
@@ -18,7 +17,7 @@ export class GetTrendingConcepts extends TrendsBase {
         }
         this.setVal("conceptCount", count);
         this.setVal("conceptType", conceptType);
-        this.params = _.extend({}, this.params, returnInfo.getParams());
+        this.params = {...this.params, ...returnInfo.getParams()};
     }
 }
 
@@ -31,7 +30,7 @@ export class GetTrendingCategories extends TrendsBase {
             this.setVal("dataType", source);
         }
         this.setVal("categoryCount", count);
-        this.params = _.extend({}, this.params, returnInfo.getParams());
+        this.params = {...this.params, ...returnInfo.getParams()};
     }
 }
 
@@ -40,7 +39,7 @@ export class GetTrendingCustomItems extends TrendsBase {
         super();
         this.setVal("action", "getTrendingCustom");
         this.setVal("conceptCount", count);
-        this.params = _.extend({}, this.params, returnInfo.getParams());
+        this.params = {...this.params, ...returnInfo.getParams()};
     }
 }
 
@@ -50,7 +49,7 @@ export class GetTrendingConceptGroups extends TrendsBase {
         this.setVal("action", "getConceptTrendGroups");
         this.setVal("source", source);
         this.setVal("conceptCount", count);
-        this.params = _.extend({}, this.params, returnInfo.getParams());
+        this.params = {...this.params, ...returnInfo.getParams()};
     }
 
     public getConceptTypeGroups(types = ["person", "org", "loc"]) {

@@ -1,5 +1,4 @@
 import { ArticleInfoFlags, EventRegistry, GetRecentArticles, QueryArticles, RequestArticlesRecentActivity, ReturnInfo, sleep } from "eventregistry";
-import * as _ from "lodash";
 
 // this is a simple script that makes a query to ER to get the feed of articles that were added
 // in the last minute (from the first to the last second of the minute).
@@ -14,9 +13,9 @@ const recentQ = new GetRecentArticles(er, { returnInfo });
 async function fetchUpdates() {
     const articleList = await recentQ.getUpdates();
     // TODO: do here whatever you need to with the articleList
-    _.each(articleList, (article) => {
+    for (const article of articleList) {
         console.info(`Added article ${article["uri"]}: ${article["title"]}`);
-    });
+    }
     // wait exactly a minute until next batch of new content is ready
     await sleep(60 * 1000);
     fetchUpdates();
@@ -44,15 +43,16 @@ async function fetchfilteredUpdates() {
         })
     );
     const articleList = await er.execQuery(query);
+    const articles = articleList?.recentActivityArticles?.activity ?? [];
     // TODO: do here whatever you need to with the articleList
-    for (const article of _.get(articleList, "recentActivityArticles.activity", [])) {
+    for (const article of articles) {
         console.info(`Added article ${article["uri"]}: ${article["title"]}`);
     }
 
     // remember what are the latest uris of the individual data items returned
-    updatesAfterNewsUri = _.get(articleList, "recentActivityArticles.newestUri.news", undefined);
-    updatesafterBlogUri = _.get(articleList, "recentActivityArticles.newestUri.blog", undefined);
-    updatesAfterPrUri = _.get(articleList, "recentActivityArticles.newestUri.pr", undefined);
+    updatesAfterNewsUri = articleList?.recentActivityArticles?.newestUri?.news;
+    updatesafterBlogUri = articleList?.recentActivityArticles?.newestUri?.blog;
+    updatesAfterPrUri = articleList?.recentActivityArticles?.newestUri?.pr;
 
     // wait for 10 minutes until next batch of new content is ready
     await sleep(600 * 1000);
@@ -72,7 +72,9 @@ async function fetchfilteredUpdatesWithParam() {
     );
     const articleList = await er.execQuery(query);
     // TODO: do here whatever you need to with the articleList
-    for (const article of _.get(articleList, "recentActivityArticles.activity", [])) {
+    const articles = articleList?.recentActivityArticles?.activity ?? [];
+
+    for (const article of articles) {
         console.info(`Added article ${article["uri"]}: ${article["title"]}`);
     }
     // wait exactly a minute until next batch of new content is ready

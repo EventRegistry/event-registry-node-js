@@ -1,28 +1,44 @@
-import * as _ from "lodash";
-import { EventRegistryStatic } from "./types";
+import { ER } from "./types";
 import * as fs from "fs";
+import { Logger } from "./logger";
 
 export abstract class ReturnInfoFlagsBase<T extends {}> {
     protected type: string;
     private data = {};
 
     public setFlag(key: string, value: boolean, defaultValue?: boolean) {
-        this.setProperty("Include" + this.type + _.upperFirst(key), value, defaultValue);
+        this.setProperty("Include" + this.type + key.charAt(0).toUpperCase() + key.slice(1), value, defaultValue);
     }
 
     public setValue(key: string, value: any, defaultValue?: any, skipKeyMod = false) {
-        const constructedKey = skipKeyMod ? _.upperFirst(key) : this.type + _.upperFirst(key);
+        const constructedKey = skipKeyMod ? key.charAt(0).toUpperCase() + key.slice(1) : this.type + key.charAt(0).toUpperCase() + key.slice(1);
         this.setProperty(constructedKey, value, defaultValue);
     }
 
     public getProperties(prefix = "") {
-        return _.mapKeys(this.data, (value, key) => {
-            if (_.startsWith(_.toLower(key), _.toLower(prefix))) {
-                return _.camelCase(key);
-            } else {
-                return _.camelCase(prefix + key);
+        const result: { [key: string]: any } = {};
+
+        for (const key in this.data) {
+            if (Object.prototype.hasOwnProperty.call(this.data, key)) {
+                const value = this.data[key];
+                const lowercaseKey = key.toLowerCase();
+                const lowercasePrefix = prefix.toLowerCase();
+
+                if (lowercaseKey.startsWith(lowercasePrefix)) {
+                    result[this.camelCase(key)] = value;
+                } else {
+                    result[this.camelCase(prefix + key)] = value;
+                }
             }
-        });
+        }
+
+        return result;
+    }
+
+    private camelCase(str: string): string {
+        return str.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
+            return index === 0 ? word.toLowerCase() : word.toUpperCase();
+        }).replace(/\s+/g, '');
     }
 
     public addProperties(properties: object) {
@@ -42,7 +58,7 @@ export abstract class ReturnInfoFlagsBase<T extends {}> {
 
     private setProperty(key, value, defaultValue?) {
         if (value !== defaultValue) {
-            _.set(this.data, key, value);
+            this.data[key] = value;
         }
     }
 
@@ -71,8 +87,8 @@ export class ReturnInfo {
             conceptFolderInfo = new ConceptFolderInfoFlags(),
             ...unsupported
         } = {}) {
-        if (!_.isEmpty(unsupported)) {
-            console.warn(`ReturnInfo: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+        if (Object.keys(unsupported).length > 0) {
+            Logger.warn(`ReturnInfo: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
         }
         this.articleInfo = articleInfo;
         this.eventInfo = eventInfo;
@@ -85,19 +101,18 @@ export class ReturnInfo {
         this.conceptFolderInfo = conceptFolderInfo;
     }
 
-    public getParams(prefix?: string) {
-        return _.extend(
-            {},
-            this.articleInfo.getProperties(prefix),
-            this.eventInfo.getProperties(prefix),
-            this.sourceInfo.getProperties(prefix),
-            this.categoryInfo.getProperties(prefix),
-            this.conceptInfo.getProperties(prefix),
-            this.locationInfo.getProperties(prefix),
-            this.storyInfo.getProperties(prefix),
-            this.conceptClassInfo.getProperties(prefix),
-            this.conceptFolderInfo.getProperties(prefix),
-        );
+    public getParams(prefix?: string): Record<string, unknown> {
+        return {
+            ...this.articleInfo.getProperties(prefix),
+            ...this.eventInfo.getProperties(prefix),
+            ...this.sourceInfo.getProperties(prefix),
+            ...this.categoryInfo.getProperties(prefix),
+            ...this.conceptInfo.getProperties(prefix),
+            ...this.locationInfo.getProperties(prefix),
+            ...this.storyInfo.getProperties(prefix),
+            ...this.conceptClassInfo.getProperties(prefix),
+            ...this.conceptFolderInfo.getProperties(prefix),
+        };
     }
 
     /**
@@ -110,21 +125,21 @@ export class ReturnInfo {
         }
         const conf = JSON.parse(fs.readFileSync(filename, "utf8"));
         return new ReturnInfo({
-            articleInfo: new ArticleInfoFlags(_.get(conf, "articleInfo", {})),
-            eventInfo: new EventInfoFlags(_.get(conf, "eventInfo", {})),
-            sourceInfo: new SourceInfoFlags(_.get(conf, "sourceInfo", {})),
-            categoryInfo: new CategoryInfoFlags(_.get(conf, "categoryInfo", {})),
-            conceptInfo: new ConceptInfoFlags(_.get(conf, "conceptInfo", {})),
-            locationInfo: new LocationInfoFlags(_.get(conf, "locationInfo", {})),
-            storyInfo: new StoryInfoFlags(_.get(conf, "storyInfo", {})),
-            conceptClassInfo: new ConceptClassInfoFlags(_.get(conf, "conceptClassInfo", {})),
-            conceptFolderInfo: new ConceptFolderInfoFlags(_.get(conf, "conceptFolderInfo", {})),
+            articleInfo: new ArticleInfoFlags(conf.articleInfo || {}),
+            eventInfo: new EventInfoFlags(conf.eventInfo || {}),
+            sourceInfo: new SourceInfoFlags(conf.sourceInfo || {}),
+            categoryInfo: new CategoryInfoFlags(conf.categoryInfo || {}),
+            conceptInfo: new ConceptInfoFlags(conf.conceptInfo || {}),
+            locationInfo: new LocationInfoFlags(conf.locationInfo || {}),
+            storyInfo: new StoryInfoFlags(conf.storyInfo || {}),
+            conceptClassInfo: new ConceptClassInfoFlags(conf.conceptClassInfo || {}),
+            conceptFolderInfo: new ConceptFolderInfoFlags(conf.conceptFolderInfo || {}),
         });
     }
 }
 
-export class ArticleInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.ArticleInfoFlags> {
-    constructor(params: EventRegistryStatic.ReturnInfo.ArticleInfo = {}) {
+export class ArticleInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ArticleInfoFlags> {
+    constructor(params: ER.ReturnInfo.ArticleInfo = {}) {
         super();
         this.type = "Article";
         const {
@@ -170,8 +185,8 @@ export class ArticleInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.Re
     }
 }
 
-export class StoryInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.StoryInfoFlags> {
-    constructor(params: EventRegistryStatic.ReturnInfo.StoryInfo = {}) {
+export class StoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.StoryInfoFlags> {
+    constructor(params: ER.ReturnInfo.StoryInfo = {}) {
         super();
         this.type = "Story";
         const {
@@ -205,8 +220,8 @@ export class StoryInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.Retu
     }
 }
 
-export class EventInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.EventInfoFlags> {
-    constructor(params: EventRegistryStatic.ReturnInfo.EventInfo = {}) {
+export class EventInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.EventInfoFlags> {
+    constructor(params: ER.ReturnInfo.EventInfo = {}) {
         super();
         this.type = "Event";
         const {
@@ -238,8 +253,8 @@ export class EventInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.Retu
     }
 }
 
-export class SourceInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.SourceInfoFlags> {
-    constructor(params: EventRegistryStatic.ReturnInfo.SourceInfo = {}) {
+export class SourceInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.SourceInfoFlags> {
+    constructor(params: ER.ReturnInfo.SourceInfo = {}) {
         super();
         const {
             title = true,
@@ -261,8 +276,8 @@ export class SourceInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.Ret
     }
 }
 
-export class CategoryInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.CategoryInfoFlags> {
-    constructor(params: EventRegistryStatic.ReturnInfo.CategoryInfo = {}) {
+export class CategoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.CategoryInfoFlags> {
+    constructor(params: ER.ReturnInfo.CategoryInfo = {}) {
         super();
         this.type = "Category";
         const {
@@ -274,8 +289,8 @@ export class CategoryInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.R
     }
 }
 
-export class ConceptInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.ConceptInfoFlags> {
-    constructor(params: EventRegistryStatic.ReturnInfo.ConceptInfo = {}) {
+export class ConceptInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptInfoFlags> {
+    constructor(params: ER.ReturnInfo.ConceptInfo = {}) {
         super();
         this.type = "Concept";
         const {
@@ -301,8 +316,8 @@ export class ConceptInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.Re
     }
 }
 
-export class LocationInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.LocationInfoFlags> {
-    constructor(params: EventRegistryStatic.ReturnInfo.LocationInfo = {}) {
+export class LocationInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.LocationInfoFlags> {
+    constructor(params: ER.ReturnInfo.LocationInfo = {}) {
         super();
         this.type = "Location";
         const {
@@ -332,8 +347,8 @@ export class LocationInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.R
     }
 }
 
-export class ConceptClassInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.ConceptClassInfoFlags> {
-    constructor(params: EventRegistryStatic.ReturnInfo.ConceptClassInfo = {}) {
+export class ConceptClassInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptClassInfoFlags> {
+    constructor(params: ER.ReturnInfo.ConceptClassInfo = {}) {
         super();
         this.type = "ConceptClass";
         const {
@@ -347,8 +362,8 @@ export class ConceptClassInfoFlags extends ReturnInfoFlagsBase<EventRegistryStat
     }
 }
 
-export class ConceptFolderInfoFlags extends ReturnInfoFlagsBase<EventRegistryStatic.ReturnInfo.ConceptFolderInfoFlags> {
-    constructor(params: EventRegistryStatic.ReturnInfo.ConceptFolderInfo = {}) {
+export class ConceptFolderInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptFolderInfoFlags> {
+    constructor(params: ER.ReturnInfo.ConceptFolderInfo = {}) {
         super();
         this.type = "ConceptFolder";
         const {

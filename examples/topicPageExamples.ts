@@ -1,5 +1,4 @@
 import { TopicPage, EventRegistry, ArticleInfoFlags, ReturnInfo } from "eventregistry";
-import * as _ from "lodash";
 
 const er = new EventRegistry();
 
@@ -47,8 +46,9 @@ async function createTopicPage2() {
     const articleInfo = new ArticleInfoFlags ({concepts: true, categories: true});
     const returnInfo = new ReturnInfo({articleInfo: articleInfo});
     // get first page of articles sorted by date (from most recent backward) to the topic page
-    const response = await topic.getArticles({page: 1, sortBy: "date", returnInfo: returnInfo});
-    for (const article of _.get(response, "articles.results", [])) {
+    const response = await topic.getArticles({ page: 1, sortBy: "date", returnInfo: returnInfo });
+    const articles = response?.articles?.results ?? [];
+    for (const article of articles) {
         console.log(article);
     }
 }
@@ -59,7 +59,7 @@ async function loadERTopicPage() {
         const topic = new TopicPage(er);
         await topic.loadTopicPageFromER("265e373d-ebf6-487f-a346-f87c198ec8dd");
         const response = await topic.getArticles({page: 1, sortBy: "date"});
-        articles = _.get(response, "articles.results", []);
+        articles = response?.articles?.results ?? [];
     } catch (error) {
         console.error(error);
     } finally {
