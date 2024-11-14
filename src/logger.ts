@@ -40,25 +40,17 @@ export class Logger {
             request: "magenta"
         }
     };
-    private readonly _errorLog = new winston.transports.File({
-        filename: "logs/error.log",
-        level: "error",
-    });
-    private readonly _infoLog = new winston.transports.File({
-        filename: "logs/info.log",
-        level: "info",
-    });
-    private readonly _requestLog = new winston.transports.File({
-        filename: "logs/requests.log",
-        level: "request",
-    });
+    private _errorLog: winston.transports.FileTransportInstance;
+    private _infoLog: winston.transports.FileTransportInstance;
+    private _requestLog: winston.transports.FileTransportInstance;
 
-    constructor({logging = false, logRequests = false}: LoggerConfig) {
+    constructor ({ logging = false, logRequests = false }: LoggerConfig) {
         this._transports = [
             new winston.transports.Console()
         ];
 
         if (logging) {
+            this.createFileTransports();
             this._transports.push(this._errorLog);
             this._transports.push(this._infoLog);
         }
@@ -97,19 +89,23 @@ export class Logger {
     }
 
     public enableRequestLogging() {
+        this.createFileTransports();
         this._logger.add(this._requestLog);
     }
 
     public disableRequestLogging() {
+        this.createFileTransports();
         this._logger.remove(this._requestLog);
     }
 
     public enableLogging() {
+        this.createFileTransports();
         this._logger.add(this._errorLog);
         this._logger.add(this._infoLog);
     }
 
     public disableLogging() {
+        this.createFileTransports();
         this._logger.remove(this._errorLog);
         this._logger.remove(this._infoLog);
     }
@@ -163,5 +159,23 @@ export class Logger {
         this._logger.request(message);
     }
 
+    private createFileTransports() {
+        if (this._errorLog && this._infoLog && this._requestLog) return;
+        this._errorLog = new winston.transports.File({
+            filename: "logs/error.log",
+            level: "error",
+            lazy: true,
+        });
+        this._infoLog = new winston.transports.File({
+            filename: "logs/info.log",
+            level: "info",
+            lazy: true,
+        });
+        this._requestLog = new winston.transports.File({
+            filename: "logs/requests.log",
+            level: "request",
+            lazy: true,
+        });
+    }
 
 }

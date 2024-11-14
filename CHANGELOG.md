@@ -1,7 +1,11 @@
 # NodeJS SDK: Change Log
 
 This log contains changes specific to the NodeJS SDK.
-## [v9.1]() (2024-27-06)
+## [v9.1.1]() (2024-11-14)
+**Fixed**
+ - fixed the issue when passing `logging` as `false` to the `EventRegistry` constructor the logs folder was still created. Now the logs are created only when `logging` is set to `true`.
+
+## [v9.1]() (2024-06-27)
 **Updated**
  - Updated several external packages used internally by the SDK.
  - Removed `lodash` as a dependency.
@@ -10,7 +14,7 @@ This log contains changes specific to the NodeJS SDK.
 **Updated**
 - `QueryArticles` class. Added filters `authorsFilter`, `videosFilter`, `linksFilter`
 - `QueryMentions` class. Added several filters: `industryUri`, `sdgUri`, `sasbUri`, `esgUri`, `minSentenceIndex`, `maxSentenceIndex`, `showDuplicates`
-- Changed how loggin works. If you would like to see host information or manually adjust logging level then you can do the following
+- Changed how logging works. If you would like to see host information or manually adjust logging level then you can do the following
     ``` javascript
         const er = new EventRegistry();
         er.logger.logLevel = LogLevel.DEBUG; // or LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR

@@ -2,7 +2,7 @@
   "author": "Anže Sršen",
   "name": "eventregistry",
   "description": "Package containing wrapper functions for Event Registry API",
-  "version": "9.1.0",
+  "version": "9.1.1",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
