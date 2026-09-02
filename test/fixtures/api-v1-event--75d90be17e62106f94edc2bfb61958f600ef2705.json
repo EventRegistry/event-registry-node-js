@@ -1,0 +1,425 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "conceptUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+      "resultType": "keywordAggr",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "keywordAggr": {
+        "usedResults": 7,
+        "totalResults": 7,
+        "results": [
+          {
+            "keyword": "charles",
+            "weight": 0.2568249702453613
+          },
+          {
+            "keyword": "scotland",
+            "weight": 0.1742616295814514
+          },
+          {
+            "keyword": "etat",
+            "weight": 0.1433620154857635
+          },
+          {
+            "keyword": "macron",
+            "weight": 0.1339649856090546
+          },
+          {
+            "keyword": "french",
+            "weight": 0.1285536885261536
+          },
+          {
+            "keyword": "applications",
+            "weight": 0.1224603205919266
+          },
+          {
+            "keyword": "frankreich",
+            "weight": 0.1159073859453201
+          },
+          {
+            "keyword": "offshore",
+            "weight": 0.1110674664378166
+          },
+          {
+            "keyword": "government",
+            "weight": 0.1109200343489647
+          },
+          {
+            "keyword": "tiktok",
+            "weight": 0.1089067980647087
+          },
+          {
+            "keyword": "basketball",
+            "weight": 0.1063229963183403
+          },
+          {
+            "keyword": "visite",
+            "weight": 0.1018396317958832
+          },
+          {
+            "keyword": "president",
+            "weight": 0.100225917994976
+          },
+          {
+            "keyword": "emmanuel",
+            "weight": 0.09664800018072128
+          },
+          {
+            "keyword": "france",
+            "weight": 0.09323443472385406
+          },
+          {
+            "keyword": "club",
+            "weight": 0.09303263574838638
+          },
+          {
+            "keyword": "grow",
+            "weight": 0.09303263574838638
+          },
+          {
+            "keyword": "oil",
+            "weight": 0.08885397017002106
+          },
+          {
+            "keyword": "gas",
+            "weight": 0.08885397017002106
+          },
+          {
+            "keyword": "paris",
+            "weight": 0.08574415743350983
+          },
+          {
+            "keyword": "visit",
+            "weight": 0.08570246398448944
+          },
+          {
+            "keyword": "manifestations",
+            "weight": 0.08486635982990265
+          },
+          {
+            "keyword": "becirovic",
+            "weight": 0.0826646238565445
+          },
+          {
+            "keyword": "rusije",
+            "weight": 0.0826646238565445
+          },
+          {
+            "keyword": "years",
+            "weight": 0.07913985848426819
+          },
+          {
+            "keyword": "energy",
+            "weight": 0.07774723321199417
+          },
+          {
+            "keyword": "wind",
+            "weight": 0.07774723321199417
+          },
+          {
+            "keyword": "projects",
+            "weight": 0.07774723321199417
+          },
+          {
+            "keyword": "verschoben",
+            "weight": 0.07727159559726715
+          },
+          {
+            "keyword": "pensionsreform",
+            "weight": 0.07727159559726715
+          },
+          {
+            "keyword": "public",
+            "weight": 0.07692047208547592
+          },
+          {
+            "keyword": "fonction",
+            "weight": 0.07260452955961227
+          },
+          {
+            "keyword": "publique",
+            "weight": 0.07260452955961227
+          },
+          {
+            "keyword": "agents",
+            "weight": 0.07260452955961227
+          },
+          {
+            "keyword": "professionnels",
+            "weight": 0.07260452955961227
+          },
+          {
+            "keyword": "utilisation",
+            "weight": 0.07260452955961227
+          },
+          {
+            "keyword": "interdit",
+            "weight": 0.07260452955961227
+          },
+          {
+            "keyword": "telephones",
+            "weight": 0.07260452955961227
+          },
+          {
+            "keyword": "recreatives",
+            "weight": 0.07260452955961227
+          },
+          {
+            "keyword": "scottish",
+            "weight": 0.07245541363954544
+          },
+          {
+            "keyword": "vendredi",
+            "weight": 0.07168100774288177
+          },
+          {
+            "keyword": "british",
+            "weight": 0.0708475261926651
+          },
+          {
+            "keyword": "apres",
+            "weight": 0.06789308786392212
+          },
+          {
+            "keyword": "innovation",
+            "weight": 0.06664048135280609
+          },
+          {
+            "keyword": "final",
+            "weight": 0.06645186990499496
+          },
+          {
+            "keyword": "murray",
+            "weight": 0.06645186990499496
+          },
+          {
+            "keyword": "team",
+            "weight": 0.06645186990499496
+          },
+          {
+            "keyword": "king",
+            "weight": 0.06427684426307678
+          },
+          {
+            "keyword": "state",
+            "weight": 0.06427684426307678
+          },
+          {
+            "keyword": "trip",
+            "weight": 0.06427684426307678
+          },
+          {
+            "keyword": "confirmed",
+            "weight": 0.06427684426307678
+          },
+          {
+            "keyword": "denis",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "predsjednistva",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "becirovica",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "denisa",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "sad",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "velike",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "odluku",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "britanije",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "ambasada",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "step",
+            "weight": 0.0588940754532814
+          },
+          {
+            "keyword": "age",
+            "weight": 0.05728619173169136
+          },
+          {
+            "keyword": "elysee",
+            "weight": 0.05674279853701591
+          },
+          {
+            "keyword": "decision",
+            "weight": 0.05650106072425842
+          },
+          {
+            "keyword": "leasing",
+            "weight": 0.05553373321890831
+          },
+          {
+            "keyword": "intog",
+            "weight": 0.05553373321890831
+          },
+          {
+            "keyword": "leases",
+            "weight": 0.05553373321890831
+          },
+          {
+            "keyword": "morning",
+            "weight": 0.05505804717540741
+          },
+          {
+            "keyword": "gouvernements",
+            "weight": 0.05436169356107712
+          },
+          {
+            "keyword": "dont",
+            "weight": 0.05436169356107712
+          },
+          {
+            "keyword": "arena",
+            "weight": 0.05316149815917015
+          },
+          {
+            "keyword": "trophy",
+            "weight": 0.05316149815917015
+          },
+          {
+            "keyword": "bbl",
+            "weight": 0.05316149815917015
+          },
+          {
+            "keyword": "rocks",
+            "weight": 0.05316149815917015
+          },
+          {
+            "keyword": "year",
+            "weight": 0.05316149815917015
+          },
+          {
+            "keyword": "plans",
+            "weight": 0.05201718211174011
+          },
+          {
+            "keyword": "bordeaux",
+            "weight": 0.05091981589794159
+          },
+          {
+            "keyword": "indique",
+            "weight": 0.05091981589794159
+          },
+          {
+            "keyword": "palais",
+            "weight": 0.05091981589794159
+          },
+          {
+            "keyword": "francais",
+            "weight": 0.05091981589794159
+          },
+          {
+            "keyword": "build",
+            "weight": 0.04978904128074646
+          },
+          {
+            "keyword": "britain",
+            "weight": 0.04898509383201599
+          },
+          {
+            "keyword": "uk",
+            "weight": 0.04898509383201599
+          },
+          {
+            "keyword": "reduce",
+            "weight": 0.04452880099415779
+          },
+          {
+            "keyword": "announced",
+            "weight": 0.04452880099415779
+          },
+          {
+            "keyword": "targeted",
+            "weight": 0.04452880099415779
+          },
+          {
+            "keyword": "crown",
+            "weight": 0.04442698508501053
+          },
+          {
+            "keyword": "estate",
+            "weight": 0.04442698508501053
+          },
+          {
+            "keyword": "deliver",
+            "weight": 0.04442698508501053
+          },
+          {
+            "keyword": "emissions",
+            "weight": 0.04442698508501053
+          },
+          {
+            "keyword": "north",
+            "weight": 0.04442698508501053
+          },
+          {
+            "keyword": "friday",
+            "weight": 0.04285123199224472
+          },
+          {
+            "keyword": "presidency",
+            "weight": 0.04285123199224472
+          },
+          {
+            "keyword": "postponement",
+            "weight": 0.04285123199224472
+          },
+          {
+            "keyword": "postponed",
+            "weight": 0.04285123199224472
+          },
+          {
+            "keyword": "protests",
+            "weight": 0.04285123199224472
+          },
+          {
+            "keyword": "retirement",
+            "weight": 0.04285123199224472
+          },
+          {
+            "keyword": "asked",
+            "weight": 0.04285123199224472
+          },
+          {
+            "keyword": "postpone",
+            "weight": 0.04285123199224472
+          },
+          {
+            "keyword": "national",
+            "weight": 0.04285123199224472
+          }
+        ]
+      }
+    }
+  }
+}

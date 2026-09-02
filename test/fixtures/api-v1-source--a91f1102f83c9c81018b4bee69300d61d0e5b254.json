@@ -1,0 +1,109 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/source",
+    "body": {
+      "action": "getInfo",
+      "uri": [
+        "bbc.com",
+        "bbc24news.com"
+      ],
+      "sourceArticleBodyLen": -1,
+      "sourceIncludeArticleBasicInfo": true,
+      "sourceIncludeArticleTitle": true,
+      "sourceIncludeArticleBody": true,
+      "sourceIncludeArticleUrl": true,
+      "sourceIncludeArticleEventUri": true,
+      "sourceIncludeArticleAuthors": true,
+      "sourceIncludeArticleConcepts": false,
+      "sourceIncludeArticleCategories": false,
+      "sourceIncludeArticleLinks": false,
+      "sourceIncludeArticleVideos": false,
+      "sourceIncludeArticleImage": true,
+      "sourceIncludeArticleSocialScore": false,
+      "sourceIncludeArticleSentiment": true,
+      "sourceIncludeArticleLocation": false,
+      "sourceIncludeArticleExtractedDates": false,
+      "sourceIncludeArticleOriginalArticle": false,
+      "sourceIncludeArticleStoryUri": false,
+      "sourceIncludeEventTitle": true,
+      "sourceIncludeEventSummary": true,
+      "sourceIncludeEventArticleCounts": true,
+      "sourceIncludeEventConcepts": true,
+      "sourceIncludeEventCategories": true,
+      "sourceIncludeEventDate": true,
+      "sourceIncludeEventCommonDates": false,
+      "sourceIncludeEventInfoArticle": false,
+      "sourceIncludeEventStories": false,
+      "sourceIncludeEventSocialScore": false,
+      "sourceEventImageCount": 0,
+      "sourceIncludeSourceTitle": true,
+      "sourceIncludeSourceDescription": true,
+      "sourceIncludeSourceLocation": true,
+      "sourceIncludeSourceRanking": true,
+      "sourceIncludeSourceImage": false,
+      "sourceIncludeSourceSocialMedia": false,
+      "sourceIncludeCategoryTrendingScore": true,
+      "sourceConceptType": "concepts",
+      "sourceConceptLang": "eng",
+      "sourceIncludeConceptLabel": true,
+      "sourceIncludeConceptSynonyms": false,
+      "sourceIncludeConceptImage": false,
+      "sourceIncludeConceptDescription": false,
+      "sourceIncludeConceptTrendingScore": false,
+      "sourceIncludeLocationLabel": true,
+      "sourceIncludeLocationWikiUri": false,
+      "sourceIncludeLocationGeoNamesId": false,
+      "sourceIncludeLocationPopulation": false,
+      "sourceIncludeLocationGeoLocation": false,
+      "sourceIncludeLocationCountryArea": false,
+      "sourceIncludeLocationCountryDetails": false,
+      "sourceIncludeLocationCountryContinent": false,
+      "sourceIncludeLocationPlaceFeatureCode": false,
+      "sourceIncludeLocationPlaceCountry": true,
+      "sourceIncludeStoryBasicStats": true,
+      "sourceIncludeStoryLocation": true,
+      "sourceIncludeStoryDate": false,
+      "sourceIncludeStoryTitle": false,
+      "sourceIncludeStorySummary": false,
+      "sourceIncludeStoryConcepts": false,
+      "sourceIncludeStoryCategories": false,
+      "sourceIncludeStoryMedoidArticle": false,
+      "sourceIncludeStoryInfoArticle": false,
+      "sourceIncludeStoryCommonDates": false,
+      "sourceIncludeStorySocialScore": false,
+      "sourceStoryImageCount": 0,
+      "sourceIncludeConceptClassParentLabels": true,
+      "sourceIncludeConceptClassConcepts": false,
+      "sourceIncludeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "bbc.com": {
+        "uri": "bbc.com",
+        "dataType": "news",
+        "title": "BBC",
+        "description": "",
+        "location": null,
+        "ranking": {
+          "importanceRank": 1000000
+        }
+      },
+      "bbc24news.com": {
+        "uri": "bbc24news.com",
+        "dataType": "news",
+        "title": "BBC24 News",
+        "description": "",
+        "location": null,
+        "ranking": {
+          "importanceRank": 1000000
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "conceptUri": [
+        "http://en.wikipedia.org/wiki/Barack_Obama",
+        "http://en.wikipedia.org/wiki/Donald_Trump"
+      ],
+      "conceptOper": "and",
+      "ignoreLang": [
+        "eng",
+        "deu"
+      ],
+      "uriWgtListPage": 1,
+      "uriWgtListCount": 50000,
+      "uriWgtListSortBy": "rel",
+      "uriWgtListSortByAsc": false,
+      "resultType": "uriWgtList",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "uriWgtList": {
+        "totalResults": 0,
+        "page": 1,
+        "count": 0,
+        "pages": 1,
+        "results": []
+      },
+      "info": "No results match the search conditions."
+    }
+  }
+}

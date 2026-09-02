@@ -1,0 +1,251 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "iphone",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone",
+        "type": "wiki",
+        "score": 8353,
+        "label": {
+          "eng": "IPhone"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_13",
+        "type": "wiki",
+        "score": 351,
+        "label": {
+          "eng": "IPhone 13"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_11",
+        "type": "wiki",
+        "score": 302,
+        "label": {
+          "eng": "IPhone 11"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_X",
+        "type": "wiki",
+        "score": 294,
+        "label": {
+          "eng": "IPhone X"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_12",
+        "type": "wiki",
+        "score": 245,
+        "label": {
+          "eng": "IPhone 12"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_XR",
+        "type": "wiki",
+        "score": 244,
+        "label": {
+          "eng": "IPhone XR"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_13_Pro",
+        "type": "wiki",
+        "score": 228,
+        "label": {
+          "eng": "IPhone 13 Pro"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_8",
+        "type": "wiki",
+        "score": 220,
+        "label": {
+          "eng": "IPhone 8"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_11_Pro",
+        "type": "wiki",
+        "score": 113,
+        "label": {
+          "eng": "IPhone 11 Pro"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_SE_(1st_generation)",
+        "type": "wiki",
+        "score": 103,
+        "label": {
+          "eng": "IPhone SE"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_(1st_generation)",
+        "type": "wiki",
+        "score": 94,
+        "label": {
+          "eng": "IPhone (1st generation)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_XS",
+        "type": "wiki",
+        "score": 93,
+        "label": {
+          "eng": "IPhone XS"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_12_Pro",
+        "type": "wiki",
+        "score": 85,
+        "label": {
+          "eng": "IPhone 12 Pro"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_7",
+        "type": "wiki",
+        "score": 66,
+        "label": {
+          "eng": "IPhone 7"
+        }
+      },
+      {
+        "uri": "http://ru.wikipedia.org/wiki/IPhone_13",
+        "type": "wiki",
+        "score": 44,
+        "label": {
+          "eng": "IPhone 13"
+        }
+      },
+      {
+        "uri": "http://es.wikipedia.org/wiki/IPhone_13",
+        "type": "wiki",
+        "score": 43,
+        "label": {
+          "eng": "IPhone 13"
+        }
+      },
+      {
+        "uri": "http://de.wikipedia.org/wiki/IPhone_13",
+        "type": "wiki",
+        "score": 40,
+        "label": {
+          "eng": "IPhone 13"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_4S",
+        "type": "wiki",
+        "score": 33,
+        "label": {
+          "eng": "IPhone 4S"
+        }
+      },
+      {
+        "uri": "http://de.wikipedia.org/wiki/IPhone_13_Pro",
+        "type": "wiki",
+        "score": 31,
+        "label": {
+          "eng": "IPhone 13 Pro"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/IPhone_4",
+        "type": "wiki",
+        "score": 27,
+        "label": {
+          "eng": "IPhone 4"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "peace",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/Peace",
+        "type": "wiki",
+        "score": 3759,
+        "label": {
+          "eng": "Peace"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Nobel_Peace_Prize",
+        "type": "wiki",
+        "score": 1047,
+        "label": {
+          "eng": "Nobel Peace Prize"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/World_peace",
+        "type": "wiki",
+        "score": 743,
+        "label": {
+          "eng": "World peace"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/International_Day_of_Peace",
+        "type": "wiki",
+        "score": 733,
+        "label": {
+          "eng": "International Day of Peace"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_Nations_peacekeeping",
+        "type": "org",
+        "score": 602,
+        "label": {
+          "eng": "United Nations peacekeeping"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Peacekeeping",
+        "type": "org",
+        "score": 547,
+        "label": {
+          "eng": "Peacekeeping"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Carnegie_Endowment_for_International_Peace",
+        "type": "org",
+        "score": 431,
+        "label": {
+          "eng": "Carnegie Endowment for International Peace"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Israeli–Palestinian_peace_process",
+        "type": "wiki",
+        "score": 242,
+        "label": {
+          "eng": "Israeli–Palestinian peace process"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Peaceful_transition_of_power",
+        "type": "wiki",
+        "score": 206,
+        "label": {
+          "eng": "Peaceful transition of power"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Northern_Ireland_peace_process",
+        "type": "wiki",
+        "score": 200,
+        "label": {
+          "eng": "Northern Ireland peace process"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Five_Principles_of_Peaceful_Coexistence",
+        "type": "wiki",
+        "score": 195,
+        "label": {
+          "eng": "Five Principles of Peaceful Coexistence"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Justice_of_the_peace",
+        "type": "wiki",
+        "score": 177,
+        "label": {
+          "eng": "Justice of the peace"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Peace_treaty",
+        "type": "wiki",
+        "score": 152,
+        "label": {
+          "eng": "Peace treaty"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Breach_of_the_peace",
+        "type": "wiki",
+        "score": 145,
+        "label": {
+          "eng": "Breach of the peace"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Arab_Peace_Initiative",
+        "type": "wiki",
+        "score": 140,
+        "label": {
+          "eng": "Arab Peace Initiative"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Peace_of_Westphalia",
+        "type": "wiki",
+        "score": 138,
+        "label": {
+          "eng": "Peace of Westphalia"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/State_Peace_and_Development_Council",
+        "type": "org",
+        "score": 98,
+        "label": {
+          "eng": "State Peace and Development Council"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Peace_movement",
+        "type": "wiki",
+        "score": 93,
+        "label": {
+          "eng": "Peace movement"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Peacebuilding",
+        "type": "wiki",
+        "score": 84,
+        "label": {
+          "eng": "Peacebuilding"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Global_Peace_Index",
+        "type": "wiki",
+        "score": 78,
+        "label": {
+          "eng": "Global Peace Index"
+        }
+      }
+    ]
+  }
+}

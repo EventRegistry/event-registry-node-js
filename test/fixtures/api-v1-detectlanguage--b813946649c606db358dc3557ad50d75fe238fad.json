@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/detectLanguage",
+    "body": {
+      "text": "Microsoft released a new version of Windows OS.",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "name": "ENGLISH",
+        "code": "en",
+        "percent": 97,
+        "score": 1176,
+        "iso3": "eng",
+        "iso1": "en"
+      }
+    ]
+  }
+}

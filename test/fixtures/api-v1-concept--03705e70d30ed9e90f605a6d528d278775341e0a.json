@@ -1,0 +1,303 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/concept",
+    "body": {
+      "action": "getInfo",
+      "uri": [
+        "http://en.wikipedia.org/wiki/United_Nations_General_Assembly",
+        "http://en.wikipedia.org/wiki/Association_football",
+        "http://en.wikipedia.org/wiki/Associated_Press",
+        "http://en.wikipedia.org/wiki/Australia",
+        "http://en.wikipedia.org/wiki/Agriculture",
+        "http://en.wikipedia.org/wiki/Asia",
+        "http://en.wikipedia.org/wiki/Africa",
+        "http://en.wikipedia.org/wiki/Advertising",
+        "http://en.wikipedia.org/wiki/Deutsche_Presse-Agentur",
+        "http://en.wikipedia.org/wiki/Argentina"
+      ],
+      "conceptArticleBodyLen": -1,
+      "conceptIncludeArticleBasicInfo": true,
+      "conceptIncludeArticleTitle": true,
+      "conceptIncludeArticleBody": true,
+      "conceptIncludeArticleUrl": true,
+      "conceptIncludeArticleEventUri": true,
+      "conceptIncludeArticleAuthors": true,
+      "conceptIncludeArticleConcepts": false,
+      "conceptIncludeArticleCategories": false,
+      "conceptIncludeArticleLinks": false,
+      "conceptIncludeArticleVideos": false,
+      "conceptIncludeArticleImage": true,
+      "conceptIncludeArticleSocialScore": false,
+      "conceptIncludeArticleSentiment": true,
+      "conceptIncludeArticleLocation": false,
+      "conceptIncludeArticleExtractedDates": false,
+      "conceptIncludeArticleOriginalArticle": false,
+      "conceptIncludeArticleStoryUri": false,
+      "conceptIncludeEventTitle": true,
+      "conceptIncludeEventSummary": true,
+      "conceptIncludeEventArticleCounts": true,
+      "conceptIncludeEventConcepts": true,
+      "conceptIncludeEventCategories": true,
+      "conceptIncludeEventDate": true,
+      "conceptIncludeEventCommonDates": false,
+      "conceptIncludeEventInfoArticle": false,
+      "conceptIncludeEventStories": false,
+      "conceptIncludeEventSocialScore": false,
+      "conceptEventImageCount": 0,
+      "conceptIncludeSourceTitle": true,
+      "conceptIncludeSourceDescription": false,
+      "conceptIncludeSourceLocation": false,
+      "conceptIncludeSourceRanking": false,
+      "conceptIncludeSourceImage": false,
+      "conceptIncludeSourceSocialMedia": false,
+      "conceptIncludeCategoryTrendingScore": true,
+      "conceptType": "wiki",
+      "conceptLang": [
+        "deu",
+        "slv"
+      ],
+      "conceptIncludeConceptLabel": true,
+      "conceptIncludeConceptSynonyms": true,
+      "conceptIncludeConceptImage": true,
+      "conceptIncludeConceptDescription": true,
+      "conceptIncludeConceptTrendingScore": true,
+      "conceptIncludeLocationLabel": true,
+      "conceptIncludeLocationWikiUri": false,
+      "conceptIncludeLocationGeoNamesId": false,
+      "conceptIncludeLocationPopulation": false,
+      "conceptIncludeLocationGeoLocation": false,
+      "conceptIncludeLocationCountryArea": false,
+      "conceptIncludeLocationCountryDetails": false,
+      "conceptIncludeLocationCountryContinent": false,
+      "conceptIncludeLocationPlaceFeatureCode": false,
+      "conceptIncludeLocationPlaceCountry": true,
+      "conceptIncludeStoryBasicStats": true,
+      "conceptIncludeStoryLocation": true,
+      "conceptIncludeStoryDate": false,
+      "conceptIncludeStoryTitle": false,
+      "conceptIncludeStorySummary": false,
+      "conceptIncludeStoryConcepts": false,
+      "conceptIncludeStoryCategories": false,
+      "conceptIncludeStoryMedoidArticle": false,
+      "conceptIncludeStoryInfoArticle": false,
+      "conceptIncludeStoryCommonDates": false,
+      "conceptIncludeStorySocialScore": false,
+      "conceptStoryImageCount": 0,
+      "conceptIncludeConceptClassParentLabels": true,
+      "conceptIncludeConceptClassConcepts": false,
+      "conceptIncludeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "http://en.wikipedia.org/wiki/United_Nations_General_Assembly": {
+        "uri": "http://en.wikipedia.org/wiki/United_Nations_General_Assembly",
+        "type": "org",
+        "label": {
+          "deu": "Generalversammlung der Vereinten Nationen",
+          "slv": "Generalna skupščina OZN"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "http://en.wikipedia.org/wiki/Association_football": {
+        "uri": "http://en.wikipedia.org/wiki/Association_football",
+        "type": "wiki",
+        "label": {
+          "deu": "Fußball",
+          "slv": "Nogomet"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "http://en.wikipedia.org/wiki/Associated_Press": {
+        "uri": "http://en.wikipedia.org/wiki/Associated_Press",
+        "type": "org",
+        "label": {
+          "deu": "Associated Press",
+          "slv": "Associated Press"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "http://en.wikipedia.org/wiki/Australia": {
+        "uri": "http://en.wikipedia.org/wiki/Australia",
+        "type": "loc",
+        "label": {
+          "deu": "Australien",
+          "slv": "Avstralija"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        },
+        "location": {
+          "type": "place",
+          "label": {
+            "deu": "Australien",
+            "slv": "Avstralija"
+          },
+          "country": {
+            "type": "country",
+            "label": {
+              "deu": "Australien (Kontinent)",
+              "slv": "Australia (continent)"
+            }
+          }
+        }
+      },
+      "http://en.wikipedia.org/wiki/Agriculture": {
+        "uri": "http://en.wikipedia.org/wiki/Agriculture",
+        "type": "wiki",
+        "label": {
+          "deu": "Landwirtschaft",
+          "slv": "Kmetijstvo"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "http://en.wikipedia.org/wiki/Asia": {
+        "uri": "http://en.wikipedia.org/wiki/Asia",
+        "type": "loc",
+        "label": {
+          "deu": "Asien",
+          "slv": "Azija"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        },
+        "location": null
+      },
+      "http://en.wikipedia.org/wiki/Africa": {
+        "uri": "http://en.wikipedia.org/wiki/Africa",
+        "type": "loc",
+        "label": {
+          "deu": "Afrika",
+          "slv": "Afrika"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        },
+        "location": null
+      },
+      "http://en.wikipedia.org/wiki/Advertising": {
+        "uri": "http://en.wikipedia.org/wiki/Advertising",
+        "type": "wiki",
+        "label": {
+          "deu": "Werbung",
+          "slv": "Oglaševanje"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "http://en.wikipedia.org/wiki/Deutsche_Presse-Agentur": {
+        "uri": "http://en.wikipedia.org/wiki/Deutsche_Presse-Agentur",
+        "type": "org",
+        "label": {
+          "deu": "Deutsche Presse-Agentur",
+          "slv": "Deutsche Presse-Agentur"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "http://en.wikipedia.org/wiki/Argentina": {
+        "uri": "http://en.wikipedia.org/wiki/Argentina",
+        "type": "loc",
+        "label": {
+          "deu": "Argentinien",
+          "slv": "Argentina"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        },
+        "location": {
+          "type": "country",
+          "label": {
+            "deu": "Argentinien",
+            "slv": "Argentina"
+          }
+        }
+      }
+    }
+  }
+}

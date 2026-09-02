@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "conceptUri": "http://en.wikipedia.org/wiki/Donald_Trump",
+      "uriWgtListPage": 3,
+      "uriWgtListCount": 10000,
+      "uriWgtListSortBy": "fq",
+      "uriWgtListSortByAsc": false,
+      "resultType": "uriWgtList",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "uriWgtList": {
+        "totalResults": 19449,
+        "page": 3,
+        "count": 0,
+        "pages": 2,
+        "results": []
+      }
+    }
+  }
+}

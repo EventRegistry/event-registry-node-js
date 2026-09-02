@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/articleMapper",
+    "body": {
+      "articleUrl": "https://www.bakersfield.com/ap/news/immigration-reform-stalled-decade-after-gang-of-8s-big-push/article_d0fe23f4-4e1c-52e7-a8f1-43ed36e5afaf.html",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "https://www.bakersfield.com/ap/news/immigration-reform-stalled-decade-after-gang-of-8s-big-push/article_d0fe23f4-4e1c-52e7-a8f1-43ed36e5afaf.html": null
+    }
+  }
+}

@@ -1,0 +1,472 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestLocationsFast",
+    "body": {
+      "prefix": "Washington",
+      "count": 20,
+      "source": [
+        "place",
+        "country"
+      ],
+      "lang": "eng",
+      "countryUri": "",
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "conceptLang": "eng",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Washington_(state)",
+        "label": {
+          "eng": "Washington"
+        },
+        "lat": 47.50012,
+        "long": -120.50147,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 6271775
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/King_County,_Washington",
+        "label": {
+          "eng": "King County, Washington"
+        },
+        "lat": 47.49084,
+        "long": -121.83583,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 1931249
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Washington_County,_Oregon",
+        "label": {
+          "eng": "Washington County"
+        },
+        "lat": 45.56007,
+        "long": -123.09849,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 529710
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Yakima_County,_Washington",
+        "label": {
+          "eng": "Yakima County, Washington"
+        },
+        "lat": 46.45685,
+        "long": -120.7387,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 243231
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Washington_County,_Minnesota",
+        "label": {
+          "eng": "Washington County"
+        },
+        "lat": 45.03873,
+        "long": -92.88396,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 238136
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Spokane,_Washington",
+        "label": {
+          "eng": "Spokane, Washington"
+        },
+        "lat": 47.65966,
+        "long": -117.42908,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 208916
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Washington_County,_Pennsylvania",
+        "label": {
+          "eng": "Washington County"
+        },
+        "lat": 40.1894,
+        "long": -80.24824,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 207820
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Washington_County,_Arkansas",
+        "label": {
+          "eng": "Washington County"
+        },
+        "lat": 35.97907,
+        "long": -94.21558,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 203065
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Tacoma,_Washington",
+        "label": {
+          "eng": "Tacoma, Washington"
+        },
+        "lat": 47.25288,
+        "long": -122.44429,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 198397
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Vancouver,_Washington",
+        "label": {
+          "eng": "Vancouver, Washington"
+        },
+        "lat": 45.63873,
+        "long": -122.66149,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 161791
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Washington_County,_Maryland",
+        "label": {
+          "eng": "Washington County"
+        },
+        "lat": 39.60367,
+        "long": -77.81398,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 147430
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Washington_County,_Utah",
+        "label": {
+          "eng": "Washington County"
+        },
+        "lat": 37.28036,
+        "long": -113.50494,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 138115
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Washington_County,_Wisconsin",
+        "label": {
+          "eng": "Washington County"
+        },
+        "lat": 43.36847,
+        "long": -88.23078,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 131887
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Washington_County,_Rhode_Island",
+        "label": {
+          "eng": "Washington County"
+        },
+        "lat": 41.39649,
+        "long": -71.61966,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 126979
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Washington_County,_Tennessee",
+        "label": {
+          "eng": "Washington County"
+        },
+        "lat": 36.2933,
+        "long": -82.49743,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 122979
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Everett,_Washington",
+        "label": {
+          "eng": "Everett, Washington"
+        },
+        "lat": 47.97898,
+        "long": -122.20208,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 103019
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Yakima,_Washington",
+        "label": {
+          "eng": "Yakima, Washington"
+        },
+        "lat": 46.60207,
+        "long": -120.5059,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 91067
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Renton,_Washington",
+        "label": {
+          "eng": "Renton, Washington"
+        },
+        "lat": 47.48288,
+        "long": -122.21707,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 90927
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Federal_Way,_Washington",
+        "label": {
+          "eng": "Federal Way, Washington"
+        },
+        "lat": 47.32232,
+        "long": -122.31262,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 89306
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Grant_County,_Washington",
+        "label": {
+          "eng": "Grant County, Washington"
+        },
+        "lat": 47.20566,
+        "long": -119.45177,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 89120
+      }
+    ]
+  }
+}

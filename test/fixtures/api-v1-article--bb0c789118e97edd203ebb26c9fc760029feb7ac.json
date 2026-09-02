@@ -1,0 +1,1479 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "conceptUri": "http://en.wikipedia.org/wiki/Barack_Obama",
+      "conceptAggrConceptCount": 50,
+      "conceptAggrSampleSize": 10000,
+      "conceptAggrScoring": "importance",
+      "conceptAggrArticleBodyLen": -1,
+      "conceptAggrIncludeArticleBasicInfo": true,
+      "conceptAggrIncludeArticleTitle": true,
+      "conceptAggrIncludeArticleBody": true,
+      "conceptAggrIncludeArticleUrl": true,
+      "conceptAggrIncludeArticleEventUri": true,
+      "conceptAggrIncludeArticleAuthors": true,
+      "conceptAggrIncludeArticleConcepts": true,
+      "conceptAggrIncludeArticleCategories": true,
+      "conceptAggrIncludeArticleLinks": false,
+      "conceptAggrIncludeArticleVideos": true,
+      "conceptAggrIncludeArticleImage": true,
+      "conceptAggrIncludeArticleSocialScore": true,
+      "conceptAggrIncludeArticleSentiment": true,
+      "conceptAggrIncludeArticleLocation": true,
+      "conceptAggrIncludeArticleExtractedDates": true,
+      "conceptAggrIncludeArticleOriginalArticle": true,
+      "conceptAggrIncludeArticleStoryUri": true,
+      "conceptAggrIncludeArticleDuplicateList": true,
+      "conceptAggrIncludeEventTitle": true,
+      "conceptAggrIncludeEventSummary": true,
+      "conceptAggrIncludeEventArticleCounts": true,
+      "conceptAggrIncludeEventConcepts": true,
+      "conceptAggrIncludeEventCategories": true,
+      "conceptAggrIncludeEventDate": true,
+      "conceptAggrIncludeEventCommonDates": false,
+      "conceptAggrIncludeEventInfoArticle": false,
+      "conceptAggrIncludeEventStories": false,
+      "conceptAggrIncludeEventSocialScore": false,
+      "conceptAggrEventImageCount": 0,
+      "conceptAggrIncludeSourceTitle": true,
+      "conceptAggrIncludeSourceDescription": false,
+      "conceptAggrIncludeSourceLocation": false,
+      "conceptAggrIncludeSourceRanking": false,
+      "conceptAggrIncludeSourceImage": false,
+      "conceptAggrIncludeSourceSocialMedia": false,
+      "conceptAggrIncludeCategoryTrendingScore": true,
+      "conceptAggrConceptType": [
+        "concepts",
+        "entities"
+      ],
+      "conceptAggrConceptLang": [
+        "eng",
+        "spa"
+      ],
+      "conceptAggrIncludeConceptLabel": true,
+      "conceptAggrIncludeConceptSynonyms": true,
+      "conceptAggrIncludeConceptImage": true,
+      "conceptAggrIncludeConceptDescription": true,
+      "conceptAggrIncludeConceptTrendingScore": true,
+      "conceptAggrMaxConceptsPerType": 50,
+      "conceptAggrIncludeLocationLabel": true,
+      "conceptAggrIncludeLocationWikiUri": true,
+      "conceptAggrIncludeLocationGeoNamesId": true,
+      "conceptAggrIncludeLocationPopulation": true,
+      "conceptAggrIncludeLocationGeoLocation": true,
+      "conceptAggrIncludeLocationCountryArea": true,
+      "conceptAggrIncludeLocationCountryDetails": true,
+      "conceptAggrIncludeLocationCountryContinent": true,
+      "conceptAggrIncludeLocationPlaceFeatureCode": true,
+      "conceptAggrIncludeLocationPlaceCountry": true,
+      "conceptAggrIncludeStoryBasicStats": true,
+      "conceptAggrIncludeStoryLocation": true,
+      "conceptAggrIncludeStoryDate": false,
+      "conceptAggrIncludeStoryTitle": false,
+      "conceptAggrIncludeStorySummary": false,
+      "conceptAggrIncludeStoryConcepts": false,
+      "conceptAggrIncludeStoryCategories": false,
+      "conceptAggrIncludeStoryMedoidArticle": false,
+      "conceptAggrIncludeStoryInfoArticle": false,
+      "conceptAggrIncludeStoryCommonDates": false,
+      "conceptAggrIncludeStorySocialScore": false,
+      "conceptAggrStoryImageCount": 0,
+      "conceptAggrIncludeConceptClassParentLabels": true,
+      "conceptAggrIncludeConceptClassConcepts": false,
+      "conceptAggrIncludeConceptFolderOwner": false,
+      "resultType": "conceptAggr",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "conceptAggr": {
+        "usedResults": 2604,
+        "totalResults": 2604,
+        "results": [
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_States",
+            "type": "loc",
+            "label": {
+              "eng": "United States",
+              "spa": "Estados Unidos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "6252001",
+              "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+              "label": {
+                "eng": "United States",
+                "spa": "Estados Unidos"
+              },
+              "population": 310232863,
+              "lat": 39.76,
+              "long": -98.5,
+              "area": 9629091,
+              "code2": "US",
+              "code3": "USA",
+              "webExt": ".us",
+              "currencyCode": "USD",
+              "currencyName": "Dollar",
+              "continent": "Noth America"
+            },
+            "score": 100
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Donald_Trump",
+            "type": "person",
+            "label": {
+              "eng": "Tiffany Trump",
+              "spa": "Donald Trump"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 76.29120394852812
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Joe_Biden",
+            "type": "person",
+            "label": {
+              "eng": "Joe Biden",
+              "spa": "Joe Biden"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 57.07738410012339
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Republican_Party_(United_States)",
+            "type": "org",
+            "label": {
+              "eng": "Republican Party (United States)",
+              "spa": "Partido Republicano (Estados Unidos)"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 44.31517715494447
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Democratic_Party_(United_States)",
+            "type": "org",
+            "label": {
+              "eng": "Democratic Party (United States)",
+              "spa": "Partido Demócrata (Estados Unidos)"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 41.26564427992244
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/White_House",
+            "type": "loc",
+            "label": {
+              "eng": "White House",
+              "spa": "Casa Blanca"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null,
+            "score": 37.31711616428697
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Florida",
+            "type": "loc",
+            "label": {
+              "eng": "Florida",
+              "spa": "Florida"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "4155751",
+              "wikiUri": "http://en.wikipedia.org/wiki/Florida",
+              "label": {
+                "eng": "Florida",
+                "spa": "Florida"
+              },
+              "population": 17671452,
+              "lat": 28.75054,
+              "long": -82.5001,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "6252001",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+                "label": {
+                  "eng": "United States",
+                  "spa": "Estados Unidos"
+                },
+                "population": 310232863,
+                "lat": 39.76,
+                "long": -98.5,
+                "area": 9629091,
+                "code2": "US",
+                "code3": "USA",
+                "webExt": ".us",
+                "currencyCode": "USD",
+                "currencyName": "Dollar",
+                "continent": "Noth America"
+              }
+            },
+            "score": 29.91362594747048
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_States_Department_of_Justice",
+            "type": "org",
+            "label": {
+              "eng": "United States Department of Justice",
+              "spa": "Departamento de Justicia de los Estados Unidos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 29.79023444385687
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Washington,_D.C.",
+            "type": "loc",
+            "label": {
+              "eng": "District of Columbia",
+              "spa": "Distrito de Columbia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "4138106",
+              "wikiUri": "http://en.wikipedia.org/wiki/Washington,_D.C.",
+              "label": {
+                "eng": "District of Columbia",
+                "spa": "Distrito de Columbia"
+              },
+              "population": 552433,
+              "lat": 38.91706,
+              "long": -77.00025,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "6252001",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+                "label": {
+                  "eng": "United States",
+                  "spa": "Estados Unidos"
+                },
+                "population": 310232863,
+                "lat": 39.76,
+                "long": -98.5,
+                "area": 9629091,
+                "code2": "US",
+                "code3": "USA",
+                "webExt": ".us",
+                "currencyCode": "USD",
+                "currencyName": "Dollar",
+                "continent": "Noth America"
+              }
+            },
+            "score": 25.55966860567601
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Russia",
+            "type": "loc",
+            "label": {
+              "eng": "Russia",
+              "spa": "Rusia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "2017370",
+              "wikiUri": "http://en.wikipedia.org/wiki/Russia",
+              "label": {
+                "eng": "Russia",
+                "spa": "Rusia"
+              },
+              "population": 140702000,
+              "lat": 60,
+              "long": 100,
+              "area": 17100000,
+              "code2": "RU",
+              "code3": "RUS",
+              "webExt": ".ru",
+              "currencyCode": "RUB",
+              "currencyName": "Ruble",
+              "continent": "Europe"
+            },
+            "score": 21.9460602855632
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_States_Senate",
+            "type": "org",
+            "label": {
+              "eng": "United States Senate",
+              "spa": "Senado de los Estados Unidos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 20.71214524942711
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_States_Congress",
+            "type": "org",
+            "label": {
+              "eng": "United States Congress",
+              "spa": "Congreso de los Estados Unidos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 19.42534814031377
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+            "type": "loc",
+            "label": {
+              "eng": "United Kingdom",
+              "spa": "Reino Unido"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "2635167",
+              "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+              "label": {
+                "eng": "United Kingdom",
+                "spa": "Reino Unido"
+              },
+              "population": 62348447,
+              "lat": 54.75844,
+              "long": -2.69531,
+              "area": 244820,
+              "code2": "GB",
+              "code3": "GBR",
+              "webExt": ".uk",
+              "currencyCode": "GBP",
+              "currencyName": "Pound",
+              "continent": "Europe"
+            },
+            "score": 18.75550854926847
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Washington_(state)",
+            "type": "loc",
+            "label": {
+              "eng": "Washington",
+              "spa": "Estado de Washington"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "5815135",
+              "wikiUri": "http://en.wikipedia.org/wiki/Washington_(state)",
+              "label": {
+                "eng": "Washington",
+                "spa": "Estado de Washington"
+              },
+              "population": 6271775,
+              "lat": 47.50012,
+              "long": -120.50147,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "6252001",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+                "label": {
+                  "eng": "United States",
+                  "spa": "Estados Unidos"
+                },
+                "population": 310232863,
+                "lat": 39.76,
+                "long": -98.5,
+                "area": 9629091,
+                "code2": "US",
+                "code3": "USA",
+                "webExt": ".us",
+                "currencyCode": "USD",
+                "currencyName": "Dollar",
+                "continent": "Noth America"
+              }
+            },
+            "score": 18.45584346906399
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Federal_Bureau_of_Investigation",
+            "type": "org",
+            "label": {
+              "eng": "Federal Bureau of Investigation",
+              "spa": "FBI"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 18.45584346906399
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Ukraine",
+            "type": "loc",
+            "label": {
+              "eng": "Ukraine",
+              "spa": "Ucrania"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "690791",
+              "wikiUri": "http://en.wikipedia.org/wiki/Ukraine",
+              "label": {
+                "eng": "Ukraine",
+                "spa": "Ucrania"
+              },
+              "population": 45415596,
+              "lat": 49,
+              "long": 32,
+              "featureCode": "A.PCLI",
+              "country": {
+                "type": "country",
+                "geoNamesId": "690791",
+                "wikiUri": "http://en.wikipedia.org/wiki/Ukrainian_Soviet_Socialist_Republic",
+                "label": {
+                  "eng": "Ukraine",
+                  "spa": "República Socialista Soviética de Ucrania"
+                },
+                "population": 45415596,
+                "lat": 49,
+                "long": 32,
+                "area": 603700,
+                "code2": "UA",
+                "code3": "UKR",
+                "webExt": ".ua",
+                "currencyCode": "UAH",
+                "currencyName": "Hryvnia",
+                "continent": "Europe"
+              }
+            },
+            "score": 18.12092367354134
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Immigration",
+            "type": "wiki",
+            "label": {
+              "eng": "Immigration",
+              "spa": "Inmigración"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 17.53922087079147
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Mar-a-Lago",
+            "type": "wiki",
+            "label": {
+              "eng": "Mar-a-Lago",
+              "spa": "Mar-a-Lago"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 17.3629472942006
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/New_York_City",
+            "type": "loc",
+            "label": {
+              "eng": "New York City",
+              "spa": "Nueva York"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "5128581",
+              "wikiUri": "http://en.wikipedia.org/wiki/New_York_City",
+              "label": {
+                "eng": "New York City",
+                "spa": "Nueva York"
+              },
+              "population": 8175133,
+              "lat": 40.71427,
+              "long": -74.00597,
+              "featureCode": "P.PPL",
+              "country": {
+                "type": "country",
+                "geoNamesId": "6252001",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+                "label": {
+                  "eng": "United States",
+                  "spa": "Estados Unidos"
+                },
+                "population": 310232863,
+                "lat": 39.76,
+                "long": -98.5,
+                "area": 9629091,
+                "code2": "US",
+                "code3": "USA",
+                "webExt": ".us",
+                "currencyCode": "USD",
+                "currencyName": "Dollar",
+                "continent": "Noth America"
+              }
+            },
+            "score": 17.18667371760973
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/National_security",
+            "type": "wiki",
+            "label": {
+              "eng": "National security",
+              "spa": "Seguridad nacional"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 16.88700863740525
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_States_Court_of_Appeals_for_the_Eleventh_Circuit",
+            "type": "wiki",
+            "label": {
+              "eng": "United States Court of Appeals for the Eleventh Circuit",
+              "spa": "United States Court of Appeals for the Eleventh Circuit"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 16.23479640401904
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Mexico",
+            "type": "loc",
+            "label": {
+              "eng": "Mexico",
+              "spa": "México"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "3996063",
+              "wikiUri": "http://en.wikipedia.org/wiki/Mexico",
+              "label": {
+                "eng": "Mexico",
+                "spa": "México"
+              },
+              "population": 112468855,
+              "lat": 23,
+              "long": -102,
+              "area": 1972550,
+              "code2": "MX",
+              "code3": "MEX",
+              "webExt": ".mx",
+              "currencyCode": "MXN",
+              "currencyName": "Peso",
+              "continent": "Noth America"
+            },
+            "score": 15.45919266701921
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_States_courts_of_appeals",
+            "type": "wiki",
+            "label": {
+              "eng": "United States courts of appeals",
+              "spa": "United States courts of appeals"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 15.40631059404195
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Venezuela",
+            "type": "loc",
+            "label": {
+              "eng": "Venezuela",
+              "spa": "Venezuela"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "3625428",
+              "wikiUri": "http://en.wikipedia.org/wiki/Venezuela",
+              "label": {
+                "eng": "Venezuela",
+                "spa": "Venezuela"
+              },
+              "population": 27223228,
+              "lat": 8,
+              "long": -66,
+              "area": 912050,
+              "code2": "VE",
+              "code3": "VEN",
+              "webExt": ".ve",
+              "currencyCode": "VEF",
+              "currencyName": "Bolivar",
+              "continent": "South America"
+            },
+            "score": 15.40631059404195
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Ron_DeSantis",
+            "type": "person",
+            "label": {
+              "eng": "Ron DeSantis",
+              "spa": "Ron DeSantis"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 15.33580116340561
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/China",
+            "type": "loc",
+            "label": {
+              "eng": "China",
+              "spa": "República Popular China"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "1814991",
+              "wikiUri": "http://en.wikipedia.org/wiki/China",
+              "label": {
+                "eng": "China",
+                "spa": "República Popular China"
+              },
+              "population": 1330044000,
+              "lat": 35,
+              "long": 105,
+              "area": 9596960,
+              "code2": "CN",
+              "code3": "CHN",
+              "webExt": ".cn",
+              "currencyCode": "CNY",
+              "currencyName": "Yuan Renminbi",
+              "continent": "Asia"
+            },
+            "score": 15.05376344086022
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Martha's_Vineyard",
+            "type": "loc",
+            "label": {
+              "eng": "Martha's Vineyard",
+              "spa": "Martha's Vineyard"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "4943231",
+              "wikiUri": "http://en.wikipedia.org/wiki/Martha's_Vineyard",
+              "label": {
+                "eng": "Martha's Vineyard",
+                "spa": "Martha's Vineyard"
+              },
+              "population": null,
+              "lat": 41.41678,
+              "long": -70.61614,
+              "featureCode": "T.ISL",
+              "country": {
+                "type": "country",
+                "geoNamesId": "6252001",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+                "label": {
+                  "eng": "United States",
+                  "spa": "Estados Unidos"
+                },
+                "population": 310232863,
+                "lat": 39.76,
+                "long": -98.5,
+                "area": 9629091,
+                "code2": "US",
+                "code3": "USA",
+                "webExt": ".us",
+                "currencyCode": "USD",
+                "currencyName": "Dollar",
+                "continent": "Noth America"
+              }
+            },
+            "score": 14.77172571831482
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Independent_politician",
+            "type": "org",
+            "label": {
+              "eng": "Independent politician",
+              "spa": "Candidato independiente"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 14.75409836065574
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Texas",
+            "type": "loc",
+            "label": {
+              "eng": "Texas",
+              "spa": "Texas"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "4736286",
+              "wikiUri": "http://en.wikipedia.org/wiki/Texas",
+              "label": {
+                "eng": "Texas",
+                "spa": "Texas"
+              },
+              "population": 22875689,
+              "lat": 31.25044,
+              "long": -99.25061,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "6252001",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+                "label": {
+                  "eng": "United States",
+                  "spa": "Estados Unidos"
+                },
+                "population": 310232863,
+                "lat": 39.76,
+                "long": -98.5,
+                "area": 9629091,
+                "code2": "US",
+                "code3": "USA",
+                "webExt": ".us",
+                "currencyCode": "USD",
+                "currencyName": "Dollar",
+                "continent": "Noth America"
+              }
+            },
+            "score": 13.67882954345144
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Twitter",
+            "type": "org",
+            "label": {
+              "eng": "Twitter",
+              "spa": "Twitter"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 13.43204653622422
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Iran",
+            "type": "loc",
+            "label": {
+              "eng": "Iran",
+              "spa": "Irán"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "130758",
+              "wikiUri": "http://en.wikipedia.org/wiki/Iran",
+              "label": {
+                "eng": "Iran",
+                "spa": "Irán"
+              },
+              "population": 76923300,
+              "lat": 32,
+              "long": 53,
+              "area": 1648000,
+              "code2": "IR",
+              "code3": "IRN",
+              "webExt": ".ir",
+              "currencyCode": "IRR",
+              "currencyName": "Rial",
+              "continent": "Asia"
+            },
+            "score": 12.83271637581526
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Inflation",
+            "type": "wiki",
+            "label": {
+              "eng": "Inflation",
+              "spa": "Inflación"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 12.81508901815618
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Democracy",
+            "type": "wiki",
+            "label": {
+              "eng": "Democracy",
+              "spa": "Democracia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 12.35677771901992
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_Nations",
+            "type": "person",
+            "label": {
+              "eng": "United Nations",
+              "spa": "Organización de las Naciones Unidas"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 12.09236735413362
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_Nations_General_Assembly",
+            "type": "org",
+            "label": {
+              "eng": "United Nations General Assembly",
+              "spa": "Asamblea General de las Naciones Unidas"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 11.8455843469064
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/New_York_(state)",
+            "type": "wiki",
+            "label": {
+              "eng": "New York (state)",
+              "spa": "Nueva York (estado)"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 11.81032963158822
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Elizabeth_II",
+            "type": "person",
+            "label": {
+              "eng": "Elizabeth II",
+              "spa": "Isabel II del Reino Unido"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 11.7045654856337
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Lawyer",
+            "type": "wiki",
+            "label": {
+              "eng": "Lawyer",
+              "spa": "Abogado"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 11.63405605499736
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Coronavirus",
+            "type": "wiki",
+            "label": {
+              "eng": "Coronavirus",
+              "spa": "Orthocoronavirinae"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 11.63405605499736
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Special_master",
+            "type": "wiki",
+            "label": {
+              "eng": "Special master",
+              "spa": "Special master"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 11.5811739820201
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_States_district_court",
+            "type": "wiki",
+            "label": {
+              "eng": "United States district court",
+              "spa": "Tribunales de Distrito de los Estados Unidos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 10.61166931077032
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Massachusetts",
+            "type": "loc",
+            "label": {
+              "eng": "Massachusetts",
+              "spa": "Massachusetts"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "6254926",
+              "wikiUri": "http://en.wikipedia.org/wiki/Massachusetts",
+              "label": {
+                "eng": "Massachusetts",
+                "spa": "Massachusetts"
+              },
+              "population": 6433422,
+              "lat": 42.36565,
+              "long": -71.10832,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "6252001",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+                "label": {
+                  "eng": "United States",
+                  "spa": "Estados Unidos"
+                },
+                "population": 310232863,
+                "lat": 39.76,
+                "long": -98.5,
+                "area": 9629091,
+                "code2": "US",
+                "code3": "USA",
+                "webExt": ".us",
+                "currencyCode": "USD",
+                "currencyName": "Dollar",
+                "continent": "Noth America"
+              }
+            },
+            "score": 10.54115988013397
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Federal_government_of_the_United_States",
+            "type": "loc",
+            "label": {
+              "eng": "Federal government of the United States",
+              "spa": "Gobierno federal de los Estados Unidos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null,
+            "score": 10.50590516481579
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Supreme_Court_of_the_United_States",
+            "type": "loc",
+            "label": {
+              "eng": "Supreme Court of the United States",
+              "spa": "Corte Suprema de los Estados Unidos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null,
+            "score": 10.3648863035431
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Europe",
+            "type": "loc",
+            "label": {
+              "eng": "Europe",
+              "spa": "Europa"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null,
+            "score": 10.32963158822493
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            "type": "person",
+            "label": {
+              "eng": "Vladimir Putin",
+              "spa": "Vladímir Putin"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 10.27674951524766
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Aileen_Cannon",
+            "type": "wiki",
+            "label": {
+              "eng": "Aileen Cannon",
+              "spa": "Aileen Cannon"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.977084435043187
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Chicago",
+            "type": "loc",
+            "label": {
+              "eng": "Chicago",
+              "spa": "Chicago"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "4887398",
+              "wikiUri": "http://en.wikipedia.org/wiki/Chicago",
+              "label": {
+                "eng": "Chicago",
+                "spa": "Chicago"
+              },
+              "population": 2695598,
+              "lat": 41.85003,
+              "long": -87.65005,
+              "featureCode": "P.PPLA2",
+              "country": {
+                "type": "country",
+                "geoNamesId": "6252001",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+                "label": {
+                  "eng": "United States",
+                  "spa": "Estados Unidos"
+                },
+                "population": 310232863,
+                "lat": 39.76,
+                "long": -98.5,
+                "area": 9629091,
+                "code2": "US",
+                "code3": "USA",
+                "webExt": ".us",
+                "currencyCode": "USD",
+                "currencyName": "Dollar",
+                "continent": "Noth America"
+              }
+            },
+            "score": 9.924202362065927
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Associated_Press",
+            "type": "org",
+            "label": {
+              "eng": "Associated Press",
+              "spa": "Associated Press"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.85369293142958
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Classified_information",
+            "type": "wiki",
+            "label": {
+              "eng": "Classified information",
+              "spa": "Información clasificada"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.783183500793232
+          }
+        ]
+      }
+    }
+  }
+}

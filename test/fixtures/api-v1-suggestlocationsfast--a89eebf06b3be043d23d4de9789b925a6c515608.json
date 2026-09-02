@@ -1,0 +1,481 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestLocationsFast",
+    "body": {
+      "prefix": "Germany",
+      "count": 20,
+      "source": [
+        "place",
+        "country"
+      ],
+      "lang": "eng",
+      "countryUri": "",
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "conceptLang": "eng",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "type": "country",
+        "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+        "label": {
+          "eng": "Germany"
+        },
+        "lat": 51.5,
+        "long": 10.5
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Worms,_Germany",
+        "label": {
+          "eng": "Worms, Germany"
+        },
+        "lat": 49.66306,
+        "long": 8.33583,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 79727
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Bocholt,_Germany",
+        "label": {
+          "eng": "Bocholt, Germany"
+        },
+        "lat": 51.82082,
+        "long": 6.60626,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 71080
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Lingen,_Germany",
+        "label": {
+          "eng": "Lingen, Germany"
+        },
+        "lat": 52.52143,
+        "long": 7.31845,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 51310
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Soest,_Germany",
+        "label": {
+          "eng": "Soest, Germany"
+        },
+        "lat": 51.56016,
+        "long": 8.08848,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 46685
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Melle,_Germany",
+        "label": {
+          "eng": "Melle, Germany"
+        },
+        "lat": 52.20197,
+        "long": 8.33826,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 46514
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Beckum,_Germany",
+        "label": {
+          "eng": "Beckum, Germany"
+        },
+        "lat": 51.7564,
+        "long": 8.0178,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 36062
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Kempen,_Germany",
+        "label": {
+          "eng": "Kempen, Germany"
+        },
+        "lat": 51.36785,
+        "long": 6.4161,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 34825
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Olpe,_Germany",
+        "label": {
+          "eng": "Olpe, Germany"
+        },
+        "lat": 50.9977,
+        "long": 7.8381,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 24663
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Rees,_Germany",
+        "label": {
+          "eng": "Rees, Germany"
+        },
+        "lat": 51.8097,
+        "long": 6.4004,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 21300
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Hille,_Germany",
+        "label": {
+          "eng": "Hille, Germany"
+        },
+        "lat": 52.3309,
+        "long": 8.7722,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 15900
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Olsberg,_Germany",
+        "label": {
+          "eng": "Olsberg, Germany"
+        },
+        "lat": 51.33713,
+        "long": 8.48813,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 14786
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Roding,_Germany",
+        "label": {
+          "eng": "Roding, Germany"
+        },
+        "lat": 49.1953,
+        "long": 12.5163,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 11412
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Diez,_Germany",
+        "label": {
+          "eng": "Diez, Germany"
+        },
+        "lat": 50.37007,
+        "long": 8.0223,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 10759
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Engen,_Germany",
+        "label": {
+          "eng": "Engen, Germany"
+        },
+        "lat": 47.85,
+        "long": 8.76667,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 10014
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Barth,_Germany",
+        "label": {
+          "eng": "Barth, Germany"
+        },
+        "lat": 54.36346,
+        "long": 12.72491,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 9298
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Westerland,_Germany",
+        "label": {
+          "eng": "Westerland, Germany"
+        },
+        "lat": 54.9079,
+        "long": 8.30326,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 8967
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Barby,_Germany",
+        "label": {
+          "eng": "Barby, Germany"
+        },
+        "lat": 51.9667,
+        "long": 11.8833,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 8938
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Daun,_Germany",
+        "label": {
+          "eng": "Daun, Germany"
+        },
+        "lat": 50.2,
+        "long": 6.83333,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 8013
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Vacha,_Germany",
+        "label": {
+          "eng": "Vacha, Germany"
+        },
+        "lat": 50.8283,
+        "long": 10.0295,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 5464
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Mommenheim,_Germany",
+        "label": {
+          "eng": "Mommenheim, Germany"
+        },
+        "lat": 49.8803,
+        "long": 8.265,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+          "label": {
+            "eng": "Germany"
+          },
+          "lat": 51.5,
+          "long": 10.5
+        },
+        "score": 3077
+      }
+    ]
+  }
+}

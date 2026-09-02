@@ -1,0 +1,407 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "conceptUri": "http://en.wikipedia.org/wiki/Barack_Obama",
+      "keywordAggrSampleSize": 100,
+      "resultType": "keywordAggr",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "keywordAggr": {
+        "warning": "Due to large number of results, the information was computed on a subset of 100 articles",
+        "usedResults": 100,
+        "totalResults": 2604,
+        "results": [
+          {
+            "keyword": "migrants",
+            "weight": 0.2847321629524231
+          },
+          {
+            "keyword": "border",
+            "weight": 0.2792487740516663
+          },
+          {
+            "keyword": "immigration",
+            "weight": 0.2761818468570709
+          },
+          {
+            "keyword": "biden",
+            "weight": 0.1373046189546585
+          },
+          {
+            "keyword": "trump",
+            "weight": 0.1339817196130753
+          },
+          {
+            "keyword": "asylum",
+            "weight": 0.1336867362260818
+          },
+          {
+            "keyword": "》",
+            "weight": 0.122149184346199
+          },
+          {
+            "keyword": "《",
+            "weight": 0.122149184346199
+          },
+          {
+            "keyword": "years",
+            "weight": 0.1142075434327126
+          },
+          {
+            "keyword": "administration",
+            "weight": 0.1084949150681496
+          },
+          {
+            "keyword": "democrats",
+            "weight": 0.1003178209066391
+          },
+          {
+            "keyword": "people",
+            "weight": 0.09976118057966232
+          },
+          {
+            "keyword": "·",
+            "weight": 0.09254537522792816
+          },
+          {
+            "keyword": "president",
+            "weight": 0.0894610658288002
+          },
+          {
+            "keyword": "mexican",
+            "weight": 0.08876845985651016
+          },
+          {
+            "keyword": "show",
+            "weight": 0.08814859390258789
+          },
+          {
+            "keyword": "republicans",
+            "weight": 0.08750323951244354
+          },
+          {
+            "keyword": "illegally",
+            "weight": 0.08502675592899323
+          },
+          {
+            "keyword": "year",
+            "weight": 0.08112683892250061
+          },
+          {
+            "keyword": "obama",
+            "weight": 0.08077085763216019
+          },
+          {
+            "keyword": "policy",
+            "weight": 0.07944191247224808
+          },
+          {
+            "keyword": "gang",
+            "weight": 0.07839636504650116
+          },
+          {
+            "keyword": "detention",
+            "weight": 0.07762390375137329
+          },
+          {
+            "keyword": "policies",
+            "weight": 0.07713944464921951
+          },
+          {
+            "keyword": "month",
+            "weight": 0.0758797824382782
+          },
+          {
+            "keyword": "republican",
+            "weight": 0.07317418605089188
+          },
+          {
+            "keyword": "senate",
+            "weight": 0.07110282778739929
+          },
+          {
+            "keyword": "mexico",
+            "weight": 0.07001429051160812
+          },
+          {
+            "keyword": "voters",
+            "weight": 0.06581320613622665
+          },
+          {
+            "keyword": "schumer",
+            "weight": 0.06371645629405975
+          },
+          {
+            "keyword": "bill",
+            "weight": 0.06319849193096161
+          },
+          {
+            "keyword": "top",
+            "weight": 0.06261839717626572
+          },
+          {
+            "keyword": "hope",
+            "weight": 0.06241952255368233
+          },
+          {
+            "keyword": "deportation",
+            "weight": 0.06146342307329178
+          },
+          {
+            "keyword": "recently",
+            "weight": 0.06145216897130013
+          },
+          {
+            "keyword": "title",
+            "weight": 0.06142168864607811
+          },
+          {
+            "keyword": "family",
+            "weight": 0.06140359863638878
+          },
+          {
+            "keyword": "court",
+            "weight": 0.06117119267582893
+          },
+          {
+            "keyword": "latino",
+            "weight": 0.06090671196579933
+          },
+          {
+            "keyword": "house",
+            "weight": 0.06067387759685516
+          },
+          {
+            "keyword": "country",
+            "weight": 0.05986090376973152
+          },
+          {
+            "keyword": "authorities",
+            "weight": 0.05984591692686081
+          },
+          {
+            "keyword": "work",
+            "weight": 0.05960695818066597
+          },
+          {
+            "keyword": "lopez",
+            "weight": 0.05958564579486847
+          },
+          {
+            "keyword": "group",
+            "weight": 0.05928299948573112
+          },
+          {
+            "keyword": "support",
+            "weight": 0.05885044857859612
+          },
+          {
+            "keyword": "children",
+            "weight": 0.05857850611209869
+          },
+          {
+            "keyword": "number",
+            "weight": 0.05830018222332001
+          },
+          {
+            "keyword": "bush",
+            "weight": 0.05573273822665215
+          },
+          {
+            "keyword": "washington",
+            "weight": 0.05552467703819275
+          },
+          {
+            "keyword": "months",
+            "weight": 0.05532576888799667
+          },
+          {
+            "keyword": "world",
+            "weight": 0.05202827230095863
+          },
+          {
+            "keyword": "george",
+            "weight": 0.05198509991168976
+          },
+          {
+            "keyword": "political",
+            "weight": 0.04945947229862213
+          },
+          {
+            "keyword": "file",
+            "weight": 0.04918608814477921
+          },
+          {
+            "keyword": "nra",
+            "weight": 0.04851176962256432
+          },
+          {
+            "keyword": "american",
+            "weight": 0.04844276607036591
+          },
+          {
+            "keyword": "%",
+            "weight": 0.04781131073832512
+          },
+          {
+            "keyword": "nation",
+            "weight": 0.04685111343860626
+          },
+          {
+            "keyword": "majority",
+            "weight": 0.04523716866970062
+          },
+          {
+            "keyword": "wait",
+            "weight": 0.04517557099461555
+          },
+          {
+            "keyword": "united",
+            "weight": 0.04517038911581039
+          },
+          {
+            "keyword": "including",
+            "weight": 0.04514408856630325
+          },
+          {
+            "keyword": "federal",
+            "weight": 0.0450897105038166
+          },
+          {
+            "keyword": "january",
+            "weight": 0.04490841925144196
+          },
+          {
+            "keyword": "security",
+            "weight": 0.04458605870604515
+          },
+          {
+            "keyword": "apply",
+            "weight": 0.04441358521580696
+          },
+          {
+            "keyword": "white",
+            "weight": 0.04412735253572464
+          },
+          {
+            "keyword": "package",
+            "weight": 0.0437946729362011
+          },
+          {
+            "keyword": "of12",
+            "weight": 0.04362702742218971
+          },
+          {
+            "keyword": "called",
+            "weight": 0.04354583099484444
+          },
+          {
+            "keyword": "presidential",
+            "weight": 0.04349580407142639
+          },
+          {
+            "keyword": "state",
+            "weight": 0.04311888664960861
+          },
+          {
+            "keyword": "laws",
+            "weight": 0.04269986599683762
+          },
+          {
+            "keyword": "today",
+            "weight": 0.04253435879945755
+          },
+          {
+            "keyword": "vineyard",
+            "weight": 0.04244248569011688
+          },
+          {
+            "keyword": "supporters",
+            "weight": 0.04228035733103752
+          },
+          {
+            "keyword": "side",
+            "weight": 0.04221503064036369
+          },
+          {
+            "keyword": "mr",
+            "weight": 0.04218755662441254
+          },
+          {
+            "keyword": "john",
+            "weight": 0.04199710488319397
+          },
+          {
+            "keyword": "online",
+            "weight": 0.04196170344948769
+          },
+          {
+            "keyword": "health",
+            "weight": 0.04182882979512215
+          },
+          {
+            "keyword": "good",
+            "weight": 0.04170388728380203
+          },
+          {
+            "keyword": "government",
+            "weight": 0.04141764715313911
+          },
+          {
+            "keyword": "southern",
+            "weight": 0.04124869406223297
+          },
+          {
+            "keyword": "mayorkas",
+            "weight": 0.04106037318706512
+          },
+          {
+            "keyword": "migrant",
+            "weight": 0.04106037318706512
+          },
+          {
+            "keyword": "chamber",
+            "weight": 0.04106037318706512
+          },
+          {
+            "keyword": "garcia",
+            "weight": 0.040888711810112
+          },
+          {
+            "keyword": "south",
+            "weight": 0.04071424901485443
+          },
+          {
+            "keyword": "kerlikowske",
+            "weight": 0.04057445749640465
+          },
+          {
+            "keyword": "centers",
+            "weight": 0.04057445749640465
+          },
+          {
+            "keyword": "hispanic",
+            "weight": 0.04057445749640465
+          },
+          {
+            "keyword": "defeated",
+            "weight": 0.04057445749640465
+          },
+          {
+            "keyword": "enforce",
+            "weight": 0.04057445749640465
+          }
+        ]
+      }
+    }
+  }
+}

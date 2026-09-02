@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/articleMapper",
+    "body": {
+      "articleUrl": "https://www.beloitdailynews.com/news/national-news/immigration-reform-stalled-decade-after-gang-of-8s-big-push/article_8e47c5e7-3bf8-57be-8ddf-bbc2b83c4bc7.html",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "https://www.beloitdailynews.com/news/national-news/immigration-reform-stalled-decade-after-gang-of-8s-big-push/article_8e47c5e7-3bf8-57be-8ddf-bbc2b83c4bc7.html": null
+    }
+  }
+}

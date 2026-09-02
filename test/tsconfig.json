@@ -1,12 +1,11 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2020",
         "experimentalDecorators": true,
         "skipLibCheck": true,
         "noImplicitAny": false,
         "module": "commonjs",
         "moduleResolution": "node",
-        "downlevelIteration": true,
         "declaration": true,
         "sourceMap": true,
         "alwaysStrict": true,
@@ -15,12 +14,8 @@
             "../node_modules/@types"
         ],
         "lib": [
-            "dom",
-            "es2015",
-            "es5",
-            "es6",
-            "es2017",
-            "esnext",
+            "es2020",
+            "dom"
         ]
     },
     "include": [

@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/articleMapper",
+    "body": {
+      "articleUrl": "https://www.goskagit.com/news/politics/immigration-reform-stalled-decade-after-gang-of-8s-big-push/article_51a9f85d-8899-5197-b11d-b4caede81261.html",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "https://www.goskagit.com/news/politics/immigration-reform-stalled-decade-after-gang-of-8s-big-push/article_51a9f85d-8899-5197-b11d-b4caede81261.html": null
+    }
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestLocationsFast",
+    "body": {
+      "action": "getLocationsAtCoordinate",
+      "lat": 38.893352,
+      "lon": -77.093779,
+      "radius": 300,
+      "limitToCities": true,
+      "count": 20,
+      "lang": "eng",
+      "ignoreNonWiki": true,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "conceptLang": "eng",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "type": "place",
+        "label": {
+          "eng": "Baltimore"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Richmond, Virginia"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Alexandria, Virginia"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Columbia, Maryland"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Reading"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Germantown, Maryland"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Silver Spring, Maryland"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Centreville"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Wilmington, Delaware"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Waldorf"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Glen Burnie"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Dale City"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Ellicott City"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Frederick"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Dundalk"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Rockville, Maryland"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Bethesda, Maryland"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Vineland"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Gaithersburg"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "type": "place",
+        "label": {
+          "eng": "Lancaster, Pennsylvania"
+        },
+        "country": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      }
+    ]
+  }
+}

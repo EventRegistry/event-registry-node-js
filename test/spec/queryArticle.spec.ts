@@ -36,7 +36,7 @@ describe("Query Article", () => {
         const mapper = new ArticleMapper(er);
         const mappedUris = await Promise.all(uniqueUrls.map((url) => mapper.getArticleUri(url)));
         if (mappedUris.filter(Boolean).length > 0) {
-            const q = new QueryArticle(mappedUris.filter(Boolean));
+            const q = new QueryArticle(mappedUris.filter(Boolean) as string[]);
             q.setRequestedResult(new RequestArticleInfo(utils.returnInfo));
             const res = await er.execQuery(q) as Record<string, ER.Article>[];
             for (const article of Object.values(res)) {

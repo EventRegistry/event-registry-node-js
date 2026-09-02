@@ -1,0 +1,187 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestCategoriesFast",
+    "body": {
+      "prefix": "politics",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "conceptLang": "eng",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "news/Politics",
+        "label": "news/Politics",
+        "parentUri": "news"
+      },
+      {
+        "uri": "dmoz/Society/Politics",
+        "label": "dmoz/Society/Politics",
+        "parentUri": "dmoz/Society"
+      },
+      {
+        "uri": "dmoz/Games/Board_Games/War_and_Politics",
+        "label": "dmoz/Games/Board Games/War and Politics",
+        "parentUri": "dmoz/Games/Board Games"
+      },
+      {
+        "uri": "dmoz/Shopping/Niche/Politics",
+        "label": "dmoz/Shopping/Niche/Politics",
+        "parentUri": "dmoz/Shopping/Niche"
+      },
+      {
+        "uri": "dmoz/Society/Gay,_Lesbian,_and_Bisexual/Politics",
+        "label": "dmoz/Society/Gay, Lesbian, and Bisexual/Politics",
+        "parentUri": "dmoz/Society/Gay, Lesbian, and Bisexual"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Alternative_Political_Systems",
+        "label": "dmoz/Society/Politics/Alternative Political Systems",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Anarchism",
+        "label": "dmoz/Society/Politics/Anarchism",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Campaigns_and_Elections",
+        "label": "dmoz/Society/Politics/Campaigns and Elections",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Christian_Democracy",
+        "label": "dmoz/Society/Politics/Christian Democracy",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Civic_Participation",
+        "label": "dmoz/Society/Politics/Civic Participation",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Conservatism",
+        "label": "dmoz/Society/Politics/Conservatism",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Democracy",
+        "label": "dmoz/Society/Politics/Democracy",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Fascism",
+        "label": "dmoz/Society/Politics/Fascism",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Federalism_and_Devolution",
+        "label": "dmoz/Society/Politics/Federalism and Devolution",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Global_Governance",
+        "label": "dmoz/Society/Politics/Global Governance",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Globalization",
+        "label": "dmoz/Society/Politics/Globalization",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Green",
+        "label": "dmoz/Society/Politics/Green",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Humor",
+        "label": "dmoz/Society/Politics/Humor",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Liberalism",
+        "label": "dmoz/Society/Politics/Liberalism",
+        "parentUri": "dmoz/Society/Politics"
+      },
+      {
+        "uri": "dmoz/Society/Politics/Lobbying",
+        "label": "dmoz/Society/Politics/Lobbying",
+        "parentUri": "dmoz/Society/Politics"
+      }
+    ]
+  }
+}

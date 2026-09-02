@@ -1,0 +1,42 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestSourcesFast",
+    "body": {
+      "prefix": "associated press",
+      "page": 1,
+      "dataType": [
+        "news",
+        "pr",
+        "blog"
+      ],
+      "count": 20,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "score": 952,
+        "dataType": "news",
+        "uri": "hosted.ap.org",
+        "title": "Associated Press"
+      },
+      {
+        "score": 30,
+        "dataType": "news",
+        "uri": "aap.com.au",
+        "title": "Australian Associated Press"
+      },
+      {
+        "score": 1,
+        "dataType": "news",
+        "uri": "eu.buckscountycouriertimes.com",
+        "title": "Associated Press"
+      }
+    ]
+  }
+}

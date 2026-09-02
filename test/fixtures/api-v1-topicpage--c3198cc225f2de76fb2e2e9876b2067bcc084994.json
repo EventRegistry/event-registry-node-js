@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/topicPage",
+    "body": {
+      "action": "getTopicPageJson",
+      "includeConceptDescription": true,
+      "includeConceptImage": true,
+      "includeTopicPageDefinition": true,
+      "includeTopicPageOwner": true,
+      "uri": "f8f08a9c-3609-401c-a1e4-2ec00f458795",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "error": "Topic page with uri 'f8f08a9c-3609-401c-a1e4-2ec00f458795' does not exist"
+    }
+  }
+}

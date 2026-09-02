@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event/getEvent",
+    "body": {
+      "eventUri": "eng-8501190",
+      "uriWgtListSortBy": "cosSim",
+      "uriWgtListSortByAsc": false,
+      "resultType": "uriWgtList",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "eng-8501190": {
+        "uriWgtList": {
+          "totalResults": 6,
+          "page": 1,
+          "count": 6,
+          "pages": 1,
+          "results": [
+            "7463253568:243",
+            "7463259146:233",
+            "7463287225:233",
+            "7463259718:231",
+            "7463285824:231",
+            "7463247562:196"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "united states",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States",
+        "type": "loc",
+        "score": 162723,
+        "label": {
+          "eng": "United States"
+        },
+        "location": {
+          "type": "country",
+          "label": {
+            "eng": "United States"
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_dollar",
+        "type": "wiki",
+        "score": 77010,
+        "label": {
+          "eng": "United States dollar"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Democratic_Party_(United_States)",
+        "type": "org",
+        "score": 17867,
+        "label": {
+          "eng": "Democratic Party (United States)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Republican_Party_(United_States)",
+        "type": "org",
+        "score": 17456,
+        "label": {
+          "eng": "Republican Party (United States)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_Congress",
+        "type": "org",
+        "score": 15421,
+        "label": {
+          "eng": "United States Congress"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Federal_government_of_the_United_States",
+        "type": "loc",
+        "score": 12377,
+        "label": {
+          "eng": "Federal government of the United States"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_Senate",
+        "type": "org",
+        "score": 11310,
+        "label": {
+          "eng": "United States Senate"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Vice_President_of_the_United_States",
+        "type": "wiki",
+        "score": 9636,
+        "label": {
+          "eng": "Vice President of the United States"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_Secretary_of_State",
+        "type": "wiki",
+        "score": 7602,
+        "label": {
+          "eng": "United States Secretary of State"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_House_of_Representatives",
+        "type": "org",
+        "score": 7059,
+        "label": {
+          "eng": "United States House of Representatives"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_Department_of_Justice",
+        "type": "org",
+        "score": 6479,
+        "label": {
+          "eng": "United States Department of Justice"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/County_(United_States)",
+        "type": "wiki",
+        "score": 6434,
+        "label": {
+          "eng": "County (United States)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Supreme_Court_of_the_United_States",
+        "type": "loc",
+        "score": 6057,
+        "label": {
+          "eng": "Supreme Court of the United States"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_Department_of_the_Treasury",
+        "type": "org",
+        "score": 5143,
+        "label": {
+          "eng": "United States Department of the Treasury"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_Department_of_Defense",
+        "type": "org",
+        "score": 4590,
+        "label": {
+          "eng": "United States Department of Defense"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_Department_of_State",
+        "type": "org",
+        "score": 4359,
+        "label": {
+          "eng": "United States Department of State"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_district_court",
+        "type": "wiki",
+        "score": 4208,
+        "label": {
+          "eng": "United States district court"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_Attorney_General",
+        "type": "wiki",
+        "score": 4040,
+        "label": {
+          "eng": "United States Attorney General"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_States_Armed_Forces",
+        "type": "wiki",
+        "score": 3909,
+        "label": {
+          "eng": "United States Armed Forces"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Economy_of_the_United_States",
+        "type": "wiki",
+        "score": 3799,
+        "label": {
+          "eng": "Economy of the United States"
+        }
+      }
+    ]
+  }
+}

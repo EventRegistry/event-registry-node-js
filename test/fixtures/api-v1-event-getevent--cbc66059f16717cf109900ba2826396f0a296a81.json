@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event/getEvent",
+    "body": {
+      "articlesPage": 1,
+      "articlesCount": 100,
+      "articlesSortBy": "date",
+      "articlesSortByAsc": true,
+      "resultType": "articles",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "error": "There is no eventUri provided in the request"
+    }
+  }
+}

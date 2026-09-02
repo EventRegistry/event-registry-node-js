@@ -1,0 +1,472 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestLocationsFast",
+    "body": {
+      "prefix": "London",
+      "count": 20,
+      "source": [
+        "place",
+        "country"
+      ],
+      "lang": "eng",
+      "countryUri": "",
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "conceptLang": "eng",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London",
+        "label": {
+          "eng": "London"
+        },
+        "lat": 51.50853,
+        "long": -0.12574,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 7556900
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/City_of_London",
+        "label": {
+          "eng": "City of London"
+        },
+        "lat": 51.51279,
+        "long": -0.09184,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 7556900
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Greater_London",
+        "label": {
+          "eng": "Greater London"
+        },
+        "lat": 51.5,
+        "long": -0.16667,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 7504800
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/East_London,_Eastern_Cape",
+        "label": {
+          "eng": "East London, Eastern Cape"
+        },
+        "lat": -33.01529,
+        "long": 27.91162,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/South_Africa",
+          "label": {
+            "eng": "South Africa"
+          },
+          "lat": -29,
+          "long": 24
+        },
+        "score": 478676
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London,_Ontario",
+        "label": {
+          "eng": "London, Ontario"
+        },
+        "lat": 42.98339,
+        "long": -81.23304,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Canada",
+          "label": {
+            "eng": "Canada"
+          },
+          "lat": 60.10867,
+          "long": -113.64258
+        },
+        "score": 346765
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London_Borough_of_Croydon",
+        "label": {
+          "eng": "London Borough of Croydon"
+        },
+        "lat": 51.37664,
+        "long": -0.10574,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 341800
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London_Borough_of_Enfield",
+        "label": {
+          "eng": "London Borough of Enfield"
+        },
+        "lat": 51.64875,
+        "long": -0.0974,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 294900
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/New_London_County,_Connecticut",
+        "label": {
+          "eng": "New London County"
+        },
+        "lat": 41.46678,
+        "long": -72.1065,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 274055
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London_Borough_of_Southwark",
+        "label": {
+          "eng": "London Borough of Southwark"
+        },
+        "lat": 51.46716,
+        "long": -0.0606,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 269200
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London_Borough_of_Lewisham",
+        "label": {
+          "eng": "London Borough of Lewisham"
+        },
+        "lat": 51.45355,
+        "long": -0.018,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 261600
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London_Borough_of_Redbridge",
+        "label": {
+          "eng": "London Borough of Redbridge"
+        },
+        "lat": 51.56667,
+        "long": 0.08333,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 257600
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London_Borough_of_Newham",
+        "label": {
+          "eng": "London Borough of Newham"
+        },
+        "lat": 51.51667,
+        "long": 0.03333,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 249500
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London_Borough_of_Havering",
+        "label": {
+          "eng": "London Borough of Havering"
+        },
+        "lat": 51.55,
+        "long": 0.21667,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 236100
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London_Borough_of_Camden",
+        "label": {
+          "eng": "London Borough of Camden"
+        },
+        "lat": 51.54281,
+        "long": -0.15942,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 235400
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/London_Borough_of_Hackney",
+        "label": {
+          "eng": "London Borough of Hackney"
+        },
+        "lat": 51.53333,
+        "long": -0.08333,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 219200
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Purley,_London",
+        "label": {
+          "eng": "Purley, London"
+        },
+        "lat": 51.33678,
+        "long": -0.11201,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 72000
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Chelsea,_London",
+        "label": {
+          "eng": "Chelsea, London"
+        },
+        "lat": 51.48755,
+        "long": -0.16936,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 60000
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Mitcham,_London",
+        "label": {
+          "eng": "Mitcham, London"
+        },
+        "lat": 51.40322,
+        "long": -0.16831,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 48311
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/New_London,_Connecticut",
+        "label": {
+          "eng": "New London"
+        },
+        "lat": 41.35565,
+        "long": -72.09952,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 27620
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/Blackheath,_London",
+        "label": {
+          "eng": "Blackheath, London"
+        },
+        "lat": 51.4647,
+        "long": 0.0079,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+          "label": {
+            "eng": "United Kingdom"
+          },
+          "lat": 54.75844,
+          "long": -2.69531
+        },
+        "score": 25116
+      }
+    ]
+  }
+}

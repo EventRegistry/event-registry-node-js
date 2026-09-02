@@ -10,6 +10,7 @@ import {
     RequestEventKeywordAggr,
     RequestEventSimilarEvents,
     RequestEventSourceAggr,
+    RequestEventsInfo,
     RequestEventsUriWgtList,
 } from "../../src/index";
 import { Utils } from "./utils";
@@ -22,6 +23,15 @@ describe("Query Event", () => {
         { uri: "http://en.wikipedia.org/wiki/Donald_Trump", wgt: 80 }
     ];
     let query: QueryEvent;
+    let eventUri: string;
+
+    async function fetchRecentEventUri(): Promise<string | undefined> {
+        const q = new QueryEvents({lang: "eng"});
+        q.setRequestedResult(new RequestEventsInfo({count: 10, sortBy: "date", sortByAsc: false}));
+        const response = await er.execQuery(q);
+        const events = (response?.events?.results ?? []) as ER.Event[];
+        return events.find((event) => !!event?.uri)?.uri;
+    }
 
     async function createQuery(count = 50): Promise<QueryEvent> {
         const q = new QueryEvents({lang: "eng", conceptUri: await er.getConceptUri("United Kingdom")});
@@ -33,55 +43,91 @@ describe("Query Event", () => {
     }
 
     beforeAll(async () => {
+        eventUri = await fetchRecentEventUri() as string;
+        if (!eventUri) {
+            pending("no recent event URI available");
+            return;
+        }
         query = await createQuery();
     });
 
     it("should test event articles filtering", async () => {
-        const q1 = new QueryEventArticlesIter(er, "fra-943918");
+        if (!eventUri) {
+            pending("no recent event URI available");
+            return;
+        }
+        const q1 = new QueryEventArticlesIter(er, eventUri);
         const counts1 = await q1.count();
-        const counts2 = await (new QueryEventArticlesIter(er, "fra-943918", {lang: "deu"})).count();
+        const counts2 = await (new QueryEventArticlesIter(er, eventUri, {lang: "deu"})).count();
         expect(counts1).not.toEqual(counts2);
-        const counts3 = await (new QueryEventArticlesIter(er, "fra-943918", {conceptUri: await er.getConceptUri("United Kingdom")})).count();
+        const counts3 = await (new QueryEventArticlesIter(er, eventUri, {conceptUri: await er.getConceptUri("United Kingdom")})).count();
         expect(counts1).not.toEqual(counts3);
-        const counts4 = await (new QueryEventArticlesIter(er, "fra-943918", {keywords: "United Kingdom"})).count();
+        const counts4 = await (new QueryEventArticlesIter(er, eventUri, {keywords: "United Kingdom"})).count();
         expect(counts1).not.toEqual(counts4);
-        const counts5 = await (new QueryEventArticlesIter(er, "fra-943918", {sourceUri: await er.getNewsSourceUri("Washington Post")})).count();
+        const counts5 = await (new QueryEventArticlesIter(er, eventUri, {sourceUri: await er.getNewsSourceUri("Washington Post")})).count();
         expect(counts1).not.toEqual(counts5);
-        const counts6 = await (new QueryEventArticlesIter(er, "fra-943918", {lang: "deu", conceptUri: await er.getConceptUri("United Kingdom")})).count();
+        const counts6 = await (new QueryEventArticlesIter(er, eventUri, {lang: "deu", conceptUri: await er.getConceptUri("United Kingdom")})).count();
         expect(counts1).not.toEqual(counts6);
         let count = 0;
-        q1.execQuery(() => {
-            count++;
-        }, async () => {
-            expect(counts1).toEqual(count);
-            const q = new QueryEvent("fra-943918");
-            q.setRequestedResult(new RequestEventArticles({lang: "deu", conceptUri: await er.getConceptUri("United Kingdom")}));
-            const response = await er.execQuery(q);
-            const totalResults = ((response["fra-943918"]) as Record<string, ER.Results<ER.Article>>)?.articles?.totalResults ?? 0;
-            expect(counts6).toEqual(totalResults);
+        await new Promise<void>((resolve, reject) => {
+            q1.execQuery(() => {
+                count++;
+            }, async (err) => {
+                if (err) {
+                    reject(new Error(err));
+                    return;
+                }
+                try {
+                    expect(counts1).toEqual(count);
+                    const q = new QueryEvent(eventUri);
+                    q.setRequestedResult(new RequestEventArticles({lang: "deu", conceptUri: await er.getConceptUri("United Kingdom")}));
+                    const response = await er.execQuery(q);
+                    const totalResults = ((response[eventUri]) as Record<string, ER.Results<ER.Article>>)?.articles?.totalResults ?? 0;
+                    expect(counts6).toEqual(totalResults);
+                    resolve();
+                } catch (e) {
+                    reject(e);
+                }
+            });
         });
     });
 
     it("should test article sorting", async () => {
         const q = await createQuery(1);
         const response = await er.execQuery(q);
-        const q1 = new QueryEventArticlesIter(er, (response?.params as unknown as Record<string, string>)?.eventUri as string, {sortBy: "date", sortByAsc: true});
+        const sortEventUri = (response?.params as unknown as Record<string, string>)?.eventUri as string;
+        const q1 = new QueryEventArticlesIter(er, sortEventUri, {sortBy: "date", sortByAsc: true});
         let wgt: number | undefined = undefined;
-        q1.execQuery((article) => {
-            if (!wgt) {
-                wgt = article?.wgt;
-            }
-            expect(article?.wgt).toBeGreaterThanOrEqual(wgt);
-            wgt = article?.wgt;
-        }, () => {
-            wgt = undefined;
-            const q2 = new QueryEventArticlesIter(er, (response?.params as unknown as Record<string, string>)?.eventUri, {sortBy: "date", sortByAsc: false});
-            q2.execQuery((article) => {
+        await new Promise<void>((resolve, reject) => {
+            q1.execQuery((article) => {
                 if (!wgt) {
                     wgt = article?.wgt;
                 }
-                expect(article?.wgt).toBeLessThanOrEqual(wgt);
+                expect(article?.wgt).toBeGreaterThanOrEqual(wgt);
                 wgt = article?.wgt;
+            }, async (err) => {
+                if (err) {
+                    reject(new Error(err));
+                    return;
+                }
+                try {
+                    wgt = undefined;
+                    const q2 = new QueryEventArticlesIter(er, sortEventUri, {sortBy: "date", sortByAsc: false});
+                    await new Promise<void>((resolveNested, rejectNested) => {
+                        q2.execQuery((article) => {
+                            if (!wgt) {
+                                wgt = article?.wgt;
+                            }
+                            expect(article?.wgt).toBeLessThanOrEqual(wgt);
+                            wgt = article?.wgt;
+                        }, (nestedErr) => {
+                            nestedErr ? rejectNested(new Error(nestedErr)) : resolveNested();
+                        });
+                    });
+                    resolve();
+                } catch (e) {
+                    reject(e);
+                }
             });
         });
     });
@@ -129,7 +175,7 @@ describe("Query Event", () => {
         for (const event of Object.values(response)) {
             expect(event?.keywordAggr).toBeTruthy();
             if (!!(event?.keywordAggr as Record<string, string>)?.error) {
-                console.error((event?.keywordAggr as Record<string, string>)?.error);
+                fail((event?.keywordAggr as Record<string, string>)?.error);
             }
             const keywords = (event?.keywordAggr as Record<string, ER.Keyword[]>)?.results || [];
             for (const kw of keywords) {
@@ -171,17 +217,32 @@ describe("Query Event", () => {
     });
 
     it("should test query event articles iterator", async () => {
-        const q = new QueryEventArticlesIter(er, "fra-943918", { maxItems: 10, articleBatchSize: 5 });
+        if (!eventUri) {
+            pending("no recent event URI available");
+            return;
+        }
+        const q = new QueryEventArticlesIter(er, eventUri, { maxItems: 10, articleBatchSize: 5 });
         let size = 0;
-        q.execQuery((item) => {
-            size += 1;
-        }, async () => {
-            const q2 = new QueryEvent("fra-943918");
-            const requestEventArticles = new RequestEventArticles({count: 10});
-            q2.setRequestedResult(requestEventArticles);
-            const response = await er.execQuery(q2);
-            const articles = (response["fra-943918"] as Record<string, ER.Results<ER.Article>>)?.articles?.results || [];
-            expect(articles.length).toEqual(size);
+        await new Promise<void>((resolve, reject) => {
+            q.execQuery((item) => {
+                size += 1;
+            }, async (err) => {
+                if (err) {
+                    reject(new Error(err));
+                    return;
+                }
+                try {
+                    const q2 = new QueryEvent(eventUri);
+                    const requestEventArticles = new RequestEventArticles({count: 10});
+                    q2.setRequestedResult(requestEventArticles);
+                    const response = await er.execQuery(q2);
+                    const articles = (response[eventUri] as Record<string, ER.Results<ER.Article>>)?.articles?.results || [];
+                    expect(articles.length).toEqual(size);
+                    resolve();
+                } catch (e) {
+                    reject(e);
+                }
+            });
         });
     });
 });

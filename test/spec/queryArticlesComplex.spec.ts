@@ -14,16 +14,20 @@ describe("Query Articles Complex", () => {
     const er = Utils.initAPI();
     const utils = new Utils();
 
-    it("should test keywords (1)", () => {
+    it("should test keywords (1)", async () => {
         const baseQuery = new BaseQuery({keyword: "obama", keywordLoc: "title"});
         const cq1 = new ComplexArticleQuery(baseQuery);
         const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {maxItems: 2000});
-        artIter.execQuery((item) => {
-            expect(utils.normalize(item?.title ?? "")).toContain("obama");
+        await new Promise<void>((resolve, reject) => {
+            artIter.execQuery((item) => {
+                expect(utils.normalize(item?.title ?? "")).toContain("obama");
+            }, (err) => {
+                err ? reject(new Error(err)) : resolve();
+            });
         });
     });
 
-    it("should test keywords (2)", () => {
+    it("should test keywords (2)", async () => {
         const qStr = `
         {
             "$query": {
@@ -32,17 +36,25 @@ describe("Query Articles Complex", () => {
         }
         `;
         const artIter = QueryArticlesIter.initWithComplexQuery(er, qStr, { maxItems: 2000 });
-        artIter.execQuery((item) => {
-            expect(utils.normalize(item?.title ?? "")).toContain("obama");
+        await new Promise<void>((resolve, reject) => {
+            artIter.execQuery((item) => {
+                expect(utils.normalize(item?.title ?? "")).toContain("obama");
+            }, (err) => {
+                err ? reject(new Error(err)) : resolve();
+            });
         });
     });
 
-    it("should test keywords (3)", () => {
+    it("should test keywords (3)", async () => {
         const baseQuery = new BaseQuery({keyword: "home", lang: "eng", keywordLoc: "body"});
         const cq1 = new ComplexArticleQuery(baseQuery);
         const artIter = QueryArticlesIter.initWithComplexQuery(er, cq1, {returnInfo: utils.returnInfo, maxItems: 20});
-        artIter.execQuery((item) => {
-            expect(utils.normalize(item?.body ?? "")).toContain("home");
+        await new Promise<void>((resolve, reject) => {
+            artIter.execQuery((item) => {
+                expect(utils.normalize(item?.body ?? "")).toContain("home");
+            }, (err) => {
+                err ? reject(new Error(err)) : resolve();
+            });
         });
     });
 
@@ -261,18 +273,22 @@ describe("Query Articles Complex", () => {
         const returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({concepts: true, categories: true})});
 
         const artIter = QueryArticlesIter.initWithComplexQuery(er, cq, { returnInfo, maxItems: 50 }) as QueryArticlesIter;
-        artIter.execQuery((item) => {
-            const concepts = item?.concepts ?? [];
-            const hasConcept = concepts.find(({ uri }) => uri === trumpUri);
-            const categories = item?.categories ?? [];
-            const hasCategory = categories.find(({uri}) => uri.includes(politicsUri));
-            const hasDate = (item?.date ?? "") === "2017-02-05";
+        await new Promise<void>((resolve, reject) => {
+            artIter.execQuery((item) => {
+                const concepts = item?.concepts ?? [];
+                const hasConcept = concepts.find(({ uri }) => uri === trumpUri);
+                const categories = item?.categories ?? [];
+                const hasCategory = categories.find(({uri}) => uri.includes(politicsUri));
+                const hasDate = (item?.date ?? "") === "2017-02-05";
 
-            expect(hasConcept || hasCategory || hasDate).toBeTruthy();
-            for (const {uri} of concepts) {
-                expect(uri).not.toEqual(obamaUri);
-            }
-            expect((item?.date ?? "")).not.toEqual("2017-02-04");
+                expect(hasConcept || hasCategory || hasDate).toBeTruthy();
+                for (const {uri} of concepts) {
+                    expect(uri).not.toEqual(obamaUri);
+                }
+                expect((item?.date ?? "")).not.toEqual("2017-02-04");
+            }, (err) => {
+                err ? reject(new Error(err)) : resolve();
+            });
         });
     });
 

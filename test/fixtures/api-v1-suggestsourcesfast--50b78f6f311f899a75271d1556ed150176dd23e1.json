@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestSourcesFast",
+    "body": {
+      "prefix": "bbc",
+      "page": 1,
+      "dataType": [
+        "news",
+        "pr",
+        "blog"
+      ],
+      "count": 10,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "score": 1377,
+        "dataType": "news",
+        "uri": "bbc.com",
+        "title": "BBC"
+      },
+      {
+        "score": 4,
+        "dataType": "news",
+        "uri": "bbc24news.com",
+        "title": "BBC24 News"
+      }
+    ]
+  }
+}

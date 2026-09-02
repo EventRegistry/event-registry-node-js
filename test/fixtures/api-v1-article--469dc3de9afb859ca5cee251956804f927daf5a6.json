@@ -1,0 +1,41 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "conceptUri": "http://en.wikipedia.org/wiki/Barack_Obama",
+      "uriWgtListPage": 1,
+      "uriWgtListCount": 10,
+      "uriWgtListSortBy": "fq",
+      "uriWgtListSortByAsc": false,
+      "resultType": "uriWgtList",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "uriWgtList": {
+        "totalResults": 2604,
+        "page": 1,
+        "count": 10,
+        "pages": 261,
+        "results": [
+          "7478589512:100",
+          "7478586127:100",
+          "7478583092:100",
+          "7478578395:100",
+          "7478575030:100",
+          "7478574791:100",
+          "7478567101:100",
+          "7478571545:100",
+          "7478567299:100",
+          "7478560428:100"
+        ]
+      }
+    }
+  }
+}

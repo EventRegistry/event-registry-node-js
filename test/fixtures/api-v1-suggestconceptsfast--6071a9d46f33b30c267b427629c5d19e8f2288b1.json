@@ -1,0 +1,263 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "apple",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_Inc.",
+        "type": "org",
+        "score": 13454,
+        "label": {
+          "eng": "Apple Inc."
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple",
+        "type": "wiki",
+        "score": 3948,
+        "label": {
+          "eng": "Apple"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_Watch",
+        "type": "wiki",
+        "score": 1725,
+        "label": {
+          "eng": "Apple Watch"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_TV+",
+        "type": "wiki",
+        "score": 1007,
+        "label": {
+          "eng": "Apple TV+"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_TV",
+        "type": "wiki",
+        "score": 717,
+        "label": {
+          "eng": "Apple TV"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_Music",
+        "type": "wiki",
+        "score": 590,
+        "label": {
+          "eng": "Apple Music"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_Store",
+        "type": "org",
+        "score": 311,
+        "label": {
+          "eng": "Apple Store"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_Pay",
+        "type": "wiki",
+        "score": 300,
+        "label": {
+          "eng": "Apple Pay"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_community",
+        "type": "wiki",
+        "score": 224,
+        "label": {
+          "eng": "Apple community"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_M1",
+        "type": "wiki",
+        "score": 114,
+        "label": {
+          "eng": "Apple M1"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_pie",
+        "type": "wiki",
+        "score": 98,
+        "label": {
+          "eng": "Apple pie"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_cider",
+        "type": "wiki",
+        "score": 91,
+        "label": {
+          "eng": "Apple cider"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_silicon",
+        "type": "wiki",
+        "score": 88,
+        "label": {
+          "eng": "Apple silicon"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_Daily",
+        "type": "org",
+        "score": 76,
+        "label": {
+          "eng": "Apple Daily"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Appleton,_Wisconsin",
+        "type": "loc",
+        "score": 75,
+        "label": {
+          "eng": "Appleton"
+        },
+        "location": {
+          "type": "place",
+          "label": {
+            "eng": "Appleton"
+          },
+          "country": {
+            "type": "country",
+            "label": {
+              "eng": "United States"
+            }
+          }
+        }
+      },
+      {
+        "uri": "http://pt.wikipedia.org/wiki/Apple_Podcasts",
+        "type": "wiki",
+        "score": 70,
+        "label": {
+          "eng": "Apple Podcasts"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_Podcasts",
+        "type": "wiki",
+        "score": 67,
+        "label": {
+          "eng": "Apple Podcasts"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_A15",
+        "type": "wiki",
+        "score": 63,
+        "label": {
+          "eng": "Apple A15"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_Arcade",
+        "type": "wiki",
+        "score": 60,
+        "label": {
+          "eng": "Apple Arcade"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Apple_juice",
+        "type": "wiki",
+        "score": 57,
+        "label": {
+          "eng": "Apple juice"
+        }
+      }
+    ]
+  }
+}

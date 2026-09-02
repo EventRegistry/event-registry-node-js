@@ -1,0 +1,527 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEventsForTopicPage",
+      "resultType": "events",
+      "dataType": [
+        "news"
+      ],
+      "eventsCount": 50,
+      "eventsSortBy": "rel",
+      "eventsSortByAsc": false,
+      "eventsPage": 1,
+      "topicPage": "{\"autoAddArticles\":true,\"articleHasDuplicate\":\"keepAll\",\"articleHasEvent\":\"keepAll\",\"articleIsDuplicate\":\"skipDuplicates\",\"maxDaysBack\":7,\"articleTreshWgt\":0,\"eventTreshWgt\":0,\"concepts\":[{\"uri\":\"http://en.wikipedia.org/wiki/Apple_Inc.\",\"wgt\":50,\"required\":false,\"excluded\":false}],\"keywords\":[],\"categories\":[],\"sources\":[],\"sourceGroups\":[],\"sourceLocations\":[],\"locations\":[],\"langs\":[],\"restrictToSetConcepts\":false,\"restrictToSetCategories\":false,\"restrictToSetSources\":false,\"restrictToSetLocations\":false,\"dataType\":[\"news\"]}",
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "conceptLang": "eng",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "events": {
+        "results": [
+          {
+            "uri": "eng-8495298",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/South_Korea",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "South Korea"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "South Korea"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/North_Korea",
+                "type": "loc",
+                "score": 94,
+                "label": {
+                  "eng": "North Korea"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "North Korea"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Unmanned_aerial_vehicle",
+                "type": "wiki",
+                "score": 92,
+                "label": {
+                  "eng": "Unmanned aerial vehicle"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_States",
+                "type": "loc",
+                "score": 92,
+                "label": {
+                  "eng": "United States"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "United States"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Korean_Central_News_Agency",
+                "type": "org",
+                "score": 86,
+                "label": {
+                  "eng": "Korean Central News Agency"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Nuclear_weapon",
+                "type": "wiki",
+                "score": 83,
+                "label": {
+                  "eng": "Nuclear weapon"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tsunami",
+                "type": "org",
+                "score": 79,
+                "label": {
+                  "eng": "Tsunami"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Strike_action",
+                "type": "wiki",
+                "score": 74,
+                "label": {
+                  "eng": "Strike action"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Radioactive_decay",
+                "type": "wiki",
+                "score": 65,
+                "label": {
+                  "eng": "Radioactive decay"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kim_Jong-un",
+                "type": "person",
+                "score": 63,
+                "label": {
+                  "eng": "Kim Jong-un"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Seoul",
+                "type": "loc",
+                "score": 57,
+                "label": {
+                  "eng": "Seoul"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Seoul"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "South Korea"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Aircraft_carrier",
+                "type": "wiki",
+                "score": 54,
+                "label": {
+                  "eng": "Aircraft carrier"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/State_media",
+                "type": "wiki",
+                "score": 50,
+                "label": {
+                  "eng": "State media"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Missile",
+                "type": "wiki",
+                "score": 46,
+                "label": {
+                  "eng": "Missile"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Cruise_missile",
+                "type": "wiki",
+                "score": 45,
+                "label": {
+                  "eng": "Cruise missile"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Pyongyang",
+                "type": "loc",
+                "score": 45,
+                "label": {
+                  "eng": "Pyongyang"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Pyongyang"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "North Korea"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Warhead",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "Warhead"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Air_force",
+                "type": "org",
+                "score": 42,
+                "label": {
+                  "eng": "Air force"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Port",
+                "type": "wiki",
+                "score": 42,
+                "label": {
+                  "eng": "Port"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Military_exercise",
+                "type": "wiki",
+                "score": 38,
+                "label": {
+                  "eng": "Military exercise"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/President_of_South_Korea",
+                "type": "wiki",
+                "score": 34,
+                "label": {
+                  "eng": "President of South Korea"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rodong_Sinmun",
+                "type": "org",
+                "score": 33,
+                "label": {
+                  "eng": "Rodong Sinmun"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Atomic_bombings_of_Hiroshima_and_Nagasaki",
+                "type": "wiki",
+                "score": 28,
+                "label": {
+                  "eng": "Atomic bombings of Hiroshima and Nagasaki"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Carnegie_Endowment_for_International_Peace",
+                "type": "org",
+                "score": 28,
+                "label": {
+                  "eng": "Carnegie Endowment for International Peace"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Air-to-surface_missile",
+                "type": "wiki",
+                "score": 27,
+                "label": {
+                  "eng": "Air-to-surface missile"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Fighter_aircraft",
+                "type": "wiki",
+                "score": 27,
+                "label": {
+                  "eng": "Fighter aircraft"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Seoul_National_University",
+                "type": "loc",
+                "score": 26,
+                "label": {
+                  "eng": "Seoul National University"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Detonation",
+                "type": "wiki",
+                "score": 25,
+                "label": {
+                  "eng": "Detonation"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Trajectory",
+                "type": "wiki",
+                "score": 25,
+                "label": {
+                  "eng": "Trajectory"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II",
+                "type": "wiki",
+                "score": 23,
+                "label": {
+                  "eng": "Fairchild Republic A-10 Thunderbolt II"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Nuclear_weapons_testing",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Nuclear weapons testing"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Economic_sanctions",
+                "type": "wiki",
+                "score": 21,
+                "label": {
+                  "eng": "Economic sanctions"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ministry_of_Defense_(Israel)",
+                "type": "org",
+                "score": 12,
+                "label": {
+                  "eng": "Ministry of Defense (Israel)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Spotify",
+                "type": "org",
+                "score": 12,
+                "label": {
+                  "eng": "Spotify"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Google",
+                "type": "org",
+                "score": 12,
+                "label": {
+                  "eng": "Google"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Apple_Inc.",
+                "type": "org",
+                "score": 12,
+                "label": {
+                  "eng": "Apple Inc."
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Asia-Pacific",
+                "type": "loc",
+                "score": 9,
+                "label": {
+                  "eng": "Asia-Pacific"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Associated_Press",
+                "type": "org",
+                "score": 9,
+                "label": {
+                  "eng": "Associated Press"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 10,
+            "title": {
+              "eng": "After Russia, now N Korea unveils underwater nuclear drone: What we know about 'Haeil'"
+            },
+            "summary": {
+              "eng": "North Korea has claimed it has successfully tested an underwater nuclear attack drone.\n\nWhile the Hermit Kingdom said it tested a drone designed to generate a gigantic \"radioactive tsunami\" that would destroy naval strike groups and ports, analysts remain skeptical.\n\nThe claim comes in the backdrop of the United States reportedly planning to deploy aircraft carrier strike groups and other advanced assets to waters off the Korean Peninsula.\n\nAs per The Verge, an underwater drone is essentially an "
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Pyongyang"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "North Korea"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Technology",
+                "label": "news/Technology",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 69
+              }
+            ],
+            "articleCounts": {
+              "eng": 10
+            },
+            "sentiment": -0.2784313725490196,
+            "wgt": 6,
+            "relevance": 6
+          }
+        ],
+        "totalResults": 1,
+        "page": 1,
+        "count": 1,
+        "pages": 1
+      },
+      "topicPage": {
+        "uri": "",
+        "autoAddArticles": true,
+        "visibility": 0,
+        "maxDaysBack": 7,
+        "restrictToSetConcepts": false,
+        "restrictToSetKeywords": false,
+        "restrictToSetCategories": false,
+        "restrictToSetSources": false,
+        "restrictToSetLocations": false,
+        "articleTreshWgt": 0,
+        "eventTreshWgt": 0,
+        "articleIsDuplicate": "skipDuplicates",
+        "articleHasDuplicate": "keepAll",
+        "articleHasEvent": "keepAll",
+        "startSourceRankPercentile": 0,
+        "endSourceRankPercentile": 100,
+        "minArticlesInEvent": 0,
+        "concepts": [
+          {
+            "uri": "http://en.wikipedia.org/wiki/Apple_Inc.",
+            "wgt": 50
+          }
+        ],
+        "keywords": [],
+        "categories": [],
+        "sources": [],
+        "locations": [],
+        "sourceLocations": [],
+        "sourceGroups": [],
+        "langs": []
+      }
+    }
+  }
+}

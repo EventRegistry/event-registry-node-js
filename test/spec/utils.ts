@@ -34,7 +34,6 @@ export class Utils {
     public er!: EventRegistry;
 
     constructor() {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         this.articleInfo = new ArticleInfoFlags({ concepts: true,
                                                   storyUri: true,
                                                   originalArticle: true,
@@ -96,7 +95,10 @@ export class Utils {
     }
 
     public static initAPI(): EventRegistry {
-        return new EventRegistry();
+        return new EventRegistry({
+            minDelayBetweenRequests: 0,
+            logging: false,
+        });
     }
 
     public async getArticlesQueryUriListForComplexQuery(er, cq) {
@@ -135,12 +137,18 @@ export class Utils {
         let result: ValidationObj = { pass: true };
         const propertyNames = ["uri", "label", "synonyms", "image", "trendingScore"];
         result = this.validateProperties(concept, "concept", propertyNames);
+        if (!result.pass) {
+            return result;
+        }
         if (!["person", "loc", "org", "wiki"].includes(concept?.type)) {
-            result = { pass: false, message: `Expected concept to be an entity type, but got ${concept?.type}` };
+            return { pass: false, message: `Expected concept to be an entity type, but got ${concept?.type}` };
         }
 
         if (concept?.location && concept?.location !== null) {
             result = this.ensureValidLocation(concept?.location);
+            if (!result.pass) {
+                return result;
+            }
         }
 
         return result;
@@ -150,6 +158,9 @@ export class Utils {
         let result = { pass: true };
         const propertyNames = ["wikiUri", "label", "lat", "long", "geoNamesId", "population"];
         result = this.validateProperties(location, "location", propertyNames);
+        if (!result.pass) {
+            return result;
+        }
         switch (location?.type) {
             case "country":
                 result = this.validateProperties(location, "location", ["area", "code2", "code3", "webExt", "continent"]);
@@ -179,13 +190,19 @@ export class Utils {
                                 "concepts",
                               ];
         result = this.validateProperties(article, "article", propertyNames);
+        if (!result.pass) {
+            return result;
+        }
         const concepts = article?.concepts ?? [];
         for (const concept of concepts) {
             result = this.ensureValidConcept(concept);
+            if (!result.pass) {
+                return result;
+            }
         }
 
         if (!(article?.isDuplicate ?? false) && !article.hasOwnProperty("eventUri")) {
-            result = {pass: false, message: "Non duplicates should have event uris "};
+            return {pass: false, message: "Non duplicates should have event uris "};
         }
         return result;
     }
@@ -206,6 +223,9 @@ export class Utils {
                                 "images",
                               ];
         result = this.validateProperties(event, "event", propertyNames);
+        if (!result.pass) {
+            return result;
+        }
         const {
             concepts = [],
             stories = [],
@@ -215,18 +235,30 @@ export class Utils {
 
         for (const concept of concepts) {
             result = this.ensureValidConcept(concept);
+            if (!result.pass) {
+                return result;
+            }
         }
 
         for (const story of stories) {
             result = this.ensureValidStory(story);
+            if (!result.pass) {
+                return result;
+            }
         }
 
         for (const category of categories) {
             result = this.ensureValidCategory(category);
+            if (!result.pass) {
+                return result;
+            }
         }
 
         if (!!location) {
             result = this.ensureValidLocation(location);
+            if (!result.pass) {
+                return result;
+            }
         }
         return result;
     }
@@ -245,9 +277,15 @@ export class Utils {
                                 "images",
                               ];
         let result = this.validateProperties(story, "story", propertyNames);
+        if (!result.pass) {
+            return result;
+        }
         const { location } = story;
         if (!!location) {
             result = this.ensureValidLocation(location);
+            if (!result.pass) {
+                return result;
+            }
         }
         return result;
     }
@@ -257,11 +295,14 @@ export class Utils {
         const { articles } = articleList;
 
         if (!articles) {
-            result = { pass: false, message: "Expected to get 'articles'" };
+            return { pass: false, message: "Expected to get 'articles'" };
         }
         const { results = [] } = articles;
         for (const article of results) {
             result = this.ensureValidArticle(article);
+            if (!result.pass) {
+                return result;
+            }
         }
         return result;
     }
@@ -270,11 +311,14 @@ export class Utils {
         let result: ValidationObj = { pass: true };
         const { events } = eventList;
         if (!events) {
-            result = { pass: false, message: "Expected to get 'events'" };
+            return { pass: false, message: "Expected to get 'events'" };
         }
         const { results = [] } = events;
         for (const event of results) {
             result = this.ensureValidEvent(event);
+            if (!result.pass) {
+                return result;
+            }
         }
         return result;
     }
@@ -358,8 +402,12 @@ export class Utils {
 
 const utils = new Utils();
 
+// Set at helper-load time (before any beforeAll/spec runs), not inside beforeEach —
+// a beforeEach doesn't protect a suite's beforeAll, which can run first in random
+// spec order and time out under the default 5000ms before this ever fires.
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 120 * 1000;
+
 beforeEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 120 * 1000;
     jasmine.addMatchers({
         toBeValidConcept: () => {
             return {

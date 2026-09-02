@@ -1,0 +1,259 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "china",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/China",
+        "type": "loc",
+        "score": 59254,
+        "label": {
+          "eng": "China"
+        },
+        "location": {
+          "type": "country",
+          "label": {
+            "eng": "China"
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/General_Secretary_of_the_Communist_Party_of_China",
+        "type": "wiki",
+        "score": 3267,
+        "label": {
+          "eng": "General Secretary of the Communist Party of China"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/China_Central_Television",
+        "type": "org",
+        "score": 2397,
+        "label": {
+          "eng": "China Central Television"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/State_Council_of_the_People's_Republic_of_China",
+        "type": "org",
+        "score": 2365,
+        "label": {
+          "eng": "State Council of the People's Republic of China"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/List_of_Ministry_of_Foreign_Affairs_of_the_People's_Republic_of_China_spokespersons",
+        "type": "wiki",
+        "score": 2195,
+        "label": {
+          "eng": "List of Ministry of Foreign Affairs of the People's Republic of China spokespersons"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/18th_National_Congress_of_the_Communist_Party_of_China",
+        "type": "wiki",
+        "score": 2135,
+        "label": {
+          "eng": "18th National Congress of the Communist Party of China"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/President_of_the_Republic_of_China",
+        "type": "wiki",
+        "score": 2014,
+        "label": {
+          "eng": "President of the Republic of China"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/President_of_the_People's_Republic_of_China",
+        "type": "wiki",
+        "score": 1985,
+        "label": {
+          "eng": "President of the People's Republic of China"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Ministry_of_Foreign_Affairs_of_the_People's_Republic_of_China",
+        "type": "org",
+        "score": 1893,
+        "label": {
+          "eng": "Ministry of Foreign Affairs of the People's Republic of China"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Public_security_bureau_(China)",
+        "type": "wiki",
+        "score": 1874,
+        "label": {
+          "eng": "Public security bureau (China)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Government_of_China",
+        "type": "wiki",
+        "score": 1805,
+        "label": {
+          "eng": "Government of China"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Mainland_China",
+        "type": "loc",
+        "score": 1738,
+        "label": {
+          "eng": "Mainland China"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/China_News_Service",
+        "type": "org",
+        "score": 1703,
+        "label": {
+          "eng": "China News Service"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/People's_Bank_of_China",
+        "type": "org",
+        "score": 975,
+        "label": {
+          "eng": "People's Bank of China"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/One-China_policy",
+        "type": "wiki",
+        "score": 972,
+        "label": {
+          "eng": "One-China policy"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Provinces_of_China",
+        "type": "wiki",
+        "score": 881,
+        "label": {
+          "eng": "Provinces of China"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/China_Internet_Information_Center",
+        "type": "wiki",
+        "score": 874,
+        "label": {
+          "eng": "China Internet Information Center"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/China_Securities_Regulatory_Commission",
+        "type": "org",
+        "score": 861,
+        "label": {
+          "eng": "China Securities Regulatory Commission"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/South_China_Sea",
+        "type": "loc",
+        "score": 735,
+        "label": {
+          "eng": "South China Sea"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Premier_of_the_People's_Republic_of_China",
+        "type": "wiki",
+        "score": 735,
+        "label": {
+          "eng": "Premier of the People's Republic of China"
+        }
+      }
+    ]
+  }
+}

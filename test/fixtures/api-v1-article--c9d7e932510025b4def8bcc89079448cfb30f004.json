@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "query": "{\"$query\":{\"dateStart\":\"2016-03-05\",\"dateEnd\":\"2017-03-06\",\"$not\":{\"categoryUri\":\"dmoz/Business\"}}}",
+      "uriWgtListPage": 1,
+      "uriWgtListCount": 50000,
+      "uriWgtListSortBy": "fq",
+      "uriWgtListSortByAsc": false,
+      "resultType": "uriWgtList",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "uriWgtList": {
+        "totalResults": 0,
+        "page": 1,
+        "count": 0,
+        "pages": 1,
+        "results": []
+      },
+      "info": "No results match the search conditions."
+    }
+  }
+}

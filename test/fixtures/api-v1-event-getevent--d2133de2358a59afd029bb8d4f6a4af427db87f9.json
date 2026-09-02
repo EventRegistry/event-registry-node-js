@@ -1,0 +1,427 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event/getEvent",
+    "body": {
+      "eventUri": "eng-8501190",
+      "articlesLang": "eng",
+      "resultType": "keywordAggr",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "eng-8501190": {
+        "keywordAggr": {
+          "results": [
+            {
+              "keyword": "friday",
+              "weight": 0.2531382739543915
+            },
+            {
+              "keyword": "public",
+              "weight": 0.2163281738758087
+            },
+            {
+              "keyword": "trip",
+              "weight": 0.1929925978183746
+            },
+            {
+              "keyword": "verifyerrors",
+              "weight": 0.1898307353258133
+            },
+            {
+              "keyword": "amid",
+              "weight": 0.1806442141532898
+            },
+            {
+              "keyword": "widespread",
+              "weight": 0.1806442141532898
+            },
+            {
+              "keyword": "emmanuel",
+              "weight": 0.1806442141532898
+            },
+            {
+              "keyword": "march",
+              "weight": 0.1728725433349609
+            },
+            {
+              "keyword": "national",
+              "weight": 0.1598155200481415
+            },
+            {
+              "keyword": "france",
+              "weight": 0.1442191302776337
+            },
+            {
+              "keyword": "union",
+              "weight": 0.1442187875509262
+            },
+            {
+              "keyword": "consort",
+              "weight": 0.1434662640094757
+            },
+            {
+              "keyword": "queen",
+              "weight": 0.1434662640094757
+            },
+            {
+              "keyword": "postponed",
+              "weight": 0.139204129576683
+            },
+            {
+              "keyword": "government",
+              "weight": 0.1384635269641876
+            },
+            {
+              "keyword": "dates",
+              "weight": 0.1227535456418991
+            },
+            {
+              "keyword": "british",
+              "weight": 0.1208831891417503
+            },
+            {
+              "keyword": "29",
+              "weight": 0.115248367190361
+            },
+            {
+              "keyword": "charles",
+              "weight": 0.115248367190361
+            },
+            {
+              "keyword": "reign",
+              "weight": 0.1138845756649971
+            },
+            {
+              "keyword": "shortly",
+              "weight": 0.107156828045845
+            },
+            {
+              "keyword": "reforms",
+              "weight": 0.1060270518064499
+            },
+            {
+              "keyword": "postpone",
+              "weight": 0.1052864640951157
+            },
+            {
+              "keyword": "asked",
+              "weight": 0.1052864640951157
+            },
+            {
+              "keyword": "downing",
+              "weight": 0.09758908301591873
+            },
+            {
+              "keyword": "mr",
+              "weight": 0.09758908301591873
+            },
+            {
+              "keyword": "street",
+              "weight": 0.09758908301591873
+            },
+            {
+              "keyword": "spokesperson",
+              "weight": 0.09758908301591873
+            },
+            {
+              "keyword": "sunday",
+              "weight": 0.08770611882209778
+            },
+            {
+              "keyword": "decision",
+              "weight": 0.08770611882209778
+            },
+            {
+              "keyword": "uk",
+              "weight": 0.08770611882209778
+            },
+            {
+              "keyword": "logistics",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "review",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "days",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "measures",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "considered",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "reduce",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "interactions",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "germany",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "planning",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "host",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "nations",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "facing",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "64",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "raising",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "bill",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "pushing",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "anger",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "renewed",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "neighbours",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "continental",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "britain",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "aimed",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "strengthening",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "months",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "assembly",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "lower",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "house",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "parliament",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "labour",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "cgt",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "announced",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "week",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "members",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "mobilier",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "charge",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "providing",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "parties",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "consent",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "vote",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "reception",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "institution",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "arrival",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "prepare",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "buildings",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "furniture",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "carpets",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "red",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "flags",
+              "weight": 0.0721093937754631
+            },
+            {
+              "keyword": "action",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "announcement",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "yesterday",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "light",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "elysee",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "statement",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "31",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "planned",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "proceed",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "berlin",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "begin",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "found",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "opportunity",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "forward",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "greatly",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "26",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "pension",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "tuesday",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "28",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "originally",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "scheduled",
+              "weight": 0.05762418359518051
+            }
+          ],
+          "usedResults": 6,
+          "totalResults": 6
+        }
+      }
+    }
+  }
+}

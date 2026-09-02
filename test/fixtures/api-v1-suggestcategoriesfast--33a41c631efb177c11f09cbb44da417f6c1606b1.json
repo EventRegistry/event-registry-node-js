@@ -1,0 +1,187 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestCategoriesFast",
+    "body": {
+      "prefix": "disa",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "conceptLang": "eng",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "dmoz/Society/Disabled",
+        "label": "dmoz/Society/Disabled",
+        "parentUri": "dmoz/Society"
+      },
+      {
+        "uri": "dmoz/Sports/Disabled",
+        "label": "dmoz/Sports/Disabled",
+        "parentUri": "dmoz/Sports"
+      },
+      {
+        "uri": "dmoz/Computers/Programming/Disassemblers",
+        "label": "dmoz/Computers/Programming/Disassemblers",
+        "parentUri": "dmoz/Computers/Programming"
+      },
+      {
+        "uri": "dmoz/Health/Support_Groups/Disability",
+        "label": "dmoz/Health/Support Groups/Disability",
+        "parentUri": "dmoz/Health/Support Groups"
+      },
+      {
+        "uri": "dmoz/Science/Earth_Sciences/Natural_Disasters_and_Hazards",
+        "label": "dmoz/Science/Earth Sciences/Natural Disasters and Hazards",
+        "parentUri": "dmoz/Science/Earth Sciences"
+      },
+      {
+        "uri": "dmoz/Shopping/Health/Disabilities",
+        "label": "dmoz/Shopping/Health/Disabilities",
+        "parentUri": "dmoz/Shopping/Health"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Arts",
+        "label": "dmoz/Society/Disabled/Arts",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Assistive_Technology",
+        "label": "dmoz/Society/Disabled/Assistive Technology",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Children",
+        "label": "dmoz/Society/Disabled/Children",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Conferences",
+        "label": "dmoz/Society/Disabled/Conferences",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Disability_Studies",
+        "label": "dmoz/Society/Disabled/Disability Studies",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Education",
+        "label": "dmoz/Society/Disabled/Education",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Employment",
+        "label": "dmoz/Society/Disabled/Employment",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Family_Resources",
+        "label": "dmoz/Society/Disabled/Family Resources",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Humor",
+        "label": "dmoz/Society/Disabled/Humor",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Independent_Living",
+        "label": "dmoz/Society/Disabled/Independent Living",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Lifestyle",
+        "label": "dmoz/Society/Disabled/Lifestyle",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Organizations",
+        "label": "dmoz/Society/Disabled/Organizations",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Recreation",
+        "label": "dmoz/Society/Disabled/Recreation",
+        "parentUri": "dmoz/Society/Disabled"
+      },
+      {
+        "uri": "dmoz/Society/Disabled/Respite_Care",
+        "label": "dmoz/Society/Disabled/Respite Care",
+        "parentUri": "dmoz/Society/Disabled"
+      }
+    ]
+  }
+}

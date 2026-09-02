@@ -1,0 +1,175 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "keyword": "car",
+      "conceptTrendsConceptCount": 5,
+      "conceptTrendsArticleBodyLen": -1,
+      "conceptTrendsIncludeArticleBasicInfo": true,
+      "conceptTrendsIncludeArticleTitle": true,
+      "conceptTrendsIncludeArticleBody": true,
+      "conceptTrendsIncludeArticleUrl": true,
+      "conceptTrendsIncludeArticleEventUri": true,
+      "conceptTrendsIncludeArticleAuthors": true,
+      "conceptTrendsIncludeArticleConcepts": false,
+      "conceptTrendsIncludeArticleCategories": false,
+      "conceptTrendsIncludeArticleLinks": false,
+      "conceptTrendsIncludeArticleVideos": false,
+      "conceptTrendsIncludeArticleImage": true,
+      "conceptTrendsIncludeArticleSocialScore": false,
+      "conceptTrendsIncludeArticleSentiment": true,
+      "conceptTrendsIncludeArticleLocation": false,
+      "conceptTrendsIncludeArticleExtractedDates": false,
+      "conceptTrendsIncludeArticleOriginalArticle": false,
+      "conceptTrendsIncludeArticleStoryUri": false,
+      "conceptTrendsIncludeEventTitle": true,
+      "conceptTrendsIncludeEventSummary": true,
+      "conceptTrendsIncludeEventArticleCounts": true,
+      "conceptTrendsIncludeEventConcepts": true,
+      "conceptTrendsIncludeEventCategories": true,
+      "conceptTrendsIncludeEventDate": true,
+      "conceptTrendsIncludeEventCommonDates": false,
+      "conceptTrendsIncludeEventInfoArticle": false,
+      "conceptTrendsIncludeEventStories": false,
+      "conceptTrendsIncludeEventSocialScore": false,
+      "conceptTrendsEventImageCount": 0,
+      "conceptTrendsIncludeSourceTitle": true,
+      "conceptTrendsIncludeSourceDescription": false,
+      "conceptTrendsIncludeSourceLocation": false,
+      "conceptTrendsIncludeSourceRanking": false,
+      "conceptTrendsIncludeSourceImage": false,
+      "conceptTrendsIncludeSourceSocialMedia": false,
+      "conceptTrendsIncludeCategoryTrendingScore": true,
+      "conceptTrendsConceptType": [
+        "org",
+        "loc"
+      ],
+      "conceptTrendsConceptLang": "spa",
+      "conceptTrendsIncludeConceptLabel": true,
+      "conceptTrendsIncludeConceptSynonyms": false,
+      "conceptTrendsIncludeConceptImage": false,
+      "conceptTrendsIncludeConceptDescription": false,
+      "conceptTrendsIncludeConceptTrendingScore": false,
+      "conceptTrendsIncludeLocationLabel": true,
+      "conceptTrendsIncludeLocationWikiUri": false,
+      "conceptTrendsIncludeLocationGeoNamesId": false,
+      "conceptTrendsIncludeLocationPopulation": false,
+      "conceptTrendsIncludeLocationGeoLocation": false,
+      "conceptTrendsIncludeLocationCountryArea": false,
+      "conceptTrendsIncludeLocationCountryDetails": false,
+      "conceptTrendsIncludeLocationCountryContinent": false,
+      "conceptTrendsIncludeLocationPlaceFeatureCode": false,
+      "conceptTrendsIncludeLocationPlaceCountry": true,
+      "conceptTrendsIncludeStoryBasicStats": true,
+      "conceptTrendsIncludeStoryLocation": true,
+      "conceptTrendsIncludeStoryDate": false,
+      "conceptTrendsIncludeStoryTitle": false,
+      "conceptTrendsIncludeStorySummary": false,
+      "conceptTrendsIncludeStoryConcepts": false,
+      "conceptTrendsIncludeStoryCategories": false,
+      "conceptTrendsIncludeStoryMedoidArticle": false,
+      "conceptTrendsIncludeStoryInfoArticle": false,
+      "conceptTrendsIncludeStoryCommonDates": false,
+      "conceptTrendsIncludeStorySocialScore": false,
+      "conceptTrendsStoryImageCount": 0,
+      "conceptTrendsIncludeConceptClassParentLabels": true,
+      "conceptTrendsIncludeConceptClassConcepts": false,
+      "conceptTrendsIncludeConceptFolderOwner": false,
+      "resultType": "conceptTrends",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "conceptTrends": {
+        "trends": [
+          {
+            "date": "2023-03-24",
+            "conceptFreq": [
+              15,
+              10,
+              8,
+              8,
+              4
+            ],
+            "totArts": 29841
+          }
+        ],
+        "conceptInfo": [
+          {
+            "uri": "http://en.wikipedia.org/wiki/Gonzaga_Bulldogs_men's_basketball",
+            "type": "org",
+            "score": 1,
+            "label": {
+              "spa": "Gonzaga Bulldogs men's basketball"
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/University_of_California,_Los_Angeles",
+            "type": "loc",
+            "score": 1,
+            "label": {
+              "spa": "Universidad de California en Los Ángeles"
+            },
+            "location": null
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Rosario,_Santa_Fe",
+            "type": "loc",
+            "score": 1,
+            "label": {
+              "spa": "Rosario (Argentina)"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "spa": "Rosario (Argentina)"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "spa": "Argentina"
+                }
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_States",
+            "type": "loc",
+            "score": 1,
+            "label": {
+              "spa": "Estados Unidos"
+            },
+            "location": {
+              "type": "country",
+              "label": {
+                "spa": "Estados Unidos"
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/South_Korea",
+            "type": "loc",
+            "score": 1,
+            "label": {
+              "spa": "Corea del Sur"
+            },
+            "location": {
+              "type": "country",
+              "label": {
+                "spa": "Corea del Sur"
+              }
+            }
+          }
+        ],
+        "usedResults": 4,
+        "totalResults": 4
+      }
+    }
+  }
+}

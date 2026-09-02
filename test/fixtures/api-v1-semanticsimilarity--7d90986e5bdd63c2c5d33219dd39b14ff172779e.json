@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/semanticSimilarity",
+    "body": {
+      "text1": "\n            The editor, Carrie Gracie, who joined the network 30 years ago, said she quit her position as China editor last week to protest pay inequality within the company.\n            In the letter posted on her website, she said that she and other women had long suspected their male counterparts drew larger salaries and that BBC management had refused to acknowledge the problem.\n        ",
+      "text2": "\n            Paukenschlag bei der britischen BBC: Die China-Expertin Carrie Gracie hat aus Protest gegen die illegale Gehaltskultur und damit verbundene Heimlichtuerei ihren Job bei dem öffentlich-rechtlichen Sender hingeworfen.\n            Zwei ihrer männlichen Kollegen in vergleichbaren Positionen würden nachweislich wesentlich besser bezahlt.\n        ",
+      "distanceMeasure": "cosine",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "similarity": 0.49217521429106564,
+      "annotations1": 3,
+      "annotations2": 3,
+      "totalAnnotations": 5
+    }
+  }
+}

@@ -1,0 +1,1579 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "locationUri": "http://en.wikipedia.org/wiki/Germany",
+      "eventsPage": 1,
+      "eventsCount": 50,
+      "eventsSortBy": "size",
+      "eventsSortByAsc": false,
+      "resultType": "events",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "events": {
+        "results": [
+          {
+            "uri": "deu-1616578",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Train_driver",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Triebfahrzeugführer"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Signalling_control",
+                "type": "wiki",
+                "score": 95,
+                "label": {
+                  "eng": "Signalling control"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Strike_action",
+                "type": "wiki",
+                "score": 85,
+                "label": {
+                  "eng": "Strike action"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Fernverkehr",
+                "type": "wiki",
+                "score": 78,
+                "label": {
+                  "eng": "Fernverkehr"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Eisenbahn-_und_Verkehrsgewerkschaft",
+                "type": "org",
+                "score": 74,
+                "label": {
+                  "eng": "Eisenbahn- und Verkehrsgewerkschaft"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Passenger",
+                "type": "wiki",
+                "score": 58,
+                "label": {
+                  "eng": "Passenger"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Intercity_(Deutsche_Bahn)",
+                "type": "wiki",
+                "score": 57,
+                "label": {
+                  "eng": "Intercity (Deutsche Bahn)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Railroad",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Ferrocarril"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Train",
+                "type": "wiki",
+                "score": 52,
+                "label": {
+                  "eng": "Train"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Train_dispatcher",
+                "type": "wiki",
+                "score": 48,
+                "label": {
+                  "eng": "Train dispatcher"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Train_station",
+                "type": "wiki",
+                "score": 48,
+                "label": {
+                  "eng": "Train station"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Regional_rail",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Regional rail"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Intercity_Express",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Intercity-Express"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Berlin",
+                "type": "loc",
+                "score": 47,
+                "label": {
+                  "eng": "Berlin"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Berlin"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rail_replacement_bus_service",
+                "type": "wiki",
+                "score": 37,
+                "label": {
+                  "eng": "Schienenersatzverkehr"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bus",
+                "type": "wiki",
+                "score": 37,
+                "label": {
+                  "eng": "Bus"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Warnstreik",
+                "type": "wiki",
+                "score": 21,
+                "label": {
+                  "eng": "Warnstreik"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Nahverkehr",
+                "type": "wiki",
+                "score": 21,
+                "label": {
+                  "eng": "Nahverkehr"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Waterway",
+                "type": "wiki",
+                "score": 21,
+                "label": {
+                  "eng": "Waterway"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Airport",
+                "type": "wiki",
+                "score": 21,
+                "label": {
+                  "eng": "Airport"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Transport",
+                "type": "wiki",
+                "score": 21,
+                "label": {
+                  "eng": "Transport"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Controlled-access_highway",
+                "type": "wiki",
+                "score": 21,
+                "label": {
+                  "eng": "Controlled-access highway"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ver.di",
+                "type": "org",
+                "score": 16,
+                "label": {
+                  "eng": "Ver.di"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 7,
+            "title": {
+              "deu": " KORREKTUR/Bahn :  Ersatzfahrplan für Warnstreiktag nicht möglich"
+            },
+            "summary": {
+              "deu": "(Im 3. Absatz wurde der Umfang der Kulanzregelungen präzisiert. Generell können für diesen Montag und diesen Dienstag rpt und diesen Dienstag gekaufte Tickets noch bis zum 4. April weiter genutzt werden, sofern sie bis einschließlich rpt einschließlich diesen Donnerstag gekauft wurden.)\n\nBERLIN (dpa-AFX) - Die Deutsche Bahn sieht keine Möglichkeit für einen Notfahrplan im Fernverkehr für den Warnstreiktag am kommenden Montag. \"Es nützt ja nichts, eine kurze Strecke mit einem Intercity od"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Berlin"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Germany"
+                }
+              }
+            },
+            "categories": [],
+            "articleCounts": {
+              "deu": 7
+            },
+            "sentiment": null,
+            "wgt": 7,
+            "relevance": 1
+          },
+          {
+            "uri": "deu-1616582",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Munich",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Munich"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Munich"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Warnstreik",
+                "type": "wiki",
+                "score": 80,
+                "label": {
+                  "eng": "Warnstreik"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Check24",
+                "type": "org",
+                "score": 80,
+                "label": {
+                  "eng": "Check24"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Leihwagen",
+                "type": "wiki",
+                "score": 70,
+                "label": {
+                  "eng": "Leihwagen"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Intercity_bus_service",
+                "type": "wiki",
+                "score": 70,
+                "label": {
+                  "eng": "Intercity bus service"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Berlin",
+                "type": "loc",
+                "score": 65,
+                "label": {
+                  "eng": "Berlin"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Berlin"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Euro",
+                "type": "wiki",
+                "score": 55,
+                "label": {
+                  "eng": "Euro"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Hamburg",
+                "type": "loc",
+                "score": 40,
+                "label": {
+                  "eng": "Hamburg"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Hamburg"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Airport",
+                "type": "wiki",
+                "score": 30,
+                "label": {
+                  "eng": "Airport"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Eisenbahn-_und_Verkehrsgewerkschaft",
+                "type": "org",
+                "score": 25,
+                "label": {
+                  "eng": "Eisenbahn- und Verkehrsgewerkschaft"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Flixbus",
+                "type": "wiki",
+                "score": 25,
+                "label": {
+                  "eng": "Flixbus"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Fernverkehr",
+                "type": "wiki",
+                "score": 25,
+                "label": {
+                  "eng": "Fernverkehr"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bus",
+                "type": "wiki",
+                "score": 25,
+                "label": {
+                  "eng": "Bus"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Deutsche_Presse-Agentur",
+                "type": "org",
+                "score": 25,
+                "label": {
+                  "eng": "Deutsche Presse-Agentur"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Frankfurt",
+                "type": "loc",
+                "score": 25,
+                "label": {
+                  "eng": "Frankfurt"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Frankfurt"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Deutsche_Bahn",
+                "type": "org",
+                "score": 24,
+                "label": {
+                  "eng": "Deutsche Bahn"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ver.di",
+                "type": "org",
+                "score": 15,
+                "label": {
+                  "eng": "Ver.di"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Regional_rail",
+                "type": "wiki",
+                "score": 15,
+                "label": {
+                  "eng": "Regional rail"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Waterway",
+                "type": "wiki",
+                "score": 15,
+                "label": {
+                  "eng": "Waterway"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Port",
+                "type": "wiki",
+                "score": 15,
+                "label": {
+                  "eng": "Port"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Controlled-access_highway",
+                "type": "wiki",
+                "score": 15,
+                "label": {
+                  "eng": "Controlled-access highway"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 7,
+            "title": {
+              "deu": "Warnstreik am Montag: Nachfrage nach Mietwagen und Fernbus steigt deutlich"
+            },
+            "summary": {
+              "deu": "Der bundesweite Warnstreik bei Bahn, Nahverkehr und Flughäfen sorgt für einen Run auf Alternativem. Bei Mietwagen kommt es teilweise zu kräftigen Preiserhöhungen.\n\nMünchen Der für Montag angekündigte große Verkehrs-Warnstreik hat zu einem Run auf Alternativen geführt. Sowohl bei Mietwagen als auch bei Fernbussen stiegen die Buchungen und Suchanfragen deutlich, wie aus Angaben von Portalen am Freitag hervorgeht eine Umfrage der Deutschen Presse-Agentur ergab. Bei Mietwagen kam es zudem te"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Munich"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Germany"
+                }
+              }
+            },
+            "categories": [],
+            "articleCounts": {
+              "deu": 7
+            },
+            "sentiment": null,
+            "wgt": 7,
+            "relevance": 1
+          },
+          {
+            "uri": "deu-1616564",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Stuttgart_Airport",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Stuttgart Airport"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Transport",
+                "type": "wiki",
+                "score": 87,
+                "label": {
+                  "eng": "Transport"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Eisenbahn-_und_Verkehrsgewerkschaft",
+                "type": "org",
+                "score": 79,
+                "label": {
+                  "eng": "Eisenbahn- und Verkehrsgewerkschaft"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Trade_union",
+                "type": "wiki",
+                "score": 57,
+                "label": {
+                  "eng": "Trade union"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Nahverkehr",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Nahverkehr"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Strike_action",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Strike action"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Passenger",
+                "type": "wiki",
+                "score": 52,
+                "label": {
+                  "eng": "Passenger"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Stuttgart",
+                "type": "loc",
+                "score": 51,
+                "label": {
+                  "eng": "Stuttgart"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Stuttgart"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ver.di",
+                "type": "org",
+                "score": 49,
+                "label": {
+                  "eng": "Ver.di"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Warnstreik",
+                "type": "wiki",
+                "score": 48,
+                "label": {
+                  "eng": "Warnstreik"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Regional_rail",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Regional rail"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Deutsche_Bahn",
+                "type": "org",
+                "score": 39,
+                "label": {
+                  "eng": "Deutsche Bahn"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/S-train",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "S-train"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Schienenpersonenfernverkehr",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Schienenpersonenfernverkehr"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Fernverkehr",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Fernverkehr"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rail_profile",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Rail profile"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Collective_agreement",
+                "type": "wiki",
+                "score": 31,
+                "label": {
+                  "eng": "Collective agreement"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Bundesebene_(Deutschland)",
+                "type": "wiki",
+                "score": 18,
+                "label": {
+                  "eng": "Bundesebene (Deutschland)"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "deu": "Bundesweiter Warnstreik legt Flughafen Stuttgart erneut lahm"
+            },
+            "summary": {
+              "deu": "STUTTGART (dpa-AFX) - Im Zuge der bundesweiten Arbeitsniederlegungen im Verkehrsbereich stellt der Flughafen Stuttgart am kommenden Montag seinen regulären Passagierbetrieb ein. Das teilte der Airport am Freitag mit. Es könnten nur Sicherheitslandungen, medizinische Flüge und militärische Flüge durchgeführt werden. Für Montag waren demnach regulär 170 Starts und Landungen geplant. Von dem Ausstand betroffen sind rund 20 000 Passagiere. Der Flughafen empfahl, sich bei den Airlines zu infor"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Stuttgart"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Germany"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "wgt": 54
+              }
+            ],
+            "articleCounts": {
+              "deu": 6
+            },
+            "sentiment": null,
+            "wgt": 6,
+            "relevance": 1
+          },
+          {
+            "uri": "eng-8501213",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/FIFA_World_Cup",
+                "type": "org",
+                "score": 100,
+                "label": {
+                  "eng": "FIFA World Cup"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Germany",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Germany"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Germany"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Thomas_Müller",
+                "type": "person",
+                "score": 88,
+                "label": {
+                  "eng": "Thomas Müller"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/UEFA_European_Championship",
+                "type": "wiki",
+                "score": 84,
+                "label": {
+                  "eng": "UEFA European Championship"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Single-elimination_tournament",
+                "type": "wiki",
+                "score": 68,
+                "label": {
+                  "eng": "Single-elimination tournament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/FIFA_Confederations_Cup",
+                "type": "org",
+                "score": 60,
+                "label": {
+                  "eng": "FIFA Confederations Cup"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Joachim_Löw",
+                "type": "person",
+                "score": 56,
+                "label": {
+                  "eng": "Joachim Löw"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Belgium",
+                "type": "loc",
+                "score": 56,
+                "label": {
+                  "eng": "Belgium"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Belgium"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Midfielder",
+                "type": "wiki",
+                "score": 52,
+                "label": {
+                  "eng": "Midfielder"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Euro",
+                "type": "wiki",
+                "score": 51,
+                "label": {
+                  "eng": "Euro"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/A.C._Milan",
+                "type": "wiki",
+                "score": 48,
+                "label": {
+                  "eng": "A.C. Milan"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Malick_Thiaw",
+                "type": "wiki",
+                "score": 48,
+                "label": {
+                  "eng": "Malick Thiaw"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Emre_Can",
+                "type": "wiki",
+                "score": 48,
+                "label": {
+                  "eng": "Emre Can"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Brentford_F.C.",
+                "type": "org",
+                "score": 48,
+                "label": {
+                  "eng": "Brentford F.C."
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/FC_Bayern_Munich",
+                "type": "org",
+                "score": 48,
+                "label": {
+                  "eng": "FC Bayern Munich"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Exhibition_game",
+                "type": "wiki",
+                "score": 44,
+                "label": {
+                  "eng": "Exhibition game"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kevin_Schade",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Kevin Schade"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Josha_Vagnoman",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Josha Vagnoman"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Joshua_Kimmich",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Joshua Kimmich"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Marius_Wolf",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Marius Wolf"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Timo_Werner",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Timo Werner"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Premier_League",
+                "type": "org",
+                "score": 40,
+                "label": {
+                  "eng": "Premier League"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Düsseldorf",
+                "type": "loc",
+                "score": 37,
+                "label": {
+                  "eng": "Düsseldorf"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Düsseldorf"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/David_Raum",
+                "type": "wiki",
+                "score": 28,
+                "label": {
+                  "eng": "David Raum"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Spain",
+                "type": "loc",
+                "score": 24,
+                "label": {
+                  "eng": "Spain"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Spain"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Florian_Wirtz",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Florian Wirtz"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Karim_Adeyemi",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Karim Adeyemi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Antonio_Rüdiger",
+                "type": "person",
+                "score": 20,
+                "label": {
+                  "eng": "Antonio Rüdiger"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Youssoufa_Moukoko",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Youssoufa Moukoko"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Jamal_Musiala",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Jamal Musiala"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Manuel_Neuer",
+                "type": "person",
+                "score": 20,
+                "label": {
+                  "eng": "Manuel Neuer"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Robin_Gosens",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Robin Gosens"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bayer_04_Leverkusen",
+                "type": "org",
+                "score": 20,
+                "label": {
+                  "eng": "Bayer 04 Leverkusen"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Inter_Milan",
+                "type": "org",
+                "score": 20,
+                "label": {
+                  "eng": "Inter Milan"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Goalkeeper_(association_football)",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Goalkeeper (association football)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Real_Madrid_CF",
+                "type": "org",
+                "score": 20,
+                "label": {
+                  "eng": "Real Madrid CF"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Leipzig",
+                "type": "loc",
+                "score": 20,
+                "label": {
+                  "eng": "Leipzig"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Leipzig"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "eng": "Euro 2024 host Germany looks to rebuild after World Cup - WTOP News"
+            },
+            "summary": {
+              "eng": "DÜSSELDORF, Germany (AP) -- Another World Cup failure, another rebuild for Germany. This time there's even more at stake.\n\nGermany will host next year's European Championship and is desperate to avoid another debacle at home.\n\nThe Germans once took pride in having a \"tournament team,\" one that could put distractions aside to perform when it mattered. Following group-stage exits at the 2018 and 2022 World Cups and a round-of-16 loss at the last European Championship, however, Germany has not won "
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Düsseldorf"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Germany"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Sports",
+                "label": "news/Sports",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Sports/Soccer",
+                "label": "dmoz/Sports/Soccer",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Sports/Soccer/CONMEBOL",
+                "label": "dmoz/Sports/Soccer/CONMEBOL",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Sports/Soccer/Competitions",
+                "label": "dmoz/Sports/Soccer/Competitions",
+                "wgt": 100
+              }
+            ],
+            "articleCounts": {
+              "eng": 6
+            },
+            "sentiment": -0.0117647058823529,
+            "wgt": 6,
+            "relevance": 1
+          },
+          {
+            "uri": "deu-1616566",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Reichsbürger_movement",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Reichsbürger movement"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Police",
+                "type": "wiki",
+                "score": 87,
+                "label": {
+                  "eng": "Police"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Remand_(detention)",
+                "type": "wiki",
+                "score": 70,
+                "label": {
+                  "eng": "Remand (detention)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Stuttgart",
+                "type": "loc",
+                "score": 66,
+                "label": {
+                  "eng": "Stuttgart"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Stuttgart"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Public_Prosecutor_General_(Germany)",
+                "type": "wiki",
+                "score": 60,
+                "label": {
+                  "eng": "Generalbundesanwalt beim Bundesgerichtshof"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Oberlandesgericht",
+                "type": "wiki",
+                "score": 57,
+                "label": {
+                  "eng": "Oberlandesgericht"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Closing_argument",
+                "type": "wiki",
+                "score": 57,
+                "label": {
+                  "eng": "Closing argument"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lawyer",
+                "type": "wiki",
+                "score": 57,
+                "label": {
+                  "eng": "Lawyer"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Culpable_homicide",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Culpable homicide"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Court",
+                "type": "wiki",
+                "score": 52,
+                "label": {
+                  "eng": "Court"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Murder_in_German_law",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "Mord (Deutschland)"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Nebenklage",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "Nebenklage"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Traffic_stop",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "Traffic stop"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Gefährliche_Körperverletzung_(Deutschland)",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Gefährliche Körperverletzung (Deutschland)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lörrach",
+                "type": "loc",
+                "score": 35,
+                "label": {
+                  "eng": "Lörrach"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Lörrach"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Efringen-Kirchen",
+                "type": "loc",
+                "score": 31,
+                "label": {
+                  "eng": "Efringen-Kirchen"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Efringen-Kirchen"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Rechtsordnung",
+                "type": "wiki",
+                "score": 26,
+                "label": {
+                  "eng": "Rechtsordnung"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Legitimacy_(political)",
+                "type": "wiki",
+                "score": 26,
+                "label": {
+                  "eng": "Legitimacy (political)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Civil_service",
+                "type": "wiki",
+                "score": 26,
+                "label": {
+                  "eng": "Civil service"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Germany",
+                "type": "loc",
+                "score": 26,
+                "label": {
+                  "eng": "Germany"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Germany"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Special_Deployment_Commando",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Spezialeinsatzkommando"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Search_and_seizure",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Search and seizure"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Beamter",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Beamter (Deutschland)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Judge",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Judge"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Reutlingen",
+                "type": "loc",
+                "score": 22,
+                "label": {
+                  "eng": "Reutlingen"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Reutlingen"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Switzerland",
+                "type": "loc",
+                "score": 22,
+                "label": {
+                  "eng": "Switzerland"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Switzerland"
+                  }
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 5,
+            "title": {
+              "deu": "\"Reichsbürger\" im Prozess: Keine Erinnerung an Auto-Attacke"
+            },
+            "summary": {
+              "deu": "Der mutmaßliche \"Reichsbürger\", der einen Polizisten angefahren und schwer verletzt haben soll, hat vor dem Oberlandesgericht in Stuttgart angegeben, keinerlei Erinnerungen an den Vorfall zu haben. Er habe schon vor der Polizeikontrolle das Gefühl gehabt, etwas \"Böses\" komme auf ihn zu, er sei \"verängstigt\" und \"desorientiert\" gewesen, schilderte der 62 Jahre alte Angeklagte am Freitag. Zuvor hatte sein Anwalt in seinem Plädoyer gesagt, der Kernvorwurf eines vorsätzlichen versuchten Tötun"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Stuttgart"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Germany"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "wgt": 60
+              }
+            ],
+            "articleCounts": {
+              "deu": 5
+            },
+            "sentiment": null,
+            "wgt": 5,
+            "relevance": 1
+          },
+          {
+            "uri": "deu-1616569",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Karlsruhe",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Karlsruhe"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Karlsruhe"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Verkehrsbetriebe_Karlsruhe",
+                "type": "org",
+                "score": 85,
+                "label": {
+                  "eng": "Verkehrsbetriebe Karlsruhe"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Haltestelle",
+                "type": "wiki",
+                "score": 73,
+                "label": {
+                  "eng": "Haltestelle"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Rechnergestütztes_Betriebsleitsystem",
+                "type": "wiki",
+                "score": 42,
+                "label": {
+                  "eng": "Rechnergestütztes Betriebsleitsystem"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tunnel",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Tunnel"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 5,
+            "title": {
+              "deu": "Karlsruher Stadttunnel zeitweise gesperrt"
+            },
+            "summary": {
+              "deu": "Sämtliche Haltestellen im Karlsruher Stadtbahntunnel sind am Freitag aus Sicherheitsgründen gesperrt worden. Das Zugleitsystem und das Funksystem der Karlsruher Verkehrsbetriebe (VBK) hatten eine Störung, wie ein Sprecher erklärte. Die betroffenen Bahnen wurden oberirdisch umgeleitet. Die VBK konnten die Störung am späten Morgen beheben, so dass alle unterirdischen Stationen wieder angefahren werden konnten.\n\nSämtliche Haltestellen im Karlsruher Stadtbahntunnel sind am Freitag aus Sicherhe"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Karlsruhe"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Germany"
+                }
+              }
+            },
+            "categories": [],
+            "articleCounts": {
+              "deu": 5
+            },
+            "sentiment": null,
+            "wgt": 5,
+            "relevance": 1
+          },
+          {
+            "uri": "deu-1616576",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Deception",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Deception"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Exmatrikulation",
+                "type": "wiki",
+                "score": 96,
+                "label": {
+                  "eng": "Exmatrikulation"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Court",
+                "type": "wiki",
+                "score": 78,
+                "label": {
+                  "eng": "Court"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Verwaltungsgericht_Berlin",
+                "type": "wiki",
+                "score": 70,
+                "label": {
+                  "eng": "Verwaltungsgericht Berlin"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Public_administration",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Public administration"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Prejudice_(legal_term)",
+                "type": "wiki",
+                "score": 44,
+                "label": {
+                  "eng": "Prejudice (legal term)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Sanctions_(law)",
+                "type": "wiki",
+                "score": 21,
+                "label": {
+                  "eng": "Sanctions (law)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Judge",
+                "type": "wiki",
+                "score": 21,
+                "label": {
+                  "eng": "Judge"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 5,
+            "title": {
+              "deu": "Austausch in Chat-Gruppe bei der Prüfung ist Täuschung"
+            },
+            "summary": {
+              "deu": "Tauschen sich Studierende während einer Online-Prüfung intensiv in einer Chat-Gruppe aus, können sie wegen Täuschung exmatrikuliert werden. Das hat das Verwaltungsgericht Berlin entschieden, wie es am Freitag mitteilte. Dabei komme es nicht darauf an, ob der Austausch tatsächlich hilfreich war und richtige Antworten lieferte, so das Gericht. Damit blieb die Klage einer Studentin im Bachelorstudiengang \"Öffentliche Verwaltung\" erfolglos, die wegen der \"besonderen Schwere der Täuschung\" exma"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Berlin"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Germany"
+                }
+              }
+            },
+            "categories": [],
+            "articleCounts": {
+              "deu": 5
+            },
+            "sentiment": null,
+            "wgt": 5,
+            "relevance": 1
+          }
+        ],
+        "totalResults": 7,
+        "page": 1,
+        "count": 7,
+        "pages": 1
+      }
+    }
+  }
+}

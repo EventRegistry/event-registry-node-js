@@ -1,0 +1,1530 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "conceptUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+      "conceptMatrixConceptCount": 20,
+      "conceptMatrixMeasure": "pmi",
+      "conceptMatrixSampleSize": 100000,
+      "conceptMatrixArticleBodyLen": -1,
+      "conceptMatrixIncludeArticleBasicInfo": true,
+      "conceptMatrixIncludeArticleTitle": true,
+      "conceptMatrixIncludeArticleBody": true,
+      "conceptMatrixIncludeArticleUrl": true,
+      "conceptMatrixIncludeArticleEventUri": true,
+      "conceptMatrixIncludeArticleAuthors": true,
+      "conceptMatrixIncludeArticleConcepts": true,
+      "conceptMatrixIncludeArticleCategories": true,
+      "conceptMatrixIncludeArticleLinks": false,
+      "conceptMatrixIncludeArticleVideos": true,
+      "conceptMatrixIncludeArticleImage": true,
+      "conceptMatrixIncludeArticleSocialScore": true,
+      "conceptMatrixIncludeArticleSentiment": true,
+      "conceptMatrixIncludeArticleLocation": true,
+      "conceptMatrixIncludeArticleExtractedDates": true,
+      "conceptMatrixIncludeArticleOriginalArticle": true,
+      "conceptMatrixIncludeArticleStoryUri": true,
+      "conceptMatrixIncludeArticleDuplicateList": true,
+      "conceptMatrixIncludeEventTitle": true,
+      "conceptMatrixIncludeEventSummary": true,
+      "conceptMatrixIncludeEventArticleCounts": true,
+      "conceptMatrixIncludeEventConcepts": true,
+      "conceptMatrixIncludeEventCategories": true,
+      "conceptMatrixIncludeEventDate": true,
+      "conceptMatrixIncludeEventCommonDates": true,
+      "conceptMatrixIncludeEventInfoArticle": false,
+      "conceptMatrixIncludeEventStories": true,
+      "conceptMatrixIncludeEventSocialScore": true,
+      "conceptMatrixEventImageCount": 2,
+      "conceptMatrixIncludeSourceTitle": true,
+      "conceptMatrixIncludeSourceDescription": true,
+      "conceptMatrixIncludeSourceLocation": true,
+      "conceptMatrixIncludeSourceRanking": true,
+      "conceptMatrixIncludeSourceImage": true,
+      "conceptMatrixIncludeSourceSocialMedia": true,
+      "conceptMatrixIncludeSourceArticleCount": true,
+      "conceptMatrixIncludeSourceSourceGroups": true,
+      "conceptMatrixIncludeCategoryTrendingScore": true,
+      "conceptMatrixConceptType": [
+        "concepts",
+        "entities"
+      ],
+      "conceptMatrixConceptLang": [
+        "eng",
+        "spa"
+      ],
+      "conceptMatrixIncludeConceptLabel": true,
+      "conceptMatrixIncludeConceptSynonyms": true,
+      "conceptMatrixIncludeConceptImage": true,
+      "conceptMatrixIncludeConceptDescription": true,
+      "conceptMatrixIncludeConceptTrendingScore": true,
+      "conceptMatrixMaxConceptsPerType": 50,
+      "conceptMatrixIncludeLocationLabel": true,
+      "conceptMatrixIncludeLocationWikiUri": true,
+      "conceptMatrixIncludeLocationGeoNamesId": true,
+      "conceptMatrixIncludeLocationPopulation": true,
+      "conceptMatrixIncludeLocationGeoLocation": true,
+      "conceptMatrixIncludeLocationCountryArea": true,
+      "conceptMatrixIncludeLocationCountryDetails": true,
+      "conceptMatrixIncludeLocationCountryContinent": true,
+      "conceptMatrixIncludeLocationPlaceFeatureCode": true,
+      "conceptMatrixIncludeLocationPlaceCountry": true,
+      "conceptMatrixIncludeStoryBasicStats": true,
+      "conceptMatrixIncludeStoryLocation": true,
+      "conceptMatrixIncludeStoryDate": true,
+      "conceptMatrixIncludeStoryTitle": true,
+      "conceptMatrixIncludeStorySummary": true,
+      "conceptMatrixIncludeStoryConcepts": true,
+      "conceptMatrixIncludeStoryCategories": true,
+      "conceptMatrixIncludeStoryMedoidArticle": true,
+      "conceptMatrixIncludeStoryInfoArticle": false,
+      "conceptMatrixIncludeStoryCommonDates": true,
+      "conceptMatrixIncludeStorySocialScore": true,
+      "conceptMatrixStoryImageCount": 2,
+      "conceptMatrixIncludeConceptClassParentLabels": true,
+      "conceptMatrixIncludeConceptClassConcepts": false,
+      "conceptMatrixIncludeConceptFolderOwner": false,
+      "resultType": "conceptMatrix",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "conceptMatrix": {
+        "concepts": [
+          {
+            "uri": "http://en.wikipedia.org/wiki/Scotland",
+            "type": "loc",
+            "label": {
+              "eng": "Scotland",
+              "spa": "Escocia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2638360",
+              "wikiUri": "http://en.wikipedia.org/wiki/Scotland",
+              "label": {
+                "eng": "Scotland",
+                "spa": "Escocia"
+              },
+              "population": 5000000,
+              "lat": 56,
+              "long": -4,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_Arab_Emirates",
+            "type": "loc",
+            "label": {
+              "eng": "United Arab Emirates",
+              "spa": "Emiratos Árabes Unidos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "290557",
+              "wikiUri": "http://en.wikipedia.org/wiki/United_Arab_Emirates",
+              "label": {
+                "eng": "United Arab Emirates",
+                "spa": "Emiratos Árabes Unidos"
+              },
+              "population": 4975593,
+              "lat": 23.75,
+              "long": 54.5,
+              "area": 82880,
+              "code2": "AE",
+              "code3": "ARE",
+              "webExt": ".ae",
+              "currencyCode": "AED",
+              "currencyName": "Dirham",
+              "continent": "Asia"
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Glasgow",
+            "type": "loc",
+            "label": {
+              "eng": "Glasgow",
+              "spa": "Glasgow"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2648579",
+              "wikiUri": "http://en.wikipedia.org/wiki/Glasgow",
+              "label": {
+                "eng": "Glasgow",
+                "spa": "Glasgow"
+              },
+              "population": 610268,
+              "lat": 55.86515,
+              "long": -4.25763,
+              "featureCode": "P.PPLA2",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Edinburgh",
+            "type": "loc",
+            "label": {
+              "eng": "Edinburgh",
+              "spa": "Edimburgo"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2650225",
+              "wikiUri": "http://en.wikipedia.org/wiki/Edinburgh",
+              "label": {
+                "eng": "Edinburgh",
+                "spa": "Edimburgo"
+              },
+              "population": 435791,
+              "lat": 55.95206,
+              "long": -3.19648,
+              "featureCode": "P.PPLA",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/East_Kilbride",
+            "type": "loc",
+            "label": {
+              "eng": "East Kilbride",
+              "spa": "East Kilbride"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2650405",
+              "wikiUri": "http://en.wikipedia.org/wiki/East_Kilbride",
+              "label": {
+                "eng": "East Kilbride",
+                "spa": "East Kilbride"
+              },
+              "population": 74231,
+              "lat": 55.76412,
+              "long": -4.17669,
+              "featureCode": "P.PPL",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/England",
+            "type": "loc",
+            "label": {
+              "eng": "England",
+              "spa": "Inglaterra"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "6269131",
+              "wikiUri": "http://en.wikipedia.org/wiki/England",
+              "label": {
+                "eng": "England",
+                "spa": "Inglaterra"
+              },
+              "population": 50000000,
+              "lat": 52.16045,
+              "long": -0.70312,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Europe",
+            "type": "loc",
+            "label": {
+              "eng": "Europe",
+              "spa": "Europa"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Great_Britain",
+            "type": "wiki",
+            "label": {
+              "eng": "Great Britain",
+              "spa": "Gran Bretaña"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Head_coach",
+            "type": "org",
+            "label": {
+              "eng": "Head coach",
+              "spa": "Entrenador en jefe (fútbol americano)"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Basketball",
+            "type": "wiki",
+            "label": {
+              "eng": "Basketball",
+              "spa": "Baloncesto"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Cap_(sport)",
+            "type": "wiki",
+            "label": {
+              "eng": "Cap (sport)",
+              "spa": "Internacional (deporte)"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Arena",
+            "type": "wiki",
+            "label": {
+              "eng": "Arena",
+              "spa": "Estadio cubierto"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Player-coach",
+            "type": "org",
+            "label": {
+              "eng": "Player-coach",
+              "spa": "Player-coach"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Kelvin_Hall",
+            "type": "wiki",
+            "label": {
+              "eng": "Kelvin Hall",
+              "spa": "Kelvin Hall"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/British_Basketball_League",
+            "type": "org",
+            "label": {
+              "eng": "British Basketball League",
+              "spa": "British Basketball League"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/BBL_Trophy",
+            "type": "org",
+            "label": {
+              "eng": "BBL Trophy",
+              "spa": "BBL Trophy"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Glasgow_Rocks",
+            "type": "org",
+            "label": {
+              "eng": "Glasgow Rocks",
+              "spa": "Glasgow Rocks"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Cheshire_Phoenix",
+            "type": "org",
+            "label": {
+              "eng": "Cheshire Phoenix",
+              "spa": "Cheshire Phoenix"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Commonwealth_Arena_and_Sir_Chris_Hoy_Velodrome",
+            "type": "wiki",
+            "label": {
+              "eng": "Commonwealth Arena and Sir Chris Hoy Velodrome",
+              "spa": "Commonwealth Arena and Sir Chris Hoy Velodrome"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Gareth_Murray",
+            "type": "wiki",
+            "label": {
+              "eng": "Gareth Murray",
+              "spa": "Gareth Murray"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          }
+        ],
+        "freqMatrix": [
+          [
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        "scoreMatrix": [
+          [
+            0,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368,
+            1.252762968495368
+          ],
+          [
+            1.252762968495368,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0,
+            1.945910149055313
+          ],
+          [
+            1.252762968495368,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            1.945910149055313,
+            0
+          ]
+        ],
+        "usedResults": 7,
+        "totalResults": 7
+      }
+    }
+  }
+}

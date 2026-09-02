@@ -1,0 +1,251 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "microsoft",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft",
+        "type": "org",
+        "score": 6951,
+        "label": {
+          "eng": "Microsoft"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Windows",
+        "type": "wiki",
+        "score": 2466,
+        "label": {
+          "eng": "Microsoft Windows"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Azure",
+        "type": "wiki",
+        "score": 525,
+        "label": {
+          "eng": "Microsoft Azure"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Excel",
+        "type": "wiki",
+        "score": 382,
+        "label": {
+          "eng": "Microsoft Excel"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Teams",
+        "type": "wiki",
+        "score": 293,
+        "label": {
+          "eng": "Microsoft Teams"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Edge",
+        "type": "wiki",
+        "score": 267,
+        "label": {
+          "eng": "Microsoft Edge"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_365",
+        "type": "wiki",
+        "score": 262,
+        "label": {
+          "eng": "Microsoft 365"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Store",
+        "type": "org",
+        "score": 166,
+        "label": {
+          "eng": "Microsoft Store"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Word",
+        "type": "wiki",
+        "score": 150,
+        "label": {
+          "eng": "Microsoft Word"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Outlook",
+        "type": "wiki",
+        "score": 138,
+        "label": {
+          "eng": "Microsoft Outlook"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Office",
+        "type": "wiki",
+        "score": 131,
+        "label": {
+          "eng": "Microsoft Office"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_PowerPoint",
+        "type": "wiki",
+        "score": 112,
+        "label": {
+          "eng": "Microsoft PowerPoint"
+        }
+      },
+      {
+        "uri": "http://de.wikipedia.org/wiki/Microsoft_Windows_11",
+        "type": "wiki",
+        "score": 91,
+        "label": {
+          "eng": "Microsoft Windows 11"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Bing",
+        "type": "wiki",
+        "score": 70,
+        "label": {
+          "eng": "Microsoft Bing"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Defender",
+        "type": "wiki",
+        "score": 69,
+        "label": {
+          "eng": "Microsoft Defender"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Visual_Studio",
+        "type": "wiki",
+        "score": 66,
+        "label": {
+          "eng": "Microsoft Visual Studio"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_OneDrive",
+        "type": "wiki",
+        "score": 63,
+        "label": {
+          "eng": "Microsoft OneDrive"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_Store_(digital)",
+        "type": "wiki",
+        "score": 46,
+        "label": {
+          "eng": "Microsoft Store (digital)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_account",
+        "type": "wiki",
+        "score": 36,
+        "label": {
+          "eng": "Microsoft account"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Microsoft_SQL_Server",
+        "type": "wiki",
+        "score": 33,
+        "label": {
+          "eng": "Microsoft SQL Server"
+        }
+      }
+    ]
+  }
+}

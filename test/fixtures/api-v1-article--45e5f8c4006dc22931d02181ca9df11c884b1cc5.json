@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "conceptUri": "http://en.wikipedia.org/wiki/Digital_data",
+      "lang": "ita",
+      "articlesPage": 11,
+      "articlesCount": 100,
+      "articlesSortBy": "date",
+      "articlesSortByAsc": false,
+      "resultType": "articles",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "articles": {
+        "results": [],
+        "totalResults": 985,
+        "page": 11,
+        "count": 0,
+        "pages": 10
+      }
+    }
+  }
+}

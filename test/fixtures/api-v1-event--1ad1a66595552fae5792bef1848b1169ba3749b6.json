@@ -1,0 +1,2483 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "conceptUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+      "conceptAggrConceptCount": 100,
+      "conceptAggrSampleSize": 100000,
+      "conceptAggrArticleBodyLen": -1,
+      "conceptAggrIncludeArticleBasicInfo": true,
+      "conceptAggrIncludeArticleTitle": true,
+      "conceptAggrIncludeArticleBody": true,
+      "conceptAggrIncludeArticleUrl": true,
+      "conceptAggrIncludeArticleEventUri": true,
+      "conceptAggrIncludeArticleAuthors": true,
+      "conceptAggrIncludeArticleConcepts": true,
+      "conceptAggrIncludeArticleCategories": true,
+      "conceptAggrIncludeArticleLinks": false,
+      "conceptAggrIncludeArticleVideos": true,
+      "conceptAggrIncludeArticleImage": true,
+      "conceptAggrIncludeArticleSocialScore": true,
+      "conceptAggrIncludeArticleSentiment": true,
+      "conceptAggrIncludeArticleLocation": true,
+      "conceptAggrIncludeArticleExtractedDates": true,
+      "conceptAggrIncludeArticleOriginalArticle": true,
+      "conceptAggrIncludeArticleStoryUri": true,
+      "conceptAggrIncludeArticleDuplicateList": true,
+      "conceptAggrIncludeEventTitle": true,
+      "conceptAggrIncludeEventSummary": true,
+      "conceptAggrIncludeEventArticleCounts": true,
+      "conceptAggrIncludeEventConcepts": true,
+      "conceptAggrIncludeEventCategories": true,
+      "conceptAggrIncludeEventDate": true,
+      "conceptAggrIncludeEventCommonDates": true,
+      "conceptAggrIncludeEventInfoArticle": false,
+      "conceptAggrIncludeEventStories": true,
+      "conceptAggrIncludeEventSocialScore": true,
+      "conceptAggrEventImageCount": 2,
+      "conceptAggrIncludeSourceTitle": true,
+      "conceptAggrIncludeSourceDescription": true,
+      "conceptAggrIncludeSourceLocation": true,
+      "conceptAggrIncludeSourceRanking": true,
+      "conceptAggrIncludeSourceImage": true,
+      "conceptAggrIncludeSourceSocialMedia": true,
+      "conceptAggrIncludeSourceArticleCount": true,
+      "conceptAggrIncludeSourceSourceGroups": true,
+      "conceptAggrIncludeCategoryTrendingScore": true,
+      "conceptAggrConceptType": [
+        "concepts",
+        "entities"
+      ],
+      "conceptAggrConceptLang": [
+        "eng",
+        "spa"
+      ],
+      "conceptAggrIncludeConceptLabel": true,
+      "conceptAggrIncludeConceptSynonyms": true,
+      "conceptAggrIncludeConceptImage": true,
+      "conceptAggrIncludeConceptDescription": true,
+      "conceptAggrIncludeConceptTrendingScore": true,
+      "conceptAggrMaxConceptsPerType": 50,
+      "conceptAggrIncludeLocationLabel": true,
+      "conceptAggrIncludeLocationWikiUri": true,
+      "conceptAggrIncludeLocationGeoNamesId": true,
+      "conceptAggrIncludeLocationPopulation": true,
+      "conceptAggrIncludeLocationGeoLocation": true,
+      "conceptAggrIncludeLocationCountryArea": true,
+      "conceptAggrIncludeLocationCountryDetails": true,
+      "conceptAggrIncludeLocationCountryContinent": true,
+      "conceptAggrIncludeLocationPlaceFeatureCode": true,
+      "conceptAggrIncludeLocationPlaceCountry": true,
+      "conceptAggrIncludeStoryBasicStats": true,
+      "conceptAggrIncludeStoryLocation": true,
+      "conceptAggrIncludeStoryDate": true,
+      "conceptAggrIncludeStoryTitle": true,
+      "conceptAggrIncludeStorySummary": true,
+      "conceptAggrIncludeStoryConcepts": true,
+      "conceptAggrIncludeStoryCategories": true,
+      "conceptAggrIncludeStoryMedoidArticle": true,
+      "conceptAggrIncludeStoryInfoArticle": false,
+      "conceptAggrIncludeStoryCommonDates": true,
+      "conceptAggrIncludeStorySocialScore": true,
+      "conceptAggrStoryImageCount": 2,
+      "conceptAggrIncludeConceptClassParentLabels": true,
+      "conceptAggrIncludeConceptClassConcepts": false,
+      "conceptAggrIncludeConceptFolderOwner": false,
+      "resultType": "conceptAggr",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "conceptAggr": {
+        "usedResults": 7,
+        "totalResults": 7,
+        "results": [
+          {
+            "uri": "http://en.wikipedia.org/wiki/France",
+            "type": "loc",
+            "label": {
+              "eng": "France",
+              "spa": "Francia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "3017382",
+              "wikiUri": "http://en.wikipedia.org/wiki/France",
+              "label": {
+                "eng": "France",
+                "spa": "Francia"
+              },
+              "population": 64768389,
+              "lat": 46,
+              "long": 2,
+              "area": 547030,
+              "code2": "FR",
+              "code3": "FRA",
+              "webExt": ".fr",
+              "currencyCode": "EUR",
+              "currencyName": "Euro",
+              "continent": "Europe"
+            },
+            "score": 100
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Scotland",
+            "type": "loc",
+            "label": {
+              "eng": "Scotland",
+              "spa": "Escocia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2638360",
+              "wikiUri": "http://en.wikipedia.org/wiki/Scotland",
+              "label": {
+                "eng": "Scotland",
+                "spa": "Escocia"
+              },
+              "population": 5000000,
+              "lat": 56,
+              "long": -4,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            },
+            "score": 46.53739612188366
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+            "type": "person",
+            "label": {
+              "eng": "Emmanuel Macron",
+              "spa": "Emmanuel Macron"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 42.38227146814405
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Charles_III_of_Spain",
+            "type": "person",
+            "label": {
+              "eng": "Charles III of Spain",
+              "spa": "Carlos III de España"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 38.50415512465374
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/President_of_France",
+            "type": "wiki",
+            "label": {
+              "eng": "President of France",
+              "spa": "Presidente de la República Francesa"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 36.01108033240997
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Paris",
+            "type": "loc",
+            "label": {
+              "eng": "Paris",
+              "spa": "París"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2968815",
+              "wikiUri": "http://en.wikipedia.org/wiki/Paris",
+              "label": {
+                "eng": "Paris",
+                "spa": "París"
+              },
+              "population": 2257981,
+              "lat": 48.8534,
+              "long": 2.3486,
+              "featureCode": "A.ADM2",
+              "country": {
+                "type": "country",
+                "geoNamesId": "3017382",
+                "wikiUri": "http://en.wikipedia.org/wiki/France",
+                "label": {
+                  "eng": "France",
+                  "spa": "Francia"
+                },
+                "population": 64768389,
+                "lat": 46,
+                "long": 2,
+                "area": 547030,
+                "code2": "FR",
+                "code3": "FRA",
+                "webExt": ".fr",
+                "currencyCode": "EUR",
+                "currencyName": "Euro",
+                "continent": "Europe"
+              }
+            },
+            "score": 30.74792243767313
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/State_visit",
+            "type": "wiki",
+            "label": {
+              "eng": "State visit",
+              "spa": "Visita oficial"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 30.47091412742382
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/British_Basketball_League",
+            "type": "org",
+            "label": {
+              "eng": "British Basketball League",
+              "spa": "British Basketball League"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 27.70083102493075
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Bosnia_and_Herzegovina",
+            "type": "loc",
+            "label": {
+              "eng": "Bosnia and Herzegovina",
+              "spa": "Bosnia-Herzegovina"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "3277605",
+              "wikiUri": "http://en.wikipedia.org/wiki/Bosnia_and_Herzegovina",
+              "label": {
+                "eng": "Bosnia and Herzegovina",
+                "spa": "Bosnia-Herzegovina"
+              },
+              "population": 4590000,
+              "lat": 44.25,
+              "long": 17.83333,
+              "area": 51129,
+              "code2": "BA",
+              "code3": "BIH",
+              "webExt": ".ba",
+              "currencyCode": "BAM",
+              "currencyName": "Marka",
+              "continent": "Europe"
+            },
+            "score": 27.70083102493075
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Offshore_wind_power",
+            "type": "wiki",
+            "label": {
+              "eng": "Offshore wind power",
+              "spa": "Offshore wind power"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 27.70083102493075
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/TikTok",
+            "type": "wiki",
+            "label": {
+              "eng": "TikTok",
+              "spa": "TikTok"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 27.70083102493075
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Basketball",
+            "type": "wiki",
+            "label": {
+              "eng": "Basketball",
+              "spa": "Baloncesto"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 26.59279778393352
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Russia",
+            "type": "loc",
+            "label": {
+              "eng": "Russia",
+              "spa": "Rusia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "2017370",
+              "wikiUri": "http://en.wikipedia.org/wiki/Russia",
+              "label": {
+                "eng": "Russia",
+                "spa": "Rusia"
+              },
+              "population": 140702000,
+              "lat": 60,
+              "long": 100,
+              "area": 17100000,
+              "code2": "RU",
+              "code3": "RUS",
+              "webExt": ".ru",
+              "currencyCode": "RUB",
+              "currencyName": "Ruble",
+              "continent": "Europe"
+            },
+            "score": 25.48476454293629
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Crown_Estate_Scotland",
+            "type": "wiki",
+            "label": {
+              "eng": "Crown Estate Scotland",
+              "spa": "Crown Estate Scotland"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 25.20775623268698
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Civil_service",
+            "type": "wiki",
+            "label": {
+              "eng": "Civil service",
+              "spa": "Funcionario"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 24.37673130193906
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Glasgow_Rocks",
+            "type": "org",
+            "label": {
+              "eng": "Glasgow Rocks",
+              "spa": "Glasgow Rocks"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 24.09972299168975
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/North_Sea",
+            "type": "loc",
+            "label": {
+              "eng": "North Sea",
+              "spa": "Mar del Norte"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null,
+            "score": 23.26869806094183
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Presidency_of_Bosnia_and_Herzegovina",
+            "type": "wiki",
+            "label": {
+              "eng": "Presidency of Bosnia and Herzegovina",
+              "spa": "Presidencia de Bosnia y Herzegovina"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 22.1606648199446
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Buckingham_Palace",
+            "type": "loc",
+            "label": {
+              "eng": "Buckingham Palace",
+              "spa": "Palacio de Buckingham"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null,
+            "score": 21.88365650969529
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Renewable_energy",
+            "type": "wiki",
+            "label": {
+              "eng": "Renewable energy",
+              "spa": "Energía renovable"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 21.88365650969529
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Government_of_the_United_Kingdom",
+            "type": "org",
+            "label": {
+              "eng": "Government of the United Kingdom",
+              "spa": "Gobierno del Reino Unido"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 20.49861495844875
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Netflix",
+            "type": "org",
+            "label": {
+              "eng": "Netflix",
+              "spa": "Netflix"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 19.66759002770083
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Cheshire_Phoenix",
+            "type": "org",
+            "label": {
+              "eng": "Cheshire Phoenix",
+              "spa": "Cheshire Phoenix"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 18.83656509695291
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Denis_Bećirović",
+            "type": "wiki",
+            "label": {
+              "eng": "Denis Bećirović",
+              "spa": "Denis Bećirović"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 18.5595567867036
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Arena",
+            "type": "wiki",
+            "label": {
+              "eng": "Arena",
+              "spa": "Estadio cubierto"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 18.5595567867036
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Head_coach",
+            "type": "org",
+            "label": {
+              "eng": "Head coach",
+              "spa": "Entrenador en jefe (fútbol americano)"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 18.28254847645429
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/East_Kilbride",
+            "type": "loc",
+            "label": {
+              "eng": "East Kilbride",
+              "spa": "East Kilbride"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2650405",
+              "wikiUri": "http://en.wikipedia.org/wiki/East_Kilbride",
+              "label": {
+                "eng": "East Kilbride",
+                "spa": "East Kilbride"
+              },
+              "population": 74231,
+              "lat": 55.76412,
+              "long": -4.17669,
+              "featureCode": "P.PPL",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            },
+            "score": 18.28254847645429
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/King",
+            "type": "person",
+            "label": {
+              "eng": "König",
+              "spa": "König"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 18.28254847645429
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Seabed",
+            "type": "wiki",
+            "label": {
+              "eng": "Seabed",
+              "spa": "Relieve oceánico"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 18.28254847645429
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Low-carbon_economy",
+            "type": "wiki",
+            "label": {
+              "eng": "Low-carbon economy",
+              "spa": "Economía de bajo carbono"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 18.28254847645429
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Republika_Srpska",
+            "type": "loc",
+            "label": {
+              "eng": "Republika Srpska",
+              "spa": "República Serbia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "3230000",
+              "wikiUri": "http://en.wikipedia.org/wiki/Republika_Srpska",
+              "label": {
+                "eng": "Republika Srpska",
+                "spa": "República Serbia"
+              },
+              "population": 1326991,
+              "lat": 44.93333,
+              "long": 17.18333,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "3277605",
+                "wikiUri": "http://en.wikipedia.org/wiki/Bosnia_and_Herzegovina",
+                "label": {
+                  "eng": "Bosnia and Herzegovina",
+                  "spa": "Bosnia-Herzegovina"
+                },
+                "population": 4590000,
+                "lat": 44.25,
+                "long": 17.83333,
+                "area": 51129,
+                "code2": "BA",
+                "code3": "BIH",
+                "webExt": ".ba",
+                "currencyCode": "BAM",
+                "currencyName": "Marka",
+                "continent": "Europe"
+              }
+            },
+            "score": 17.72853185595568
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Stanislas_Guerini",
+            "type": "wiki",
+            "label": {
+              "eng": "Stanislas Guerini",
+              "spa": "Stanislas Guerini"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 17.17451523545706
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Streaming_media",
+            "type": "wiki",
+            "label": {
+              "eng": "Streaming media",
+              "spa": "Streaming"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 17.17451523545706
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Milorad_Dodik",
+            "type": "person",
+            "label": {
+              "eng": "Milorad Dodik",
+              "spa": "Milorad Dodik"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 16.62049861495845
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Commonwealth_Arena_and_Sir_Chris_Hoy_Velodrome",
+            "type": "wiki",
+            "label": {
+              "eng": "Commonwealth Arena and Sir Chris Hoy Velodrome",
+              "spa": "Commonwealth Arena and Sir Chris Hoy Velodrome"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 16.62049861495845
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/BBL_Trophy",
+            "type": "org",
+            "label": {
+              "eng": "BBL Trophy",
+              "spa": "BBL Trophy"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 16.34349030470914
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/China",
+            "type": "loc",
+            "label": {
+              "eng": "China",
+              "spa": "República Popular China"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "1814991",
+              "wikiUri": "http://en.wikipedia.org/wiki/China",
+              "label": {
+                "eng": "China",
+                "spa": "República Popular China"
+              },
+              "population": 1330044000,
+              "lat": 35,
+              "long": 105,
+              "area": 9596960,
+              "code2": "CN",
+              "code3": "CHN",
+              "webExt": ".cn",
+              "currencyCode": "CNY",
+              "currencyName": "Yuan Renminbi",
+              "continent": "Asia"
+            },
+            "score": 15.78947368421053
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Fossil_fuel",
+            "type": "wiki",
+            "label": {
+              "eng": "Fossil fuel",
+              "spa": "Combustible fósil"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 15.23545706371191
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Glasgow",
+            "type": "loc",
+            "label": {
+              "eng": "Glasgow",
+              "spa": "Glasgow"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2648579",
+              "wikiUri": "http://en.wikipedia.org/wiki/Glasgow",
+              "label": {
+                "eng": "Glasgow",
+                "spa": "Glasgow"
+              },
+              "population": 610268,
+              "lat": 55.86515,
+              "long": -4.25763,
+              "featureCode": "P.PPLA2",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            },
+            "score": 14.9584487534626
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/North_Sea_oil",
+            "type": "wiki",
+            "label": {
+              "eng": "North Sea oil",
+              "spa": "North Sea oil"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 14.9584487534626
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Government",
+            "type": "wiki",
+            "label": {
+              "eng": "Government",
+              "spa": "Gobierno"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 14.6814404432133
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Edinburgh",
+            "type": "loc",
+            "label": {
+              "eng": "Edinburgh",
+              "spa": "Edimburgo"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2650225",
+              "wikiUri": "http://en.wikipedia.org/wiki/Edinburgh",
+              "label": {
+                "eng": "Edinburgh",
+                "spa": "Edimburgo"
+              },
+              "population": 435791,
+              "lat": 55.95206,
+              "long": -3.19648,
+              "featureCode": "P.PPLA",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            },
+            "score": 14.12742382271468
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Scottish_Government",
+            "type": "org",
+            "label": {
+              "eng": "Scottish Government",
+              "spa": "Gobierno de Escocia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 13.85041551246537
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Social_network",
+            "type": "wiki",
+            "label": {
+              "eng": "Social network",
+              "spa": "Red social"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 13.01939058171745
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Gareth_Murray",
+            "type": "wiki",
+            "label": {
+              "eng": "Gareth Murray",
+              "spa": "Gareth Murray"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 12.46537396121884
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Government_of_France",
+            "type": "org",
+            "label": {
+              "eng": "Government of France",
+              "spa": "Gobierno de Francia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 11.91135734072022
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
+            "type": "wiki",
+            "label": {
+              "eng": "George Floyd protests",
+              "spa": "George Floyd protests"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 11.63434903047091
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Offshore_drilling",
+            "type": "wiki",
+            "label": {
+              "eng": "Offshore drilling",
+              "spa": "Offshore drilling"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 11.63434903047091
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Carbon_neutrality",
+            "type": "wiki",
+            "label": {
+              "eng": "Carbon neutrality",
+              "spa": "Neutralidad de carbono"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 11.35734072022161
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Germany",
+            "type": "loc",
+            "label": {
+              "eng": "Germany",
+              "spa": "Alemania"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "2921044",
+              "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+              "label": {
+                "eng": "Germany",
+                "spa": "Alemania"
+              },
+              "population": 81802257,
+              "lat": 51.5,
+              "long": 10.5,
+              "area": 357021,
+              "code2": "DE",
+              "code3": "DEU",
+              "webExt": ".de",
+              "currencyCode": "EUR",
+              "currencyName": "Euro",
+              "continent": "Europe"
+            },
+            "score": 11.0803324099723
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Queen_consort",
+            "type": "wiki",
+            "label": {
+              "eng": "Queen consort",
+              "spa": "Queen consort"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 10.80332409972299
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/President_(government_title)",
+            "type": "wiki",
+            "label": {
+              "eng": "Presidente",
+              "spa": "Presidente"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 10.80332409972299
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/England",
+            "type": "loc",
+            "label": {
+              "eng": "England",
+              "spa": "Inglaterra"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "6269131",
+              "wikiUri": "http://en.wikipedia.org/wiki/England",
+              "label": {
+                "eng": "England",
+                "spa": "Inglaterra"
+              },
+              "population": 50000000,
+              "lat": 52.16045,
+              "long": -0.70312,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            },
+            "score": 10.52631578947368
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Supply_chain",
+            "type": "wiki",
+            "label": {
+              "eng": "Supply chain",
+              "spa": "Cadena de suministro"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 10.24930747922438
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Vassal",
+            "type": "loc",
+            "label": {
+              "eng": "Vassal",
+              "spa": "Vasallaje"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "8013703",
+              "wikiUri": "http://en.wikipedia.org/wiki/Vassal",
+              "label": {
+                "eng": "Vassal",
+                "spa": "Vasallaje"
+              },
+              "population": null,
+              "lat": 41.61688,
+              "long": -7.34655,
+              "featureCode": "A.ADM3",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2264397",
+                "wikiUri": "http://en.wikipedia.org/wiki/Portugal",
+                "label": {
+                  "eng": "Portugal",
+                  "spa": "Portugal"
+                },
+                "population": 10676000,
+                "lat": 39.6945,
+                "long": -8.13057,
+                "area": 92391,
+                "code2": "PT",
+                "code3": "PRT",
+                "webExt": ".pt",
+                "currencyCode": "EUR",
+                "currencyName": "Euro",
+                "continent": "Europe"
+              }
+            },
+            "score": 10.24930747922438
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/State_(polity)",
+            "type": "wiki",
+            "label": {
+              "eng": "State (polity)",
+              "spa": "Forma de gobierno"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.97229916897507
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Downing_Street",
+            "type": "wiki",
+            "label": {
+              "eng": "Downing Street",
+              "spa": "Downing Street"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.695290858725762
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Fast_food",
+            "type": "wiki",
+            "label": {
+              "eng": "Fast food",
+              "spa": "Comida rápida"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.695290858725762
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Government_of_Republika_Srpska",
+            "type": "wiki",
+            "label": {
+              "eng": "Влада Републике Српске",
+              "spa": "Влада Републике Српске"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.695290858725762
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Strike_action",
+            "type": "wiki",
+            "label": {
+              "eng": "Strike action",
+              "spa": "Huelga"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.695290858725762
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_Arab_Emirates",
+            "type": "loc",
+            "label": {
+              "eng": "United Arab Emirates",
+              "spa": "Emiratos Árabes Unidos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "290557",
+              "wikiUri": "http://en.wikipedia.org/wiki/United_Arab_Emirates",
+              "label": {
+                "eng": "United Arab Emirates",
+                "spa": "Emiratos Árabes Unidos"
+              },
+              "population": 4975593,
+              "lat": 23.75,
+              "long": 54.5,
+              "area": 82880,
+              "code2": "AE",
+              "code3": "ARE",
+              "webExt": ".ae",
+              "currencyCode": "AED",
+              "currencyName": "Dirham",
+              "continent": "Asia"
+            },
+            "score": 9.418282548476455
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Kelvin_Hall",
+            "type": "wiki",
+            "label": {
+              "eng": "Kelvin Hall",
+              "spa": "Kelvin Hall"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.418282548476455
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Player-coach",
+            "type": "org",
+            "label": {
+              "eng": "Player-coach",
+              "spa": "Player-coach"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.418282548476455
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Monarchy",
+            "type": "wiki",
+            "label": {
+              "eng": "Monarchy",
+              "spa": "Monarquía"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 8.86426592797784
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Digital_security",
+            "type": "wiki",
+            "label": {
+              "eng": "Digital security",
+              "spa": "Digital security"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 8.587257617728532
+          },
+          {
+            "uri": "http://fr.wikipedia.org/wiki/Fonction_publique_française",
+            "type": "wiki",
+            "label": {
+              "eng": "Fonction publique française",
+              "spa": "Fonction publique française"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 8.033240997229917
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Michael_Matheson_(politician)",
+            "type": "person",
+            "label": {
+              "eng": "Michael Matheson (politician)",
+              "spa": "Michael Matheson (politician)"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 8.033240997229917
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Twitter",
+            "type": "org",
+            "label": {
+              "eng": "Twitter",
+              "spa": "Twitter"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 8.033240997229917
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Retirement",
+            "type": "org",
+            "label": {
+              "eng": "Retirement",
+              "spa": "Jubilación"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 7.202216066481994
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Electrification",
+            "type": "wiki",
+            "label": {
+              "eng": "Electrification",
+              "spa": "Electrification"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 6.925207756232687
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Energy_transition",
+            "type": "wiki",
+            "label": {
+              "eng": "Energy transition",
+              "spa": "Transición energética"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 6.925207756232687
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Élysée_Palace",
+            "type": "loc",
+            "label": {
+              "eng": "Élysée Palace",
+              "spa": "Palacio del Elíseo"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null,
+            "score": 6.094182825484765
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_States",
+            "type": "loc",
+            "label": {
+              "eng": "United States",
+              "spa": "Estados Unidos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "6252001",
+              "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+              "label": {
+                "eng": "United States",
+                "spa": "Estados Unidos"
+              },
+              "population": 310232863,
+              "lat": 39.76,
+              "long": -98.5,
+              "area": 9629091,
+              "code2": "US",
+              "code3": "USA",
+              "webExt": ".us",
+              "currencyCode": "USD",
+              "currencyName": "Dollar",
+              "continent": "Noth America"
+            },
+            "score": 6.094182825484765
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Education",
+            "type": "wiki",
+            "label": {
+              "eng": "Education",
+              "spa": "Educación"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.817174515235457
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Mobilier_National",
+            "type": "wiki",
+            "label": {
+              "eng": "Mobilier national",
+              "spa": "Mobilier national"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.54016620498615
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/French_Parliament",
+            "type": "org",
+            "label": {
+              "eng": "French Parliament",
+              "spa": "Parlamento francés"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.54016620498615
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/National_Assembly_(France)",
+            "type": "org",
+            "label": {
+              "eng": "National Assembly (France)",
+              "spa": "Asamblea Nacional de Francia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.54016620498615
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Lower_house",
+            "type": "wiki",
+            "label": {
+              "eng": "Lower house",
+              "spa": "Cámara baja"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.54016620498615
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Trade_union",
+            "type": "wiki",
+            "label": {
+              "eng": "Trade union",
+              "spa": "Sindicato"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.54016620498615
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Energy_industry",
+            "type": "wiki",
+            "label": {
+              "eng": "Energy industry",
+              "spa": "Industria de la energía"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.54016620498615
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Monarchy_of_the_United_Kingdom",
+            "type": "wiki",
+            "label": {
+              "eng": "Monarchy of the United Kingdom",
+              "spa": "Corona británica"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.54016620498615
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Just_transition",
+            "type": "wiki",
+            "label": {
+              "eng": "Just transition",
+              "spa": "Just transition"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.54016620498615
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Politics",
+            "type": "wiki",
+            "label": {
+              "eng": "Politics",
+              "spa": "Política"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.263157894736842
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Sovereignty",
+            "type": "wiki",
+            "label": {
+              "eng": "Sovereignty",
+              "spa": "Soberanía"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 5.263157894736842
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Police",
+            "type": "wiki",
+            "label": {
+              "eng": "Police",
+              "spa": "Policía"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 4.986149584487535
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Gendarmerie",
+            "type": "wiki",
+            "label": {
+              "eng": "Gendarmerie",
+              "spa": "Gendarmería"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 4.986149584487535
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/General_Confederation_of_Labour_(France)",
+            "type": "org",
+            "label": {
+              "eng": "General Confederation of Labour (France)",
+              "spa": "Confederación General del Trabajo (Francia)"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 4.986149584487535
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Great_Britain",
+            "type": "wiki",
+            "label": {
+              "eng": "Great Britain",
+              "spa": "Gran Bretaña"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 4.709141274238227
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Cap_(sport)",
+            "type": "wiki",
+            "label": {
+              "eng": "Cap (sport)",
+              "spa": "Internacional (deporte)"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 4.709141274238227
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Europe",
+            "type": "loc",
+            "label": {
+              "eng": "Europe",
+              "spa": "Europa"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null,
+            "score": 4.709141274238227
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Bordeaux",
+            "type": "loc",
+            "label": {
+              "eng": "Bordeaux",
+              "spa": "Burdeos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "3031582",
+              "wikiUri": "http://en.wikipedia.org/wiki/Bordeaux",
+              "label": {
+                "eng": "Bordeaux",
+                "spa": "Burdeos"
+              },
+              "population": 231844,
+              "lat": 44.84044,
+              "long": -0.5805,
+              "featureCode": "P.PPLA",
+              "country": {
+                "type": "country",
+                "geoNamesId": "3017382",
+                "wikiUri": "http://en.wikipedia.org/wiki/France",
+                "label": {
+                  "eng": "France",
+                  "spa": "Francia"
+                },
+                "population": 64768389,
+                "lat": 46,
+                "long": 2,
+                "area": 547030,
+                "code2": "FR",
+                "code3": "FRA",
+                "webExt": ".fr",
+                "currencyCode": "EUR",
+                "currencyName": "Euro",
+                "continent": "Europe"
+              }
+            },
+            "score": 3.878116343490305
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Sète",
+            "type": "loc",
+            "label": {
+              "eng": "Sète",
+              "spa": "Sète"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2974733",
+              "wikiUri": "http://en.wikipedia.org/wiki/Sète",
+              "label": {
+                "eng": "Sète",
+                "spa": "Sète"
+              },
+              "population": 40736,
+              "lat": 43.4028,
+              "long": 3.69278,
+              "featureCode": "P.PPL",
+              "country": {
+                "type": "country",
+                "geoNamesId": "3017382",
+                "wikiUri": "http://en.wikipedia.org/wiki/France",
+                "label": {
+                  "eng": "France",
+                  "spa": "Francia"
+                },
+                "population": 64768389,
+                "lat": 46,
+                "long": 2,
+                "area": 547030,
+                "code2": "FR",
+                "code3": "FRA",
+                "webExt": ".fr",
+                "currencyCode": "EUR",
+                "currencyName": "Euro",
+                "continent": "Europe"
+              }
+            },
+            "score": 3.878116343490305
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Versailles,_Yvelines",
+            "type": "loc",
+            "label": {
+              "eng": "Versailles, Yvelines",
+              "spa": "Versalles"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null,
+            "score": 3.601108033240997
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Furniture",
+            "type": "wiki",
+            "label": {
+              "eng": "Furniture",
+              "spa": "Mobiliario"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 3.32409972299169
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Majesty",
+            "type": "org",
+            "label": {
+              "eng": "Majesty",
+              "spa": "Majestad"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 2.770083102493075
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/European_Commission",
+            "type": "org",
+            "label": {
+              "eng": "European Commission",
+              "spa": "Comisión Europea"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 2.770083102493075
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Canada",
+            "type": "loc",
+            "label": {
+              "eng": "Canada",
+              "spa": "Canadá"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "6251999",
+              "wikiUri": "http://en.wikipedia.org/wiki/Canada",
+              "label": {
+                "eng": "Canada",
+                "spa": "Canadá"
+              },
+              "population": 33679000,
+              "lat": 60.10867,
+              "long": -113.64258,
+              "area": 9984670,
+              "code2": "CA",
+              "code3": "CAN",
+              "webExt": ".ca",
+              "currencyCode": "CAD",
+              "currencyName": "Dollar",
+              "continent": "Noth America"
+            },
+            "score": 2.493074792243767
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/White_House",
+            "type": "loc",
+            "label": {
+              "eng": "White House",
+              "spa": "Casa Blanca"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": null,
+            "score": 2.493074792243767
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/National_security",
+            "type": "wiki",
+            "label": {
+              "eng": "National security",
+              "spa": "Seguridad nacional"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 2.493074792243767
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Diplomacy",
+            "type": "wiki",
+            "label": {
+              "eng": "Diplomacy",
+              "spa": "Diplomacia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 2.493074792243767
+          }
+        ]
+      }
+    }
+  }
+}

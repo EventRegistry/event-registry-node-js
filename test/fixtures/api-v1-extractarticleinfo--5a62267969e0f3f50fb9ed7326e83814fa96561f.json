@@ -1,0 +1,168 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/extractArticleInfo",
+    "body": {
+      "url": "https://www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "authors": [
+        "Stephen Burgen",
+        "Sam Jones"
+      ],
+      "body": "Ousted president's private messages caught on TV cameras reveal admission of defeat\nThe ousted Catalan president, Carles Puigdemont, has admitted privately that his attempt to secure regional independence is over and claims he has been sacrificed by his own side, according to messages sent to a colleague and captured by TV cameras.\nOn Wednesday, a Spanish TV show published messages that Puigdemont had sent to his former health minister Toni Comín while the latter was at an event in Leuven, Belgium, the previous evening.\nSent using the Signal messaging app and written in Catalan, the texts were caught by a TV camera behind Comín and aired by Telecinco's Ana Rosa programme.\nThey mention \"the last days of republican Catalonia\" and suggest the deposed leader is preparing to abandon his attempt to return to office.\n\"I guess you've realised that this is over,\" reads one. \"Our people have sacrificed us. Or at least me.\" It goes on to refer to the pro-independence Catalan MP Joan Tardà, who suggested at the weekend that Puigdemont could step aside to allow another candidate to become president: \"You will be ministers (I hope and wish) but I've already been sacrificed just like Tardà said.\"\nAnother says \"The [Spanish government's] plan has won,\" before expressing the hope that the victory will lead to the release of the four Catalan leaders in prison.\nThe texts were sent around the same time that Puigdemont issued a defiant message on social media, calling for unity and saying he intended to return to the presidency after last December's election, in which pro-independence parties held on to their majority in the regional parliament.\nAppearing in a video hours after the speaker of the Catalan parliament postponed a debate on the presidential investiture, in which Puigdemont was the only candidate, the former leader said he was intent on resuming office.\nHe confirmed on Wednesday morning that he had sent the messages, but insisted he was still the best candidate to represent the Catalan people.\n\"I am a journalist and I have always understood that there are limits, such as privacy, which should never be violated,\" he wrote on Twitter. \"I am human and I, too, have moments of doubt. I am also the president and I will not fold or back away out of respect for the gratitude I feel towards - and the commitment I have - to the citizens and the nation. Onwards!\"\nA spokesman for Puigdemont's Catalan European Democratic party declined to comment on the messages, saying: \"We don't send out WhatsApp [sic] messages, we send out official messages like the one Puigdemont sent last night. That's what's important to us.\"\nComín's lawyer told the Catalan radio station RAC1 that while he did \"not deny the veracity\" of the leaked messages, they had been obtained \"in an illegal manner\" and would result in legal action against Telecinco.\nCatalonia has been under the direct control of the Spanish government since the end of October, when the prime minister, Mariano Rajoy, responded to the Catalan parliament's unilateral declaration of independence by sacking Puigdemont and calling fresh elections. Puigdemont fled to Brussels shortly afterwards and faces arrest on possible charges of rebellion, sedition and misuses of public funds if he returns to Spain.",
+      "date": "2018-01-31",
+      "datetime": "2018-01-31T12:35:59Z",
+      "description": null,
+      "fbAuthorUrl": null,
+      "fbPages": null,
+      "fbSourceUrl": "https://www.facebook.com/theguardian",
+      "image": "https://i.guim.co.uk/img/media/5375012a6f86f60584c83a9060652c7dd82e5147/4_129_4888_2932/master/4888.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTgucG5n&enable=upscale&s=6c7194b8b93df3b242d6a20f9c6b99b0",
+      "jsonld": [
+        [
+          {
+            "@context": "https://schema.org",
+            "@id": "https://www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera",
+            "@type": "NewsArticle",
+            "author": [
+              {
+                "@type": "Person",
+                "name": "Sam Jones",
+                "sameAs": "https://www.theguardian.com/profile/samjones"
+              },
+              {
+                "@type": "Person",
+                "name": "Stephen Burgen",
+                "sameAs": "https://www.theguardian.com/profile/stephen-burgen"
+              }
+            ],
+            "dateModified": "2018-01-31T22:00:18.000Z",
+            "datePublished": "2018-01-31T12:35:59.000Z",
+            "headline": "'This is over': Puigdemont's Catalan independence doubts caught on camera",
+            "image": [
+              "https://i.guim.co.uk/img/media/5375012a6f86f60584c83a9060652c7dd82e5147/4_129_4888_2932/master/4888.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTgucG5n&enable=upscale&s=6c7194b8b93df3b242d6a20f9c6b99b0",
+              "https://i.guim.co.uk/img/media/5375012a6f86f60584c83a9060652c7dd82e5147/4_129_4888_2932/master/4888.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=094b9a7c3a47e9574af965ad7c34cabc",
+              "https://i.guim.co.uk/img/media/5375012a6f86f60584c83a9060652c7dd82e5147/4_129_4888_2932/master/4888.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=7c71e4fd393a2642501d64c89588e58b",
+              "https://i.guim.co.uk/img/media/5375012a6f86f60584c83a9060652c7dd82e5147/4_129_4888_2932/master/4888.jpg?width=1200&quality=85&auto=format&fit=max&s=70bb441de0b995ad45a66e67d0abeefb"
+            ],
+            "isAccessibleForFree": true,
+            "isPartOf": {
+              "@type": [
+                "CreativeWork",
+                "Product"
+              ],
+              "name": "The Guardian",
+              "productID": "theguardian.com:basic"
+            },
+            "mainEntityOfPage": "https://www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera",
+            "publisher": {
+              "@context": "https://schema.org",
+              "@id": "https://www.theguardian.com#publisher",
+              "@type": "Organization",
+              "logo": {
+                "@type": "ImageObject",
+                "height": 60,
+                "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+                "width": 190
+              },
+              "name": "The Guardian",
+              "sameAs": [
+                "https://www.facebook.com/theguardian",
+                "https://twitter.com/guardian",
+                "https://www.youtube.com/user/TheGuardian"
+              ],
+              "url": "https://www.theguardian.com/"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@id": "https://www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera",
+            "@type": "WebPage",
+            "potentialAction": {
+              "@type": "ViewAction",
+              "target": "android-app://com.guardian/https/www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera"
+            }
+          }
+        ]
+      ],
+      "keywords": null,
+      "links": [
+        {
+          "anchorText": "Carles Puigdemont",
+          "url": "https://www.theguardian.com/world/carles-puigdemont"
+        },
+        {
+          "anchorText": "who suggested at the weekend that Puigdemont could step aside",
+          "url": "https://www.theguardian.com/world/2018/jan/27/carles-puigdemont-must-return-to-catalonia-to-form-government"
+        },
+        {
+          "anchorText": "the speaker of the Catalan parliament postponed a debate on the presidential investiture",
+          "url": "https://www.theguardian.com/world/2018/jan/30/catalonia-parliament-postpones-carles-puigdemont-investiture-president"
+        },
+        {
+          "anchorText": "wrote on Twitter",
+          "url": "https://twitter.com/KRLS/status/958661707303399424"
+        },
+        {
+          "anchorText": "unilateral declaration of independence by sacking Puigdemont and calling fresh elections",
+          "url": "https://www.theguardian.com/world/2017/oct/27/spanish-pm-mariano-rajoy-asks-senate-powers-dismiss-catalonia-president"
+        }
+      ],
+      "meta": {
+        "al:ios:app_name": "The Guardian",
+        "al:ios:app_store_id": "409128287",
+        "al:ios:url": "gnmguardian://world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera?contenttype=Article&source=applinks",
+        "article:author": "https://www.theguardian.com/profile/samjones,https://www.theguardian.com/profile/stephen-burgen",
+        "article:modified_time": "2018-01-31T22:00:18.000Z",
+        "article:published_time": "2018-01-31T12:35:59.000Z",
+        "article:publisher": "https://www.facebook.com/theguardian",
+        "article:section": "World news",
+        "article:tag": "Carles Puigdemont,Catalonia,Spain,Europe,World news",
+        "charset": "utf-8",
+        "description": "Ousted president's private messages caught on TV cameras reveal admission of defeat<br>",
+        "fb:app_id": "180444840287",
+        "og:description": "Ousted president's private messages caught on TV cameras reveal admission of defeat",
+        "og:image": "https://i.guim.co.uk/img/media/5375012a6f86f60584c83a9060652c7dd82e5147/4_129_4888_2932/master/4888.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTgucG5n&enable=upscale&s=6c7194b8b93df3b242d6a20f9c6b99b0",
+        "og:image:height": "720",
+        "og:image:width": "1200",
+        "og:site_name": "the Guardian",
+        "og:title": "'This is over': Puigdemont's Catalan independence doubts caught on camera",
+        "og:type": "article",
+        "og:url": "http://www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera",
+        "robots": "max-image-preview:large",
+        "theme-color": "#052962",
+        "twitter:app:id:googleplay": "com.guardian",
+        "twitter:app:id:ipad": "409128287",
+        "twitter:app:id:iphone": "409128287",
+        "twitter:app:name:googleplay": "The Guardian",
+        "twitter:app:name:ipad": "The Guardian",
+        "twitter:app:name:iphone": "The Guardian",
+        "twitter:app:url:googleplay": "guardian://www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera",
+        "twitter:app:url:ipad": "gnmguardian://world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera?contenttype=Article&source=twitter",
+        "twitter:app:url:iphone": "gnmguardian://world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera?contenttype=Article&source=twitter",
+        "twitter:card": "summary_large_image",
+        "twitter:creator": "@swajones",
+        "twitter:dnt": "on",
+        "twitter:image": "https://i.guim.co.uk/img/media/5375012a6f86f60584c83a9060652c7dd82e5147/4_129_4888_2932/master/4888.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTgucG5n&s=aa9a8e12e4d487bf55f008569e5e6950",
+        "twitter:site": "@guardian",
+        "viewport": "width=device-width,minimum-scale=1,initial-scale=1"
+      },
+      "sourceTitle": "The Guardian",
+      "statusCode": 200,
+      "time": "12:35:59",
+      "title": "'This is over': Puigdemont's Catalan independence doubts caught on camera",
+      "twitterSite": "@guardian",
+      "twitterSiteId": null,
+      "urlCanonical": "https://www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera",
+      "urlFacebook": "http://www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera",
+      "usedCustomization": "proxy",
+      "videos": null
+    }
+  }
+}

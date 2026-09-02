@@ -1,0 +1,287 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "Ljubljana",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/Ljubljana",
+        "type": "loc",
+        "score": 1398,
+        "label": {
+          "eng": "Ljubljana"
+        },
+        "location": {
+          "type": "place",
+          "label": {
+            "eng": "Ljubljana"
+          },
+          "country": {
+            "type": "country",
+            "label": {
+              "eng": "Slovenia"
+            }
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/NK_Olimpija_Ljubljana",
+        "type": "org",
+        "score": 67,
+        "label": {
+          "eng": "NK Olimpija Ljubljana"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/University_of_Ljubljana",
+        "type": "org",
+        "score": 41,
+        "label": {
+          "eng": "University of Ljubljana"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Ljubljana_University_Medical_Centre",
+        "type": "wiki",
+        "score": 34,
+        "label": {
+          "eng": "Univerzitetni klinični center Ljubljana"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/City_Municipality_of_Ljubljana",
+        "type": "loc",
+        "score": 20,
+        "label": {
+          "eng": "City Municipality of Ljubljana"
+        },
+        "location": {
+          "type": "place",
+          "label": {
+            "eng": "City Municipality of Ljubljana"
+          },
+          "country": {
+            "type": "country",
+            "label": {
+              "eng": "Slovenia"
+            }
+          }
+        }
+      },
+      {
+        "uri": "http://sl.wikipedia.org/wiki/Slovenska_cesta,_Ljubljana",
+        "type": "wiki",
+        "score": 18,
+        "label": {
+          "eng": "Slovenska cesta, Ljubljana"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Ljubljana_Stock_Exchange",
+        "type": "wiki",
+        "score": 18,
+        "label": {
+          "eng": "Ljubljana Stock Exchange"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/HDD_Olimpija_Ljubljana",
+        "type": "org",
+        "score": 16,
+        "label": {
+          "eng": "HDD Olimpija Ljubljana"
+        }
+      },
+      {
+        "uri": "http://sl.wikipedia.org/wiki/Onkološki_inštitut_Ljubljana",
+        "type": "wiki",
+        "score": 10,
+        "label": {
+          "eng": "Onkološki inštitut Ljubljana"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Ljubljana_Slovene_National_Theatre_Drama",
+        "type": "wiki",
+        "score": 10,
+        "label": {
+          "eng": "Slovensko narodno gledališče Drama Ljubljana"
+        }
+      },
+      {
+        "uri": "http://sl.wikipedia.org/wiki/Železniška_proga_Ljubljana–Sežana–d._m.",
+        "type": "wiki",
+        "score": 8,
+        "label": {
+          "eng": "Železniška proga Ljubljana–Sežana–d. m."
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Faculty_of_Social_Sciences,_Ljubljana",
+        "type": "org",
+        "score": 8,
+        "label": {
+          "eng": "Faculty of Social Sciences, Ljubljana"
+        }
+      },
+      {
+        "uri": "http://sl.wikipedia.org/wiki/Lutkovno_gledališče_Ljubljana",
+        "type": "wiki",
+        "score": 7,
+        "label": {
+          "eng": "Lutkovno gledališče Ljubljana"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Faculty_of_Architecture,_Ljubljana",
+        "type": "wiki",
+        "score": 7,
+        "label": {
+          "eng": "Faculty of Architecture, Ljubljana"
+        }
+      },
+      {
+        "uri": "http://sl.wikipedia.org/wiki/Dunajska_cesta,_Ljubljana",
+        "type": "wiki",
+        "score": 6,
+        "label": {
+          "eng": "Dunajska cesta, Ljubljana"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Zalog_(Ljubljana)",
+        "type": "loc",
+        "score": 6,
+        "label": {
+          "eng": "Zalog, Ljubljana"
+        },
+        "location": {
+          "type": "place",
+          "label": {
+            "eng": "Zalog, Ljubljana"
+          },
+          "country": {
+            "type": "country",
+            "label": {
+              "eng": "Slovenia"
+            }
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Republic_Square_(Ljubljana)",
+        "type": "wiki",
+        "score": 6,
+        "label": {
+          "eng": "Trg republike, Ljubljana"
+        }
+      },
+      {
+        "uri": "http://sl.wikipedia.org/wiki/Vilharjeva_cesta,_Ljubljana",
+        "type": "wiki",
+        "score": 5,
+        "label": {
+          "eng": "Vilharjeva cesta, Ljubljana"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Ljubljana_Castle",
+        "type": "wiki",
+        "score": 5,
+        "label": {
+          "eng": "Ljubljana Castle"
+        }
+      },
+      {
+        "uri": "http://sl.wikipedia.org/wiki/Šentjakobsko_gledališče_Ljubljana",
+        "type": "wiki",
+        "score": 4,
+        "label": {
+          "eng": "Šentjakobsko gledališče Ljubljana"
+        }
+      }
+    ]
+  }
+}

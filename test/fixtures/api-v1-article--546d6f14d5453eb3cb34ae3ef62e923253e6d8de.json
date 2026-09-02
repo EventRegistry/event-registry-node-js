@@ -1,0 +1,193 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "conceptUri": "http://en.wikipedia.org/wiki/Barack_Obama",
+      "conceptTrendsConceptUri": [
+        "http://en.wikipedia.org/wiki/Barack_Obama",
+        "http://en.wikipedia.org/wiki/Donald_Trump"
+      ],
+      "conceptTrendsConceptCount": 25,
+      "conceptTrendsSampleSize": 10000,
+      "conceptTrendsArticleBodyLen": -1,
+      "conceptTrendsIncludeArticleBasicInfo": true,
+      "conceptTrendsIncludeArticleTitle": true,
+      "conceptTrendsIncludeArticleBody": true,
+      "conceptTrendsIncludeArticleUrl": true,
+      "conceptTrendsIncludeArticleEventUri": true,
+      "conceptTrendsIncludeArticleAuthors": true,
+      "conceptTrendsIncludeArticleConcepts": false,
+      "conceptTrendsIncludeArticleCategories": false,
+      "conceptTrendsIncludeArticleLinks": false,
+      "conceptTrendsIncludeArticleVideos": false,
+      "conceptTrendsIncludeArticleImage": true,
+      "conceptTrendsIncludeArticleSocialScore": false,
+      "conceptTrendsIncludeArticleSentiment": true,
+      "conceptTrendsIncludeArticleLocation": false,
+      "conceptTrendsIncludeArticleExtractedDates": false,
+      "conceptTrendsIncludeArticleOriginalArticle": false,
+      "conceptTrendsIncludeArticleStoryUri": false,
+      "conceptTrendsIncludeEventTitle": true,
+      "conceptTrendsIncludeEventSummary": true,
+      "conceptTrendsIncludeEventArticleCounts": true,
+      "conceptTrendsIncludeEventConcepts": true,
+      "conceptTrendsIncludeEventCategories": true,
+      "conceptTrendsIncludeEventDate": true,
+      "conceptTrendsIncludeEventCommonDates": false,
+      "conceptTrendsIncludeEventInfoArticle": false,
+      "conceptTrendsIncludeEventStories": false,
+      "conceptTrendsIncludeEventSocialScore": false,
+      "conceptTrendsEventImageCount": 0,
+      "conceptTrendsIncludeSourceTitle": true,
+      "conceptTrendsIncludeSourceDescription": false,
+      "conceptTrendsIncludeSourceLocation": false,
+      "conceptTrendsIncludeSourceRanking": false,
+      "conceptTrendsIncludeSourceImage": false,
+      "conceptTrendsIncludeSourceSocialMedia": false,
+      "conceptTrendsIncludeCategoryTrendingScore": true,
+      "conceptTrendsConceptType": "concepts",
+      "conceptTrendsConceptLang": "eng",
+      "conceptTrendsIncludeConceptLabel": true,
+      "conceptTrendsIncludeConceptSynonyms": true,
+      "conceptTrendsIncludeConceptImage": true,
+      "conceptTrendsIncludeConceptDescription": true,
+      "conceptTrendsIncludeConceptTrendingScore": true,
+      "conceptTrendsIncludeLocationLabel": true,
+      "conceptTrendsIncludeLocationWikiUri": false,
+      "conceptTrendsIncludeLocationGeoNamesId": false,
+      "conceptTrendsIncludeLocationPopulation": false,
+      "conceptTrendsIncludeLocationGeoLocation": false,
+      "conceptTrendsIncludeLocationCountryArea": false,
+      "conceptTrendsIncludeLocationCountryDetails": false,
+      "conceptTrendsIncludeLocationCountryContinent": false,
+      "conceptTrendsIncludeLocationPlaceFeatureCode": false,
+      "conceptTrendsIncludeLocationPlaceCountry": true,
+      "conceptTrendsIncludeStoryBasicStats": true,
+      "conceptTrendsIncludeStoryLocation": true,
+      "conceptTrendsIncludeStoryDate": false,
+      "conceptTrendsIncludeStoryTitle": false,
+      "conceptTrendsIncludeStorySummary": false,
+      "conceptTrendsIncludeStoryConcepts": false,
+      "conceptTrendsIncludeStoryCategories": false,
+      "conceptTrendsIncludeStoryMedoidArticle": false,
+      "conceptTrendsIncludeStoryInfoArticle": false,
+      "conceptTrendsIncludeStoryCommonDates": false,
+      "conceptTrendsIncludeStorySocialScore": false,
+      "conceptTrendsStoryImageCount": 0,
+      "conceptTrendsIncludeConceptClassParentLabels": true,
+      "conceptTrendsIncludeConceptClassConcepts": false,
+      "conceptTrendsIncludeConceptFolderOwner": false,
+      "resultType": "conceptTrends",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "conceptTrends": {
+        "trends": [
+          {
+            "date": "2022-09-21",
+            "conceptFreq": [
+              892,
+              340
+            ],
+            "totArts": 625523
+          },
+          {
+            "date": "2022-09-22",
+            "conceptFreq": [
+              932,
+              524
+            ],
+            "totArts": 610368
+          },
+          {
+            "date": "2022-09-23",
+            "conceptFreq": [
+              408,
+              198
+            ],
+            "totArts": 352411
+          },
+          {
+            "date": "2023-01-03",
+            "conceptFreq": [
+              54,
+              22
+            ],
+            "totArts": 30171
+          },
+          {
+            "date": "2023-01-04",
+            "conceptFreq": [
+              162,
+              34
+            ],
+            "totArts": 47036
+          },
+          {
+            "date": "2023-03-24",
+            "conceptFreq": [
+              21,
+              7
+            ],
+            "totArts": 29841
+          },
+          {
+            "date": "2023-04-03",
+            "conceptFreq": [
+              135,
+              88
+            ],
+            "totArts": 66907
+          }
+        ],
+        "conceptInfo": [
+          {
+            "uri": "http://en.wikipedia.org/wiki/Barack_Obama",
+            "type": "person",
+            "score": 1,
+            "label": {
+              "eng": "Barack Obama"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Donald_Trump",
+            "type": "person",
+            "score": 1,
+            "label": {
+              "eng": "Tiffany Trump"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          }
+        ],
+        "usedResults": 2604,
+        "totalResults": 2604
+      }
+    }
+  }
+}

@@ -163,21 +163,25 @@ describe("Query Events Complex", () => {
             conceptInfo: new ConceptInfoFlags({maxConceptsPerType: 100}),
         });
         const iter = QueryEventsIter.initWithComplexQuery(er, cq, {returnInfo, maxItems: 50});
-        iter.execQuery((item) => {
-            const {
-                concepts = [],
-                categories = [],
-                eventDate,
-            } = item;
-            const hasConcept = concepts.find(({uri}) => uri === conceptUris.trump);
-            const hasCategory = categories.find(({uri}) => uri.includes(politicsUri));
-            const hasDate = eventDate === "2017-02-05";
+        await new Promise<void>((resolve, reject) => {
+            iter.execQuery((item) => {
+                const {
+                    concepts = [],
+                    categories = [],
+                    eventDate,
+                } = item;
+                const hasConcept = concepts.find(({uri}) => uri === conceptUris.trump);
+                const hasCategory = categories.find(({uri}) => uri.includes(politicsUri));
+                const hasDate = eventDate === "2017-02-05";
 
-            expect(hasConcept || hasCategory || hasDate).toBeTruthy();
-            for (const {uri} of concepts) {
-                expect(uri).not.toEqual(conceptUris.obama);
-            }
-            expect(eventDate).not.toEqual("2017-02-04");
+                expect(hasConcept || hasCategory || hasDate).toBeTruthy();
+                for (const {uri} of concepts) {
+                    expect(uri).not.toEqual(conceptUris.obama);
+                }
+                expect(eventDate).not.toEqual("2017-02-04");
+            }, (err) => {
+                err ? reject(new Error(err)) : resolve();
+            });
         });
     });
 });

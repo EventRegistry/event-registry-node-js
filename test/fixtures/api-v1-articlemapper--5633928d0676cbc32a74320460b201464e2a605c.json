@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/articleMapper",
+    "body": {
+      "articleUrl": "https://abcnews.go.com/Politics/wireStory/immigration-reform-stalled-decade-after-gang-8s-big-98311629",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "https://abcnews.go.com/Politics/wireStory/immigration-reform-stalled-decade-after-gang-8s-big-98311629": null
+    }
+  }
+}

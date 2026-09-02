@@ -1,0 +1,211 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "conceptUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+      "categoryAggrArticleBodyLen": -1,
+      "categoryAggrIncludeArticleBasicInfo": true,
+      "categoryAggrIncludeArticleTitle": true,
+      "categoryAggrIncludeArticleBody": true,
+      "categoryAggrIncludeArticleUrl": true,
+      "categoryAggrIncludeArticleEventUri": true,
+      "categoryAggrIncludeArticleAuthors": true,
+      "categoryAggrIncludeArticleConcepts": true,
+      "categoryAggrIncludeArticleCategories": true,
+      "categoryAggrIncludeArticleLinks": false,
+      "categoryAggrIncludeArticleVideos": true,
+      "categoryAggrIncludeArticleImage": true,
+      "categoryAggrIncludeArticleSocialScore": true,
+      "categoryAggrIncludeArticleSentiment": true,
+      "categoryAggrIncludeArticleLocation": true,
+      "categoryAggrIncludeArticleExtractedDates": true,
+      "categoryAggrIncludeArticleOriginalArticle": true,
+      "categoryAggrIncludeArticleStoryUri": true,
+      "categoryAggrIncludeArticleDuplicateList": true,
+      "categoryAggrIncludeEventTitle": true,
+      "categoryAggrIncludeEventSummary": true,
+      "categoryAggrIncludeEventArticleCounts": true,
+      "categoryAggrIncludeEventConcepts": true,
+      "categoryAggrIncludeEventCategories": true,
+      "categoryAggrIncludeEventDate": true,
+      "categoryAggrIncludeEventCommonDates": true,
+      "categoryAggrIncludeEventInfoArticle": false,
+      "categoryAggrIncludeEventStories": true,
+      "categoryAggrIncludeEventSocialScore": true,
+      "categoryAggrEventImageCount": 2,
+      "categoryAggrIncludeSourceTitle": true,
+      "categoryAggrIncludeSourceDescription": true,
+      "categoryAggrIncludeSourceLocation": true,
+      "categoryAggrIncludeSourceRanking": true,
+      "categoryAggrIncludeSourceImage": true,
+      "categoryAggrIncludeSourceSocialMedia": true,
+      "categoryAggrIncludeSourceArticleCount": true,
+      "categoryAggrIncludeSourceSourceGroups": true,
+      "categoryAggrIncludeCategoryTrendingScore": true,
+      "categoryAggrConceptType": [
+        "concepts",
+        "entities"
+      ],
+      "categoryAggrConceptLang": [
+        "eng",
+        "spa"
+      ],
+      "categoryAggrIncludeConceptLabel": true,
+      "categoryAggrIncludeConceptSynonyms": true,
+      "categoryAggrIncludeConceptImage": true,
+      "categoryAggrIncludeConceptDescription": true,
+      "categoryAggrIncludeConceptTrendingScore": true,
+      "categoryAggrMaxConceptsPerType": 50,
+      "categoryAggrIncludeLocationLabel": true,
+      "categoryAggrIncludeLocationWikiUri": true,
+      "categoryAggrIncludeLocationGeoNamesId": true,
+      "categoryAggrIncludeLocationPopulation": true,
+      "categoryAggrIncludeLocationGeoLocation": true,
+      "categoryAggrIncludeLocationCountryArea": true,
+      "categoryAggrIncludeLocationCountryDetails": true,
+      "categoryAggrIncludeLocationCountryContinent": true,
+      "categoryAggrIncludeLocationPlaceFeatureCode": true,
+      "categoryAggrIncludeLocationPlaceCountry": true,
+      "categoryAggrIncludeStoryBasicStats": true,
+      "categoryAggrIncludeStoryLocation": true,
+      "categoryAggrIncludeStoryDate": true,
+      "categoryAggrIncludeStoryTitle": true,
+      "categoryAggrIncludeStorySummary": true,
+      "categoryAggrIncludeStoryConcepts": true,
+      "categoryAggrIncludeStoryCategories": true,
+      "categoryAggrIncludeStoryMedoidArticle": true,
+      "categoryAggrIncludeStoryInfoArticle": false,
+      "categoryAggrIncludeStoryCommonDates": true,
+      "categoryAggrIncludeStorySocialScore": true,
+      "categoryAggrStoryImageCount": 2,
+      "categoryAggrIncludeConceptClassParentLabels": true,
+      "categoryAggrIncludeConceptClassConcepts": false,
+      "categoryAggrIncludeConceptFolderOwner": false,
+      "resultType": "categoryAggr",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "categoryAggr": {
+        "usedResults": 7,
+        "totalResults": 7,
+        "results": [
+          {
+            "uri": "news/Politics",
+            "label": "news/Politics",
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "count": 2
+          },
+          {
+            "uri": "dmoz/Business/Energy",
+            "label": "dmoz/Business/Energy",
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "count": 1
+          },
+          {
+            "uri": "dmoz/Business/Energy/Consulting",
+            "label": "dmoz/Business/Energy/Consulting",
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "count": 1
+          },
+          {
+            "uri": "dmoz/Science/Environment/Energy",
+            "label": "dmoz/Science/Environment/Energy",
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "count": 1
+          },
+          {
+            "uri": "news/Environment",
+            "label": "news/Environment",
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "count": 1
+          },
+          {
+            "uri": "news/Sports",
+            "label": "news/Sports",
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "count": 1
+          },
+          {
+            "uri": "dmoz/Sports/Basketball",
+            "label": "dmoz/Sports/Basketball",
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "count": 1
+          },
+          {
+            "uri": "dmoz/Sports/Basketball/Training",
+            "label": "dmoz/Sports/Basketball/Training",
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "count": 1
+          },
+          {
+            "uri": "news/Business",
+            "label": "news/Business",
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "count": 1
+          }
+        ]
+      }
+    }
+  }
+}

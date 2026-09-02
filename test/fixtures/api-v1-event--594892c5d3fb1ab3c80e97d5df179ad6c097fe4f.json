@@ -1,0 +1,54 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "query": "\n        {\n            \"$query\": {\n                \"$or\": [\n                    { \"dateStart\": \"2017-02-05\", \"dateEnd\": \"2017-02-05\" },\n                    { \"conceptUri\": \"http://en.wikipedia.org/wiki/Donald_Trump\" },\n                    { \"categoryUri\": \"news/Politics\" }\n                ],\n                \"$not\": {\n                    \"$or\": [\n                        { \"dateStart\": \"2017-02-04\", \"dateEnd\": \"2017-02-04\" },\n                        { \"conceptUri\": \"http://en.wikipedia.org/wiki/Barack_Obama\" }\n                    ]\n                }\n            }\n        }\n        ",
+      "uriWgtListPage": 1,
+      "uriWgtListCount": 50000,
+      "uriWgtListSortBy": "rel",
+      "uriWgtListSortByAsc": false,
+      "resultType": "uriWgtList",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "uriWgtList": {
+        "totalResults": 23,
+        "page": 1,
+        "count": 23,
+        "pages": 1,
+        "results": [
+          "eng-8500625:30",
+          "hin-277414:25",
+          "eng-8501188:25",
+          "hin-277399:25",
+          "tam-25037:21",
+          "ces-61201:21",
+          "ukr-181178:20",
+          "rus-1427728:18",
+          "deu-1616575:18",
+          "fas-630279:15",
+          "rus-1427718:13",
+          "rus-1427714:13",
+          "ron-240051:11",
+          "hrv-588797:9",
+          "ara-1436704:9",
+          "rus-1427707:9",
+          "pol-147887:7",
+          "deu-1616566:5",
+          "ukr-181180:3",
+          "eng-8501135:3",
+          "deu-1616568:2",
+          "deu-1616564:2",
+          "ell-725278:1"
+        ]
+      }
+    }
+  }
+}

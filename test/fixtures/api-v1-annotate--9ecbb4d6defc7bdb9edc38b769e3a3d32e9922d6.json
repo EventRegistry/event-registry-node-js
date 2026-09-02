@@ -1,0 +1,164 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/annotate",
+    "body": {
+      "text": "Microsoft released a new version of Windows OS.",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "annotations": [
+        {
+          "title": "Microsoft",
+          "url": "http://en.wikipedia.org/wiki/Microsoft",
+          "lang": "en",
+          "pageRank": 0.1142329171532542,
+          "secLang": "en",
+          "secTitle": "Microsoft",
+          "secUrl": "http://en.wikipedia.org/wiki/Microsoft",
+          "wikiDataItemId": "Q2283",
+          "dbPediaTypes": [
+            "Agent",
+            "Organisation",
+            "Company"
+          ],
+          "dbPediaIri": "http://dbpedia.org/resource/Microsoft",
+          "support": [
+            {
+              "wFrom": 0,
+              "wTo": 0,
+              "chFrom": 0,
+              "chTo": 8,
+              "pMentionGivenSurface": 0.2572546087256622,
+              "pageRank": 0.036405021383144,
+              "prbConfidence": 1,
+              "entropy": 0,
+              "text": "Microsoft",
+              "wikiLang": "en"
+            },
+            {
+              "wFrom": 6,
+              "wTo": 6,
+              "chFrom": 36,
+              "chTo": 42,
+              "pMentionGivenSurface": 0.3588090614886731,
+              "pageRank": 0.05077635584710108,
+              "prbConfidence": 0.1527975043060059,
+              "entropy": 2.81294527625988,
+              "text": "Windows",
+              "wikiLang": "en"
+            }
+          ],
+          "type": "org",
+          "wgt": 0.6323413281806236
+        }
+      ],
+      "spaces": [
+        "",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "",
+        ""
+      ],
+      "words": [
+        "Microsoft",
+        "released",
+        "a",
+        "new",
+        "version",
+        "of",
+        "Windows",
+        "OS",
+        "."
+      ],
+      "normWords": [
+        "Microsoft",
+        "released",
+        "a",
+        "new",
+        "version",
+        "of",
+        "Windows",
+        "OS",
+        "."
+      ],
+      "minPageRank": 0.1142329171532542,
+      "maxDfThreshold": 612004,
+      "altLabelSetsUsed": [],
+      "linkSourcesAvailable": true,
+      "ranges": [],
+      "extraVocabularies": [],
+      "timeTotalMs": 7.989,
+      "timeAnnotationMs": 7.989,
+      "timeBuildJsonMs": 0,
+      "incIdxTimestampUtc": "",
+      "fnRegIdx": "enwiki-20260701-pages-articles-index3.bin",
+      "fnWikiData": "wikidata-20241111-all.bin",
+      "settings": {
+        "pageRankSqThreshold": 0.95,
+        "applyPageRankSqThreshold": true,
+        "minPMentionGivenPhrase": 0.03,
+        "maxMentionEntropy": -1,
+        "maxTargetsPerMention": 20,
+        "useLogLinkCounts": false,
+        "candSelectionUseLinearizedPageRank": false,
+        "candSelectionPageRankThreshold": 0,
+        "candSelectionCosineWeight": 0,
+        "candSelectionLinkCtxCosineWeight": 0,
+        "candSelectionUseLinkProb": "log",
+        "semanticSimilarity": "in",
+        "secondaryAnnotLanguage": "en",
+        "minLinkFrequency": 3,
+        "minLinkRelFrequency": 0.01,
+        "nTopDfWordsToIgnore": 200,
+        "nWordsToIgnoreFromList": 200,
+        "extraVocabsToInclude": [
+          "1fc7ef92-28cc-41db-9036-8c752437adf9"
+        ],
+        "altLabelSetsToUse": [
+          "*"
+        ]
+      },
+      "language": "en",
+      "languageAutodetectInfo": "Language autodetected as \"en\" (0).",
+      "languageAutodetectDetails": {
+        "topLangNo": 0,
+        "topLangCode": "en",
+        "candidates": [
+          {
+            "langNo": 0,
+            "langCode": "en",
+            "percent": 97,
+            "normScore": 1176
+          },
+          {
+            "langNo": 26,
+            "langCode": "unknown_26",
+            "percent": 0,
+            "normScore": 0
+          },
+          {
+            "langNo": 26,
+            "langCode": "unknown_26",
+            "percent": 0,
+            "normScore": 0
+          }
+        ],
+        "textBytes": 48,
+        "validPrefBytes": 47,
+        "isReliable": true,
+        "chunks": []
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/articleMapper",
+    "body": {
+      "articleUrl": "http://accesswdun.com/article/2023/4/1176494",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "http://accesswdun.com/article/2023/4/1176494": null
+    }
+  }
+}

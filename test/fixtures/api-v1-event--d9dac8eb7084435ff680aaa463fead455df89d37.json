@@ -1,0 +1,513 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "conceptUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+      "sourceAggrSourceCount": 15,
+      "sourceAggrSampleSize": 50000,
+      "sourceAggrArticleBodyLen": -1,
+      "sourceAggrIncludeArticleBasicInfo": true,
+      "sourceAggrIncludeArticleTitle": true,
+      "sourceAggrIncludeArticleBody": true,
+      "sourceAggrIncludeArticleUrl": true,
+      "sourceAggrIncludeArticleEventUri": true,
+      "sourceAggrIncludeArticleAuthors": true,
+      "sourceAggrIncludeArticleConcepts": true,
+      "sourceAggrIncludeArticleCategories": true,
+      "sourceAggrIncludeArticleLinks": false,
+      "sourceAggrIncludeArticleVideos": true,
+      "sourceAggrIncludeArticleImage": true,
+      "sourceAggrIncludeArticleSocialScore": true,
+      "sourceAggrIncludeArticleSentiment": true,
+      "sourceAggrIncludeArticleLocation": true,
+      "sourceAggrIncludeArticleExtractedDates": true,
+      "sourceAggrIncludeArticleOriginalArticle": true,
+      "sourceAggrIncludeArticleStoryUri": true,
+      "sourceAggrIncludeArticleDuplicateList": true,
+      "sourceAggrIncludeEventTitle": true,
+      "sourceAggrIncludeEventSummary": true,
+      "sourceAggrIncludeEventArticleCounts": true,
+      "sourceAggrIncludeEventConcepts": true,
+      "sourceAggrIncludeEventCategories": true,
+      "sourceAggrIncludeEventDate": true,
+      "sourceAggrIncludeEventCommonDates": true,
+      "sourceAggrIncludeEventInfoArticle": false,
+      "sourceAggrIncludeEventStories": true,
+      "sourceAggrIncludeEventSocialScore": true,
+      "sourceAggrEventImageCount": 2,
+      "sourceAggrIncludeSourceTitle": true,
+      "sourceAggrIncludeSourceDescription": true,
+      "sourceAggrIncludeSourceLocation": true,
+      "sourceAggrIncludeSourceRanking": true,
+      "sourceAggrIncludeSourceImage": true,
+      "sourceAggrIncludeSourceSocialMedia": true,
+      "sourceAggrIncludeSourceArticleCount": true,
+      "sourceAggrIncludeSourceSourceGroups": true,
+      "sourceAggrIncludeCategoryTrendingScore": true,
+      "sourceAggrConceptType": [
+        "concepts",
+        "entities"
+      ],
+      "sourceAggrConceptLang": [
+        "eng",
+        "spa"
+      ],
+      "sourceAggrIncludeConceptLabel": true,
+      "sourceAggrIncludeConceptSynonyms": true,
+      "sourceAggrIncludeConceptImage": true,
+      "sourceAggrIncludeConceptDescription": true,
+      "sourceAggrIncludeConceptTrendingScore": true,
+      "sourceAggrMaxConceptsPerType": 50,
+      "sourceAggrIncludeLocationLabel": true,
+      "sourceAggrIncludeLocationWikiUri": true,
+      "sourceAggrIncludeLocationGeoNamesId": true,
+      "sourceAggrIncludeLocationPopulation": true,
+      "sourceAggrIncludeLocationGeoLocation": true,
+      "sourceAggrIncludeLocationCountryArea": true,
+      "sourceAggrIncludeLocationCountryDetails": true,
+      "sourceAggrIncludeLocationCountryContinent": true,
+      "sourceAggrIncludeLocationPlaceFeatureCode": true,
+      "sourceAggrIncludeLocationPlaceCountry": true,
+      "sourceAggrIncludeStoryBasicStats": true,
+      "sourceAggrIncludeStoryLocation": true,
+      "sourceAggrIncludeStoryDate": true,
+      "sourceAggrIncludeStoryTitle": true,
+      "sourceAggrIncludeStorySummary": true,
+      "sourceAggrIncludeStoryConcepts": true,
+      "sourceAggrIncludeStoryCategories": true,
+      "sourceAggrIncludeStoryMedoidArticle": true,
+      "sourceAggrIncludeStoryInfoArticle": false,
+      "sourceAggrIncludeStoryCommonDates": true,
+      "sourceAggrIncludeStorySocialScore": true,
+      "sourceAggrStoryImageCount": 2,
+      "sourceAggrIncludeConceptClassParentLabels": true,
+      "sourceAggrIncludeConceptClassConcepts": false,
+      "sourceAggrIncludeConceptFolderOwner": false,
+      "resultType": "sourceAggr",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "sourceAggr": {
+        "usedResults": 7,
+        "totalResults": 7,
+        "countsPerSource": [
+          {
+            "source": {
+              "uri": "zonebourse.com",
+              "dataType": "news",
+              "title": "zonebourse",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 47
+              },
+              "articleCount": 1417,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 2,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "actu.fr",
+              "dataType": "news",
+              "title": "actu.fr",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 1611,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 2,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "francebleu.fr",
+              "dataType": "news",
+              "title": "ici, par France Bleu et France 3",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 2376,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 2,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "lindependant.fr",
+              "dataType": "news",
+              "title": "lindependant.fr",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 383,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 2,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "letelegramme.fr",
+              "dataType": "news",
+              "title": "Le Telegramme",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 1543,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 2,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "guernseypress.com",
+              "dataType": "news",
+              "title": "guernseypress.com",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 523,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 2,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "ca.sports.yahoo.com",
+              "dataType": "news",
+              "title": "ca.sports.yahoo.com",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 90000
+              },
+              "articleCount": 5017,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 2,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "euractiv.fr",
+              "dataType": "news",
+              "title": "euractiv.fr",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 61,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 1,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "dn.pt",
+              "dataType": "news",
+              "title": "DN",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 343,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 1,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "madame.lefigaro.fr",
+              "dataType": "news",
+              "title": "Madame Figaro",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 76,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 1,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "centrepresseaveyron.fr",
+              "dataType": "news",
+              "title": "centrepresseaveyron.fr",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 90,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 1,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "parismatch.be",
+              "dataType": "news",
+              "title": "parismatch.be",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 44,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 1,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "news-24.fr",
+              "dataType": "news",
+              "title": "News 24",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 1133,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 1,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "elle.fr",
+              "dataType": "news",
+              "title": "elle.fr",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 188,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 1,
+              "total": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "gala.fr",
+              "dataType": "news",
+              "title": "Gala.fr",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 203,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 1,
+              "total": 7
+            }
+          }
+        ],
+        "countsPerCountry": [
+          {
+            "uri": "http://en.wikipedia.org/wiki/Germany",
+            "type": "loc",
+            "label": {
+              "eng": "Germany",
+              "spa": "Alemania"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "2921044",
+              "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+              "label": {
+                "eng": "Germany",
+                "spa": "Alemania"
+              },
+              "population": 81802257,
+              "lat": 51.5,
+              "long": 10.5,
+              "area": 357021,
+              "code2": "DE",
+              "code3": "DEU",
+              "webExt": ".de",
+              "currencyCode": "EUR",
+              "currencyName": "Euro",
+              "continent": "Europe"
+            },
+            "frequency": 1
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Bosnia_and_Herzegovina",
+            "type": "loc",
+            "label": {
+              "eng": "Bosnia and Herzegovina",
+              "spa": "Bosnia-Herzegovina"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "3277605",
+              "wikiUri": "http://en.wikipedia.org/wiki/Bosnia_and_Herzegovina",
+              "label": {
+                "eng": "Bosnia and Herzegovina",
+                "spa": "Bosnia-Herzegovina"
+              },
+              "population": 4590000,
+              "lat": 44.25,
+              "long": 17.83333,
+              "area": 51129,
+              "code2": "BA",
+              "code3": "BIH",
+              "webExt": ".ba",
+              "currencyCode": "BAM",
+              "currencyName": "Marka",
+              "continent": "Europe"
+            },
+            "frequency": 1
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "United Kingdom",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+        "type": "loc",
+        "score": 77212,
+        "label": {
+          "eng": "United Kingdom"
+        },
+        "location": {
+          "type": "country",
+          "label": {
+            "eng": "United Kingdom"
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Prime_Minister_of_the_United_Kingdom",
+        "type": "person",
+        "score": 9560,
+        "label": {
+          "eng": "Prime Minister of the United Kingdom"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Government_of_the_United_Kingdom",
+        "type": "org",
+        "score": 3866,
+        "label": {
+          "eng": "Government of the United Kingdom"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Monarchy_of_the_United_Kingdom",
+        "type": "wiki",
+        "score": 2840,
+        "label": {
+          "eng": "Monarchy of the United Kingdom"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/The_Sun_(United_Kingdom)",
+        "type": "org",
+        "score": 2795,
+        "label": {
+          "eng": "The Sun (United Kingdom)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Parliament_of_the_United_Kingdom",
+        "type": "org",
+        "score": 2618,
+        "label": {
+          "eng": "Parliament of the United Kingdom"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/House_of_Commons_of_the_United_Kingdom",
+        "type": "org",
+        "score": 1749,
+        "label": {
+          "eng": "House of Commons of the United Kingdom"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Ministry_of_Defence_(United_Kingdom)",
+        "type": "org",
+        "score": 996,
+        "label": {
+          "eng": "Ministry of Defence (United Kingdom)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Economy_of_the_United_Kingdom",
+        "type": "wiki",
+        "score": 773,
+        "label": {
+          "eng": "Economy of the United Kingdom"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Monetary_Policy_Committee_(United_Kingdom)",
+        "type": "wiki",
+        "score": 746,
+        "label": {
+          "eng": "Monetary Policy Committee (United Kingdom)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/2010_United_Kingdom_general_election",
+        "type": "wiki",
+        "score": 432,
+        "label": {
+          "eng": "2010 United Kingdom general election"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Deputy_Prime_Minister_of_the_United_Kingdom",
+        "type": "wiki",
+        "score": 317,
+        "label": {
+          "eng": "Deputy Prime Minister of the United Kingdom"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Daily_Star_(United_Kingdom)",
+        "type": "org",
+        "score": 309,
+        "label": {
+          "eng": "Daily Star (United Kingdom)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Cabinet_of_the_United_Kingdom",
+        "type": "wiki",
+        "score": 276,
+        "label": {
+          "eng": "Cabinet of the United Kingdom"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Royal_Households_of_the_United_Kingdom",
+        "type": "org",
+        "score": 244,
+        "label": {
+          "eng": "Royal Households of the United Kingdom"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Member_of_Parliament_(United_Kingdom)",
+        "type": "wiki",
+        "score": 229,
+        "label": {
+          "eng": "Member of Parliament (United Kingdom)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Independent_school_(United_Kingdom)",
+        "type": "wiki",
+        "score": 218,
+        "label": {
+          "eng": "Independent school (United Kingdom)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Speaker_of_the_House_of_Commons_(United_Kingdom)",
+        "type": "org",
+        "score": 216,
+        "label": {
+          "eng": "Speaker of the House of Commons (United Kingdom)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Leader_of_the_Opposition_(United_Kingdom)",
+        "type": "wiki",
+        "score": 216,
+        "label": {
+          "eng": "Leader of the Opposition (United Kingdom)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Privy_Council_of_the_United_Kingdom",
+        "type": "wiki",
+        "score": 206,
+        "label": {
+          "eng": "Privy Council of the United Kingdom"
+        }
+      }
+    ]
+  }
+}

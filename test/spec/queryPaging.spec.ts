@@ -87,10 +87,15 @@ describe("Query Paging", () => {
     });
 
     it("should test all pages articles 1", async () => {
+        const maxPages = 100;
         const q1 = new QueryArticles({ sourceUri: "bbc.com" });
         let page1 = 1;
         let uriList1: string[] = [];
         while (true) {
+            if (page1 > maxPages) {
+                fail(`exceeded maxPages (${maxPages}) while paging articles`);
+                break;
+            }
             q1.setRequestedResult(new RequestArticlesInfo({page: page1, count: 100}));
             const response = await er.execQuery(q1) as Record<string, ER.Results<ER.Article>>;
             const results = getUriList(response);
@@ -105,6 +110,10 @@ describe("Query Paging", () => {
         let page2 = 1;
         let uriList2: string[] = [];
         while (true) {
+            if (page2 > maxPages) {
+                fail(`exceeded maxPages (${maxPages}) while paging articles`);
+                break;
+            }
             q2.setRequestedResult(new RequestArticlesInfo({page: page2, count: 100}));
             const response = await er.execQuery(q2) as Record<string, ER.Results<ER.Article>>;
             const results = getUriList(response);

@@ -1,0 +1,45 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/categorize",
+    "body": {
+      "text": "Microsoft released a new version of Windows OS.",
+      "taxonomy": "dmoz",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "categories": [
+        {
+          "label": "dmoz/Computers/Software/Licensing",
+          "score": 0.4129,
+          "uri": "dmoz/Computers/Software/Licensing"
+        },
+        {
+          "label": "dmoz/Computers/Software/Operating Systems",
+          "score": 0.3161,
+          "uri": "dmoz/Computers/Software/Operating_Systems"
+        },
+        {
+          "label": "dmoz/Society/Activism/Anti-Corporation",
+          "score": 0.2997,
+          "uri": "dmoz/Society/Activism/Anti-Corporation"
+        },
+        {
+          "label": "dmoz/Computers/Software/Freeware",
+          "score": 0.2873,
+          "uri": "dmoz/Computers/Software/Freeware"
+        },
+        {
+          "label": "dmoz/Computers/Software/Word Processors",
+          "score": 0.2775,
+          "uri": "dmoz/Computers/Software/Word_Processors"
+        }
+      ]
+    }
+  }
+}

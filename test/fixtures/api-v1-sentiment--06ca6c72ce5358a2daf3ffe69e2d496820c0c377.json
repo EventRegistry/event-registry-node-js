@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/sentiment",
+    "body": {
+      "text": "\n            Residents and tourists enjoy holiday weekend even as waves start to pound; beaches remain closed due to dangerous rip currents.\n            Despite a state of emergency declared by the governor and warnings about dangerous surf and the possibility of significant coastal flooding,\n            residents and visitors to the Jersey Shore spent Saturday making the most of the calm before the storm. Cloudy skies in the morning gave way to sunshine in the afternoon,\n            and despite winds that already were kicking up sand and carving the beach, people flocked to the boardwalk in both Seaside Heights and Point Pleasant Beach, where children rode amusement rides and teens enjoyed ice cream cones.\n        ",
+      "method": "vocabulary",
+      "sentences": 10,
+      "returnSentences": true,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "avgSent": 0.2599666666666667,
+      "sentences": [
+        "\n            Residents and tourists enjoy holiday weekend even as waves start to pound; beaches remain closed due to dangerous rip currents.",
+        "Despite a state of emergency declared by the governor and warnings about dangerous surf and the possibility of significant coastal flooding,\n            residents and visitors to the Jersey Shore spent Saturday making the most of the calm before the storm.",
+        "Cloudy skies in the morning gave way to sunshine in the afternoon,\n            and despite winds that already were kicking up sand and carving the beach, people flocked to the boardwalk in both Seaside Heights and Point Pleasant Beach, where children rode amusement rides and teens enjoyed ice cream cones."
+      ],
+      "sentimentPerSent": [
+        0.4215,
+        -0.5478,
+        0.9062
+      ]
+    }
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "trump",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/Donald_Trump",
+        "type": "person",
+        "score": 20608,
+        "label": {
+          "eng": "Tiffany Trump"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/The_Trump_Organization",
+        "type": "org",
+        "score": 2835,
+        "label": {
+          "eng": "The Trump Organization"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Ivanka_Trump",
+        "type": "person",
+        "score": 2416,
+        "label": {
+          "eng": "Ivanka Trump"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Donald_Trump_Jr.",
+        "type": "person",
+        "score": 2071,
+        "label": {
+          "eng": "Donald Trump Jr."
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Eric_Trump",
+        "type": "person",
+        "score": 1802,
+        "label": {
+          "eng": "Eric Trump"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Presidency_of_Donald_Trump",
+        "type": "wiki",
+        "score": 1450,
+        "label": {
+          "eng": "Presidency of Donald Trump"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Donald_Trump_2016_presidential_campaign",
+        "type": "wiki",
+        "score": 814,
+        "label": {
+          "eng": "Donald Trump 2016 presidential campaign"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Trump_Tower",
+        "type": "wiki",
+        "score": 797,
+        "label": {
+          "eng": "Trump Tower"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Trumpet",
+        "type": "wiki",
+        "score": 552,
+        "label": {
+          "eng": "Trumpet"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Donald_Trump_2020_presidential_campaign",
+        "type": "wiki",
+        "score": 395,
+        "label": {
+          "eng": "Donald Trump 2020 presidential campaign"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/First_impeachment_of_Donald_Trump",
+        "type": "wiki",
+        "score": 296,
+        "label": {
+          "eng": "First impeachment of Donald Trump"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Melania_Trump",
+        "type": "person",
+        "score": 200,
+        "label": {
+          "eng": "Melania Trump"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Donald_J._Trump_Foundation",
+        "type": "wiki",
+        "score": 188,
+        "label": {
+          "eng": "Donald J. Trump Foundation"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Trumpism",
+        "type": "wiki",
+        "score": 164,
+        "label": {
+          "eng": "Trumpism"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Trump_family",
+        "type": "wiki",
+        "score": 149,
+        "label": {
+          "eng": "Trump family"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/40_Wall_Street",
+        "type": "loc",
+        "score": 109,
+        "label": {
+          "eng": "The Trump Building"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Trump_wall",
+        "type": "wiki",
+        "score": 96,
+        "label": {
+          "eng": "Trump wall"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Trump_Park_Avenue",
+        "type": "wiki",
+        "score": 76,
+        "label": {
+          "eng": "Trump Park Avenue"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Trump_International_Hotel_and_Tower_(Chicago)",
+        "type": "loc",
+        "score": 53,
+        "label": {
+          "eng": "Trump International Hotel and Tower (Chicago)"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Presidential_transition_of_Donald_Trump",
+        "type": "wiki",
+        "score": 49,
+        "label": {
+          "eng": "Presidential transition of Donald Trump"
+        }
+      }
+    ]
+  }
+}

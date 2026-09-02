@@ -1,0 +1,207 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/category",
+    "body": {
+      "action": "getInfo",
+      "uri": [
+        "dmoz/Arts",
+        "news/Arts_and_Entertainment",
+        "dmoz/Arts/Animation",
+        "dmoz/Arts/Architecture",
+        "dmoz/Arts/Art_History",
+        "dmoz/Arts/Awards",
+        "dmoz/Arts/Bodyart",
+        "dmoz/Arts/Classical_Studies",
+        "dmoz/Arts/Comics",
+        "dmoz/Arts/Contests"
+      ],
+      "categoryArticleBodyLen": -1,
+      "categoryIncludeArticleBasicInfo": true,
+      "categoryIncludeArticleTitle": true,
+      "categoryIncludeArticleBody": true,
+      "categoryIncludeArticleUrl": true,
+      "categoryIncludeArticleEventUri": true,
+      "categoryIncludeArticleAuthors": true,
+      "categoryIncludeArticleConcepts": false,
+      "categoryIncludeArticleCategories": false,
+      "categoryIncludeArticleLinks": false,
+      "categoryIncludeArticleVideos": false,
+      "categoryIncludeArticleImage": true,
+      "categoryIncludeArticleSocialScore": false,
+      "categoryIncludeArticleSentiment": true,
+      "categoryIncludeArticleLocation": false,
+      "categoryIncludeArticleExtractedDates": false,
+      "categoryIncludeArticleOriginalArticle": false,
+      "categoryIncludeArticleStoryUri": false,
+      "categoryIncludeEventTitle": true,
+      "categoryIncludeEventSummary": true,
+      "categoryIncludeEventArticleCounts": true,
+      "categoryIncludeEventConcepts": true,
+      "categoryIncludeEventCategories": true,
+      "categoryIncludeEventDate": true,
+      "categoryIncludeEventCommonDates": false,
+      "categoryIncludeEventInfoArticle": false,
+      "categoryIncludeEventStories": false,
+      "categoryIncludeEventSocialScore": false,
+      "categoryEventImageCount": 0,
+      "categoryIncludeSourceTitle": true,
+      "categoryIncludeSourceDescription": false,
+      "categoryIncludeSourceLocation": false,
+      "categoryIncludeSourceRanking": false,
+      "categoryIncludeSourceImage": false,
+      "categoryIncludeSourceSocialMedia": false,
+      "categoryIncludeCategoryTrendingScore": true,
+      "categoryConceptType": "concepts",
+      "categoryConceptLang": "eng",
+      "categoryIncludeConceptLabel": true,
+      "categoryIncludeConceptSynonyms": false,
+      "categoryIncludeConceptImage": false,
+      "categoryIncludeConceptDescription": false,
+      "categoryIncludeConceptTrendingScore": false,
+      "categoryIncludeLocationLabel": true,
+      "categoryIncludeLocationWikiUri": false,
+      "categoryIncludeLocationGeoNamesId": false,
+      "categoryIncludeLocationPopulation": false,
+      "categoryIncludeLocationGeoLocation": false,
+      "categoryIncludeLocationCountryArea": false,
+      "categoryIncludeLocationCountryDetails": false,
+      "categoryIncludeLocationCountryContinent": false,
+      "categoryIncludeLocationPlaceFeatureCode": false,
+      "categoryIncludeLocationPlaceCountry": true,
+      "categoryIncludeStoryBasicStats": true,
+      "categoryIncludeStoryLocation": true,
+      "categoryIncludeStoryDate": false,
+      "categoryIncludeStoryTitle": false,
+      "categoryIncludeStorySummary": false,
+      "categoryIncludeStoryConcepts": false,
+      "categoryIncludeStoryCategories": false,
+      "categoryIncludeStoryMedoidArticle": false,
+      "categoryIncludeStoryInfoArticle": false,
+      "categoryIncludeStoryCommonDates": false,
+      "categoryIncludeStorySocialScore": false,
+      "categoryStoryImageCount": 0,
+      "categoryIncludeConceptClassParentLabels": true,
+      "categoryIncludeConceptClassConcepts": false,
+      "categoryIncludeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "dmoz/Arts": {
+        "uri": "dmoz/Arts",
+        "label": "dmoz/Arts",
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "news/Arts_and_Entertainment": {
+        "uri": "news/Arts_and_Entertainment",
+        "label": "news/Arts and Entertainment",
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "dmoz/Arts/Animation": {
+        "uri": "dmoz/Arts/Animation",
+        "label": "dmoz/Arts/Animation",
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "dmoz/Arts/Architecture": {
+        "uri": "dmoz/Arts/Architecture",
+        "label": "dmoz/Arts/Architecture",
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "dmoz/Arts/Art_History": {
+        "uri": "dmoz/Arts/Art_History",
+        "label": "dmoz/Arts/Art History",
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "dmoz/Arts/Awards": {
+        "uri": "dmoz/Arts/Awards",
+        "label": "dmoz/Arts/Awards",
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "dmoz/Arts/Bodyart": {
+        "uri": "dmoz/Arts/Bodyart",
+        "label": "dmoz/Arts/Bodyart",
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "dmoz/Arts/Classical_Studies": {
+        "uri": "dmoz/Arts/Classical_Studies",
+        "label": "dmoz/Arts/Classical Studies",
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "dmoz/Arts/Comics": {
+        "uri": "dmoz/Arts/Comics",
+        "label": "dmoz/Arts/Comics",
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      },
+      "dmoz/Arts/Contests": {
+        "uri": "dmoz/Arts/Contests",
+        "label": "dmoz/Arts/Contests",
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        }
+      }
+    }
+  }
+}

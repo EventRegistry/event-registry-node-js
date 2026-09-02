@@ -1,0 +1,266 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "New York City",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City",
+        "type": "loc",
+        "score": 57656,
+        "label": {
+          "eng": "New York City"
+        },
+        "location": {
+          "type": "place",
+          "label": {
+            "eng": "New York City"
+          },
+          "country": {
+            "type": "country",
+            "label": {
+              "eng": "United States"
+            }
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Council",
+        "type": "org",
+        "score": 1224,
+        "label": {
+          "eng": "New York City Council"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Police_Department",
+        "type": "org",
+        "score": 793,
+        "label": {
+          "eng": "New York City Police Department"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Mayor_of_New_York_City",
+        "type": "wiki",
+        "score": 434,
+        "label": {
+          "eng": "Mayor of New York City"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Subway",
+        "type": "wiki",
+        "score": 303,
+        "label": {
+          "eng": "New York City Subway"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Hall",
+        "type": "loc",
+        "score": 255,
+        "label": {
+          "eng": "New York City Hall"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Boroughs_of_New_York_City",
+        "type": "wiki",
+        "score": 114,
+        "label": {
+          "eng": "Boroughs of New York City"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_FC",
+        "type": "wiki",
+        "score": 99,
+        "label": {
+          "eng": "New York City FC"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/City_University_of_New_York",
+        "type": "org",
+        "score": 89,
+        "label": {
+          "eng": "City University of New York"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Fire_Department",
+        "type": "loc",
+        "score": 49,
+        "label": {
+          "eng": "New York City Fire Department"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/City_College_of_New_York",
+        "type": "org",
+        "score": 47,
+        "label": {
+          "eng": "City College of New York"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Marathon",
+        "type": "wiki",
+        "score": 33,
+        "label": {
+          "eng": "New York City Marathon"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Department_of_Parks_and_Recreation",
+        "type": "org",
+        "score": 33,
+        "label": {
+          "eng": "New York City Department of Parks and Recreation"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Comptroller",
+        "type": "wiki",
+        "score": 32,
+        "label": {
+          "eng": "New York City Comptroller"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Pennsylvania_Station_(New_York_City)",
+        "type": "loc",
+        "score": 31,
+        "label": {
+          "eng": "Pennsylvania Station (New York City)"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Department_of_Education",
+        "type": "wiki",
+        "score": 28,
+        "label": {
+          "eng": "New York City Department of Education"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Department_of_Buildings",
+        "type": "org",
+        "score": 27,
+        "label": {
+          "eng": "New York City Department of Buildings"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Department_of_Health_and_Mental_Hygiene",
+        "type": "org",
+        "score": 24,
+        "label": {
+          "eng": "New York City Department of Health and Mental Hygiene"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Queens_College,_City_University_of_New_York",
+        "type": "org",
+        "score": 22,
+        "label": {
+          "eng": "Queens College, City University of New York"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/New_York_City_Emergency_Management",
+        "type": "wiki",
+        "score": 22,
+        "label": {
+          "eng": "New York City Emergency Management"
+        }
+      }
+    ]
+  }
+}

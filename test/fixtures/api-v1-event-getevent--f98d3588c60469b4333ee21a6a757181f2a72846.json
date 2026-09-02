@@ -1,0 +1,322 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event/getEvent",
+    "body": {
+      "eventUri": "eng-8501190",
+      "infoArticleBodyLen": -1,
+      "infoIncludeArticleBasicInfo": true,
+      "infoIncludeArticleTitle": true,
+      "infoIncludeArticleBody": true,
+      "infoIncludeArticleUrl": true,
+      "infoIncludeArticleEventUri": true,
+      "infoIncludeArticleAuthors": true,
+      "infoIncludeArticleConcepts": false,
+      "infoIncludeArticleCategories": false,
+      "infoIncludeArticleLinks": false,
+      "infoIncludeArticleVideos": false,
+      "infoIncludeArticleImage": true,
+      "infoIncludeArticleSocialScore": false,
+      "infoIncludeArticleSentiment": true,
+      "infoIncludeArticleLocation": false,
+      "infoIncludeArticleExtractedDates": false,
+      "infoIncludeArticleOriginalArticle": false,
+      "infoIncludeArticleStoryUri": false,
+      "infoIncludeEventTitle": true,
+      "infoIncludeEventSummary": true,
+      "infoIncludeEventArticleCounts": true,
+      "infoIncludeEventConcepts": true,
+      "infoIncludeEventCategories": true,
+      "infoIncludeEventDate": true,
+      "infoIncludeEventCommonDates": false,
+      "infoIncludeEventInfoArticle": false,
+      "infoIncludeEventStories": false,
+      "infoIncludeEventSocialScore": false,
+      "infoEventImageCount": 0,
+      "infoIncludeSourceTitle": true,
+      "infoIncludeSourceDescription": false,
+      "infoIncludeSourceLocation": false,
+      "infoIncludeSourceRanking": false,
+      "infoIncludeSourceImage": false,
+      "infoIncludeSourceSocialMedia": false,
+      "infoIncludeCategoryTrendingScore": true,
+      "infoConceptType": "concepts",
+      "infoConceptLang": "eng",
+      "infoIncludeConceptLabel": true,
+      "infoIncludeConceptSynonyms": false,
+      "infoIncludeConceptImage": false,
+      "infoIncludeConceptDescription": false,
+      "infoIncludeConceptTrendingScore": false,
+      "infoIncludeLocationLabel": true,
+      "infoIncludeLocationWikiUri": false,
+      "infoIncludeLocationGeoNamesId": false,
+      "infoIncludeLocationPopulation": false,
+      "infoIncludeLocationGeoLocation": false,
+      "infoIncludeLocationCountryArea": false,
+      "infoIncludeLocationCountryDetails": false,
+      "infoIncludeLocationCountryContinent": false,
+      "infoIncludeLocationPlaceFeatureCode": false,
+      "infoIncludeLocationPlaceCountry": true,
+      "infoIncludeStoryBasicStats": true,
+      "infoIncludeStoryLocation": true,
+      "infoIncludeStoryDate": false,
+      "infoIncludeStoryTitle": false,
+      "infoIncludeStorySummary": false,
+      "infoIncludeStoryConcepts": false,
+      "infoIncludeStoryCategories": false,
+      "infoIncludeStoryMedoidArticle": false,
+      "infoIncludeStoryInfoArticle": false,
+      "infoIncludeStoryCommonDates": false,
+      "infoIncludeStorySocialScore": false,
+      "infoStoryImageCount": 0,
+      "infoIncludeConceptClassParentLabels": true,
+      "infoIncludeConceptClassConcepts": false,
+      "infoIncludeConceptFolderOwner": false,
+      "resultType": "info",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "eng-8501190": {
+        "info": {
+          "uri": "eng-8501190",
+          "concepts": [
+            {
+              "uri": "http://en.wikipedia.org/wiki/President_of_France",
+              "type": "wiki",
+              "score": 100,
+              "label": {
+                "eng": "President of France"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/France",
+              "type": "loc",
+              "score": 92,
+              "label": {
+                "eng": "France"
+              },
+              "location": {
+                "type": "country",
+                "label": {
+                  "eng": "France"
+                }
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/State_visit",
+              "type": "wiki",
+              "score": 84,
+              "label": {
+                "eng": "State visit"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Government_of_the_United_Kingdom",
+              "type": "org",
+              "score": 74,
+              "label": {
+                "eng": "Government of the United Kingdom"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+              "type": "person",
+              "score": 73,
+              "label": {
+                "eng": "Emmanuel Macron"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Buckingham_Palace",
+              "type": "loc",
+              "score": 65,
+              "label": {
+                "eng": "Buckingham Palace"
+              },
+              "location": null
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+              "type": "loc",
+              "score": 59,
+              "label": {
+                "eng": "United Kingdom"
+              },
+              "location": {
+                "type": "country",
+                "label": {
+                  "eng": "United Kingdom"
+                }
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
+              "type": "wiki",
+              "score": 42,
+              "label": {
+                "eng": "George Floyd protests"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Queen_consort",
+              "type": "wiki",
+              "score": 39,
+              "label": {
+                "eng": "Queen consort"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Downing_Street",
+              "type": "wiki",
+              "score": 35,
+              "label": {
+                "eng": "Downing Street"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Fast_food",
+              "type": "wiki",
+              "score": 35,
+              "label": {
+                "eng": "Fast food"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Paris",
+              "type": "loc",
+              "score": 35,
+              "label": {
+                "eng": "Paris"
+              },
+              "location": {
+                "type": "place",
+                "label": {
+                  "eng": "Paris"
+                },
+                "country": {
+                  "type": "country",
+                  "label": {
+                    "eng": "France"
+                  }
+                }
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Germany",
+              "type": "loc",
+              "score": 35,
+              "label": {
+                "eng": "Germany"
+              },
+              "location": {
+                "type": "country",
+                "label": {
+                  "eng": "Germany"
+                }
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Mobilier_National",
+              "type": "wiki",
+              "score": 20,
+              "label": {
+                "eng": "Mobilier national"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/French_Parliament",
+              "type": "org",
+              "score": 20,
+              "label": {
+                "eng": "French Parliament"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/National_Assembly_(France)",
+              "type": "org",
+              "score": 20,
+              "label": {
+                "eng": "National Assembly (France)"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Lower_house",
+              "type": "wiki",
+              "score": 20,
+              "label": {
+                "eng": "Lower house"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Trade_union",
+              "type": "wiki",
+              "score": 20,
+              "label": {
+                "eng": "Trade union"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/General_Confederation_of_Labour_(France)",
+              "type": "org",
+              "score": 12,
+              "label": {
+                "eng": "General Confederation of Labour (France)"
+              }
+            },
+            {
+              "uri": "http://en.wikipedia.org/wiki/Furniture",
+              "type": "wiki",
+              "score": 12,
+              "label": {
+                "eng": "Furniture"
+              }
+            }
+          ],
+          "eventDate": "2023-03-24",
+          "totalArticleCount": 6,
+          "title": {
+            "eng": "King's state visit to France postponed amid widespread retirement age protests"
+          },
+          "summary": {
+            "eng": "The French Presidency confirmed the postponement on Friday morning.\n\nThe King's first state visit of his reign has been postponed amid widespread French protests over President Emmanuel Macron's retirement age reforms.\n\nThe French Presidency confirmed the postponement on Friday morning, while Buckingham Palace has yet to comment.\n\nDowning Street later confirmed the Mr Macron had asked the British Government to postpone the trip.\n\nA Government spokesperson said: \"The King and Queen Consort's state"
+          },
+          "location": {
+            "type": "place",
+            "label": {
+              "eng": "Paris"
+            },
+            "country": {
+              "type": "country",
+              "label": {
+                "eng": "France"
+              }
+            }
+          },
+          "categories": [
+            {
+              "uri": "news/Business",
+              "label": "news/Business",
+              "trendingScore": {
+                "news": {
+                  "score": 0,
+                  "testPopFq": 0,
+                  "nullPopFq": 0
+                }
+              },
+              "wgt": 65
+            }
+          ],
+          "articleCounts": {
+            "eng": 6
+          },
+          "sentiment": -0.08235294117647063
+        }
+      }
+    }
+  }
+}

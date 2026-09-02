@@ -1,0 +1,162 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestCategoriesFast",
+    "body": {
+      "prefix": "birding",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "conceptLang": "eng",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "dmoz/Recreation/Birding",
+        "label": "dmoz/Recreation/Birding",
+        "parentUri": "dmoz/Recreation"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Africa",
+        "label": "dmoz/Recreation/Birding/Africa",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Asia",
+        "label": "dmoz/Recreation/Birding/Asia",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Backyard_Birding",
+        "label": "dmoz/Recreation/Birding/Backyard Birding",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Caribbean",
+        "label": "dmoz/Recreation/Birding/Caribbean",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Central_America",
+        "label": "dmoz/Recreation/Birding/Central America",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Europe",
+        "label": "dmoz/Recreation/Birding/Europe",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Middle_East",
+        "label": "dmoz/Recreation/Birding/Middle East",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/North_America",
+        "label": "dmoz/Recreation/Birding/North America",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Oceania",
+        "label": "dmoz/Recreation/Birding/Oceania",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Optics",
+        "label": "dmoz/Recreation/Birding/Optics",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Photography",
+        "label": "dmoz/Recreation/Birding/Photography",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Software",
+        "label": "dmoz/Recreation/Birding/Software",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/South_America",
+        "label": "dmoz/Recreation/Birding/South America",
+        "parentUri": "dmoz/Recreation/Birding"
+      },
+      {
+        "uri": "dmoz/Recreation/Birding/Trip_Reports",
+        "label": "dmoz/Recreation/Birding/Trip Reports",
+        "parentUri": "dmoz/Recreation/Birding"
+      }
+    ]
+  }
+}

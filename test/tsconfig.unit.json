@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "include": [
+        "index.d.ts",
+        "unit/**/*.ts"
+    ],
+    "compilerOptions": {
+        "rootDir": "."
+    }
+}

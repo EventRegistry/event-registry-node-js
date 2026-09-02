@@ -1,0 +1,1183 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "categoryUri": "dmoz/Society/Disabled",
+      "eventsPage": 1,
+      "eventsCount": 10,
+      "eventsSortBy": "rel",
+      "eventsSortByAsc": false,
+      "eventsArticleBodyLen": -1,
+      "eventsIncludeArticleBasicInfo": true,
+      "eventsIncludeArticleTitle": true,
+      "eventsIncludeArticleBody": true,
+      "eventsIncludeArticleUrl": true,
+      "eventsIncludeArticleEventUri": true,
+      "eventsIncludeArticleAuthors": true,
+      "eventsIncludeArticleConcepts": true,
+      "eventsIncludeArticleCategories": true,
+      "eventsIncludeArticleLinks": false,
+      "eventsIncludeArticleVideos": true,
+      "eventsIncludeArticleImage": true,
+      "eventsIncludeArticleSocialScore": true,
+      "eventsIncludeArticleSentiment": true,
+      "eventsIncludeArticleLocation": true,
+      "eventsIncludeArticleExtractedDates": true,
+      "eventsIncludeArticleOriginalArticle": true,
+      "eventsIncludeArticleStoryUri": true,
+      "eventsIncludeArticleDuplicateList": true,
+      "eventsIncludeEventTitle": true,
+      "eventsIncludeEventSummary": true,
+      "eventsIncludeEventArticleCounts": true,
+      "eventsIncludeEventConcepts": true,
+      "eventsIncludeEventCategories": true,
+      "eventsIncludeEventDate": true,
+      "eventsIncludeEventCommonDates": true,
+      "eventsIncludeEventInfoArticle": false,
+      "eventsIncludeEventStories": true,
+      "eventsIncludeEventSocialScore": true,
+      "eventsEventImageCount": 2,
+      "eventsIncludeSourceTitle": true,
+      "eventsIncludeSourceDescription": true,
+      "eventsIncludeSourceLocation": true,
+      "eventsIncludeSourceRanking": true,
+      "eventsIncludeSourceImage": true,
+      "eventsIncludeSourceSocialMedia": true,
+      "eventsIncludeSourceArticleCount": true,
+      "eventsIncludeSourceSourceGroups": true,
+      "eventsIncludeCategoryTrendingScore": true,
+      "eventsConceptType": [
+        "concepts",
+        "entities"
+      ],
+      "eventsConceptLang": [
+        "eng",
+        "spa"
+      ],
+      "eventsIncludeConceptLabel": true,
+      "eventsIncludeConceptSynonyms": true,
+      "eventsIncludeConceptImage": true,
+      "eventsIncludeConceptDescription": true,
+      "eventsIncludeConceptTrendingScore": true,
+      "eventsMaxConceptsPerType": 50,
+      "eventsIncludeLocationLabel": true,
+      "eventsIncludeLocationWikiUri": true,
+      "eventsIncludeLocationGeoNamesId": true,
+      "eventsIncludeLocationPopulation": true,
+      "eventsIncludeLocationGeoLocation": true,
+      "eventsIncludeLocationCountryArea": true,
+      "eventsIncludeLocationCountryDetails": true,
+      "eventsIncludeLocationCountryContinent": true,
+      "eventsIncludeLocationPlaceFeatureCode": true,
+      "eventsIncludeLocationPlaceCountry": true,
+      "eventsIncludeStoryBasicStats": true,
+      "eventsIncludeStoryLocation": true,
+      "eventsIncludeStoryDate": true,
+      "eventsIncludeStoryTitle": true,
+      "eventsIncludeStorySummary": true,
+      "eventsIncludeStoryConcepts": true,
+      "eventsIncludeStoryCategories": true,
+      "eventsIncludeStoryMedoidArticle": true,
+      "eventsIncludeStoryInfoArticle": false,
+      "eventsIncludeStoryCommonDates": true,
+      "eventsIncludeStorySocialScore": true,
+      "eventsStoryImageCount": 2,
+      "eventsIncludeConceptClassParentLabels": true,
+      "eventsIncludeConceptClassConcepts": false,
+      "eventsIncludeConceptFolderOwner": false,
+      "resultType": "events",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "events": {
+        "results": [
+          {
+            "uri": "eng-8501179",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tractor",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Tractor",
+                  "spa": "Tractor"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Dog",
+                "type": "wiki",
+                "score": 95,
+                "label": {
+                  "eng": "Dog",
+                  "spa": "Canis lupus familiaris"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Euro",
+                "type": "wiki",
+                "score": 89,
+                "label": {
+                  "eng": "Euro",
+                  "spa": "Euro"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Limerick",
+                "type": "loc",
+                "score": 78,
+                "label": {
+                  "eng": "Luimneach",
+                  "spa": "Limerick"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "location": {
+                  "type": "place",
+                  "geoNamesId": "2962943",
+                  "wikiUri": "http://en.wikipedia.org/wiki/Limerick",
+                  "label": {
+                    "eng": "Luimneach",
+                    "spa": "Limerick"
+                  },
+                  "population": 90054,
+                  "lat": 52.66472,
+                  "long": -8.62306,
+                  "featureCode": "P.PPLA2",
+                  "country": {
+                    "type": "country",
+                    "geoNamesId": "2963597",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Republic_of_Ireland",
+                    "label": {
+                      "eng": "Republic of Ireland",
+                      "spa": "Irlanda"
+                    },
+                    "population": 4622917,
+                    "lat": 53,
+                    "long": -8,
+                    "area": 70280,
+                    "code2": "IE",
+                    "code3": "IRL",
+                    "webExt": ".ie",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/The_Nationalist_(Carlow)",
+                "type": "wiki",
+                "score": 67,
+                "label": {
+                  "eng": "The Nationalist (Carlow)",
+                  "spa": "The Nationalist (Carlow)"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/John_Deere",
+                "type": "org",
+                "score": 67,
+                "label": {
+                  "eng": "John Deere",
+                  "spa": "John Deere"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Galbally,_County_Limerick",
+                "type": "wiki",
+                "score": 51,
+                "label": {
+                  "eng": "Galbally, County Limerick",
+                  "spa": "Galbally, County Limerick"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Facebook",
+                "type": "org",
+                "score": 45,
+                "label": {
+                  "eng": "Facebook",
+                  "spa": "Meta Inc."
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bar",
+                "type": "wiki",
+                "score": 34,
+                "label": {
+                  "eng": "Bar",
+                  "spa": "Bar"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Community_centre",
+                "type": "wiki",
+                "score": 17,
+                "label": {
+                  "eng": "Community centre",
+                  "spa": "Centro social"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tidy_Towns_(Ireland)",
+                "type": "wiki",
+                "score": 17,
+                "label": {
+                  "eng": "Tidy Towns (Ireland)",
+                  "spa": "Tidy Towns (Ireland)"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Playground",
+                "type": "wiki",
+                "score": 17,
+                "label": {
+                  "eng": "Playground",
+                  "spa": "Patio de recreo"
+                },
+                "image": null,
+                "synonyms": {},
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "eng-8501179",
+                "articleCount": 5,
+                "lang": "eng",
+                "avgCos": 0.8705882352941177,
+                "variance": 0.2392156862745098,
+                "eventUri": "eng-8501179",
+                "title": "Dog wins tractor worth €100k in Laois draw | Meath Chronicle",
+                "isUserSetTitle": false,
+                "summary": "Dog wins tractor worth €100k in Laois draw RSS Syndicated Content Published: Fri 24 Mar 2023, 10:44 AM Last updated: Fri 24 Mar 2023, 11:01 AM\n\nA John Deere tractor worth €100,000 has been won by an unlikely winner, a dog.\n\nAs reported by the Laois Nationalist, the main prize in the Clough Community Centre fundraiser is on its way to Limerick, after the winning ticket was pulled from a drum on St Patrick's night.\n\nThe golden ticket was in the name of Toby, a dog owned by Patsy Dalton from Gal",
+                "isUserSetSummary": false,
+                "concepts": [
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/Tractor",
+                    "type": "wiki",
+                    "score": 100,
+                    "label": {
+                      "eng": "Tractor",
+                      "spa": "Tractor"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/Dog",
+                    "type": "wiki",
+                    "score": 95,
+                    "label": {
+                      "eng": "Dog",
+                      "spa": "Canis lupus familiaris"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/Euro",
+                    "type": "wiki",
+                    "score": 89,
+                    "label": {
+                      "eng": "Euro",
+                      "spa": "Euro"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/Limerick",
+                    "type": "loc",
+                    "score": 78,
+                    "label": {
+                      "eng": "Luimneach",
+                      "spa": "Limerick"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    },
+                    "location": {
+                      "type": "place",
+                      "geoNamesId": "2962943",
+                      "wikiUri": "http://en.wikipedia.org/wiki/Limerick",
+                      "label": {
+                        "eng": "Luimneach",
+                        "spa": "Limerick"
+                      },
+                      "population": 90054,
+                      "lat": 52.66472,
+                      "long": -8.62306,
+                      "featureCode": "P.PPLA2",
+                      "country": {
+                        "type": "country",
+                        "geoNamesId": "2963597",
+                        "wikiUri": "http://en.wikipedia.org/wiki/Republic_of_Ireland",
+                        "label": {
+                          "eng": "Republic of Ireland",
+                          "spa": "Irlanda"
+                        },
+                        "population": 4622917,
+                        "lat": 53,
+                        "long": -8,
+                        "area": 70280,
+                        "code2": "IE",
+                        "code3": "IRL",
+                        "webExt": ".ie",
+                        "currencyCode": "EUR",
+                        "currencyName": "Euro",
+                        "continent": "Europe"
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/The_Nationalist_(Carlow)",
+                    "type": "wiki",
+                    "score": 67,
+                    "label": {
+                      "eng": "The Nationalist (Carlow)",
+                      "spa": "The Nationalist (Carlow)"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/John_Deere",
+                    "type": "org",
+                    "score": 67,
+                    "label": {
+                      "eng": "John Deere",
+                      "spa": "John Deere"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/Galbally,_County_Limerick",
+                    "type": "wiki",
+                    "score": 51,
+                    "label": {
+                      "eng": "Galbally, County Limerick",
+                      "spa": "Galbally, County Limerick"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/Facebook",
+                    "type": "org",
+                    "score": 45,
+                    "label": {
+                      "eng": "Facebook",
+                      "spa": "Meta Inc."
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/Bar",
+                    "type": "wiki",
+                    "score": 34,
+                    "label": {
+                      "eng": "Bar",
+                      "spa": "Bar"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/Community_centre",
+                    "type": "wiki",
+                    "score": 17,
+                    "label": {
+                      "eng": "Community centre",
+                      "spa": "Centro social"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/Tidy_Towns_(Ireland)",
+                    "type": "wiki",
+                    "score": 17,
+                    "label": {
+                      "eng": "Tidy Towns (Ireland)",
+                      "spa": "Tidy Towns (Ireland)"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  },
+                  {
+                    "uri": "http://en.wikipedia.org/wiki/Playground",
+                    "type": "wiki",
+                    "score": 17,
+                    "label": {
+                      "eng": "Playground",
+                      "spa": "Patio de recreo"
+                    },
+                    "image": null,
+                    "synonyms": {},
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "type": "place",
+                  "geoNamesId": "2962943",
+                  "wikiUri": "http://en.wikipedia.org/wiki/Limerick",
+                  "label": {
+                    "eng": "Luimneach",
+                    "spa": "Limerick"
+                  },
+                  "population": 90054,
+                  "lat": 52.66472,
+                  "long": -8.62306,
+                  "featureCode": "P.PPLA2",
+                  "country": {
+                    "type": "country",
+                    "geoNamesId": "2963597",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Republic_of_Ireland",
+                    "label": {
+                      "eng": "Republic of Ireland",
+                      "spa": "Irlanda"
+                    },
+                    "population": 4622917,
+                    "lat": 53,
+                    "long": -8,
+                    "area": 70280,
+                    "code2": "IE",
+                    "code3": "IRL",
+                    "webExt": ".ie",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                },
+                "isUserSetLocation": false,
+                "categories": [
+                  {
+                    "uri": "news/Business",
+                    "label": "news/Business",
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    },
+                    "wgt": 54
+                  },
+                  {
+                    "uri": "dmoz/Society/Disabled/Service_Animals",
+                    "label": "dmoz/Society/Disabled/Service Animals",
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    },
+                    "wgt": 100
+                  },
+                  {
+                    "uri": "dmoz/Recreation/Pets/Dogs",
+                    "label": "dmoz/Recreation/Pets/Dogs",
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    },
+                    "wgt": 100
+                  },
+                  {
+                    "uri": "dmoz/Recreation/Pets/Contests",
+                    "label": "dmoz/Recreation/Pets/Contests",
+                    "trendingScore": {
+                      "news": {
+                        "score": 0,
+                        "testPopFq": 0,
+                        "nullPopFq": 0
+                      }
+                    },
+                    "wgt": 100
+                  }
+                ],
+                "medoidArticle": {
+                  "uri": "7463253006",
+                  "lang": "eng",
+                  "isDuplicate": false,
+                  "date": "2023-03-24",
+                  "time": "11:05:00",
+                  "dateTime": "2023-03-24T11:05:00Z",
+                  "dateTimePub": "2023-03-24T11:04:00Z",
+                  "dataType": "news",
+                  "sim": 0.9450980424880981,
+                  "url": "https://www.breakingnews.ie/ireland/dog-wins-tractor-worth-e100k-in-laois-draw-1452586.html",
+                  "title": "Dog wins tractor worth €100k in Laois draw | BreakingNews.ie",
+                  "body": "A John Deere tractor worth €100,000 has been won by an unlikely winner, a dog.\n\nAs reported by the Laois Nationalist, the main prize in the Clough Community Centre fundraiser is on its way to Limerick, after the winning ticket was pulled from a drum on St Patrick's night.\n\nThe golden ticket was in the name of Toby, a dog owned by Patsy Dalton from Galbally. While Toby does have a licence, it doesn't appear to cover driving, so Patsy will have to sit in behind the wheel when the tractor arrives.\n\nA video of the draw in Mary's Bar, posted on the Clough Community Centre Facebook page, shows that everything was completely above board, with no suggestion of Father Ted-style chicanery.\n\nAfter former proprietor Seán Hyland picked out the winner, it emerged Patsy put his dog Toby's name on the ticket, never thinkingthe canine would trot away with the prize.\n\nThe Clough Community Vision Committee's biggest fundraiser to date has brought the village a giant step closer towards achieving its goal of building a new community hall, which will host a variety of local clubs, activities and organisations.\n\nThe group is working closely with the Tidy Towns committee, which has plans for a playground and community garden adjacent to the new centre, creating a wonderful focal point for the village.",
+                  "source": {
+                    "uri": "breakingnews.ie",
+                    "dataType": "news",
+                    "title": "BreakingNews.ie",
+                    "description": "",
+                    "location": null,
+                    "image": null,
+                    "thumbImage": null,
+                    "favicon": null,
+                    "ranking": {
+                      "importanceRank": 1000000
+                    },
+                    "articleCount": 190,
+                    "socialMedia": {},
+                    "sourceGroups": []
+                  },
+                  "authors": [],
+                  "concepts": [
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Dog",
+                      "type": "wiki",
+                      "score": 5,
+                      "label": {
+                        "eng": "Dog",
+                        "spa": "Canis lupus familiaris"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Tractor",
+                      "type": "wiki",
+                      "score": 4,
+                      "label": {
+                        "eng": "Tractor",
+                        "spa": "Tractor"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Clough",
+                      "type": "loc",
+                      "score": 4,
+                      "label": {
+                        "eng": "Clough",
+                        "spa": "Clough"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      },
+                      "location": {
+                        "type": "place",
+                        "geoNamesId": "2652783",
+                        "wikiUri": "http://en.wikipedia.org/wiki/Clough",
+                        "label": {
+                          "eng": "Clough",
+                          "spa": "Clough"
+                        },
+                        "population": null,
+                        "lat": 54.29088,
+                        "long": -5.83666,
+                        "featureCode": "P.PPL",
+                        "country": {
+                          "type": "country",
+                          "geoNamesId": "2635167",
+                          "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                          "label": {
+                            "eng": "United Kingdom",
+                            "spa": "Reino Unido"
+                          },
+                          "population": 62348447,
+                          "lat": 54.75844,
+                          "long": -2.69531,
+                          "area": 244820,
+                          "code2": "GB",
+                          "code3": "GBR",
+                          "webExt": ".uk",
+                          "currencyCode": "GBP",
+                          "currencyName": "Pound",
+                          "continent": "Europe"
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/The_Nationalist_(Carlow)",
+                      "type": "wiki",
+                      "score": 3,
+                      "label": {
+                        "eng": "The Nationalist (Carlow)",
+                        "spa": "The Nationalist (Carlow)"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/John_Deere",
+                      "type": "org",
+                      "score": 3,
+                      "label": {
+                        "eng": "John Deere",
+                        "spa": "John Deere"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Euro",
+                      "type": "wiki",
+                      "score": 3,
+                      "label": {
+                        "eng": "Euro",
+                        "spa": "Euro"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Limerick",
+                      "type": "loc",
+                      "score": 3,
+                      "label": {
+                        "eng": "Luimneach",
+                        "spa": "Limerick"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      },
+                      "location": {
+                        "type": "place",
+                        "geoNamesId": "2962943",
+                        "wikiUri": "http://en.wikipedia.org/wiki/Limerick",
+                        "label": {
+                          "eng": "Luimneach",
+                          "spa": "Limerick"
+                        },
+                        "population": 90054,
+                        "lat": 52.66472,
+                        "long": -8.62306,
+                        "featureCode": "P.PPLA2",
+                        "country": {
+                          "type": "country",
+                          "geoNamesId": "2963597",
+                          "wikiUri": "http://en.wikipedia.org/wiki/Republic_of_Ireland",
+                          "label": {
+                            "eng": "Republic of Ireland",
+                            "spa": "Irlanda"
+                          },
+                          "population": 4622917,
+                          "lat": 53,
+                          "long": -8,
+                          "area": 70280,
+                          "code2": "IE",
+                          "code3": "IRL",
+                          "webExt": ".ie",
+                          "currencyCode": "EUR",
+                          "currencyName": "Euro",
+                          "continent": "Europe"
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Galbally,_County_Limerick",
+                      "type": "wiki",
+                      "score": 2,
+                      "label": {
+                        "eng": "Galbally, County Limerick",
+                        "spa": "Galbally, County Limerick"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Bar",
+                      "type": "wiki",
+                      "score": 2,
+                      "label": {
+                        "eng": "Bar",
+                        "spa": "Bar"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Facebook",
+                      "type": "org",
+                      "score": 2,
+                      "label": {
+                        "eng": "Facebook",
+                        "spa": "Meta Inc."
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Community_gardening",
+                      "type": "wiki",
+                      "score": 1,
+                      "label": {
+                        "eng": "Community gardening",
+                        "spa": "Community gardening"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Community_centre",
+                      "type": "wiki",
+                      "score": 1,
+                      "label": {
+                        "eng": "Community centre",
+                        "spa": "Centro social"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Tidy_Towns_(Ireland)",
+                      "type": "wiki",
+                      "score": 1,
+                      "label": {
+                        "eng": "Tidy Towns (Ireland)",
+                        "spa": "Tidy Towns (Ireland)"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    },
+                    {
+                      "uri": "http://en.wikipedia.org/wiki/Playground",
+                      "type": "wiki",
+                      "score": 1,
+                      "label": {
+                        "eng": "Playground",
+                        "spa": "Patio de recreo"
+                      },
+                      "image": null,
+                      "synonyms": {},
+                      "trendingScore": {
+                        "news": {
+                          "score": 0,
+                          "testPopFq": 0,
+                          "nullPopFq": 0
+                        }
+                      }
+                    }
+                  ],
+                  "categories": [],
+                  "videos": [],
+                  "image": "https://img.resized.co/breaking-news/eyJkYXRhIjoie1widXJsXCI6XCJodHRwczpcXFwvXFxcL2ltYWdlcy5icmVha2luZ25ld3MuaWVcXFwvcHJvZFxcXC91cGxvYWRzXFxcLzIwMjNcXFwvMDNcXFwvMjQxMDM3MTNcXFwvTGFvaXMuanBnXCIsXCJ3aWR0aFwiOjEyMDAsXCJoZWlnaHRcIjo2MjcsXCJkZWZhdWx0XCI6XCJodHRwczpcXFwvXFxcL3d3dy5icmVha2luZ25ld3MuaWVcXFwvaW1hZ2VzXFxcL25vLWltYWdlLnBuZ1wiLFwib3B0aW9uc1wiOltdfSIsImhhc2giOiJjYjZlYmM3ZTBjN2Q0NjExMDBiMTYyMTZmMGE5OGNjOWViMzg3OWE3In0=/dog-wins-tractor-worth-100k-in-laois-draw.jpg",
+                  "duplicateList": [],
+                  "originalArticle": null,
+                  "storyUri": "eng-8501179",
+                  "eventUri": "eng-8501179",
+                  "location": null,
+                  "extractedDates": null,
+                  "shares": {},
+                  "sentiment": 0.388235294117647
+                },
+                "storyDate": "2023-03-24",
+                "isUserSetDate": false,
+                "extractedDate": "2023-03-24",
+                "extractedDateEnd": "",
+                "averageDate": "2023-03-24",
+                "images": [
+                  "https://imengine.public.prod.cmg.infomaker.io?uuid=7154fff2-8913-5370-aee2-d23f81206819&function=cropresize&type=preview&source=false&q=75&crop_w=0.95704&crop_h=0.99999&x=0.02148&y=0&width=1200&height=675",
+                  "https://img.resized.co/breaking-news/eyJkYXRhIjoie1widXJsXCI6XCJodHRwczpcXFwvXFxcL2ltYWdlcy5icmVha2luZ25ld3MuaWVcXFwvcHJvZFxcXC91cGxvYWRzXFxcLzIwMjNcXFwvMDNcXFwvMjQxMDM3MTNcXFwvTGFvaXMuanBnXCIsXCJ3aWR0aFwiOjEyMDAsXCJoZWlnaHRcIjo2MjcsXCJkZWZhdWx0XCI6XCJodHRwczpcXFwvXFxcL3d3dy5icmVha2luZ25ld3MuaWVcXFwvaW1hZ2VzXFxcL25vLWltYWdlLnBuZ1wiLFwib3B0aW9uc1wiOltdfSIsImhhc2giOiJjYjZlYmM3ZTBjN2Q0NjExMDBiMTYyMTZmMGE5OGNjOWViMzg3OWE3In0=/dog-wins-tractor-worth-100k-in-laois-draw.jpg"
+                ],
+                "commonDates": null,
+                "socialScore": 0,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 5,
+            "title": {
+              "eng": "Dog wins tractor worth €100k in Laois draw | Meath Chronicle"
+            },
+            "summary": {
+              "eng": "Dog wins tractor worth €100k in Laois draw RSS Syndicated Content Published: Fri 24 Mar 2023, 10:44 AM Last updated: Fri 24 Mar 2023, 11:01 AM\n\nA John Deere tractor worth €100,000 has been won by an unlikely winner, a dog.\n\nAs reported by the Laois Nationalist, the main prize in the Clough Community Centre fundraiser is on its way to Limerick, after the winning ticket was pulled from a drum on St Patrick's night.\n\nThe golden ticket was in the name of Toby, a dog owned by Patsy Dalton from Gal"
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2962943",
+              "wikiUri": "http://en.wikipedia.org/wiki/Limerick",
+              "label": {
+                "eng": "Luimneach",
+                "spa": "Limerick"
+              },
+              "population": 90054,
+              "lat": 52.66472,
+              "long": -8.62306,
+              "featureCode": "P.PPLA2",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2963597",
+                "wikiUri": "http://en.wikipedia.org/wiki/Republic_of_Ireland",
+                "label": {
+                  "eng": "Republic of Ireland",
+                  "spa": "Irlanda"
+                },
+                "population": 4622917,
+                "lat": 53,
+                "long": -8,
+                "area": 70280,
+                "code2": "IE",
+                "code3": "IRL",
+                "webExt": ".ie",
+                "currencyCode": "EUR",
+                "currencyName": "Euro",
+                "continent": "Europe"
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Business",
+                "label": "news/Business",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 54
+              },
+              {
+                "uri": "dmoz/Society/Disabled/Service_Animals",
+                "label": "dmoz/Society/Disabled/Service Animals",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Recreation/Pets/Dogs",
+                "label": "dmoz/Recreation/Pets/Dogs",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Recreation/Pets/Contests",
+                "label": "dmoz/Recreation/Pets/Contests",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 100
+              }
+            ],
+            "images": [
+              "https://imengine.public.prod.cmg.infomaker.io?uuid=7154fff2-8913-5370-aee2-d23f81206819&function=cropresize&type=preview&source=false&q=75&crop_w=0.95704&crop_h=0.99999&x=0.02148&y=0&width=1200&height=675",
+              "https://img.resized.co/breaking-news/eyJkYXRhIjoie1widXJsXCI6XCJodHRwczpcXFwvXFxcL2ltYWdlcy5icmVha2luZ25ld3MuaWVcXFwvcHJvZFxcXC91cGxvYWRzXFxcLzIwMjNcXFwvMDNcXFwvMjQxMDM3MTNcXFwvTGFvaXMuanBnXCIsXCJ3aWR0aFwiOjEyMDAsXCJoZWlnaHRcIjo2MjcsXCJkZWZhdWx0XCI6XCJodHRwczpcXFwvXFxcL3d3dy5icmVha2luZ25ld3MuaWVcXFwvaW1hZ2VzXFxcL25vLWltYWdlLnBuZ1wiLFwib3B0aW9uc1wiOltdfSIsImhhc2giOiJjYjZlYmM3ZTBjN2Q0NjExMDBiMTYyMTZmMGE5OGNjOWViMzg3OWE3In0=/dog-wins-tractor-worth-100k-in-laois-draw.jpg"
+            ],
+            "articleCounts": {
+              "eng": 5
+            },
+            "socialScore": 0,
+            "sentiment": 0.3490196078431373,
+            "commonDates": null,
+            "wgt": 100,
+            "relevance": 100
+          }
+        ],
+        "totalResults": 1,
+        "page": 1,
+        "count": 1,
+        "pages": 1
+      }
+    }
+  }
+}

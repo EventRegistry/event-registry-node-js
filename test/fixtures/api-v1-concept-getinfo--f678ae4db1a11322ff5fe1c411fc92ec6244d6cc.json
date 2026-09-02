@@ -1,0 +1,146 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/concept/getInfo",
+    "body": {
+      "uri": "http://en.wikipedia.org/wiki/Ljubljana",
+      "action": "getInfo",
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": true,
+      "includeArticleCategories": true,
+      "includeArticleLinks": false,
+      "includeArticleVideos": true,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": true,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": true,
+      "includeArticleExtractedDates": true,
+      "includeArticleOriginalArticle": true,
+      "includeArticleStoryUri": true,
+      "includeArticleDuplicateList": true,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": true,
+      "includeEventInfoArticle": false,
+      "includeEventStories": true,
+      "includeEventSocialScore": true,
+      "eventImageCount": 2,
+      "includeSourceTitle": true,
+      "includeSourceDescription": true,
+      "includeSourceLocation": true,
+      "includeSourceRanking": true,
+      "includeSourceImage": true,
+      "includeSourceSocialMedia": true,
+      "includeSourceArticleCount": true,
+      "includeSourceSourceGroups": true,
+      "includeCategoryTrendingScore": true,
+      "conceptType": [
+        "concepts",
+        "entities"
+      ],
+      "conceptLang": [
+        "eng",
+        "spa"
+      ],
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": true,
+      "includeConceptImage": true,
+      "includeConceptDescription": true,
+      "includeConceptTrendingScore": true,
+      "maxConceptsPerType": 50,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": true,
+      "includeLocationGeoNamesId": true,
+      "includeLocationPopulation": true,
+      "includeLocationGeoLocation": true,
+      "includeLocationCountryArea": true,
+      "includeLocationCountryDetails": true,
+      "includeLocationCountryContinent": true,
+      "includeLocationPlaceFeatureCode": true,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": true,
+      "includeStoryTitle": true,
+      "includeStorySummary": true,
+      "includeStoryConcepts": true,
+      "includeStoryCategories": true,
+      "includeStoryMedoidArticle": true,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": true,
+      "includeStorySocialScore": true,
+      "storyImageCount": 2,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "http://en.wikipedia.org/wiki/Ljubljana": {
+        "uri": "http://en.wikipedia.org/wiki/Ljubljana",
+        "type": "loc",
+        "label": {
+          "eng": "Ljubljana",
+          "spa": "Liubliana"
+        },
+        "description": "",
+        "image": null,
+        "synonyms": {},
+        "trendingScore": {
+          "news": {
+            "score": 0,
+            "testPopFq": 0,
+            "nullPopFq": 0
+          }
+        },
+        "location": {
+          "type": "place",
+          "geoNamesId": "3196359",
+          "wikiUri": "http://en.wikipedia.org/wiki/Ljubljana",
+          "label": {
+            "eng": "Ljubljana",
+            "spa": "Liubliana"
+          },
+          "population": 272220,
+          "lat": 46.05108,
+          "long": 14.50513,
+          "featureCode": "P.PPLC",
+          "country": {
+            "type": "country",
+            "geoNamesId": "3190538",
+            "wikiUri": "http://en.wikipedia.org/wiki/Slovenia",
+            "label": {
+              "eng": "Slovenia",
+              "spa": "Eslovenia"
+            },
+            "population": 2007000,
+            "lat": 46.08333,
+            "long": 15,
+            "area": 20273,
+            "code2": "SI",
+            "code3": "SVN",
+            "webExt": ".si",
+            "currencyCode": "EUR",
+            "currencyName": "Euro",
+            "continent": "Europe"
+          }
+        }
+      }
+    }
+  }
+}

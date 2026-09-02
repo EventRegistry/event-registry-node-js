@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "query": "\n            {\n                \"$query\": {\n                    \"$aaaaor\": [\n                        { \"conceptUri\": \"http://en.wikipedia.org/wiki/George_W._Bush\" },\n                        { \"categoryUri\": \"news/Politics\" }\n                    ],\n                    \"$not\": {\n                    }\n                }\n            }\n        ",
+      "articlesPage": 1,
+      "articlesCount": 100,
+      "articlesSortBy": "date",
+      "articlesSortByAsc": false,
+      "resultType": "articles",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "error": "No valid conditions were provided in query part: {}"
+    }
+  }
+}

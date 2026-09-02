@@ -1,0 +1,187 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestCategoriesFast",
+    "body": {
+      "prefix": "business",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "conceptLang": "eng",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "dmoz/Business",
+        "label": "dmoz/Business",
+        "parentUri": "dmoz"
+      },
+      {
+        "uri": "news/Business",
+        "label": "news/Business",
+        "parentUri": "news"
+      },
+      {
+        "uri": "dmoz/Business/Accounting",
+        "label": "dmoz/Business/Accounting",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Aerospace_and_Defense",
+        "label": "dmoz/Business/Aerospace and Defense",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Agriculture_and_Forestry",
+        "label": "dmoz/Business/Agriculture and Forestry",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Arts_and_Entertainment",
+        "label": "dmoz/Business/Arts and Entertainment",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Associations",
+        "label": "dmoz/Business/Associations",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Automotive",
+        "label": "dmoz/Business/Automotive",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Biotechnology_and_Pharmaceuticals",
+        "label": "dmoz/Business/Biotechnology and Pharmaceuticals",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Business_Services",
+        "label": "dmoz/Business/Business Services",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Business_and_Society",
+        "label": "dmoz/Business/Business and Society",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Chemicals",
+        "label": "dmoz/Business/Chemicals",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Construction_and_Maintenance",
+        "label": "dmoz/Business/Construction and Maintenance",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Consumer_Goods_and_Services",
+        "label": "dmoz/Business/Consumer Goods and Services",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Cooperatives",
+        "label": "dmoz/Business/Cooperatives",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Customer_Service",
+        "label": "dmoz/Business/Customer Service",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/E-Commerce",
+        "label": "dmoz/Business/E-Commerce",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Education_and_Training",
+        "label": "dmoz/Business/Education and Training",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Electronics_and_Electrical",
+        "label": "dmoz/Business/Electronics and Electrical",
+        "parentUri": "dmoz/Business"
+      },
+      {
+        "uri": "dmoz/Business/Employment",
+        "label": "dmoz/Business/Employment",
+        "parentUri": "dmoz/Business"
+      }
+    ]
+  }
+}

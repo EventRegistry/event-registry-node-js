@@ -1,0 +1,277 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "Bush",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/George_W._Bush",
+        "type": "person",
+        "score": 777,
+        "label": {
+          "eng": "George W. Bush"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/George_H._W._Bush",
+        "type": "person",
+        "score": 242,
+        "label": {
+          "eng": "Presidency of George H. W. Bush"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Bushel",
+        "type": "wiki",
+        "score": 202,
+        "label": {
+          "eng": "Bushel"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Bushehr",
+        "type": "loc",
+        "score": 168,
+        "label": {
+          "eng": "Bushehr"
+        },
+        "location": {
+          "type": "place",
+          "label": {
+            "eng": "Bushehr"
+          },
+          "country": {
+            "type": "country",
+            "label": {
+              "eng": "Iran"
+            }
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Cori_Bush",
+        "type": "wiki",
+        "score": 158,
+        "label": {
+          "eng": "Cori Bush"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Presidency_of_George_W._Bush",
+        "type": "person",
+        "score": 138,
+        "label": {
+          "eng": "Presidency of George W. Bush"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Bushehr_Province",
+        "type": "loc",
+        "score": 103,
+        "label": {
+          "eng": "Bushehr Province"
+        },
+        "location": {
+          "type": "place",
+          "label": {
+            "eng": "Bushehr Province"
+          },
+          "country": {
+            "type": "country",
+            "label": {
+              "eng": "Iran"
+            }
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Kate_Bush",
+        "type": "org",
+        "score": 92,
+        "label": {
+          "eng": "Kate Bush"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/The_Bush_(Alaska)",
+        "type": "wiki",
+        "score": 74,
+        "label": {
+          "eng": "The Bush (Alaska)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Jeb_Bush",
+        "type": "person",
+        "score": 65,
+        "label": {
+          "eng": "Jeb Bush"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Jenna_Bush_Hager",
+        "type": "person",
+        "score": 63,
+        "label": {
+          "eng": "Jenna Bush Hager"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Bushfires_in_Australia",
+        "type": "wiki",
+        "score": 46,
+        "label": {
+          "eng": "Bushfires in Australia"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Bushmeat",
+        "type": "wiki",
+        "score": 42,
+        "label": {
+          "eng": "Bushmeat"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Devin_Bush_Jr.",
+        "type": "wiki",
+        "score": 35,
+        "label": {
+          "eng": "Devin Bush Jr."
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Heorhiy_Bushchan",
+        "type": "wiki",
+        "score": 31,
+        "label": {
+          "eng": "Heorhiy Bushchan"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/The_bush",
+        "type": "wiki",
+        "score": 25,
+        "label": {
+          "eng": "The bush"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/George_Bush_Intercontinental_Airport",
+        "type": "loc",
+        "score": 19,
+        "label": {
+          "eng": "George Bush Intercontinental Airport"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Bushland",
+        "type": "wiki",
+        "score": 18,
+        "label": {
+          "eng": "Bushland"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Flat_Bush",
+        "type": "loc",
+        "score": 14,
+        "label": {
+          "eng": "Flat Bush"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://fr.wikipedia.org/wiki/Cori_Bush",
+        "type": "wiki",
+        "score": 13,
+        "label": {
+          "eng": "Cori Bush"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "politics",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/Politics",
+        "type": "wiki",
+        "score": 32792,
+        "label": {
+          "eng": "Politics"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Left-wing_politics",
+        "type": "wiki",
+        "score": 7694,
+        "label": {
+          "eng": "Left-wing politics"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Far-right_politics",
+        "type": "wiki",
+        "score": 5043,
+        "label": {
+          "eng": "Far-right politics"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Right-wing_politics",
+        "type": "wiki",
+        "score": 4456,
+        "label": {
+          "eng": "Right-wing politics"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Opposition_(politics)",
+        "type": "org",
+        "score": 3660,
+        "label": {
+          "eng": "Opposition (politics)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Speaker_(politics)",
+        "type": "wiki",
+        "score": 2844,
+        "label": {
+          "eng": "Speaker (politics)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Centre-right_politics",
+        "type": "wiki",
+        "score": 2447,
+        "label": {
+          "eng": "Centre-right politics"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Centre-left_politics",
+        "type": "wiki",
+        "score": 1630,
+        "label": {
+          "eng": "Centre-left politics"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Far-left_politics",
+        "type": "wiki",
+        "score": 611,
+        "label": {
+          "eng": "Far-left politics"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Politics_of_the_United_States",
+        "type": "wiki",
+        "score": 499,
+        "label": {
+          "eng": "Politics of the United States"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Politics_of_global_warming",
+        "type": "wiki",
+        "score": 444,
+        "label": {
+          "eng": "Politics of global warming"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Interpellation_(politics)",
+        "type": "wiki",
+        "score": 383,
+        "label": {
+          "eng": "Interpellation (politics)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Politics_of_Iran",
+        "type": "wiki",
+        "score": 359,
+        "label": {
+          "eng": "Politics of Iran"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Whip_(politics)",
+        "type": "wiki",
+        "score": 344,
+        "label": {
+          "eng": "Whip (politics)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Pancasila_(politics)",
+        "type": "wiki",
+        "score": 292,
+        "label": {
+          "eng": "Pancasila (politics)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Politics_of_Mexico",
+        "type": "wiki",
+        "score": 285,
+        "label": {
+          "eng": "Politics of Mexico"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Mandate_(politics)",
+        "type": "wiki",
+        "score": 277,
+        "label": {
+          "eng": "Mandate (politics)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Partisan_(politics)",
+        "type": "wiki",
+        "score": 251,
+        "label": {
+          "eng": "Partisan (politics)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Gun_politics_in_the_United_States",
+        "type": "wiki",
+        "score": 242,
+        "label": {
+          "eng": "Gun politics in the United States"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Identity_politics",
+        "type": "wiki",
+        "score": 156,
+        "label": {
+          "eng": "Identity politics"
+        }
+      }
+    ]
+  }
+}

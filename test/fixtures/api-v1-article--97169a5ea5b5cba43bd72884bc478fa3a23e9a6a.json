@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "sourceUri": "bbc.com",
+      "articlesPage": 13,
+      "articlesCount": 100,
+      "articlesSortBy": "date",
+      "articlesSortByAsc": false,
+      "resultType": "articles",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "articles": {
+        "results": [],
+        "totalResults": 1180,
+        "page": 13,
+        "count": 0,
+        "pages": 12
+      }
+    }
+  }
+}

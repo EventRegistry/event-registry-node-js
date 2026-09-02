@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "conceptUri": "http://en.wikipedia.org/wiki/Germany",
+      "uriWgtListPage": 5,
+      "uriWgtListCount": 20000,
+      "uriWgtListSortBy": "fq",
+      "uriWgtListSortByAsc": false,
+      "resultType": "uriWgtList",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "uriWgtList": {
+        "totalResults": 65011,
+        "page": 5,
+        "count": 0,
+        "pages": 4,
+        "results": []
+      }
+    }
+  }
+}

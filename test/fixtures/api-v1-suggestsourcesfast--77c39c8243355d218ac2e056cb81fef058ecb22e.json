@@ -1,0 +1,48 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestSourcesFast",
+    "body": {
+      "prefix": "aawsat",
+      "page": 1,
+      "dataType": [
+        "news",
+        "pr",
+        "blog"
+      ],
+      "count": 20,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "score": 528,
+        "dataType": "news",
+        "uri": "aawsat.com",
+        "title": "الشرق الأوسط"
+      },
+      {
+        "score": 108,
+        "dataType": "news",
+        "uri": "english.aawsat.com",
+        "title": "Asharq AL-awsat"
+      },
+      {
+        "score": 106,
+        "dataType": "news",
+        "uri": "turkish.aawsat.com",
+        "title": "ŞARKUL AVSAT"
+      },
+      {
+        "score": 13,
+        "dataType": "news",
+        "uri": "urdu.aawsat.com",
+        "title": "الشرق الأوسط"
+      }
+    ]
+  }
+}

@@ -1,0 +1,5252 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "query": "{\"$query\":{\"$or\":[{\"dateStart\":\"2017-02-04\",\"dateEnd\":\"2017-02-05\"},{\"conceptUri\":\"http://en.wikipedia.org/wiki/Donald_Trump\"},{\"categoryUri\":\"news/Politics\"}],\"$not\":{\"$or\":[{\"dateStart\":\"2017-02-04\",\"dateEnd\":\"2017-02-04\"},{\"conceptUri\":\"http://en.wikipedia.org/wiki/Barack_Obama\"}]}}}",
+      "eventsPage": 1,
+      "eventsCount": 50,
+      "eventsSortBy": "rel",
+      "eventsSortByAsc": false,
+      "eventsArticleBodyLen": -1,
+      "eventsIncludeArticleBasicInfo": true,
+      "eventsIncludeArticleTitle": true,
+      "eventsIncludeArticleBody": true,
+      "eventsIncludeArticleUrl": true,
+      "eventsIncludeArticleEventUri": true,
+      "eventsIncludeArticleAuthors": true,
+      "eventsIncludeArticleConcepts": false,
+      "eventsIncludeArticleCategories": false,
+      "eventsIncludeArticleLinks": false,
+      "eventsIncludeArticleVideos": false,
+      "eventsIncludeArticleImage": true,
+      "eventsIncludeArticleSocialScore": false,
+      "eventsIncludeArticleSentiment": true,
+      "eventsIncludeArticleLocation": false,
+      "eventsIncludeArticleExtractedDates": false,
+      "eventsIncludeArticleOriginalArticle": false,
+      "eventsIncludeArticleStoryUri": false,
+      "eventsIncludeEventTitle": true,
+      "eventsIncludeEventSummary": true,
+      "eventsIncludeEventArticleCounts": true,
+      "eventsIncludeEventConcepts": true,
+      "eventsIncludeEventCategories": true,
+      "eventsIncludeEventDate": true,
+      "eventsIncludeEventCommonDates": false,
+      "eventsIncludeEventInfoArticle": false,
+      "eventsIncludeEventStories": true,
+      "eventsIncludeEventSocialScore": false,
+      "eventsEventImageCount": 0,
+      "eventsIncludeSourceTitle": true,
+      "eventsIncludeSourceDescription": false,
+      "eventsIncludeSourceLocation": false,
+      "eventsIncludeSourceRanking": false,
+      "eventsIncludeSourceImage": false,
+      "eventsIncludeSourceSocialMedia": false,
+      "eventsIncludeCategoryTrendingScore": true,
+      "eventsConceptType": "concepts",
+      "eventsConceptLang": "eng",
+      "eventsIncludeConceptLabel": true,
+      "eventsIncludeConceptSynonyms": false,
+      "eventsIncludeConceptImage": false,
+      "eventsIncludeConceptDescription": false,
+      "eventsIncludeConceptTrendingScore": false,
+      "eventsMaxConceptsPerType": 100,
+      "eventsIncludeLocationLabel": true,
+      "eventsIncludeLocationWikiUri": false,
+      "eventsIncludeLocationGeoNamesId": false,
+      "eventsIncludeLocationPopulation": false,
+      "eventsIncludeLocationGeoLocation": false,
+      "eventsIncludeLocationCountryArea": false,
+      "eventsIncludeLocationCountryDetails": false,
+      "eventsIncludeLocationCountryContinent": false,
+      "eventsIncludeLocationPlaceFeatureCode": false,
+      "eventsIncludeLocationPlaceCountry": true,
+      "eventsIncludeStoryBasicStats": true,
+      "eventsIncludeStoryLocation": true,
+      "eventsIncludeStoryDate": false,
+      "eventsIncludeStoryTitle": false,
+      "eventsIncludeStorySummary": false,
+      "eventsIncludeStoryConcepts": false,
+      "eventsIncludeStoryCategories": false,
+      "eventsIncludeStoryMedoidArticle": false,
+      "eventsIncludeStoryInfoArticle": false,
+      "eventsIncludeStoryCommonDates": false,
+      "eventsIncludeStorySocialScore": false,
+      "eventsStoryImageCount": 0,
+      "eventsIncludeConceptClassParentLabels": true,
+      "eventsIncludeConceptClassConcepts": false,
+      "eventsIncludeConceptFolderOwner": false,
+      "resultType": "events",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "events": {
+        "results": [
+          {
+            "uri": "eng-8500625",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rahul_Gandhi",
+                "type": "person",
+                "score": 100,
+                "label": {
+                  "eng": "Rahul Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_National_Congress",
+                "type": "org",
+                "score": 78,
+                "label": {
+                  "eng": "Indian National Congress"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lok_Sabha",
+                "type": "loc",
+                "score": 67,
+                "label": {
+                  "eng": "Lok Sabha"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Defamation",
+                "type": "wiki",
+                "score": 56,
+                "label": {
+                  "eng": "Defamation"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bharatiya_Janata_Party",
+                "type": "org",
+                "score": 48,
+                "label": {
+                  "eng": "Bharatiya Janata Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Surat",
+                "type": "loc",
+                "score": 48,
+                "label": {
+                  "eng": "Surat"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Surat"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_parliament",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Member of parliament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Mahatma_Gandhi",
+                "type": "person",
+                "score": 46,
+                "label": {
+                  "eng": "Mahatma Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Democracy",
+                "type": "wiki",
+                "score": 33,
+                "label": {
+                  "eng": "Democracy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/India",
+                "type": "loc",
+                "score": 28,
+                "label": {
+                  "eng": "India"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "India"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Chief_minister",
+                "type": "wiki",
+                "score": 23,
+                "label": {
+                  "eng": "Chief minister"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kerala",
+                "type": "loc",
+                "score": 21,
+                "label": {
+                  "eng": "State of Kerala"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "State of Kerala"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Narendra_Modi",
+                "type": "person",
+                "score": 20,
+                "label": {
+                  "eng": "Narendra Modi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Dictatorship",
+                "type": "wiki",
+                "score": 19,
+                "label": {
+                  "eng": "Dictatorship"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Parliament_of_India",
+                "type": "org",
+                "score": 18,
+                "label": {
+                  "eng": "Parliament of India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Wayanad_district",
+                "type": "loc",
+                "score": 18,
+                "label": {
+                  "eng": "Wayanad"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Wayanad"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_Parliament,_Lok_Sabha",
+                "type": "wiki",
+                "score": 15,
+                "label": {
+                  "eng": "Member of Parliament, Lok Sabha"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_the_Legislative_Assembly_(India)",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Member of the Legislative Assembly (India)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Uddhav_Thackeray",
+                "type": "person",
+                "score": 13,
+                "label": {
+                  "eng": "Uddhav Thackeray"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Mamata_Banerjee",
+                "type": "person",
+                "score": 13,
+                "label": {
+                  "eng": "Mamata Banerjee"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Gujarat",
+                "type": "loc",
+                "score": 13,
+                "label": {
+                  "eng": "Gujarat"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Gujarat"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Magistrate",
+                "type": "wiki",
+                "score": 12,
+                "label": {
+                  "eng": "Magistrate"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Twitter",
+                "type": "org",
+                "score": 11,
+                "label": {
+                  "eng": "Twitter"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Liberal_democracy",
+                "type": "wiki",
+                "score": 10,
+                "label": {
+                  "eng": "Liberal democracy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Aam_Aadmi_Party",
+                "type": "wiki",
+                "score": 9,
+                "label": {
+                  "eng": "Aam Aadmi Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Electoral_district",
+                "type": "wiki",
+                "score": 9,
+                "label": {
+                  "eng": "Electoral district"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Supreme_Court_of_India",
+                "type": "wiki",
+                "score": 9,
+                "label": {
+                  "eng": "Supreme Court of India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Shiv_Sena",
+                "type": "org",
+                "score": 9,
+                "label": {
+                  "eng": "Shiv Sena"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Cabinet_(government)",
+                "type": "wiki",
+                "score": 9,
+                "label": {
+                  "eng": "Cabinet (government)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/West_Bengal",
+                "type": "loc",
+                "score": 9,
+                "label": {
+                  "eng": "West Bengal"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "West Bengal"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Other_Backward_Class",
+                "type": "wiki",
+                "score": 8,
+                "label": {
+                  "eng": "Other Backward Class"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Delhi",
+                "type": "loc",
+                "score": 8,
+                "label": {
+                  "eng": "Delhi"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Karnataka",
+                "type": "loc",
+                "score": 8,
+                "label": {
+                  "eng": "Karnataka"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Karnataka"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/New_Delhi",
+                "type": "loc",
+                "score": 8,
+                "label": {
+                  "eng": "New Delhi"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "New Delhi"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Trinamool_Congress",
+                "type": "org",
+                "score": 7,
+                "label": {
+                  "eng": "Trinamool Congress"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Arvind_Kejriwal",
+                "type": "person",
+                "score": 7,
+                "label": {
+                  "eng": "Arvind Kejriwal"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Constitution_of_India",
+                "type": "wiki",
+                "score": 7,
+                "label": {
+                  "eng": "Constitution of India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Mallikarjun_Kharge",
+                "type": "person",
+                "score": 6,
+                "label": {
+                  "eng": "Mallikarjun Kharge"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ashok_Gehlot",
+                "type": "person",
+                "score": 6,
+                "label": {
+                  "eng": "Ashok Gehlot"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bail",
+                "type": "wiki",
+                "score": 6,
+                "label": {
+                  "eng": "Bail"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Representation_of_the_People_Act,_1951",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Representation of the People Act, 1951"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lalit_Modi",
+                "type": "person",
+                "score": 5,
+                "label": {
+                  "eng": "Lalit Modi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Priyanka_Gandhi",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Priyanka Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Jairam_Ramesh",
+                "type": "person",
+                "score": 5,
+                "label": {
+                  "eng": "Jairam Ramesh"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_Progressive_Alliance",
+                "type": "org",
+                "score": 5,
+                "label": {
+                  "eng": "United Progressive Alliance"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_Penal_Code",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Indian Penal Code"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Leader_of_the_Opposition",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Leader of the Opposition"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Nationalist_Congress_Party",
+                "type": "org",
+                "score": 5,
+                "label": {
+                  "eng": "Nationalist Congress Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Parliament",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Parliament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Murder",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Murder"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "eng-8500625",
+                "articleCount": 74,
+                "lang": "eng",
+                "avgCos": 0.6078431372549019,
+                "variance": 0.6313725490196078,
+                "eventUri": "eng-8500625",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Surat"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 8
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 74,
+            "title": {
+              "eng": "Rahul Gandhi now an ex-MP: What's next for Congress leader "
+            },
+            "summary": {
+              "eng": "Rahul Gandhi disqualified as MP: A day after a Surat court convicted him in 2019 'Modi surname' defamation case, former Congress president Rahul Gandhi was disqualified as member of Lok Sabha on Friday. The Surat Sessions court awarded two-year sentence to Rahul Gandhi, however, he was granted bail and 30-day time to appeal against the decision.\n\n\"Consequent upon his conviction by the Court of Chief Judicial Magistrate, Surat, Rahul Gandhi, Member of Lok Sabha representing the Wayanad Parliamenta"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Surat"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "India"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 98
+              },
+              {
+                "uri": "dmoz/Society/Issues/Crime_and_Justice",
+                "label": "dmoz/Society/Issues/Crime and Justice",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 100
+              }
+            ],
+            "articleCounts": {
+              "eng": 74
+            },
+            "sentiment": -0.1450980392156863,
+            "wgt": 30,
+            "relevance": 30
+          },
+          {
+            "uri": "hin-277414",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indira_Gandhi",
+                "type": "person",
+                "score": 100,
+                "label": {
+                  "eng": "Indira Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Parliament_of_India",
+                "type": "org",
+                "score": 100,
+                "label": {
+                  "eng": "Parliament of India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lok_Sabha",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Lok Sabha"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rahul_Gandhi",
+                "type": "person",
+                "score": 100,
+                "label": {
+                  "eng": "Rahul Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_parliament",
+                "type": "wiki",
+                "score": 80,
+                "label": {
+                  "eng": "Member of parliament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Raebareli",
+                "type": "loc",
+                "score": 73,
+                "label": {
+                  "eng": "Rāe Bareli"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Rāe Bareli"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Surat",
+                "type": "loc",
+                "score": 67,
+                "label": {
+                  "eng": "Surat"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Surat"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_National_Congress",
+                "type": "org",
+                "score": 53,
+                "label": {
+                  "eng": "Indian National Congress"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "hin-277414",
+                "articleCount": 4,
+                "lang": "hin",
+                "avgCos": 0.788235294117647,
+                "variance": 0.3803921568627451,
+                "eventUri": "hin-277414",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 4,
+            "title": {
+              "hin": "Disqualified From Lok Sabha: राहुल गांधी ही नहीं, दादी इंदिरा और मां सोनिया भी खो चुकी हैं संसद की सदस्यता, जानें कब-क्यों और कैसे? | 🗳️ LatestLY हिन्दी"
+            },
+            "summary": {
+              "hin": "Disqualified From Lok Sabha: सूरत कोर्ट ने मानहानि मामले में गुरुवार को राहुल गांधी (Rahul Gandhi Disqualified) को दोषी करार देते हुए 2 साल की सजा सुनाई थी. इस फैसले के बाद लोकसभा सचिवालय ने राहुल गांधी की संसद की सदस्यता को रद्द "
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 99
+              }
+            ],
+            "articleCounts": {
+              "hin": 4
+            },
+            "sentiment": null,
+            "wgt": 25,
+            "relevance": 25
+          },
+          {
+            "uri": "eng-8501188",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_the_Legislative_Assembly_(India)",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Member of the Legislative Assembly (India)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_parliament",
+                "type": "wiki",
+                "score": 89,
+                "label": {
+                  "eng": "Member of parliament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Azam_Khan_(politician)",
+                "type": "person",
+                "score": 81,
+                "label": {
+                  "eng": "Azam Khan (politician)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bharatiya_Janata_Party",
+                "type": "org",
+                "score": 71,
+                "label": {
+                  "eng": "Bharatiya Janata Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Uttar_Pradesh",
+                "type": "loc",
+                "score": 71,
+                "label": {
+                  "eng": "Uttar Pradesh"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Uttar Pradesh"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lok_Sabha",
+                "type": "loc",
+                "score": 67,
+                "label": {
+                  "eng": "Lok Sabha"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rampur,_Uttar_Pradesh",
+                "type": "loc",
+                "score": 63,
+                "label": {
+                  "eng": "Rāmpur"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Rāmpur"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Samajwadi_Party",
+                "type": "org",
+                "score": 59,
+                "label": {
+                  "eng": "Samajwadi Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/J._Jayalalithaa",
+                "type": "person",
+                "score": 53,
+                "label": {
+                  "eng": "J. Jayalalithaa"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rashtriya_Janata_Dal",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Rashtriya Janata Dal"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rahul_Gandhi",
+                "type": "person",
+                "score": 53,
+                "label": {
+                  "eng": "Rahul Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tamil_Nadu_Legislative_Assembly",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "Tamil Nadu Legislative Assembly"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/All_India_Anna_Dravida_Munnetra_Kazhagam",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "All India Anna Dravida Munnetra Kazhagam"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_National_Congress",
+                "type": "org",
+                "score": 43,
+                "label": {
+                  "eng": "Indian National Congress"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bihar",
+                "type": "loc",
+                "score": 43,
+                "label": {
+                  "eng": "Bihar"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Bihar"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Saran_district",
+                "type": "loc",
+                "score": 43,
+                "label": {
+                  "eng": "Sāran"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Sāran"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Suar_(Assembly_constituency)",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Suar (Assembly constituency)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Central_Reserve_Police_Force",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Central Reserve Police Force"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Anil_Kumar_(politician)",
+                "type": "wiki",
+                "score": 38,
+                "label": {
+                  "eng": "Anil Kumar (politician)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Muzaffarnagar",
+                "type": "loc",
+                "score": 36,
+                "label": {
+                  "eng": "Muzaffarnagar"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Muzaffarnagar"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Chief_minister",
+                "type": "wiki",
+                "score": 34,
+                "label": {
+                  "eng": "Chief minister"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tamil_Nadu",
+                "type": "loc",
+                "score": 34,
+                "label": {
+                  "eng": "State of Tamil Nādu"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "State of Tamil Nādu"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Khatauli_(Assembly_constituency)",
+                "type": "wiki",
+                "score": 31,
+                "label": {
+                  "eng": "Khatauli (Assembly constituency)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kerala_High_Court",
+                "type": "org",
+                "score": 29,
+                "label": {
+                  "eng": "Kerala High Court"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Nationalist_Congress_Party",
+                "type": "org",
+                "score": 29,
+                "label": {
+                  "eng": "Nationalist Congress Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lakshadweep",
+                "type": "loc",
+                "score": 29,
+                "label": {
+                  "eng": "Union Territory of Lakshadweep"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Union Territory of Lakshadweep"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Vikram_Singh_Saini",
+                "type": "wiki",
+                "score": 24,
+                "label": {
+                  "eng": "Vikram Singh Saini"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Air_India",
+                "type": "org",
+                "score": 24,
+                "label": {
+                  "eng": "Air India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bangarmau",
+                "type": "loc",
+                "score": 23,
+                "label": {
+                  "eng": "Bāngarmau"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Bāngarmau"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kuldeep_Singh_Sengar",
+                "type": "wiki",
+                "score": 19,
+                "label": {
+                  "eng": "Kuldeep Singh Sengar"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rampur_district",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "रामपुर जिला"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Abdullah_Azam_Khan",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Abdullah Azam Khan"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Uttar_Pradesh_Legislative_Assembly",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Uttar Pradesh Legislative Assembly"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Janata_Dal_(United)",
+                "type": "org",
+                "score": 14,
+                "label": {
+                  "eng": "Janata Dal (United)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_Parliament,_Rajya_Sabha",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Member of Parliament, Rajya Sabha"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_rupee",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Indian rupee"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lakh",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Lakh"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Haryana",
+                "type": "loc",
+                "score": 14,
+                "label": {
+                  "eng": "Haryana"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Haryana"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Patna_district",
+                "type": "loc",
+                "score": 14,
+                "label": {
+                  "eng": "Patna"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Patna"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Unnao",
+                "type": "loc",
+                "score": 14,
+                "label": {
+                  "eng": "Unnāo"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Unnāo"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rape",
+                "type": "wiki",
+                "score": 13,
+                "label": {
+                  "eng": "Rape"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "eng-8501188",
+                "articleCount": 6,
+                "lang": "eng",
+                "avgCos": 0.8784313725490196,
+                "variance": 0.2274509803921569,
+                "eventUri": "eng-8501188",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Uttar Pradesh"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "eng": "Six UP MLAs faced disqualification after conviction by courts"
+            },
+            "summary": {
+              "eng": "Lucknow, March 24 (SocialNews.XYZ) Six legislators in Uttar Pradesh have been disqualified in the past five years after they were convicted by courts on various charges.\n\nFormer Samajwadi Party MLA Azam Khan faced disqualification from the state Assembly last month after a Moradabad court order sentenced him to two years in jail in a 15-year-old case. He held the Rampur Assembly seat.\n\nHe was found guilty of staging a dharna on a state highway on January 29, 2008 as their cavalcade was stopped by"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Uttar Pradesh"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "India"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 99
+              },
+              {
+                "uri": "dmoz/Society/Crime",
+                "label": "dmoz/Society/Crime",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Society/Crime/Murder",
+                "label": "dmoz/Society/Crime/Murder",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Society/Crime/Trials",
+                "label": "dmoz/Society/Crime/Trials",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 100
+              }
+            ],
+            "articleCounts": {
+              "eng": 6
+            },
+            "sentiment": -0.3490196078431372,
+            "wgt": 25,
+            "relevance": 25
+          },
+          {
+            "uri": "hin-277399",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rahul_Gandhi",
+                "type": "person",
+                "score": 100,
+                "label": {
+                  "eng": "Rahul Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_National_Congress",
+                "type": "org",
+                "score": 82,
+                "label": {
+                  "eng": "Indian National Congress"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lok_Sabha",
+                "type": "loc",
+                "score": 71,
+                "label": {
+                  "eng": "Lok Sabha"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bharatiya_Janata_Party",
+                "type": "org",
+                "score": 66,
+                "label": {
+                  "eng": "Bharatiya Janata Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Parliament_of_India",
+                "type": "org",
+                "score": 49,
+                "label": {
+                  "eng": "Parliament of India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Surat",
+                "type": "loc",
+                "score": 49,
+                "label": {
+                  "eng": "Surat"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Surat"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Democracy",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Democracy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_parliament",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Member of parliament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Wayanad_(Lok_Sabha_constituency)",
+                "type": "wiki",
+                "score": 24,
+                "label": {
+                  "eng": "Wayanad (Lok Sabha constituency)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Uddhav_Thackeray",
+                "type": "person",
+                "score": 21,
+                "label": {
+                  "eng": "Uddhav Thackeray"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kerala",
+                "type": "loc",
+                "score": 19,
+                "label": {
+                  "eng": "State of Kerala"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "State of Kerala"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Gujarat",
+                "type": "loc",
+                "score": 18,
+                "label": {
+                  "eng": "Gujarat"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Gujarat"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Twitter",
+                "type": "org",
+                "score": 16,
+                "label": {
+                  "eng": "Twitter"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Prime_minister",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Prime minister"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Narendra_Modi",
+                "type": "person",
+                "score": 12,
+                "label": {
+                  "eng": "Narendra Modi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Samajwadi_Party",
+                "type": "org",
+                "score": 12,
+                "label": {
+                  "eng": "Samajwadi Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Mamata_Banerjee",
+                "type": "person",
+                "score": 11,
+                "label": {
+                  "eng": "Mamata Banerjee"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_the_Legislative_Assembly",
+                "type": "wiki",
+                "score": 11,
+                "label": {
+                  "eng": "Member of the Legislative Assembly"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Maharashtra",
+                "type": "loc",
+                "score": 11,
+                "label": {
+                  "eng": "Maharashtra"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Maharashtra"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Karnataka",
+                "type": "loc",
+                "score": 10,
+                "label": {
+                  "eng": "Karnataka"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Karnataka"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/New_Delhi",
+                "type": "loc",
+                "score": 10,
+                "label": {
+                  "eng": "New Delhi"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "New Delhi"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lalu_Prasad_Yadav",
+                "type": "person",
+                "score": 9,
+                "label": {
+                  "eng": "Lalu Prasad Yadav"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rajasthan",
+                "type": "loc",
+                "score": 9,
+                "label": {
+                  "eng": "Rajasthan"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Rajasthan"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Sonia_Gandhi",
+                "type": "person",
+                "score": 8,
+                "label": {
+                  "eng": "Sonia Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Vidhan_Sabha",
+                "type": "wiki",
+                "score": 8,
+                "label": {
+                  "eng": "Vidhan Sabha"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bihar",
+                "type": "loc",
+                "score": 8,
+                "label": {
+                  "eng": "Bihar"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Bihar"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Priyanka_Gandhi",
+                "type": "wiki",
+                "score": 7,
+                "label": {
+                  "eng": "Priyanka Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Congress",
+                "type": "wiki",
+                "score": 7,
+                "label": {
+                  "eng": "Congress"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Akhilesh_Yadav",
+                "type": "person",
+                "score": 7,
+                "label": {
+                  "eng": "Akhilesh Yadav"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Sidhi_(Lok_Sabha_constituency)",
+                "type": "wiki",
+                "score": 6,
+                "label": {
+                  "eng": "Sidhi (Lok Sabha constituency)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Government_of_India",
+                "type": "wiki",
+                "score": 6,
+                "label": {
+                  "eng": "Government of India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Shiv_Sena",
+                "type": "org",
+                "score": 6,
+                "label": {
+                  "eng": "Shiv Sena"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Patna",
+                "type": "loc",
+                "score": 6,
+                "label": {
+                  "eng": "Patna"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Patna"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indira_Gandhi",
+                "type": "person",
+                "score": 5,
+                "label": {
+                  "eng": "Indira Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/All_India_Trinamool_Congress",
+                "type": "org",
+                "score": 5,
+                "label": {
+                  "eng": "All India Trinamool Congress"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Arvind_Kejriwal",
+                "type": "person",
+                "score": 5,
+                "label": {
+                  "eng": "Arvind Kejriwal"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Constitution",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Constitution"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Delhi",
+                "type": "loc",
+                "score": 5,
+                "label": {
+                  "eng": "Delhi"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Himachal_Pradesh",
+                "type": "loc",
+                "score": 5,
+                "label": {
+                  "eng": "Himachal Pradesh"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Himachal Pradesh"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/West_Bengal",
+                "type": "loc",
+                "score": 5,
+                "label": {
+                  "eng": "West Bengal"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "West Bengal"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "hin-277399",
+                "articleCount": 41,
+                "lang": "hin",
+                "avgCos": 0.5803921568627451,
+                "variance": 0.6627450980392157,
+                "eventUri": "hin-277399",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Surat"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 4
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 41,
+            "title": {
+              "hin": "राहुल गांधी की सदस्यता खत्म होने पर अभिषेक मनु सिंघवी उद्धव ठाकरे अशोक गहलोत भूपेश बघेल ने दीं ऐसी प्रतिक्रिया"
+            },
+            "summary": {
+              "hin": "अभिषेक मनु सिंघवी ने प्रेस वार्ता करके कहा कि हम सभी जानते हैं कि राहुल गांधी संसद के अंदर और बाहर दोनों जगह निडर होकर\n\nराहुल गांधी की संसद सदस्यता समाप्त किए जाने की कड़ी कार्यवाही के बाद कांग"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Surat"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "India"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 93
+              }
+            ],
+            "articleCounts": {
+              "hin": 41
+            },
+            "sentiment": null,
+            "wgt": 25,
+            "relevance": 25
+          },
+          {
+            "uri": "tam-25037",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_National_Congress",
+                "type": "org",
+                "score": 100,
+                "label": {
+                  "eng": "Indian National Congress"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lok_Sabha",
+                "type": "loc",
+                "score": 79,
+                "label": {
+                  "eng": "Lok Sabha"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_parliament",
+                "type": "wiki",
+                "score": 77,
+                "label": {
+                  "eng": "Member of parliament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Mahatma_Gandhi",
+                "type": "person",
+                "score": 75,
+                "label": {
+                  "eng": "Mahatma Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bharatiya_Janata_Party",
+                "type": "org",
+                "score": 72,
+                "label": {
+                  "eng": "Bharatiya Janata Party"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "tam-25037",
+                "articleCount": 4,
+                "lang": "tam",
+                "avgCos": 0.6745098039215687,
+                "variance": 0.5450980392156862,
+                "eventUri": "tam-25037",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 4,
+            "title": {
+              "tam": "ராகுல் காந்தி தகுதி நீக்கம்; அடுத்து அவர் என்ன செய்வார்.?"
+            },
+            "summary": {
+              "tam": "எலக்ட்ரானிக் பஜார் - உங்கள் பட்ஜெட்டுக்கு ஏற்ற ஸ்மார்ட்போன்கள்ராகுல் காந்தி தகுதி நீக்கம்\n\nமோடி குறித்து அவதூறாக பேசியதாக குஜராத் நீதிமன்றத்தில் 2019 அவதூறு வழக்கில் தண்டனை விதிக்கப்பட"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 91
+              }
+            ],
+            "articleCounts": {
+              "tam": 4
+            },
+            "sentiment": null,
+            "wgt": 21,
+            "relevance": 21
+          },
+          {
+            "uri": "ces-61201",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ukraine",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Ukraine"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Ukraine"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Russia",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Russia"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Russia"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/European_Union",
+                "type": "loc",
+                "score": 93,
+                "label": {
+                  "eng": "European Union"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Prime_minister",
+                "type": "wiki",
+                "score": 93,
+                "label": {
+                  "eng": "Prime minister"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ursula_von_der_Leyen",
+                "type": "person",
+                "score": 85,
+                "label": {
+                  "eng": "Ursula von der Leyen"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Petr_Fiala",
+                "type": "wiki",
+                "score": 71,
+                "label": {
+                  "eng": "Petr Fiala"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Civic_Democratic_Party_(Czech_Republic)",
+                "type": "org",
+                "score": 65,
+                "label": {
+                  "eng": "Civic Democratic Party (Czech Republic)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/European_Council",
+                "type": "org",
+                "score": 56,
+                "label": {
+                  "eng": "European Council"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Brussels",
+                "type": "loc",
+                "score": 51,
+                "label": {
+                  "eng": "Brussels"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Brussels"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Belgium"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Poland",
+                "type": "loc",
+                "score": 50,
+                "label": {
+                  "eng": "Poland"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Poland"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/International_Criminal_Court",
+                "type": "org",
+                "score": 43,
+                "label": {
+                  "eng": "International Criminal Court"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Vladimir_Putin",
+                "type": "person",
+                "score": 36,
+                "label": {
+                  "eng": "Vladimir Putin"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "ces-61201",
+                "articleCount": 3,
+                "lang": "ces",
+                "avgCos": 0.792156862745098,
+                "variance": 0.3686274509803922,
+                "eventUri": "ces-61201",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 3,
+            "title": {
+              "ces": "Tohle Brusel nezažil 20 let. Summit o Ukrajině je nevídaně klidný, spory se odkládají"
+            },
+            "summary": {
+              "ces": "\"Včerejší Evropská rada byla velmi konsenzuální,\" shrnul v pátek dopoledne na úvod druhého dne schůzky premiér Petr Fiala (ODS). \"Jsem rád, že i po roce trvání ruské agrese na Ukrajině je pozice Evropské unie jednotná, silná a rozhodná. Nijak neoslabuje naše odhodlání Ukrajinu podporovat,\" dodal.\n\nHladké debaty způsobuje hlavně to, že politici dostali k posvěcení už víceméně hotové dohody. Případně se vyhnuli technickým detailům, které by mohly vést ke sp"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 91
+              }
+            ],
+            "articleCounts": {
+              "ces": 3
+            },
+            "sentiment": null,
+            "wgt": 21,
+            "relevance": 21
+          },
+          {
+            "uri": "ukr-181178",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Wang_(surname)",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Wang (surname)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/China_(region)",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Kitajska"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Europe",
+                "type": "loc",
+                "score": 87,
+                "label": {
+                  "eng": "Europe"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Diplomat",
+                "type": "wiki",
+                "score": 60,
+                "label": {
+                  "eng": "Diplomat"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/President_of_France",
+                "type": "wiki",
+                "score": 60,
+                "label": {
+                  "eng": "President of France"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bonn",
+                "type": "loc",
+                "score": 60,
+                "label": {
+                  "eng": "Bonn"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Bonn"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Xi_Jinping",
+                "type": "person",
+                "score": 53,
+                "label": {
+                  "eng": "Xi Jinping"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "ukr-181178",
+                "articleCount": 4,
+                "lang": "ukr",
+                "avgCos": 0.7137254901960784,
+                "variance": 0.4901960784313725,
+                "eventUri": "ukr-181178",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 4,
+            "title": {
+              "ukr": "Китай просуває свій \"мирний план\" на Заході, а у Байдена заявили про \"невійськове\" повернення територій"
+            },
+            "summary": {
+              "ukr": "Китай закликав зіграти свою роль у підтримці мирних переговорів про війну росії\n\nКитай продовжує просувати свій так званий \"мирний план\" щодо війни в Україні і тепер шукає підтримки для нього на Заході.\n\nПро це пише Bloomberg.\n\nЖурналісти з'ясували, що високопоставлений китайськ"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 89
+              }
+            ],
+            "articleCounts": {
+              "ukr": 4
+            },
+            "sentiment": null,
+            "wgt": 20,
+            "relevance": 20
+          },
+          {
+            "uri": "rus-1427728",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Berdiansk",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Berdiansk"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Berdiansk"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ukraine",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Ukraine"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Ukraine"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Saratov",
+                "type": "loc",
+                "score": 93,
+                "label": {
+                  "eng": "Saratov"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Saratov"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Russia"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Armed_Forces_of_Ukraine",
+                "type": "org",
+                "score": 85,
+                "label": {
+                  "eng": "Armed Forces of Ukraine"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Commander-in-chief",
+                "type": "person",
+                "score": 78,
+                "label": {
+                  "eng": "Commander-in-chief"
+                }
+              },
+              {
+                "uri": "http://ru.wikipedia.org/wiki/Залужный,_Валерий_Федорович",
+                "type": "wiki",
+                "score": 71,
+                "label": {
+                  "eng": "Залужный, Валерий Федорович"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Novocherkassk",
+                "type": "loc",
+                "score": 65,
+                "label": {
+                  "eng": "Novocherkassk"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Novocherkassk"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Russia"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Orsk",
+                "type": "loc",
+                "score": 65,
+                "label": {
+                  "eng": "Orsk"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Orsk"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Russia"
+                    }
+                  }
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "rus-1427728",
+                "articleCount": 3,
+                "lang": "rus",
+                "avgCos": 0.7333333333333333,
+                "variance": 0.4627450980392157,
+                "eventUri": "rus-1427728",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 3,
+            "title": {
+              "rus": "\"Враг не узнает покоя\": Залужный показал, как ВСУ уничтожили корабль РФ \"Саратов\" (видео)"
+            },
+            "summary": {
+              "rus": "Главнокомандующий украинскими войсками рассказал, что произошло это яркое событие еще год назад. Именно в этот день миф о \"неуязвимости флота\" России был развеян.\n\nГлавнокомандующий ВСУ Валерий Залужный показал, как год назад был уничтожен один из самых больших десантных к"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 85
+              }
+            ],
+            "articleCounts": {
+              "rus": 3
+            },
+            "sentiment": null,
+            "wgt": 18,
+            "relevance": 18
+          },
+          {
+            "uri": "deu-1616575",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Russia",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Russia"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Russia"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Arms_industry",
+                "type": "wiki",
+                "score": 86,
+                "label": {
+                  "eng": "Arms industry"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Joseph_Stalin",
+                "type": "wiki",
+                "score": 80,
+                "label": {
+                  "eng": "Joseph Stalin"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/World_War_II",
+                "type": "wiki",
+                "score": 80,
+                "label": {
+                  "eng": "World War II"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ukraine",
+                "type": "loc",
+                "score": 74,
+                "label": {
+                  "eng": "Ukraine"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Ukraine"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Social_networking_service",
+                "type": "wiki",
+                "score": 60,
+                "label": {
+                  "eng": "Social networking service"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/War_of_aggression",
+                "type": "wiki",
+                "score": 54,
+                "label": {
+                  "eng": "War of aggression"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Generalissimo",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Generalissimo"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/NATO",
+                "type": "loc",
+                "score": 40,
+                "label": {
+                  "eng": "NATO"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "NATO"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Belgium"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_Nations_Security_Council",
+                "type": "org",
+                "score": 40,
+                "label": {
+                  "eng": "United Nations Security Council"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Chelyabinsk",
+                "type": "loc",
+                "score": 40,
+                "label": {
+                  "eng": "Chelyabinsk"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Chelyabinsk"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Russia"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/War_in_Donbass",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "War in Donbass"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Vladimir_Putin",
+                "type": "person",
+                "score": 20,
+                "label": {
+                  "eng": "Vladimir Putin"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "deu-1616575",
+                "articleCount": 3,
+                "lang": "deu",
+                "avgCos": 0.8627450980392157,
+                "variance": 0.2549019607843137,
+                "eventUri": "deu-1616575",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 3,
+            "title": {
+              "deu": "\"Ich will, dass Sie sich an die Worte des Generalissimus..."
+            },
+            "summary": {
+              "deu": "Zur Steigerung der heimischen Waffenproduktion greift Russlands früherer Präsident zu einer aufsehenerregenden Methode. Einen \"direkten Konflikt\" mit der Nato wolle man nicht, sagt er.\n\nMehr als ein Jahr nach Kriegsbeginn gegen die Ukraine hat Russlands Ex-Präsident Dmitri Medwedjew zur Steigerung der heimischen Waffenproduktion zu einer aufsehenerregenden Methode gegriffen: Vor Vertretern einer nationalen Rüstungskommission zitierte der 57-Jährige den Sowjetdiktator Josef Stalin (1879-1953)"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 86
+              }
+            ],
+            "articleCounts": {
+              "deu": 3
+            },
+            "sentiment": null,
+            "wgt": 18,
+            "relevance": 18
+          },
+          {
+            "uri": "fas-630279",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Qazvin",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Qazvīn"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Qazvīn"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Iran"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Inflation",
+                "type": "wiki",
+                "score": 93,
+                "label": {
+                  "eng": "Inflation"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Friday_prayer",
+                "type": "wiki",
+                "score": 84,
+                "label": {
+                  "eng": "نماز جمعه"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Government_of_the_Islamic_Republic_of_Iran",
+                "type": "wiki",
+                "score": 66,
+                "label": {
+                  "eng": "نظام جمهوری اسلامی ایران"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Imam_of_Friday_Prayer",
+                "type": "wiki",
+                "score": 64,
+                "label": {
+                  "eng": "امام جمعه"
+                }
+              },
+              {
+                "uri": "http://fa.wikipedia.org/wiki/نماینده_ولی_فقیه",
+                "type": "wiki",
+                "score": 61,
+                "label": {
+                  "eng": "نماینده ولی فقیه"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Economy",
+                "type": "wiki",
+                "score": 61,
+                "label": {
+                  "eng": "Economy"
+                }
+              },
+              {
+                "uri": "http://fa.wikipedia.org/wiki/عبدالکریم_عابدینی",
+                "type": "wiki",
+                "score": 60,
+                "label": {
+                  "eng": "عبدالکریم عابدینی"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Faith",
+                "type": "wiki",
+                "score": 58,
+                "label": {
+                  "eng": "Faith"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Iranian_Revolution",
+                "type": "wiki",
+                "score": 54,
+                "label": {
+                  "eng": "Iranian Revolution"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Qazvin_Province",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Qazvin Province"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Saudi_Arabia",
+                "type": "loc",
+                "score": 53,
+                "label": {
+                  "eng": "Saudi Arabia"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Saudi Arabia"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Al-Masjid_an-Nabawi",
+                "type": "wiki",
+                "score": 49,
+                "label": {
+                  "eng": "Al-Masjid al-Nabawi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Hussein-Ali_Montazeri",
+                "type": "person",
+                "score": 42,
+                "label": {
+                  "eng": "Hussein-Ali Montazeri"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Iran",
+                "type": "loc",
+                "score": 42,
+                "label": {
+                  "eng": "Iran"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Iran"
+                  }
+                }
+              },
+              {
+                "uri": "http://fa.wikipedia.org/wiki/حقوق",
+                "type": "wiki",
+                "score": 37,
+                "label": {
+                  "eng": "حقوق"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Wisdom",
+                "type": "wiki",
+                "score": 36,
+                "label": {
+                  "eng": "Wisdom"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Imam",
+                "type": "wiki",
+                "score": 25,
+                "label": {
+                  "eng": "Imam"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Saddam_Hussein",
+                "type": "person",
+                "score": 25,
+                "label": {
+                  "eng": "Saddam Hussein"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "fas-630279",
+                "articleCount": 5,
+                "lang": "fas",
+                "avgCos": 0.7529411764705882,
+                "variance": 0.4352941176470588,
+                "eventUri": "fas-630279",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Qazvīn"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Iran"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 5,
+            "title": {
+              "fas": "مردمی کردن اقتصاد اصلی ترین راه تحقق شعار سال است"
+            },
+            "summary": {
+              "fas": "به گزارش خبرنگار مهر، آیت الله عبدالکریم عابدینی در خطبههای اولین نماز جمعه قزوین در سال جدید که در مسجدالنبی (ص) برگزار شد اظهار کرد: نظم در امور و در انجام وظایف از سوی مسئولین باعث جلب رضایت مردم میشود.\n\nوی با اشاره به سفرهای نوروزی افزود: نظم در رانندگی و رعایت مقررات باعث رع"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Qazvīn"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Iran"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 80
+              }
+            ],
+            "articleCounts": {
+              "fas": 5
+            },
+            "sentiment": null,
+            "wgt": 15,
+            "relevance": 15
+          },
+          {
+            "uri": "rus-1427718",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Prisoner_of_war",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Prisoner of war"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ukraine",
+                "type": "loc",
+                "score": 96,
+                "label": {
+                  "eng": "Ukraine"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Ukraine"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Repatriation",
+                "type": "wiki",
+                "score": 85,
+                "label": {
+                  "eng": "Repatriation"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/International_humanitarian_law",
+                "type": "wiki",
+                "score": 62,
+                "label": {
+                  "eng": "International humanitarian law"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/International_Committee_of_the_Red_Cross",
+                "type": "org",
+                "score": 58,
+                "label": {
+                  "eng": "International Committee of the Red Cross"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Russia",
+                "type": "loc",
+                "score": 50,
+                "label": {
+                  "eng": "Russia"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Russia"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Geneva_Conventions",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Geneva Conventions"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Non-combatant",
+                "type": "wiki",
+                "score": 27,
+                "label": {
+                  "eng": "Non-combatant"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kiev",
+                "type": "loc",
+                "score": 13,
+                "label": {
+                  "eng": "Kiev"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Kiev"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Moscow",
+                "type": "loc",
+                "score": 13,
+                "label": {
+                  "eng": "Moscow"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Moscow"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Russia"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/International_community",
+                "type": "wiki",
+                "score": 11,
+                "label": {
+                  "eng": "International community"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/International_law",
+                "type": "wiki",
+                "score": 10,
+                "label": {
+                  "eng": "International law"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Military_personnel",
+                "type": "wiki",
+                "score": 9,
+                "label": {
+                  "eng": "Military personnel"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ministry_of_Defence_(Russia)",
+                "type": "org",
+                "score": 9,
+                "label": {
+                  "eng": "Ministry of Defence (Russia)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bakhmut",
+                "type": "loc",
+                "score": 8,
+                "label": {
+                  "eng": "Bakhmut"
+                },
+                "location": null
+              }
+            ],
+            "stories": [
+              {
+                "uri": "rus-1427718",
+                "articleCount": 20,
+                "lang": "rus",
+                "avgCos": 0.7647058823529411,
+                "variance": 0.4156862745098039,
+                "eventUri": "rus-1427718",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 3
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 20,
+            "title": {
+              "rus": "Украина передала РФ всех тяжелораненых пленных "
+            },
+            "summary": {
+              "rus": "Украина передала РФ всех тяжелораненых пленных\n\nУкраинский координационный штаб по вопросам военнопленных сообщил, что передал РФ всех тяжелораненых пленных, состояние которых позволяло транспортировку. В штабе назвали это \"гуманитарной акцией\".\n\n\"Согласно международном"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 75
+              }
+            ],
+            "articleCounts": {
+              "rus": 20
+            },
+            "sentiment": null,
+            "wgt": 13,
+            "relevance": 13
+          },
+          {
+            "uri": "rus-1427714",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ukraine",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Ukraine"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Ukraine"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Romania",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Romania"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Romania"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_States_Senate",
+                "type": "org",
+                "score": 75,
+                "label": {
+                  "eng": "United States Senate"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/International_sanctions_during_the_Russo-Ukrainian_War",
+                "type": "wiki",
+                "score": 69,
+                "label": {
+                  "eng": "Санкции в связи с украинскими событиями 2014 года"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ministry_of_Foreign_Affairs_(Ukraine)",
+                "type": "org",
+                "score": 44,
+                "label": {
+                  "eng": "Ministry of Foreign Affairs (Ukraine)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Politician",
+                "type": "wiki",
+                "score": 41,
+                "label": {
+                  "eng": "Politician"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Parliament_of_Romania",
+                "type": "org",
+                "score": 39,
+                "label": {
+                  "eng": "Parliament of Romania"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Budjak",
+                "type": "wiki",
+                "score": 36,
+                "label": {
+                  "eng": "Budjak"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bolhrad",
+                "type": "loc",
+                "score": 36,
+                "label": {
+                  "eng": "Bolhrad"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Bolhrad"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Izmail",
+                "type": "loc",
+                "score": 36,
+                "label": {
+                  "eng": "Izmayil"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Izmayil"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Cahul",
+                "type": "loc",
+                "score": 36,
+                "label": {
+                  "eng": "Cahul"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Cahul"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Moldova"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Revanchism",
+                "type": "wiki",
+                "score": 35,
+                "label": {
+                  "eng": "Revanchism"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Facebook",
+                "type": "org",
+                "score": 32,
+                "label": {
+                  "eng": "Facebook"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ratification",
+                "type": "wiki",
+                "score": 29,
+                "label": {
+                  "eng": "Ratification"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Parliament",
+                "type": "wiki",
+                "score": 29,
+                "label": {
+                  "eng": "Parliament"
+                }
+              },
+              {
+                "uri": "http://ru.wikipedia.org/wiki/Северная_Буковина",
+                "type": "wiki",
+                "score": 28,
+                "label": {
+                  "eng": "Северная Буковина"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Snake_Island_(Black_Sea)",
+                "type": "loc",
+                "score": 28,
+                "label": {
+                  "eng": "Ostriv Zmiyinyy"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Ostriv Zmiyinyy"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "rus-1427714",
+                "articleCount": 8,
+                "lang": "rus",
+                "avgCos": 0.7450980392156863,
+                "variance": 0.4431372549019608,
+                "eventUri": "rus-1427714",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Cahul"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Moldova"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 8,
+            "title": {
+              "rus": "Румынский сенатор Шошоакэ захотела украинской земли. У Кулебы инициируют санкции"
+            },
+            "summary": {
+              "rus": "Министерство иностранных дел инициирует наложение санкций на румынского сенатора Диану Шошоакэ за угрозу национальной безопасности. Так в ведомстве Дмитрия Кулебы отреагировали на призывы ультраправого политика к захвату части украинской территории на юге, о чем сообщ"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Cahul"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Moldova"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 76
+              }
+            ],
+            "articleCounts": {
+              "rus": 8
+            },
+            "sentiment": null,
+            "wgt": 13,
+            "relevance": 13
+          },
+          {
+            "uri": "ron-240051",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Transnistria_(region)",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Transnistria"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Maia_Sandu",
+                "type": "wiki",
+                "score": 65,
+                "label": {
+                  "eng": "Maia Sandu"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Romania",
+                "type": "loc",
+                "score": 55,
+                "label": {
+                  "eng": "Romania"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Romania"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Dorin_Recean",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Dorin Recean"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/State_(polity)",
+                "type": "wiki",
+                "score": 48,
+                "label": {
+                  "eng": "State (polity)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Moldova",
+                "type": "loc",
+                "score": 48,
+                "label": {
+                  "eng": "Moldova"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Moldova"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Chișinău",
+                "type": "loc",
+                "score": 43,
+                "label": {
+                  "eng": "Chișinău"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Cabinet_of_Moldova",
+                "type": "wiki",
+                "score": 41,
+                "label": {
+                  "eng": "Cabinet of Moldova"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Easter",
+                "type": "wiki",
+                "score": 37,
+                "label": {
+                  "eng": "Easter"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "ron-240051",
+                "articleCount": 6,
+                "lang": "ron",
+                "avgCos": 0.803921568627451,
+                "variance": 0.3490196078431372,
+                "eventUri": "ron-240051",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "ron": "Tauber: \"Serviciile Speciale Internaționale spun că PAS pregătește o provocare militară în Transnistria, pe 17 aprilie\". Guvernul: Un fals"
+            },
+            "summary": {
+              "ron": "Deputata Șor, Marina Tauber, acuză guvernarea că pregătește o provocare militară în Transnistria pe 17 aprilie. Aceasta spune că \"informația este exactă și verificată\". Guvernul a respins acest scenariu și o acuză pe ultima că \"încearcă să se acopere în fața finanțatorilor eșecul total al protestelor plătite\".\n\n\"Am o noutate foarte tristă, strigătoare la cer pentru toți cetățenii. Conform datelor ale Serviciilor Speciale Internaționale există informația exactă și "
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 72
+              }
+            ],
+            "articleCounts": {
+              "ron": 6
+            },
+            "sentiment": null,
+            "wgt": 11,
+            "relevance": 11
+          },
+          {
+            "uri": "hrv-588797",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bosnia_and_Herzegovina",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Bosnia and Herzegovina"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Bosnia and Herzegovina"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Russia",
+                "type": "loc",
+                "score": 92,
+                "label": {
+                  "eng": "Russia"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Russia"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Presidency_of_Bosnia_and_Herzegovina",
+                "type": "wiki",
+                "score": 80,
+                "label": {
+                  "eng": "Presidency of Bosnia and Herzegovina"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Denis_Bećirović",
+                "type": "wiki",
+                "score": 67,
+                "label": {
+                  "eng": "Denis Bećirović"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Republika_Srpska",
+                "type": "loc",
+                "score": 64,
+                "label": {
+                  "eng": "Republika Srpska"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Republika Srpska"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Bosnia and Herzegovina"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Milorad_Dodik",
+                "type": "person",
+                "score": 60,
+                "label": {
+                  "eng": "Milorad Dodik"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "type": "loc",
+                "score": 55,
+                "label": {
+                  "eng": "United Kingdom"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "United Kingdom"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/President_(government_title)",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Presidente"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Vassal",
+                "type": "loc",
+                "score": 37,
+                "label": {
+                  "eng": "Vassal"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Vassal"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Portugal"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/State_(polity)",
+                "type": "wiki",
+                "score": 36,
+                "label": {
+                  "eng": "State (polity)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Government_of_Republika_Srpska",
+                "type": "wiki",
+                "score": 35,
+                "label": {
+                  "eng": "Влада Републике Српске"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Politics",
+                "type": "wiki",
+                "score": 19,
+                "label": {
+                  "eng": "Politics"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Sovereignty",
+                "type": "wiki",
+                "score": 19,
+                "label": {
+                  "eng": "Sovereignty"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "hrv-588797",
+                "articleCount": 8,
+                "lang": "hrv",
+                "avgCos": 0.8901960784313725,
+                "variance": 0.207843137254902,
+                "eventUri": "hrv-588797",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Republika Srpska"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Bosnia and Herzegovina"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 8,
+            "title": {
+              "hrv": "Ruska ambasada obrušila se na Bećirovića: Čiji si ti vazal?"
+            },
+            "summary": {
+              "hrv": "Nakon što je član Predsjedništva BiH Denis Bećirović kritizirao Milorada Dodika zbog prekida odnosa sa ambasadama SAD i Velike Britanije, javila se Ambasada Rusije.\n\nOni naravno brane Dodikov stav i odluku Vlade RS kojom ne želi više komunikacije sa predstavnicima ambasada SAD i Velike Britanije u BiH.\n\n\"Obratili smo pažnju na ocjene, iznesene od strane člana Predsjedništva Bosne i Hercegovine Denisa Bećirovića, u vezi odluke Vlade Republike Srpske o prekidu saradnje sa ambasadama SAD"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Republika Srpska"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Bosnia and Herzegovina"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 68
+              }
+            ],
+            "articleCounts": {
+              "hrv": 8
+            },
+            "sentiment": null,
+            "wgt": 9,
+            "relevance": 9
+          },
+          {
+            "uri": "ara-1436704",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Benjamin_Netanyahu",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Benjamin Netanyahu"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Israel",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Israel"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Israel"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Law",
+                "type": "wiki",
+                "score": 80,
+                "label": {
+                  "eng": "Law"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Economy",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Economy"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "ara-1436704",
+                "articleCount": 3,
+                "lang": "ara",
+                "avgCos": 0.7372549019607844,
+                "variance": 0.4549019607843137,
+                "eventUri": "ara-1436704",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 3,
+            "title": {
+              "ara": "الادعاء العام الإسرائيلي: نتنياهو انتهك القانون"
+            },
+            "summary": {
+              "ara": "قالت المدعية العامة الإسرائيلية جالي باهراف، اليوم الجمعة، إنّ \"رئيس الوزراء الإسرائيلي بنيامين نتنياهو انتهك القانون بقوله إنّه سيتدخل شخصياً في خطة لإصلاح النظام القضائي\".\n\nوقالت باهراف إن \"الموقف القانوني واضح: يجب أن تحجم عن أي تدخل في مبادرات لتغيير النظام القضائي، ومن "
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 69
+              }
+            ],
+            "articleCounts": {
+              "ara": 3
+            },
+            "sentiment": null,
+            "wgt": 9,
+            "relevance": 9
+          },
+          {
+            "uri": "rus-1427707",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Meat",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Meat"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Anthrax",
+                "type": "wiki",
+                "score": 97,
+                "label": {
+                  "eng": "Anthrax"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Chuvashia",
+                "type": "loc",
+                "score": 83,
+                "label": {
+                  "eng": "Chuvashia"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Chuvashia"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Russia"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Quarantine",
+                "type": "wiki",
+                "score": 56,
+                "label": {
+                  "eng": "Quarantine"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Federal_Service_for_Surveillance_on_Consumer_Rights_Protection_and_Human_Wellbeing",
+                "type": "wiki",
+                "score": 50,
+                "label": {
+                  "eng": "Федеральная служба по надзору в сфере защиты прав потребителей и благополучия человека"
+                }
+              },
+              {
+                "uri": "http://ru.wikipedia.org/wiki/Старое_Акташево",
+                "type": "wiki",
+                "score": 49,
+                "label": {
+                  "eng": "Старое Акташево"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Investigative_Committee_of_Russia",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Investigative Committee of Russia"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Criminal_Code_of_Russia",
+                "type": "wiki",
+                "score": 25,
+                "label": {
+                  "eng": "Criminal Code of Russia"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Probable_cause",
+                "type": "wiki",
+                "score": 25,
+                "label": {
+                  "eng": "Probable cause"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "rus-1427707",
+                "articleCount": 8,
+                "lang": "rus",
+                "avgCos": 0.7411764705882353,
+                "variance": 0.4509803921568628,
+                "eventUri": "rus-1427707",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Chuvashia"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Russia"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 8,
+            "title": {
+              "rus": "В Чувашии нашли заражённого сибирской язвой бычка"
+            },
+            "summary": {
+              "rus": "Чебоксары, 24 марта - АиФ-Чувашия.\n\nВ Чувашии установлено местонахождение мяса, зараженного сибирской язвой. Об этом сообщается в Телеграм-канале СУ СКР по Чувашии.\n\nВыяснилось, что житель деревни Старое Акташево Цивильского округа продал мясо больного сибирской язвой живот"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Chuvashia"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Russia"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 68
+              }
+            ],
+            "articleCounts": {
+              "rus": 8
+            },
+            "sentiment": null,
+            "wgt": 9,
+            "relevance": 9
+          },
+          {
+            "uri": "pol-147887",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Sławomir_Nitras",
+                "type": "person",
+                "score": 100,
+                "label": {
+                  "eng": "Sławomir Nitras"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Pope_John_Paul_II",
+                "type": "person",
+                "score": 64,
+                "label": {
+                  "eng": "Pope John Paul II"
+                }
+              },
+              {
+                "uri": "http://pl.wikipedia.org/wiki/Radio_Plus",
+                "type": "wiki",
+                "score": 59,
+                "label": {
+                  "eng": "Radio Plus"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_parliament",
+                "type": "wiki",
+                "score": 59,
+                "label": {
+                  "eng": "Member of parliament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Concordat",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Concordat"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "pol-147887",
+                "articleCount": 4,
+                "lang": "pol",
+                "avgCos": 0.7607843137254902,
+                "variance": 0.4196078431372549,
+                "eventUri": "pol-147887",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 4,
+            "title": {
+              "pol": "\"Piłowanie katolików i małżeństwa homoseksualne\". Nitras: Z tym idę do wyborów"
+            },
+            "summary": {
+              "pol": "* Donald Tusk nie chciał rozmawiać z mediami. Lokalny dziennikarz odgrodzony [WIDEO]\n\nSpadek naszych notowań jest związany z ofensywą dotyczącą Jana Pawła II - mówi o słabnących wynikach sondażowych Platformy Obywatelskiej poseł tej partii Sławomir Nitras. W wywiadzie dla Radia Plus polityk potwierdził, że nadal chce \"piłować katolików\", domaga się wypowiedzenia konkordatu i wprowadzenia małżeństw homoseksualnych.\n\nSławomir Nitras znany jest z agresji i przemocy. Gdy Nitra"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 65
+              }
+            ],
+            "articleCounts": {
+              "pol": 4
+            },
+            "sentiment": null,
+            "wgt": 7,
+            "relevance": 7
+          },
+          {
+            "uri": "deu-1616566",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Reichsbürger_movement",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Reichsbürger movement"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Police",
+                "type": "wiki",
+                "score": 87,
+                "label": {
+                  "eng": "Police"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Remand_(detention)",
+                "type": "wiki",
+                "score": 70,
+                "label": {
+                  "eng": "Remand (detention)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Stuttgart",
+                "type": "loc",
+                "score": 66,
+                "label": {
+                  "eng": "Stuttgart"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Stuttgart"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Public_Prosecutor_General_(Germany)",
+                "type": "wiki",
+                "score": 60,
+                "label": {
+                  "eng": "Generalbundesanwalt beim Bundesgerichtshof"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Oberlandesgericht",
+                "type": "wiki",
+                "score": 57,
+                "label": {
+                  "eng": "Oberlandesgericht"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Closing_argument",
+                "type": "wiki",
+                "score": 57,
+                "label": {
+                  "eng": "Closing argument"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lawyer",
+                "type": "wiki",
+                "score": 57,
+                "label": {
+                  "eng": "Lawyer"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Culpable_homicide",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Culpable homicide"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Court",
+                "type": "wiki",
+                "score": 52,
+                "label": {
+                  "eng": "Court"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Murder_in_German_law",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "Mord (Deutschland)"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Nebenklage",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "Nebenklage"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Traffic_stop",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "Traffic stop"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Gefährliche_Körperverletzung_(Deutschland)",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Gefährliche Körperverletzung (Deutschland)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lörrach",
+                "type": "loc",
+                "score": 35,
+                "label": {
+                  "eng": "Lörrach"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Lörrach"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Efringen-Kirchen",
+                "type": "loc",
+                "score": 31,
+                "label": {
+                  "eng": "Efringen-Kirchen"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Efringen-Kirchen"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Rechtsordnung",
+                "type": "wiki",
+                "score": 26,
+                "label": {
+                  "eng": "Rechtsordnung"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Legitimacy_(political)",
+                "type": "wiki",
+                "score": 26,
+                "label": {
+                  "eng": "Legitimacy (political)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Civil_service",
+                "type": "wiki",
+                "score": 26,
+                "label": {
+                  "eng": "Civil service"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Germany",
+                "type": "loc",
+                "score": 26,
+                "label": {
+                  "eng": "Germany"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Germany"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Special_Deployment_Commando",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Spezialeinsatzkommando"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Search_and_seizure",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Search and seizure"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Beamter",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Beamter (Deutschland)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Judge",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Judge"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Reutlingen",
+                "type": "loc",
+                "score": 22,
+                "label": {
+                  "eng": "Reutlingen"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Reutlingen"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Switzerland",
+                "type": "loc",
+                "score": 22,
+                "label": {
+                  "eng": "Switzerland"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Switzerland"
+                  }
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "deu-1616566",
+                "articleCount": 5,
+                "lang": "deu",
+                "avgCos": 0.8627450980392157,
+                "variance": 0.2549019607843137,
+                "eventUri": "deu-1616566",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Stuttgart"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 5,
+            "title": {
+              "deu": "\"Reichsbürger\" im Prozess: Keine Erinnerung an Auto-Attacke"
+            },
+            "summary": {
+              "deu": "Der mutmaßliche \"Reichsbürger\", der einen Polizisten angefahren und schwer verletzt haben soll, hat vor dem Oberlandesgericht in Stuttgart angegeben, keinerlei Erinnerungen an den Vorfall zu haben. Er habe schon vor der Polizeikontrolle das Gefühl gehabt, etwas \"Böses\" komme auf ihn zu, er sei \"verängstigt\" und \"desorientiert\" gewesen, schilderte der 62 Jahre alte Angeklagte am Freitag. Zuvor hatte sein Anwalt in seinem Plädoyer gesagt, der Kernvorwurf eines vorsätzlichen versuchten Tötun"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Stuttgart"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Germany"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 60
+              }
+            ],
+            "articleCounts": {
+              "deu": 5
+            },
+            "sentiment": null,
+            "wgt": 5,
+            "relevance": 5
+          },
+          {
+            "uri": "ukr-181180",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Cruise_missile",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Cruise missile"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kiev",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Kiev"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Kiev"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tactic_(method)",
+                "type": "wiki",
+                "score": 95,
+                "label": {
+                  "eng": "Tactic (method)"
+                }
+              },
+              {
+                "uri": "http://uk.wikipedia.org/wiki/Озброєння",
+                "type": "wiki",
+                "score": 81,
+                "label": {
+                  "eng": "Озброєння"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Reconnaissance_aircraft",
+                "type": "wiki",
+                "score": 71,
+                "label": {
+                  "eng": "Reconnaissance aircraft"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Serhiy_Popko",
+                "type": "wiki",
+                "score": 69,
+                "label": {
+                  "eng": "Serhiy Popko"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Holodomor",
+                "type": "wiki",
+                "score": 66,
+                "label": {
+                  "eng": "Holodomor"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kiev_Oblast",
+                "type": "loc",
+                "score": 65,
+                "label": {
+                  "eng": "Kyyivs’ka Oblast’"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Kyyivs’ka Oblast’"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Unmanned_aerial_vehicle",
+                "type": "wiki",
+                "score": 64,
+                "label": {
+                  "eng": "Unmanned aerial vehicle"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Zaporizhia",
+                "type": "loc",
+                "score": 60,
+                "label": {
+                  "eng": "Zaporizhzhya"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Zaporizhzhya"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Black_Sea",
+                "type": "loc",
+                "score": 59,
+                "label": {
+                  "eng": "Black Sea"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://uk.wikipedia.org/wiki/Су-24МР",
+                "type": "wiki",
+                "score": 58,
+                "label": {
+                  "eng": "Су-24МР"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tupolev_Tu-22M",
+                "type": "wiki",
+                "score": 58,
+                "label": {
+                  "eng": "Tupolev Tu-22M"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Aerodrome",
+                "type": "wiki",
+                "score": 58,
+                "label": {
+                  "eng": "Aerodrome"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Caliber",
+                "type": "wiki",
+                "score": 58,
+                "label": {
+                  "eng": "Caliber"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bomber",
+                "type": "wiki",
+                "score": 58,
+                "label": {
+                  "eng": "Bomber"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Anti-aircraft_warfare",
+                "type": "wiki",
+                "score": 58,
+                "label": {
+                  "eng": "Anti-aircraft warfare"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Submarine",
+                "type": "wiki",
+                "score": 58,
+                "label": {
+                  "eng": "Submarine"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kherson_Oblast",
+                "type": "loc",
+                "score": 54,
+                "label": {
+                  "eng": "Kherson Oblast"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Kherson Oblast"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tupolev_Tu-160",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Tupolev Tu-160"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tupolev_Tu-95",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Tupolev Tu-95"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Strategic_bomber",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Strategic bomber"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ship",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Ship"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "ukr-181180",
+                "articleCount": 6,
+                "lang": "ukr",
+                "avgCos": 0.8431372549019608,
+                "variance": 0.2862745098039216,
+                "eventUri": "ukr-181180",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Kiev"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "ukr": "Ворог не відмовився від масованих обстрілів, ризик чергового удару існує, - КМВА"
+            },
+            "summary": {
+              "ukr": "Про це заявив начальник Київської міської військової адміністрації Сергій Попко, пише РБК-Україна з посиланням на Telegram-канал КМВА.\n\nЯк відзначив Попко, лише за останній тиждень росіяни завдали удари:\n\n\"Це лише частина повітряних ударів. І нанесені вони виключно по цивільних"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Kiev"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Ukraine"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 56
+              }
+            ],
+            "articleCounts": {
+              "ukr": 6
+            },
+            "sentiment": null,
+            "wgt": 3,
+            "relevance": 3
+          },
+          {
+            "uri": "eng-8501135",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Fishcross",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Fishcross"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Autopsy",
+                "type": "wiki",
+                "score": 79,
+                "label": {
+                  "eng": "Autopsy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Police_Scotland",
+                "type": "wiki",
+                "score": 66,
+                "label": {
+                  "eng": "Police Scotland"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "eng-8501135",
+                "articleCount": 4,
+                "lang": "eng",
+                "avgCos": 0.8627450980392157,
+                "variance": 0.2549019607843137,
+                "eventUri": "eng-8501135",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 4,
+            "title": {
+              "eng": "First picture of 'lovely' Scots OAP found 'murdered' at home on Mother's Day"
+            },
+            "summary": {
+              "eng": "A woman found 'murdered' at her home in a tiny Scots village on Mother's Day has been named locally as Catherine Pryde.\n\nThe 74-year-old was found fatally injured at the plush property in the Engine Green area of Fishcross, Clackmannanshire, at around 7.35am on Sunday, March 19.\n\nPolice have confirmed they are treating her death as suspicious following the results of a post mortem and are following a \"positive line of inquiry\".\n\nShocked neighbours today paid tribute to the \"wonderful woman\" who h"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 56
+              }
+            ],
+            "articleCounts": {
+              "eng": 4
+            },
+            "sentiment": -0.2784313725490196,
+            "wgt": 3,
+            "relevance": 3
+          },
+          {
+            "uri": "deu-1616568",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/France",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "France"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "France"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Paris",
+                "type": "loc",
+                "score": 51,
+                "label": {
+                  "eng": "Paris"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Paris"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "France"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+                "type": "person",
+                "score": 50,
+                "label": {
+                  "eng": "Emmanuel Macron"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/King",
+                "type": "person",
+                "score": 48,
+                "label": {
+                  "eng": "König"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Charles_III_of_Spain",
+                "type": "person",
+                "score": 48,
+                "label": {
+                  "eng": "Charles III of Spain"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "type": "loc",
+                "score": 46,
+                "label": {
+                  "eng": "United Kingdom"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "United Kingdom"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Monarchy",
+                "type": "wiki",
+                "score": 32,
+                "label": {
+                  "eng": "Monarchy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Strike_action",
+                "type": "wiki",
+                "score": 27,
+                "label": {
+                  "eng": "Strike action"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Gendarmerie",
+                "type": "wiki",
+                "score": 18,
+                "label": {
+                  "eng": "Gendarmerie"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Police",
+                "type": "wiki",
+                "score": 18,
+                "label": {
+                  "eng": "Police"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "deu-1616568",
+                "articleCount": 6,
+                "lang": "deu",
+                "avgCos": 0.803921568627451,
+                "variance": 0.3529411764705883,
+                "eventUri": "deu-1616568",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Paris"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "France"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "deu": "Land im Ausnahmezustand: Frankreich-Besuch von König Charles verschoben"
+            },
+            "summary": {
+              "deu": "In Frankreich und Deutschland wollen König Charles III. und Camilla nach jahrelangen Brexit-Spannungen Brücken bauen. In Frankreich muss dieser Plan jedoch vorerst auf Eis gelegt werden: Wegen der heftigen Proteste wird die Reise verschoben - die Demonstranten hatten zuvor Aktionen angekündigt.\n\nDer Frankreich-Staatsbesuch des britischen Königs Charles ist kurzfristig verschoben worden. Dies teilte der Elysée-Palast in Paris mit. Die Entscheidung sei nach einem Telefonat zwischen Charles und"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Paris"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "France"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 55
+              }
+            ],
+            "articleCounts": {
+              "deu": 6
+            },
+            "sentiment": null,
+            "wgt": 2,
+            "relevance": 2
+          },
+          {
+            "uri": "deu-1616564",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Stuttgart_Airport",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Stuttgart Airport"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Transport",
+                "type": "wiki",
+                "score": 87,
+                "label": {
+                  "eng": "Transport"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Eisenbahn-_und_Verkehrsgewerkschaft",
+                "type": "org",
+                "score": 79,
+                "label": {
+                  "eng": "Eisenbahn- und Verkehrsgewerkschaft"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Trade_union",
+                "type": "wiki",
+                "score": 57,
+                "label": {
+                  "eng": "Trade union"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Nahverkehr",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Nahverkehr"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Strike_action",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Strike action"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Passenger",
+                "type": "wiki",
+                "score": 52,
+                "label": {
+                  "eng": "Passenger"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Stuttgart",
+                "type": "loc",
+                "score": 51,
+                "label": {
+                  "eng": "Stuttgart"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Stuttgart"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ver.di",
+                "type": "org",
+                "score": 49,
+                "label": {
+                  "eng": "Ver.di"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Warnstreik",
+                "type": "wiki",
+                "score": 48,
+                "label": {
+                  "eng": "Warnstreik"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Regional_rail",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Regional rail"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Deutsche_Bahn",
+                "type": "org",
+                "score": 39,
+                "label": {
+                  "eng": "Deutsche Bahn"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/S-train",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "S-train"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Schienenpersonenfernverkehr",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Schienenpersonenfernverkehr"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Fernverkehr",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Fernverkehr"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rail_profile",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Rail profile"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Collective_agreement",
+                "type": "wiki",
+                "score": 31,
+                "label": {
+                  "eng": "Collective agreement"
+                }
+              },
+              {
+                "uri": "http://de.wikipedia.org/wiki/Bundesebene_(Deutschland)",
+                "type": "wiki",
+                "score": 18,
+                "label": {
+                  "eng": "Bundesebene (Deutschland)"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "deu-1616564",
+                "articleCount": 6,
+                "lang": "deu",
+                "avgCos": 0.9411764705882353,
+                "variance": 0.1137254901960784,
+                "eventUri": "deu-1616564",
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Stuttgart"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Germany"
+                    }
+                  }
+                },
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "deu": "Bundesweiter Warnstreik legt Flughafen Stuttgart erneut lahm"
+            },
+            "summary": {
+              "deu": "STUTTGART (dpa-AFX) - Im Zuge der bundesweiten Arbeitsniederlegungen im Verkehrsbereich stellt der Flughafen Stuttgart am kommenden Montag seinen regulären Passagierbetrieb ein. Das teilte der Airport am Freitag mit. Es könnten nur Sicherheitslandungen, medizinische Flüge und militärische Flüge durchgeführt werden. Für Montag waren demnach regulär 170 Starts und Landungen geplant. Von dem Ausstand betroffen sind rund 20 000 Passagiere. Der Flughafen empfahl, sich bei den Airlines zu infor"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Stuttgart"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Germany"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 54
+              }
+            ],
+            "articleCounts": {
+              "deu": 6
+            },
+            "sentiment": null,
+            "wgt": 2,
+            "relevance": 2
+          },
+          {
+            "uri": "ell-725278",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Russia",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "Russia"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Russia"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kazakhstan",
+                "type": "loc",
+                "score": 93,
+                "label": {
+                  "eng": "Kazakhstan"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Kazakhstan"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Armenia",
+                "type": "loc",
+                "score": 54,
+                "label": {
+                  "eng": "Armenia"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Armenia"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Siberia",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Siberia"
+                }
+              }
+            ],
+            "stories": [
+              {
+                "uri": "ell-725278",
+                "articleCount": 3,
+                "lang": "ell",
+                "avgCos": 0.8235294117647058,
+                "variance": 0.3215686274509804,
+                "eventUri": "ell-725278",
+                "location": null,
+                "isUserSetLocation": false,
+                "wgt": 1
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 3,
+            "title": {
+              "ell": "Ρώσος αξιωματικός ασφαλείας καταδικάστηκε σε 6,5 χρόνια φυλάκιση για λιποταξία"
+            },
+            "summary": {
+              "ell": "Ο 36χρονος ταγματάρχης της Ομοσπονδιακής Υπηρεσίας Προστασίας, Μιχαήλ Ζιλίν, διέφυγε τον περασμένο χρόνο στο Καζακστάν όταν η Ρωσία ανακοίνωσε επιστράτευση και διέσχισε παράνομα το σύνορο μέσα από δάση, ενώ η σύζυγος και τα παιδιά του πέρασαν οδικώς μέσω ενός σημείου ελέγχ"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "trendingScore": {
+                  "news": {
+                    "score": 0,
+                    "testPopFq": 0,
+                    "nullPopFq": 0
+                  }
+                },
+                "wgt": 53
+              }
+            ],
+            "articleCounts": {
+              "ell": 3
+            },
+            "sentiment": null,
+            "wgt": 1,
+            "relevance": 1
+          }
+        ],
+        "totalResults": 23,
+        "page": 1,
+        "count": 23,
+        "pages": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,2570 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "lang": "eng",
+      "eventsPage": 1,
+      "eventsCount": 10,
+      "eventsSortBy": "date",
+      "eventsSortByAsc": false,
+      "resultType": "events",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "events": {
+        "results": [
+          {
+            "uri": "eng-8501132",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Offshore_wind_power",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Offshore wind power"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Crown_Estate_Scotland",
+                "type": "wiki",
+                "score": 91,
+                "label": {
+                  "eng": "Crown Estate Scotland"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/North_Sea",
+                "type": "loc",
+                "score": 84,
+                "label": {
+                  "eng": "North Sea"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Renewable_energy",
+                "type": "wiki",
+                "score": 79,
+                "label": {
+                  "eng": "Renewable energy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Scotland",
+                "type": "loc",
+                "score": 74,
+                "label": {
+                  "eng": "Scotland"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Scotland"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "United Kingdom"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Seabed",
+                "type": "wiki",
+                "score": 66,
+                "label": {
+                  "eng": "Seabed"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Low-carbon_economy",
+                "type": "wiki",
+                "score": 66,
+                "label": {
+                  "eng": "Low-carbon economy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Fossil_fuel",
+                "type": "wiki",
+                "score": 55,
+                "label": {
+                  "eng": "Fossil fuel"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/North_Sea_oil",
+                "type": "wiki",
+                "score": 54,
+                "label": {
+                  "eng": "North Sea oil"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Scottish_Government",
+                "type": "org",
+                "score": 50,
+                "label": {
+                  "eng": "Scottish Government"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Offshore_drilling",
+                "type": "wiki",
+                "score": 42,
+                "label": {
+                  "eng": "Offshore drilling"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Carbon_neutrality",
+                "type": "wiki",
+                "score": 41,
+                "label": {
+                  "eng": "Carbon neutrality"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Supply_chain",
+                "type": "wiki",
+                "score": 37,
+                "label": {
+                  "eng": "Supply chain"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Michael_Matheson_(politician)",
+                "type": "person",
+                "score": 29,
+                "label": {
+                  "eng": "Michael Matheson (politician)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Energy_transition",
+                "type": "wiki",
+                "score": 25,
+                "label": {
+                  "eng": "Energy transition"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Electrification",
+                "type": "wiki",
+                "score": 25,
+                "label": {
+                  "eng": "Electrification"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "type": "loc",
+                "score": 21,
+                "label": {
+                  "eng": "United Kingdom"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "United Kingdom"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Just_transition",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Just transition"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Energy_industry",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Energy industry"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "eng": "Crown Estate Scotland Selects 13 Offshore Wind Projects to Decarbonize Oil Platforms"
+            },
+            "summary": {
+              "eng": "Crown Estate Scotland has announced the results of the world's first leasing round designed to enable offshore wind energy to supply offshore oil and gas platforms directly. Thirteen projects have been offered exclusivity agreements.\n\nINTOG (Innovation and Targeted Oil & Gas) leasing aims to attract investment in innovative offshore wind projects in Scottish waters, as well as help decarbonize North Sea operations.\n\nThe INTOG process allowed developers to apply for seabed rights to develop offsho"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "dmoz/Business/Energy",
+                "label": "dmoz/Business/Energy",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Business/Energy/Consulting",
+                "label": "dmoz/Business/Energy/Consulting",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Science/Environment/Energy",
+                "label": "dmoz/Science/Environment/Energy",
+                "wgt": 100
+              },
+              {
+                "uri": "news/Environment",
+                "label": "news/Environment",
+                "wgt": 53
+              }
+            ],
+            "articleCounts": {
+              "eng": 6
+            },
+            "sentiment": 0.4431372549019608,
+            "wgt": 417312000,
+            "relevance": 1
+          },
+          {
+            "uri": "eng-8501135",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Fishcross",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Fishcross"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Autopsy",
+                "type": "wiki",
+                "score": 79,
+                "label": {
+                  "eng": "Autopsy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Police_Scotland",
+                "type": "wiki",
+                "score": 66,
+                "label": {
+                  "eng": "Police Scotland"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 4,
+            "title": {
+              "eng": "First picture of 'lovely' Scots OAP found 'murdered' at home on Mother's Day"
+            },
+            "summary": {
+              "eng": "A woman found 'murdered' at her home in a tiny Scots village on Mother's Day has been named locally as Catherine Pryde.\n\nThe 74-year-old was found fatally injured at the plush property in the Engine Green area of Fishcross, Clackmannanshire, at around 7.35am on Sunday, March 19.\n\nPolice have confirmed they are treating her death as suspicious following the results of a post mortem and are following a \"positive line of inquiry\".\n\nShocked neighbours today paid tribute to the \"wonderful woman\" who h"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "wgt": 56
+              }
+            ],
+            "articleCounts": {
+              "eng": 4
+            },
+            "sentiment": -0.2784313725490196,
+            "wgt": 417312000,
+            "relevance": 1
+          },
+          {
+            "uri": "eng-8500625",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rahul_Gandhi",
+                "type": "person",
+                "score": 100,
+                "label": {
+                  "eng": "Rahul Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_National_Congress",
+                "type": "org",
+                "score": 78,
+                "label": {
+                  "eng": "Indian National Congress"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lok_Sabha",
+                "type": "loc",
+                "score": 67,
+                "label": {
+                  "eng": "Lok Sabha"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Defamation",
+                "type": "wiki",
+                "score": 56,
+                "label": {
+                  "eng": "Defamation"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bharatiya_Janata_Party",
+                "type": "org",
+                "score": 48,
+                "label": {
+                  "eng": "Bharatiya Janata Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Surat",
+                "type": "loc",
+                "score": 48,
+                "label": {
+                  "eng": "Surat"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Surat"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_parliament",
+                "type": "wiki",
+                "score": 47,
+                "label": {
+                  "eng": "Member of parliament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Mahatma_Gandhi",
+                "type": "person",
+                "score": 46,
+                "label": {
+                  "eng": "Mahatma Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Democracy",
+                "type": "wiki",
+                "score": 33,
+                "label": {
+                  "eng": "Democracy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/India",
+                "type": "loc",
+                "score": 28,
+                "label": {
+                  "eng": "India"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "India"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Chief_minister",
+                "type": "wiki",
+                "score": 23,
+                "label": {
+                  "eng": "Chief minister"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kerala",
+                "type": "loc",
+                "score": 21,
+                "label": {
+                  "eng": "State of Kerala"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "State of Kerala"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Narendra_Modi",
+                "type": "person",
+                "score": 20,
+                "label": {
+                  "eng": "Narendra Modi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Dictatorship",
+                "type": "wiki",
+                "score": 19,
+                "label": {
+                  "eng": "Dictatorship"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Parliament_of_India",
+                "type": "org",
+                "score": 18,
+                "label": {
+                  "eng": "Parliament of India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Wayanad_district",
+                "type": "loc",
+                "score": 18,
+                "label": {
+                  "eng": "Wayanad"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Wayanad"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_Parliament,_Lok_Sabha",
+                "type": "wiki",
+                "score": 15,
+                "label": {
+                  "eng": "Member of Parliament, Lok Sabha"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_the_Legislative_Assembly_(India)",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Member of the Legislative Assembly (India)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Uddhav_Thackeray",
+                "type": "person",
+                "score": 13,
+                "label": {
+                  "eng": "Uddhav Thackeray"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Mamata_Banerjee",
+                "type": "person",
+                "score": 13,
+                "label": {
+                  "eng": "Mamata Banerjee"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Gujarat",
+                "type": "loc",
+                "score": 13,
+                "label": {
+                  "eng": "Gujarat"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Gujarat"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Magistrate",
+                "type": "wiki",
+                "score": 12,
+                "label": {
+                  "eng": "Magistrate"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Twitter",
+                "type": "org",
+                "score": 11,
+                "label": {
+                  "eng": "Twitter"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Liberal_democracy",
+                "type": "wiki",
+                "score": 10,
+                "label": {
+                  "eng": "Liberal democracy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Aam_Aadmi_Party",
+                "type": "wiki",
+                "score": 9,
+                "label": {
+                  "eng": "Aam Aadmi Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Electoral_district",
+                "type": "wiki",
+                "score": 9,
+                "label": {
+                  "eng": "Electoral district"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Supreme_Court_of_India",
+                "type": "wiki",
+                "score": 9,
+                "label": {
+                  "eng": "Supreme Court of India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Shiv_Sena",
+                "type": "org",
+                "score": 9,
+                "label": {
+                  "eng": "Shiv Sena"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Cabinet_(government)",
+                "type": "wiki",
+                "score": 9,
+                "label": {
+                  "eng": "Cabinet (government)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/West_Bengal",
+                "type": "loc",
+                "score": 9,
+                "label": {
+                  "eng": "West Bengal"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "West Bengal"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Other_Backward_Class",
+                "type": "wiki",
+                "score": 8,
+                "label": {
+                  "eng": "Other Backward Class"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Delhi",
+                "type": "loc",
+                "score": 8,
+                "label": {
+                  "eng": "Delhi"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Karnataka",
+                "type": "loc",
+                "score": 8,
+                "label": {
+                  "eng": "Karnataka"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Karnataka"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/New_Delhi",
+                "type": "loc",
+                "score": 8,
+                "label": {
+                  "eng": "New Delhi"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "New Delhi"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Trinamool_Congress",
+                "type": "org",
+                "score": 7,
+                "label": {
+                  "eng": "Trinamool Congress"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Arvind_Kejriwal",
+                "type": "person",
+                "score": 7,
+                "label": {
+                  "eng": "Arvind Kejriwal"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Constitution_of_India",
+                "type": "wiki",
+                "score": 7,
+                "label": {
+                  "eng": "Constitution of India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Mallikarjun_Kharge",
+                "type": "person",
+                "score": 6,
+                "label": {
+                  "eng": "Mallikarjun Kharge"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ashok_Gehlot",
+                "type": "person",
+                "score": 6,
+                "label": {
+                  "eng": "Ashok Gehlot"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bail",
+                "type": "wiki",
+                "score": 6,
+                "label": {
+                  "eng": "Bail"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Representation_of_the_People_Act,_1951",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Representation of the People Act, 1951"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lalit_Modi",
+                "type": "person",
+                "score": 5,
+                "label": {
+                  "eng": "Lalit Modi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Priyanka_Gandhi",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Priyanka Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Jairam_Ramesh",
+                "type": "person",
+                "score": 5,
+                "label": {
+                  "eng": "Jairam Ramesh"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_Progressive_Alliance",
+                "type": "org",
+                "score": 5,
+                "label": {
+                  "eng": "United Progressive Alliance"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_Penal_Code",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Indian Penal Code"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Leader_of_the_Opposition",
+                "type": "wiki",
+                "score": 5,
+                "label": {
+                  "eng": "Leader of the Opposition"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Nationalist_Congress_Party",
+                "type": "org",
+                "score": 5,
+                "label": {
+                  "eng": "Nationalist Congress Party"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 74,
+            "title": {
+              "eng": "Rahul Gandhi now an ex-MP: What's next for Congress leader "
+            },
+            "summary": {
+              "eng": "Rahul Gandhi disqualified as MP: A day after a Surat court convicted him in 2019 'Modi surname' defamation case, former Congress president Rahul Gandhi was disqualified as member of Lok Sabha on Friday. The Surat Sessions court awarded two-year sentence to Rahul Gandhi, however, he was granted bail and 30-day time to appeal against the decision.\n\n\"Consequent upon his conviction by the Court of Chief Judicial Magistrate, Surat, Rahul Gandhi, Member of Lok Sabha representing the Wayanad Parliamenta"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Surat"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "India"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "wgt": 98
+              },
+              {
+                "uri": "dmoz/Society/Issues/Crime_and_Justice",
+                "label": "dmoz/Society/Issues/Crime and Justice",
+                "wgt": 100
+              }
+            ],
+            "articleCounts": {
+              "eng": 74
+            },
+            "sentiment": -0.1450980392156863,
+            "wgt": 417312000,
+            "relevance": 5
+          },
+          {
+            "uri": "eng-8501164",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/European_Union",
+                "type": "loc",
+                "score": 100,
+                "label": {
+                  "eng": "European Union"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Financial_crisis_of_2007–2008",
+                "type": "wiki",
+                "score": 82,
+                "label": {
+                  "eng": "Financial crisis of 2007–2008"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Russia",
+                "type": "loc",
+                "score": 77,
+                "label": {
+                  "eng": "Russia"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Russia"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Brussels",
+                "type": "loc",
+                "score": 70,
+                "label": {
+                  "eng": "Brussels"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Brussels"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Belgium"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ukraine",
+                "type": "loc",
+                "score": 67,
+                "label": {
+                  "eng": "Ukraine"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Ukraine"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Ukraine"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_States",
+                "type": "loc",
+                "score": 66,
+                "label": {
+                  "eng": "United States"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "United States"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Euro",
+                "type": "wiki",
+                "score": 58,
+                "label": {
+                  "eng": "Euro"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Prime_Minister_of_Belgium",
+                "type": "wiki",
+                "score": 49,
+                "label": {
+                  "eng": "Prime Minister of Belgium"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Alexander_De_Croo",
+                "type": "person",
+                "score": 49,
+                "label": {
+                  "eng": "Alexander De Croo"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Credit_Suisse",
+                "type": "org",
+                "score": 48,
+                "label": {
+                  "eng": "Credit Suisse"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Eurozone",
+                "type": "wiki",
+                "score": 45,
+                "label": {
+                  "eng": "Eurozone"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bank",
+                "type": "wiki",
+                "score": 45,
+                "label": {
+                  "eng": "Bank"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Brexit",
+                "type": "wiki",
+                "score": 38,
+                "label": {
+                  "eng": "Brexit"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Natural_gas",
+                "type": "wiki",
+                "score": 38,
+                "label": {
+                  "eng": "Natural gas"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Recession",
+                "type": "wiki",
+                "score": 38,
+                "label": {
+                  "eng": "Recession"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Europe",
+                "type": "loc",
+                "score": 38,
+                "label": {
+                  "eng": "Europe"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Petroleum",
+                "type": "wiki",
+                "score": 38,
+                "label": {
+                  "eng": "Petroleum"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Sovereign_default",
+                "type": "wiki",
+                "score": 37,
+                "label": {
+                  "eng": "Sovereign default"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/UBS",
+                "type": "org",
+                "score": 37,
+                "label": {
+                  "eng": "UBS"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Inflation",
+                "type": "wiki",
+                "score": 37,
+                "label": {
+                  "eng": "Inflation"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Greek_government-debt_crisis",
+                "type": "wiki",
+                "score": 33,
+                "label": {
+                  "eng": "Greek government-debt crisis"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Financial_institution",
+                "type": "wiki",
+                "score": 33,
+                "label": {
+                  "eng": "Financial institution"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/European_Commission",
+                "type": "org",
+                "score": 33,
+                "label": {
+                  "eng": "European Commission"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Coal",
+                "type": "wiki",
+                "score": 33,
+                "label": {
+                  "eng": "Coal"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Economic_growth",
+                "type": "wiki",
+                "score": 33,
+                "label": {
+                  "eng": "Economic growth"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Paschal_Donohoe",
+                "type": "person",
+                "score": 28,
+                "label": {
+                  "eng": "Paschal Donohoe"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Finance",
+                "type": "wiki",
+                "score": 28,
+                "label": {
+                  "eng": "Finance"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/European_Central_Bank",
+                "type": "loc",
+                "score": 28,
+                "label": {
+                  "eng": "European Central Bank"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Interest_rate",
+                "type": "wiki",
+                "score": 24,
+                "label": {
+                  "eng": "Interest rate"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Deposit_insurance",
+                "type": "wiki",
+                "score": 22,
+                "label": {
+                  "eng": "Deposit insurance"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Prime_Minister_of_Estonia",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Prime Minister of Estonia"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/President_of_the_European_Central_Bank",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "President of the European Central Bank"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Christine_Lagarde",
+                "type": "person",
+                "score": 20,
+                "label": {
+                  "eng": "Christine Lagarde"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Associated_Press",
+                "type": "org",
+                "score": 15,
+                "label": {
+                  "eng": "Associated Press"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 8,
+            "title": {
+              "eng": "EU leaders grapple with bank risks as economy weakens"
+            },
+            "summary": {
+              "eng": "BRUSSELS (AP) -- European Union leaders gathered Friday to gauge the risk of a banking crisis developing from recent global financial turbulence and hitting the economy even harder than the energy crunch tied to Russia's war in Ukraine.\n\nThe deliberations by EU government heads in Brussels follow U.S. regulators shutting down two U.S. banks, including Silicon Valley Bank, and a Swiss-orchestrated takeover of troubled lender Credit Suisse by rival UBS.\n\nThe emergency actions on both sides of the A"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Brussels"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Belgium"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Business",
+                "label": "news/Business",
+                "wgt": 83
+              },
+              {
+                "uri": "dmoz/Society/Government/Finance",
+                "label": "dmoz/Society/Government/Finance",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Business/Financial_Services/Banking_Services",
+                "label": "dmoz/Business/Financial Services/Banking Services",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Business/Financial_Services/Holding_Companies",
+                "label": "dmoz/Business/Financial Services/Holding Companies",
+                "wgt": 100
+              }
+            ],
+            "articleCounts": {
+              "eng": 8
+            },
+            "sentiment": -0.2,
+            "wgt": 417312000,
+            "relevance": 1
+          },
+          {
+            "uri": "eng-8501166",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Nasdaq",
+                "type": "org",
+                "score": 100,
+                "label": {
+                  "eng": "Nasdaq"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Listing_(finance)",
+                "type": "wiki",
+                "score": 79,
+                "label": {
+                  "eng": "Listing (finance)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/WiSA",
+                "type": "wiki",
+                "score": 73,
+                "label": {
+                  "eng": "WiSA"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/WISA",
+                "type": "org",
+                "score": 66,
+                "label": {
+                  "eng": "WISA"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Stock_exchange",
+                "type": "wiki",
+                "score": 60,
+                "label": {
+                  "eng": "Stock exchange"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Stock",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Stock"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 3,
+            "title": {
+              "eng": "WiSA Technologies Regains Compliance with Nasdaq Continued Listing Requirements"
+            },
+            "summary": {
+              "eng": "BEAVERTON, Ore.--(BUSINESS WIRE)-- WiSA Technologies, Inc. (Nasdaq: WISA or the âCompanyâ), a developer of spatial audio wireless technology for smart devices and next-generation home entertainment systems, announced today that it is now in compliance with all Nasdaq continued listing requirements.\n\nAs previously announced, on June 23, 2022, the Nasdaq Listing Qualifications staff (âStaffâ) issued the Company a delist letter citing its failure to comply with the minimum bid pr"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Business",
+                "label": "news/Business",
+                "wgt": 70
+              },
+              {
+                "uri": "dmoz/Business/Investing",
+                "label": "dmoz/Business/Investing",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Business/Investing/Stocks_and_Bonds",
+                "label": "dmoz/Business/Investing/Stocks and Bonds",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Business/Major_Companies",
+                "label": "dmoz/Business/Major Companies",
+                "wgt": 100
+              }
+            ],
+            "articleCounts": {
+              "eng": 3
+            },
+            "sentiment": 0.1450980392156862,
+            "wgt": 417312000,
+            "relevance": 1
+          },
+          {
+            "uri": "eng-8501177",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/British_Basketball_League",
+                "type": "org",
+                "score": 100,
+                "label": {
+                  "eng": "British Basketball League"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Basketball",
+                "type": "wiki",
+                "score": 96,
+                "label": {
+                  "eng": "Basketball"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Scotland",
+                "type": "loc",
+                "score": 94,
+                "label": {
+                  "eng": "Scotland"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Scotland"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "United Kingdom"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Glasgow_Rocks",
+                "type": "org",
+                "score": 87,
+                "label": {
+                  "eng": "Glasgow Rocks"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Cheshire_Phoenix",
+                "type": "org",
+                "score": 68,
+                "label": {
+                  "eng": "Cheshire Phoenix"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Arena",
+                "type": "wiki",
+                "score": 67,
+                "label": {
+                  "eng": "Arena"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Head_coach",
+                "type": "org",
+                "score": 66,
+                "label": {
+                  "eng": "Head coach"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/East_Kilbride",
+                "type": "loc",
+                "score": 66,
+                "label": {
+                  "eng": "East Kilbride"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "East Kilbride"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "United Kingdom"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Commonwealth_Arena_and_Sir_Chris_Hoy_Velodrome",
+                "type": "wiki",
+                "score": 60,
+                "label": {
+                  "eng": "Commonwealth Arena and Sir Chris Hoy Velodrome"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/BBL_Trophy",
+                "type": "org",
+                "score": 59,
+                "label": {
+                  "eng": "BBL Trophy"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Glasgow",
+                "type": "loc",
+                "score": 54,
+                "label": {
+                  "eng": "Glasgow"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Glasgow"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "United Kingdom"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Edinburgh",
+                "type": "loc",
+                "score": 51,
+                "label": {
+                  "eng": "Edinburgh"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Edinburgh"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "United Kingdom"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Gareth_Murray",
+                "type": "wiki",
+                "score": 45,
+                "label": {
+                  "eng": "Gareth Murray"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/England",
+                "type": "loc",
+                "score": 38,
+                "label": {
+                  "eng": "England"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "England"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "United Kingdom"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/France",
+                "type": "loc",
+                "score": 38,
+                "label": {
+                  "eng": "France"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "France"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kelvin_Hall",
+                "type": "wiki",
+                "score": 34,
+                "label": {
+                  "eng": "Kelvin Hall"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Player-coach",
+                "type": "org",
+                "score": 34,
+                "label": {
+                  "eng": "Player-coach"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "type": "loc",
+                "score": 34,
+                "label": {
+                  "eng": "United Kingdom"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "United Kingdom"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_Arab_Emirates",
+                "type": "loc",
+                "score": 34,
+                "label": {
+                  "eng": "United Arab Emirates"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "United Arab Emirates"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Cap_(sport)",
+                "type": "wiki",
+                "score": 17,
+                "label": {
+                  "eng": "Cap (sport)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Great_Britain",
+                "type": "wiki",
+                "score": 17,
+                "label": {
+                  "eng": "Great Britain"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Europe",
+                "type": "loc",
+                "score": 17,
+                "label": {
+                  "eng": "Europe"
+                },
+                "location": null
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "eng": "Head coach Gareth Murray sees bright future for Caledonia Gladiators"
+            },
+            "summary": {
+              "eng": "Head coach Gareth Murray is determined to secure a tangible step in his ambition to make Caledonia Gladiators Britain's biggest basketball club when they compete in Sunday's BBL Trophy final.\n\nThe final against Cheshire Phoenix at the Emirates Arena in Glasgow offers the chance to bring major silverware to Scotland for the first time since the Scottish Rocks won the BBL play-offs 20 years ago.\n\nDoing so would help grow increasing belief that the Gladiators can be a major force in the game followi"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Scotland"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "United Kingdom"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Sports",
+                "label": "news/Sports",
+                "wgt": 98
+              },
+              {
+                "uri": "dmoz/Sports/Basketball",
+                "label": "dmoz/Sports/Basketball",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Sports/Basketball/Training",
+                "label": "dmoz/Sports/Basketball/Training",
+                "wgt": 100
+              }
+            ],
+            "articleCounts": {
+              "eng": 6
+            },
+            "sentiment": 0.3254901960784313,
+            "wgt": 417312000,
+            "relevance": 1
+          },
+          {
+            "uri": "eng-8501179",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tractor",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Tractor"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Dog",
+                "type": "wiki",
+                "score": 95,
+                "label": {
+                  "eng": "Dog"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Euro",
+                "type": "wiki",
+                "score": 89,
+                "label": {
+                  "eng": "Euro"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Limerick",
+                "type": "loc",
+                "score": 78,
+                "label": {
+                  "eng": "Luimneach"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Luimneach"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "Republic of Ireland"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/The_Nationalist_(Carlow)",
+                "type": "wiki",
+                "score": 67,
+                "label": {
+                  "eng": "The Nationalist (Carlow)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/John_Deere",
+                "type": "org",
+                "score": 67,
+                "label": {
+                  "eng": "John Deere"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Galbally,_County_Limerick",
+                "type": "wiki",
+                "score": 51,
+                "label": {
+                  "eng": "Galbally, County Limerick"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Facebook",
+                "type": "org",
+                "score": 45,
+                "label": {
+                  "eng": "Facebook"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bar",
+                "type": "wiki",
+                "score": 34,
+                "label": {
+                  "eng": "Bar"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Community_centre",
+                "type": "wiki",
+                "score": 17,
+                "label": {
+                  "eng": "Community centre"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tidy_Towns_(Ireland)",
+                "type": "wiki",
+                "score": 17,
+                "label": {
+                  "eng": "Tidy Towns (Ireland)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Playground",
+                "type": "wiki",
+                "score": 17,
+                "label": {
+                  "eng": "Playground"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 5,
+            "title": {
+              "eng": "Dog wins tractor worth €100k in Laois draw | Meath Chronicle"
+            },
+            "summary": {
+              "eng": "Dog wins tractor worth €100k in Laois draw RSS Syndicated Content Published: Fri 24 Mar 2023, 10:44 AM Last updated: Fri 24 Mar 2023, 11:01 AM\n\nA John Deere tractor worth €100,000 has been won by an unlikely winner, a dog.\n\nAs reported by the Laois Nationalist, the main prize in the Clough Community Centre fundraiser is on its way to Limerick, after the winning ticket was pulled from a drum on St Patrick's night.\n\nThe golden ticket was in the name of Toby, a dog owned by Patsy Dalton from Gal"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Luimneach"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "Republic of Ireland"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Business",
+                "label": "news/Business",
+                "wgt": 54
+              },
+              {
+                "uri": "dmoz/Society/Disabled/Service_Animals",
+                "label": "dmoz/Society/Disabled/Service Animals",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Recreation/Pets/Dogs",
+                "label": "dmoz/Recreation/Pets/Dogs",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Recreation/Pets/Contests",
+                "label": "dmoz/Recreation/Pets/Contests",
+                "wgt": 100
+              }
+            ],
+            "articleCounts": {
+              "eng": 5
+            },
+            "sentiment": 0.3490196078431373,
+            "wgt": 417312000,
+            "relevance": 1
+          },
+          {
+            "uri": "eng-8501188",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_the_Legislative_Assembly_(India)",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "Member of the Legislative Assembly (India)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_parliament",
+                "type": "wiki",
+                "score": 89,
+                "label": {
+                  "eng": "Member of parliament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Azam_Khan_(politician)",
+                "type": "person",
+                "score": 81,
+                "label": {
+                  "eng": "Azam Khan (politician)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bharatiya_Janata_Party",
+                "type": "org",
+                "score": 71,
+                "label": {
+                  "eng": "Bharatiya Janata Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Uttar_Pradesh",
+                "type": "loc",
+                "score": 71,
+                "label": {
+                  "eng": "Uttar Pradesh"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Uttar Pradesh"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lok_Sabha",
+                "type": "loc",
+                "score": 67,
+                "label": {
+                  "eng": "Lok Sabha"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rampur,_Uttar_Pradesh",
+                "type": "loc",
+                "score": 63,
+                "label": {
+                  "eng": "Rāmpur"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Rāmpur"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Samajwadi_Party",
+                "type": "org",
+                "score": 59,
+                "label": {
+                  "eng": "Samajwadi Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/J._Jayalalithaa",
+                "type": "person",
+                "score": 53,
+                "label": {
+                  "eng": "J. Jayalalithaa"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rashtriya_Janata_Dal",
+                "type": "wiki",
+                "score": 53,
+                "label": {
+                  "eng": "Rashtriya Janata Dal"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rahul_Gandhi",
+                "type": "person",
+                "score": 53,
+                "label": {
+                  "eng": "Rahul Gandhi"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tamil_Nadu_Legislative_Assembly",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "Tamil Nadu Legislative Assembly"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/All_India_Anna_Dravida_Munnetra_Kazhagam",
+                "type": "wiki",
+                "score": 43,
+                "label": {
+                  "eng": "All India Anna Dravida Munnetra Kazhagam"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_National_Congress",
+                "type": "org",
+                "score": 43,
+                "label": {
+                  "eng": "Indian National Congress"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bihar",
+                "type": "loc",
+                "score": 43,
+                "label": {
+                  "eng": "Bihar"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Bihar"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Saran_district",
+                "type": "loc",
+                "score": 43,
+                "label": {
+                  "eng": "Sāran"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Sāran"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Suar_(Assembly_constituency)",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Suar (Assembly constituency)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Central_Reserve_Police_Force",
+                "type": "wiki",
+                "score": 40,
+                "label": {
+                  "eng": "Central Reserve Police Force"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Anil_Kumar_(politician)",
+                "type": "wiki",
+                "score": 38,
+                "label": {
+                  "eng": "Anil Kumar (politician)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Muzaffarnagar",
+                "type": "loc",
+                "score": 36,
+                "label": {
+                  "eng": "Muzaffarnagar"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Muzaffarnagar"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Chief_minister",
+                "type": "wiki",
+                "score": 34,
+                "label": {
+                  "eng": "Chief minister"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Tamil_Nadu",
+                "type": "loc",
+                "score": 34,
+                "label": {
+                  "eng": "State of Tamil Nādu"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "State of Tamil Nādu"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Khatauli_(Assembly_constituency)",
+                "type": "wiki",
+                "score": 31,
+                "label": {
+                  "eng": "Khatauli (Assembly constituency)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kerala_High_Court",
+                "type": "org",
+                "score": 29,
+                "label": {
+                  "eng": "Kerala High Court"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Nationalist_Congress_Party",
+                "type": "org",
+                "score": 29,
+                "label": {
+                  "eng": "Nationalist Congress Party"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lakshadweep",
+                "type": "loc",
+                "score": 29,
+                "label": {
+                  "eng": "Union Territory of Lakshadweep"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Union Territory of Lakshadweep"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Vikram_Singh_Saini",
+                "type": "wiki",
+                "score": 24,
+                "label": {
+                  "eng": "Vikram Singh Saini"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Air_India",
+                "type": "org",
+                "score": 24,
+                "label": {
+                  "eng": "Air India"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Bangarmau",
+                "type": "loc",
+                "score": 23,
+                "label": {
+                  "eng": "Bāngarmau"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Bāngarmau"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Kuldeep_Singh_Sengar",
+                "type": "wiki",
+                "score": 19,
+                "label": {
+                  "eng": "Kuldeep Singh Sengar"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rampur_district",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "रामपुर जिला"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Abdullah_Azam_Khan",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Abdullah Azam Khan"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Uttar_Pradesh_Legislative_Assembly",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Uttar Pradesh Legislative Assembly"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Janata_Dal_(United)",
+                "type": "org",
+                "score": 14,
+                "label": {
+                  "eng": "Janata Dal (United)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Member_of_Parliament,_Rajya_Sabha",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Member of Parliament, Rajya Sabha"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Indian_rupee",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Indian rupee"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lakh",
+                "type": "wiki",
+                "score": 14,
+                "label": {
+                  "eng": "Lakh"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Haryana",
+                "type": "loc",
+                "score": 14,
+                "label": {
+                  "eng": "Haryana"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Haryana"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Patna_district",
+                "type": "loc",
+                "score": 14,
+                "label": {
+                  "eng": "Patna"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Patna"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Unnao",
+                "type": "loc",
+                "score": 14,
+                "label": {
+                  "eng": "Unnāo"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Unnāo"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "India"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Rape",
+                "type": "wiki",
+                "score": 13,
+                "label": {
+                  "eng": "Rape"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "eng": "Six UP MLAs faced disqualification after conviction by courts"
+            },
+            "summary": {
+              "eng": "Lucknow, March 24 (SocialNews.XYZ) Six legislators in Uttar Pradesh have been disqualified in the past five years after they were convicted by courts on various charges.\n\nFormer Samajwadi Party MLA Azam Khan faced disqualification from the state Assembly last month after a Moradabad court order sentenced him to two years in jail in a 15-year-old case. He held the Rampur Assembly seat.\n\nHe was found guilty of staging a dharna on a state highway on January 29, 2008 as their cavalcade was stopped by"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Uttar Pradesh"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "India"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Politics",
+                "label": "news/Politics",
+                "wgt": 99
+              },
+              {
+                "uri": "dmoz/Society/Crime",
+                "label": "dmoz/Society/Crime",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Society/Crime/Murder",
+                "label": "dmoz/Society/Crime/Murder",
+                "wgt": 100
+              },
+              {
+                "uri": "dmoz/Society/Crime/Trials",
+                "label": "dmoz/Society/Crime/Trials",
+                "wgt": 100
+              }
+            ],
+            "articleCounts": {
+              "eng": 6
+            },
+            "sentiment": -0.3490196078431372,
+            "wgt": 417312000,
+            "relevance": 1
+          },
+          {
+            "uri": "eng-8501190",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/President_of_France",
+                "type": "wiki",
+                "score": 100,
+                "label": {
+                  "eng": "President of France"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/France",
+                "type": "loc",
+                "score": 92,
+                "label": {
+                  "eng": "France"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "France"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/State_visit",
+                "type": "wiki",
+                "score": 84,
+                "label": {
+                  "eng": "State visit"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Government_of_the_United_Kingdom",
+                "type": "org",
+                "score": 74,
+                "label": {
+                  "eng": "Government of the United Kingdom"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+                "type": "person",
+                "score": 73,
+                "label": {
+                  "eng": "Emmanuel Macron"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Buckingham_Palace",
+                "type": "loc",
+                "score": 65,
+                "label": {
+                  "eng": "Buckingham Palace"
+                },
+                "location": null
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "type": "loc",
+                "score": 59,
+                "label": {
+                  "eng": "United Kingdom"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "United Kingdom"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
+                "type": "wiki",
+                "score": 42,
+                "label": {
+                  "eng": "George Floyd protests"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Queen_consort",
+                "type": "wiki",
+                "score": 39,
+                "label": {
+                  "eng": "Queen consort"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Downing_Street",
+                "type": "wiki",
+                "score": 35,
+                "label": {
+                  "eng": "Downing Street"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Fast_food",
+                "type": "wiki",
+                "score": 35,
+                "label": {
+                  "eng": "Fast food"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Paris",
+                "type": "loc",
+                "score": 35,
+                "label": {
+                  "eng": "Paris"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Paris"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "France"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Germany",
+                "type": "loc",
+                "score": 35,
+                "label": {
+                  "eng": "Germany"
+                },
+                "location": {
+                  "type": "country",
+                  "label": {
+                    "eng": "Germany"
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Mobilier_National",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Mobilier national"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/French_Parliament",
+                "type": "org",
+                "score": 20,
+                "label": {
+                  "eng": "French Parliament"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/National_Assembly_(France)",
+                "type": "org",
+                "score": 20,
+                "label": {
+                  "eng": "National Assembly (France)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Lower_house",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Lower house"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Trade_union",
+                "type": "wiki",
+                "score": 20,
+                "label": {
+                  "eng": "Trade union"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/General_Confederation_of_Labour_(France)",
+                "type": "org",
+                "score": 12,
+                "label": {
+                  "eng": "General Confederation of Labour (France)"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Furniture",
+                "type": "wiki",
+                "score": 12,
+                "label": {
+                  "eng": "Furniture"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 6,
+            "title": {
+              "eng": "King's state visit to France postponed amid widespread retirement age protests"
+            },
+            "summary": {
+              "eng": "The French Presidency confirmed the postponement on Friday morning.\n\nThe King's first state visit of his reign has been postponed amid widespread French protests over President Emmanuel Macron's retirement age reforms.\n\nThe French Presidency confirmed the postponement on Friday morning, while Buckingham Palace has yet to comment.\n\nDowning Street later confirmed the Mr Macron had asked the British Government to postpone the trip.\n\nA Government spokesperson said: \"The King and Queen Consort's state"
+            },
+            "location": {
+              "type": "place",
+              "label": {
+                "eng": "Paris"
+              },
+              "country": {
+                "type": "country",
+                "label": {
+                  "eng": "France"
+                }
+              }
+            },
+            "categories": [
+              {
+                "uri": "news/Business",
+                "label": "news/Business",
+                "wgt": 65
+              }
+            ],
+            "articleCounts": {
+              "eng": 6
+            },
+            "sentiment": -0.08235294117647063,
+            "wgt": 417312000,
+            "relevance": 1
+          },
+          {
+            "uri": "eng-8501196",
+            "concepts": [
+              {
+                "uri": "http://en.wikipedia.org/wiki/John_Motson",
+                "type": "person",
+                "score": 100,
+                "label": {
+                  "eng": "John Motson"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/BBC",
+                "type": "org",
+                "score": 87,
+                "label": {
+                  "eng": "BBC"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Association_football",
+                "type": "wiki",
+                "score": 72,
+                "label": {
+                  "eng": "Association football"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Ray_Stubbs",
+                "type": "person",
+                "score": 51,
+                "label": {
+                  "eng": "Ray Stubbs"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Mark_Lawrenson",
+                "type": "person",
+                "score": 51,
+                "label": {
+                  "eng": "Mark Lawrenson"
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Milton_Keynes",
+                "type": "loc",
+                "score": 43,
+                "label": {
+                  "eng": "Milton Keynes"
+                },
+                "location": {
+                  "type": "place",
+                  "label": {
+                    "eng": "Milton Keynes"
+                  },
+                  "country": {
+                    "type": "country",
+                    "label": {
+                      "eng": "United Kingdom"
+                    }
+                  }
+                }
+              },
+              {
+                "uri": "http://en.wikipedia.org/wiki/Match_of_the_Day",
+                "type": "wiki",
+                "score": 28,
+                "label": {
+                  "eng": "Match of the Day"
+                }
+              }
+            ],
+            "eventDate": "2023-03-24",
+            "totalArticleCount": 3,
+            "title": {
+              "eng": "Football stars arrive for funeral of John Motson as loved ones remember BBC commentary legend"
+            },
+            "summary": {
+              "eng": "FOOTBALL stars have arrived at the funeral of John Motson as friends and family remember the legendary commentator.\n\nThe BBC pundit and iconic voice of football died aged 77 last month leaving the world of sport in mourning.\n\nMotson, who was affectionately known as Motty, celebrated 50 years at the BBC in 2018 before hanging up his mic in May that year.\n\nThe legendary commentator was behind the microphone for more than 2,000 games, including 29 FA Cup Finals, and covering ten World Cups and ten E"
+            },
+            "location": null,
+            "categories": [
+              {
+                "uri": "news/Sports",
+                "label": "news/Sports",
+                "wgt": 88
+              }
+            ],
+            "articleCounts": {
+              "eng": 3
+            },
+            "sentiment": -0.1294117647058823,
+            "wgt": 417312000,
+            "relevance": 1
+          }
+        ],
+        "totalResults": 17,
+        "page": 1,
+        "count": 10,
+        "pages": 2
+      }
+    }
+  }
+}

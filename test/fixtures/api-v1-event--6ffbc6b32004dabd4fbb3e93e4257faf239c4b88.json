@@ -1,0 +1,282 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "conceptUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+      "conceptTrendsConceptCount": 5,
+      "conceptTrendsArticleBodyLen": -1,
+      "conceptTrendsIncludeArticleBasicInfo": true,
+      "conceptTrendsIncludeArticleTitle": true,
+      "conceptTrendsIncludeArticleBody": true,
+      "conceptTrendsIncludeArticleUrl": true,
+      "conceptTrendsIncludeArticleEventUri": true,
+      "conceptTrendsIncludeArticleAuthors": true,
+      "conceptTrendsIncludeArticleConcepts": true,
+      "conceptTrendsIncludeArticleCategories": true,
+      "conceptTrendsIncludeArticleLinks": false,
+      "conceptTrendsIncludeArticleVideos": true,
+      "conceptTrendsIncludeArticleImage": true,
+      "conceptTrendsIncludeArticleSocialScore": true,
+      "conceptTrendsIncludeArticleSentiment": true,
+      "conceptTrendsIncludeArticleLocation": true,
+      "conceptTrendsIncludeArticleExtractedDates": true,
+      "conceptTrendsIncludeArticleOriginalArticle": true,
+      "conceptTrendsIncludeArticleStoryUri": true,
+      "conceptTrendsIncludeArticleDuplicateList": true,
+      "conceptTrendsIncludeEventTitle": true,
+      "conceptTrendsIncludeEventSummary": true,
+      "conceptTrendsIncludeEventArticleCounts": true,
+      "conceptTrendsIncludeEventConcepts": true,
+      "conceptTrendsIncludeEventCategories": true,
+      "conceptTrendsIncludeEventDate": true,
+      "conceptTrendsIncludeEventCommonDates": true,
+      "conceptTrendsIncludeEventInfoArticle": false,
+      "conceptTrendsIncludeEventStories": true,
+      "conceptTrendsIncludeEventSocialScore": true,
+      "conceptTrendsEventImageCount": 2,
+      "conceptTrendsIncludeSourceTitle": true,
+      "conceptTrendsIncludeSourceDescription": true,
+      "conceptTrendsIncludeSourceLocation": true,
+      "conceptTrendsIncludeSourceRanking": true,
+      "conceptTrendsIncludeSourceImage": true,
+      "conceptTrendsIncludeSourceSocialMedia": true,
+      "conceptTrendsIncludeSourceArticleCount": true,
+      "conceptTrendsIncludeSourceSourceGroups": true,
+      "conceptTrendsIncludeCategoryTrendingScore": true,
+      "conceptTrendsConceptType": [
+        "concepts",
+        "entities"
+      ],
+      "conceptTrendsConceptLang": [
+        "eng",
+        "spa"
+      ],
+      "conceptTrendsIncludeConceptLabel": true,
+      "conceptTrendsIncludeConceptSynonyms": true,
+      "conceptTrendsIncludeConceptImage": true,
+      "conceptTrendsIncludeConceptDescription": true,
+      "conceptTrendsIncludeConceptTrendingScore": true,
+      "conceptTrendsMaxConceptsPerType": 50,
+      "conceptTrendsIncludeLocationLabel": true,
+      "conceptTrendsIncludeLocationWikiUri": true,
+      "conceptTrendsIncludeLocationGeoNamesId": true,
+      "conceptTrendsIncludeLocationPopulation": true,
+      "conceptTrendsIncludeLocationGeoLocation": true,
+      "conceptTrendsIncludeLocationCountryArea": true,
+      "conceptTrendsIncludeLocationCountryDetails": true,
+      "conceptTrendsIncludeLocationCountryContinent": true,
+      "conceptTrendsIncludeLocationPlaceFeatureCode": true,
+      "conceptTrendsIncludeLocationPlaceCountry": true,
+      "conceptTrendsIncludeStoryBasicStats": true,
+      "conceptTrendsIncludeStoryLocation": true,
+      "conceptTrendsIncludeStoryDate": true,
+      "conceptTrendsIncludeStoryTitle": true,
+      "conceptTrendsIncludeStorySummary": true,
+      "conceptTrendsIncludeStoryConcepts": true,
+      "conceptTrendsIncludeStoryCategories": true,
+      "conceptTrendsIncludeStoryMedoidArticle": true,
+      "conceptTrendsIncludeStoryInfoArticle": false,
+      "conceptTrendsIncludeStoryCommonDates": true,
+      "conceptTrendsIncludeStorySocialScore": true,
+      "conceptTrendsStoryImageCount": 2,
+      "conceptTrendsIncludeConceptClassParentLabels": true,
+      "conceptTrendsIncludeConceptClassConcepts": false,
+      "conceptTrendsIncludeConceptFolderOwner": false,
+      "resultType": "conceptTrends",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "conceptTrends": {
+        "trends": [
+          {
+            "date": "2023-03-24",
+            "conceptFreq": [
+              85,
+              73,
+              12,
+              50,
+              60
+            ],
+            "totArts": 29841
+          }
+        ],
+        "conceptInfo": [
+          {
+            "uri": "http://en.wikipedia.org/wiki/Charles_III_of_Spain",
+            "type": "person",
+            "score": 1,
+            "label": {
+              "eng": "Charles III of Spain",
+              "spa": "Carlos III de España"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+            "type": "person",
+            "score": 1,
+            "label": {
+              "eng": "Emmanuel Macron",
+              "spa": "Emmanuel Macron"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Scotland",
+            "type": "loc",
+            "score": 1,
+            "label": {
+              "eng": "Scotland",
+              "spa": "Escocia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "2638360",
+              "wikiUri": "http://en.wikipedia.org/wiki/Scotland",
+              "label": {
+                "eng": "Scotland",
+                "spa": "Escocia"
+              },
+              "population": 5000000,
+              "lat": 56,
+              "long": -4,
+              "featureCode": "A.ADM1",
+              "country": {
+                "type": "country",
+                "geoNamesId": "2635167",
+                "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                "label": {
+                  "eng": "United Kingdom",
+                  "spa": "Reino Unido"
+                },
+                "population": 62348447,
+                "lat": 54.75844,
+                "long": -2.69531,
+                "area": 244820,
+                "code2": "GB",
+                "code3": "GBR",
+                "webExt": ".uk",
+                "currencyCode": "GBP",
+                "currencyName": "Pound",
+                "continent": "Europe"
+              }
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+            "type": "loc",
+            "score": 1,
+            "label": {
+              "eng": "United Kingdom",
+              "spa": "Reino Unido"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "2635167",
+              "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+              "label": {
+                "eng": "United Kingdom",
+                "spa": "Reino Unido"
+              },
+              "population": 62348447,
+              "lat": 54.75844,
+              "long": -2.69531,
+              "area": 244820,
+              "code2": "GB",
+              "code3": "GBR",
+              "webExt": ".uk",
+              "currencyCode": "GBP",
+              "currencyName": "Pound",
+              "continent": "Europe"
+            }
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/France",
+            "type": "loc",
+            "score": 1,
+            "label": {
+              "eng": "France",
+              "spa": "Francia"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "country",
+              "geoNamesId": "3017382",
+              "wikiUri": "http://en.wikipedia.org/wiki/France",
+              "label": {
+                "eng": "France",
+                "spa": "Francia"
+              },
+              "population": 64768389,
+              "lat": 46,
+              "long": 2,
+              "area": 547030,
+              "code2": "FR",
+              "code3": "FRA",
+              "webExt": ".fr",
+              "currencyCode": "EUR",
+              "currencyName": "Euro",
+              "continent": "Europe"
+            }
+          }
+        ],
+        "usedResults": 7,
+        "totalResults": 7
+      }
+    }
+  }
+}

@@ -4,9 +4,10 @@ import { TopicPage, ReturnInfo, ArticleInfoFlags, ConceptInfoFlags, ER } from ".
 describe("Topic Page", () => {
     const er = Utils.initAPI();
 
-    async function createTopicPage() {
+    async function createTopicPage(): Promise<TopicPage> {
         const q = new TopicPage(er);
-        await q.loadTopicPageFromER("f8f08a9c-3609-401c-a1e4-2ec00f458795");
+        const appleUri = await er.getConceptUri("apple");
+        q.addConcept(appleUri, 50);
         return q;
     }
 

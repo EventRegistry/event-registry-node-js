@@ -1,0 +1,270 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "germany",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/Germany",
+        "type": "loc",
+        "score": 70263,
+        "label": {
+          "eng": "Germany"
+        },
+        "location": {
+          "type": "country",
+          "label": {
+            "eng": "Germany"
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Cabinet_of_Germany",
+        "type": "org",
+        "score": 7369,
+        "label": {
+          "eng": "Cabinet of Germany"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Chancellor_of_Germany",
+        "type": "wiki",
+        "score": 7004,
+        "label": {
+          "eng": "Chancellor of Germany"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Social_Democratic_Party_of_Germany",
+        "type": "org",
+        "score": 6074,
+        "label": {
+          "eng": "Social Democratic Party of Germany"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Germany_national_football_team",
+        "type": "org",
+        "score": 4210,
+        "label": {
+          "eng": "Germany national football team"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Free_Democratic_Party_(Germany)",
+        "type": "org",
+        "score": 3700,
+        "label": {
+          "eng": "Free Democratic Party (Germany)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Nazi_Germany",
+        "type": "loc",
+        "score": 3557,
+        "label": {
+          "eng": "Nazi Germany"
+        },
+        "location": null
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Christian_Democratic_Union_of_Germany",
+        "type": "org",
+        "score": 3552,
+        "label": {
+          "eng": "Christian Democratic Union of Germany"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Districts_of_Germany",
+        "type": "wiki",
+        "score": 2091,
+        "label": {
+          "eng": "Districts of Germany"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Federal_Ministry_of_Finance_(Germany)",
+        "type": "org",
+        "score": 1874,
+        "label": {
+          "eng": "Federal Ministry of Finance (Germany)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/The_Left_(Germany)",
+        "type": "org",
+        "score": 1712,
+        "label": {
+          "eng": "The Left (Germany)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Alternative_for_Germany",
+        "type": "org",
+        "score": 1247,
+        "label": {
+          "eng": "Alternative for Germany"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/President_of_Germany",
+        "type": "person",
+        "score": 1000,
+        "label": {
+          "eng": "President of Germany"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/States_of_Germany",
+        "type": "wiki",
+        "score": 976,
+        "label": {
+          "eng": "States of Germany"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/East_Germany",
+        "type": "loc",
+        "score": 973,
+        "label": {
+          "eng": "East Germany"
+        },
+        "location": {
+          "type": "place",
+          "label": {
+            "eng": "East Germany"
+          },
+          "country": {
+            "type": "country",
+            "label": {
+              "eng": "Germany"
+            }
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Federal_Ministry_of_Health_(Germany)",
+        "type": "org",
+        "score": 850,
+        "label": {
+          "eng": "Federal Ministry of Health (Germany)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Municipalities_of_Germany",
+        "type": "wiki",
+        "score": 784,
+        "label": {
+          "eng": "Municipalities of Germany"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Federal_Police_(Germany)",
+        "type": "org",
+        "score": 774,
+        "label": {
+          "eng": "Federal Police (Germany)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Centre_Party_(Germany)",
+        "type": "org",
+        "score": 756,
+        "label": {
+          "eng": "Centre Party (Germany)"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Federal_Ministry_of_Defence_(Germany)",
+        "type": "org",
+        "score": 724,
+        "label": {
+          "eng": "Federal Ministry of Defence (Germany)"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestSourcesFast",
+    "body": {
+      "prefix": "nytimes",
+      "page": 1,
+      "dataType": [
+        "news",
+        "pr",
+        "blog"
+      ],
+      "count": 20,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "score": 578,
+        "dataType": "news",
+        "uri": "nytimes.com",
+        "title": "The New York Times"
+      },
+      {
+        "score": 8,
+        "dataType": "news",
+        "uri": "cn.nytimes.com",
+        "title": "New York Times (Chinese)"
+      }
+    ]
+  }
+}

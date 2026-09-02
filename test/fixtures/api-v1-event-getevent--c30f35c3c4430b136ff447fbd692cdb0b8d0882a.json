@@ -1,0 +1,33 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event/getEvent",
+    "body": {
+      "eventUri": "eng-8501132",
+      "lang": "deu",
+      "articlesPage": 1,
+      "articlesCount": 100,
+      "articlesSortBy": "cosSim",
+      "articlesSortByAsc": false,
+      "articlesLang": "deu",
+      "resultType": "articles",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "eng-8501132": {
+        "articles": {
+          "results": [],
+          "totalResults": 0,
+          "page": 1,
+          "count": 0,
+          "pages": 1
+        }
+      }
+    }
+  }
+}

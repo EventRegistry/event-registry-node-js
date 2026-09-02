@@ -1,0 +1,139 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestAuthorsFast",
+    "body": {
+      "prefix": "associated",
+      "page": 1,
+      "count": 20,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "associated_press@rds.ca",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@kion546.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": false
+      },
+      {
+        "uri": "associated_press@journalnow.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@mymcmurray.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@siouxcityjournal.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@mynorthwest.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": false
+      },
+      {
+        "uri": "associated_press@keyt.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@dothaneagle.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@lacrossetribune.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": false
+      },
+      {
+        "uri": "associated_press@ktar.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@santamariatimes.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": false
+      },
+      {
+        "uri": "associated_press@napavalleyregister.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@wcfcourier.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@nwitimes.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@pantagraph.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": false
+      },
+      {
+        "uri": "associated_press@journalstar.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": false
+      },
+      {
+        "uri": "associated_press@omaha.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": false
+      },
+      {
+        "uri": "associated_press@muscatinejournal.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": false
+      },
+      {
+        "uri": "associated_press@stltoday.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      },
+      {
+        "uri": "associated_press@clickondetroit.com",
+        "name": "Associated Press",
+        "type": "author",
+        "isAgency": true
+      }
+    ]
+  }
+}

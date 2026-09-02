@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "query": "\n            {\n                \"$query\": {\n                    \"$and\": {}\n                }\n            }\n        ",
+      "articlesPage": 1,
+      "articlesCount": 100,
+      "articlesSortBy": "date",
+      "articlesSortByAsc": false,
+      "resultType": "articles",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "error": "The value in $and did not contain an array"
+    }
+  }
+}

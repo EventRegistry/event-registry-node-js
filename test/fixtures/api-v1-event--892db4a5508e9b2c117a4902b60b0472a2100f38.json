@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event",
+    "body": {
+      "action": "getEvents",
+      "conceptUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+      "lang": "eng",
+      "uriWgtListPage": 1,
+      "uriWgtListCount": 50,
+      "uriWgtListSortBy": "rel",
+      "uriWgtListSortByAsc": false,
+      "resultType": "uriWgtList",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "uriWgtList": {
+        "totalResults": 3,
+        "page": 1,
+        "count": 3,
+        "pages": 1,
+        "results": [
+          "eng-8501190:101",
+          "eng-8501177:50",
+          "eng-8501132:24"
+        ]
+      }
+    }
+  }
+}

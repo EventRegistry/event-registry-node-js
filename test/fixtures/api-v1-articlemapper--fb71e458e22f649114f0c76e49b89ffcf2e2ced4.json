@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/articleMapper",
+    "body": {
+      "articleUrl": "https://santamariatimes.com/news/state-and-regional/immigration-reform-stalled-decade-after-gang-of-8s-big-push/article_cb3651e4-822d-5788-9845-8352213199c4.html",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "https://santamariatimes.com/news/state-and-regional/immigration-reform-stalled-decade-after-gang-of-8s-big-push/article_cb3651e4-822d-5788-9845-8352213199c4.html": null
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestSourcesFast",
+    "body": {
+      "prefix": "Washington Post",
+      "page": 1,
+      "dataType": [
+        "news",
+        "pr",
+        "blog"
+      ],
+      "count": 20,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "score": 647,
+        "dataType": "news",
+        "uri": "washingtonpost.com",
+        "title": "Washington Post"
+      }
+    ]
+  }
+}

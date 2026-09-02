@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/articleMapper",
+    "body": {
+      "articleUrl": "https://www.timesdaily.com/news/nation/immigration-reform-stalled-decade-after-gang-of-8s-big-push/article_d2487414-84f5-530b-bd25-51e9928b1beb.html",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "https://www.timesdaily.com/news/nation/immigration-reform-stalled-decade-after-gang-of-8s-big-push/article_d2487414-84f5-530b-bd25-51e9928b1beb.html": null
+    }
+  }
+}

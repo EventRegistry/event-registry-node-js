@@ -1,0 +1,213 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestLocationsFast",
+    "body": {
+      "prefix": "united",
+      "count": 20,
+      "source": [
+        "place",
+        "country"
+      ],
+      "lang": "eng",
+      "countryUri": "",
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "conceptLang": "eng",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "type": "country",
+        "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+        "label": {
+          "eng": "United States"
+        },
+        "lat": 39.76,
+        "long": -98.5
+      },
+      {
+        "type": "country",
+        "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+        "label": {
+          "eng": "United Kingdom"
+        },
+        "lat": 54.75844,
+        "long": -2.69531
+      },
+      {
+        "type": "country",
+        "wikiUri": "http://en.wikipedia.org/wiki/United_Arab_Emirates",
+        "label": {
+          "eng": "United Arab Emirates"
+        },
+        "lat": 23.75,
+        "long": 54.5
+      },
+      {
+        "type": "country",
+        "wikiUri": "http://en.wikipedia.org/wiki/United_States_Virgin_Islands",
+        "label": {
+          "eng": "United States Virgin Islands"
+        },
+        "lat": 18.34829,
+        "long": -64.98348
+      },
+      {
+        "type": "country",
+        "wikiUri": "http://en.wikipedia.org/wiki/United_States_Minor_Outlying_Islands",
+        "label": {
+          "eng": "United States Minor Outlying Islands"
+        },
+        "lat": 5.875,
+        "long": -162.057
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/United,_West_Virginia",
+        "label": {
+          "eng": "United, West Virginia"
+        },
+        "lat": 37.99066,
+        "long": -81.4265,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 0
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/United,_Pennsylvania",
+        "label": {
+          "eng": "United"
+        },
+        "lat": 40.2184,
+        "long": -79.48782,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/United_States",
+          "label": {
+            "eng": "United States"
+          },
+          "lat": 39.76,
+          "long": -98.5
+        },
+        "score": 0
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/United_Counties_of_Leeds_and_Grenville",
+        "label": {
+          "eng": "United Counties of Leeds and Grenville"
+        },
+        "lat": 44.83341,
+        "long": -75.66604,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Canada",
+          "label": {
+            "eng": "Canada"
+          },
+          "lat": 60.10867,
+          "long": -113.64258
+        },
+        "score": 0
+      },
+      {
+        "type": "place",
+        "wikiUri": "http://en.wikipedia.org/wiki/United_Counties_of_Stormont,_Dundas_and_Glengarry",
+        "label": {
+          "eng": "United Counties of Stormont, Dundas and Glengarry"
+        },
+        "lat": 45.25009,
+        "long": -74.66597,
+        "country": {
+          "type": "country",
+          "wikiUri": "http://en.wikipedia.org/wiki/Canada",
+          "label": {
+            "eng": "Canada"
+          },
+          "lat": 60.10867,
+          "long": -113.64258
+        },
+        "score": 0
+      }
+    ]
+  }
+}

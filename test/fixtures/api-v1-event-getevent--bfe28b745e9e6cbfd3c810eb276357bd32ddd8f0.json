@@ -1,0 +1,210 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event/getEvent",
+    "body": {
+      "eventUri": "eng-8501132",
+      "articlesPage": 1,
+      "articlesCount": 100,
+      "articlesSortBy": "cosSim",
+      "articlesSortByAsc": false,
+      "resultType": "articles",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "eng-8501132": {
+        "articles": {
+          "results": [
+            {
+              "uri": "7463240471",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "10:58:00",
+              "dateTime": "2023-03-24T10:58:00Z",
+              "dateTimePub": "2023-03-24T10:47:00Z",
+              "dataType": "news",
+              "sim": 0.8745098114013672,
+              "url": "http://www.businessgreen.com/news/4087216/plans-advance-north-sea-oil-gas-industry-wind-farm-projects",
+              "title": "Plans advance for North Sea oil and gas industry wind farm projects ",
+              "body": "Crown Estate confirms initial leases for 13 offshore wind projects that could deliver over 5GW of capacity to help slash emissions from oil and gas operations\n\nPlans to harness renewable energy to help cut emissions from oil and gas projects in the North Sea took a major step forward today, after Crown Estate Scotland announced the results of the world's first leasing round designed to enable offshore wind energy to directly supply offshore oil and gas platforms.\n\nThe Innovation and Targeted Oil & Gas (INTOG) leasing programme announced this morning that 13 projects out of an initial 19 applications have been offered Exclusivity Agreements that represent the first step towards securing seabed leases.\n\nThe leasing programme is designed to support the government's North Sea Transition Sector Deal, which aims to help decarbonise North Sea oil and gas operations before phasing down fossil fuel production in the basin. One of the main focuses of the initiative is to slash emissions from existing oil and gas rigs through electrification and the use of renewable energy.\n\nThe proposed leases would deliver 5GW of capacity for providing power to oil and gas sites and a further 499MW through a range of smaller scale innovation projects.\n\nOnce the government's Sectoral Marine Plan has been finalised and option agreements signed the leasing round is expected to deliver around £262m in applicant fees for the Crown Estate Scotland with all net revenues then going to the Scottish Government for public spending.\n\n\"Today's results for this very distinctive and targeted leasing round are extremely encouraging,\" said Colin Palmer, director of marine at Crown Estate Scotland. \"INTOG provides a range of practical ways to support innovation, reduce North Sea carbon emissions, and encourage technical and commercial innovation in the offshore renewables market.\n\n\"In addition to delivering economic and environmental benefits, INTOG will generate funds for the Scottish Government, from initial fees when option agreements are signed, to ongoing rent payments when the projects are constructed and move to operation. There are still significant challenges that need to be addressed to ensure INTOG's many opportunities are realised fully, but today marks a real step forward.\"\n\nMichael Matheson, Scotland's Net Zero and Energy Secretary, hailed the milestone as \"the next step in realising another world leading opportunity for Scotland's energy transition: helping both decarbonise our existing oil and gas operations while helping our offshore wind sector to expand, innovate and deliver on our ambition to be a renewables powerhouse\".\n\nThe Scottish Offshore Wind Energy Council said the new leases took Scotland's offshore wind pipeline to over 36GW, including 22.5GW of floating offshore wind capacity.\n\nThe group also welcomed the planned innovation projects, which include proposals to produce green hydrogen offshore and reduce the cost of floating turbines.\n\n\"The successful announcement of INTOG demonstrates strong appetite amongst industry for new project leases,\" said SOWEC industry co-chair Brian McFarlane. \"It also demonstrates that our industry is innovating and helping Scotland manage its energy transition.\n\n\"To build these projects we will need to make use of Scottish deepsea expertise built up over many years. That gives us the opportunity to show the world how to successfully build and operate floating offshore wind sites and commercialise innovation that will come from this early experience.\"",
+              "source": {
+                "uri": "businessgreen.com",
+                "dataType": "news",
+                "title": "businessgreen.com"
+              },
+              "authors": [
+                {
+                  "uri": "james_murray@businessgreen.com",
+                  "name": "James Murray",
+                  "type": "author",
+                  "isAgency": false
+                }
+              ],
+              "image": "https://image.chitra.live/api/v1/wps/8042e34/364a16e6-f8ad-4cc4-a582-6e9ce0ba41ac/3/New-Leith-outer-berth-with-Floating-Foundation-and-Turbine-370x229.jpg",
+              "eventUri": "eng-8501132",
+              "sentiment": 0.4509803921568627,
+              "wgt": 223,
+              "relevance": 1
+            },
+            {
+              "uri": "7463277957",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "11:19:00",
+              "dateTime": "2023-03-24T11:19:00Z",
+              "dateTimePub": "2023-03-24T11:19:00Z",
+              "dataType": "news",
+              "sim": 0.8666666746139526,
+              "url": "https://w3.windfair.net/wind-energy/news/43601-crown-estate-scotland-scotland-intog-leasing-auction-offshore-floating-energy-oil-gas-platform-power-wind-government-decarbonisation",
+              "title": "INTOG (Innovation and Targeted Oil & Gas) leasing aims to attract investment in innovative offshore wind projects in Scottish waters, as well as help to decarbonise the North Sea industry.?? ",
+              "body": "INTOG: 13 projects selected to support green innovation and help decarbonise North Sea\n\nCrown Estate Scotland has announced the results of the world's first leasing round designed to enable offshore wind energy to directly supply offshore oil and gas platforms.\n\nINTOG (Innovation and Targeted Oil & Gas) leasing aims to attract investment in innovative offshore wind projects in Scottish waters, as well as help decarbonise North Sea operations.?? The INTOG process allowed developers to apply for seabed rights to develop offshore wind projects that either reduce emissions from the North Sea oil and gas sector - by supplying renewable electricity directly to oil and gas infrastructure (TOG) - or consist of small-scale (IN) innovative projects of 100MW or less.??This distinctive offshore wind leasing is different to any other previously carried out... ... More: Official Press Release Crown Estate Scotland",
+              "source": {
+                "uri": "w3.windfair.net",
+                "dataType": "news",
+                "title": "w3.windfair.net"
+              },
+              "authors": [],
+              "image": null,
+              "eventUri": "eng-8501132",
+              "sentiment": 0.5372549019607844,
+              "wgt": 221,
+              "relevance": 1
+            },
+            {
+              "uri": "7463241687",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "10:58:00",
+              "dateTime": "2023-03-24T10:58:00Z",
+              "dateTimePub": "2023-03-24T10:56:00Z",
+              "dataType": "news",
+              "sim": 0.8509804010391235,
+              "url": "https://dailybusinessgroup.co.uk/2023/03/energy-firms-chosen-to-decarbonise-north-sea/",
+              "title": "Energy firms chosen to decarbonise North Sea",
+              "body": "Crown Estate Scotland has announced the developers who have secured seabed rights to develop offshore wind projects that will power oil and gas platforms and millions of Scottish home with clean energy.\n\nThirteen bids out of 19 applications have been successful in the world's first leasing round designed to enable offshore wind energy to directly supply platforms.\n\nThe INTOG (Innovation and Targeted Oil & Gas) leasing process is different to any other previously carried out anywhere in the world.\n\nIt has been designed to help achieve the targets of the North Sea Transition Sector Deal through decarbonising North Sea oil and gas operations. It also aims to further stimulate innovation in Scotland's offshore wind sector, create additional supply chain opportunity, assist companies to enter the renewable energy market, and support net-zero ambitions.\n\nThe process will generate about £262m in applicant fees and once projects are operating, further revenues will be secured. All net revenues from Crown Estate Scotland go to Scottish Government for public spending.\n\nMichael Matheson, Net Zero & Energy Secretary, said: \"This milestone in the INTOG leasing round is the next step in realising another world leading opportunity for Scotland's energy transition: helping both decarbonise our existing oil and gas operations while helping our offshore wind sector to expand, innovate and deliver on our ambition to be a renewables powerhouse.\n\n\"The announcement from Crown Estate Scotland not only indicates that the INTOG initiative will provide a significant contribution to the public purse but ensure the continuing growth and development of Scotland's offshore expertise and wider supply chain, supporting a true just transition for our energy sector.\"\n\nAmong the successful bidders is Flotation Energy, an Edinburgh-based offshore wind developer, which together with its Norwegian partner Vårgrønn, will develop two huge floating wind farms.\n\nThe companies have been awarded exclusive seabed rights by Crown Estate Scotland to develop up to 1.9 GW of capacity at Green Volt and Cenos in the North Sea. Together they will generate billions of pounds of investment and thousands of jobs.\n\nGreen Volt and Cenos wind farms could begin generating first power from 2027 and 2028 respectively, making them the most advanced projects for electrification and decarbonisation of oil and gas platforms with floating offshore wind in Europe.\n\nThe power and grid-connection supplied through these windfarms will provide renewable energy to oil and gas platforms in the surrounding areas, replacing power currently generated by gas turbines.\n\nSimultaneously, up to 7 TWh of energy from the projects will be supplied to the UK grid annually, providing consumers with renewable electricity.\n\nOverall, the projects are estimated to cut emissions by three million tonnes of carbon each year, while supporting the commercialisation of floating offshore wind technology.\n\nFormer Scottish Liberal Democrat leader, Deputy First Minister and Enterprise Minister Nicol Stephen, now CEO of Flotation Energy, said: \"These floating wind farms will make a huge contribution to the reduction of CO emissions from offshore oil and gas platforms by replacing industrial-scale gas turbines with renewable energy straight from our wind farms.\"\n\nHe said they will also become long-term infrastructure assets providing renewable electricity to millions of Scottish homes.\n\n\"The scale of these floating wind projects is huge. They will deliver billions of pounds of new infrastructure investment and help to create thousands of local jobs, giving a major boost to the Scottish supply chain.\n\n\"Today's announcement allows us to get ahead with delivering renewable electricity to offshore platforms well before the end of the decade. Our challenge now is to drive forward with the delivery of these exciting projects as quickly as possible.\"\n\nVårgrønn is a joint venture between Plenitude (Eni) and HitecVision. It holds a 20% stage in the world's largest offshore wind farm under construction, Dogger Bank (UK) and is developing floating and bottom-fixed offshore wind projects in Norway.\n\nVårgrønn's ambition is 5 GW installed and sanctioned offshore wind capacity by 2030 in the northern European market.",
+              "source": {
+                "uri": "dailybusinessgroup.co.uk",
+                "dataType": "news",
+                "title": "Daily Business"
+              },
+              "authors": [
+                {
+                  "uri": "terry_murden@dailybusinessgroup.co.uk",
+                  "name": "Terry Murden",
+                  "type": "author",
+                  "isAgency": false
+                }
+              ],
+              "image": null,
+              "eventUri": "eng-8501132",
+              "sentiment": 0.4588235294117646,
+              "wgt": 217,
+              "relevance": 1
+            },
+            {
+              "uri": "7463230036",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "10:50:00",
+              "dateTime": "2023-03-24T10:50:00Z",
+              "dateTimePub": "2023-03-24T10:29:00Z",
+              "dataType": "news",
+              "sim": 0.843137264251709,
+              "url": "https://www.oedigital.com/news/503889-crown-estate-scotland-selects-13-offshore-wind-projects-to-decarbonize-oil-platforms",
+              "title": "Crown Estate Scotland Selects 13 Offshore Wind Projects to Decarbonize Oil Platforms",
+              "body": "Crown Estate Scotland has announced the results of the world's first leasing round designed to enable offshore wind energy to supply offshore oil and gas platforms directly. Thirteen projects have been offered exclusivity agreements.\n\nINTOG (Innovation and Targeted Oil & Gas) leasing aims to attract investment in innovative offshore wind projects in Scottish waters, as well as help decarbonize North Sea operations.\n\nThe INTOG process allowed developers to apply for seabed rights to develop offshore wind projects that either reduce emissions from the North Sea oil and gas sector - by supplying renewable electricity directly to oil and gas infrastructure (TOG) - or consist of small-scale (IN) innovative projects of 100MW or less.  This distinctive offshore wind leasing is different to any other previously carried out in the UK or in the world.\n\nCrown Estate offered exclusivity agreements to 13 projects out of a total of 19 applications - five for IN and eight for TOG.\n\nThe area of seabed covered by the IN projects is just over 139km2 and by the TOG projects 1534km 2 (a maximum of 1900 km2 was made available for TOG projects and 167 km2 for IN through the Scottish Government's Initial Plan Framework.)\n\nCrown Estate Scotland will offer a seabed lease of 50 years for TOG projects and 25 years for IN projects.\n\nExclusivity Agreements will cover projects with a proposed capacity of up to 499MW for IN and 5GW for TOG.\n\n\"The successful applicants have now been offered initial agreements - called Exclusivity Agreements - that, if they accept the offers and proceed to sign them, enable them to start offshore wind development work while the Marine Scotland's planning process for the INTOG Sectoral Marine Plan (INTOG SMP) is completed,\" Crown Estate said.\n\nIf a successful proposed project is in the final INTOG SMP, an option agreement will be offered. Projects will then go through planning, consenting, and financing stages. Responsibility for these next steps does not sit with Crown Estate Scotland, and projects will only progress to a full seabed lease once all these various planning stages have been completed, Crown Estate Scotland said.\n\nProjects that received exclusivity agreements:\n\nOnce the Sectoral Marine Plan has been finalized and option agreements signed (expected 2024), around £262m in applicant fees will be secured. Once projects are operating, further revenues will be secured. All net revenues from Crown Estate Scotland go to the Scottish Government for public spending.\n\nColin Palmer, Director of Marine at Crown Estate Scotland, said: \"Today's results for this very distinctive and targeted leasing round are extremely encouraging. INTOG provides a range of practical ways to support innovation, reduce North Sea carbon emissions, and encourage technical and commercial innovation in the offshore renewables market.\n\n\"In addition to delivering economic and environmental benefits, INTOG will generate funds for the Scottish Government, from initial fees when option agreements are signed, to ongoing rent payments when the projects are constructed and move to operation. There are still significant challenges that need to be addressed to ensure INTOG's many opportunities are realized fully, but today marks a real step forward.\"\n\nMichael Matheson, Net Zero & Energy Secretary, said: \"This milestone in the INTOG leasing round is the next step in realizing another world leading opportunity for Scotland's energy transition: helping both decarbonize our existing oil and gas operations while helping our offshore wind sector to expand, innovate and deliver on our ambition to be a renewables powerhouse.\n\n\"The announcement from Crown Estate Scotland not only indicates that the INTOG initiative will provide a significant contribution to the public purse but ensure the continuing growth and development of Scotland's offshore expertise and wider supply chain, supporting a true just transition for our energy sector.\"\n\nINTOG contract awards were determined on a largely open-auction basis and were judged on a mixture of price and quality, Crown Estate Scotland said.\n\nOption agreements are expected to be offered in 2024. To secure an option agreement, developers must provide a Supply Chain Development Statement (SCDS).",
+              "source": {
+                "uri": "oedigital.com",
+                "dataType": "news",
+                "title": "Offshore Engineer Magazine"
+              },
+              "authors": [],
+              "image": "https://images.oedigital.com/images/maritime/w800/crown-estate-scotland-image-139759.jpg",
+              "eventUri": "eng-8501132",
+              "sentiment": 0.3098039215686275,
+              "wgt": 215,
+              "relevance": 1
+            },
+            {
+              "uri": "7463241688",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "10:58:00",
+              "dateTime": "2023-03-24T10:58:00Z",
+              "dateTimePub": "2023-03-24T10:34:00Z",
+              "dataType": "news",
+              "sim": 0.800000011920929,
+              "url": "https://dailybusinessgroup.co.uk/2023/03/energy-firms-chosen-to-decarbonise-north-sea/#new_tab",
+              "title": "Scots wind developer to power rigs and homes",
+              "body": "Crown Estate Scotland has announced the developers who have secured seabed rights to develop offshore wind projects that will power oil and gas platforms and millions of Scottish home with clean energy.\n\nThirteen bids out of 19 applications have been successful in the world's first leasing round designed to enable offshore wind energy to directly supply platforms.\n\nThe INTOG (Innovation and Targeted Oil & Gas) leasing process is different to any other previously carried out anywhere in the world.\n\nIt has been designed to help achieve the targets of the North Sea Transition Sector Deal through decarbonising North Sea oil and gas operations. It also aims to further stimulate innovation in Scotland's offshore wind sector, create additional supply chain opportunity, assist companies to enter the renewable energy market, and support net-zero ambitions.\n\nThe process will generate about £262m in applicant fees and once projects are operating, further revenues will be secured. All net revenues from Crown Estate Scotland go to Scottish Government for public spending.\n\nMichael Matheson, Net Zero & Energy Secretary, said: \"This milestone in the INTOG leasing round is the next step in realising another world leading opportunity for Scotland's energy transition: helping both decarbonise our existing oil and gas operations while helping our offshore wind sector to expand, innovate and deliver on our ambition to be a renewables powerhouse.\n\n\"The announcement from Crown Estate Scotland not only indicates that the INTOG initiative will provide a significant contribution to the public purse but ensure the continuing growth and development of Scotland's offshore expertise and wider supply chain, supporting a true just transition for our energy sector.\"\n\nAmong the successful bidders is Flotation Energy, an Edinburgh-based offshore wind developer, which together with its Norwegian partner Vårgrønn, will develop two huge floating wind farms.\n\nThe companies have been awarded exclusive seabed rights by Crown Estate Scotland to develop up to 1.9 GW of capacity at Green Volt and Cenos in the North Sea. Together they will generate billions of pounds of investment and thousands of jobs.\n\nGreen Volt and Cenos wind farms could begin generating first power from 2027 and 2028 respectively, making them the most advanced projects for electrification and decarbonisation of oil and gas platforms with floating offshore wind in Europe.\n\nThe power and grid-connection supplied through these windfarms will provide renewable energy to oil and gas platforms in the surrounding areas, replacing power currently generated by gas turbines.\n\nSimultaneously, up to 7 TWh of energy from the projects will be supplied to the UK grid annually, providing consumers with renewable electricity.\n\nOverall, the projects are estimated to cut emissions by three million tonnes of carbon each year, while supporting the commercialisation of floating offshore wind technology.\n\nFormer Scottish Liberal Democrat leader, Deputy First Minister and Enterprise Minister Nicol Stephen, now CEO of Flotation Energy, said: \"These floating wind farms will make a huge contribution to the reduction of CO emissions from offshore oil and gas platforms by replacing industrial-scale gas turbines with renewable energy straight from our wind farms.\"\n\nHe said they will also become long-term infrastructure assets providing renewable electricity to millions of Scottish homes.\n\n\"The scale of these floating wind projects is huge. They will deliver billions of pounds of new infrastructure investment and help to create thousands of local jobs, giving a major boost to the Scottish supply chain.\n\n\"Today's announcement allows us to get ahead with delivering renewable electricity to offshore platforms well before the end of the decade. Our challenge now is to drive forward with the delivery of these exciting projects as quickly as possible.\"\n\nVårgrønn is a joint venture between Plenitude (Eni) and HitecVision. It holds a 20% stage in the world's largest offshore wind farm under construction, Dogger Bank (UK) and is developing floating and bottom-fixed offshore wind projects in Norway.\n\nVårgrønn's ambition is 5 GW installed and sanctioned offshore wind capacity by 2030 in the northern European market.",
+              "source": {
+                "uri": "dailybusinessgroup.co.uk",
+                "dataType": "news",
+                "title": "Daily Business"
+              },
+              "authors": [
+                {
+                  "uri": "terry_murden@dailybusinessgroup.co.uk",
+                  "name": "Terry Murden",
+                  "type": "author",
+                  "isAgency": false
+                }
+              ],
+              "image": null,
+              "eventUri": "eng-8501132",
+              "sentiment": 0.4588235294117646,
+              "wgt": 204,
+              "relevance": 1
+            },
+            {
+              "uri": "7463285515",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "11:24:00",
+              "dateTime": "2023-03-24T11:24:00Z",
+              "dateTimePub": "2023-03-24T11:07:00Z",
+              "dataType": "news",
+              "sim": 0.7019608020782471,
+              "url": "https://www.insider.co.uk/news/13-projects-selected-help-decarbonise-29540089",
+              "title": "13 projects selected to help decarbonise the North Sea",
+              "body": "Crown Estate Scotland has announced the results of the world's first leasing round designed to enable offshore wind energy to directly supply oil and gas platforms.\n\nInnovation and Targeted Oil & Gas (INTOG) leasing aims to attract investment in innovative offshore wind projects in Scottish waters, as well as help decarbonise North Sea operations.\n\nThe process allowed developers to apply for seabed rights to develop offshore wind projects that either reduce emissions from the North Sea oil and gas sector - by supplying renewable electricity directly to oil and gas infrastructure (TOG) - or consist of small-scale (IN) innovative projects of 100MW or less.\n\nINTOG, which has been designed in response to demand from government and industry to help achieve the targets of the North Sea Transition Sector Deal through decarbonising North Sea oil and gas operations, should also further stimulate innovation in Scotland's offshore wind sector, create additional supply chain opportunity and assist companies to enter the renewable energy market.\n\nThe successful applicants have now been offered initial agreements - called exclusivity agreements - that, if they accept the offers and proceed to sign them, enable them to start offshore wind development work while the Marine Scotland's planning process for the INTOG Sectoral Marine Plan (INTOG SMP) is completed.\n\nIf a successful proposed project is in the final INTOG SMP, an option agreement will be offered. Projects will then go through planning, consenting, and financing stages.\n\nA total of 13 projects were selected for exclusivity agreements from 19 applications - five for IN and eight for TOG - and once the Sectoral Marine Plan has been finalised and option agreements signed (expected 2024), around £262m in applicant fees will be secured.\n\nContract awards were determined on a largely open-auction basis and were judged on a mixture of price and quality.\n\nThe area of seabed covered by the IN projects is just over 139km2 and by the TOG projects 1534km2. Crown Estate Scotland will offer a seabed lease of 50 years for TOG projects and 25 years for IN projects.\n\nExclusivity Agreements will cover projects with a proposed capacity of up to 499MW for IN and 5GW for TOG.\n\nMap reference\n\nLead applicant\n\nOption Fees\n\nIN or TOG\n\nTotal capacity (MW)\n\n1\n\nBluefloat Energy/Renantis Partnership £5,401,360 IN 99.45\n\n2\n\nBluefloat Energy/Renantis Partnership\n\n£7,107,900\n\nIN\n\n99.45\n\n3\n\nSimply Blue Energy £9,972,000 IN 100\n\n4\n\nBP Alternative Energy Investments\n\n£1,670,917\n\nIN\n\n50\n\n5\n\nESB Asset Development UK\n\n£3,137,000\n\nIN\n\n100\n\n6\n\nFlotation Energy\n\n£54,893,102\n\nTOG\n\n560\n\n7\n\nFlotation Energy\n\n£40,987,979\n\nTOG\n\n1350\n\n8\n\nCerulean Winds\n\n£67,200,066\n\nTOG\n\n1008\n\n9\n\nCerulean Winds\n\n£35,200,098\n\nTOG\n\n1008\n\n10\n\nCerulean Winds\n\n£35,200,098\n\nTOG\n\n1008\n\n11\n\nTotalEnergies\n\n£200,000\n\nTOG\n\n3\n\n12\n\nHarbour Energy\n\n£405,000\n\nTOG\n\n15\n\n13\n\nHarbour Energy\n\n£405,000\n\nTOG\n\n15\n\nTotal (rounded)\n\n£261,780,521\n\nColin Palmer, director of marine at Crown Estate Scotland, said: \"Today's results for this very distinctive and targeted leasing round are extremely encouraging.\n\n\"In addition to delivering economic and environmental benefits, INTOG will generate funds for the Scottish Government, from initial fees when option agreements are signed, to ongoing rent payments when the projects are constructed and move to operation.\n\n\"There are still significant challenges that need to be addressed to ensure INTOG's many opportunities are realised fully, but today marks a real step forward.\"\n\nNet Zero and Energy Secretary Michael Matheson said: \"The announcement from Crown Estate Scotland not only indicates that the INTOG initiative will provide a significant contribution to the public purse, but ensure the continuing growth and development of Scotland's offshore expertise and wider supply chain, supporting a true just transition for our energy sector.\"\n\nScottish Renewables' chief executive Claire Mack added: \"ScotWind will be at the forefront of the drive to achieve Scotland's net zero ambitions and must remain the priority as we see an increase in demand for resources and connections to the electricity network.\n\n\"We recognise that the marine planning process is already under significant pressure and urge the Scottish Government to ensure that appropriate resources are in place across key bodies to enable deployment of ScotWind and INTOG at the pace and scale required to achieve a secure, affordable, low-carbon energy system.\"\n\nDon't miss the latest headlines with our twice-daily newsletter - sign up here for free .",
+              "source": {
+                "uri": "insider.co.uk",
+                "dataType": "news",
+                "title": "businessInsider"
+              },
+              "authors": [
+                {
+                  "uri": "peter_a_walker@insider.co.uk",
+                  "name": "Peter A Walker",
+                  "type": "author",
+                  "isAgency": false
+                }
+              ],
+              "image": "https://i2-prod.dailyrecord.co.uk/incoming/article29368459.ece/ALTERNATES/s1200/0_Forties-Alpha-chopper-Peter-Iain-Campbell-jpeg.jpg",
+              "eventUri": "eng-8501132",
+              "sentiment": 0.5921568627450979,
+              "wgt": 179,
+              "relevance": 1
+            }
+          ],
+          "totalResults": 6,
+          "page": 1,
+          "count": 6,
+          "pages": 1
+        }
+      }
+    }
+  }
+}

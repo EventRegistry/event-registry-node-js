@@ -1,0 +1,3257 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/event/getEvent",
+    "body": {
+      "eventUri": "eng-8501190",
+      "articlesPage": 1,
+      "articlesCount": 100,
+      "articlesSortBy": "cosSim",
+      "articlesSortByAsc": false,
+      "articlesArticleBodyLen": -1,
+      "articlesIncludeArticleBasicInfo": true,
+      "articlesIncludeArticleTitle": true,
+      "articlesIncludeArticleBody": true,
+      "articlesIncludeArticleUrl": true,
+      "articlesIncludeArticleEventUri": true,
+      "articlesIncludeArticleAuthors": true,
+      "articlesIncludeArticleConcepts": true,
+      "articlesIncludeArticleCategories": true,
+      "articlesIncludeArticleLinks": false,
+      "articlesIncludeArticleVideos": true,
+      "articlesIncludeArticleImage": true,
+      "articlesIncludeArticleSocialScore": true,
+      "articlesIncludeArticleSentiment": true,
+      "articlesIncludeArticleLocation": true,
+      "articlesIncludeArticleExtractedDates": true,
+      "articlesIncludeArticleOriginalArticle": true,
+      "articlesIncludeArticleStoryUri": true,
+      "articlesIncludeArticleDuplicateList": true,
+      "articlesIncludeEventTitle": true,
+      "articlesIncludeEventSummary": true,
+      "articlesIncludeEventArticleCounts": true,
+      "articlesIncludeEventConcepts": true,
+      "articlesIncludeEventCategories": true,
+      "articlesIncludeEventDate": true,
+      "articlesIncludeEventCommonDates": true,
+      "articlesIncludeEventInfoArticle": false,
+      "articlesIncludeEventStories": true,
+      "articlesIncludeEventSocialScore": true,
+      "articlesEventImageCount": 2,
+      "articlesIncludeSourceTitle": true,
+      "articlesIncludeSourceDescription": true,
+      "articlesIncludeSourceLocation": true,
+      "articlesIncludeSourceRanking": true,
+      "articlesIncludeSourceImage": true,
+      "articlesIncludeSourceSocialMedia": true,
+      "articlesIncludeSourceArticleCount": true,
+      "articlesIncludeSourceSourceGroups": true,
+      "articlesIncludeCategoryTrendingScore": true,
+      "articlesConceptType": [
+        "concepts",
+        "entities"
+      ],
+      "articlesConceptLang": [
+        "eng",
+        "spa"
+      ],
+      "articlesIncludeConceptLabel": true,
+      "articlesIncludeConceptSynonyms": true,
+      "articlesIncludeConceptImage": true,
+      "articlesIncludeConceptDescription": true,
+      "articlesIncludeConceptTrendingScore": true,
+      "articlesMaxConceptsPerType": 50,
+      "articlesIncludeLocationLabel": true,
+      "articlesIncludeLocationWikiUri": true,
+      "articlesIncludeLocationGeoNamesId": true,
+      "articlesIncludeLocationPopulation": true,
+      "articlesIncludeLocationGeoLocation": true,
+      "articlesIncludeLocationCountryArea": true,
+      "articlesIncludeLocationCountryDetails": true,
+      "articlesIncludeLocationCountryContinent": true,
+      "articlesIncludeLocationPlaceFeatureCode": true,
+      "articlesIncludeLocationPlaceCountry": true,
+      "articlesIncludeStoryBasicStats": true,
+      "articlesIncludeStoryLocation": true,
+      "articlesIncludeStoryDate": true,
+      "articlesIncludeStoryTitle": true,
+      "articlesIncludeStorySummary": true,
+      "articlesIncludeStoryConcepts": true,
+      "articlesIncludeStoryCategories": true,
+      "articlesIncludeStoryMedoidArticle": true,
+      "articlesIncludeStoryInfoArticle": false,
+      "articlesIncludeStoryCommonDates": true,
+      "articlesIncludeStorySocialScore": true,
+      "articlesStoryImageCount": 2,
+      "articlesIncludeConceptClassParentLabels": true,
+      "articlesIncludeConceptClassConcepts": false,
+      "articlesIncludeConceptFolderOwner": false,
+      "resultType": "articles",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "eng-8501190": {
+        "articles": {
+          "results": [
+            {
+              "uri": "7463253568",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "11:05:00",
+              "dateTime": "2023-03-24T11:05:00Z",
+              "dateTimePub": "2023-03-24T10:52:00Z",
+              "dataType": "news",
+              "sim": 0.9529411792755127,
+              "url": "https://guernseypress.com//news/uk-news/2023/03/24/kings-state-visit-to-france-postponed-amid-widespread-retirement-age-protests/",
+              "title": "King's state visit to France postponed amid widespread retirement age protests",
+              "body": "The French Presidency confirmed the postponement on Friday morning.\n\nThe King's first state visit of his reign has been postponed amid widespread French protests over President Emmanuel Macron's retirement age reforms.\n\nThe French Presidency confirmed the postponement on Friday morning, while Buckingham Palace has yet to comment.\n\nDowning Street later confirmed the Mr Macron had asked the British Government to postpone the trip.\n\nA Government spokesperson said: \"The King and Queen Consort's state visit to France has been postponed.\n\n\"This decision was taken with the consent of all parties, after the President of France asked the British Government to postpone the visit.\"\n\nTens of thousands of mainly peaceful demonstrators took to the streets of Paris on Thursday - the ninth day of nationwide protests - but violence erupted when French police clashed with black-clad, masked groups who targeted at least two fast food restaurants, a supermarket and a bank.\n\nIt is understood the trip's logistics had been under review for some days and measures were being considered to reduce interactions with the public.\n\nThe trip, which was to be followed by a state visit to Germany, has been in the planning by the UK and host nations for months, and is aimed at strengthening ties between Britain and its continental neighbours.\n\nPresident Macron is facing renewed public anger for pushing through a bill raising the retirement age to 64 without a vote in the National Assembly, the lower house of the French Parliament.\n\nFrench labour union CGT union announced this week that its members at Mobilier National, the institution in charge of providing flags, red carpets and furniture for public buildings, would not help prepare a Sunday reception for the king upon his arrival in Paris.",
+              "source": {
+                "uri": "guernseypress.com",
+                "dataType": "news",
+                "title": "guernseypress.com",
+                "description": "",
+                "location": null,
+                "image": null,
+                "thumbImage": null,
+                "favicon": null,
+                "ranking": {
+                  "importanceRank": 1000000
+                },
+                "articleCount": 523,
+                "socialMedia": {},
+                "sourceGroups": []
+              },
+              "authors": [],
+              "concepts": [
+                {
+                  "uri": "http://en.wikipedia.org/wiki/President_of_France",
+                  "type": "wiki",
+                  "score": 5,
+                  "label": {
+                    "eng": "President of France",
+                    "spa": "Presidente de la República Francesa"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/State_visit",
+                  "type": "wiki",
+                  "score": 5,
+                  "label": {
+                    "eng": "State visit",
+                    "spa": "Visita oficial"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/France",
+                  "type": "loc",
+                  "score": 5,
+                  "label": {
+                    "eng": "France",
+                    "spa": "Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "3017382",
+                    "wikiUri": "http://en.wikipedia.org/wiki/France",
+                    "label": {
+                      "eng": "France",
+                      "spa": "Francia"
+                    },
+                    "population": 64768389,
+                    "lat": 46,
+                    "long": 2,
+                    "area": 547030,
+                    "code2": "FR",
+                    "code3": "FRA",
+                    "webExt": ".fr",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Government_of_the_United_Kingdom",
+                  "type": "org",
+                  "score": 4,
+                  "label": {
+                    "eng": "Government of the United Kingdom",
+                    "spa": "Gobierno del Reino Unido"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+                  "type": "person",
+                  "score": 4,
+                  "label": {
+                    "eng": "Emmanuel Macron",
+                    "spa": "Emmanuel Macron"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Downing_Street",
+                  "type": "wiki",
+                  "score": 3,
+                  "label": {
+                    "eng": "Downing Street",
+                    "spa": "Downing Street"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Buckingham_Palace",
+                  "type": "loc",
+                  "score": 3,
+                  "label": {
+                    "eng": "Buckingham Palace",
+                    "spa": "Palacio de Buckingham"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": null
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Queen_consort",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "Queen consort",
+                    "spa": "Queen consort"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "George Floyd protests",
+                    "spa": "George Floyd protests"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Fast_food",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "Fast food",
+                    "spa": "Comida rápida"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Paris",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "Paris",
+                    "spa": "París"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "place",
+                    "geoNamesId": "2968815",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Paris",
+                    "label": {
+                      "eng": "Paris",
+                      "spa": "París"
+                    },
+                    "population": 2257981,
+                    "lat": 48.8534,
+                    "long": 2.3486,
+                    "featureCode": "A.ADM2",
+                    "country": {
+                      "type": "country",
+                      "geoNamesId": "3017382",
+                      "wikiUri": "http://en.wikipedia.org/wiki/France",
+                      "label": {
+                        "eng": "France",
+                        "spa": "Francia"
+                      },
+                      "population": 64768389,
+                      "lat": 46,
+                      "long": 2,
+                      "area": 547030,
+                      "code2": "FR",
+                      "code3": "FRA",
+                      "webExt": ".fr",
+                      "currencyCode": "EUR",
+                      "currencyName": "Euro",
+                      "continent": "Europe"
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "United Kingdom",
+                    "spa": "Reino Unido"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "2635167",
+                    "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                    "label": {
+                      "eng": "United Kingdom",
+                      "spa": "Reino Unido"
+                    },
+                    "population": 62348447,
+                    "lat": 54.75844,
+                    "long": -2.69531,
+                    "area": 244820,
+                    "code2": "GB",
+                    "code3": "GBR",
+                    "webExt": ".uk",
+                    "currencyCode": "GBP",
+                    "currencyName": "Pound",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Mobilier_National",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Mobilier national",
+                    "spa": "Mobilier national"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/French_Parliament",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "French Parliament",
+                    "spa": "Parlamento francés"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/General_Confederation_of_Labour_(France)",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "General Confederation of Labour (France)",
+                    "spa": "Confederación General del Trabajo (Francia)"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Furniture",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Furniture",
+                    "spa": "Mobiliario"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/National_Assembly_(France)",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "National Assembly (France)",
+                    "spa": "Asamblea Nacional de Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Lower_house",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Lower house",
+                    "spa": "Cámara baja"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Trade_union",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Trade union",
+                    "spa": "Sindicato"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Germany",
+                  "type": "loc",
+                  "score": 1,
+                  "label": {
+                    "eng": "Germany",
+                    "spa": "Alemania"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "2921044",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+                    "label": {
+                      "eng": "Germany",
+                      "spa": "Alemania"
+                    },
+                    "population": 81802257,
+                    "lat": 51.5,
+                    "long": 10.5,
+                    "area": 357021,
+                    "code2": "DE",
+                    "code3": "DEU",
+                    "webExt": ".de",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                }
+              ],
+              "categories": [
+                {
+                  "uri": "news/Business",
+                  "label": "news/Business",
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "wgt": 55
+                }
+              ],
+              "videos": [],
+              "image": "https://guernseypress.com/resizer/R2ySykSzd2rlvH-5RZFEJbMnsfQ=/1200x0/cloudfront-us-east-1.images.arcpublishing.com/mna/52SKWKX3WJBYJDZ3VNXH5G5HB4.jpg",
+              "duplicateList": [
+                "7463252215",
+                "7463254348",
+                "7463259969"
+              ],
+              "originalArticle": null,
+              "storyUri": "eng-8501190",
+              "eventUri": "eng-8501190",
+              "location": null,
+              "extractedDates": null,
+              "shares": {},
+              "sentiment": -0.1372549019607843,
+              "wgt": 243,
+              "relevance": 1
+            },
+            {
+              "uri": "7463259146",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "11:09:00",
+              "dateTime": "2023-03-24T11:09:00Z",
+              "dateTimePub": "2023-03-24T11:01:00Z",
+              "dataType": "news",
+              "sim": 0.9137254953384399,
+              "url": "https://www.standard.co.uk/news/uk/france-british-government-king-government-british-b1069682.html",
+              "title": "King's state visit to France postponed amid widespread retirement age protests",
+              "body": "The French Presidency confirmed the postponement on Friday morning, while Buckingham Palace has yet to comment.\n\n\"This decision was taken with the consent of all parties, after the President of France asked the British Government to postpone the visit.\"\n\nIt is understood new dates for the visit will be confirmed shortly.\n\nTens of thousands of mainly peaceful demonstrators took to the streets of Paris on Thursday - the ninth day of nationwide protests - but violence erupted when French police clashed with black-clad, masked groups who targeted at least two fast food restaurants, a supermarket and a bank.\n\nIt is understood the trip's logistics had been under review for some days and measures were being considered to reduce interactions with the public.\n\nThe trip, which was to be followed by a state visit to Germany, has been in the planning by the UK and host nations for months, and is aimed at strengthening ties between Britain and its continental neighbours.\n\nPresident Macron is facing renewed public anger for pushing through a bill raising the retirement age to 64 without a vote in the National Assembly, the lower house of the French Parliament.\n\nFrench labour union CGT union announced this week that its members at Mobilier National, the institution in charge of providing flags, red carpets and furniture for public buildings, would not help prepare a Sunday reception for the king upon his arrival in Paris.",
+              "source": {
+                "uri": "standard.co.uk",
+                "dataType": "news",
+                "title": "Evening Standard",
+                "description": "",
+                "location": null,
+                "image": null,
+                "thumbImage": null,
+                "favicon": null,
+                "ranking": {
+                  "importanceRank": 1000000
+                },
+                "articleCount": 1129,
+                "socialMedia": {},
+                "sourceGroups": [
+                  {
+                    "uri": "business/top200",
+                    "label": "Business/Top 200"
+                  },
+                  {
+                    "uri": "ET_Business",
+                    "label": "EventTypes/100"
+                  }
+                ]
+              },
+              "authors": [],
+              "concepts": [
+                {
+                  "uri": "http://en.wikipedia.org/wiki/President_of_France",
+                  "type": "wiki",
+                  "score": 5,
+                  "label": {
+                    "eng": "President of France",
+                    "spa": "Presidente de la República Francesa"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Government_of_the_United_Kingdom",
+                  "type": "org",
+                  "score": 3,
+                  "label": {
+                    "eng": "Government of the United Kingdom",
+                    "spa": "Gobierno del Reino Unido"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Buckingham_Palace",
+                  "type": "loc",
+                  "score": 3,
+                  "label": {
+                    "eng": "Buckingham Palace",
+                    "spa": "Palacio de Buckingham"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": null
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "George Floyd protests",
+                    "spa": "George Floyd protests"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Fast_food",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "Fast food",
+                    "spa": "Comida rápida"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Logistics",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "Logistics",
+                    "spa": "Logística"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Paris",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "Paris",
+                    "spa": "París"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "place",
+                    "geoNamesId": "2968815",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Paris",
+                    "label": {
+                      "eng": "Paris",
+                      "spa": "París"
+                    },
+                    "population": 2257981,
+                    "lat": 48.8534,
+                    "long": 2.3486,
+                    "featureCode": "A.ADM2",
+                    "country": {
+                      "type": "country",
+                      "geoNamesId": "3017382",
+                      "wikiUri": "http://en.wikipedia.org/wiki/France",
+                      "label": {
+                        "eng": "France",
+                        "spa": "Francia"
+                      },
+                      "population": 64768389,
+                      "lat": 46,
+                      "long": 2,
+                      "area": 547030,
+                      "code2": "FR",
+                      "code3": "FRA",
+                      "webExt": ".fr",
+                      "currencyCode": "EUR",
+                      "currencyName": "Euro",
+                      "continent": "Europe"
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "United Kingdom",
+                    "spa": "Reino Unido"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "2635167",
+                    "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                    "label": {
+                      "eng": "United Kingdom",
+                      "spa": "Reino Unido"
+                    },
+                    "population": 62348447,
+                    "lat": 54.75844,
+                    "long": -2.69531,
+                    "area": 244820,
+                    "code2": "GB",
+                    "code3": "GBR",
+                    "webExt": ".uk",
+                    "currencyCode": "GBP",
+                    "currencyName": "Pound",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/France",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "France",
+                    "spa": "Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "3017382",
+                    "wikiUri": "http://en.wikipedia.org/wiki/France",
+                    "label": {
+                      "eng": "France",
+                      "spa": "Francia"
+                    },
+                    "population": 64768389,
+                    "lat": 46,
+                    "long": 2,
+                    "area": 547030,
+                    "code2": "FR",
+                    "code3": "FRA",
+                    "webExt": ".fr",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Mobilier_National",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Mobilier national",
+                    "spa": "Mobilier national"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/French_Parliament",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "French Parliament",
+                    "spa": "Parlamento francés"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/General_Confederation_of_Labour_(France)",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "General Confederation of Labour (France)",
+                    "spa": "Confederación General del Trabajo (Francia)"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Furniture",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Furniture",
+                    "spa": "Mobiliario"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/National_Assembly_(France)",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "National Assembly (France)",
+                    "spa": "Asamblea Nacional de Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Lower_house",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Lower house",
+                    "spa": "Cámara baja"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+                  "type": "person",
+                  "score": 1,
+                  "label": {
+                    "eng": "Emmanuel Macron",
+                    "spa": "Emmanuel Macron"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/State_visit",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "State visit",
+                    "spa": "Visita oficial"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Trade_union",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Trade union",
+                    "spa": "Sindicato"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Germany",
+                  "type": "loc",
+                  "score": 1,
+                  "label": {
+                    "eng": "Germany",
+                    "spa": "Alemania"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "2921044",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+                    "label": {
+                      "eng": "Germany",
+                      "spa": "Alemania"
+                    },
+                    "population": 81802257,
+                    "lat": 51.5,
+                    "long": 10.5,
+                    "area": 357021,
+                    "code2": "DE",
+                    "code3": "DEU",
+                    "webExt": ".de",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                }
+              ],
+              "categories": [
+                {
+                  "uri": "news/Business",
+                  "label": "news/Business",
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "wgt": 72
+                },
+                {
+                  "uri": "dmoz/Society/Issues/Warfare_and_Conflict",
+                  "label": "dmoz/Society/Issues/Warfare and Conflict",
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "wgt": 100
+                }
+              ],
+              "videos": [],
+              "image": "https://static.standard.co.uk/2023/03/24/10/23-71b039466e4f4df1be6bc2f9a88429a9.jpg?width=1200&width=1200&auto=webp&quality=75",
+              "duplicateList": [
+                "7463263201"
+              ],
+              "originalArticle": null,
+              "storyUri": "eng-8501190",
+              "eventUri": "eng-8501190",
+              "location": null,
+              "extractedDates": null,
+              "shares": {},
+              "sentiment": -0.1058823529411764,
+              "wgt": 233,
+              "relevance": 1
+            },
+            {
+              "uri": "7463287225",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "11:25:00",
+              "dateTime": "2023-03-24T11:25:00Z",
+              "dateTimePub": "2023-03-24T11:20:00Z",
+              "dataType": "news",
+              "sim": 0.9137254953384399,
+              "url": "https://www.hulldailymail.co.uk/news/uk-world-news/king-charless-state-visit-france-8285569",
+              "title": "King Charles's state visit to France postponed amid protests",
+              "body": "The King's state visit to France has been postponed amid widespread protests over President Emmanuel Macron's retirement age reforms.\n\nThe French Presidency confirmed the postponement of what would have been the first state visit of the King's reign and Downing Street later said Mr Macron had asked the British Government to postpone the trip.\n\nIt is understood new dates for the visit will be confirmed shortly and Buckingham Palace said the King and Queen Consort \"greatly look forward to the opportunity to visit France as soon as dates can be found\".\n\nThe trip, which was to begin on Sunday and be followed by a state visit to Germany, had been in the planning by the UK and host nations for months, and is aimed at strengthening ties between Britain and its continental neighbours.\n\nIt is understood the trip to Berlin, which will now be the first state visit of the King's reign, will proceed as planned between March 29 and 31.\n\nA UK Government spokesperson said: \"The King and Queen Consort's state visit to France has been postponed.\n\n\"This decision was taken with the consent of all parties, after the President of France asked the British Government to postpone the visit.\"\n\nIn a statement, the Elysee Palace said: \"In light of yesterday's announcement of a new national day of action against pension reforms on Tuesday, March 28 in France, the visit of King Charles III, originally scheduled for March 26 to 29 in our country, will be postponed.\n\n\"This decision was taken by the French and British governments, after a telephone exchange between the President of the Republic and the King this morning, in order to be able to welcome His Majesty King Charles III in conditions that correspond to our friendly relationship. This state visit will be rescheduled as soon as possible.\"\n\nTens of thousands of mainly peaceful demonstrators took to the streets of Paris on Thursday - the ninth day of nationwide protests - but violence erupted when French police clashed with black-clad, masked groups who targeted at least two fast food restaurants, a supermarket and a bank.\n\nIt is understood the trip's logistics had been under review for some days and measures were being considered to reduce interactions with the public.\n\nPresident Macron is facing renewed public anger for pushing through a bill raising the retirement age to 64 without a vote in the National Assembly, the lower house of the French Parliament.\n\nFrench labour union CGT union announced this week that its members at Mobilier National, the institution in charge of providing flags, red carpets and furniture for public buildings, would not help prepare a Sunday reception for the king upon his arrival in Paris.",
+              "source": {
+                "uri": "hulldailymail.co.uk",
+                "dataType": "news",
+                "title": "HullLive",
+                "description": "",
+                "location": null,
+                "image": null,
+                "thumbImage": null,
+                "favicon": null,
+                "ranking": {
+                  "importanceRank": 1000000
+                },
+                "articleCount": 438,
+                "socialMedia": {},
+                "sourceGroups": []
+              },
+              "authors": [
+                {
+                  "uri": "neil_shaw@hulldailymail.co.uk",
+                  "name": "Neil Shaw",
+                  "type": "author",
+                  "isAgency": false
+                }
+              ],
+              "concepts": [
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Government_of_the_United_Kingdom",
+                  "type": "org",
+                  "score": 5,
+                  "label": {
+                    "eng": "Government of the United Kingdom",
+                    "spa": "Gobierno del Reino Unido"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Charles_III_of_Spain",
+                  "type": "person",
+                  "score": 5,
+                  "label": {
+                    "eng": "Charles III of Spain",
+                    "spa": "Carlos III de España"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+                  "type": "person",
+                  "score": 5,
+                  "label": {
+                    "eng": "Emmanuel Macron",
+                    "spa": "Emmanuel Macron"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/State_visit",
+                  "type": "wiki",
+                  "score": 5,
+                  "label": {
+                    "eng": "State visit",
+                    "spa": "Visita oficial"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/France",
+                  "type": "loc",
+                  "score": 5,
+                  "label": {
+                    "eng": "France",
+                    "spa": "Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "3017382",
+                    "wikiUri": "http://en.wikipedia.org/wiki/France",
+                    "label": {
+                      "eng": "France",
+                      "spa": "Francia"
+                    },
+                    "population": 64768389,
+                    "lat": 46,
+                    "long": 2,
+                    "area": 547030,
+                    "code2": "FR",
+                    "code3": "FRA",
+                    "webExt": ".fr",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Queen_consort",
+                  "type": "wiki",
+                  "score": 4,
+                  "label": {
+                    "eng": "Queen consort",
+                    "spa": "Queen consort"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/President_of_France",
+                  "type": "wiki",
+                  "score": 4,
+                  "label": {
+                    "eng": "President of France",
+                    "spa": "Presidente de la República Francesa"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                  "type": "loc",
+                  "score": 4,
+                  "label": {
+                    "eng": "United Kingdom",
+                    "spa": "Reino Unido"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "2635167",
+                    "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                    "label": {
+                      "eng": "United Kingdom",
+                      "spa": "Reino Unido"
+                    },
+                    "population": 62348447,
+                    "lat": 54.75844,
+                    "long": -2.69531,
+                    "area": 244820,
+                    "code2": "GB",
+                    "code3": "GBR",
+                    "webExt": ".uk",
+                    "currencyCode": "GBP",
+                    "currencyName": "Pound",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Downing_Street",
+                  "type": "wiki",
+                  "score": 3,
+                  "label": {
+                    "eng": "Downing Street",
+                    "spa": "Downing Street"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
+                  "type": "wiki",
+                  "score": 3,
+                  "label": {
+                    "eng": "George Floyd protests",
+                    "spa": "George Floyd protests"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Buckingham_Palace",
+                  "type": "loc",
+                  "score": 3,
+                  "label": {
+                    "eng": "Buckingham Palace",
+                    "spa": "Palacio de Buckingham"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": null
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Germany",
+                  "type": "loc",
+                  "score": 3,
+                  "label": {
+                    "eng": "Germany",
+                    "spa": "Alemania"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "2921044",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+                    "label": {
+                      "eng": "Germany",
+                      "spa": "Alemania"
+                    },
+                    "population": 81802257,
+                    "lat": 51.5,
+                    "long": 10.5,
+                    "area": 357021,
+                    "code2": "DE",
+                    "code3": "DEU",
+                    "webExt": ".de",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Élysée_Palace",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "Élysée Palace",
+                    "spa": "Palacio del Elíseo"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": null
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/National_day",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "National day",
+                    "spa": "Día nacional"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Pension",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "Pension",
+                    "spa": "Pensión"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Berlin",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "Berlin",
+                    "spa": "Berlín"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "place",
+                    "geoNamesId": "2950157",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Berlin",
+                    "label": {
+                      "eng": "Berlin",
+                      "spa": "Berlín"
+                    },
+                    "population": 3442675,
+                    "lat": 52.5,
+                    "long": 13.41667,
+                    "featureCode": "A.ADM1",
+                    "country": {
+                      "type": "country",
+                      "geoNamesId": "2921044",
+                      "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+                      "label": {
+                        "eng": "Germany",
+                        "spa": "Alemania"
+                      },
+                      "population": 81802257,
+                      "lat": 51.5,
+                      "long": 10.5,
+                      "area": 357021,
+                      "code2": "DE",
+                      "code3": "DEU",
+                      "webExt": ".de",
+                      "currencyCode": "EUR",
+                      "currencyName": "Euro",
+                      "continent": "Europe"
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Mobilier_National",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Mobilier national",
+                    "spa": "Mobilier national"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Telephone_exchange",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Telephone exchange",
+                    "spa": "Central telefónica"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/French_Parliament",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "French Parliament",
+                    "spa": "Parlamento francés"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Majesty",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "Majesty",
+                    "spa": "Majestad"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Fast_food",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Fast food",
+                    "spa": "Comida rápida"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/National_Assembly_(France)",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "National Assembly (France)",
+                    "spa": "Asamblea Nacional de Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Lower_house",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Lower house",
+                    "spa": "Cámara baja"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Trade_union",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Trade union",
+                    "spa": "Sindicato"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Paris",
+                  "type": "loc",
+                  "score": 1,
+                  "label": {
+                    "eng": "Paris",
+                    "spa": "París"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "place",
+                    "geoNamesId": "2968815",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Paris",
+                    "label": {
+                      "eng": "Paris",
+                      "spa": "París"
+                    },
+                    "population": 2257981,
+                    "lat": 48.8534,
+                    "long": 2.3486,
+                    "featureCode": "A.ADM2",
+                    "country": {
+                      "type": "country",
+                      "geoNamesId": "3017382",
+                      "wikiUri": "http://en.wikipedia.org/wiki/France",
+                      "label": {
+                        "eng": "France",
+                        "spa": "Francia"
+                      },
+                      "population": 64768389,
+                      "lat": 46,
+                      "long": 2,
+                      "area": 547030,
+                      "code2": "FR",
+                      "code3": "FRA",
+                      "webExt": ".fr",
+                      "currencyCode": "EUR",
+                      "currencyName": "Euro",
+                      "continent": "Europe"
+                    }
+                  }
+                }
+              ],
+              "categories": [
+                {
+                  "uri": "news/Politics",
+                  "label": "news/Politics",
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "wgt": 84
+                }
+              ],
+              "videos": [],
+              "image": "https://i2-prod.hulldailymail.co.uk/news/uk-world-news/article8285566.ece/ALTERNATES/s1200/0_271498784.jpg",
+              "duplicateList": [
+                "7463292035"
+              ],
+              "originalArticle": null,
+              "storyUri": "eng-8501190",
+              "eventUri": "eng-8501190",
+              "location": null,
+              "extractedDates": [
+                {
+                  "amb": false,
+                  "imp": true,
+                  "date": "2023-03-29",
+                  "dateEnd": "2023-03-31",
+                  "textStart": 919,
+                  "textEnd": 934
+                },
+                {
+                  "amb": false,
+                  "imp": true,
+                  "date": "2023-03-26",
+                  "dateEnd": "2023-03-29",
+                  "textStart": 1409,
+                  "textEnd": 1423
+                },
+                {
+                  "amb": false,
+                  "imp": true,
+                  "date": "2023-03-28",
+                  "textStart": 1333,
+                  "textEnd": 1341
+                }
+              ],
+              "shares": {},
+              "sentiment": 0.03529411764705892,
+              "wgt": 233,
+              "relevance": 1
+            },
+            {
+              "uri": "7463259718",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "11:09:00",
+              "dateTime": "2023-03-24T11:09:00Z",
+              "dateTimePub": "2023-03-24T11:01:00Z",
+              "dataType": "news",
+              "sim": 0.9058823585510254,
+              "url": "https://www.independent.co.uk/news/uk/france-british-government-government-british-buckingham-palace-b2307348.html",
+              "title": "King's state visit to France postponed amid widespread retirement age protests",
+              "body": "{{ #verifyErrors }}{{ message }}{{ /verifyErrors }}{{ ^verifyErrors }}Something went wrong. Please try again later{{ /verifyErrors }}\n\nThe King's first state visit of his reign has been postponed amid widespread French protests over President Emmanuel Macron's retirement age reforms.\n\nThe French Presidency confirmed the postponement on Friday morning, while Buckingham Palace has yet to comment.\n\n\"This decision was taken with the consent of all parties, after the President of France asked the British Government to postpone the visit.\"\n\nIt is understood new dates for the visit will be confirmed shortly.\n\nTens of thousands of mainly peaceful demonstrators took to the streets of Paris on Thursday - the ninth day of nationwide protests - but violence erupted when French police clashed with black-clad, masked groups who targeted at least two fast food restaurants, a supermarket and a bank.\n\nIt is understood the trip's logistics had been under review for some days and measures were being considered to reduce interactions with the public.\n\nThe trip, which was to be followed by a state visit to Germany, has been in the planning by the UK and host nations for months, and is aimed at strengthening ties between Britain and its continental neighbours.\n\nPresident Macron is facing renewed public anger for pushing through a bill raising the retirement age to 64 without a vote in the National Assembly, the lower house of the French Parliament.\n\nFrench labour union CGT union announced this week that its members at Mobilier National, the institution in charge of providing flags, red carpets and furniture for public buildings, would not help prepare a Sunday reception for the king upon his arrival in Paris.",
+              "source": {
+                "uri": "independent.co.uk",
+                "dataType": "news",
+                "title": "The Independent",
+                "description": "",
+                "location": null,
+                "image": null,
+                "thumbImage": null,
+                "favicon": null,
+                "ranking": {
+                  "importanceRank": 1000000
+                },
+                "articleCount": 1969,
+                "socialMedia": {},
+                "sourceGroups": [
+                  {
+                    "uri": "general/top50",
+                    "label": "General/Top 50"
+                  },
+                  {
+                    "uri": "business/top100",
+                    "label": "Business/Top 100"
+                  }
+                ]
+              },
+              "authors": [],
+              "concepts": [
+                {
+                  "uri": "http://en.wikipedia.org/wiki/President_of_France",
+                  "type": "wiki",
+                  "score": 4,
+                  "label": {
+                    "eng": "President of France",
+                    "spa": "Presidente de la República Francesa"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/France",
+                  "type": "loc",
+                  "score": 4,
+                  "label": {
+                    "eng": "France",
+                    "spa": "Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "3017382",
+                    "wikiUri": "http://en.wikipedia.org/wiki/France",
+                    "label": {
+                      "eng": "France",
+                      "spa": "Francia"
+                    },
+                    "population": 64768389,
+                    "lat": 46,
+                    "long": 2,
+                    "area": 547030,
+                    "code2": "FR",
+                    "code3": "FRA",
+                    "webExt": ".fr",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+                  "type": "person",
+                  "score": 3,
+                  "label": {
+                    "eng": "Emmanuel Macron",
+                    "spa": "Emmanuel Macron"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Buckingham_Palace",
+                  "type": "loc",
+                  "score": 3,
+                  "label": {
+                    "eng": "Buckingham Palace",
+                    "spa": "Palacio de Buckingham"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": null
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/State_visit",
+                  "type": "wiki",
+                  "score": 3,
+                  "label": {
+                    "eng": "State visit",
+                    "spa": "Visita oficial"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "George Floyd protests",
+                    "spa": "George Floyd protests"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Fast_food",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "Fast food",
+                    "spa": "Comida rápida"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Government_of_the_United_Kingdom",
+                  "type": "org",
+                  "score": 2,
+                  "label": {
+                    "eng": "Government of the United Kingdom",
+                    "spa": "Gobierno del Reino Unido"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Paris",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "Paris",
+                    "spa": "París"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "place",
+                    "geoNamesId": "2968815",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Paris",
+                    "label": {
+                      "eng": "Paris",
+                      "spa": "París"
+                    },
+                    "population": 2257981,
+                    "lat": 48.8534,
+                    "long": 2.3486,
+                    "featureCode": "A.ADM2",
+                    "country": {
+                      "type": "country",
+                      "geoNamesId": "3017382",
+                      "wikiUri": "http://en.wikipedia.org/wiki/France",
+                      "label": {
+                        "eng": "France",
+                        "spa": "Francia"
+                      },
+                      "population": 64768389,
+                      "lat": 46,
+                      "long": 2,
+                      "area": 547030,
+                      "code2": "FR",
+                      "code3": "FRA",
+                      "webExt": ".fr",
+                      "currencyCode": "EUR",
+                      "currencyName": "Euro",
+                      "continent": "Europe"
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "United Kingdom",
+                    "spa": "Reino Unido"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "2635167",
+                    "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                    "label": {
+                      "eng": "United Kingdom",
+                      "spa": "Reino Unido"
+                    },
+                    "population": 62348447,
+                    "lat": 54.75844,
+                    "long": -2.69531,
+                    "area": 244820,
+                    "code2": "GB",
+                    "code3": "GBR",
+                    "webExt": ".uk",
+                    "currencyCode": "GBP",
+                    "currencyName": "Pound",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Mobilier_National",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Mobilier national",
+                    "spa": "Mobilier national"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/French_Parliament",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "French Parliament",
+                    "spa": "Parlamento francés"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/General_Confederation_of_Labour_(France)",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "General Confederation of Labour (France)",
+                    "spa": "Confederación General del Trabajo (Francia)"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Furniture",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Furniture",
+                    "spa": "Mobiliario"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/National_Assembly_(France)",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "National Assembly (France)",
+                    "spa": "Asamblea Nacional de Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Lower_house",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Lower house",
+                    "spa": "Cámara baja"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Trade_union",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Trade union",
+                    "spa": "Sindicato"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Germany",
+                  "type": "loc",
+                  "score": 1,
+                  "label": {
+                    "eng": "Germany",
+                    "spa": "Alemania"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "2921044",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+                    "label": {
+                      "eng": "Germany",
+                      "spa": "Alemania"
+                    },
+                    "population": 81802257,
+                    "lat": 51.5,
+                    "long": 10.5,
+                    "area": 357021,
+                    "code2": "DE",
+                    "code3": "DEU",
+                    "webExt": ".de",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                }
+              ],
+              "categories": [
+                {
+                  "uri": "news/Business",
+                  "label": "news/Business",
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "wgt": 67
+                }
+              ],
+              "videos": [],
+              "image": "https://static.independent.co.uk/2023/03/24/10/23-71b039466e4f4df1be6bc2f9a88429a9.jpg?quality=75&width=1200&auto=webp",
+              "duplicateList": [],
+              "originalArticle": null,
+              "storyUri": "eng-8501190",
+              "eventUri": "eng-8501190",
+              "location": null,
+              "extractedDates": null,
+              "shares": {},
+              "sentiment": -0.1137254901960785,
+              "wgt": 231,
+              "relevance": 1
+            },
+            {
+              "uri": "7463285824",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "11:24:00",
+              "dateTime": "2023-03-24T11:24:00Z",
+              "dateTimePub": "2023-03-24T11:17:00Z",
+              "dataType": "news",
+              "sim": 0.9058823585510254,
+              "url": "https://www.standard.co.uk/news/uk/france-uk-government-king-downing-street-buckingham-palace-b1069682.html",
+              "title": "King's state visit to France postponed amid widespread retirement age protests",
+              "body": "The French Presidency confirmed the postponement of what would have been the first state visit of the King's reign and Downing Street later said Mr Macron had asked the British Government to postpone the trip.\n\nIt is understood new dates for the visit will be confirmed shortly and Buckingham Palace said the King and Queen Consort \"greatly look forward to the opportunity to visit France as soon as dates can be found\".\n\nThe trip, which was to begin on Sunday and be followed by a state visit to Germany, had been in the planning by the UK and host nations for months, and is aimed at strengthening ties between Britain and its continental neighbours.\n\nIt is understood the trip to Berlin, which will now be the first state visit of the King's reign, will proceed as planned between March 29 and 31.\n\nA UK Government spokesperson said: \"The King and Queen Consort's state visit to France has been postponed.\n\n\"This decision was taken with the consent of all parties, after the President of France asked the British Government to postpone the visit.\"\n\nIn a statement, the Elysee Palace said: \"In light of yesterday's announcement of a new national day of action against pension reforms on Tuesday, March 28 in France, the visit of King Charles III, originally scheduled for March 26 to 29 in our country, will be postponed.\n\n\"This decision was taken by the French and British governments, after a telephone exchange between the President of the Republic and the King this morning, in order to be able to welcome His Majesty King Charles III in conditions that correspond to our friendly relationship. This state visit will be rescheduled as soon as possible.\"\n\nTens of thousands of mainly peaceful demonstrators took to the streets of Paris on Thursday - the ninth day of nationwide protests - but violence erupted when French police clashed with black-clad, masked groups who targeted at least two fast food restaurants, a supermarket and a bank.\n\nIt is understood the trip's logistics had been under review for some days and measures were being considered to reduce interactions with the public.\n\nPresident Macron is facing renewed public anger for pushing through a bill raising the retirement age to 64 without a vote in the National Assembly, the lower house of the French Parliament.\n\nFrench labour union CGT union announced this week that its members at Mobilier National, the institution in charge of providing flags, red carpets and furniture for public buildings, would not help prepare a Sunday reception for the king upon his arrival in Paris.",
+              "source": {
+                "uri": "standard.co.uk",
+                "dataType": "news",
+                "title": "Evening Standard",
+                "description": "",
+                "location": null,
+                "image": null,
+                "thumbImage": null,
+                "favicon": null,
+                "ranking": {
+                  "importanceRank": 1000000
+                },
+                "articleCount": 1129,
+                "socialMedia": {},
+                "sourceGroups": [
+                  {
+                    "uri": "business/top200",
+                    "label": "Business/Top 200"
+                  },
+                  {
+                    "uri": "ET_Business",
+                    "label": "EventTypes/100"
+                  }
+                ]
+              },
+              "authors": [],
+              "concepts": [
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Government_of_the_United_Kingdom",
+                  "type": "org",
+                  "score": 5,
+                  "label": {
+                    "eng": "Government of the United Kingdom",
+                    "spa": "Gobierno del Reino Unido"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Charles_III_of_Spain",
+                  "type": "person",
+                  "score": 5,
+                  "label": {
+                    "eng": "Charles III of Spain",
+                    "spa": "Carlos III de España"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/President_of_France",
+                  "type": "wiki",
+                  "score": 5,
+                  "label": {
+                    "eng": "President of France",
+                    "spa": "Presidente de la República Francesa"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/State_visit",
+                  "type": "wiki",
+                  "score": 5,
+                  "label": {
+                    "eng": "State visit",
+                    "spa": "Visita oficial"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                  "type": "loc",
+                  "score": 5,
+                  "label": {
+                    "eng": "United Kingdom",
+                    "spa": "Reino Unido"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "2635167",
+                    "wikiUri": "http://en.wikipedia.org/wiki/United_Kingdom",
+                    "label": {
+                      "eng": "United Kingdom",
+                      "spa": "Reino Unido"
+                    },
+                    "population": 62348447,
+                    "lat": 54.75844,
+                    "long": -2.69531,
+                    "area": 244820,
+                    "code2": "GB",
+                    "code3": "GBR",
+                    "webExt": ".uk",
+                    "currencyCode": "GBP",
+                    "currencyName": "Pound",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/France",
+                  "type": "loc",
+                  "score": 5,
+                  "label": {
+                    "eng": "France",
+                    "spa": "Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "3017382",
+                    "wikiUri": "http://en.wikipedia.org/wiki/France",
+                    "label": {
+                      "eng": "France",
+                      "spa": "Francia"
+                    },
+                    "population": 64768389,
+                    "lat": 46,
+                    "long": 2,
+                    "area": 547030,
+                    "code2": "FR",
+                    "code3": "FRA",
+                    "webExt": ".fr",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Queen_consort",
+                  "type": "wiki",
+                  "score": 4,
+                  "label": {
+                    "eng": "Queen consort",
+                    "spa": "Queen consort"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Downing_Street",
+                  "type": "wiki",
+                  "score": 3,
+                  "label": {
+                    "eng": "Downing Street",
+                    "spa": "Downing Street"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+                  "type": "person",
+                  "score": 3,
+                  "label": {
+                    "eng": "Emmanuel Macron",
+                    "spa": "Emmanuel Macron"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Buckingham_Palace",
+                  "type": "loc",
+                  "score": 3,
+                  "label": {
+                    "eng": "Buckingham Palace",
+                    "spa": "Palacio de Buckingham"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": null
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Germany",
+                  "type": "loc",
+                  "score": 3,
+                  "label": {
+                    "eng": "Germany",
+                    "spa": "Alemania"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "2921044",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+                    "label": {
+                      "eng": "Germany",
+                      "spa": "Alemania"
+                    },
+                    "population": 81802257,
+                    "lat": 51.5,
+                    "long": 10.5,
+                    "area": 357021,
+                    "code2": "DE",
+                    "code3": "DEU",
+                    "webExt": ".de",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Telephone_exchange",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "Telephone exchange",
+                    "spa": "Central telefónica"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Élysée_Palace",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "Élysée Palace",
+                    "spa": "Palacio del Elíseo"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": null
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/National_day",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "National day",
+                    "spa": "Día nacional"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Pension",
+                  "type": "wiki",
+                  "score": 2,
+                  "label": {
+                    "eng": "Pension",
+                    "spa": "Pensión"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Berlin",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "Berlin",
+                    "spa": "Berlín"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "place",
+                    "geoNamesId": "2950157",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Berlin",
+                    "label": {
+                      "eng": "Berlin",
+                      "spa": "Berlín"
+                    },
+                    "population": 3442675,
+                    "lat": 52.5,
+                    "long": 13.41667,
+                    "featureCode": "A.ADM1",
+                    "country": {
+                      "type": "country",
+                      "geoNamesId": "2921044",
+                      "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+                      "label": {
+                        "eng": "Germany",
+                        "spa": "Alemania"
+                      },
+                      "population": 81802257,
+                      "lat": 51.5,
+                      "long": 10.5,
+                      "area": 357021,
+                      "code2": "DE",
+                      "code3": "DEU",
+                      "webExt": ".de",
+                      "currencyCode": "EUR",
+                      "currencyName": "Euro",
+                      "continent": "Europe"
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Mobilier_National",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Mobilier national",
+                    "spa": "Mobilier national"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/French_Parliament",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "French Parliament",
+                    "spa": "Parlamento francés"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Majesty",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "Majesty",
+                    "spa": "Majestad"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "George Floyd protests",
+                    "spa": "George Floyd protests"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Fast_food",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Fast food",
+                    "spa": "Comida rápida"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/National_Assembly_(France)",
+                  "type": "org",
+                  "score": 1,
+                  "label": {
+                    "eng": "National Assembly (France)",
+                    "spa": "Asamblea Nacional de Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Lower_house",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Lower house",
+                    "spa": "Cámara baja"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Trade_union",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Trade union",
+                    "spa": "Sindicato"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Paris",
+                  "type": "loc",
+                  "score": 1,
+                  "label": {
+                    "eng": "Paris",
+                    "spa": "París"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "place",
+                    "geoNamesId": "2968815",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Paris",
+                    "label": {
+                      "eng": "Paris",
+                      "spa": "París"
+                    },
+                    "population": 2257981,
+                    "lat": 48.8534,
+                    "long": 2.3486,
+                    "featureCode": "A.ADM2",
+                    "country": {
+                      "type": "country",
+                      "geoNamesId": "3017382",
+                      "wikiUri": "http://en.wikipedia.org/wiki/France",
+                      "label": {
+                        "eng": "France",
+                        "spa": "Francia"
+                      },
+                      "population": 64768389,
+                      "lat": 46,
+                      "long": 2,
+                      "area": 547030,
+                      "code2": "FR",
+                      "code3": "FRA",
+                      "webExt": ".fr",
+                      "currencyCode": "EUR",
+                      "currencyName": "Euro",
+                      "continent": "Europe"
+                    }
+                  }
+                }
+              ],
+              "categories": [
+                {
+                  "uri": "news/Politics",
+                  "label": "news/Politics",
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "wgt": 84
+                },
+                {
+                  "uri": "dmoz/Society/History/Historical_Personages",
+                  "label": "dmoz/Society/History/Historical Personages",
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "wgt": 100
+                },
+                {
+                  "uri": "dmoz/Games/Tile_Games/Kings_Cribbage",
+                  "label": "dmoz/Games/Tile Games/Kings Cribbage",
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "wgt": 100
+                }
+              ],
+              "videos": [],
+              "image": "https://static.standard.co.uk/2023/03/24/10/23-71b039466e4f4df1be6bc2f9a88429a9.jpg?width=1200&width=1200&auto=webp&quality=75",
+              "duplicateList": [
+                "7463291944"
+              ],
+              "originalArticle": null,
+              "storyUri": "eng-8501190",
+              "eventUri": "eng-8501190",
+              "location": null,
+              "extractedDates": [
+                {
+                  "amb": false,
+                  "imp": true,
+                  "date": "2023-03-29",
+                  "dateEnd": "2023-03-31",
+                  "textStart": 784,
+                  "textEnd": 799
+                },
+                {
+                  "amb": false,
+                  "imp": true,
+                  "date": "2023-03-26",
+                  "dateEnd": "2023-03-29",
+                  "textStart": 1274,
+                  "textEnd": 1288
+                },
+                {
+                  "amb": false,
+                  "imp": true,
+                  "date": "2023-03-28",
+                  "textStart": 1198,
+                  "textEnd": 1206
+                }
+              ],
+              "shares": {},
+              "sentiment": 0.08235294117647052,
+              "wgt": 231,
+              "relevance": 1
+            },
+            {
+              "uri": "7463247562",
+              "lang": "eng",
+              "isDuplicate": false,
+              "date": "2023-03-24",
+              "time": "11:02:00",
+              "dateTime": "2023-03-24T11:02:00Z",
+              "dateTimePub": "2023-03-24T10:50:00Z",
+              "dataType": "news",
+              "sim": 0.7686274647712708,
+              "url": "https://ca.sports.yahoo.com/news/king-state-visit-france-postponed-105042059.html",
+              "title": "King's state visit to France postponed amid widespread retirement age protests",
+              "body": "The King's first state visit of his reign has been postponed amid widespread French protests over President Emmanuel Macron's retirement age reforms.\n\nThe French Presidency confirmed the postponement on Friday morning, while Buckingham Palace has yet to comment.\n\nIt is understood new dates for the visit will be confirmed shortly.\n\nTens of thousands of mainly peaceful demonstrators took to the streets of Paris on Thursday - the ninth day of nationwide protests - but violence erupted when French police clashed with black-clad, masked groups who targeted at least two fast food restaurants, a supermarket and a bank.",
+              "source": {
+                "uri": "ca.sports.yahoo.com",
+                "dataType": "news",
+                "title": "ca.sports.yahoo.com",
+                "description": "",
+                "location": null,
+                "image": null,
+                "thumbImage": null,
+                "favicon": null,
+                "ranking": {
+                  "importanceRank": 90000
+                },
+                "articleCount": 5017,
+                "socialMedia": {},
+                "sourceGroups": []
+              },
+              "authors": [],
+              "concepts": [
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Emmanuel_Macron",
+                  "type": "person",
+                  "score": 3,
+                  "label": {
+                    "eng": "Emmanuel Macron",
+                    "spa": "Emmanuel Macron"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/President_of_France",
+                  "type": "wiki",
+                  "score": 3,
+                  "label": {
+                    "eng": "President of France",
+                    "spa": "Presidente de la República Francesa"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/State_visit",
+                  "type": "wiki",
+                  "score": 3,
+                  "label": {
+                    "eng": "State visit",
+                    "spa": "Visita oficial"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/France",
+                  "type": "loc",
+                  "score": 3,
+                  "label": {
+                    "eng": "France",
+                    "spa": "Francia"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "country",
+                    "geoNamesId": "3017382",
+                    "wikiUri": "http://en.wikipedia.org/wiki/France",
+                    "label": {
+                      "eng": "France",
+                      "spa": "Francia"
+                    },
+                    "population": 64768389,
+                    "lat": 46,
+                    "long": 2,
+                    "area": 547030,
+                    "code2": "FR",
+                    "code3": "FRA",
+                    "webExt": ".fr",
+                    "currencyCode": "EUR",
+                    "currencyName": "Euro",
+                    "continent": "Europe"
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Buckingham_Palace",
+                  "type": "loc",
+                  "score": 2,
+                  "label": {
+                    "eng": "Buckingham Palace",
+                    "spa": "Palacio de Buckingham"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": null
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "George Floyd protests",
+                    "spa": "George Floyd protests"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Fast_food",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Fast food",
+                    "spa": "Comida rápida"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Supermarket",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Supermarket",
+                    "spa": "Supermercado"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Restaurant",
+                  "type": "wiki",
+                  "score": 1,
+                  "label": {
+                    "eng": "Restaurant",
+                    "spa": "Restaurante"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  }
+                },
+                {
+                  "uri": "http://en.wikipedia.org/wiki/Paris",
+                  "type": "loc",
+                  "score": 1,
+                  "label": {
+                    "eng": "Paris",
+                    "spa": "París"
+                  },
+                  "image": null,
+                  "synonyms": {},
+                  "trendingScore": {
+                    "news": {
+                      "score": 0,
+                      "testPopFq": 0,
+                      "nullPopFq": 0
+                    }
+                  },
+                  "location": {
+                    "type": "place",
+                    "geoNamesId": "2968815",
+                    "wikiUri": "http://en.wikipedia.org/wiki/Paris",
+                    "label": {
+                      "eng": "Paris",
+                      "spa": "París"
+                    },
+                    "population": 2257981,
+                    "lat": 48.8534,
+                    "long": 2.3486,
+                    "featureCode": "A.ADM2",
+                    "country": {
+                      "type": "country",
+                      "geoNamesId": "3017382",
+                      "wikiUri": "http://en.wikipedia.org/wiki/France",
+                      "label": {
+                        "eng": "France",
+                        "spa": "Francia"
+                      },
+                      "population": 64768389,
+                      "lat": 46,
+                      "long": 2,
+                      "area": 547030,
+                      "code2": "FR",
+                      "code3": "FRA",
+                      "webExt": ".fr",
+                      "currencyCode": "EUR",
+                      "currencyName": "Euro",
+                      "continent": "Europe"
+                    }
+                  }
+                }
+              ],
+              "categories": [],
+              "videos": [],
+              "image": "https://s.yimg.com/ny/api/res/1.2/IvveOvTbpkn8YQM93l1W3g--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU7Y2Y9d2VicA--/https://media.zenfs.com/en/pa_viral_news_uk_120/238f0550ee5ab7dcf7ae045e92ce0ea3",
+              "duplicateList": [
+                "7463234672",
+                "7463237367",
+                "7463239596"
+              ],
+              "originalArticle": null,
+              "storyUri": "eng-8501190",
+              "eventUri": "eng-8501190",
+              "location": null,
+              "extractedDates": null,
+              "shares": {},
+              "sentiment": -0.2784313725490196,
+              "wgt": 196,
+              "relevance": 1
+            }
+          ],
+          "totalResults": 6,
+          "page": 1,
+          "count": 6,
+          "pages": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1485 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "conceptUri": "http://en.wikipedia.org/wiki/Barack_Obama",
+      "sourceAggrSourceCount": 50,
+      "sourceAggrArticleBodyLen": -1,
+      "sourceAggrIncludeArticleBasicInfo": true,
+      "sourceAggrIncludeArticleTitle": true,
+      "sourceAggrIncludeArticleBody": true,
+      "sourceAggrIncludeArticleUrl": true,
+      "sourceAggrIncludeArticleEventUri": true,
+      "sourceAggrIncludeArticleAuthors": true,
+      "sourceAggrIncludeArticleConcepts": true,
+      "sourceAggrIncludeArticleCategories": true,
+      "sourceAggrIncludeArticleLinks": false,
+      "sourceAggrIncludeArticleVideos": true,
+      "sourceAggrIncludeArticleImage": true,
+      "sourceAggrIncludeArticleSocialScore": true,
+      "sourceAggrIncludeArticleSentiment": true,
+      "sourceAggrIncludeArticleLocation": true,
+      "sourceAggrIncludeArticleExtractedDates": true,
+      "sourceAggrIncludeArticleOriginalArticle": true,
+      "sourceAggrIncludeArticleStoryUri": true,
+      "sourceAggrIncludeArticleDuplicateList": true,
+      "sourceAggrIncludeEventTitle": true,
+      "sourceAggrIncludeEventSummary": true,
+      "sourceAggrIncludeEventArticleCounts": true,
+      "sourceAggrIncludeEventConcepts": true,
+      "sourceAggrIncludeEventCategories": true,
+      "sourceAggrIncludeEventDate": true,
+      "sourceAggrIncludeEventCommonDates": false,
+      "sourceAggrIncludeEventInfoArticle": false,
+      "sourceAggrIncludeEventStories": false,
+      "sourceAggrIncludeEventSocialScore": false,
+      "sourceAggrEventImageCount": 0,
+      "sourceAggrIncludeSourceTitle": true,
+      "sourceAggrIncludeSourceDescription": true,
+      "sourceAggrIncludeSourceLocation": true,
+      "sourceAggrIncludeSourceRanking": true,
+      "sourceAggrIncludeSourceImage": true,
+      "sourceAggrIncludeSourceSocialMedia": true,
+      "sourceAggrIncludeSourceArticleCount": true,
+      "sourceAggrIncludeSourceSourceGroups": true,
+      "sourceAggrIncludeCategoryTrendingScore": true,
+      "sourceAggrConceptType": "concepts",
+      "sourceAggrConceptLang": "eng",
+      "sourceAggrIncludeConceptLabel": true,
+      "sourceAggrIncludeConceptSynonyms": false,
+      "sourceAggrIncludeConceptImage": false,
+      "sourceAggrIncludeConceptDescription": false,
+      "sourceAggrIncludeConceptTrendingScore": false,
+      "sourceAggrIncludeLocationLabel": true,
+      "sourceAggrIncludeLocationWikiUri": false,
+      "sourceAggrIncludeLocationGeoNamesId": false,
+      "sourceAggrIncludeLocationPopulation": false,
+      "sourceAggrIncludeLocationGeoLocation": false,
+      "sourceAggrIncludeLocationCountryArea": false,
+      "sourceAggrIncludeLocationCountryDetails": false,
+      "sourceAggrIncludeLocationCountryContinent": false,
+      "sourceAggrIncludeLocationPlaceFeatureCode": false,
+      "sourceAggrIncludeLocationPlaceCountry": true,
+      "sourceAggrIncludeStoryBasicStats": true,
+      "sourceAggrIncludeStoryLocation": true,
+      "sourceAggrIncludeStoryDate": false,
+      "sourceAggrIncludeStoryTitle": false,
+      "sourceAggrIncludeStorySummary": false,
+      "sourceAggrIncludeStoryConcepts": false,
+      "sourceAggrIncludeStoryCategories": false,
+      "sourceAggrIncludeStoryMedoidArticle": false,
+      "sourceAggrIncludeStoryInfoArticle": false,
+      "sourceAggrIncludeStoryCommonDates": false,
+      "sourceAggrIncludeStorySocialScore": false,
+      "sourceAggrStoryImageCount": 0,
+      "sourceAggrIncludeConceptClassParentLabels": true,
+      "sourceAggrIncludeConceptClassConcepts": false,
+      "sourceAggrIncludeConceptFolderOwner": false,
+      "resultType": "sourceAggr",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "sourceAggr": {
+        "usedResults": 2604,
+        "totalResults": 2604,
+        "countsPerSource": [
+          {
+            "source": {
+              "uri": "news.yahoo.com",
+              "dataType": "news",
+              "title": "Yahoo! News",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 40
+              },
+              "articleCount": 3160,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 3160,
+              "frequency": 31
+            }
+          },
+          {
+            "source": {
+              "uri": "dailymail.co.uk",
+              "dataType": "news",
+              "title": "Mail Online",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 4753,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "general/top10",
+                  "label": "General/Top 10"
+                },
+                {
+                  "uri": "general/top25",
+                  "label": "General/Top 25"
+                },
+                {
+                  "uri": "general/top50",
+                  "label": "General/Top 50"
+                },
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 4753,
+              "frequency": 23
+            }
+          },
+          {
+            "source": {
+              "uri": "infobae.com",
+              "dataType": "news",
+              "title": "infobae",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 5839,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 5839,
+              "frequency": 22
+            }
+          },
+          {
+            "source": {
+              "uri": "nytimes.com",
+              "dataType": "news",
+              "title": "The New York Times",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 578,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "media/top10",
+                  "label": "Media/Top 10"
+                },
+                {
+                  "uri": "business/top10",
+                  "label": "Business/Top 10"
+                },
+                {
+                  "uri": "general/top10",
+                  "label": "General/Top 10"
+                },
+                {
+                  "uri": "general/top25",
+                  "label": "General/Top 25"
+                },
+                {
+                  "uri": "general/top50",
+                  "label": "General/Top 50"
+                },
+                {
+                  "uri": "business/top100",
+                  "label": "Business/Top 100"
+                },
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 578,
+              "frequency": 21
+            }
+          },
+          {
+            "source": {
+              "uri": "therussophile.org",
+              "dataType": "news",
+              "title": "Russia News Now",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 415,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 415,
+              "frequency": 15
+            }
+          },
+          {
+            "source": {
+              "uri": "sandiegouniontribune.com",
+              "dataType": "news",
+              "title": "San Diego Union-Tribune",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 1088,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 1088,
+              "frequency": 13
+            }
+          },
+          {
+            "source": {
+              "uri": "eagletribune.com",
+              "dataType": "news",
+              "title": "Eagle-Tribune",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 723,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 723,
+              "frequency": 12
+            }
+          },
+          {
+            "source": {
+              "uri": "internewscast.com",
+              "dataType": "news",
+              "title": "Internewscast",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 1130,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 1130,
+              "frequency": 12
+            }
+          },
+          {
+            "source": {
+              "uri": "conservativeangle.com",
+              "dataType": "news",
+              "title": "Conservative Angle",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 286,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 286,
+              "frequency": 12
+            }
+          },
+          {
+            "source": {
+              "uri": "heritage.org",
+              "dataType": "news",
+              "title": "The Heritage Foundation",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 118,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 118,
+              "frequency": 12
+            }
+          },
+          {
+            "source": {
+              "uri": "breitbart.com",
+              "dataType": "news",
+              "title": "Breitbart",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 544,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 544,
+              "frequency": 12
+            }
+          },
+          {
+            "source": {
+              "uri": "arcamax.com",
+              "dataType": "news",
+              "title": "ArcaMax",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 753,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 753,
+              "frequency": 12
+            }
+          },
+          {
+            "source": {
+              "uri": "theepochtimes.com",
+              "dataType": "news",
+              "title": "theepochtimes.com",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 649,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 649,
+              "frequency": 11
+            }
+          },
+          {
+            "source": {
+              "uri": "abcnews.go.com",
+              "dataType": "news",
+              "title": "ABC News",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 609,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "general/top50",
+                  "label": "General/Top 50"
+                }
+              ]
+            },
+            "counts": {
+              "total": 609,
+              "frequency": 11
+            }
+          },
+          {
+            "source": {
+              "uri": "keyt.com",
+              "dataType": "news",
+              "title": "News Channel 3-12",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 597,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 597,
+              "frequency": 11
+            }
+          },
+          {
+            "source": {
+              "uri": "pantagraph.com",
+              "dataType": "news",
+              "title": "pantagraph.com",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 627,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 627,
+              "frequency": 11
+            }
+          },
+          {
+            "source": {
+              "uri": "ca.sports.yahoo.com",
+              "dataType": "news",
+              "title": "ca.sports.yahoo.com",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 90000
+              },
+              "articleCount": 5017,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 5017,
+              "frequency": 11
+            }
+          },
+          {
+            "source": {
+              "uri": "newsweek.com",
+              "dataType": "news",
+              "title": "Newsweek",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 500,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 500,
+              "frequency": 11
+            }
+          },
+          {
+            "source": {
+              "uri": "cbsnews.com",
+              "dataType": "news",
+              "title": "CBS News",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 1573,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "general/top50",
+                  "label": "General/Top 50"
+                }
+              ]
+            },
+            "counts": {
+              "total": 1573,
+              "frequency": 11
+            }
+          },
+          {
+            "source": {
+              "uri": "independent.co.uk",
+              "dataType": "news",
+              "title": "The Independent",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 1969,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "general/top50",
+                  "label": "General/Top 50"
+                },
+                {
+                  "uri": "business/top100",
+                  "label": "Business/Top 100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 1969,
+              "frequency": 10
+            }
+          },
+          {
+            "source": {
+              "uri": "elperiodicodemexico.com",
+              "dataType": "news",
+              "title": "elperiodicodemexico.com",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 522,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 522,
+              "frequency": 10
+            }
+          },
+          {
+            "source": {
+              "uri": "patriotpost.us",
+              "dataType": "news",
+              "title": "The Patriot Post",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 52,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 52,
+              "frequency": 10
+            }
+          },
+          {
+            "source": {
+              "uri": "rawstory.com",
+              "dataType": "news",
+              "title": "Raw Story",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 273,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 273,
+              "frequency": 10
+            }
+          },
+          {
+            "source": {
+              "uri": "dcweekly.org",
+              "dataType": "news",
+              "title": "DC Weekly",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 188,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 188,
+              "frequency": 10
+            }
+          },
+          {
+            "source": {
+              "uri": "epochtimes.com",
+              "dataType": "news",
+              "title": "大紀元 www.epochtimes.com",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 1905,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 1905,
+              "frequency": 10
+            }
+          },
+          {
+            "source": {
+              "uri": "hosted.ap.org",
+              "dataType": "news",
+              "title": "Associated Press",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 952,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "general/top10",
+                  "label": "General/Top 10"
+                },
+                {
+                  "uri": "general/top25",
+                  "label": "General/Top 25"
+                },
+                {
+                  "uri": "general/top50",
+                  "label": "General/Top 50"
+                }
+              ]
+            },
+            "counts": {
+              "total": 952,
+              "frequency": 10
+            }
+          },
+          {
+            "source": {
+              "uri": "eltiempo.com",
+              "dataType": "news",
+              "title": "El Tiempo",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 765,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 765,
+              "frequency": 9
+            }
+          },
+          {
+            "source": {
+              "uri": "americanthinker.com",
+              "dataType": "news",
+              "title": "American Thinker",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 55,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 55,
+              "frequency": 9
+            }
+          },
+          {
+            "source": {
+              "uri": "kion546.com",
+              "dataType": "news",
+              "title": "KION546",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 1031,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 1031,
+              "frequency": 9
+            }
+          },
+          {
+            "source": {
+              "uri": "bostonglobe.com",
+              "dataType": "news",
+              "title": "BostonGlobe.com",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 844,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "general/top50",
+                  "label": "General/Top 50"
+                },
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 844,
+              "frequency": 9
+            }
+          },
+          {
+            "source": {
+              "uri": "siouxcityjournal.com",
+              "dataType": "news",
+              "title": "Sioux City Journal",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 821,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 821,
+              "frequency": 9
+            }
+          },
+          {
+            "source": {
+              "uri": "wtop.com",
+              "dataType": "news",
+              "title": "WTOP News",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 865,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 865,
+              "frequency": 9
+            }
+          },
+          {
+            "source": {
+              "uri": "washingtonexaminer.com",
+              "dataType": "news",
+              "title": "Washington Examiner",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 365,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 365,
+              "frequency": 8
+            }
+          },
+          {
+            "source": {
+              "uri": "foxnews.com",
+              "dataType": "news",
+              "title": "Fox News",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 748,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "general/top25",
+                  "label": "General/Top 25"
+                },
+                {
+                  "uri": "general/top50",
+                  "label": "General/Top 50"
+                },
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 748,
+              "frequency": 8
+            }
+          },
+          {
+            "source": {
+              "uri": "journalnow.com",
+              "dataType": "news",
+              "title": "Winston-Salem Journal",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 604,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 604,
+              "frequency": 8
+            }
+          },
+          {
+            "source": {
+              "uri": "uk.news.yahoo.com",
+              "dataType": "news",
+              "title": "Yahoo News UK",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 90000
+              },
+              "articleCount": 2410,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 2410,
+              "frequency": 8
+            }
+          },
+          {
+            "source": {
+              "uri": "journalstar.com",
+              "dataType": "news",
+              "title": "JournalStar.com",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 520,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 520,
+              "frequency": 8
+            }
+          },
+          {
+            "source": {
+              "uri": "politico.com",
+              "dataType": "news",
+              "title": "POLITICO",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 158,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "general/top50",
+                  "label": "General/Top 50"
+                },
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 158,
+              "frequency": 8
+            }
+          },
+          {
+            "source": {
+              "uri": "dothaneagle.com",
+              "dataType": "news",
+              "title": "Dothan Eagle",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 384,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 384,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "wral.com",
+              "dataType": "news",
+              "title": "WRAL",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 326,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 326,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "wcfcourier.com",
+              "dataType": "news",
+              "title": "Waterloo Cedar Falls Courier",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 654,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 654,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "sports.yahoo.com",
+              "dataType": "news",
+              "title": "Yahoo Sports",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 90000
+              },
+              "articleCount": 3288,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "sport/top25",
+                  "label": "Sport/Top 25"
+                }
+              ]
+            },
+            "counts": {
+              "total": 3288,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "edition.cnn.com",
+              "dataType": "news",
+              "title": "CNN International",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 495,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "general/top10",
+                  "label": "General/Top 10"
+                },
+                {
+                  "uri": "general/top25",
+                  "label": "General/Top 25"
+                },
+                {
+                  "uri": "general/top50",
+                  "label": "General/Top 50"
+                },
+                {
+                  "uri": "business/top200",
+                  "label": "Business/Top 200"
+                },
+                {
+                  "uri": "ET_Business",
+                  "label": "EventTypes/100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 495,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "pjmedia.com",
+              "dataType": "news",
+              "title": "PJ Media",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 72,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 72,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "seattlepi.com",
+              "dataType": "news",
+              "title": "seattlepi.com",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 463,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 463,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "tw.news.yahoo.com",
+              "dataType": "news",
+              "title": "tw.news.yahoo.com",
+              "description": "",
+              "location": {
+                "type": "country",
+                "wikiUri": "http://en.wikipedia.org/wiki/Taiwan",
+                "label": {
+                  "eng": "Taiwan"
+                },
+                "lat": 24,
+                "long": 121
+              },
+              "locationValidated": false,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 60
+              },
+              "articleCount": 4367,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 4367,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "thestar.com",
+              "dataType": "news",
+              "title": "The Star",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 1115,
+              "socialMedia": {},
+              "sourceGroups": [
+                {
+                  "uri": "business/top100",
+                  "label": "Business/Top 100"
+                }
+              ]
+            },
+            "counts": {
+              "total": 1115,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "thehill.com",
+              "dataType": "news",
+              "title": "The Hill",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 332,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 332,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "bakersfield.com",
+              "dataType": "news",
+              "title": "The Bakersfield Californian",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 177,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 177,
+              "frequency": 7
+            }
+          },
+          {
+            "source": {
+              "uri": "merkur.de",
+              "dataType": "news",
+              "title": "Merkur.de",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 2397,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "total": 2397,
+              "frequency": 7
+            }
+          }
+        ],
+        "countsPerCountry": [
+          {
+            "uri": "http://en.wikipedia.org/wiki/Taiwan",
+            "type": "loc",
+            "label": {
+              "eng": "Taiwan"
+            },
+            "location": {
+              "type": "country",
+              "wikiUri": "http://en.wikipedia.org/wiki/Taiwan",
+              "label": {
+                "eng": "Taiwan"
+              },
+              "lat": 24,
+              "long": 121
+            },
+            "frequency": 7,
+            "sources": 1
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Germany",
+            "type": "loc",
+            "label": {
+              "eng": "Germany"
+            },
+            "location": {
+              "type": "country",
+              "wikiUri": "http://en.wikipedia.org/wiki/Germany",
+              "label": {
+                "eng": "Germany"
+              },
+              "lat": 51.5,
+              "long": 10.5
+            },
+            "frequency": 2,
+            "sources": 1
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/India",
+            "type": "loc",
+            "label": {
+              "eng": "India"
+            },
+            "location": {
+              "type": "country",
+              "wikiUri": "http://en.wikipedia.org/wiki/India",
+              "label": {
+                "eng": "India"
+              },
+              "lat": 22,
+              "long": 79
+            },
+            "frequency": 2,
+            "sources": 1
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Switzerland",
+            "type": "loc",
+            "label": {
+              "eng": "Switzerland"
+            },
+            "location": {
+              "type": "country",
+              "wikiUri": "http://en.wikipedia.org/wiki/Switzerland",
+              "label": {
+                "eng": "Switzerland"
+              },
+              "lat": 47.00016,
+              "long": 8.01427
+            },
+            "frequency": 1,
+            "sources": 1
+          }
+        ]
+      }
+    }
+  }
+}

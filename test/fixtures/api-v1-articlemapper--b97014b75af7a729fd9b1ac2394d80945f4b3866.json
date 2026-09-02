@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/articleMapper",
+    "body": {
+      "articleUrl": "https://internewscast.com/news/us/sunrises-natalie-barr-loses-it-at-donald-trump-supporter-on-live-tv/",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "https://internewscast.com/news/us/sunrises-natalie-barr-loses-it-at-donald-trump-supporter-on-live-tv/": null
+    }
+  }
+}

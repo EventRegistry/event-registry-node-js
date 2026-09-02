@@ -1,0 +1,33 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/article",
+    "body": {
+      "action": "getArticles",
+      "keyword": "trump",
+      "conceptUri": "http://en.wikipedia.org/wiki/Barack_Obama",
+      "sourceUri": "bbc.com",
+      "articlesPage": 1,
+      "articlesCount": 100,
+      "articlesSortBy": "date",
+      "articlesSortByAsc": false,
+      "resultType": "articles",
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "articles": {
+        "results": [],
+        "totalResults": 0,
+        "page": 1,
+        "count": 0,
+        "pages": 1
+      },
+      "info": "No results match the search conditions."
+    }
+  }
+}

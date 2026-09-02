@@ -1,0 +1,207 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/suggestConceptsFast",
+    "body": {
+      "prefix": "Obama",
+      "source": [
+        "concepts"
+      ],
+      "lang": "eng",
+      "conceptLang": "eng",
+      "page": 1,
+      "count": 20,
+      "articleBodyLen": -1,
+      "includeArticleBasicInfo": true,
+      "includeArticleTitle": true,
+      "includeArticleBody": true,
+      "includeArticleUrl": true,
+      "includeArticleEventUri": true,
+      "includeArticleAuthors": true,
+      "includeArticleConcepts": false,
+      "includeArticleCategories": false,
+      "includeArticleLinks": false,
+      "includeArticleVideos": false,
+      "includeArticleImage": true,
+      "includeArticleSocialScore": false,
+      "includeArticleSentiment": true,
+      "includeArticleLocation": false,
+      "includeArticleExtractedDates": false,
+      "includeArticleOriginalArticle": false,
+      "includeArticleStoryUri": false,
+      "includeEventTitle": true,
+      "includeEventSummary": true,
+      "includeEventArticleCounts": true,
+      "includeEventConcepts": true,
+      "includeEventCategories": true,
+      "includeEventDate": true,
+      "includeEventCommonDates": false,
+      "includeEventInfoArticle": false,
+      "includeEventStories": false,
+      "includeEventSocialScore": false,
+      "eventImageCount": 0,
+      "includeSourceTitle": true,
+      "includeSourceDescription": false,
+      "includeSourceLocation": false,
+      "includeSourceRanking": false,
+      "includeSourceImage": false,
+      "includeSourceSocialMedia": false,
+      "includeCategoryTrendingScore": true,
+      "conceptType": "concepts",
+      "includeConceptLabel": true,
+      "includeConceptSynonyms": false,
+      "includeConceptImage": false,
+      "includeConceptDescription": false,
+      "includeConceptTrendingScore": false,
+      "includeLocationLabel": true,
+      "includeLocationWikiUri": false,
+      "includeLocationGeoNamesId": false,
+      "includeLocationPopulation": false,
+      "includeLocationGeoLocation": false,
+      "includeLocationCountryArea": false,
+      "includeLocationCountryDetails": false,
+      "includeLocationCountryContinent": false,
+      "includeLocationPlaceFeatureCode": false,
+      "includeLocationPlaceCountry": true,
+      "includeStoryBasicStats": true,
+      "includeStoryLocation": true,
+      "includeStoryDate": false,
+      "includeStoryTitle": false,
+      "includeStorySummary": false,
+      "includeStoryConcepts": false,
+      "includeStoryCategories": false,
+      "includeStoryMedoidArticle": false,
+      "includeStoryInfoArticle": false,
+      "includeStoryCommonDates": false,
+      "includeStorySocialScore": false,
+      "storyImageCount": 0,
+      "includeConceptClassParentLabels": true,
+      "includeConceptClassConcepts": false,
+      "includeConceptFolderOwner": false,
+      "apiKey": "***redacted***"
+    }
+  },
+  "response": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "application/json; charset=utf-8",
+    "body": [
+      {
+        "uri": "http://en.wikipedia.org/wiki/Barack_Obama",
+        "type": "person",
+        "score": 2765,
+        "label": {
+          "eng": "Barack Obama"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Presidency_of_Barack_Obama",
+        "type": "person",
+        "score": 1042,
+        "label": {
+          "eng": "Presidency of Barack Obama"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Michelle_Obama",
+        "type": "person",
+        "score": 280,
+        "label": {
+          "eng": "Michelle Obama"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Barack_Obama_2008_presidential_campaign",
+        "type": "wiki",
+        "score": 18,
+        "label": {
+          "eng": "Barack Obama 2008 presidential campaign"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Obama_Foundation",
+        "type": "wiki",
+        "score": 12,
+        "label": {
+          "eng": "Obama Foundation"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Barack_Obama_2012_presidential_campaign",
+        "type": "wiki",
+        "score": 12,
+        "label": {
+          "eng": "Barack Obama 2012 presidential campaign"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Family_of_Barack_Obama",
+        "type": "person",
+        "score": 10,
+        "label": {
+          "eng": "Family of Barack Obama"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Obama,_Fukui",
+        "type": "loc",
+        "score": 7,
+        "label": {
+          "eng": "Obama"
+        },
+        "location": {
+          "type": "place",
+          "label": {
+            "eng": "Obama"
+          },
+          "country": {
+            "type": "country",
+            "label": {
+              "eng": "Japan"
+            }
+          }
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Barack_Obama_Presidential_Center",
+        "type": "wiki",
+        "score": 6,
+        "label": {
+          "eng": "Barack Obama Presidential Center"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/East_Asian_foreign_policy_of_the_Barack_Obama_administration",
+        "type": "wiki",
+        "score": 4,
+        "label": {
+          "eng": "East Asian foreign policy of the Barack Obama administration"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Confirmations_of_Barack_Obama's_Cabinet",
+        "type": "person",
+        "score": 3,
+        "label": {
+          "eng": "Kabinett Obama"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Barack_Obama_Academy_of_International_Studies_6-12",
+        "type": "org",
+        "score": 1,
+        "label": {
+          "eng": "Barack Obama Academy of International Studies 6-12"
+        }
+      },
+      {
+        "uri": "http://en.wikipedia.org/wiki/Auma_Obama",
+        "type": "person",
+        "score": 1,
+        "label": {
+          "eng": "Auma Obama"
+        }
+      }
+    ]
+  }
+}
