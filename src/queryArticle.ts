@@ -27,7 +27,7 @@ export class QueryArticle extends Query<RequestArticle> {
      * If some other request type was previously set, it will be overwritten.
      * Result types can be the classes that extend RequestArticle base class (see classes below).
      */
-    public setRequestedResult(requestArticle) {
+    public setRequestedResult(requestArticle: RequestArticle) {
         if (!(requestArticle instanceof RequestArticle)) {
             throw Error("QueryArticle class can only accept result requests that are of type RequestArticle");
         }
@@ -43,7 +43,7 @@ export class RequestArticle {}
  */
 export class RequestArticleInfo extends RequestArticle {
     public resultType = "info";
-    public params;
+    public params: Record<string, unknown>;
 
     /**
      * @param returnInfo what details should be included in the returned information
@@ -59,7 +59,7 @@ export class RequestArticleInfo extends RequestArticle {
  */
 export class RequestArticleSimilarArticles extends RequestArticle {
     public resultType = "similarArticles";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryArticle.RequestArticleSimilarArticlesArguments = {}) {
         super();
         const {
@@ -93,7 +93,7 @@ export class RequestArticleSimilarArticles extends RequestArticle {
  */
 export class RequestArticleDuplicatedArticles extends RequestArticle {
     public resultType = "duplicatedArticles";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryArticle.RequestArticleDuplicatedArticlesArguments = {}) {
         super();
         const {
@@ -127,7 +127,7 @@ export class RequestArticleDuplicatedArticles extends RequestArticle {
  */
 export class RequestArticleOriginalArticle extends RequestArticle {
     public resultType = "originalArticle";
-    public params;
+    public params: Record<string, unknown>;
     /**
      * @param returnInfo: what details should be included in the returned information
      */

@@ -56,7 +56,7 @@ export class GetTrendingConceptGroups extends TrendsBase {
         this.setVal("conceptType", types);
     }
 
-    public getConceptClassUris(conceptClassUris) {
+    public getConceptClassUris(conceptClassUris: string | string[]) {
         this.setVal("conceptClassUri", conceptClassUris);
     }
 }

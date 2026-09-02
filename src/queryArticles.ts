@@ -1,6 +1,7 @@
 import { Query, QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { ComplexArticleQuery } from "./query";
+import { QueryIterationEngine } from "./queryIterator";
 import { ReturnInfo } from "./returnInfo";
 import { ER } from "./types";
 import { Data } from "./data";
@@ -94,6 +95,9 @@ export class QueryArticles extends Query<RequestArticles> {
         this.setValIfNotDefault("isDuplicateFilter", isDuplicateFilter, "keepAll");
         this.setValIfNotDefault("hasDuplicateFilter", hasDuplicateFilter, "keepAll");
         this.setValIfNotDefault("eventFilter", eventFilter, "keepAll");
+        this.setValIfNotDefault("authorsFilter", authorsFilter, "keepAll");
+        this.setValIfNotDefault("videosFilter", videosFilter, "keepAll");
+        this.setValIfNotDefault("linksFilter", linksFilter, "keepAll");
         if (startSourceRankPercentile < 0 || startSourceRankPercentile % 10 !== 0 || startSourceRankPercentile > 100) {
             throw new Error("StartSourceRankPercentile: Value should be in range 0-90 and divisible by 10.");
         }
@@ -126,41 +130,39 @@ export class QueryArticles extends Query<RequestArticles> {
         return "/api/v1/article";
     }
 
-    public setRequestedResult(requestArticles) {
+    public setRequestedResult(requestArticles: RequestArticles) {
         if (!(requestArticles instanceof RequestArticles)) {
             throw new Error("QueryArticles class can only accept result requests that are of type RequestArticles");
         }
         this.resultTypeList = [requestArticles];
     }
 
-    public static initWithArticleUriList(...args);
-    public static initWithArticleUriList(uriList) {
+    public static initWithArticleUriList(uriList: string[]) {
         const q = new QueryArticles();
         if (!Array.isArray(uriList)) {
             throw new Error("uriList has to be a list of strings that represent article uris");
         }
         q.params = {
             action: "getArticles",
-            articleUri: uriList,
+            articleUri: uriList
         };
         return q;
     }
 
-    public static initWithArticleUriWgtList(...args);
-    public static initWithArticleUriWgtList(uriWgtList) {
+    public static initWithArticleUriWgtList(uriWgtList: string[]) {
         const q = new QueryArticles();
         if (!Array.isArray(uriWgtList)) {
             throw new Error("uriList has to be a list of strings that represent article uris");
         }
         q.params = {
             action: "getArticles",
-            articleUriWgtList: uriWgtList.join(","),
+            articleUriWgtList: uriWgtList.join(",")
         };
         return q;
     }
 
-    public static initWithComplexQuery(...args);
-    public static initWithComplexQuery(complexQuery) {
+    public static initWithComplexQuery(...args: unknown[]) {
+        const complexQuery = args[0] as ComplexArticleQuery | string | Record<string, unknown>;
         const query = new QueryArticles();
         if (complexQuery instanceof ComplexArticleQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
@@ -183,53 +185,49 @@ export class QueryArticles extends Query<RequestArticles> {
 
 export class QueryArticlesIter extends QueryArticles implements AsyncIterable<Data.Article>  {
     private readonly er: EventRegistry;
-    private readonly sortBy: string;
-    private readonly sortByAsc: boolean;
-    private readonly returnInfo: ReturnInfo;
-    private readonly maxItems: number;
-    private page: number = 0;
-    private pages: number = 1;
-    private items: Data.Article[] = [];
-    private returnedSoFar: number = 0;
-    private index: number = 0;
-    private callback: (item: Data.Article) => void = () => {};
-    private doneCallback: (error?: string) => void = () => {};
-    private errorMessage: string;
+    private readonly engine: QueryIterationEngine<Data.Article>;
 
-    constructor(er: EventRegistry, args: {[name: string]: any} = {}) {
+    constructor(er: EventRegistry, args: ER.QueryArticles.IteratorArguments = {}) {
         super(args);
         const {
             sortBy = "rel",
             sortByAsc = false,
             returnInfo = undefined,
-            maxItems = -1,
+            maxItems = -1
         } = args;
         this.er = er;
-        this.sortBy = sortBy;
-        this.sortByAsc = sortByAsc;
-        this.returnInfo = returnInfo;
-        this.maxItems = maxItems;
+        this.engine = new QueryIterationEngine<Data.Article>({
+            maxItems,
+            entityLabel: "articles",
+            onError: (message) => this.er.logger.error(message),
+            fetchPage: async (page) => {
+                const requestArticles = new RequestArticlesInfo({ page, sortBy, sortByAsc, returnInfo });
+                this.setRequestedResult(requestArticles);
+                if (this.er.verboseOutput) {
+                    this.er.logger.info(`Downloading article page ${page}...`);
+                }
+                const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
+                return {
+                    results: (response.articles as ER.Results<Data.Article>)?.results || [],
+                    pages: (response.articles as ER.Results)?.pages || 0,
+                    error: response.error || undefined
+                };
+            }
+        });
     }
 
     /**
      * Async Iterator function that returns the next item in the list of articles
      */
     [Symbol.asyncIterator](): AsyncIterator<Data.Article> {
-        return {
-            next: async () => {
-                await this.getNextBatch();
-                const item = this.items[this.index];
-                this.index++;
-                return {value: item, done: !item};
-            },
-        };
+        return this.engine[Symbol.asyncIterator]();
     }
 
     public async count(): Promise<number> {
         this.setRequestedResult(new RequestArticlesInfo());
         const response = await this.er.execQuery(this);
 
-        if (response.hasOwnProperty("error")) {
+        if (response.error) {
             this.er.logger.error(response.error);
         }
 
@@ -237,12 +235,10 @@ export class QueryArticlesIter extends QueryArticles implements AsyncIterable<Da
     }
 
     public execQuery(callback: (item: Data.Article) => void, doneCallback?: (error?: string) => void): void {
-        if (callback) { this.callback = callback; }
-        if (doneCallback) { this.doneCallback = doneCallback; }
-        this.iterate();
+        this.engine.execQuery(callback, doneCallback);
     }
 
-    public static initWithComplexQuery(er: EventRegistry, complexQuery, params: {[name: string]: any} = {}): QueryArticlesIter {
+    public static initWithComplexQuery(er: EventRegistry, complexQuery: ComplexArticleQuery | string | Record<string, unknown>, params: ER.QueryArticles.IteratorArguments = {}): QueryArticlesIter {
         const query = new QueryArticlesIter(er, params);
         if (complexQuery instanceof ComplexArticleQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
@@ -256,71 +252,13 @@ export class QueryArticlesIter extends QueryArticles implements AsyncIterable<Da
         return query;
     }
 
-    private async iterate(): Promise<void> {
-        if (this.current) {
-            this.callback(this.current);
-            this.index += 1;
-        } else if (!await this.getNextBatch()) {
-            this.doneCallback(this.errorMessage);
-            return;
-        }
-        return this.iterate();
-    }
-
-    /**
-     * Extract the results according to maxItems
-     * @param response response from the backend
-     */
-    private extractResults(response): Data.Article[] {
-        const results = response?.articles?.results || [];
-        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : results.length;
-        return results.slice(0, extractedSize).filter(Boolean);
-    }
-
-    private get current() {
-        return this.items[this.index] || undefined;
-    }
-
-    private async getNextBatch(): Promise<boolean> {
-        try {
-            this.page += 1;
-            if (this.page > this.pages || (this.maxItems !== -1 && this.returnedSoFar >= this.maxItems)) {
-                return false;
-            }
-            const requestArticles = new RequestArticlesInfo({
-                page: this.page,
-                sortBy: this.sortBy,
-                sortByAsc: this.sortByAsc,
-                returnInfo: this.returnInfo,
-            });
-            this.setRequestedResult(requestArticles);
-            if (this.er.verboseOutput) {
-                this.er.logger.info(`Downloading article page ${this.page}...`);
-            }
-            const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
-            const error = response.error || "";
-            if (error) {
-                this.errorMessage = `Error while obtaining a list of articles:  ${this.errorMessage}`;
-            } else {
-                this.pages = (response.articles as ER.Results)?.pages || 0;
-            }
-            const results = this.extractResults(response);
-            this.returnedSoFar += results.length;
-            this.items = [...this.items, ...results];
-            return true;
-        } catch (error) {
-            this.er.logger.error(error);
-            return false;
-        }
-    }
-
 }
 
 export class RequestArticles {}
 
 export class RequestArticlesInfo extends RequestArticles {
     public resultType = "articles";
-    public params;
+    public params: Record<string, unknown>;
     constructor (parameters: ER.RequestArticlesInfoParameters = {}) {
         super();
         const {
@@ -353,7 +291,7 @@ export class RequestArticlesInfo extends RequestArticles {
 
 export class RequestArticlesUriWgtList extends RequestArticles {
     public resultType = "uriWgtList";
-    public params;
+    public params: Record<string, unknown>;
     constructor(parameters: ER.RequestArticlesUriWgtListParameters = {}) {
         super();
         const {
@@ -380,7 +318,7 @@ export class RequestArticlesUriWgtList extends RequestArticles {
         this.params["uriWgtListSortByAsc"] = sortByAsc;
     }
 
-    public setPage(page) {
+    public setPage(page: number) {
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
         }
@@ -394,7 +332,7 @@ export class RequestArticlesTimeAggr extends RequestArticles {
 
 export class RequestArticlesConceptAggr extends RequestArticles {
     public resultType = "conceptAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor({
                  conceptCount = 25,
                  conceptCountPerType = undefined,
@@ -426,7 +364,7 @@ export class RequestArticlesConceptAggr extends RequestArticles {
 
 export class RequestArticlesCategoryAggr extends RequestArticles {
     public resultType = "categoryAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor({articlesSampleSize = 20000,
                  returnInfo = new ReturnInfo(),
                  ...unsupported
@@ -446,7 +384,7 @@ export class RequestArticlesCategoryAggr extends RequestArticles {
 
 export class RequestArticlesSourceAggr extends RequestArticles {
     public resultType = "sourceAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor({
                  sourceCount = 50,
                  normalizeBySourceArts = false,
@@ -459,13 +397,16 @@ export class RequestArticlesSourceAggr extends RequestArticles {
         }
         this.params = {};
         this.params["sourceAggrSourceCount"] = sourceCount;
+        if (normalizeBySourceArts) {
+            this.params["sourceAggrNormalizeBySourceArts"] = normalizeBySourceArts;
+        }
         this.params = {...this.params, ...returnInfo.getParams("sourceAggr")};
     }
 }
 
 export class RequestArticlesKeywordAggr extends RequestArticles {
     public resultType = "keywordAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor({
                  articlesSampleSize = 2000,
                  ...unsupported
@@ -484,7 +425,7 @@ export class RequestArticlesKeywordAggr extends RequestArticles {
 
 export class RequestArticlesConceptGraph extends RequestArticles {
     public resultType = "conceptGraph";
-    public params;
+    public params: Record<string, unknown>;
     constructor({conceptCount = 25,
                  linkCount = 50,
                  articlesSampleSize = 10000,
@@ -516,7 +457,7 @@ export class RequestArticlesConceptGraph extends RequestArticles {
 
 export class RequestArticlesConceptMatrix extends RequestArticles {
     public resultType = "conceptMatrix";
-    public params;
+    public params: Record<string, unknown>;
     constructor({conceptCount = 25,
                  measure = "pmi",
                  articlesSampleSize = 10000,
@@ -543,7 +484,7 @@ export class RequestArticlesConceptMatrix extends RequestArticles {
 
 export class RequestArticlesConceptTrends extends RequestArticles {
     public resultType = "conceptTrends";
-    public params;
+    public params: Record<string, unknown>;
     constructor(parameters: ER.RequestArticlesConceptTrendsParameters = {}) {
         super();
         const {
@@ -578,7 +519,7 @@ export class RequestArticlesDateMentionAggr extends RequestArticles {
 
 export class RequestArticlesRecentActivity extends RequestArticles {
     public resultType = "recentActivityArticles";
-    public params;
+    public params: Record<string, unknown>;
     constructor({maxArticleCount = 100,
                  updatesAfterNewsUri = undefined,
                  updatesafterBlogUri = undefined,
@@ -590,7 +531,7 @@ export class RequestArticlesRecentActivity extends RequestArticles {
                  mandatorySourceLocation = false,
                  returnInfo = undefined,
                  ...unsupported
-                } = {}) {
+                }: ER.RequestArticlesRecentActivityParameters = {}) {
         super();
         if (Object.keys(unsupported).length !== 0) {
             Logger.warn(`RequestArticlesRecentActivity: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);

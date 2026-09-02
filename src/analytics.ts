@@ -37,9 +37,14 @@ export class Analytics {
      * @param taxonomy: which taxonomy use for categorization. Options:
      *  - "dmoz" (over 5000 categories in 3 levels, English language only)
      *  - "news" (general news categorization, 9 categories, any langauge)
+     * @param concepts optional list of concept URIs to bias categorization
      */
-    public async categorize(text: string, taxonomy: "dmoz" | "news" = "dmoz"): Promise<ER.Analytics.Response.Categorize> {
-        const response = await this.er.jsonRequestAnalytics("/api/v1/categorize", { text, taxonomy });
+    public async categorize(text: string, taxonomy: "dmoz" | "news" = "dmoz", concepts?: string[]): Promise<ER.Analytics.Response.Categorize> {
+        const params: { text: string; taxonomy: "dmoz" | "news"; concepts?: string[] } = { text, taxonomy };
+        if (Array.isArray(concepts) && concepts.length > 0) {
+            params.concepts = concepts;
+        }
+        const response = await this.er.jsonRequestAnalytics("/api/v1/categorize", params);
         return response?.data as ER.Analytics.Response.Categorize;
     }
 
@@ -56,7 +61,7 @@ export class Analytics {
             text,
             method,
             sentences,
-            returnSentences,
+            returnSentences
         };
         const response = await this.er.jsonRequestAnalytics("/api/v1/sentiment", params);
         return response?.data as ER.Analytics.Response.Sentiment;
@@ -114,7 +119,7 @@ export class Analytics {
             ignoreConceptTypes = [],
             maxConcepts = 20,
             maxCategories = 10,
-            notifyEmailAddress = undefined,
+            notifyEmailAddress = undefined
         } = args;
         if (maxTweets > 5000) {
             throw new Error("We can analyze at most 5000 tweets");
@@ -127,7 +132,7 @@ export class Analytics {
             maxTweets,
             maxUsedLinks,
             maxConcepts,
-            maxCategories,
+            maxCategories
         };
         if (notifyEmailAddress) {
             params.notifyEmailAddress = notifyEmailAddress;
@@ -177,14 +182,14 @@ export class Analytics {
         const {
             maxConcepts = 20,
             maxCategories = 10,
-            idfNormalization = true,
+            idfNormalization = true
         } = args;
         const params = {
             action: "getTrainedTopic",
             uri: uri,
             maxConcepts: maxConcepts,
             maxCategories: maxCategories,
-            idfNormalization: idfNormalization,
+            idfNormalization: idfNormalization
         };
         const response = await this.er.jsonRequestAnalytics("/api/v1/trainTopic", params);
         return response?.data as ER.Analytics.Response;

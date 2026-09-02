@@ -3,7 +3,7 @@ import {ArticleInfoFlags, ReturnInfo } from "./returnInfo";
 import { Logger } from "./logger";
 
 export class QueryStory extends Query<RequestStory> {
-    constructor(storyUriOrList) {
+    constructor(storyUriOrList: string | string[]) {
         super();
         this.setVal("action", "getStory");
         this.queryByUri(storyUriOrList);
@@ -20,7 +20,7 @@ export class QueryStory extends Query<RequestStory> {
         this.setVal("storyUri", uriOrUriList);
     }
 
-    public setRequestedResult(requestStory) {
+    public setRequestedResult(requestStory: RequestStory) {
         if (!(requestStory instanceof RequestStory)) {
             throw Error("QueryStory class can only accept result requests that are of type RequestStory");
         }
@@ -33,7 +33,7 @@ export class RequestStory {}
 
 export class RequestStoryInfo extends RequestStory {
     public resultType = "info";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor(returnInfo = new ReturnInfo()) {
         super();
@@ -43,7 +43,7 @@ export class RequestStoryInfo extends RequestStory {
 
 export class RequestStoryArticles extends RequestStory {
     public resultType = "articles";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor({ page = 1,
                   count = 100,
@@ -73,7 +73,7 @@ export class RequestStoryArticles extends RequestStory {
 
 export class RequestStoryArticleUris extends RequestStory {
     public resultType = "articleUris";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor({ sortBy = "cosSim",
                   sortByAsc = false,
@@ -91,7 +91,7 @@ export class RequestStoryArticleUris extends RequestStory {
 
 export class RequestStoryArticleTrend extends RequestStory {
     public resultType = "articleTrend";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor({ lang = mainLangs,
                   minArticleCosSim = -1,
@@ -111,7 +111,7 @@ export class RequestStoryArticleTrend extends RequestStory {
 
 export class RequestStorySimilarStories extends RequestStory {
     public resultType = "similarStories";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor({ conceptInfoList = undefined,
                   count = 50,

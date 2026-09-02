@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow, @typescript-eslint/no-unused-vars */
 import { QueryItems } from "./base";
 import { BaseQuery, CombinedQuery} from "./query";
 import { QueryArticles, RequestArticles } from "./queryArticles";
@@ -8,7 +9,7 @@ import { ReturnInfo } from "./returnInfo";
 /**
  * Type definitions for different classes and functions from the Event Registry Node JS SDK.
  */
-export module ER {
+export namespace ER {
 
     export type Response<T = SuccessfulResponse<unknown>, E = string> = T & ErrorResponse<E>;
 
@@ -52,34 +53,34 @@ export module ER {
          */
         apiKey?: string;
         /**
-         *  Host to use to access the Event Registry backend
+         * Host to use to access the Event Registry backend.
+         * @default "https://eventregistry.org"
          */
         host?: string;
         /**
-         * host address to use to perform the analytics api calls
+         * Host address to use to perform the analytics api calls.
+         * @default "https://analytics.eventregistry.org"
          */
         hostAnalytics?: string;
         /**
-         * log all requests
+         * Log all requests.
          */
         logging?: boolean;
         /**
-         * The minimum number of seconds between individual api calls
+         * The minimum number of seconds between individual api calls.
+         * @default 0.5
          */
         minDelayBetweenRequests?: number;
         /**
-         * if a request fails (for example, because ER is down),
-         * what is the max number of times the request should be repeated
+         * If a request fails (for example, because ER is down),
+         * what is the max number of times the request should be repeated.
+         * @default -1
          */
         repeatFailedRequestCount?: number;
         /**
-         * if true, additional info about errors etc. will be printed to console
+         * If true, additional info about errors etc. will be printed to console.
          */
         verboseOutput?: boolean;
-        /**
-         * print which urls are used as the hosts
-         */
-        printHostInfo?: boolean;
         settingsFName?: string;
         allowUseOfArchive?: boolean;
     }
@@ -415,7 +416,6 @@ export module ER {
         required?: boolean;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     type Weight<T = any> =
     T extends ConceptWeight ? ConceptWeight :
         T extends KeywordWeight ? KeywordWeight :
@@ -488,7 +488,7 @@ export module ER {
             categories?: Weight<CategoryWeight>[];
             locations?: Weight<LocationWeight>[];
             langs?: string[];
-            dataType?: Array<"news" | "pr" | "blog">;
+            dataType?: ("news" | "pr" | "blog")[];
             owner?: { uri: string };
         };
         collection?: {
@@ -659,7 +659,7 @@ export module ER {
          * What details should be included in the returned information
          */
         returnInfo?: ReturnInfo;
-        [name: string]: (string | number | boolean | ReturnInfo) | (string | number | boolean)[];
+        [name: string]: (string | number | boolean | ReturnInfo) | (string | number | boolean)[] | undefined;
     }
 
     export interface TopicPageEvents {
@@ -683,7 +683,7 @@ export module ER {
          * What details should be included in the returned information
          */
         returnInfo?: ReturnInfo;
-        [name: string]: (string | number | boolean | ReturnInfo) | (string | number | boolean)[];
+        [name: string]: (string | number | boolean | ReturnInfo) | (string | number | boolean)[] | undefined;
     }
 
     export namespace Correlations {
@@ -1067,6 +1067,19 @@ export module ER {
         articlesSampleSize?: number;
         returnInfo?: ReturnInfo;
     }
+
+    export interface RequestArticlesRecentActivityParameters {
+        maxArticleCount?: number;
+        updatesAfterNewsUri?: string;
+        updatesafterBlogUri?: string;
+        updatesAfterPrUri?: string;
+        updatesAfterTm?: string | Date;
+        updatesAfterMinsAgo?: number;
+        updatesUntilTm?: string | Date;
+        updatesUntilMinsAgo?: number;
+        mandatorySourceLocation?: boolean;
+        returnInfo?: ReturnInfo;
+    }
     export namespace Aggr {
         export namespace Source {
             export interface CountsPerSource {
@@ -1255,6 +1268,24 @@ export module ER {
              */
             requestedResult?: RequestArticles;
         }
+        export interface IteratorArguments extends Arguments {
+            /**
+             * how should the resulting articles be sorted. Options: "rel" (relevance), "date" (published date), "sourceImportance", "sourceImportanceRank", "sourceAlexaGlobalRank", "sourceAlexaCountryRank", "socialScore", "facebookShares"
+             */
+            sortBy?: string;
+            /**
+             * should the results be sorted in ascending order (true) or descending (false)
+             */
+            sortByAsc?: boolean;
+            /**
+             * what details should be included in the returned information
+             */
+            returnInfo?: ReturnInfo;
+            /**
+             * maximum number of items to be returned. Used to stop iteration sooner than results run out
+             */
+            maxItems?: number;
+        }
     }
 
     export namespace QueryEvent {
@@ -1273,10 +1304,7 @@ export module ER {
          */
         export type SortByOptions = "id" | "date" | "cosSim" | "sourceImportance" | "sourceImportanceRank" | "sourceAlexaGlobalRank" | "sourceAlexaCountryRank" | "socialScore" | "facebookShares";
 
-        // tslint:disable-next-line:no-empty-interface
-        export interface RequestEvent {
-
-        }
+        export type RequestEvent = Record<string, never>;
         export interface IteratorArguments {
             /**
              * Array or a single language in which to return the list of matching articles
@@ -1412,7 +1440,7 @@ export module ER {
             /**
              * array of concepts and their importance, e.g. [{ "uri": "http://en.wikipedia.org/wiki/Barack_Obama", "wgt": 100 }, ...]
              */
-            conceptInfoList?: Array<{uri: string, wgt: number}>;
+            conceptInfoList?: {uri: string, wgt: number}[];
             /**
              * number of similar events to return (at most 50)
              */
@@ -1440,7 +1468,7 @@ export module ER {
             /**
              * array of concepts and their importance, e.g. [{ "uri": "http://en.wikipedia.org/wiki/Barack_Obama", "wgt": 100 }, ...]
              */
-            conceptInfoList?: Array<{uri: string, wgt: number}>;
+            conceptInfoList?: {uri: string, wgt: number}[];
             /**
              * number of similar stories to return (at most 5')
              */
@@ -1499,7 +1527,45 @@ export module ER {
             requestedResult?: RequestMentions;
         }
         export interface IteratorArguments extends Arguments {
-            [key: string]: any;
+            /**
+             * how should the resulting mentions be sorted. Options: "none", "rel" (relevance), "date" (published date), "size", "socialScore"
+             */
+            sortBy?: "none" | "rel" | "date" | "size" | "socialScore";
+            /**
+             * should the results be sorted in ascending order (true) or descending (false)
+             */
+            sortByAsc?: boolean;
+            /**
+             * what details should be included in the returned information
+             */
+            returnInfo?: ReturnInfo;
+            /**
+             * maximum number of items to be returned. Used to stop iteration sooner than results run out
+             */
+            maxItems?: number;
+        }
+
+        export interface RequestMentionsInfoArguments {
+            /**
+             * page of the results to return (1, 2, ...)
+             */
+            page?: number;
+            /**
+             * number of results to return per page
+             */
+            count?: number;
+            /**
+             * how mentions should be sorted
+             */
+            sortBy?: "none" | "rel" | "date" | "size" | "socialScore";
+            /**
+             * should the results be sorted in ascending order (true) or descending (false)
+             */
+            sortByAsc?: boolean;
+            /**
+             * what details should be included in the returned information
+             */
+            returnInfo?: ReturnInfo;
         }
 
         export interface RequestMentionsUriWgtListArguments {
@@ -2041,6 +2107,25 @@ export module ER {
              */
             returnInfo?: ReturnInfo;
         }
+
+        export interface RequestEventsBreakingEventsArguments {
+            /**
+             * page of the results to return (1, 2, ...)
+             */
+            page?: number;
+            /**
+             * max events to return (at most 50)
+             */
+            count?: number;
+            /**
+             * the minimum score of "breakingness" of the events to be returned
+             */
+            minBreakingScore?: number;
+            /**
+             * what details should be included in the returned information
+             */
+            returnInfo?: ReturnInfo;
+        }
     }
     // tslint:disable-next-line:no-shadowed-variable
     export namespace ReturnInfo {
@@ -2124,7 +2209,7 @@ export module ER {
              * uri of the story (cluster) to which the article belongs
              */
             storyUri?: boolean;
-            [name: string]: boolean | string | number;
+            [name: string]: boolean | string | number | undefined;
         }
 
         /**
@@ -2311,7 +2396,7 @@ export module ER {
              * number of images to be returned for a story
              */
             imageCount?: number;
-            [name: string]: boolean | string | number;
+            [name: string]: boolean | string | number | undefined;
         }
 
         /**
@@ -2412,7 +2497,7 @@ export module ER {
              * number of images to be returned for an event
              */
             imageCount?: number;
-            [name: string]: boolean | string | number;
+            [name: string]: boolean | string | number | undefined;
         }
 
         /**
@@ -2481,7 +2566,7 @@ export module ER {
              * info about the names of the source groups to which the source belongs to
              */
             sourceGroups?: boolean;
-            [name: string]: boolean | string | number;
+            [name: string]: boolean | string | number | undefined;
         }
 
         /**
@@ -2496,7 +2581,7 @@ export module ER {
          */
         export interface CategoryInfo {
             trendingScore?: boolean;
-            [name: string]: boolean | string | number;
+            [name: string]: boolean | string | number | undefined;
         }
 
         export interface ConceptInfoFlags {
@@ -2519,7 +2604,7 @@ export module ER {
             description?: boolean;
             trendingScore?: boolean;
             maxConceptsPerType?: number;
-            [name: string]: boolean | string | number | (boolean | string | number)[];
+            [name: string]: boolean | string | number | (boolean | string | number)[] | undefined;
         }
 
         export interface LocationInfoFlags {
@@ -2546,7 +2631,7 @@ export module ER {
             countryContinent?: boolean;
             placeFeatureCode?: boolean;
             placeCountry?: boolean;
-            [name: string]: boolean | string | number;
+            [name: string]: boolean | string | number | undefined;
         }
 
         export interface ConceptClassInfoFlags {
@@ -2557,7 +2642,7 @@ export module ER {
         export interface ConceptClassInfo {
             parentLabels?: boolean;
             concepts?: boolean;
-            [name: string]: boolean | string | number;
+            [name: string]: boolean | string | number | undefined;
         }
 
         export interface ConceptFolderInfoFlags {
@@ -2568,7 +2653,7 @@ export module ER {
         export interface ConceptFolderInfo {
             definition?: boolean;
             owner?: boolean;
-            [name: string]: boolean | string | number;
+            [name: string]: boolean | string | number | undefined;
         }
     }
 

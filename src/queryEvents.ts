@@ -2,6 +2,7 @@ import { Query, QueryParamsBase } from "./base";
 import { Data } from "./data";
 import { EventRegistry } from "./eventRegistry";
 import { ComplexEventQuery } from "./query";
+import { QueryIterationEngine } from "./queryIterator";
 import { ReturnInfo } from "./returnInfo";
 import { ER } from "./types";
 import { Logger } from "./logger";
@@ -11,7 +12,7 @@ import { Logger } from "./logger";
  * Class for obtaining available info for one or more events in the Event Registry
  */
 export class QueryEvents extends Query<RequestEvents> {
-    public params = {};
+    public params: Record<string, unknown> = {};
     constructor(args: ER.QueryEvents.Arguments = {}) {
         super();
         const {
@@ -49,7 +50,7 @@ export class QueryEvents extends Query<RequestEvents> {
             ignoreKeywordSearchMode = "phrase",
             categoryIncludeSub = true,
             ignoreCategoryIncludeSub = true,
-            requestedResult = new RequestEventsInfo(),
+            requestedResult = new RequestEventsInfo()
         } = args;
 
         this.setVal("action", "getEvents");
@@ -127,7 +128,7 @@ export class QueryEvents extends Query<RequestEvents> {
             throw new Error("QueryEvents class can only accept result requests that are of type RequestEvents");
         }
         this.resultTypeList = [
-            requestEvents,
+            requestEvents
         ];
     }
     /**
@@ -140,7 +141,7 @@ export class QueryEvents extends Query<RequestEvents> {
         }
         query.params = {
             action: "getEvents",
-            eventUriList: uriList.join(","),
+            eventUriList: uriList.join(",")
         };
         return query;
     }
@@ -148,7 +149,6 @@ export class QueryEvents extends Query<RequestEvents> {
     /**
      * Set a custom list of event uris. The results will be then computed on this list - no query will be done (all conditions will be ignored).
      */
-    public static initWithEventUriWgtList(...args);
     public static initWithEventUriWgtList(uriWgtList: string[]) {
         const query = new QueryEvents();
         if (!Array.isArray(uriWgtList)) {
@@ -156,13 +156,13 @@ export class QueryEvents extends Query<RequestEvents> {
         }
         query.params = {
             action: "getEvents",
-            eventUriWgtList: uriWgtList.join(","),
+            eventUriWgtList: uriWgtList.join(",")
         };
         return query;
     }
 
-    public static initWithComplexQuery(...args);
-    public static initWithComplexQuery(complexQuery) {
+    public static initWithComplexQuery(...args: unknown[]) {
+        const complexQuery = args[0] as ComplexEventQuery | string | Record<string, unknown>;
         const query = new QueryEvents();
         if (complexQuery instanceof ComplexEventQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
@@ -188,18 +188,7 @@ export class QueryEvents extends Query<RequestEvents> {
  */
 export class QueryEventsIter extends QueryEvents implements AsyncIterable<Data.Event> {
     private readonly er: EventRegistry;
-    private readonly sortBy: "none" | "rel" | "date" | "size" | "socialScore";
-    private readonly sortByAsc: boolean;
-    private readonly returnInfo: ReturnInfo;
-    private readonly maxItems: number;
-    private page: number = 0;
-    private pages: number = 1;
-    private items: Data.Event[] = [];
-    private returnedSoFar: number = 0;
-    private index: number = 0;
-    private callback: (item: Data.Event) => void = () => undefined;
-    private doneCallback: (error?: string) => void = () => undefined;
-    private errorMessage: string;
+    private readonly engine: QueryIterationEngine<Data.Event>;
 
     constructor(er: EventRegistry, args: ER.QueryEvents.IteratorArguments = {}) {
         super(args as ER.QueryEvents.Arguments);
@@ -207,29 +196,34 @@ export class QueryEventsIter extends QueryEvents implements AsyncIterable<Data.E
             sortBy = "rel",
             sortByAsc = false,
             returnInfo = undefined,
-            maxItems = -1,
+            maxItems = -1
         } = args;
         this.er = er;
-        this.sortBy = sortBy;
-        this.sortByAsc = sortByAsc;
-        this.returnInfo = returnInfo;
-        this.maxItems = maxItems;
+        this.engine = new QueryIterationEngine<Data.Event>({
+            maxItems,
+            entityLabel: "events",
+            onError: (message) => this.er.logger.error(message),
+            fetchPage: async (page) => {
+                const requestEventsInfo = new RequestEventsInfo({ page, count: 50, sortBy, sortByAsc, returnInfo });
+                this.setRequestedResult(requestEventsInfo);
+                if (this.er.verboseOutput) {
+                    this.er.logger.info(`Downloading event page ${page}...`);
+                }
+                const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
+                return {
+                    results: (response.events as ER.Results<Data.Event>)?.results || [],
+                    pages: (response.events as ER.Results)?.pages || 0,
+                    error: response.error || undefined
+                };
+            }
+        });
     }
 
     /**
      * Async Iterator function that returns the next item in the list of events
      */
     [Symbol.asyncIterator](): AsyncIterator<Data.Event> {
-        return {
-            next: async () => {
-                if (this.index >= this.items.length) {
-                    await this.getNextBatch();
-                }
-                const item = this.items[this.index];
-                this.index++;
-                return {value: item, done: !item};
-            },
-        };
+        return this.engine[Symbol.asyncIterator]();
     }
 
     public async count(): Promise<number> {
@@ -247,12 +241,10 @@ export class QueryEventsIter extends QueryEvents implements AsyncIterable<Data.E
      * @param doneCallback callback function that'll be called when everything is complete
      */
     public execQuery(callback: (item: Data.Event) => void, doneCallback?: (error?: string) => void): void {
-        if (callback) { this.callback = callback; }
-        if (doneCallback) { this.doneCallback = doneCallback; }
-        this.iterate();
+        this.engine.execQuery(callback, doneCallback);
     }
 
-    public static initWithComplexQuery(er, complexQuery, args: ER.QueryEvents.IteratorArguments = {}) {
+    public static initWithComplexQuery(er: EventRegistry, complexQuery: ComplexEventQuery | string | Record<string, unknown>, args: ER.QueryEvents.IteratorArguments = {}) {
         const query = new QueryEventsIter(er, args);
         if (complexQuery instanceof ComplexEventQuery) {
             query.setVal("query", JSON.stringify(complexQuery.getQuery()));
@@ -265,65 +257,6 @@ export class QueryEventsIter extends QueryEvents implements AsyncIterable<Data.E
         }
         return query;
     }
-
-    private async iterate() {
-        if (this.current) {
-            this.callback(this.current);
-            this.index += 1;
-        } else if (!await this.getNextBatch()) {
-            this.doneCallback(this.errorMessage);
-            return;
-        }
-        return this.iterate();
-    }
-
-    /**
-     * Extract the results according to maxItems
-     * @param response response from the backend
-     */
-    private extractResults(response): Data.Event[] {
-        const results = response?.events?.results || [];
-        const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : results.length;
-        return results.slice(0, extractedSize).filter(Boolean);
-    }
-
-    private get current() {
-        return this.items[this.index] || undefined;
-    }
-
-    private async getNextBatch() {
-        try {
-            this.page += 1;
-            if (this.page > this.pages || (this.maxItems !== -1 && this.returnedSoFar >= this.maxItems)) {
-                return false;
-            }
-            const requestEventsInfo = new RequestEventsInfo({
-                page: this.page,
-                count: 50,
-                sortBy: this.sortBy,
-                sortByAsc: this.sortByAsc,
-                returnInfo: this.returnInfo,
-            });
-            this.setRequestedResult(requestEventsInfo);
-            if (this.er.verboseOutput) {
-                this.er.logger.info(`Downloading event page ${this.page}...`);
-            }
-            const response = await this.er.execQuery(this, this.er.allowUseOfArchive);
-            const error = response.error || "";
-            if (error) {
-                this.errorMessage = `Error while obtaining a list of events:  ${response.error}`;
-            } else {
-                this.pages = (response.events as ER.Results)?.pages || 0;
-            }
-            const results = this.extractResults(response);
-            this.returnedSoFar += results.length;
-            this.items = [...this.items, ...results];
-            return true;
-        } catch (error) {
-            this.er.logger.error(error);
-            return false;
-        }
-    }
 }
 
 export class RequestEvents {}
@@ -334,7 +267,7 @@ export class RequestEvents {}
  */
 export class RequestEventsInfo extends RequestEvents {
     public resultType = "events";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsInfoArguments = {}) {
         super();
         const {
@@ -342,7 +275,7 @@ export class RequestEventsInfo extends RequestEvents {
             count = 50,
             sortBy = "rel",
             sortByAsc = false,
-            returnInfo = undefined,
+            returnInfo = undefined
         } = args;
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
@@ -367,7 +300,7 @@ export class RequestEventsInfo extends RequestEvents {
  */
 export class RequestEventsUriWgtList extends RequestEvents {
     public resultType = "uriWgtList";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor(args: ER.QueryEvents.RequestEventsUriWgtListArguments = {}) {
         super();
@@ -416,11 +349,11 @@ export class RequestEventsTimeAggr extends RequestEvents {
  */
 export class RequestEventsKeywordAggr extends RequestEvents {
     public resultType = "keywordAggr";
-    public params;
+    public params: Record<string, unknown>;
     /**
      * @param lang: in which language to produce the list of top keywords. If undefined, then compute on all articles
      */
-    constructor(lang?) {
+    constructor(lang?: string | string[]) {
         super();
         this.params = {};
         if (lang !== undefined) {
@@ -435,7 +368,7 @@ export class RequestEventsKeywordAggr extends RequestEvents {
  */
 export class RequestEventsLocAggr extends RequestEvents {
     public resultType = "locAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsLocAggrArguments = {}) {
         super();
         const {
@@ -461,7 +394,7 @@ export class RequestEventsLocAggr extends RequestEvents {
  */
 export class RequestEventsLocTimeAggr extends RequestEvents {
     public resultType = "locTimeAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsLocTimeAggrArguments = {}) {
         super();
         const {
@@ -487,7 +420,7 @@ export class RequestEventsLocTimeAggr extends RequestEvents {
  */
 export class RequestEventsConceptAggr extends RequestEvents {
     public resultType = "conceptAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsConceptAggrArguments = {}) {
         super();
         const { conceptCount = 20, eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
@@ -510,7 +443,7 @@ export class RequestEventsConceptAggr extends RequestEvents {
  */
 export class RequestEventsConceptGraph extends RequestEvents {
     public resultType = "conceptGraph";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsConceptGraphArguments = {}) {
         super();
         const { conceptCount = 25, linkCount = 150, eventsSampleSize = 50000, returnInfo = new ReturnInfo() } = args;
@@ -540,7 +473,7 @@ export class RequestEventsConceptGraph extends RequestEvents {
  */
 export class RequestEventsConceptMatrix extends RequestEvents {
     public resultType = "conceptMatrix";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsConceptMatrixArguments = {}) {
         super();
         const { conceptCount = 25, measure = "pmi", eventsSampleSize = 100000, returnInfo = new ReturnInfo() } = args;
@@ -564,7 +497,7 @@ export class RequestEventsConceptMatrix extends RequestEvents {
  */
 export class RequestEventsConceptTrends extends RequestEvents {
     public resultType = "conceptTrends";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsConceptTrendsArguments = {}) {
         super();
         const { conceptCount = 10, conceptUris = [], returnInfo = new ReturnInfo() } = args;
@@ -586,7 +519,7 @@ export class RequestEventsConceptTrends extends RequestEvents {
  */
 export class RequestEventsSourceAggr extends RequestEvents {
     public resultType = "sourceAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsSourceAggrArguments = {}) {
         super();
         const { sourceCount = 30, eventsSampleSize = 50000, returnInfo = new ReturnInfo() } = args;
@@ -609,14 +542,14 @@ export class RequestEventsSourceAggr extends RequestEvents {
  */
 export class RequestEventsDateMentionAggr extends RequestEvents {
     public resultType = "dateMentionAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsDateMentionAggrArguments = {}) {
         super();
         const {
             minDaysApart = 0,
             minDateMentionCount = 5,
             eventsSampleSize = 100000,
-            returnInfo = new ReturnInfo(),
+            returnInfo = new ReturnInfo()
         } = args;
         if (eventsSampleSize > 300000) {
             throw new RangeError("At most 300000 results can be used for computing");
@@ -635,7 +568,7 @@ export class RequestEventsDateMentionAggr extends RequestEvents {
  */
 export class RequestEventsEventClusters extends RequestEvents {
     public resultType = "eventClusters";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsEventClustersArguments = {}) {
         super();
         const { keywordCount = 30, maxEventsToCluster = 10000, returnInfo = new ReturnInfo() } = args;
@@ -658,7 +591,7 @@ export class RequestEventsEventClusters extends RequestEvents {
  */
 export class RequestEventsCategoryAggr extends RequestEvents {
     public resultType = "categoryAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor(returnInfo = new ReturnInfo()) {
         super();
         this.params = returnInfo.getParams("categoryAggr");
@@ -671,7 +604,7 @@ export class RequestEventsCategoryAggr extends RequestEvents {
  */
 export class RequestEventsRecentActivity extends RequestEvents {
     public resultType = "recentActivityEvents";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvents.RequestEventsRecentActivityArguments = {}) {
         super();
         const {
@@ -680,7 +613,7 @@ export class RequestEventsRecentActivity extends RequestEvents {
             updatesAfterMinsAgo,
             mandatoryLocation = true,
             minAvgCosSim = 0,
-            returnInfo = undefined,
+            returnInfo = undefined
         } = args;
         if (maxEventCount > 2000) {
             throw new RangeError("At most 2000 events can be returned");
@@ -703,6 +636,37 @@ export class RequestEventsRecentActivity extends RequestEvents {
         this.params["recentActivityEventsMinAvgCosSim"] = minAvgCosSim;
         if (!!returnInfo) {
             this.params = {...this.params, ...returnInfo.getParams("recentActivityEvents")};
+        }
+    }
+}
+
+/**
+ * @class RequestEventsBreakingEvents
+ * Return a list of events that are currently breaking.
+ */
+export class RequestEventsBreakingEvents extends RequestEvents {
+    public resultType = "breakingEvents";
+    public params: Record<string, unknown>;
+    constructor(args: ER.QueryEvents.RequestEventsBreakingEventsArguments = {}) {
+        super();
+        const {
+            page = 1,
+            count = 50,
+            minBreakingScore = 0.2,
+            returnInfo = undefined
+        } = args;
+        if (page < 1) {
+            throw new RangeError("page has to be >= 1");
+        }
+        if (count > 50) {
+            throw new RangeError("At most 50 events can be returned");
+        }
+        this.params = {};
+        this.params["breakingEventsPage"] = page;
+        this.params["breakingEventsCount"] = count;
+        this.params["breakingEventsMinBreakingScore"] = minBreakingScore;
+        if (!!returnInfo) {
+            this.params = {...this.params, ...returnInfo.getParams("breakingEvents")};
         }
     }
 }

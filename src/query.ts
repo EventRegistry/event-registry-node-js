@@ -1,7 +1,7 @@
 import { QueryItems, QueryParamsBase } from "./base";
 import { ER } from "./types";
 export abstract class QueryCore {
-    protected queryObj;
+    protected queryObj: Record<string, unknown>;
 
     constructor() {
         this.queryObj = {};
@@ -23,7 +23,6 @@ export abstract class QueryCore {
 }
 
 export class BaseQuery extends QueryCore {
-    protected queryObj;
     /**
      * @param args Object which contains a host of optional parameters
      */
@@ -31,7 +30,7 @@ export class BaseQuery extends QueryCore {
         super();
         const defaults = {
             keywordLoc: "body",
-            categoryIncludeSub: true,
+            categoryIncludeSub: true
         };
         const args = {
             ...defaults,
@@ -87,13 +86,14 @@ export class BaseQuery extends QueryCore {
         }
     }
 
-    protected setQueryArrVal(propName: string, value: string | string[] | QueryItems) {
+    protected setQueryArrVal(propName: string, value: string | string[] | QueryItems | undefined) {
         if (value === null || value === undefined) {
             return;
         }
         if (value instanceof QueryItems) {
-            this.queryObj[propName] = this.queryObj[propName] || {};
-            this.queryObj[propName][value.getOper()] = value.getItems();
+            const target = (this.queryObj[propName] as Record<string, unknown>) || {};
+            target[value.getOper()] = value.getItems();
+            this.queryObj[propName] = target;
         } else if (typeof value === "string") {
             this.queryObj[propName] = value;
         } else {
@@ -103,14 +103,12 @@ export class BaseQuery extends QueryCore {
 }
 
 export class CombinedQuery extends QueryCore {
-    protected queryObj;
-
     /**
      * Create a combined query with multiple items on which to perform an AND operation
      * @param queryArr a list of items on which to perform an AND operation. Items can be either a CombinedQuery or BaseQuery instances.
      * @param exclude Used to filter out results matching the other criteria specified in this query
      */
-    public static AND(queryArr: Array<BaseQuery | CombinedQuery>, exclude?: BaseQuery | CombinedQuery) {
+    public static AND(queryArr: (BaseQuery | CombinedQuery)[], exclude?: BaseQuery | CombinedQuery) {
         if (!Array.isArray(queryArr)) {
             throw new Error("provided argument as not a list");
         }
@@ -118,13 +116,14 @@ export class CombinedQuery extends QueryCore {
             throw new Error("queryArr had an empty list");
         }
         const query = new CombinedQuery();
-        query.queryObj["$and"] = [];
+        const andItems: unknown[] = [];
         for (const item of queryArr) {
             if (!(item instanceof QueryCore)) {
                 throw new Error("item in the list was not a CombinedQuery or BaseQuery instance");
             }
-            query.queryObj["$and"] = [...query.queryObj["$and"], item.getQuery()];
+            andItems.push(item.getQuery());
         }
+        query.queryObj["$and"] = andItems;
 
         if (exclude !== null && exclude !== undefined) {
             if (!(exclude instanceof QueryCore)) {
@@ -141,7 +140,7 @@ export class CombinedQuery extends QueryCore {
      * @param queryArr A list of items on which to perform an OR operation.
      * @param exclude Used to filter out results matching the other criteria specified in this query.
      */
-    public static OR(queryArr: Array<BaseQuery | CombinedQuery>, exclude?: BaseQuery | CombinedQuery) {
+    public static OR(queryArr: (BaseQuery | CombinedQuery)[], exclude?: BaseQuery | CombinedQuery) {
         if (!Array.isArray(queryArr)) {
             throw new Error("provided argument as not a list");
         }
@@ -154,7 +153,7 @@ export class CombinedQuery extends QueryCore {
             if (!(item instanceof QueryCore)) {
                 throw new Error("item in the list was not a CombinedQuery or BaseQuery instance");
             }
-            query.queryObj["$or"] = [...query.queryObj["$or"], item.getQuery()];
+            query.queryObj["$or"] = [...(query.queryObj["$or"] as unknown[]), item.getQuery()];
         });
 
         if (exclude !== null && exclude !== undefined) {
@@ -172,8 +171,6 @@ export class CombinedQuery extends QueryCore {
  * Create an article query using a complex query
  */
 export class ComplexArticleQuery extends QueryCore {
-    protected queryObj;
-
     /**
      * @param query An instance of CombinedQuery or BaseQuery to use to find articles that match the conditions
      * @param args Object which contains a host of optional parameters
@@ -190,14 +187,14 @@ export class ComplexArticleQuery extends QueryCore {
             endSourceRankPercentile: 0,
             isDuplicateFilter: "keepAll",
             hasDuplicateFilter: "keepAll",
-            eventFilter: "keepAll",
+            eventFilter: "keepAll"
         };
         args = { ...defaults, ...args } as ER.Query.ComplexArticleQueryArguments;
         if (!(query instanceof QueryCore)) {
             throw new Error("query parameter was not a CombinedQuery or BaseQuery instance");
         }
         this.queryObj["$query"] = query.getQuery();
-        const filter = {};
+        const filter: Record<string, unknown> = {};
         if (args.dataType !== "news") {
             filter["dataType"] = args.dataType;
         }
@@ -207,10 +204,10 @@ export class ComplexArticleQuery extends QueryCore {
         if (args.maxSentiment) {
             filter["maxSentiment"] = args.maxSentiment;
         }
-        if (args.minSocialScore > 0) {
+        if ((args.minSocialScore ?? 0) > 0) {
             filter["minSocialScore"] = args.minSocialScore;
         }
-        if (args.minFacebookShares > 0) {
+        if ((args.minFacebookShares ?? 0) > 0) {
             filter["minFacebookShares"] = args.minFacebookShares;
         }
         if (args.startSourceRankPercentile !== 0) {
@@ -247,7 +244,7 @@ export class ComplexEventQuery extends QueryCore {
             throw new Error("query parameter was not a CombinedQuery or BaseQuery instance");
         }
         this.queryObj["$query"] = query.getQuery();
-        const filter = {};
+        const filter: Record<string, unknown> = {};
         if (args?.minSentiment) {
             filter["minSentiment"] = args.minSentiment;
         }

@@ -1,6 +1,6 @@
 // This file contains type definitions of actual results (articles, events,...) from the API
 
-export module Data {
+export namespace Data {
     type TranslationObject = Record<string, string>;
     type Label = TranslationObject;
     type Summary = TranslationObject;
@@ -44,9 +44,7 @@ export module Data {
         wikiUri: string;
     }
 
-    export interface Location extends Country {
-
-    }
+    export type Location = Country
 
     export interface SourceLocation {
         country: Country;
@@ -60,9 +58,7 @@ export module Data {
         wikiUri: string;
     }
 
-    export interface EventLocation extends SourceLocation {
-
-    }
+    export type EventLocation = SourceLocation
 
     interface Source {
         uri: string;
@@ -219,6 +215,36 @@ export module Data {
         freq: number;
     }
 
+    /**
+     * A cluster of articles (within an event) reporting on the same specific angle/story
+     */
+    export interface Story {
+        uri: string;
+        articleCount: number;
+        lang: string;
+        avgCos: number;
+        variance: number;
+        eventUri: string;
+        title: string;
+        isUserSetTitle: boolean;
+        summary: string;
+        isUserSetSummary: boolean;
+        concepts: Concept[];
+        location: EventLocation | null;
+        isUserSetLocation: boolean;
+        categories: Category[];
+        medoidArticle: Article;
+        storyDate: string;
+        isUserSetDate: boolean;
+        extractedDate: string;
+        extractedDateEnd: string;
+        averageDate: string;
+        images: string[];
+        commonDates: CommonDate[] | null;
+        socialScore: number;
+        wgt: number;
+    }
+
     export interface Event {
         /**
          * Event URI
@@ -279,6 +305,6 @@ export module Data {
         /**
          * List of clusters reporting about the event
          */
-        stories: any[];
+        stories: Story[];
     }
 }

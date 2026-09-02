@@ -3,7 +3,7 @@ import { QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { ReturnInfo } from "./returnInfo";
 import { ER } from "./types";
-import { AxiosResponse } from "axios";
+import { ErHttpResponse } from "./http";
 
 export class TopicPage extends QueryParamsBase {
     private topicPage: ER.TopicPage;
@@ -29,14 +29,14 @@ export class TopicPage extends QueryParamsBase {
         restrictToSetLocations: false,
         dataType: [ "news" ]
     };
-    private concept: AxiosResponse<ER.Response> = {} as AxiosResponse<ER.Response>;
+    private concept: ErHttpResponse<ER.Response> = {} as ErHttpResponse<ER.Response>;
 
     constructor(private eventRegistry: EventRegistry) {
         super();
         this.topicPage = this.createEmptyTopicPage();
     }
 
-    private isTopicPage(definition: {[name: string]: any}): definition is ER.TopicPage {
+    private isTopicPage(definition: object): definition is ER.TopicPage {
         return Object.keys(this.emptyTopicPage).sort().toString() === Object.keys(definition).sort().toString();
     }
 
@@ -70,7 +70,7 @@ export class TopicPage extends QueryParamsBase {
      * Load the topic page definition from an object
      * @param definition topic page definition
      */
-    public loadTopicPageFromDefinition(definition: {}) {
+    public loadTopicPageFromDefinition(definition: object) {
         if (this.isTopicPage(definition)) {
             this.topicPage = definition;
         }
@@ -260,7 +260,7 @@ export class TopicPage extends QueryParamsBase {
             label,
             conceptType,
             required = false,
-            excluded = false,
+            excluded = false
         } = args;
         if (required && excluded) {
             throw new Error("Parameters required and excluded can not be true at the same time");
@@ -286,7 +286,7 @@ export class TopicPage extends QueryParamsBase {
         }
         const {
             required = false,
-            excluded = false,
+            excluded = false
         } = args;
         this.topicPage.keywords = [...this.topicPage.keywords, {keyword, wgt, required, excluded}];
     }
@@ -302,7 +302,7 @@ export class TopicPage extends QueryParamsBase {
         }
         const {
             required = false,
-            excluded = false,
+            excluded = false
         } = args;
         this.topicPage.categories = [...this.topicPage.categories, {uri, wgt, required, excluded}];
     }
@@ -317,7 +317,7 @@ export class TopicPage extends QueryParamsBase {
             throw new Error("Weight value has to be a positive or negative number");
         }
         const {
-            excluded = false,
+            excluded = false
         } = args;
         this.topicPage.sources = [...this.topicPage.sources, {uri, wgt, excluded}];
     }
@@ -332,7 +332,7 @@ export class TopicPage extends QueryParamsBase {
             throw new Error("Weight value has to be a positive or negative number");
         }
         const {
-            excluded = false,
+            excluded = false
         } = args;
         this.topicPage.sourceLocations = [...this.topicPage.sourceLocations, {uri, wgt, excluded}];
     }
@@ -347,7 +347,7 @@ export class TopicPage extends QueryParamsBase {
             throw new Error("Weight value has to be a positive or negative number");
         }
         const {
-            excluded = false,
+            excluded = false
         } = args;
         this.topicPage.sourceGroups = [...this.topicPage.sourceGroups, {uri, wgt, excluded}];
     }
@@ -424,7 +424,7 @@ export class TopicPage extends QueryParamsBase {
      * @param args {ER.TopicPageArticles} Object which contains a host of optional parameters
      */
     public async getArticles(args: ER.TopicPageArticles = {}) {
-        const {page = 1, count = 100, sortBy = "rel", sortByAsc = false, dataType = "news", returnInfo = new ReturnInfo(), ...otherParameters} = args;
+        const {page = 1, count = 100, sortBy = "rel", sortByAsc = false, returnInfo = new ReturnInfo(), ...otherParameters} = args;
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
         }

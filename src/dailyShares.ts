@@ -1,4 +1,3 @@
-import * as moment from "moment";
 import { QueryParamsBase } from "./base";
 import { ReturnInfo } from "./returnInfo";
 import { ER } from "./types";
@@ -12,7 +11,7 @@ import { ER } from "./types";
 
 export class GetTopSharedArticles extends QueryParamsBase {
     constructor(args: ER.DailyShares.Arguments = {}) {
-        const {date = moment().format("YYYY-MM-DD"), count = 20, returnInfo = new ReturnInfo()} = args;
+        const {date = new Date().toISOString().slice(0, 10), count = 20, returnInfo = new ReturnInfo()} = args;
         super();
         this.setVal("action", "getArticles");
         this.setVal("resultType", "articles");
@@ -30,7 +29,7 @@ export class GetTopSharedArticles extends QueryParamsBase {
 
 export class GetTopSharedEvents extends QueryParamsBase {
     constructor(args: ER.DailyShares.Arguments = {}) {
-        const {date = moment().format("YYYY-MM-DD"), count = 20, returnInfo = new ReturnInfo()} = args;
+        const {date = new Date().toISOString().slice(0, 10), count = 20, returnInfo = new ReturnInfo()} = args;
         super();
         this.setVal("action", "getEvents");
         this.setVal("resultType", "events");

@@ -1,13 +1,12 @@
 import { QueryParamsBase } from "./base";
 import { EventRegistry } from "./eventRegistry";
 import { ReturnInfo } from "./returnInfo";
-import { ER } from "./types";
 
 export class GetRecentEvents extends QueryParamsBase {
     private er: EventRegistry;
     constructor(er: EventRegistry, { mandatoryLang = undefined,
                                      mandatoryLocation = true,
-                                     returnInfo = new ReturnInfo(),
+                                     returnInfo = new ReturnInfo()
                                    } = {}) {
         super();
         this.er = er;
@@ -24,7 +23,18 @@ export class GetRecentEvents extends QueryParamsBase {
 
     public async getUpdates() {
         const response = await this.er.execQuery(this);
-        return (response.recentActivityEvents as Record<string, ER.Results>)?.activity || {};
+        const payload = response.recentActivityEvents as Record<string, unknown> | undefined;
+        if (!payload) {
+            return [];
+        }
+        const newestUri = payload.newestUri;
+        if (newestUri && typeof newestUri === "object") {
+            for (const [key, value] of Object.entries(newestUri as Record<string, string>)) {
+                const splitKey = key.split("");
+                this.setVal("recentActivityEvents" + splitKey[0].toUpperCase() + splitKey.slice(1).join(""), value);
+            }
+        }
+        return Array.isArray(payload.activity) ? payload.activity : [];
     }
 }
 

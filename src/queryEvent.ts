@@ -41,7 +41,7 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
     private readonly er: EventRegistry;
     private readonly sortBy: ER.QueryEvent.SortByOptions;
     private readonly sortByAsc: boolean;
-    private readonly returnInfo: ReturnInfo;
+    private readonly returnInfo: ReturnInfo | undefined;
     private readonly eventUri: string;
     private readonly maxItems: number;
     private page: number = 0;
@@ -51,7 +51,7 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
     private index: number = 0;
     private callback: (item: Data.Article) => void = () => undefined;
     private doneCallback: (error?: string) => void = () => undefined;
-    private errorMessage: string;
+    private errorMessage!: string;
 
     /**
      * @param er instance of EventRegistry class. used to obtain the necessary data
@@ -83,7 +83,7 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
             startSourceRankPercentile = 0,
             endSourceRankPercentile = 100,
             minSentiment = -1,
-            maxSentiment = 1,
+            maxSentiment = 1
         } = args;
         this.er = er;
         this.sortBy = sortBy;
@@ -159,7 +159,7 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
                 const item = this.items[this.index];
                 this.index++;
                 return {value: item, done: !item};
-            },
+            }
         };
     }
 
@@ -197,8 +197,8 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
      * Extract the results according to maxItems
      * @param response response from the backend
      */
-    private extractResults(response): Data.Article[] {
-        const results = response[this.eventUri]?.articles?.results || [];
+    private extractResults(response: ER.Response): Data.Article[] {
+        const results = (response[this.eventUri] as Record<string, ER.Results<Data.Article>>)?.articles?.results || [];
         const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : results.length;
         const extractedResults = results.slice(0, extractedSize);
         return extractedResults.filter(Boolean);
@@ -219,7 +219,7 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
                 sortBy: this.sortBy,
                 sortByAsc: this.sortByAsc,
                 returnInfo: this.returnInfo,
-                ...this.getQueryParams(),
+                ...this.getQueryParams()
             }));
             if (this.er.verboseOutput) {
                 this.er.logger.info(`Downloading page ${this.page}...`);
@@ -236,7 +236,7 @@ export class QueryEventArticlesIter extends QueryEvent implements AsyncIterable<
             this.items = [...this.items, ...results];
             return true;
         } catch (error) {
-            this.er.logger.error(error);
+            this.er.logger.error(error instanceof Error ? error.message : String(error));
             return false;
         }
     }
@@ -251,7 +251,7 @@ export class RequestEvent extends QueryParamsBase {
  */
 export class RequestEventInfo extends RequestEvent {
     public resultType = "info";
-    public params;
+    public params: Record<string, unknown>;
     constructor(returnInfo = new ReturnInfo()) {
         super();
         this.params = returnInfo.getParams("info");
@@ -264,7 +264,7 @@ export class RequestEventInfo extends RequestEvent {
  */
 export class RequestEventArticles extends RequestEvent {
     public resultType = "articles";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor(args: ER.QueryEvent.RequestEventArticlesArguments = {}) {
         super();
@@ -289,7 +289,7 @@ export class RequestEventArticles extends RequestEvent {
             endSourceRankPercentile = 100,
             sortBy = "cosSim",
             sortByAsc = false,
-            returnInfo = undefined,
+            returnInfo = undefined
         } = args;
 
         if (page < 1) {
@@ -359,7 +359,7 @@ export class RequestEventArticles extends RequestEvent {
  */
 export class RequestEventArticleUriWgts extends RequestEvent {
     public resultType = "uriWgtList";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor(args: ER.QueryEvent.RequestEventArticleUriWgtsArguments = {}) {
         super();
@@ -387,7 +387,7 @@ export class RequestEventArticleUriWgts extends RequestEvent {
  */
 export class RequestEventKeywordAggr extends RequestEvent {
     public resultType = "keywordAggr";
-    public params;
+    public params: Record<string, unknown>;
     /**
      * @param lang: language for which to compute the keywords
      */
@@ -419,7 +419,7 @@ export class RequestEventDateMentionAggr extends RequestEvent {
  */
 export class RequestEventArticleTrend extends RequestEvent {
     public resultType = "articleTrend";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor(args: ER.QueryEvent.RequestEventArticleTrendArguments = {}) {
         super();
@@ -458,7 +458,7 @@ export class RequestEventArticleTrend extends RequestEvent {
  */
 export class RequestEventSimilarEvents extends RequestEvent {
     public path = "/api/v1/event/getSimilarEvents";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryEvent.RequestEventSimilarEventsArguments = {}) {
         super();
         const {

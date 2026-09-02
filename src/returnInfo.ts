@@ -2,33 +2,30 @@ import { ER } from "./types";
 import * as fs from "fs";
 import { Logger } from "./logger";
 
-export abstract class ReturnInfoFlagsBase<T extends {}> {
-    protected type: string;
-    private data = {};
+export abstract class ReturnInfoFlagsBase {
+    protected type = "";
+    private data: Record<string, unknown> = {};
 
     public setFlag(key: string, value: boolean, defaultValue?: boolean) {
         this.setProperty("Include" + this.type + key.charAt(0).toUpperCase() + key.slice(1), value, defaultValue);
     }
 
-    public setValue(key: string, value: any, defaultValue?: any, skipKeyMod = false) {
+    public setValue(key: string, value: unknown, defaultValue?: unknown, skipKeyMod = false) {
         const constructedKey = skipKeyMod ? key.charAt(0).toUpperCase() + key.slice(1) : this.type + key.charAt(0).toUpperCase() + key.slice(1);
         this.setProperty(constructedKey, value, defaultValue);
     }
 
-    public getProperties(prefix = "") {
-        const result: { [key: string]: any } = {};
+    public getProperties(prefix = ""): Record<string, unknown> {
+        const result: Record<string, unknown> = {};
 
-        for (const key in this.data) {
-            if (Object.prototype.hasOwnProperty.call(this.data, key)) {
-                const value = this.data[key];
-                const lowercaseKey = key.toLowerCase();
-                const lowercasePrefix = prefix.toLowerCase();
+        for (const [key, value] of Object.entries(this.data)) {
+            const lowercaseKey = key.toLowerCase();
+            const lowercasePrefix = prefix.toLowerCase();
 
-                if (lowercaseKey.startsWith(lowercasePrefix)) {
-                    result[this.camelCase(key)] = value;
-                } else {
-                    result[this.camelCase(prefix + key)] = value;
-                }
+            if (lowercaseKey.startsWith(lowercasePrefix)) {
+                result[this.camelCase(key)] = value;
+            } else {
+                result[this.camelCase(prefix + key)] = value;
             }
         }
 
@@ -43,20 +40,17 @@ export abstract class ReturnInfoFlagsBase<T extends {}> {
 
     public addProperties(properties: object) {
         if (properties instanceof Object) {
-            for (const name in properties) {
-                if (properties.hasOwnProperty(name)) {
-                    const value = properties[name];
-                    if (typeof value === "boolean") {
-                        this.setFlag(name, value, !value);
-                    } else {
-                        this.setValue(name, value);
-                    }
+            for (const [name, value] of Object.entries(properties)) {
+                if (typeof value === "boolean") {
+                    this.setFlag(name, value, !value);
+                } else {
+                    this.setValue(name, value);
                 }
             }
         }
     }
 
-    private setProperty(key, value, defaultValue?) {
+    private setProperty(key: string, value: unknown, defaultValue?: unknown) {
         if (value !== defaultValue) {
             this.data[key] = value;
         }
@@ -111,7 +105,7 @@ export class ReturnInfo {
             ...this.locationInfo.getProperties(prefix),
             ...this.storyInfo.getProperties(prefix),
             ...this.conceptClassInfo.getProperties(prefix),
-            ...this.conceptFolderInfo.getProperties(prefix),
+            ...this.conceptFolderInfo.getProperties(prefix)
         };
     }
 
@@ -133,12 +127,12 @@ export class ReturnInfo {
             locationInfo: new LocationInfoFlags(conf.locationInfo || {}),
             storyInfo: new StoryInfoFlags(conf.storyInfo || {}),
             conceptClassInfo: new ConceptClassInfoFlags(conf.conceptClassInfo || {}),
-            conceptFolderInfo: new ConceptFolderInfoFlags(conf.conceptFolderInfo || {}),
+            conceptFolderInfo: new ConceptFolderInfoFlags(conf.conceptFolderInfo || {})
         });
     }
 }
 
-export class ArticleInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ArticleInfoFlags> {
+export class ArticleInfoFlags extends ReturnInfoFlagsBase {
     constructor(params: ER.ReturnInfo.ArticleInfo = {}) {
         super();
         this.type = "Article";
@@ -185,7 +179,7 @@ export class ArticleInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ArticleI
     }
 }
 
-export class StoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.StoryInfoFlags> {
+export class StoryInfoFlags extends ReturnInfoFlagsBase {
     constructor(params: ER.ReturnInfo.StoryInfo = {}) {
         super();
         this.type = "Story";
@@ -220,7 +214,7 @@ export class StoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.StoryInfoF
     }
 }
 
-export class EventInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.EventInfoFlags> {
+export class EventInfoFlags extends ReturnInfoFlagsBase {
     constructor(params: ER.ReturnInfo.EventInfo = {}) {
         super();
         this.type = "Event";
@@ -253,7 +247,7 @@ export class EventInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.EventInfoF
     }
 }
 
-export class SourceInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.SourceInfoFlags> {
+export class SourceInfoFlags extends ReturnInfoFlagsBase {
     constructor(params: ER.ReturnInfo.SourceInfo = {}) {
         super();
         const {
@@ -276,7 +270,7 @@ export class SourceInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.SourceInf
     }
 }
 
-export class CategoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.CategoryInfoFlags> {
+export class CategoryInfoFlags extends ReturnInfoFlagsBase {
     constructor(params: ER.ReturnInfo.CategoryInfo = {}) {
         super();
         this.type = "Category";
@@ -289,7 +283,7 @@ export class CategoryInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.Categor
     }
 }
 
-export class ConceptInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptInfoFlags> {
+export class ConceptInfoFlags extends ReturnInfoFlagsBase {
     constructor(params: ER.ReturnInfo.ConceptInfo = {}) {
         super();
         this.type = "Concept";
@@ -316,7 +310,7 @@ export class ConceptInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptI
     }
 }
 
-export class LocationInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.LocationInfoFlags> {
+export class LocationInfoFlags extends ReturnInfoFlagsBase {
     constructor(params: ER.ReturnInfo.LocationInfo = {}) {
         super();
         this.type = "Location";
@@ -347,7 +341,7 @@ export class LocationInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.Locatio
     }
 }
 
-export class ConceptClassInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptClassInfoFlags> {
+export class ConceptClassInfoFlags extends ReturnInfoFlagsBase {
     constructor(params: ER.ReturnInfo.ConceptClassInfo = {}) {
         super();
         this.type = "ConceptClass";
@@ -362,7 +356,7 @@ export class ConceptClassInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.Con
     }
 }
 
-export class ConceptFolderInfoFlags extends ReturnInfoFlagsBase<ER.ReturnInfo.ConceptFolderInfoFlags> {
+export class ConceptFolderInfoFlags extends ReturnInfoFlagsBase {
     constructor(params: ER.ReturnInfo.ConceptFolderInfo = {}) {
         super();
         this.type = "ConceptFolder";

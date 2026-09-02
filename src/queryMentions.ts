@@ -5,7 +5,7 @@ import { ER } from "./types";
 import { Logger } from "./logger";
 
 export class QueryMentions extends Query<RequestMentions> {
-    public params = {};
+    public params: Record<string, unknown> = {};
     constructor(args: ER.QueryMentions.Arguments = {}) {
         super();
         const {
@@ -44,7 +44,7 @@ export class QueryMentions extends Query<RequestMentions> {
             maxSentiment = 1,
             minSentenceIndex,
             maxSentenceIndex,
-            requestedResult = new RequestMentions(),
+            requestedResult = new RequestMentions()
         } = args;
 
         this.setVal("action", "getMentions");
@@ -128,37 +128,36 @@ export class QueryMentions extends Query<RequestMentions> {
             throw new Error("QueryMentions class can only accept result requests that are of type RequestMentions");
         }
         this.resultTypeList = [
-            requestMentions,
+            requestMentions
         ];
     }
 
-    public static initWithMentionUriList(...args);
-    public static initWithMentionUriList(uriList) {
+    public static initWithMentionUriList(uriList: string[]) {
         const q = new QueryMentions();
         if (!Array.isArray(uriList)) {
             throw new Error("uriList has to be a list of strings that represent mention uris");
         }
         q.params = {
             action: "getMentions",
-            mentionUri: uriList,
+            mentionUri: uriList
         };
+        return q;
     }
 
-    public static initWithMentionUriWgtList(...args);
-    public static initWithMentionUriWgtList(uriWgtList) {
+    public static initWithMentionUriWgtList(uriWgtList: string[]) {
         const q = new QueryMentions();
         if (!Array.isArray(uriWgtList)) {
             throw new Error("uriList has to be a list of strings that represent mention uris");
         }
         q.params = {
             action: "getMentions",
-            mentionUriWgtList: uriWgtList.join(","),
+            mentionUriWgtList: uriWgtList.join(",")
         };
         return q;
     }
 
-    public static initWithComplexQuery(...args);
-    public static initWithComplexQuery(complexQuery) {
+    public static initWithComplexQuery(...args: unknown[]) {
+        const complexQuery = args[0] as string | Record<string, unknown>;
         const query = new QueryMentions();
         if (typeof complexQuery === "string") {
             query.setVal("query", complexQuery);
@@ -171,20 +170,20 @@ export class QueryMentions extends Query<RequestMentions> {
     }
 }
 
-export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Record<string, any>> {
+export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Record<string, unknown>> {
     private readonly er: EventRegistry;
     private readonly sortBy: "date" | "socialScore" | "none" | "rel" | "size";
     private readonly sortByAsc: boolean;
-    private readonly returnInfo: ReturnInfo;
+    private readonly returnInfo: ReturnInfo | undefined;
     private readonly maxItems: number;
     private page: number = 0;
     private pages: number = 1;
-    private items: Record<string, any>[] = [];
+    private items: Record<string, unknown>[] = [];
     private returnedSoFar: number = 0;
     private index: number = 0;
-    private callback: (item: Record<string, any>) => void = () => {};
-    private doneCallback: (error?: string) => void = () => {};
-    private errorMessage: string;
+    private callback: (item: Record<string, unknown>) => void = () => undefined;
+    private doneCallback: (error?: string) => void = () => undefined;
+    private errorMessage!: string;
 
     constructor(er: EventRegistry, args: ER.QueryMentions.IteratorArguments = {}) {
         super(args as ER.QueryMentions.Arguments);
@@ -192,7 +191,7 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
             sortBy = "rel",
             sortByAsc = false,
             returnInfo = undefined,
-            maxItems = -1,
+            maxItems = -1
         } = args;
         this.er = er;
         this.sortBy = sortBy;
@@ -201,7 +200,7 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
         this.maxItems = maxItems;
     }
 
-    [Symbol.asyncIterator](): AsyncIterator<Record<string, any>> {
+    [Symbol.asyncIterator](): AsyncIterator<Record<string, unknown>> {
         return {
             next: async () => {
                 if (this.index >= this.items.length) {
@@ -210,7 +209,7 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
                 const item = this.items[this.index];
                 this.index++;
                 return {value: item, done: !item};
-            },
+            }
         };
     }
 
@@ -228,13 +227,13 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
      * @param callback callback function that'll be called every time we get a new batch of events from the backend
      * @param doneCallback callback function that'll be called when everything is complete
      */
-     public execQuery(callback: (item) => void, doneCallback?: (error?) => void) {
+     public execQuery(callback: (item: Record<string, unknown>) => void, doneCallback?: (error?: string) => void) {
         if (callback) { this.callback = callback; }
         if (doneCallback) { this.doneCallback = doneCallback; }
         this.iterate();
     }
 
-    public static initWithComplexQuery(er, complexQuery, args: ER.QueryMentions.IteratorArguments = {}) {
+    public static initWithComplexQuery(er: EventRegistry, complexQuery: string | Record<string, unknown>, args: ER.QueryMentions.IteratorArguments = {}) {
         const query = new QueryMentionsIter(er, args);
         if (typeof complexQuery === "string") {
             query.setVal("query", complexQuery);
@@ -246,7 +245,7 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
         return query;
     }
 
-    private async iterate() {
+    private async iterate(): Promise<void> {
         if (this.current) {
             this.callback(this.current);
             this.index += 1;
@@ -261,8 +260,8 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
      * Extract the results according to maxItems
      * @param response response from the backend
      */
-    private extractResults(response): Array<{[name: string]: any}> {
-        const results = response.mentions?.results || [];
+    private extractResults(response: ER.Response): Record<string, unknown>[] {
+        const results = (response.mentions as ER.Results<Record<string, unknown>>)?.results || [];
         const extractedSize = this.maxItems !== -1 ? this.maxItems - this.returnedSoFar : results.length;
         return results.slice(0, extractedSize).filter(Boolean);
     }
@@ -282,7 +281,7 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
                 count: 50,
                 sortBy: this.sortBy,
                 sortByAsc: this.sortByAsc,
-                returnInfo: this.returnInfo,
+                returnInfo: this.returnInfo
             });
             this.setRequestedResult(requestMentionsInfo);
             if (this.er.verboseOutput) {
@@ -300,7 +299,7 @@ export class QueryMentionsIter extends QueryMentions implements AsyncIterable<Re
             this.items = [...this.items, ...results];
             return true;
         } catch (error) {
-            this.er.logger.error(error);
+            this.er.logger.error(error instanceof Error ? error.message : String(error));
             return false;
         }
     }
@@ -310,15 +309,15 @@ export class RequestMentions {}
 
 export class RequestMentionsInfo extends RequestMentions {
     public resultType = "mentions";
-    public params;
-    constructor(args: ER.QueryEvents.RequestEventsInfoArguments = {}) {
+    public params: Record<string, unknown>;
+    constructor(args: ER.QueryMentions.RequestMentionsInfoArguments = {}) {
         super();
         const {
             page = 1,
             count = 100,
             sortBy = "date",
             sortByAsc = false,
-            returnInfo = undefined,
+            returnInfo = undefined
         } = args;
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
@@ -346,7 +345,7 @@ export class RequestMentionsInfo extends RequestMentions {
 
 export class RequestMentionsUriWgtList extends RequestMentions {
     public resultType = "uriWgtList";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor(args: ER.QueryMentions.RequestMentionsUriWgtListArguments = {}) {
         super();
@@ -373,11 +372,11 @@ export class RequestMentionsUriWgtList extends RequestMentions {
         this.params["uriWgtListSortByAsc"] = sortByAsc;
     }
 
-    public set page(page) {
+    public set page(page: number) {
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
         }
-        this.params["uriWgtListPage"] = page;
+        this.params.uriWgtListPage = page;
     }
 }
 
@@ -387,7 +386,7 @@ export class RequestMentionsTimeAggr extends RequestMentions {
 
 export class RequestMentionsConceptAggr extends RequestMentions {
     public resultType = "conceptAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryMentions.RequestMentionsConceptAggrArguments = {}) {
         super();
         const {
@@ -395,7 +394,7 @@ export class RequestMentionsConceptAggr extends RequestMentions {
             mentionsSampleSize = 100000,
             conceptScoring = "importance",
             conceptCountPerType = undefined,
-            returnInfo = new ReturnInfo(),
+            returnInfo = new ReturnInfo()
         } = args;
         if (conceptCount > 500) {
             throw new RangeError("At most 500 top concepts can be returned");
@@ -416,54 +415,58 @@ export class RequestMentionsConceptAggr extends RequestMentions {
 
 export class RequestMentionsCategoryAggr extends RequestMentions {
     public resultType = "categoryAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryMentions.RequestMentionsCategoryAggrArguments = {}) {
         super();
         const {
             mentionsSampleSize = 20000,
-            returnInfo = new ReturnInfo(),
+            returnInfo = new ReturnInfo()
         } = args;
         if (mentionsSampleSize > 50000) {
             throw new RangeError("At most 50000 results can be used for aggregation");
         }
+        this.params = {};
         this.params["categoryAggrSampleSize"] = mentionsSampleSize;
-        this.params = returnInfo.getParams("categoryAggr");
+        this.params = {...this.params, ...returnInfo.getParams("categoryAggr")};
     }
 }
 
 export class RequestMentionsSourceAggr extends RequestMentions {
     public resultType = "sourceAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryMentions.RequestMentionsSourceAggrArguments = {}) {
         super();
         const {
             sourceCount = 50,
             normalizeBySourceArts = false,
-            returnInfo = new ReturnInfo(),
+            returnInfo = new ReturnInfo()
         } = args;
+        this.params = {};
         this.params["sourceAggrSourceCount"] = sourceCount;
-        this.params = returnInfo.getParams("sourceAggr");
+        this.params["sourceAggrNormalizeBySourceArts"] = normalizeBySourceArts;
+        this.params = {...this.params, ...returnInfo.getParams("sourceAggr")};
     }
 }
 
 export class RequestMentionsKeywordAggr extends RequestMentions {
     public resultType = "keywordAggr";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryMentions.RequestMentionsKeywordAggrArguments = {}) {
         super();
         const {
-            mentionsSampleSize = 2000,
+            mentionsSampleSize = 2000
         } = args;
         if (mentionsSampleSize > 20000) {
             throw new RangeError("At most 20000 results can be used for aggregation");
         }
+        this.params = {};
         this.params["keywordAggrSampleSize"] = mentionsSampleSize;
     }
 }
 
 export class RequestMentionsConceptGraph extends RequestMentions {
     public resultType = "conceptGraph";
-    public params;
+    public params: Record<string, unknown>;
 
     constructor(args: ER.QueryMentions.RequestMentionsConceptGraphArguments = {}) {
         super();
@@ -472,7 +475,7 @@ export class RequestMentionsConceptGraph extends RequestMentions {
             linkCount = 50,
             mentionsSampleSize = 10000,
             skipQueryConcepts = true,
-            returnInfo = new ReturnInfo(),
+            returnInfo = new ReturnInfo()
         } = args;
         if (conceptCount > 1000) {
             throw new RangeError("At most 1000 top concepts can be returned");
@@ -494,7 +497,7 @@ export class RequestMentionsConceptGraph extends RequestMentions {
 
 export class RequestMentionsRecentActivity extends RequestMentions {
     public resultType = "recentActivityMentions";
-    public params;
+    public params: Record<string, unknown>;
     constructor(args: ER.QueryMentions.RequestMentionsRecentActivityArguments = {}) {
         super();
         const {
@@ -505,7 +508,7 @@ export class RequestMentionsRecentActivity extends RequestMentions {
             updatesUntilTm = undefined,
             updatesUntilMinsAgo = undefined,
             mandatorySourceLocation = false,
-            returnInfo = undefined,
+            returnInfo = undefined
         } = args;
         if (maxMentionCount > 2000) {
             throw new RangeError("At most 2000 mentions can be returned");
