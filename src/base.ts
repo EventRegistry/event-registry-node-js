@@ -1,4 +1,3 @@
-import * as moment from "moment";
 import { Logger } from "./logger";
 
 export const mainLangs = ["eng", "deu", "zho", "slv", "spa"];
@@ -6,13 +5,13 @@ export const allLangs = [ "eng", "deu", "spa", "cat", "por", "ita", "fra", "rus"
 // Utility classes for Event Registry
 
 export class QueryItems {
-    public static AND = (items) => new QueryItems("$and", items);
-    public static OR = (items) => new QueryItems("$or", items);
+    public static AND = (items: unknown[]): QueryItems => new QueryItems("$and", items);
+    public static OR = (items: unknown[]): QueryItems => new QueryItems("$or", items);
 
-    private oper;
-    private items;
+    private oper: string;
+    private items: unknown[];
 
-    constructor(oper, items) {
+    constructor(oper: string, items: unknown[]) {
         this.oper = oper;
         this.items = items;
     }
@@ -40,11 +39,14 @@ export class QueryParamsBase {
      * Encode datetime into UTC ISO format which can be sent to ER.
      */
     public static encodeDateTime(val: string | Date, format?: string): string {
-        const datetime = moment.utc(val);
-        if (!datetime.isValid()) {
+        const date = val instanceof Date ? val : new Date(val);
+        if (isNaN(date.getTime())) {
             throw new Error("Datetime was not recognizable. Use `new Date()` or string in ISO format");
         }
-        return (format === null || format === undefined) ? datetime.toISOString() : datetime.format(format);
+        if (format === "YYYY-MM-DD") {
+            return date.toISOString().slice(0, 10);
+        }
+        return date.toISOString();
     }
 
     /**
@@ -106,7 +108,7 @@ export class QueryParamsBase {
      * @param propOperName Property to set containing the "and" or "or". Relevant only if multiple items are provided in "value". Can be None if only one value is possible.
      * @param defaultOperName Which operator should be used in case "value" is an array. If an array, we will print also a warning to suggest use of QueryItems.
      */
-    public setQueryArrVal(value: string | QueryItems | any[], propName: string, propOperName: string | undefined, defaultOperName: string) {
+    public setQueryArrVal(value: string | QueryItems | unknown[] | undefined, propName: string, propOperName: string | undefined, defaultOperName: string) {
         if (!value) {
             return;
         }
@@ -140,11 +142,11 @@ export class QueryParamsBase {
 }
 
 export abstract class Query<T> extends QueryParamsBase {
-    public resultTypeList: T[];
+    public resultTypeList: T[] = [];
     /**
      * Set it to a default path.
      */
-    protected internalPath: string;
+    protected internalPath: string = "";
     protected params: Record<string, unknown> = {};
 
     public get path() {
@@ -171,7 +173,7 @@ export abstract class Query<T> extends QueryParamsBase {
         if (formattedResultTypeList?.length > 0) {
             allParams = { ...allParams, resultType: formattedResultTypeList };
         }
-        return JSON.parse(JSON.stringify(allParams));
+        return structuredClone(allParams);
     }
 
     public getFormattedResultTypeList() {
@@ -185,13 +187,13 @@ export abstract class Query<T> extends QueryParamsBase {
         }
     }
 
-    public abstract setRequestedResult(args);
+    public abstract setRequestedResult(args: unknown): void;
 }
 
 /**
  * Utility function used in conjunction with a async/await and/or Promise
  */
-export function sleep(ms) {
+export function sleep(ms: number): Promise<void> {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
