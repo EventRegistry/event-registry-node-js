@@ -1,8 +1,10 @@
 ## Accessing Event Registry data through JS
 
-This library contains classes that allow one to easily access the event and article information from Event Registry (http://eventregistry.org).
+This library contains classes that allow one to easily access the event and article information from Event Registry (https://eventregistry.org).
 
-Most of the package is quite similar to [Event Registry Python](https://github.com/EventRegistry/event-registry-python) so for all who are already acquainted with the Python version, there shouldn't be any problems with using this package. Though we strongly suggest using a JS transpiler or Typescript to employ the latest in ECMAScript standards.
+Most of the package is quite similar to [Event Registry Python](https://github.com/EventRegistry/event-registry-python) so for all who are already acquainted with the Python version, there shouldn't be any problems with using this package.
+
+Node.js 24.11.0 is the supported development target. Starting with `10.0.0`, Node.js **18+ is a hard runtime requirement** (the HTTP layer uses native `fetch`); see [MIGRATION.md](MIGRATION.md) for details.
 
 ### Installation
 
@@ -12,30 +14,86 @@ Event Registry package can be installed using the NodeJS Package Manager. Type t
 
 and the package should be installed. Alternatively, you can also clone the package from the GitHub repository. After cloning it, open the command line and run:
 
-`npm build`
+`npm run build`
 
-### Usage
+### Quick start: fluent + helpers (recommended for new code)
 
-If you are using Typescript then import the package with the following line:
+`10.0.0` adds a small ergonomic layer on top of the classic classes below. It's the recommended starting point for new code — less boilerplate, same requests, same responses.
 
-``` typescript
-import {EventRegistry} from "eventregistry";
+```typescript
+import { EventRegistry, searchArticles } from "eventregistry";
+
+const er = new EventRegistry({ apiKey: "YOUR_API_KEY" });
+
+// helper function
+const conceptUri = await er.concepts.uri("Barack Obama"); // throws if no match is found
+const response = await searchArticles(er, { conceptUri, count: 30, sortBy: "date" });
+
+// fluent, chained
+const response2 = await er.articles
+    .search({ conceptUri })
+    .info({ count: 30, sortBy: "date" })
+    .exec();
+
+// auto-paging iterator
+for await (const article of er.articles.iterate({ conceptUri, maxItems: 500 })) {
+    console.info(article);
+}
+```
+
+The same style is available for `er.events`, `er.mentions`, `er.stories`, `er.trends`, `er.counts`, `er.shares`, `er.recent`, `er.info`, `er.topicPages`, `er.analytics`, `er.eventForText(...)`, and URI resolution (`er.concepts.uri`, `er.categories.uri`, `er.sources.uri`, `er.locations.uri`, `er.eventTypes.uri`, `er.conceptClasses.uri`, `er.authors.uri`). See [MIGRATION.md](MIGRATION.md#2-recommended-fluent--helpers) for the full coverage table and more examples.
+
+### Classic API (fully supported)
+
+The classic class-based API — `QueryArticles`, `QueryEvents`, `Request*Info`, iterators, complex queries, `er.execQuery()` — is **fully supported** in `10.0.0` and is not going anywhere. Class names from `9.1.1` were not removed; some defaults and return shapes did change (HTTPS hosts, delay, retries, `GetRecentEvents`). See [MIGRATION.md](MIGRATION.md). The fluent/helpers layer is additive sugar over the same classes.
+
+```typescript
+import { EventRegistry, QueryArticles, RequestArticlesInfo, QueryArticlesIter } from "eventregistry";
+
+const er = new EventRegistry({ apiKey: "YOUR_API_KEY" });
+
+er.getConceptUri("George Clooney").then((conceptUri) => {
+    const q = new QueryArticlesIter(er, { conceptUri, sortBy: "date" });
+    q.execQuery((item) => {
+        console.info(item);
+    });
+});
+```
+
+Use whichever style fits a given file or team; the two can be mixed freely within the same project, even the same function.
+
+### Usage: dual import/require
+
+The package provides the same API to ES module/TypeScript imports and CommonJS `require` calls:
+
+```typescript
+import { EventRegistry } from "eventregistry";
 const er = new EventRegistry();
 ```
 
-If you are using Node.js with no ES6 support.
-
-``` javascript
-var erBase = require("eventregistry");
-var er = new erBase.EventRegistry();
-```
-
-Or shorter with destructuring, which is available from Node.js v6 onwards.
-
-``` javascript
+```javascript
 const { EventRegistry } = require("eventregistry");
 const er = new EventRegistry();
 ```
+
+Requests use `https://eventregistry.org` and `https://analytics.eventregistry.org` by default. Override `host` and, when needed, `hostAnalytics` in the constructor:
+
+```javascript
+const er = new EventRegistry({
+    host: "https://your-event-registry-host.example",
+    hostAnalytics: "https://your-analytics-host.example"
+});
+```
+
+### Upgrading from 9.1.1?
+
+See [MIGRATION.md](MIGRATION.md) for the full guide — classic class names remain, but Node 18+, HTTPS defaults, and a few return shapes changed. The fluent layer is optional.
+
+TypeScript samples live in `examples/` (not published). After `npm run build` and a root `settings.json` with your `apiKey`, run one with:
+
+`npm run example -- examples/queryArticlesExamples.ts`
+
+Typecheck them with `npm run example:check`.
 
 ### Updating the package
 

@@ -1,6 +1,45 @@
 # NodeJS SDK: Change Log
 
 This log contains changes specific to the NodeJS SDK.
+
+## [v10.0.0]() (2026-08-21)
+
+Upgrade guide for the last published line (`9.1.1`): [MIGRATION.md](MIGRATION.md). **The classic class-based API (`QueryArticles`, `QueryEvents`, `execQuery()`, iterators, complex queries, …) remains fully supported** — class names were not removed or renamed.
+
+**Breaking**
+ - Node.js **18+ is required**. `9.1.1` declared `engines: >=5` and used Axios, so it still ran on older Node. `10.0.0` uses native `fetch` / `Headers` / `AbortController` with no polyfill; Node 16 and below fail at runtime (`fetch is not defined`). Upgrade Node before upgrading this package. See [MIGRATION.md](MIGRATION.md#4-http-transport-axios-removed-fetch-required).
+ - API requests now use HTTPS by default (`https://eventregistry.org` and `https://analytics.eventregistry.org`). `9.1.1` defaulted to `http://`.
+ - The default `minDelayBetweenRequests` is now `0.5` seconds (was `1`). Throttling is enforced with `Date.now()` under a per-instance mutex.
+ - The default `repeatFailedRequestCount` is now `-1` (retry indefinitely; was `2`). Stop codes `204`, `400`, `401`, `403`, `530` still do not retry. Programmer errors (`JSON.stringify` of a circular body) and JSON parse failures on HTTP 200 are **not** retried.
+ - Replaced the Axios HTTP client with a native `fetch`-based transport (`src/http.ts`). Axios-specific error shapes (`error.isAxiosError`, interceptors, `getLastHeaders()` as a plain object) are gone. See [MIGRATION.md](MIGRATION.md#4-http-transport-axios-removed-fetch-required).
+ - Removed Winston. `Logger`/`LogLevel` keep the same public API (`er.logger.logLevel`, `LogLevel.{ERROR,WARN,INFO,DEBUG,REQUEST}`, constructor `logging`); custom Winston transports no longer apply. See [MIGRATION.md](MIGRATION.md#5-logging-winston-removed-loggerloglevel-api-unchanged).
+ - The TypeScript source now compiles under `strict` mode, producing tighter `.d.ts` typings. See [MIGRATION.md](MIGRATION.md#3-typescript-strict-mode-and-tighter-dts).
+ - Dual CommonJS and ES module builds under `dist/cjs` and `dist/esm` (`package.json` `exports`). Importing or requiring `eventregistry` keeps the same API.
+ - Transport failures returned from `execQuery` / `jsonRequest` expose `error` as a **string** (matching API error payloads) instead of an `Error` instance that JSON-serialized to `{}`.
+ - `GetRecentEvents.getUpdates()` now returns the `activity` **array** (`[]` if missing) and advances the `newestUri` polling cursor, matching `GetRecentArticles`. `9.1.1` returned `activity || {}` and did not persist the cursor.
+
+**Added**
+ - Full-surface ergonomic layer: helper functions (`searchArticles`, `iterateArticles`, `getArticle`, `searchEvents`, `iterateEvents`, `getEvent`, `searchMentions`, `iterateMentions`, `getStory`, `getTrending*`, `getCounts`/`getCountsEx`, `getTopShared*`, `getRecent*`, `getSourceInfo`/`getConceptInfo`/`getCategoryInfo`/`getSourceStats`, `getMyTopicPages`/`loadTopicPage`/`createTopicPage`, `annotateText`/`categorizeText`/`analyzeSentiment`/`semanticSimilarity`/`detectLanguage`/`extractArticleInfo`/`ner`/`trainTopic*`, `getEventForText`) and URI-resolution helpers (`conceptUri`, `categoryUri`, `sourceUri`, `sourceGroupUri`, `locationUri`, `eventTypeUri`, `conceptClassUri`, `authorUri`) that throw on no-match instead of resolving to `undefined`.
+ - Matching fluent namespaces on `EventRegistry`: `er.articles`, `er.events`, `er.mentions`, `er.stories`, `er.trends`, `er.counts`, `er.shares`, `er.recent`, `er.info`, `er.topicPages`, `er.analytics`, `er.eventForText(...)`, and `er.concepts`/`er.categories`/`er.sources`/`er.locations`/`er.eventTypes`/`er.conceptClasses`/`er.authors` for URI resolution. Search-style namespaces expose `.search(args).info(opts).exec()`, `.iterate(args)`, and `.get(uri)` where applicable.
+ - `RequestEventsBreakingEvents` for querying currently breaking events.
+ - `TopicPages` class with `getMyTopicPages()` to list user-owned topic pages.
+ - `EventRegistry.getEventTypeUri()` helper for resolving event type labels to URIs.
+ - Optional `concepts` parameter on `Analytics.categorize()`.
+ - `EventRegistry.setExtraParams()` for adding parameters to every request.
+ - `EventRegistry.checkVersion()` for checking the latest SDK version.
+ - Configuration getters: `getHost()`, `getHostAnalytics()`, `getApiKey()`, `getMinDelayBetweenRequests()`, and `getRepeatFailedRequestCount()`.
+
+**Updated**
+ - Node.js 24.11.0 is the supported development target; `engines` is `>=18.0.0`.
+ - Zero runtime dependencies (Axios, Winston, moment, and `semaphore-async-await` removed). Dates use native `Date`; request locking uses an in-house `Mutex`.
+ - TypeScript compile target raised to ES2020.
+ - Upgraded linting to ESLint 9 (TSLint removed).
+ - Offline unit tests migrated to Vitest (`npm run test:unit`). Jasmine integration tests replay committed fixtures by default (`npm test`).
+ - Hardened integration tests against live API volatility (awaited iterators, range assertions, dynamic fixtures, paging safety caps).
+
+**Fixed**
+ - Removed accidental `fdescribe` focus in integration tests so the full suite runs.
+
 ## [v9.1.1]() (2024-11-14)
 **Fixed**
  - fixed the issue when passing `logging` as `false` to the `EventRegistry` constructor the logs folder was still created. Now the logs are created only when `logging` is set to `true`.
