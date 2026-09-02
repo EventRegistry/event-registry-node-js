@@ -1,41 +1,42 @@
+import { pathToFileURL } from "node:url";
 import { ArticleInfoFlags, ArticleMapper, EventRegistry, QueryArticle, QueryArticles, RequestArticleInfo, RequestArticlesUriWgtList, ReturnInfo } from "eventregistry";
 
 // examples that download information about the individual news articles
 
 const er = new EventRegistry();
 
-// search article by uri
-const q1 = new QueryArticle("247634888");
-er.execQuery(q1).then((response) => {
-    console.info(response);
-});
+async function main(): Promise<void> {
+    const q1 = new QueryArticle("247634888");
+    console.info(await er.execQuery(q1));
 
-// search article by url
-// use ArticleMapper to map article URL to the URI (id) that is used by ER internally
-const artMapper = new ArticleMapper(er);
-// artMapper.getArticleUri("http://www.bbc.co.uk/news/world-europe-31763789#sa-ns_mchannel%3Drss%26ns_source%3DPublicRSS20-sa")
-artMapper.getArticleUri("http://www.mynet.com/haber/guncel/share-2058597-1").then((artUri) => {
-    const q2 = new QueryArticle(artUri);
-    // get all info about the specified article
-    q2.setRequestedResult(new RequestArticleInfo());
-    return er.execQuery(q2);
-});
+    const artMapper = new ArticleMapper(er);
+    const artUri = await artMapper.getArticleUri("http://www.mynet.com/haber/guncel/share-2058597-1");
+    if (typeof artUri === "string") {
+        const q2 = new QueryArticle(artUri);
+        q2.setRequestedResult(new RequestArticleInfo());
+        console.info(await er.execQuery(q2));
+    }
 
-// do regular article search, obtain a list of resulting article URIs and then ask for details about these articles
-// first search for articles related to Apple
-er.getConceptUri("Apple").then((conceptUri) => {
+    const conceptUri = await er.getConceptUri("Apple");
     const q3 = new QueryArticles({conceptUri});
     q3.setRequestedResult(new RequestArticlesUriWgtList());
-    return er.execQuery(q3);
-}).then((response) => {
-    // take the list of article URIs that match the search criteria (i.e. ['641565713', '641559021', '641551446', '641025492', '641548675', ...])
-    const articleUriList = EventRegistry.getUriFromUriWgt(response?.uriWgtList?.results ?? []);
-    // take first 5 article URIs and ask for all details about these articles
-    const queryUris = articleUriList.slice(0, 5) as string[];
-    const q4 = new QueryArticle(queryUris);
+    const response = await er.execQuery(q3);
+    const uriWgtResults = response?.uriWgtList?.results;
+    const articleUriList = EventRegistry.getUriFromUriWgt(
+        Array.isArray(uriWgtResults) ? uriWgtResults.filter((item): item is string => typeof item === "string") : []
+    );
+    const q4 = new QueryArticle(articleUriList.slice(0, 5));
     const articleInfo = new ArticleInfoFlags({concepts: true, categories: true, location: true});
-    const returnInfo = new ReturnInfo({articleInfo});
-    const requestArticleInfo = new RequestArticleInfo(returnInfo);
-    q4.setRequestedResult(requestArticleInfo);
-    return er.execQuery(q4);
-});
+    q4.setRequestedResult(new RequestArticleInfo(new ReturnInfo({articleInfo})));
+    console.info(await er.execQuery(q4));
+}
+
+const invokedDirectly = process.argv[1] !== undefined
+    && import.meta.url === pathToFileURL(process.argv[1]).href;
+
+if (invokedDirectly) {
+    void main().catch((error: unknown) => {
+        console.error(error);
+        process.exitCode = 1;
+    });
+}

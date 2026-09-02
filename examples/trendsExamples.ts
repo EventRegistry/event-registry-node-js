@@ -1,3 +1,4 @@
+import { pathToFileURL } from "node:url";
 import { CategoryInfoFlags, ConceptInfoFlags, EventRegistry, GetTrendingCategories, GetTrendingConceptGroups, GetTrendingConcepts, ReturnInfo } from "eventregistry";
 
 // examples that illustrate how to obtain the currently top trending concepts or categories
@@ -5,30 +6,29 @@ import { CategoryInfoFlags, ConceptInfoFlags, EventRegistry, GetTrendingCategori
 
 const er = new EventRegistry();
 
-const returnInfo1 = new ReturnInfo({conceptInfo: new ConceptInfoFlags({trendingHistory: true})});
-// top 10 top trending concepts in the news
-const q1 = new GetTrendingConcepts({source: "news", count: 10, returnInfo: returnInfo1});
-er.execQuery(q1).then((response) => {
-    console.info(response);
-});
+async function main(): Promise<void> {
+    const returnInfo1 = new ReturnInfo({conceptInfo: new ConceptInfoFlags({trendingHistory: true})});
+    const q1 = new GetTrendingConcepts({source: "news", count: 10, returnInfo: returnInfo1});
+    console.info(await er.execQuery(q1));
 
-// get 20 most trending concept for each entity type
-const q2 = new GetTrendingConceptGroups({source: "news"});
-// get top trends for individual concept groups - people, locations and organisations
-q2.getConceptTypeGroups();
-er.execQuery(q2).then((response) => {
-    console.info(response);
-});
+    const q2 = new GetTrendingConceptGroups({source: "news"});
+    q2.getConceptTypeGroups();
+    console.info(await er.execQuery(q2));
 
-// top 20 trending concepts in the social media
-const q3 = new GetTrendingConcepts({source: "social", count: 20, returnInfo: returnInfo1});
-er.execQuery(q3).then((response) => {
-    console.info(response);
-});
+    const q3 = new GetTrendingConcepts({source: "social", count: 20, returnInfo: returnInfo1});
+    console.info(await er.execQuery(q3));
 
-// top 10 trending categories in the news
-const returnInfo2 = new ReturnInfo({categoryInfo: new CategoryInfoFlags({parentUri: true, childrenUris: true, trendingHistory: true})});
-const q4 = new GetTrendingCategories({source: "news", count: 10, returnInfo: returnInfo2});
-er.execQuery(q4).then((response) => {
-    console.info(response);
-});
+    const returnInfo2 = new ReturnInfo({categoryInfo: new CategoryInfoFlags({parentUri: true, childrenUris: true, trendingHistory: true})});
+    const q4 = new GetTrendingCategories({source: "news", count: 10, returnInfo: returnInfo2});
+    console.info(await er.execQuery(q4));
+}
+
+const invokedDirectly = process.argv[1] !== undefined
+    && import.meta.url === pathToFileURL(process.argv[1]).href;
+
+if (invokedDirectly) {
+    void main().catch((error: unknown) => {
+        console.error(error);
+        process.exitCode = 1;
+    });
+}

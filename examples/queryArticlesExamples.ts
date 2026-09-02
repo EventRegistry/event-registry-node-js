@@ -1,70 +1,135 @@
-import { ArticleInfoFlags, BaseQuery, CombinedQuery, ComplexArticleQuery, EventRegistry, ConceptInfoFlags, QueryArticle, QueryArticles, QueryArticlesIter, QueryItems, RequestArticlesInfo, RequestArticlesRecentActivity, ReturnInfo } from "eventregistry";
+import { pathToFileURL } from "node:url";
+import { ArticleInfoFlags, BaseQuery, CombinedQuery, ComplexArticleQuery, EventRegistry, ConceptInfoFlags, QueryArticles, QueryArticlesIter, QueryItems, RequestArticlesInfo, RequestArticlesRecentActivity, ReturnInfo, searchArticles } from "eventregistry";
 
 // examples that illustrate how to query articles using different search options
 
 const er = new EventRegistry({allowUseOfArchive: false});
-const articleInfo = new ArticleInfoFlags({ duplicateList: true, concepts: true, categories: true, location: true, image: true, conceptInfo: new ConceptInfoFlags({trendingScore: true}) });
-const returnInfo = new ReturnInfo({articleInfo});
+const articleInfo = new ArticleInfoFlags({
+    duplicateList: true,
+    concepts: true,
+    categories: true,
+    location: true,
+    image: true,
+});
+const conceptInfo = new ConceptInfoFlags({ trendingScore: true });
+const returnInfo = new ReturnInfo({ articleInfo, conceptInfo });
 const requestArticlesInfo = new RequestArticlesInfo({count: 30, returnInfo: returnInfo});
+type ArticlesPageResponse = {
+    articles?: {results?: Array<{uri?: string}>; pages?: number};
+    recentActivity?: {newestUpdate?: string};
+};
+
+// ---------------------------------------------------------------------------
+// RECOMMENDED: fluent + helpers (see MIGRATION.md for the full guide)
+// ---------------------------------------------------------------------------
 
 const MAX_RESULTS = 100;
-const query = new QueryArticlesIter(er, {keywords: "Tesla Inc", maxItems: MAX_RESULTS});
-query.execQuery((item) => {
-    console.info(item);
-});
 
-// search for the phrase "Barack Obama" - both words have to appear together
-const q1 = new QueryArticles({keywords: "Barack Obama"});
-er.execQuery(q1).then((response) => {
+// helper function: build + execute a QueryArticles + RequestArticlesInfo in one call
+async function fluentSearchTesla() {
+    const response = await searchArticles(er, {keywords: "Tesla Inc", count: 30, returnInfo});
     console.info(response);
-});
+}
 
-// search for articles that mention both of the two words - maybe together, maybe apart
-// this form of specifying multiple keywords, concepts, etc is now deprecated. When you have a list,
-// use it with QueryItems.AND() or QueryItems.OR() to explicitly specify how the query should be processed
-const q2 = new QueryArticles({keywords: ["Barack", "Obama"]});
-// set some custom information that should be returned as a result of the query
-q2.setRequestedResult(requestArticlesInfo);
-er.execQuery(q2).then((response) => {
+// fluent, chained: er.articles.search(...).info(...).exec()
+async function fluentSearchObama() {
+    const response = await er.articles.search({keywords: "Barack Obama"}).info({count: 30, returnInfo}).exec();
     console.info(response);
-});
+}
 
-// search for articles that mention both of the two words - maybe together, maybe apart
-// the correct way of specifying multiple keywords - using QueryItems.AND or .OR classes
-const q3 = new QueryArticles({keywords: QueryItems.AND(["Barack", "Obama"])});
-// set some custom information that should be returned as a result of the query
-q3.setRequestedResult(requestArticlesInfo);
-er.execQuery(q3).then((response) => {
-    console.info(response);
-});
+// fluent auto-paging iterator, equivalent to the classic QueryArticlesIter below
+async function fluentIterateTesla() {
+    for await (const article of er.articles.iterate({keywords: "Tesla Inc", maxItems: MAX_RESULTS})) {
+        console.info(article);
+    }
+}
 
-// search for articles that mention the phrase "Barack Obama" or Trump
-const q4 = new QueryArticles({keywords: QueryItems.AND(["Barack Obama", "Trump"])});
-q4.setRequestedResult(requestArticlesInfo);
-er.execQuery(q4).then((response) => {
-    console.info(response);
-});
+// fluent single-article fetch — needs a uri from a prior search; not invoked here
+async function fluentGetArticle(articleUri: string) {
+    const article = await er.articles.get(articleUri, {returnInfo: new ReturnInfo({articleInfo})});
+    console.info(article);
+}
 
-// if you already have some articles that you have received from Event Registry
-// for which you would like to obtain some potentially updated metadata (shared counts, event uri)
-// you can use the query shown below. When making such a query you can specify up to 100 article uris in a call.
-const q = QueryArticles.initWithArticleUriList(["934903913", "934902493", "934902499", "934902488", "934899375", "934900984", "934890360", "934888250"]);
-const res = er.execQuery(q);
+// query articles using the QueryArticles class
+// old way of iterating through the pages of results - requesting results page by page
+async function fetchArticlePage(query: QueryArticles, page: number) {
+    query.setRequestedResult(new RequestArticlesInfo({page}));
+    return er.execQuery<ArticlesPageResponse>(query);
+}
 
-/**
- * Search for articles that:
- * - mentions the concept Samsung
- * - mention the phrase "iphone" in the article title
- * - by BBC or by any news source located in Germany
- * - in English or German language
- * - return results sorted by relevance to the query (instead of "date" which is default)
- */
-Promise.all([
-    er.getConceptUri("Samsung"),
-    er.getSourceUri("bbc"),
-    er.getLocationUri("Germany"),
-]).then(([samsungUri, bbcUri, germanyUri]) => {
-    const query1 = new QueryArticles({
+async function fetchArticles(conceptLabel: string) {
+    const conceptUri = await er.getConceptUri(conceptLabel);
+    if (conceptUri === undefined) {
+        return;
+    }
+    const query = new QueryArticles({conceptUri});
+    let page = 1;
+    while (true) {
+        const response = await fetchArticlePage(query, page);
+        for (const article of response.articles?.results ?? []) {
+            console.info(article.uri);
+        }
+        if (page >= (response.articles?.pages ?? page)) {
+            break;
+        }
+        page++;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// CLASSIC API (fully supported) — same requests, spelled out with Query*/Request* classes
+// ---------------------------------------------------------------------------
+
+async function runClassic(): Promise<void> {
+    const query = new QueryArticlesIter(er, {keywords: "Tesla Inc", maxItems: MAX_RESULTS});
+    for await (const item of query) {
+        console.info(item);
+    }
+
+    // search for the phrase "Barack Obama" - both words have to appear together
+    const q1 = new QueryArticles({keywords: "Barack Obama"});
+    console.info(await er.execQuery(q1));
+
+    // search for articles that mention both of the two words - maybe together, maybe apart
+    // this form of specifying multiple keywords, concepts, etc is ambiguous. When you have a list,
+    // use it with QueryItems.AND() or QueryItems.OR() to explicitly specify how the query should be processed
+    const q2 = new QueryArticles({keywords: ["Barack", "Obama"]});
+    // set some custom information that should be returned as a result of the query
+    q2.setRequestedResult(requestArticlesInfo);
+    console.info(await er.execQuery(q2));
+
+    // search for articles that mention both of the two words - maybe together, maybe apart
+    // the correct way of specifying multiple keywords - using QueryItems.AND or .OR classes
+    const q3 = new QueryArticles({keywords: QueryItems.AND(["Barack", "Obama"])});
+    // set some custom information that should be returned as a result of the query
+    q3.setRequestedResult(requestArticlesInfo);
+    console.info(await er.execQuery(q3));
+
+    // search for articles that mention the phrase "Barack Obama" or Trump
+    const q4 = new QueryArticles({keywords: QueryItems.OR(["Barack Obama", "Trump"])});
+    q4.setRequestedResult(requestArticlesInfo);
+    console.info(await er.execQuery(q4));
+
+    // if you already have some articles that you have received from Event Registry
+    // for which you would like to obtain some potentially updated metadata (shared counts, event uri)
+    // you can use the query shown below. When making such a query you can specify up to 100 article uris in a call.
+    const q = QueryArticles.initWithArticleUriList(["934903913", "934902493", "934902499", "934902488", "934899375", "934900984", "934890360", "934888250"]);
+    console.info(await er.execQuery(q));
+
+    /**
+     * Search for articles that:
+     * - mentions the concept Samsung
+     * - mention the phrase "iphone" in the article title
+     * - by BBC or by any news source located in Germany
+     * - in English or German language
+     * - return results sorted by relevance to the query (instead of "date" which is default)
+     */
+    const [samsungUri, bbcUri, germanyUri] = await Promise.all([
+        er.getConceptUri("Samsung"),
+        er.getSourceUri("bbc"),
+        er.getLocationUri("Germany"),
+    ]);
+    const samsungQuery = new QueryArticles({
         conceptUri: samsungUri,
         keywords: "iphone",
         keywordsLoc: "title",
@@ -72,23 +137,20 @@ Promise.all([
         sourceUri: bbcUri,
         sourceLocationUri: germanyUri,
     });
-    query1.setRequestedResult(new RequestArticlesInfo({sortBy: "rel"}));
-    return er.execQuery(query1);
-}).then((response) => {
-    console.log(response);
-});
+    samsungQuery.setRequestedResult(new RequestArticlesInfo({sortBy: "rel"}));
+    console.info(await er.execQuery(samsungQuery));
 
-/**
- * Find articles that:
- *  - are related to business (categorized into business category)
- *  - were published between 1st and 20th August 2018
- *  - don't mention Trump in the article title
- *  - are not a duplicate (copy) of another article
- *  - are from a news source that is among top 20 percentile of sources
- *  - return results sorted from most shared on social media to least
- */
-er.getCategoryUri("business").then((businessUri) => {
-    const query1 = new QueryArticles({
+    /**
+     * Find articles that:
+     *  - are related to business (categorized into business category)
+     *  - were published between 1st and 20th August 2018
+     *  - don't mention Trump in the article title
+     *  - are not a duplicate (copy) of another article
+     *  - are from a news source that is among top 20 percentile of sources
+     *  - return results sorted from most shared on social media to least
+     */
+    const businessUri = await er.getCategoryUri("business");
+    const businessQuery = new QueryArticles({
             categoryUri: businessUri,
             dateStart: "2018-08-01",
             dateEnd: "2018-08-20",
@@ -98,25 +160,22 @@ er.getCategoryUri("business").then((businessUri) => {
             startSourceRankPercentile: 0,
             endSourceRankPercentile: 20,
     });
-    query1.setRequestedResult(new RequestArticlesInfo({sortBy: "socialScore"}));
-    return er.execQuery(query1);
-}).then((response) => {
-    console.log(response);
-});
+    businessQuery.setRequestedResult(new RequestArticlesInfo({sortBy: "socialScore"}));
+    console.info(await er.execQuery(businessQuery));
 
-//  USE OF ITERATOR
-//  example of using the QueryArticlesIter to easily iterate through all results matching the search
+    //  USE OF ITERATOR
+    //  example of using the QueryArticlesIter to easily iterate through all results matching the search
 
-//  Search for articles mentioning George Clooney that were reported from sources from Spain or sources from Los Angeles
-//  iterator class simplifies retrieving and listing the list of matching articles
-//  by specifying maxItems we say that we want to retrieve maximum 500 articles (without specifying the parameter we would iterate through all results)
-//  the results will be sorted from those that are from highest ranked news sources down
+    //  Search for articles mentioning George Clooney that were reported from sources from Spain or sources from Los Angeles
+    //  iterator class simplifies retrieving and listing the list of matching articles
+    //  by specifying maxItems we say that we want to retrieve maximum 500 articles (without specifying the parameter we would iterate through all results)
+    //  the results will be sorted from those that are from highest ranked news sources down
 
-Promise.all([
-    er.getConceptUri("George Clooney"),
-    er.getLocationUri("Spain"),
-    er.getLocationUri("Los Angeles"),
-]).then(([clooneyUri, spainUri, laUri]) => {
+    const [clooneyUri, spainUri, laUri] = await Promise.all([
+        er.getConceptUri("George Clooney"),
+        er.getLocationUri("Spain"),
+        er.getLocationUri("Los Angeles"),
+    ]);
     const iterOpts = {
         sortBy: "sourceAlexaGlobalRank",
         maxItems: 500,
@@ -125,39 +184,14 @@ Promise.all([
         sourceLocationUri:  QueryItems.OR([spainUri, laUri]),
     };
     const q5 = new QueryArticlesIter(er, iterOpts);
-    q5.execQuery((item) => {
+    for await (const item of q5) {
         console.info(item);
-    });
-});
-
-// query articles using the QueryArticles class
-// old way of iterating through the pages of results - requesting results page by page
-async function fetchArticlePage(query: QueryArticles, page: number) {
-    query.setRequestedResult(new RequestArticlesInfo({page}));
-    return await er.execQuery(query);
-}
-
-async function fetchArticles(conceptUri) {
-    await er.getConceptUri(conceptUri);
-    const query = new QueryArticles({conceptUri});
-    let page = 1;
-    while (true) {
-        const response = await fetchArticlePage(query, page);
-        for (const article of _.get(response, "articles.results", [])) {
-            console.info(article.uri);
-        }
-        if (page >= _.get(response, "articles.pages")) {
-            break;
-        }
-        page++;
     }
-}
 
-// articles published between 2016-03-22 and 2016-03-23
-// mentioning Brussels
-// published by New York Times
-const uriPromises1 = [er.getConceptUri("Brussels"), er.getNewsSourceUri("New York Times")];
-Promise.all(uriPromises1).then(([brusselsUri, nytUri]) => {
+    // articles published between 2016-03-22 and 2016-03-23
+    // mentioning Brussels
+    // published by New York Times
+    const [brusselsUri, nytUri] = await Promise.all([er.getConceptUri("Brussels"), er.getNewsSourceUri("New York Times")]);
     const queryArticlesOpts = {
         dateStart: "2016-03-22",
         dateEnd: "2016-03-23",
@@ -167,54 +201,54 @@ Promise.all(uriPromises1).then(([brusselsUri, nytUri]) => {
     const q6 = new QueryArticles(queryArticlesOpts);
     // return details about the articles, including the concepts, categories, location and image
     q6.setRequestedResult(requestArticlesInfo);
-    return er.execQuery(q6);
-});
+    console.info(await er.execQuery(q6));
 
-// RECENT ACTIVITY
-// example of querying most recently added content related to a particular thing
-// get latest articles about Obama
+    // RECENT ACTIVITY
+    // example of querying most recently added content related to a particular thing
+    // get latest articles about Obama
 
-er.getConceptUri("Obama").then((conceptUri) => {
-    const q7 = new QueryArticles({conceptUri});
-    q7.setRequestedResult(new RequestArticlesRecentActivity());
-    const res1 = er.execQuery(q7);
-    q7.setRequestedResult(new RequestArticlesRecentActivity({updatesAfterTm: _.get(res1, "recentActivity.newestUpdate")}));
-    // get only the matching articles that were added since the last call
-    const res2 = er.execQuery(q7);
-});
+    const obamaUri = await er.getConceptUri("Obama");
+    if (obamaUri !== undefined) {
+        const q7 = new QueryArticles({conceptUri: obamaUri});
+        q7.setRequestedResult(new RequestArticlesRecentActivity());
+        const res1 = await er.execQuery<ArticlesPageResponse>(q7);
+        console.info(res1);
+        q7.setRequestedResult(new RequestArticlesRecentActivity({updatesAfterTm: res1.recentActivity?.newestUpdate}));
+        // get only the matching articles that were added since the last call
+        console.info(await er.execQuery(q7));
+    }
 
-// COMPLEX QUERIES
-// examples of complex queries that combine various OR and AND operators
-// prepare some variables used in the queries
+    // COMPLEX QUERIES
+    // examples of complex queries that combine various OR and AND operators
+    // prepare some variables used in the queries
 
-const uriPromises2 = [
-    er.getConceptUri("Trump"),
-    er.getConceptUri("Obama"),
-    er.getCategoryUri("politics"),
-    er.getConceptUri("merkel"),
-    er.getCategoryUri("business"),
-];
+    const [trumpUri, obamaConceptUri, politicsUri, merkelUri, businessConceptUri] = await Promise.all([
+        er.getConceptUri("Trump"),
+        er.getConceptUri("Obama"),
+        er.getCategoryUri("politics"),
+        er.getConceptUri("merkel"),
+        er.getCategoryUri("business"),
+    ]);
 
-Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, businessUri]) => {
     // find articles that (1) were published on 2017-04-22 and (2) are either about Obama or mention keyword Trump and (3) are related to business
     const cq1 = new ComplexArticleQuery(CombinedQuery.AND([
         new BaseQuery({dateStart: "2017-04-22", dateEnd: "2017-04-22"}),
         CombinedQuery.OR([
-            new BaseQuery({conceptUri: QueryItems.OR([obamaUri])}),
+            new BaseQuery({conceptUri: QueryItems.OR([obamaConceptUri])}),
             new BaseQuery({keyword: "Trump"}),
         ]),
-        new BaseQuery({categoryUri: businessUri}),
+        new BaseQuery({categoryUri: businessConceptUri}),
     ]));
     const query1 = QueryArticles.initWithComplexQuery(cq1);
-    const res1 = er.execQuery(query1);
+    console.info(await er.execQuery(query1));
 
     // find articles that are both about Obama and Trump and are not in English or German language
     const cq2 = new ComplexArticleQuery(new BaseQuery({
-        conceptUri: QueryItems.AND([obamaUri, trumpUri]),
+        conceptUri: QueryItems.AND([obamaConceptUri, trumpUri]),
         exclude: new BaseQuery({lang: QueryItems.OR(["eng", "deu"])}),
     }));
     const query2 = QueryArticles.initWithComplexQuery(cq2);
-    const res2 = er.execQuery(query2);
+    console.info(await er.execQuery(query2));
 
     // get articles that were published on 2017-02-05 or are about trump
     // or are about politics or are about Merkel and business
@@ -229,21 +263,21 @@ Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, bus
                 {
                     "$and": [
                         { "conceptUri": "${merkelUri}" },
-                        { "categoryUri": "${businessUri}" }
+                        { "categoryUri": "${businessConceptUri}" }
                     ]
                 }
             ],
             "$not": {
                 "$or": [
                     { "dateStart": "2017-02-04", "dateEnd": "2017-02-04" },
-                    { "conceptUri": "${obamaUri}" }
+                    { "conceptUri": "${obamaConceptUri}" }
                 ]
             }
         }
     }
     `;
     const query3 = QueryArticles.initWithComplexQuery(qStr);
-    const res3 = er.execQuery(query3);
+    console.info(await er.execQuery(query3));
 
     const qStr4 = `
     {
@@ -257,7 +291,7 @@ Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, bus
     `;
 
     const query4 = QueryArticles.initWithComplexQuery(qStr4);
-    const res4 = er.execQuery(query4);
+    console.info(await er.execQuery(query4));
 
     const qStr5 = `
     {
@@ -270,7 +304,7 @@ Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, bus
     `;
 
     const query5 = QueryArticles.initWithComplexQuery(qStr5);
-    const res5 = er.execQuery(query5);
+    console.info(await er.execQuery(query5));
 
     const qStr6 = `
     {
@@ -283,7 +317,7 @@ Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, bus
     `;
 
     const query6 = QueryArticles.initWithComplexQuery(qStr6);
-    const res6 = er.execQuery(query6);
+    console.info(await er.execQuery(query6));
 
     const qStr7 = `
     {
@@ -296,7 +330,7 @@ Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, bus
     `;
 
     const query7 = QueryArticles.initWithComplexQuery(qStr7);
-    const res7 = er.execQuery(query7);
+    console.info(await er.execQuery(query7));
 
     // Phrase search is used by default, so you don't need to specify the "keywordSearchMode"
     const qStr8 = `
@@ -311,5 +345,22 @@ Promise.all(uriPromises2).then(([trumpUri, obamaUri, politicsUri, merkelUri, bus
     `;
 
     const query8 = QueryArticles.initWithComplexQuery(qStr8);
-    const res8 = er.execQuery(query8);
-});
+    console.info(await er.execQuery(query8));
+}
+
+async function main(): Promise<void> {
+    await fluentSearchTesla();
+    await fluentSearchObama();
+    await fluentIterateTesla();
+    await runClassic();
+}
+
+const invokedDirectly = process.argv[1] !== undefined
+    && import.meta.url === pathToFileURL(process.argv[1]).href;
+
+if (invokedDirectly) {
+    void main().catch((error: unknown) => {
+        console.error(error);
+        process.exitCode = 1;
+    });
+}

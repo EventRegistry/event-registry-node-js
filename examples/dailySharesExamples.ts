@@ -1,3 +1,4 @@
+import { pathToFileURL } from "node:url";
 import {
     ArticleInfoFlags,
     EventInfoFlags,
@@ -16,39 +17,41 @@ import {
 
 const er = new EventRegistry();
 
-const q1 = new GetTopSharedArticles({date: "2015-03-01", count: 30, returnInfo: new ReturnInfo({articleInfo: new ArticleInfoFlags({socialScore: true})})});
-er.execQuery(q1).then((response) => {
-    console.info(response);
-});
+async function main(): Promise<void> {
+    const q1 = new GetTopSharedArticles({date: "2015-03-01", count: 30, returnInfo: new ReturnInfo({articleInfo: new ArticleInfoFlags({socialScore: true})})});
+    console.info(await er.execQuery(q1));
 
-// get top shared events for a date
-const q2 = new GetTopSharedEvents({date: "2015-05-23", count: 30, returnInfo: new ReturnInfo({eventInfo: new EventInfoFlags({socialScore: true})})});
-er.execQuery(q2).then((response) => {
-    console.info(response);
-});
+    const q2 = new GetTopSharedEvents({date: "2015-05-23", count: 30, returnInfo: new ReturnInfo({eventInfo: new EventInfoFlags({socialScore: true})})});
+    console.info(await er.execQuery(q2));
 
-// get social shared information for resulting articles
-er.getConceptUri("Apple").then((conceptUri) => {
-    const q3 = new QueryArticles({ conceptUri });
-    const returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({socialScore: true})});
-    const requestArticlesInfo = new RequestArticlesInfo({
+    const appleUri = await er.getConceptUri("Apple");
+    if (appleUri === undefined) {
+        return;
+    }
+
+    const q3 = new QueryArticles({ conceptUri: appleUri });
+    q3.setRequestedResult(new RequestArticlesInfo({
         count: 5,
         sortBy: "socialScore",
-        returnInfo: returnInfo,
-    });
-    q3.setRequestedResult(requestArticlesInfo);
-    return er.execQuery(q3);
-}).then((response) => {
-    console.info(response);
-});
+        returnInfo: new ReturnInfo({articleInfo: new ArticleInfoFlags({socialScore: true})}),
+    }));
+    console.info(await er.execQuery(q3));
 
-// get social shared information for resulting events
-er.getConceptUri("Apple").then((conceptUri) => {
-    const q4 = new QueryEvents({ conceptUri });
-    const returnInfo = new ReturnInfo({articleInfo: new ArticleInfoFlags({socialScore: true})});
-    const requestEventsInfo = new RequestEventsInfo({count: 5, sortBy: "socialScore", returnInfo: returnInfo});
-    q4.setRequestedResult(requestEventsInfo);
-    return er.execQuery(q4);
-}).then((response) => {
-    console.info(response);
-});
+    const q4 = new QueryEvents({ conceptUri: appleUri });
+    q4.setRequestedResult(new RequestEventsInfo({
+        count: 5,
+        sortBy: "socialScore",
+        returnInfo: new ReturnInfo({articleInfo: new ArticleInfoFlags({socialScore: true})}),
+    }));
+    console.info(await er.execQuery(q4));
+}
+
+const invokedDirectly = process.argv[1] !== undefined
+    && import.meta.url === pathToFileURL(process.argv[1]).href;
+
+if (invokedDirectly) {
+    void main().catch((error: unknown) => {
+        console.error(error);
+        process.exitCode = 1;
+    });
+}

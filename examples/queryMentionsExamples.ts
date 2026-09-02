@@ -1,20 +1,29 @@
+import { pathToFileURL } from "node:url";
 import {
     EventRegistry,
     QueryMentions,
     RequestMentionsUriWgtList,
 } from "eventregistry";
 
-// examples of how to search for events using different search criteria
+// examples of how to search for mentions using different search criteria
 
 const er = new EventRegistry({allowUseOfArchive: false});
 
-const q1 = new QueryMentions({eventTypeUri: "et/business/acquisitions-mergers"});
-q1.setRequestedResult(new RequestMentionsUriWgtList());
-er.execQuery(q1).then((response) => {
-    console.log(response);
-})
+async function main(): Promise<void> {
+    const q1 = new QueryMentions({eventTypeUri: "et/business/acquisitions-mergers"});
+    q1.setRequestedResult(new RequestMentionsUriWgtList());
+    console.info(await er.execQuery(q1));
 
-const q2 = new QueryMentions({eventTypeUri: "et/business/labor-issues"});
-er.execQuery(q2).then((response) => {
-    console.log(response);
-})
+    const q2 = new QueryMentions({eventTypeUri: "et/business/labor-issues"});
+    console.info(await er.execQuery(q2));
+}
+
+const invokedDirectly = process.argv[1] !== undefined
+    && import.meta.url === pathToFileURL(process.argv[1]).href;
+
+if (invokedDirectly) {
+    void main().catch((error: unknown) => {
+        console.error(error);
+        process.exitCode = 1;
+    });
+}
