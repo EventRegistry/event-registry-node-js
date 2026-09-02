@@ -52,3 +52,9 @@ disabledIPs.txt
 /static/tslint.json
 /test/dist
 /dist
+/${workspaceFolder}/
+
+.worktrees/
+graphify-out
+.superpowers
+.serena/

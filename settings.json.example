@@ -1,0 +1,9 @@
+{
+    "apiKey": "YOUR_API_KEY",
+    "host": "https://eventregistry.org",
+    "hostAnalytics": "https://analytics.eventregistry.org",
+    "minDelayBetweenRequests": 0.5,
+    "logging": false,
+    "verboseOutput": false,
+    "allowUseOfArchive": true
+}

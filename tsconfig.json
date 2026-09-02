@@ -1,12 +1,11 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "experimentalDecorators": true,
+        "target": "ES2020",
+        "experimentalDecorators": false,
         "skipLibCheck": true,
-        "noImplicitAny": false,
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "downlevelIteration": true,
+        "esModuleInterop": true,
+        "strict": true,
+        "moduleResolution": "node16",
         "declaration": true,
         "sourceMap": true,
         "alwaysStrict": true,
@@ -15,16 +14,13 @@
             "node_modules/@types"
         ],
         "lib": [
-            "dom",
-            "es2015",
-            "es5",
-            "es6",
-            "es2017",
-            "esnext",
+            "ES2020"
         ]
     },
     "include": [
-        "src/index.ts"
+        "src/index.ts",
+        "src/version.ts",
+        "src/mutex.ts"
     ],
     "exclude": [
         "node_modules"

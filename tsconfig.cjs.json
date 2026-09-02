@@ -1,0 +1,13 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "outDir": "dist/cjs"
+    },
+    "include": [
+        "src/index.ts",
+        "src/version.ts",
+        "src/mutex.ts"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "name": "eventregistry",
+    "install": "npm ci && npm run build",
+    "start": "bash .cursor/start.sh"
+}
