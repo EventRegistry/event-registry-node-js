@@ -214,17 +214,14 @@ export class EventRegistry {
     }
 
     /**
-     * Check the latest Node.js SDK version on the server and log if this client is outdated.
+     * Check the latest Node.js SDK version and log if this client is outdated.
+     * Prefers `/static/nodejsSDKVersion.txt` on the API host; if that file is missing
+     * (or the request fails), falls back to the npm registry `latest` document.
      */
     public async checkVersion(): Promise<void> {
         try {
-            const resp = await erFetch<string>({
-                url: `${this.config.host}/static/nodejsSDKVersion.txt`,
-                method: "GET",
-                responseType: "text"
-            });
-            const latestVersion = resp.data.trim();
-            if (latestVersion.length > 20) {
+            const latestVersion = (await this.readHostSdkVersion()) ?? (await this.readNpmLatestVersion());
+            if (latestVersion === undefined || latestVersion.length > 20) {
                 return;
             }
             const currentVersion = __version__;
@@ -245,6 +242,35 @@ export class EventRegistry {
             }
         } catch {
             // ignore version check failures
+        }
+    }
+
+    private async readHostSdkVersion(): Promise<string | undefined> {
+        try {
+            const resp = await erFetch<string>({
+                url: `${this.config.host}/static/nodejsSDKVersion.txt`,
+                method: "GET",
+                responseType: "text",
+                retry: 0,
+                stopStatusCodes: [204, 400, 401, 403, 404, 530]
+            });
+            return resp.data.trim();
+        } catch {
+            return undefined;
+        }
+    }
+
+    private async readNpmLatestVersion(): Promise<string | undefined> {
+        try {
+            const resp = await erFetch<{ version?: string }>({
+                url: "https://registry.npmjs.org/eventregistry/latest",
+                method: "GET",
+                retry: 0
+            });
+            const version = resp.data?.version;
+            return typeof version === "string" ? version.trim() : undefined;
+        } catch {
+            return undefined;
         }
     }
 

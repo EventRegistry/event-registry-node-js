@@ -2,7 +2,7 @@
 
 This log contains changes specific to the NodeJS SDK.
 
-## [v10.0.0]() (2026-08-21)
+## [v10.0.0](https://www.npmjs.com/package/eventregistry/v/10.0.0) (2026-09-07)
 
 Upgrade guide for the last published line (`9.1.1`): [MIGRATION.md](MIGRATION.md). **The classic class-based API (`QueryArticles`, `QueryEvents`, `execQuery()`, iterators, complex queries, …) remains fully supported** — class names were not removed or renamed.
 
@@ -26,7 +26,7 @@ Upgrade guide for the last published line (`9.1.1`): [MIGRATION.md](MIGRATION.md
  - `EventRegistry.getEventTypeUri()` helper for resolving event type labels to URIs.
  - Optional `concepts` parameter on `Analytics.categorize()`.
  - `EventRegistry.setExtraParams()` for adding parameters to every request.
- - `EventRegistry.checkVersion()` for checking the latest SDK version.
+ - `EventRegistry.checkVersion()` for checking the latest SDK version. Reads `/static/nodejsSDKVersion.txt` on the API host, then falls back to the npm registry `latest` document if that file is missing.
  - Configuration getters: `getHost()`, `getHostAnalytics()`, `getApiKey()`, `getMinDelayBetweenRequests()`, and `getRepeatFailedRequestCount()`.
 
 **Updated**
@@ -35,12 +35,15 @@ Upgrade guide for the last published line (`9.1.1`): [MIGRATION.md](MIGRATION.md
  - TypeScript compile target raised to ES2020.
  - Upgraded linting to ESLint 9 (TSLint removed).
  - Offline unit tests migrated to Vitest (`npm run test:unit`). Jasmine integration tests replay committed fixtures by default (`npm test`).
+ - GitHub Actions CI runs build, lint, unit tests, fixture replay, example typecheck, and `publint` on Node 18 and Node 24.
+ - `package.json` declares `"type": "commonjs"` and a `git+https` repository URL (publint).
  - Hardened integration tests against live API volatility (awaited iterators, range assertions, dynamic fixtures, paging safety caps).
 
 **Fixed**
  - Removed accidental `fdescribe` focus in integration tests so the full suite runs.
+ - `checkVersion()` no longer silently no-ops when `/static/nodejsSDKVersion.txt` is missing (the live URL currently 404s); it falls back to the npm registry.
 
-## [v9.1.1]() (2024-11-14)
+## [v9.1.1](https://www.npmjs.com/package/eventregistry/v/9.1.1) (2024-11-14)
 **Fixed**
  - fixed the issue when passing `logging` as `false` to the `EventRegistry` constructor the logs folder was still created. Now the logs are created only when `logging` is set to `true`.
 

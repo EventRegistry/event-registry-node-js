@@ -4,6 +4,7 @@
   "description": "Package containing wrapper functions for Event Registry API",
   "version": "10.0.0",
   "license": "MIT",
+  "type": "commonjs",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/cjs/index.d.ts",
@@ -22,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/EventRegistry/event-registry-node-js.git"
+    "url": "git+https://github.com/EventRegistry/event-registry-node-js.git"
   },
   "files": [
     "dist",
