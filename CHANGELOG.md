@@ -42,6 +42,7 @@ Upgrade guide for the last published line (`9.1.1`): [MIGRATION.md](MIGRATION.md
 **Fixed**
  - Removed accidental `fdescribe` focus in integration tests so the full suite runs.
  - `checkVersion()` no longer silently no-ops when `/static/nodejsSDKVersion.txt` is missing (the live URL currently 404s); it falls back to the npm registry.
+ - `QueryArticles` now sends `authorsFilter` / `videosFilter` / `linksFilter` as the API params `hasAuthorsFilter` / `hasVideosFilter` / `hasLinksFilter` (matching the Python SDK). The constructor argument names are unchanged.
 
 ## [v9.1.1](https://www.npmjs.com/package/eventregistry/v/9.1.1) (2024-11-14)
 **Fixed**

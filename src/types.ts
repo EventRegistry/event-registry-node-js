@@ -1239,9 +1239,27 @@ export namespace ER {
              *   "keepAll" (no filtering, default)
              */
             eventFilter?: "skipArticlesWithoutEvent" | "keepOnlyArticlesWithoutEvent" | "keepAll";
-            authorsFilter?: string;
-            videosFilter?: string;
-            linksFilter?: string;
+            /**
+             * Some articles have an extracted author and some don't. What should be done with them. Possible values are:
+             *   "skipIfHasAuthors" (skip articles for which we have identified the author)
+             *   "keepOnlyIfHasAuthors" (return only articles for which we have extracted the author)
+             *   "keepAll" (no filtering, default)
+             */
+            authorsFilter?: "skipIfHasAuthors" | "keepOnlyIfHasAuthors" | "keepAll";
+            /**
+             * Some articles contain a link to a video and some don't. What should be done with them. Possible values are:
+             *   "skipIfHasVideos" (skip articles that contain a link to a video)
+             *   "keepOnlyIfHasVideos" (return only articles that contain a link to a video)
+             *   "keepAll" (no filtering, default)
+             */
+            videosFilter?: "skipIfHasVideos" | "keepOnlyIfHasVideos" | "keepAll";
+            /**
+             * Some articles contain links to other URLs and some don't. What should be done with them. Possible values are:
+             *   "skipIfHasLinks" (skip articles that contain one or more links)
+             *   "keepOnlyIfHasLinks" (return only articles that contain a link to other URLs)
+             *   "keepAll" (no filtering, default)
+             */
+            linksFilter?: "skipIfHasLinks" | "keepOnlyIfHasLinks" | "keepAll";
             /**
              * Starting percentile of the sources to consider in the results (default: 0). Value should be in range 0-90 and divisible by 10.
              */

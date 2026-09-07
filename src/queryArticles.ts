@@ -95,9 +95,9 @@ export class QueryArticles extends Query<RequestArticles> {
         this.setValIfNotDefault("isDuplicateFilter", isDuplicateFilter, "keepAll");
         this.setValIfNotDefault("hasDuplicateFilter", hasDuplicateFilter, "keepAll");
         this.setValIfNotDefault("eventFilter", eventFilter, "keepAll");
-        this.setValIfNotDefault("authorsFilter", authorsFilter, "keepAll");
-        this.setValIfNotDefault("videosFilter", videosFilter, "keepAll");
-        this.setValIfNotDefault("linksFilter", linksFilter, "keepAll");
+        this.setValIfNotDefault("hasAuthorsFilter", authorsFilter, "keepAll");
+        this.setValIfNotDefault("hasVideosFilter", videosFilter, "keepAll");
+        this.setValIfNotDefault("hasLinksFilter", linksFilter, "keepAll");
         if (startSourceRankPercentile < 0 || startSourceRankPercentile % 10 !== 0 || startSourceRankPercentile > 100) {
             throw new Error("StartSourceRankPercentile: Value should be in range 0-90 and divisible by 10.");
         }
