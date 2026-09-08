@@ -27,6 +27,7 @@
   },
   "files": [
     "dist",
+    "src",
     "MIGRATION.md",
     "CHANGELOG.md"
   ],
