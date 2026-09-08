@@ -37,6 +37,7 @@ Upgrade guide for the last published line (`9.1.1`): [MIGRATION.md](MIGRATION.md
  - Offline unit tests migrated to Vitest (`npm run test:unit`). Jasmine integration tests replay committed fixtures by default (`npm test`).
  - GitHub Actions CI runs build, lint, unit tests, fixture replay, example typecheck, and `publint` on Node 18 and Node 24.
  - `package.json` declares `"type": "commonjs"` and a `git+https` repository URL (publint).
+ - The published tarball now ships `src/` alongside `dist/`, so the emitted `.js.map` source maps resolve to the real TypeScript sources instead of dangling.
  - Hardened integration tests against live API volatility (awaited iterators, range assertions, dynamic fixtures, paging safety caps).
 
 **Fixed**
