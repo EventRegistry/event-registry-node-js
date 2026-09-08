@@ -484,7 +484,7 @@ export class EventRegistry {
     /**
      * Return the headers returned in the response object of the last executed request
      */
-    public getLastHeaders() {
+    public getLastHeaders(): Headers {
         return this.headers;
     }
 
