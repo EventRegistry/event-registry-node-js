@@ -44,11 +44,9 @@ function stableStringify(value: unknown): string {
 
 function redactBody(body: unknown): unknown {
     if (body && typeof body === "object" && !Array.isArray(body)) {
-        const clone: Record<string, unknown> = { ...(body as Record<string, unknown>) };
-        if ("apiKey" in clone) {
-            clone.apiKey = "***redacted***";
-        }
-        return clone;
+        // Set unconditionally: with no apiKey configured (e.g. CI, no settings.json) JSON.stringify
+        // drops the undefined key, and the request would hash to a fixture that was never recorded.
+        return { ...(body as Record<string, unknown>), apiKey: "***redacted***" };
     }
     return body;
 }
