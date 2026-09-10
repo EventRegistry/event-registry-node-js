@@ -76,6 +76,16 @@ function bodyToText(body: unknown): string {
     return typeof body === "string" ? body : JSON.stringify(body);
 }
 
+// The SDK swallows request errors, so a spec whose fixture is missing can still pass on an
+// empty response. Collect the misses and fail the spec that caused them.
+const missingFixtures: string[] = [];
+afterEach(() => {
+    const missed = missingFixtures.splice(0);
+    if (missed.length) {
+        fail(missed.join("\n\n"));
+    }
+});
+
 if (mode !== "live") {
     const realFetch = globalThis.fetch.bind(globalThis);
     console.log(`[fixtures] integration tests running in "${mode}" mode (ER_TEST_MODE=${mode}). Fixtures dir: ${FIXTURES_DIR}`);
@@ -88,11 +98,14 @@ if (mode !== "live") {
 
         if (mode === "replay") {
             if (!fs.existsSync(file)) {
-                throw new Error(
+                missingFixtures.push(
                     `[fixtures] No recorded fixture for ${method} ${url}\n` +
                     `body: ${JSON.stringify(redactedBody)}\n` +
                     `Record it with: ER_TEST_MODE=record npm test (needs a valid apiKey in settings.json)`
                 );
+                // erFetch retries a plain Error forever (repeatFailedRequestCount -1), hanging the
+                // suite behind the request mutex. A non-network TypeError is not retried.
+                throw new TypeError(`[fixtures] No recorded fixture for ${method} ${url}`);
             }
             const fixture = JSON.parse(fs.readFileSync(file, "utf8"));
             return new Response(bodyToText(fixture.response.body), {
