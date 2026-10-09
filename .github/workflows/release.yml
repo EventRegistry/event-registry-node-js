@@ -1,0 +1,66 @@
+name: Release
+
+# Publishes to npm when a push to master carries a package.json version that
+# is not on npm yet. Bump "version" (and CHANGELOG.md) in the PR; merging it
+# publishes and tags the release.
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # push the vX.Y.Z tag
+      id-token: write # npm trusted publishing + provenance
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          cache: npm
+      - name: Check whether this version is already published
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if npm view "eventregistry@$VERSION" version >/dev/null 2>&1; then
+            echo "eventregistry@$VERSION is already on npm; nothing to publish."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.version.outputs.publish == 'true'
+        run: npm ci
+      - if: steps.version.outputs.publish == 'true'
+        run: npm run build
+      - if: steps.version.outputs.publish == 'true'
+        run: npm run lint
+      - if: steps.version.outputs.publish == 'true'
+        run: npm run test:unit
+      - if: steps.version.outputs.publish == 'true'
+        run: npm test
+      - if: steps.version.outputs.publish == 'true'
+        name: Publish to npm
+        # Uses npm trusted publishing (OIDC) when configured on npmjs.com;
+        # falls back to the NPM_TOKEN repository secret otherwise.
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - if: steps.version.outputs.publish == 'true'
+        name: Tag the release
+        run: |
+          TAG="v${{ steps.version.outputs.version }}"
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null; then
+            echo "$TAG already exists; skipping."
+          else
+            git tag "$TAG"
+            git push origin "$TAG"
+          fi
