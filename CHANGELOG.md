@@ -2,7 +2,7 @@
 
 This log contains changes specific to the NodeJS SDK.
 
-## [v10.0.0](https://www.npmjs.com/package/eventregistry/v/10.0.0) (2026-09-07)
+## [v10.0.0](https://www.npmjs.com/package/eventregistry/v/10.0.0) (2026-10-09)
 
 Upgrade guide for the last published line (`9.1.1`): [MIGRATION.md](MIGRATION.md). **The classic class-based API (`QueryArticles`, `QueryEvents`, `execQuery()`, iterators, complex queries, …) remains fully supported** — class names were not removed or renamed.
 
