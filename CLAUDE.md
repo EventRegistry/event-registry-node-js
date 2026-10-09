@@ -123,6 +123,10 @@ Logging level: `er.logger.logLevel = LogLevel.DEBUG` after construction.
   - `test:live`/`test:record` exist because npm scripts can't set env vars in a way that's both bash- and PowerShell-safe without an extra dependency — they shell out via `scripts/run-tests-with-mode.js` instead.
 - **Offline unit**: Vitest, spec files in `test/unit/*.spec.ts`, run via `npm run test:unit` (or `npm run test:unit:watch`). These stub `fetch` and assert request-body shape/response mapping for both classic and ergonomic-layer code paths — use this suite for routine verification while iterating.
 
+## Releasing
+
+`.github/workflows/release.yml` publishes to npm on every push to `master` whose `package.json` `version` is not on npm yet, then pushes a `vX.Y.Z` tag. To release, bump `version` and add a `CHANGELOG.md` entry in the PR; merging it publishes. Pushes that keep the version unchanged are no-ops. Publishing authenticates with npm trusted publishing (OIDC) or the `NPM_TOKEN` repository secret.
+
 ## Linting
 
 ESLint 9 with `typescript-eslint` flat configuration in `eslint.config.mjs`. Plugins include import, jsdoc, and prefer-arrow.
