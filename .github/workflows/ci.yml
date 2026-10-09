@@ -22,7 +22,10 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run lint
+      # Vitest 5 needs Node 20+ (node:util styleText). The unit suite runs on
+      # Node 24; Node 18 still covers the build, lint and fixture tests.
       - run: npm run test:unit
+        if: matrix.node != '18'
       - run: npm test
       - run: npm run example:check
       - run: npx publint
