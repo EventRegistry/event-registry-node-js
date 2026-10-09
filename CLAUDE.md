@@ -115,7 +115,7 @@ Logging level: `er.logger.logLevel = LogLevel.DEBUG` after construction.
 
 ## Testing
 
-- **Live integration**: Jasmine 5 (`test/jasmine.json`), spec files in `test/spec/*.spec.ts`. `test/spec/utils.ts` has custom matchers (`toBeValidArticle`, `toBeValidEvent`, …), shared `ReturnInfo` flags, 120s timeout. Never commit `fdescribe` / `fit` — Jasmine exits with code 2 on incomplete runs.
+- **Live integration**: Jasmine 5 (`test/jasmine.json`), spec files in `test/spec/*.spec.ts`. `test/spec/utils.ts` has custom matchers (`toBeValidArticle`, `toBeValidEvent`, …), shared `ReturnInfo` flags, 30s per-spec timeout, and `initAPI()` sets `repeatFailedRequestCount: 0` so live runs fail fast instead of retrying forever. Never commit `fdescribe` / `fit` — Jasmine exits with code 2 on incomplete runs.
   - **Offline by default**: `test/spec/fixtureTransport.ts` (loaded as a Jasmine helper, before `utils.ts`) intercepts `fetch` and replays recorded HTTP fixtures from `test/fixtures/` (committed — apiKey and the configured `host` are redacted before a fixture is written, so they're safe to commit and replay needs no `settings.json`/apiKey at all). Controlled by `ER_TEST_MODE`, default `replay`:
     - `npm test` — offline, replays `test/fixtures/`, fails loudly (not silently) if a fixture is missing.
     - `npm run test:live` — hits the real API, no interception, unchanged pre-fixture behavior. Needs network + a valid `apiKey` in `settings.json`.

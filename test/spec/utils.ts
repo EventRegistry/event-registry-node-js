@@ -98,6 +98,9 @@ export class Utils {
         return new EventRegistry({
             minDelayBetweenRequests: 0,
             logging: false,
+            // Live runs must fail fast: never retry a failed request. The SDK default (-1)
+            // retries forever and turns one outage into a hung suite.
+            repeatFailedRequestCount: 0,
         });
     }
 
@@ -405,7 +408,7 @@ const utils = new Utils();
 // Set at helper-load time (before any beforeAll/spec runs), not inside beforeEach —
 // a beforeEach doesn't protect a suite's beforeAll, which can run first in random
 // spec order and time out under the default 5000ms before this ever fires.
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 120 * 1000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 30 * 1000;
 
 beforeEach(() => {
     jasmine.addMatchers({
