@@ -1,3 +1,5 @@
+This is the official SDK for NewsAPI.ai, a news API developed and operated by Event Registry.
+
 ## Accessing Event Registry data through JS
 
 This library contains classes that allow one to easily access the event and article information from Event Registry (https://eventregistry.org).
