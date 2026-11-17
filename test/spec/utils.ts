@@ -96,7 +96,8 @@ export class Utils {
 
     public static initAPI(): EventRegistry {
         return new EventRegistry({
-            minDelayBetweenRequests: 0,
+            // Seconds between requests. CI record runs set ER_TEST_MIN_DELAY to throttle the API.
+            minDelayBetweenRequests: Number(process.env.ER_TEST_MIN_DELAY ?? 0),
             logging: false,
             // Live runs must fail fast: never retry a failed request. The SDK default (-1)
             // retries forever and turns one outage into a hung suite.
