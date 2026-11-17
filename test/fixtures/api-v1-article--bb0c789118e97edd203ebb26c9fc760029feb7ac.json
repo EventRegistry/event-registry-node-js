@@ -753,25 +753,6 @@
             "score": 15.45919266701921
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/United_States_courts_of_appeals",
-            "type": "wiki",
-            "label": {
-              "eng": "United States courts of appeals",
-              "spa": "United States courts of appeals"
-            },
-            "description": "",
-            "image": null,
-            "synonyms": {},
-            "trendingScore": {
-              "news": {
-                "score": 0,
-                "testPopFq": 0,
-                "nullPopFq": 0
-              }
-            },
-            "score": 15.40631059404195
-          },
-          {
             "uri": "http://en.wikipedia.org/wiki/Venezuela",
             "type": "loc",
             "label": {
@@ -806,6 +787,25 @@
               "currencyCode": "VEF",
               "currencyName": "Bolivar",
               "continent": "South America"
+            },
+            "score": 15.40631059404195
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/United_States_courts_of_appeals",
+            "type": "wiki",
+            "label": {
+              "eng": "United States courts of appeals",
+              "spa": "United States courts of appeals"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
             },
             "score": 15.40631059404195
           },
@@ -1159,11 +1159,11 @@
             "score": 11.7045654856337
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Lawyer",
+            "uri": "http://en.wikipedia.org/wiki/Coronavirus",
             "type": "wiki",
             "label": {
-              "eng": "Lawyer",
-              "spa": "Abogado"
+              "eng": "Coronavirus",
+              "spa": "Orthocoronavirinae"
             },
             "description": "",
             "image": null,
@@ -1178,11 +1178,11 @@
             "score": 11.63405605499736
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Coronavirus",
+            "uri": "http://en.wikipedia.org/wiki/Lawyer",
             "type": "wiki",
             "label": {
-              "eng": "Coronavirus",
-              "spa": "Orthocoronavirinae"
+              "eng": "Lawyer",
+              "spa": "Abogado"
             },
             "description": "",
             "image": null,

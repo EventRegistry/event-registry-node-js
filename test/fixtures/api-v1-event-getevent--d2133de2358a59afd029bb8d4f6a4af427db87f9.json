@@ -62,11 +62,11 @@
               "weight": 0.1442187875509262
             },
             {
-              "keyword": "consort",
+              "keyword": "queen",
               "weight": 0.1434662640094757
             },
             {
-              "keyword": "queen",
+              "keyword": "consort",
               "weight": 0.1434662640094757
             },
             {
@@ -86,11 +86,11 @@
               "weight": 0.1208831891417503
             },
             {
-              "keyword": "29",
+              "keyword": "charles",
               "weight": 0.115248367190361
             },
             {
-              "keyword": "charles",
+              "keyword": "29",
               "weight": 0.115248367190361
             },
             {
@@ -114,11 +114,7 @@
               "weight": 0.1052864640951157
             },
             {
-              "keyword": "downing",
-              "weight": 0.09758908301591873
-            },
-            {
-              "keyword": "mr",
+              "keyword": "spokesperson",
               "weight": 0.09758908301591873
             },
             {
@@ -126,11 +122,15 @@
               "weight": 0.09758908301591873
             },
             {
-              "keyword": "spokesperson",
+              "keyword": "mr",
               "weight": 0.09758908301591873
             },
             {
-              "keyword": "sunday",
+              "keyword": "downing",
+              "weight": 0.09758908301591873
+            },
+            {
+              "keyword": "uk",
               "weight": 0.08770611882209778
             },
             {
@@ -138,7 +138,7 @@
               "weight": 0.08770611882209778
             },
             {
-              "keyword": "uk",
+              "keyword": "sunday",
               "weight": 0.08770611882209778
             },
             {
@@ -310,19 +310,7 @@
               "weight": 0.0721093937754631
             },
             {
-              "keyword": "prepare",
-              "weight": 0.0721093937754631
-            },
-            {
-              "keyword": "buildings",
-              "weight": 0.0721093937754631
-            },
-            {
-              "keyword": "furniture",
-              "weight": 0.0721093937754631
-            },
-            {
-              "keyword": "carpets",
+              "keyword": "flags",
               "weight": 0.0721093937754631
             },
             {
@@ -330,63 +318,23 @@
               "weight": 0.0721093937754631
             },
             {
-              "keyword": "flags",
+              "keyword": "carpets",
               "weight": 0.0721093937754631
             },
             {
-              "keyword": "action",
-              "weight": 0.05762418359518051
+              "keyword": "furniture",
+              "weight": 0.0721093937754631
             },
             {
-              "keyword": "announcement",
-              "weight": 0.05762418359518051
+              "keyword": "buildings",
+              "weight": 0.0721093937754631
             },
             {
-              "keyword": "yesterday",
-              "weight": 0.05762418359518051
+              "keyword": "prepare",
+              "weight": 0.0721093937754631
             },
             {
-              "keyword": "light",
-              "weight": 0.05762418359518051
-            },
-            {
-              "keyword": "elysee",
-              "weight": 0.05762418359518051
-            },
-            {
-              "keyword": "statement",
-              "weight": 0.05762418359518051
-            },
-            {
-              "keyword": "31",
-              "weight": 0.05762418359518051
-            },
-            {
-              "keyword": "planned",
-              "weight": 0.05762418359518051
-            },
-            {
-              "keyword": "proceed",
-              "weight": 0.05762418359518051
-            },
-            {
-              "keyword": "berlin",
-              "weight": 0.05762418359518051
-            },
-            {
-              "keyword": "begin",
-              "weight": 0.05762418359518051
-            },
-            {
-              "keyword": "found",
-              "weight": 0.05762418359518051
-            },
-            {
-              "keyword": "opportunity",
-              "weight": 0.05762418359518051
-            },
-            {
-              "keyword": "forward",
+              "keyword": "26",
               "weight": 0.05762418359518051
             },
             {
@@ -394,7 +342,59 @@
               "weight": 0.05762418359518051
             },
             {
-              "keyword": "26",
+              "keyword": "forward",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "opportunity",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "found",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "begin",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "berlin",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "proceed",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "planned",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "31",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "statement",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "elysee",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "light",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "yesterday",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "announcement",
+              "weight": 0.05762418359518051
+            },
+            {
+              "keyword": "action",
               "weight": 0.05762418359518051
             },
             {

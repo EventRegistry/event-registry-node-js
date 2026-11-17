@@ -45,11 +45,11 @@
             "weight": 0.1336867362260818
           },
           {
-            "keyword": "》",
+            "keyword": "《",
             "weight": 0.122149184346199
           },
           {
-            "keyword": "《",
+            "keyword": "》",
             "weight": 0.122149184346199
           },
           {
@@ -381,15 +381,7 @@
             "weight": 0.04071424901485443
           },
           {
-            "keyword": "kerlikowske",
-            "weight": 0.04057445749640465
-          },
-          {
-            "keyword": "centers",
-            "weight": 0.04057445749640465
-          },
-          {
-            "keyword": "hispanic",
+            "keyword": "enforce",
             "weight": 0.04057445749640465
           },
           {
@@ -397,7 +389,15 @@
             "weight": 0.04057445749640465
           },
           {
-            "keyword": "enforce",
+            "keyword": "hispanic",
+            "weight": 0.04057445749640465
+          },
+          {
+            "keyword": "centers",
+            "weight": 0.04057445749640465
+          },
+          {
+            "keyword": "kerlikowske",
             "weight": 0.04057445749640465
           }
         ]

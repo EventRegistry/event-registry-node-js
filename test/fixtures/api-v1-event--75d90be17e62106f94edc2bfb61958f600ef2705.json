@@ -107,11 +107,11 @@
             "weight": 0.08486635982990265
           },
           {
-            "keyword": "becirovic",
+            "keyword": "rusije",
             "weight": 0.0826646238565445
           },
           {
-            "keyword": "rusije",
+            "keyword": "becirovic",
             "weight": 0.0826646238565445
           },
           {
@@ -131,11 +131,11 @@
             "weight": 0.07774723321199417
           },
           {
-            "keyword": "verschoben",
+            "keyword": "pensionsreform",
             "weight": 0.07727159559726715
           },
           {
-            "keyword": "pensionsreform",
+            "keyword": "verschoben",
             "weight": 0.07727159559726715
           },
           {
@@ -195,7 +195,7 @@
             "weight": 0.06664048135280609
           },
           {
-            "keyword": "final",
+            "keyword": "team",
             "weight": 0.06645186990499496
           },
           {
@@ -203,15 +203,11 @@
             "weight": 0.06645186990499496
           },
           {
-            "keyword": "team",
+            "keyword": "final",
             "weight": 0.06645186990499496
           },
           {
-            "keyword": "king",
-            "weight": 0.06427684426307678
-          },
-          {
-            "keyword": "state",
+            "keyword": "confirmed",
             "weight": 0.06427684426307678
           },
           {
@@ -219,35 +215,15 @@
             "weight": 0.06427684426307678
           },
           {
-            "keyword": "confirmed",
+            "keyword": "state",
             "weight": 0.06427684426307678
           },
           {
-            "keyword": "denis",
-            "weight": 0.06199846789240837
+            "keyword": "king",
+            "weight": 0.06427684426307678
           },
           {
-            "keyword": "predsjednistva",
-            "weight": 0.06199846789240837
-          },
-          {
-            "keyword": "becirovica",
-            "weight": 0.06199846789240837
-          },
-          {
-            "keyword": "denisa",
-            "weight": 0.06199846789240837
-          },
-          {
-            "keyword": "sad",
-            "weight": 0.06199846789240837
-          },
-          {
-            "keyword": "velike",
-            "weight": 0.06199846789240837
-          },
-          {
-            "keyword": "odluku",
+            "keyword": "ambasada",
             "weight": 0.06199846789240837
           },
           {
@@ -255,7 +231,31 @@
             "weight": 0.06199846789240837
           },
           {
-            "keyword": "ambasada",
+            "keyword": "odluku",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "velike",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "sad",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "denisa",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "becirovica",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "predsjednistva",
+            "weight": 0.06199846789240837
+          },
+          {
+            "keyword": "denis",
             "weight": 0.06199846789240837
           },
           {
@@ -275,7 +275,7 @@
             "weight": 0.05650106072425842
           },
           {
-            "keyword": "leasing",
+            "keyword": "leases",
             "weight": 0.05553373321890831
           },
           {
@@ -283,7 +283,7 @@
             "weight": 0.05553373321890831
           },
           {
-            "keyword": "leases",
+            "keyword": "leasing",
             "weight": 0.05553373321890831
           },
           {
@@ -299,15 +299,7 @@
             "weight": 0.05436169356107712
           },
           {
-            "keyword": "arena",
-            "weight": 0.05316149815917015
-          },
-          {
-            "keyword": "trophy",
-            "weight": 0.05316149815917015
-          },
-          {
-            "keyword": "bbl",
+            "keyword": "year",
             "weight": 0.05316149815917015
           },
           {
@@ -315,7 +307,15 @@
             "weight": 0.05316149815917015
           },
           {
-            "keyword": "year",
+            "keyword": "bbl",
+            "weight": 0.05316149815917015
+          },
+          {
+            "keyword": "trophy",
+            "weight": 0.05316149815917015
+          },
+          {
+            "keyword": "arena",
             "weight": 0.05316149815917015
           },
           {
@@ -351,10 +351,6 @@
             "weight": 0.04898509383201599
           },
           {
-            "keyword": "reduce",
-            "weight": 0.04452880099415779
-          },
-          {
             "keyword": "announced",
             "weight": 0.04452880099415779
           },
@@ -363,15 +359,11 @@
             "weight": 0.04452880099415779
           },
           {
-            "keyword": "crown",
-            "weight": 0.04442698508501053
+            "keyword": "reduce",
+            "weight": 0.04452880099415779
           },
           {
-            "keyword": "estate",
-            "weight": 0.04442698508501053
-          },
-          {
-            "keyword": "deliver",
+            "keyword": "north",
             "weight": 0.04442698508501053
           },
           {
@@ -379,7 +371,15 @@
             "weight": 0.04442698508501053
           },
           {
-            "keyword": "north",
+            "keyword": "deliver",
+            "weight": 0.04442698508501053
+          },
+          {
+            "keyword": "estate",
+            "weight": 0.04442698508501053
+          },
+          {
+            "keyword": "crown",
             "weight": 0.04442698508501053
           },
           {

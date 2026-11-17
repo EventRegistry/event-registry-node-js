@@ -13,13 +13,14 @@
     "contentType": "application/json; charset=utf-8",
     "body": {
       "authors": [
-        "Stephen Burgen",
-        "Sam Jones"
+        "Sam Jones",
+        "Stephen Burgen"
       ],
       "body": "Ousted president's private messages caught on TV cameras reveal admission of defeat\nThe ousted Catalan president, Carles Puigdemont, has admitted privately that his attempt to secure regional independence is over and claims he has been sacrificed by his own side, according to messages sent to a colleague and captured by TV cameras.\nOn Wednesday, a Spanish TV show published messages that Puigdemont had sent to his former health minister Toni Comín while the latter was at an event in Leuven, Belgium, the previous evening.\nSent using the Signal messaging app and written in Catalan, the texts were caught by a TV camera behind Comín and aired by Telecinco's Ana Rosa programme.\nThey mention \"the last days of republican Catalonia\" and suggest the deposed leader is preparing to abandon his attempt to return to office.\n\"I guess you've realised that this is over,\" reads one. \"Our people have sacrificed us. Or at least me.\" It goes on to refer to the pro-independence Catalan MP Joan Tardà, who suggested at the weekend that Puigdemont could step aside to allow another candidate to become president: \"You will be ministers (I hope and wish) but I've already been sacrificed just like Tardà said.\"\nAnother says \"The [Spanish government's] plan has won,\" before expressing the hope that the victory will lead to the release of the four Catalan leaders in prison.\nThe texts were sent around the same time that Puigdemont issued a defiant message on social media, calling for unity and saying he intended to return to the presidency after last December's election, in which pro-independence parties held on to their majority in the regional parliament.\nAppearing in a video hours after the speaker of the Catalan parliament postponed a debate on the presidential investiture, in which Puigdemont was the only candidate, the former leader said he was intent on resuming office.\nHe confirmed on Wednesday morning that he had sent the messages, but insisted he was still the best candidate to represent the Catalan people.\n\"I am a journalist and I have always understood that there are limits, such as privacy, which should never be violated,\" he wrote on Twitter. \"I am human and I, too, have moments of doubt. I am also the president and I will not fold or back away out of respect for the gratitude I feel towards - and the commitment I have - to the citizens and the nation. Onwards!\"\nA spokesman for Puigdemont's Catalan European Democratic party declined to comment on the messages, saying: \"We don't send out WhatsApp [sic] messages, we send out official messages like the one Puigdemont sent last night. That's what's important to us.\"\nComín's lawyer told the Catalan radio station RAC1 that while he did \"not deny the veracity\" of the leaked messages, they had been obtained \"in an illegal manner\" and would result in legal action against Telecinco.\nCatalonia has been under the direct control of the Spanish government since the end of October, when the prime minister, Mariano Rajoy, responded to the Catalan parliament's unilateral declaration of independence by sacking Puigdemont and calling fresh elections. Puigdemont fled to Brussels shortly afterwards and faces arrest on possible charges of rebellion, sedition and misuses of public funds if he returns to Spain.",
       "date": "2018-01-31",
+      "dateFromXPaths": false,
       "datetime": "2018-01-31T12:35:59Z",
-      "description": null,
+      "description": "Ousted president's private messages caught on TV cameras reveal admission of defeat<br>",
       "fbAuthorUrl": null,
       "fbPages": null,
       "fbSourceUrl": "https://www.facebook.com/theguardian",
@@ -153,10 +154,11 @@
         "twitter:site": "@guardian",
         "viewport": "width=device-width,minimum-scale=1,initial-scale=1"
       },
-      "sourceTitle": "The Guardian",
+      "sourceTitle": "the Guardian",
       "statusCode": 200,
       "time": "12:35:59",
       "title": "'This is over': Puigdemont's Catalan independence doubts caught on camera",
+      "titleFromXPaths": false,
       "twitterSite": "@guardian",
       "twitterSiteId": null,
       "urlCanonical": "https://www.theguardian.com/world/2018/jan/31/this-is-over-puigdemonts-catalan-independence-doubts-caught-on-camera",

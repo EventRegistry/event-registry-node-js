@@ -254,6 +254,28 @@
           },
           {
             "source": {
+              "uri": "sueddeutsche.de",
+              "dataType": "news",
+              "title": "Süddeutsche.de",
+              "description": "",
+              "location": null,
+              "image": null,
+              "thumbImage": null,
+              "favicon": null,
+              "ranking": {
+                "importanceRank": 1000000
+              },
+              "articleCount": 3521,
+              "socialMedia": {},
+              "sourceGroups": []
+            },
+            "counts": {
+              "frequency": 1,
+              "total": 7
+            }
+          },
+          {
+            "source": {
               "uri": "euractiv.fr",
               "dataType": "news",
               "title": "euractiv.fr",
@@ -398,28 +420,6 @@
                 "importanceRank": 1000000
               },
               "articleCount": 188,
-              "socialMedia": {},
-              "sourceGroups": []
-            },
-            "counts": {
-              "frequency": 1,
-              "total": 7
-            }
-          },
-          {
-            "source": {
-              "uri": "gala.fr",
-              "dataType": "news",
-              "title": "Gala.fr",
-              "description": "",
-              "location": null,
-              "image": null,
-              "thumbImage": null,
-              "favicon": null,
-              "ranking": {
-                "importanceRank": 1000000
-              },
-              "articleCount": 203,
               "socialMedia": {},
               "sourceGroups": []
             },

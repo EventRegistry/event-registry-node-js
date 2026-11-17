@@ -315,25 +315,6 @@
             "score": 30.47091412742382
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/British_Basketball_League",
-            "type": "org",
-            "label": {
-              "eng": "British Basketball League",
-              "spa": "British Basketball League"
-            },
-            "description": "",
-            "image": null,
-            "synonyms": {},
-            "trendingScore": {
-              "news": {
-                "score": 0,
-                "testPopFq": 0,
-                "nullPopFq": 0
-              }
-            },
-            "score": 27.70083102493075
-          },
-          {
             "uri": "http://en.wikipedia.org/wiki/Bosnia_and_Herzegovina",
             "type": "loc",
             "label": {
@@ -368,6 +349,25 @@
               "currencyCode": "BAM",
               "currencyName": "Marka",
               "continent": "Europe"
+            },
+            "score": 27.70083102493075
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/British_Basketball_League",
+            "type": "org",
+            "label": {
+              "eng": "British Basketball League",
+              "spa": "British Basketball League"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
             },
             "score": 27.70083102493075
           },
@@ -659,25 +659,6 @@
             "score": 18.83656509695291
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Denis_Bećirović",
-            "type": "wiki",
-            "label": {
-              "eng": "Denis Bećirović",
-              "spa": "Denis Bećirović"
-            },
-            "description": "",
-            "image": null,
-            "synonyms": {},
-            "trendingScore": {
-              "news": {
-                "score": 0,
-                "testPopFq": 0,
-                "nullPopFq": 0
-              }
-            },
-            "score": 18.5595567867036
-          },
-          {
             "uri": "http://en.wikipedia.org/wiki/Arena",
             "type": "wiki",
             "label": {
@@ -697,11 +678,11 @@
             "score": 18.5595567867036
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Head_coach",
-            "type": "org",
+            "uri": "http://en.wikipedia.org/wiki/Denis_Bećirović",
+            "type": "wiki",
             "label": {
-              "eng": "Head coach",
-              "spa": "Entrenador en jefe (fútbol americano)"
+              "eng": "Denis Bećirović",
+              "spa": "Denis Bećirović"
             },
             "description": "",
             "image": null,
@@ -713,7 +694,7 @@
                 "nullPopFq": 0
               }
             },
-            "score": 18.28254847645429
+            "score": 18.5595567867036
           },
           {
             "uri": "http://en.wikipedia.org/wiki/East_Kilbride",
@@ -767,6 +748,25 @@
             "score": 18.28254847645429
           },
           {
+            "uri": "http://en.wikipedia.org/wiki/Low-carbon_economy",
+            "type": "wiki",
+            "label": {
+              "eng": "Low-carbon economy",
+              "spa": "Economía de bajo carbono"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 18.28254847645429
+          },
+          {
             "uri": "http://en.wikipedia.org/wiki/King",
             "type": "person",
             "label": {
@@ -786,11 +786,11 @@
             "score": 18.28254847645429
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Seabed",
-            "type": "wiki",
+            "uri": "http://en.wikipedia.org/wiki/Head_coach",
+            "type": "org",
             "label": {
-              "eng": "Seabed",
-              "spa": "Relieve oceánico"
+              "eng": "Head coach",
+              "spa": "Entrenador en jefe (fútbol americano)"
             },
             "description": "",
             "image": null,
@@ -805,11 +805,11 @@
             "score": 18.28254847645429
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Low-carbon_economy",
+            "uri": "http://en.wikipedia.org/wiki/Seabed",
             "type": "wiki",
             "label": {
-              "eng": "Low-carbon economy",
-              "spa": "Economía de bajo carbono"
+              "eng": "Seabed",
+              "spa": "Relieve oceánico"
             },
             "description": "",
             "image": null,
@@ -875,25 +875,6 @@
             "score": 17.72853185595568
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Stanislas_Guerini",
-            "type": "wiki",
-            "label": {
-              "eng": "Stanislas Guerini",
-              "spa": "Stanislas Guerini"
-            },
-            "description": "",
-            "image": null,
-            "synonyms": {},
-            "trendingScore": {
-              "news": {
-                "score": 0,
-                "testPopFq": 0,
-                "nullPopFq": 0
-              }
-            },
-            "score": 17.17451523545706
-          },
-          {
             "uri": "http://en.wikipedia.org/wiki/Streaming_media",
             "type": "wiki",
             "label": {
@@ -913,11 +894,30 @@
             "score": 17.17451523545706
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Milorad_Dodik",
-            "type": "person",
+            "uri": "http://en.wikipedia.org/wiki/Stanislas_Guerini",
+            "type": "wiki",
             "label": {
-              "eng": "Milorad Dodik",
-              "spa": "Milorad Dodik"
+              "eng": "Stanislas Guerini",
+              "spa": "Stanislas Guerini"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 17.17451523545706
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Commonwealth_Arena_and_Sir_Chris_Hoy_Velodrome",
+            "type": "wiki",
+            "label": {
+              "eng": "Commonwealth Arena and Sir Chris Hoy Velodrome",
+              "spa": "Commonwealth Arena and Sir Chris Hoy Velodrome"
             },
             "description": "",
             "image": null,
@@ -932,11 +932,11 @@
             "score": 16.62049861495845
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Commonwealth_Arena_and_Sir_Chris_Hoy_Velodrome",
-            "type": "wiki",
+            "uri": "http://en.wikipedia.org/wiki/Milorad_Dodik",
+            "type": "person",
             "label": {
-              "eng": "Commonwealth Arena and Sir Chris Hoy Velodrome",
-              "spa": "Commonwealth Arena and Sir Chris Hoy Velodrome"
+              "eng": "Milorad Dodik",
+              "spa": "Milorad Dodik"
             },
             "description": "",
             "image": null,
@@ -1243,11 +1243,11 @@
             "score": 11.91135734072022
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
+            "uri": "http://en.wikipedia.org/wiki/Offshore_drilling",
             "type": "wiki",
             "label": {
-              "eng": "George Floyd protests",
-              "spa": "George Floyd protests"
+              "eng": "Offshore drilling",
+              "spa": "Offshore drilling"
             },
             "description": "",
             "image": null,
@@ -1262,11 +1262,11 @@
             "score": 11.63434903047091
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Offshore_drilling",
+            "uri": "http://en.wikipedia.org/wiki/George_Floyd_protests",
             "type": "wiki",
             "label": {
-              "eng": "Offshore drilling",
-              "spa": "Offshore drilling"
+              "eng": "George Floyd protests",
+              "spa": "George Floyd protests"
             },
             "description": "",
             "image": null,
@@ -1338,11 +1338,11 @@
             "score": 11.0803324099723
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Queen_consort",
+            "uri": "http://en.wikipedia.org/wiki/President_(government_title)",
             "type": "wiki",
             "label": {
-              "eng": "Queen consort",
-              "spa": "Queen consort"
+              "eng": "Presidente",
+              "spa": "Presidente"
             },
             "description": "",
             "image": null,
@@ -1357,11 +1357,11 @@
             "score": 10.80332409972299
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/President_(government_title)",
+            "uri": "http://en.wikipedia.org/wiki/Queen_consort",
             "type": "wiki",
             "label": {
-              "eng": "Presidente",
-              "spa": "Presidente"
+              "eng": "Queen consort",
+              "spa": "Queen consort"
             },
             "description": "",
             "image": null,
@@ -1427,25 +1427,6 @@
             "score": 10.52631578947368
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Supply_chain",
-            "type": "wiki",
-            "label": {
-              "eng": "Supply chain",
-              "spa": "Cadena de suministro"
-            },
-            "description": "",
-            "image": null,
-            "synonyms": {},
-            "trendingScore": {
-              "news": {
-                "score": 0,
-                "testPopFq": 0,
-                "nullPopFq": 0
-              }
-            },
-            "score": 10.24930747922438
-          },
-          {
             "uri": "http://en.wikipedia.org/wiki/Vassal",
             "type": "loc",
             "label": {
@@ -1492,6 +1473,25 @@
                 "currencyCode": "EUR",
                 "currencyName": "Euro",
                 "continent": "Europe"
+              }
+            },
+            "score": 10.24930747922438
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Supply_chain",
+            "type": "wiki",
+            "label": {
+              "eng": "Supply chain",
+              "spa": "Cadena de suministro"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
               }
             },
             "score": 10.24930747922438
@@ -1592,6 +1592,44 @@
             "score": 9.695290858725762
           },
           {
+            "uri": "http://en.wikipedia.org/wiki/Player-coach",
+            "type": "org",
+            "label": {
+              "eng": "Player-coach",
+              "spa": "Player-coach"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.418282548476455
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Kelvin_Hall",
+            "type": "wiki",
+            "label": {
+              "eng": "Kelvin Hall",
+              "spa": "Kelvin Hall"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 9.418282548476455
+          },
+          {
             "uri": "http://en.wikipedia.org/wiki/United_Arab_Emirates",
             "type": "loc",
             "label": {
@@ -1626,44 +1664,6 @@
               "currencyCode": "AED",
               "currencyName": "Dirham",
               "continent": "Asia"
-            },
-            "score": 9.418282548476455
-          },
-          {
-            "uri": "http://en.wikipedia.org/wiki/Kelvin_Hall",
-            "type": "wiki",
-            "label": {
-              "eng": "Kelvin Hall",
-              "spa": "Kelvin Hall"
-            },
-            "description": "",
-            "image": null,
-            "synonyms": {},
-            "trendingScore": {
-              "news": {
-                "score": 0,
-                "testPopFq": 0,
-                "nullPopFq": 0
-              }
-            },
-            "score": 9.418282548476455
-          },
-          {
-            "uri": "http://en.wikipedia.org/wiki/Player-coach",
-            "type": "org",
-            "label": {
-              "eng": "Player-coach",
-              "spa": "Player-coach"
-            },
-            "description": "",
-            "image": null,
-            "synonyms": {},
-            "trendingScore": {
-              "news": {
-                "score": 0,
-                "testPopFq": 0,
-                "nullPopFq": 0
-              }
             },
             "score": 9.418282548476455
           },
@@ -1706,25 +1706,6 @@
             "score": 8.587257617728532
           },
           {
-            "uri": "http://fr.wikipedia.org/wiki/Fonction_publique_française",
-            "type": "wiki",
-            "label": {
-              "eng": "Fonction publique française",
-              "spa": "Fonction publique française"
-            },
-            "description": "",
-            "image": null,
-            "synonyms": {},
-            "trendingScore": {
-              "news": {
-                "score": 0,
-                "testPopFq": 0,
-                "nullPopFq": 0
-              }
-            },
-            "score": 8.033240997229917
-          },
-          {
             "uri": "http://en.wikipedia.org/wiki/Michael_Matheson_(politician)",
             "type": "person",
             "label": {
@@ -1763,6 +1744,25 @@
             "score": 8.033240997229917
           },
           {
+            "uri": "http://fr.wikipedia.org/wiki/Fonction_publique_française",
+            "type": "wiki",
+            "label": {
+              "eng": "Fonction publique française",
+              "spa": "Fonction publique française"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "score": 8.033240997229917
+          },
+          {
             "uri": "http://en.wikipedia.org/wiki/Retirement",
             "type": "org",
             "label": {
@@ -1782,11 +1782,11 @@
             "score": 7.202216066481994
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Electrification",
+            "uri": "http://en.wikipedia.org/wiki/Energy_transition",
             "type": "wiki",
             "label": {
-              "eng": "Electrification",
-              "spa": "Electrification"
+              "eng": "Energy transition",
+              "spa": "Transición energética"
             },
             "description": "",
             "image": null,
@@ -1801,11 +1801,11 @@
             "score": 6.925207756232687
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Energy_transition",
+            "uri": "http://en.wikipedia.org/wiki/Electrification",
             "type": "wiki",
             "label": {
-              "eng": "Energy transition",
-              "spa": "Transición energética"
+              "eng": "Electrification",
+              "spa": "Electrification"
             },
             "description": "",
             "image": null,
@@ -1897,11 +1897,11 @@
             "score": 5.817174515235457
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Mobilier_National",
-            "type": "wiki",
+            "uri": "http://en.wikipedia.org/wiki/French_Parliament",
+            "type": "org",
             "label": {
-              "eng": "Mobilier national",
-              "spa": "Mobilier national"
+              "eng": "French Parliament",
+              "spa": "Parlamento francés"
             },
             "description": "",
             "image": null,
@@ -1916,11 +1916,11 @@
             "score": 5.54016620498615
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/French_Parliament",
-            "type": "org",
+            "uri": "http://en.wikipedia.org/wiki/Mobilier_National",
+            "type": "wiki",
             "label": {
-              "eng": "French Parliament",
-              "spa": "Parlamento francés"
+              "eng": "Mobilier national",
+              "spa": "Mobilier national"
             },
             "description": "",
             "image": null,
@@ -1992,11 +1992,11 @@
             "score": 5.54016620498615
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Energy_industry",
+            "uri": "http://en.wikipedia.org/wiki/Monarchy_of_the_United_Kingdom",
             "type": "wiki",
             "label": {
-              "eng": "Energy industry",
-              "spa": "Industria de la energía"
+              "eng": "Monarchy of the United Kingdom",
+              "spa": "Corona británica"
             },
             "description": "",
             "image": null,
@@ -2011,11 +2011,11 @@
             "score": 5.54016620498615
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Monarchy_of_the_United_Kingdom",
+            "uri": "http://en.wikipedia.org/wiki/Energy_industry",
             "type": "wiki",
             "label": {
-              "eng": "Monarchy of the United Kingdom",
-              "spa": "Corona británica"
+              "eng": "Energy industry",
+              "spa": "Industria de la energía"
             },
             "description": "",
             "image": null,
@@ -2144,11 +2144,11 @@
             "score": 4.986149584487535
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Great_Britain",
+            "uri": "http://en.wikipedia.org/wiki/Cap_(sport)",
             "type": "wiki",
             "label": {
-              "eng": "Great Britain",
-              "spa": "Gran Bretaña"
+              "eng": "Cap (sport)",
+              "spa": "Internacional (deporte)"
             },
             "description": "",
             "image": null,
@@ -2163,11 +2163,11 @@
             "score": 4.709141274238227
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Cap_(sport)",
+            "uri": "http://en.wikipedia.org/wiki/Great_Britain",
             "type": "wiki",
             "label": {
-              "eng": "Cap (sport)",
-              "spa": "Internacional (deporte)"
+              "eng": "Great Britain",
+              "spa": "Gran Bretaña"
             },
             "description": "",
             "image": null,
@@ -2202,57 +2202,6 @@
             "score": 4.709141274238227
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Bordeaux",
-            "type": "loc",
-            "label": {
-              "eng": "Bordeaux",
-              "spa": "Burdeos"
-            },
-            "description": "",
-            "image": null,
-            "synonyms": {},
-            "trendingScore": {
-              "news": {
-                "score": 0,
-                "testPopFq": 0,
-                "nullPopFq": 0
-              }
-            },
-            "location": {
-              "type": "place",
-              "geoNamesId": "3031582",
-              "wikiUri": "http://en.wikipedia.org/wiki/Bordeaux",
-              "label": {
-                "eng": "Bordeaux",
-                "spa": "Burdeos"
-              },
-              "population": 231844,
-              "lat": 44.84044,
-              "long": -0.5805,
-              "featureCode": "P.PPLA",
-              "country": {
-                "type": "country",
-                "geoNamesId": "3017382",
-                "wikiUri": "http://en.wikipedia.org/wiki/France",
-                "label": {
-                  "eng": "France",
-                  "spa": "Francia"
-                },
-                "population": 64768389,
-                "lat": 46,
-                "long": 2,
-                "area": 547030,
-                "code2": "FR",
-                "code3": "FRA",
-                "webExt": ".fr",
-                "currencyCode": "EUR",
-                "currencyName": "Euro",
-                "continent": "Europe"
-              }
-            },
-            "score": 3.878116343490305
-          },
-          {
             "uri": "http://en.wikipedia.org/wiki/Sète",
             "type": "loc",
             "label": {
@@ -2281,6 +2230,57 @@
               "lat": 43.4028,
               "long": 3.69278,
               "featureCode": "P.PPL",
+              "country": {
+                "type": "country",
+                "geoNamesId": "3017382",
+                "wikiUri": "http://en.wikipedia.org/wiki/France",
+                "label": {
+                  "eng": "France",
+                  "spa": "Francia"
+                },
+                "population": 64768389,
+                "lat": 46,
+                "long": 2,
+                "area": 547030,
+                "code2": "FR",
+                "code3": "FRA",
+                "webExt": ".fr",
+                "currencyCode": "EUR",
+                "currencyName": "Euro",
+                "continent": "Europe"
+              }
+            },
+            "score": 3.878116343490305
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Bordeaux",
+            "type": "loc",
+            "label": {
+              "eng": "Bordeaux",
+              "spa": "Burdeos"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
+            },
+            "location": {
+              "type": "place",
+              "geoNamesId": "3031582",
+              "wikiUri": "http://en.wikipedia.org/wiki/Bordeaux",
+              "label": {
+                "eng": "Bordeaux",
+                "spa": "Burdeos"
+              },
+              "population": 231844,
+              "lat": 44.84044,
+              "long": -0.5805,
+              "featureCode": "P.PPLA",
               "country": {
                 "type": "country",
                 "geoNamesId": "3017382",
@@ -2343,25 +2343,6 @@
             "score": 3.32409972299169
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Majesty",
-            "type": "org",
-            "label": {
-              "eng": "Majesty",
-              "spa": "Majestad"
-            },
-            "description": "",
-            "image": null,
-            "synonyms": {},
-            "trendingScore": {
-              "news": {
-                "score": 0,
-                "testPopFq": 0,
-                "nullPopFq": 0
-              }
-            },
-            "score": 2.770083102493075
-          },
-          {
             "uri": "http://en.wikipedia.org/wiki/European_Commission",
             "type": "org",
             "label": {
@@ -2381,11 +2362,11 @@
             "score": 2.770083102493075
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Canada",
-            "type": "loc",
+            "uri": "http://en.wikipedia.org/wiki/Majesty",
+            "type": "org",
             "label": {
-              "eng": "Canada",
-              "spa": "Canadá"
+              "eng": "Majesty",
+              "spa": "Majestad"
             },
             "description": "",
             "image": null,
@@ -2397,33 +2378,33 @@
                 "nullPopFq": 0
               }
             },
-            "location": {
-              "type": "country",
-              "geoNamesId": "6251999",
-              "wikiUri": "http://en.wikipedia.org/wiki/Canada",
-              "label": {
-                "eng": "Canada",
-                "spa": "Canadá"
-              },
-              "population": 33679000,
-              "lat": 60.10867,
-              "long": -113.64258,
-              "area": 9984670,
-              "code2": "CA",
-              "code3": "CAN",
-              "webExt": ".ca",
-              "currencyCode": "CAD",
-              "currencyName": "Dollar",
-              "continent": "Noth America"
+            "score": 2.770083102493075
+          },
+          {
+            "uri": "http://en.wikipedia.org/wiki/Firm",
+            "type": "wiki",
+            "label": {
+              "eng": "Unternehmen",
+              "spa": "Unternehmen"
+            },
+            "description": "",
+            "image": null,
+            "synonyms": {},
+            "trendingScore": {
+              "news": {
+                "score": 0,
+                "testPopFq": 0,
+                "nullPopFq": 0
+              }
             },
             "score": 2.493074792243767
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/White_House",
+            "uri": "http://en.wikipedia.org/wiki/Kingdom_of_England",
             "type": "loc",
             "label": {
-              "eng": "White House",
-              "spa": "Casa Blanca"
+              "eng": "Kingdom of England",
+              "spa": "Reino de Inglaterra"
             },
             "description": "",
             "image": null,
@@ -2439,11 +2420,11 @@
             "score": 2.493074792243767
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/National_security",
-            "type": "wiki",
+            "uri": "http://en.wikipedia.org/wiki/Mao_Zedong",
+            "type": "person",
             "label": {
-              "eng": "National security",
-              "spa": "Seguridad nacional"
+              "eng": "Mao Zedong",
+              "spa": "Mao Zedong"
             },
             "description": "",
             "image": null,
@@ -2458,11 +2439,11 @@
             "score": 2.493074792243767
           },
           {
-            "uri": "http://en.wikipedia.org/wiki/Diplomacy",
+            "uri": "http://en.wikipedia.org/wiki/Personal_data",
             "type": "wiki",
             "label": {
-              "eng": "Diplomacy",
-              "spa": "Diplomacia"
+              "eng": "Personal data",
+              "spa": "Personal data"
             },
             "description": "",
             "image": null,
