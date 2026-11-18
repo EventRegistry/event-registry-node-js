@@ -22,6 +22,7 @@ Also contains everything listed under `10.1.0` below, which was never published 
  - `TopicPage.loadTopicPageFromER()` starts from a clean definition; concepts, keywords and settings added earlier no longer leak into the loaded page.
  - `TopicPage.loadTopicPageFromDefinition()` and `loadTopicPageFromFile()` accept definitions that carry `startSourceRankPercentile` or `endSourceRankPercentile`, so a saved definition with source rank limits loads again instead of being ignored.
  - `ComplexArticleQuery`'s `hasDuplicateFilter` option is typed `"skipHasDuplicates" | "keepOnlyHasDuplicates" | "keepAll"`, the values the API accepts (it was typed with the `isDuplicateFilter` values, so the valid values needed a cast).
+ - `RequestArticlesRecentActivity` sends `updatesafterBlogUri` and `updatesAfterPrUri` as `recentActivityArticlesBlogUpdatesAfterUri` and `recentActivityArticlesPrUpdatesAfterUri` (both were sent as the news key and overwrote `updatesAfterNewsUri`). `updatesAfterBlogUri` is accepted as a camel-case alias for `updatesafterBlogUri`.
 
 ## [v10.1.0](https://www.npmjs.com/package/eventregistry/v/10.1.0) (2026-11-11)
 

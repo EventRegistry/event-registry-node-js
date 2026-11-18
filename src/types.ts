@@ -1128,7 +1128,9 @@ export namespace ER {
     export interface RequestArticlesRecentActivityParameters {
         maxArticleCount?: number;
         updatesAfterNewsUri?: string;
+        /** Python-style name; `updatesAfterBlogUri` is an alias and wins when both are set. */
         updatesafterBlogUri?: string;
+        updatesAfterBlogUri?: string;
         updatesAfterPrUri?: string;
         updatesAfterTm?: string | Date;
         updatesAfterMinsAgo?: number;

@@ -524,6 +524,7 @@ export class RequestArticlesRecentActivity extends RequestArticles {
     constructor({maxArticleCount = 100,
                  updatesAfterNewsUri = undefined,
                  updatesafterBlogUri = undefined,
+                 updatesAfterBlogUri = updatesafterBlogUri,
                  updatesAfterPrUri = undefined,
                  updatesAfterTm = undefined,
                  updatesAfterMinsAgo = undefined,
@@ -563,11 +564,11 @@ export class RequestArticlesRecentActivity extends RequestArticles {
         if (updatesAfterNewsUri !== undefined) {
             this.params["recentActivityArticlesNewsUpdatesAfterUri"] = updatesAfterNewsUri;
         }
-        if (updatesafterBlogUri !== undefined) {
-            this.params["recentActivityArticlesNewsUpdatesAfterUri"] = updatesafterBlogUri;
+        if (updatesAfterBlogUri !== undefined) {
+            this.params["recentActivityArticlesBlogUpdatesAfterUri"] = updatesAfterBlogUri;
         }
         if (updatesAfterPrUri !== undefined) {
-            this.params["recentActivityArticlesNewsUpdatesAfterUri"] = updatesAfterPrUri;
+            this.params["recentActivityArticlesPrUpdatesAfterUri"] = updatesAfterPrUri;
         }
         this.params["recentActivityArticlesMandatorySourceLocation"] = mandatorySourceLocation;
         if (returnInfo) {
