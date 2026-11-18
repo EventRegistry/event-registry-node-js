@@ -67,5 +67,14 @@
     "typescript": "5.8.3",
     "typescript-eslint": "^8.73.0",
     "vitest": "^5.1.1"
+  },
+  "overrides": {
+    "jasmine": {
+      "glob": "^14.0.6"
+    },
+    "miniflare": {
+      "sharp": "^0.35.5",
+      "undici": "^7.30.2"
+    }
   }
 }
