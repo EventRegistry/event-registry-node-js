@@ -364,7 +364,7 @@ export class RequestMentionsUriWgtList extends RequestMentions {
             ...unsupported
         } = args;
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestMentionsUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestMentionsUriWgtList", unsupported);
         }
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");

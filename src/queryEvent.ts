@@ -377,7 +377,7 @@ export class RequestEventArticleUriWgts extends RequestEvent {
             ...unsupported
         } = args;
         if (Object.keys(unsupported).length > 0) {
-            Logger.warn(`RequestEventArticleUriWgts: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestEventArticleUriWgts", unsupported);
         }
         this.params = {};
         if (lang !== undefined) {
@@ -439,7 +439,7 @@ export class RequestEventArticleTrend extends RequestEvent {
             ...unsupported
         } = args;
         if (Object.keys(unsupported).length > 0) {
-            Logger.warn(`RequestEventArticleTrend: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestEventArticleTrend", unsupported);
         }
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
@@ -479,7 +479,7 @@ export class RequestEventSimilarEvents extends RequestEvent {
             ...unsupported
         } = args;
         if (Object.keys(unsupported).length > 0) {
-            Logger.warn(`RequestEventSimilarEvents: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestEventSimilarEvents", unsupported);
         }
         if (count > 50) {
             throw new RangeError("At most 50 similar events can be returned per call");

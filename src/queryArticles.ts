@@ -54,7 +54,7 @@ export class QueryArticles extends Query<RequestArticles> {
         if (Object.keys(unsupported).length > 0) {
             const unsupportedKeys = ["sortBy", "sortByAsc", "returnInfo", "maxItems", "signal", "timeoutMs"];
             if (!Object.keys(unsupported).some(key => unsupportedKeys.includes(key))) {
-                console.warn(`QueryArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+                Logger.warnUnsupported("QueryArticles", unsupported);
             }
         }
         this.setVal("action", "getArticles");
@@ -170,7 +170,7 @@ export class QueryArticles extends Query<RequestArticles> {
             try {
                 JSON.parse(complexQuery);
             } catch {
-                console.error("Failed to parse the provided string content as a JSON object. Please check the content provided as a parameter to the initWithComplexQuery() method");
+                Logger.error("Failed to parse the provided string content as a JSON object. Please check the content provided as a parameter to the initWithComplexQuery() method");
             }
             query.setVal("query", complexQuery);
         } else if (typeof complexQuery === "object" && complexQuery !== null) {
@@ -271,7 +271,7 @@ export class RequestArticlesInfo extends RequestArticles {
             ...unsupported
         } = parameters;
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestArticlesInfo: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticlesInfo", unsupported);
         }
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
@@ -304,7 +304,7 @@ export class RequestArticlesUriWgtList extends RequestArticles {
         } = parameters;
 
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestArticlesUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticlesUriWgtList", unsupported);
         }
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
@@ -344,7 +344,7 @@ export class RequestArticlesConceptAggr extends RequestArticles {
                 } = {}) {
         super();
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestArticlesConceptAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticlesConceptAggr", unsupported);
         }
         if (conceptCount > 500) {
             throw new RangeError("At most 500 concepts can be returned per call");
@@ -372,7 +372,7 @@ export class RequestArticlesCategoryAggr extends RequestArticles {
                 } = {}) {
         super();
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestArticlesCategoryAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticlesCategoryAggr", unsupported);
         }
         if (articlesSampleSize > 50000) {
             throw new RangeError("at most 50000 articles can be used for computation sample");
@@ -394,7 +394,7 @@ export class RequestArticlesSourceAggr extends RequestArticles {
                 } = {}) {
         super();
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestArticlesSourceAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticlesSourceAggr", unsupported);
         }
         this.params = {};
         this.params["sourceAggrSourceCount"] = sourceCount;
@@ -414,7 +414,7 @@ export class RequestArticlesKeywordAggr extends RequestArticles {
                 } = {}) {
         super();
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestArticlesKeywordAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticlesKeywordAggr", unsupported);
         }
         if (articlesSampleSize > 20000) {
             throw new RangeError("at most 20000 articles can be used for computation sample");
@@ -436,7 +436,7 @@ export class RequestArticlesConceptGraph extends RequestArticles {
                 } = {}) {
         super();
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestArticlesConceptGraph: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticlesConceptGraph", unsupported);
         }
         if (conceptCount > 1000) {
             throw new RangeError("At most 1000 concepts can be returned per call");
@@ -467,7 +467,7 @@ export class RequestArticlesConceptMatrix extends RequestArticles {
                 } = {}) {
         super();
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestArticlesConceptMatrix: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticlesConceptMatrix", unsupported);
         }
         if (conceptCount > 200) {
             throw new RangeError("At most 200 concepts can be returned per call");
@@ -496,7 +496,7 @@ export class RequestArticlesConceptTrends extends RequestArticles {
             ...unsupported
         } = parameters;
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestArticlesConceptTrends: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticlesConceptTrends", unsupported);
         }
         if (conceptCount > 50) {
             throw new RangeError("At most 50 concepts can be returned per call");
@@ -535,7 +535,7 @@ export class RequestArticlesRecentActivity extends RequestArticles {
                 }: ER.RequestArticlesRecentActivityParameters = {}) {
         super();
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestArticlesRecentActivity: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticlesRecentActivity", unsupported);
         }
         if (maxArticleCount > 2000) {
             throw new RangeError("At most 2000 articles can be returned per call");

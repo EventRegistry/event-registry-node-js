@@ -1,3 +1,4 @@
+import { Logger } from "./logger";
 import { Query } from "./base";
 import { ArticleInfoFlags, ReturnInfo } from "./returnInfo";
 import { ER } from "./types";
@@ -71,7 +72,7 @@ export class RequestArticleSimilarArticles extends RequestArticle {
             ...unsupported
         } = args;
         if (Object.keys(unsupported).length > 0) {
-            console.warn(`RequestArticleSimilarArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticleSimilarArticles", unsupported);
         }
         if (page < 1) {
             throw new RangeError("page has to be >= 1");
@@ -105,7 +106,7 @@ export class RequestArticleDuplicatedArticles extends RequestArticle {
             ...unsupported
         } = args;
         if (Object.keys(unsupported).length > 0) {
-            console.warn(`RequestArticleDuplicatedArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestArticleDuplicatedArticles", unsupported);
         }
         if (page < 1) {
             throw new RangeError("page has to be >= 1");

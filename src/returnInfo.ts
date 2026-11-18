@@ -82,7 +82,7 @@ export class ReturnInfo {
             ...unsupported
         } = {}) {
         if (Object.keys(unsupported).length > 0) {
-            Logger.warn(`ReturnInfo: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("ReturnInfo", unsupported);
         }
         this.articleInfo = articleInfo;
         this.eventInfo = eventInfo;

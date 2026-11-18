@@ -313,7 +313,7 @@ export class RequestEventsUriWgtList extends RequestEvents {
             ...unsupported
         } = args;
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestEventsUriWgtList: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestEventsUriWgtList", unsupported);
         }
         if (page < 1) {
             throw new RangeError("Page has to be >= 1");
@@ -378,7 +378,7 @@ export class RequestEventsLocAggr extends RequestEvents {
             ...unsupported
         } = args;
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestEventsLocAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestEventsLocAggr", unsupported);
         }
         if (eventsSampleSize > 100000) {
             throw new RangeError("At most 100000 results can be used for computing");
@@ -404,7 +404,7 @@ export class RequestEventsLocTimeAggr extends RequestEvents {
             ...unsupported
         } = args;
         if (Object.keys(unsupported).length !== 0) {
-            Logger.warn(`RequestEventsLocTimeAggr: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestEventsLocTimeAggr", unsupported);
         }
         if (eventsSampleSize > 100000) {
             throw new RangeError("At most 100000 results can be used for computing");

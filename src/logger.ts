@@ -101,6 +101,11 @@ export class Logger {
         this.log(LogLevel.WARN, message);
     }
 
+    /** Warn that a constructor received parameters it does not know, e.g. a typo in a filter name. */
+    public static warnUnsupported(owner: string, unsupported: object): void {
+        this.warn(`${owner}: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+    }
+
     public static debug(message: string): void {
         this.ensureStaticInstance().debug(message);
     }

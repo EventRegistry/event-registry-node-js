@@ -54,7 +54,7 @@ export class RequestStoryArticles extends RequestStory {
                 } = {}) {
         super();
         if (Object.keys(unsupported).length > 0) {
-            Logger.warn(`RequestStoryArticles: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestStoryArticles", unsupported);
         }
         if (page < 1) {
           throw new RangeError("Page has to be >= 1");
@@ -81,7 +81,7 @@ export class RequestStoryArticleUris extends RequestStory {
                 } = {}) {
         super();
         if (Object.keys(unsupported).length > 0) {
-            Logger.warn(`RequestStoryArticleUris: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestStoryArticleUris", unsupported);
         }
         this.params = {};
         this.params["articleUrisSortBy"] = sortBy;
@@ -100,7 +100,7 @@ export class RequestStoryArticleTrend extends RequestStory {
                 } = {}) {
         super();
         if (Object.keys(unsupported).length > 0) {
-            Logger.warn(`RequestStoryArticleTrend: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestStoryArticleTrend", unsupported);
         }
         this.params = {};
         this.params["articleTrendLang"] = lang;
@@ -123,7 +123,7 @@ export class RequestStorySimilarStories extends RequestStory {
                 } = {}) {
         super();
         if (Object.keys(unsupported).length > 0) {
-            Logger.warn(`RequestStorySimilarStories: Unsupported parameters detected: ${JSON.stringify(unsupported)}. Please check the documentation.`);
+            Logger.warnUnsupported("RequestStorySimilarStories", unsupported);
         }
         if (count > 50) {
           throw new RangeError("At most 50 stories can be returned per call");
