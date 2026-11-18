@@ -126,6 +126,8 @@ export class EventRegistry {
     private dailyAvailableRequests = -1;
     private remainingAvailableRequests = -1;
     private lastQueryTime = 0;
+    /** `minDelayBetweenRequests` converted to milliseconds. */
+    private minDelayMs = 500;
     private _logRequests = false;
     private readonly lock: Mutex;
     private extraParams: Record<string, unknown> | null = null;
@@ -167,7 +169,7 @@ export class EventRegistry {
         }
         this.logger.debug(`Event Registry host: ${this.config.host}`);
         this.logger.debug(`Text analytics host: ${this.config.hostAnalytics}`);
-        this.config.minDelayBetweenRequests = (this.config.minDelayBetweenRequests ?? 0.5) * 1000;
+        this.minDelayMs = (this.config.minDelayBetweenRequests ?? 0.5) * 1000;
 
         Object.assign(this, this.buildNamespaces(this));
     }
@@ -253,7 +255,7 @@ export class EventRegistry {
 
     /** Minimum delay between requests in seconds (constructor units). */
     public getMinDelayBetweenRequests(): number {
-        return (this.config.minDelayBetweenRequests ?? 500) / 1000;
+        return this.minDelayMs / 1000;
     }
 
     public getRepeatFailedRequestCount(): number {
@@ -400,9 +402,8 @@ export class EventRegistry {
      */
     private async waitForTurn(signal?: AbortSignal): Promise<void> {
         const now = Date.now();
-        const minDelayBetweenRequests = this.config.minDelayBetweenRequests ?? 500;
-        if (this.lastQueryTime && now - this.lastQueryTime < minDelayBetweenRequests) {
-            await abortableSleep(minDelayBetweenRequests - (now - this.lastQueryTime), signal);
+        if (this.lastQueryTime && now - this.lastQueryTime < this.minDelayMs) {
+            await abortableSleep(this.minDelayMs - (now - this.lastQueryTime), signal);
         }
     }
 
