@@ -273,6 +273,18 @@ export namespace ER {
         returnInfo?: ReturnInfo;
     }
 
+    export interface SuggestPagedArguments {
+        /** page of the results (1, 2, ...) */
+        page?: number;
+        /** number of returned suggestions */
+        count?: number;
+    }
+
+    export interface SuggestSourcesAtCoordinateArguments {
+        /** number of returned suggestions */
+        count?: number;
+    }
+
     export interface SuggestSourcesAtPlaceArguments {
         /**
          * page of the results (1, 2, ...)

@@ -56,6 +56,15 @@ function firstMatchField<T, K extends keyof T>(matches: T[] | undefined, field: 
  */
 const USAGE_PATH = "/api/v1/usage";
 
+/** Build the request params for the prefix suggesters from either call style (positional page/count or an args object). */
+function pagedSuggestParams(prefix: string, pageOrArgs: number | ER.SuggestPagedArguments = {}, count?: number) {
+    const { page = 1, count: argsCount = 20, ...otherParams } = typeof pageOrArgs === "number" ? { page: pageOrArgs, count } : pageOrArgs;
+    if (page <= 0) {
+        throw new Error("Page parameter should be above 0.");
+    }
+    return { prefix, page, count: argsCount, ...otherParams };
+}
+
 export class EventRegistry {
     public logger: Logger;
     /** Ergonomic article search/iterate/get façade — see `ArticlesFluent`. */
@@ -794,19 +803,20 @@ export class EventRegistry {
      * @param radiusKm radius in kilometers around the coordinates inside which the news sources should be located
      * @param count number of returned suggestions
      */
-    public async suggestSourcesAtCoordinate(latitude: number, longitude: number, radiusKm: number, count = 20, ...otherParams: unknown[]) {
+    public async suggestSourcesAtCoordinate(latitude: number, longitude: number, radiusKm: number, countOrArgs: number | ER.SuggestSourcesAtCoordinateArguments = 20) {
         if (typeof latitude !== "number") {
             throw new Error("The 'latitude' should be a number");
         }
         if (typeof longitude !== "number") {
             throw new Error("The 'longitude' should be a number");
         }
+        const { count = 20, ...otherParams } = typeof countOrArgs === "number" ? { count: countOrArgs } : countOrArgs;
         const params = {
             action: "getSourcesAtCoordinate",
             lat: latitude,
             lon: longitude,
             radius: radiusKm,
-            count: count,
+            count,
             ...otherParams
         };
         const request = await this.jsonRequest("/api/v1/suggestSourcesFast", params);
@@ -838,16 +848,10 @@ export class EventRegistry {
      * @param page: page of results
      * @param count: number of returned suggestions
      */
-    public async suggestAuthors(prefix: string, page = 1, count = 20, ...otherParams: unknown[]) {
-        if (page <= 0) {
-            throw new Error("Page parameter should be above 0.");
-        }
-        const params = {
-            prefix,
-            page,
-            count,
-            ...otherParams
-        };
+    public async suggestAuthors(prefix: string, args?: ER.SuggestPagedArguments): Promise<ER.Author[]>;
+    public async suggestAuthors(prefix: string, page?: number, count?: number): Promise<ER.Author[]>;
+    public async suggestAuthors(prefix: string, pageOrArgs?: number | ER.SuggestPagedArguments, count?: number) {
+        const params = pagedSuggestParams(prefix, pageOrArgs, count);
         const request = await this.jsonRequest<ER.Author[]>("/api/v1/suggestAuthorsFast", params);
         return request.data;
     }
@@ -858,16 +862,10 @@ export class EventRegistry {
      * @param page: page of results
      * @param count: number of returned suggestions
      */
-    public async suggestEventTypes(prefix: string, page = 1, count = 20, ...otherParams: unknown[]) {
-        if (page <= 0) {
-            throw new Error("Page parameter should be above 0.");
-        }
-        const params = {
-            prefix,
-            page,
-            count,
-            ...otherParams
-        };
+    public async suggestEventTypes(prefix: string, args?: ER.SuggestPagedArguments): Promise<UriSuggestion[]>;
+    public async suggestEventTypes(prefix: string, page?: number, count?: number): Promise<UriSuggestion[]>;
+    public async suggestEventTypes(prefix: string, pageOrArgs?: number | ER.SuggestPagedArguments, count?: number) {
+        const params = pagedSuggestParams(prefix, pageOrArgs, count);
         const request = await this.jsonRequest<UriSuggestion[]>("/api/v1/eventType/suggestEventTypes", params);
         return request.data;
     }
@@ -878,16 +876,10 @@ export class EventRegistry {
      * @param page: page of results
      * @param count: number of returned suggestions
      */
-    public async suggestIndustries(prefix: string, page = 1, count = 20, ...otherParams: unknown[]) {
-        if (page <= 0) {
-            throw new Error("Page parameter should be above 0.");
-        }
-        const params = {
-            prefix,
-            page,
-            count,
-            ...otherParams
-        };
+    public async suggestIndustries(prefix: string, args?: ER.SuggestPagedArguments): Promise<unknown>;
+    public async suggestIndustries(prefix: string, page?: number, count?: number): Promise<unknown>;
+    public async suggestIndustries(prefix: string, pageOrArgs?: number | ER.SuggestPagedArguments, count?: number) {
+        const params = pagedSuggestParams(prefix, pageOrArgs, count);
         const request = await this.jsonRequest("/api/v1/eventType/suggestIndustries", params);
         return request.data;
     }
