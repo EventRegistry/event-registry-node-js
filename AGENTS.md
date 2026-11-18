@@ -62,7 +62,7 @@ npm run test:record # live Jasmine that rewrites test/fixtures/
 | `examples/` | Usage examples (not published); lead with fluent/helpers, keep classic snippets labeled |
 | `MIGRATION.md` | Consumer-facing upgrade guide — update when the public surface changes |
 | `CHANGELOG.md` | User-facing changelog — update on every release |
-| `package.json` | `"files": ["dist"]` — only dist is published |
+| `package.json` | `"files"` ships `dist`, `src`, `MIGRATION.md`, `AGENT-RECIPES.md` and `CHANGELOG.md` |
 
 ## Common Tasks
 
