@@ -57,9 +57,9 @@ export class QueryEvents extends Query<RequestEvents> {
         this.setQueryArrVal(keywords, "keyword", "keywordOper", "and");
         this.setQueryArrVal(conceptUri, "conceptUri", "conceptOper", "and");
         this.setQueryArrVal(categoryUri, "categoryUri", "categoryOper", "or");
-        this.setQueryArrVal(sourceUri, "sourceUri", undefined, "or");
+        this.setQueryArrVal(sourceUri, "sourceUri", "sourceOper", "or");
         this.setQueryArrVal(sourceLocationUri, "sourceLocationUri", undefined, "or");
-        this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", undefined, "or");
+        this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", "sourceGroupOper", "or");
         this.setQueryArrVal(authorUri, "authorUri", "authorOper", "or");
         this.setQueryArrVal(locationUri, "locationUri", undefined, "or");
         this.setQueryArrVal(lang, "lang", undefined, "or");
@@ -95,7 +95,7 @@ export class QueryEvents extends Query<RequestEvents> {
         }
 
         // for the negative conditions, only the OR is a valid operator type
-        this.setQueryArrVal(ignoreKeywords, "ignoreKeywords", undefined, "or");
+        this.setQueryArrVal(ignoreKeywords, "ignoreKeyword", undefined, "or");
         this.setQueryArrVal(ignoreConceptUri, "ignoreConceptUri", undefined, "or");
         this.setQueryArrVal(ignoreCategoryUri, "ignoreCategoryUri", undefined, "or");
         this.setQueryArrVal(ignoreSourceUri, "ignoreSourceUri", undefined, "or");
