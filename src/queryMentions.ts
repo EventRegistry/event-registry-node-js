@@ -398,7 +398,7 @@ export class RequestMentionsConceptAggr extends RequestMentions {
         super();
         const {
             conceptCount = 25,
-            mentionsSampleSize = 100000,
+            mentionsSampleSize = 20000,
             conceptScoring = "importance",
             conceptCountPerType = undefined,
             returnInfo = new ReturnInfo()

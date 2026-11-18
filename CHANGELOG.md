@@ -17,6 +17,9 @@ Also contains everything listed under `10.1.0` below, which was never published 
 **Changed**
  - A malformed `settings.json` now reports the file and the parse error. Unsupported-parameter warnings go through one logger helper. Iterators buffer pages and `jsonRequest` and `jsonRequestAnalytics` share one request path; behaviour is unchanged.
 
+**Fixed**
+ - `new RequestMentionsConceptAggr()` no longer throws with its defaults: `mentionsSampleSize` now defaults to `20000` (was `100000`, above the `20000` cap).
+
 ## [v10.1.0](https://www.npmjs.com/package/eventregistry/v/10.1.0) (2026-11-11)
 
 Additive release on top of `10.0.0`; nothing was removed or renamed. **The classic class-based API is permanent**: it carries no `@deprecated` tags and there is no plan to remove it. See [MIGRATION.md](MIGRATION.md#the-classic-api-is-permanent).
