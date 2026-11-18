@@ -76,6 +76,36 @@ er.getConceptUri("George Clooney").then((conceptUri) => {
 
 Use whichever style fits a given file or team; the two can be mixed freely within the same project, even the same function.
 
+### Errors and retries
+
+By default a failed call resolves to an object with a string `error` (and `apiError`, a typed `ErApiError`, for HTTP failures), so check `response.error`. Set `throwOnError: true` to make failed calls throw instead: HTTP failures throw `ErApiError` (with `status`, `apiCode`, `apiError`, `requestId`, `tokens` and `retryAfterMs`), other failures a plain `Error`.
+
+```typescript
+import { EventRegistry, ErApiError, QueryArticles } from "eventregistry";
+
+const er = new EventRegistry({ apiKey: "YOUR_API_KEY", throwOnError: true });
+try {
+    const response = await er.execQuery(new QueryArticles({ keywords: "Tesla" }));
+    console.info(response);
+} catch (err) {
+    if (err instanceof ErApiError) {
+        console.error(err.status, err.apiError);
+    }
+}
+```
+
+Transient failures are retried up to `repeatFailedRequestCount` times (default `5`, since `11.0.0`; it was `-1`, retry indefinitely). Waits grow exponentially with jitter from `retryDelayMs` (default `5000`) up to `maxRetryDelayMs` (default `30000`), and `Retry-After` is honoured on 429 and 503. Status codes 204, 400, 401, 403 and 530 are never retried. Set `repeatFailedRequestCount: -1` to retry indefinitely, or `0` to fail fast.
+
+### Suggesters
+
+The `suggest*` methods on `EventRegistry` resolve a label prefix to candidate URIs. `suggestAuthors`, `suggestEventTypes` and `suggestIndustries` take paging either positionally or as an object, and `suggestSourcesAtCoordinate` does the same for its count:
+
+```typescript
+await er.suggestAuthors("john", 2, 5);              // page 2, 5 results
+await er.suggestAuthors("john", { page: 2, count: 5 });
+await er.suggestSourcesAtCoordinate(40.7, -74.0, 50, { count: 10 });
+```
+
 ### Usage: dual import/require
 
 The package provides the same API to ES module/TypeScript imports and CommonJS `require` calls:

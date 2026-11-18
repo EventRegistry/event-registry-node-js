@@ -58,7 +58,7 @@ const response = await scoped.articles.search({ conceptUri }).exec();
 
 ## Retry behaviour
 
-Failed requests are retried with exponential backoff, capped at 30 seconds, and `Retry-After` is honoured on 429 and 503. By default retries continue until the request succeeds; set `repeatFailedRequestCount` to a number to give up earlier. When the API answers with an error that is not retried, the response carries an `ErApiError` with the status, the API's error code and, when present, the request id and token cost, so an agent can decide what to do next.
+Failed requests are retried with exponential backoff, capped at 30 seconds, and `Retry-After` is honoured on 429 and 503. By default a request is retried up to 5 times; set `repeatFailedRequestCount` to change that (`-1` retries until the request succeeds, `0` fails fast). When the API answers with an error that is not retried, the response carries an `ErApiError` with the status, the API's error code and, when present, the request id and token cost, so an agent can decide what to do next.
 
 ## Watch for new content
 

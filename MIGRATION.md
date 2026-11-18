@@ -1,8 +1,22 @@
-# Migrating to eventregistry 10.0.0
+# Migrating to eventregistry 11.0.0
 
-This guide covers moving from **`9.1.1`** (the last version on npm) to **`10.0.0`**. Read the [CHANGELOG](CHANGELOG.md) for the itemized list; this document explains the *why* and shows copy-paste examples.
+Coming from `10.x`, read [From 10.x to 11.0.0](#from-10x-to-1100). Coming from `9.1.1`, read the whole guide: [From 9.1.1 to 10.0.0](#from-911-to-1000) first, then the `11.0.0` change. Read the [CHANGELOG](CHANGELOG.md) for the itemized list; this document explains the *why* and shows copy-paste examples.
 
-There was no published `9.1.2` or `11.0.0`. Everything that landed on `development` after `9.1.1` ships as this major.
+## From 10.x to 11.0.0
+
+One breaking change: **failed requests are retried 5 times by default, not indefinitely.** `repeatFailedRequestCount` now defaults to `5` (was `-1`). Before, a down API or a broken network could hang a call forever; now it gives up after 5 retries and the call resolves to `{ error }` (or throws, with `throwOnError: true`).
+
+To keep the old behaviour, set it back explicitly:
+
+```typescript
+const er = new EventRegistry({ apiKey: "YOUR_API_KEY", repeatFailedRequestCount: -1 });
+```
+
+Nothing else was removed or renamed. `11.0.0` also contains the additive `10.1.0` features (typed `ErApiError`, cancellation and deadlines, usage accounting and `maxTokens`, `RecentFeed`, opt-in `validate`), which were never published as a separate version, plus `throwOnError` and the `{ page, count }` form for the paged suggesters. See the [CHANGELOG](CHANGELOG.md) for details.
+
+## From 9.1.1 to 10.0.0
+
+This part covers moving from **`9.1.1`** to **`10.0.0`**. There was no published `9.1.2`: everything that landed on `development` after `9.1.1` shipped as `10.0.0`. The retry default described below (`-1`) changed again in `11.0.0`.
 
 ## TL;DR
 
