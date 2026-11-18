@@ -64,7 +64,7 @@ describe("QueryStory", () => {
             dateStart: "2026-03-01",
             dateEnd: new Date("2026-03-02T05:00:00Z"),
             lang: ["eng"],
-        } as unknown as ConstructorParameters<typeof RequestStorySimilarStories>[0]);
+        });
         expect(req.params).toMatchObject({
             action: "getSimilarStories",
             concepts: JSON.stringify(concepts),
@@ -73,10 +73,10 @@ describe("QueryStory", () => {
             dateEnd: "2026-03-02",
             lang: ["eng"],
         });
-        const bare = new RequestStorySimilarStories({ conceptInfoList: [] } as unknown as ConstructorParameters<typeof RequestStorySimilarStories>[0]);
+        const bare = new RequestStorySimilarStories({ conceptInfoList: [] });
         expect(bare.params.lang).toBeUndefined();
         expect(bare.params.dateStart).toBeUndefined();
-        expect(() => new RequestStorySimilarStories({ conceptInfoList: [], count: 51 } as unknown as ConstructorParameters<typeof RequestStorySimilarStories>[0])).toThrow(RangeError);
+        expect(() => new RequestStorySimilarStories({ conceptInfoList: [], count: 51 })).toThrow(RangeError);
         expect(() => new RequestStorySimilarStories()).toThrow(/not an array/);
     });
 });
