@@ -284,6 +284,8 @@ er.getCategoryUri("business").then((businessUri) => {
 
 Depending on your interest and existing knowledge of the `eventregistry` package you can check different things:
 
+For method signatures and option types, the [API reference](https://eventregistry.github.io/event-registry-node-js/) is the current source. The wiki pages below explain the concepts and may lag behind the 10.x API.
+
 **[Terminology](https://github.com/EventRegistry/event-registry-node-js/wiki/Terminology)**. There are numerous terms in the Event Registry that you will constantly see. If you don't know what we mean by an *event*, *story*, *concept* or *category*, you should definitely check this page first.
 
 **[Learn about `EventRegistry` class](https://github.com/EventRegistry/event-registry-node-js/wiki/Eventregistry-class)**. You will need to use the `EventRegistry` class whenever you will want to interact with Event Registry so you should learn about it.
