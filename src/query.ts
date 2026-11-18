@@ -198,10 +198,10 @@ export class ComplexArticleQuery extends QueryCore {
         if (args.dataType !== "news") {
             filter["dataType"] = args.dataType;
         }
-        if (args.minSentiment) {
+        if (args.minSentiment != null) {
             filter["minSentiment"] = args.minSentiment;
         }
-        if (args.maxSentiment) {
+        if (args.maxSentiment != null) {
             filter["maxSentiment"] = args.maxSentiment;
         }
         if ((args.minSocialScore ?? 0) > 0) {
@@ -245,10 +245,10 @@ export class ComplexEventQuery extends QueryCore {
         }
         this.queryObj["$query"] = query.getQuery();
         const filter: Record<string, unknown> = {};
-        if (args?.minSentiment) {
+        if (args?.minSentiment != null) {
             filter["minSentiment"] = args.minSentiment;
         }
-        if (args?.maxSentiment) {
+        if (args?.maxSentiment != null) {
             filter["maxSentiment"] = args.maxSentiment;
         }
         if (Object.keys(filter).length > 0) {

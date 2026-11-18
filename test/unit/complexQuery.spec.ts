@@ -122,6 +122,13 @@ describe("ComplexArticleQuery", () => {
         });
     });
 
+    it("keeps a sentiment bound of 0", () => {
+        expect(new ComplexArticleQuery(base, { minSentiment: 0, maxSentiment: 0 }).getQuery()).toEqual({
+            $query: { conceptUri: "c" },
+            $filter: { minSentiment: 0, maxSentiment: 0 },
+        });
+    });
+
     it("rejects a query that is not a QueryCore", () => {
         expect(() => new ComplexArticleQuery({} as BaseQuery)).toThrow(/query parameter/);
     });
@@ -134,6 +141,10 @@ describe("ComplexEventQuery", () => {
         expect(new ComplexEventQuery(base, { minSentiment: -0.3, maxSentiment: 0.7 }).getQuery()).toEqual({
             $query: { keyword: "k" },
             $filter: { minSentiment: -0.3, maxSentiment: 0.7 },
+        });
+        expect(new ComplexEventQuery(base, { minSentiment: 0, maxSentiment: 0 }).getQuery()).toEqual({
+            $query: { keyword: "k" },
+            $filter: { minSentiment: 0, maxSentiment: 0 },
         });
         expect(() => new ComplexEventQuery({} as BaseQuery)).toThrow(/query parameter/);
     });

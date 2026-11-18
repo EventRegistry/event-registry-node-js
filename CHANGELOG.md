@@ -24,6 +24,7 @@ Also contains everything listed under `10.1.0` below, which was never published 
  - `ComplexArticleQuery`'s `hasDuplicateFilter` option is typed `"skipHasDuplicates" | "keepOnlyHasDuplicates" | "keepAll"`, the values the API accepts (it was typed with the `isDuplicateFilter` values, so the valid values needed a cast).
  - `RequestArticlesRecentActivity` sends `updatesafterBlogUri` and `updatesAfterPrUri` as `recentActivityArticlesBlogUpdatesAfterUri` and `recentActivityArticlesPrUpdatesAfterUri` (both were sent as the news key and overwrote `updatesAfterNewsUri`). `updatesAfterBlogUri` is accepted as a camel-case alias for `updatesafterBlogUri`.
  - `QueryEvents` sends `ignoreKeywords` under the `ignoreKeyword` key the API reads (it was sent as `ignoreKeywords` and ignored), and sends `sourceOper` / `sourceGroupOper`, so `QueryItems.AND` on `sourceUri` or `sourceGroupUri` works instead of throwing. Both match `QueryArticles` and the Python SDK.
+ - `ComplexArticleQuery` and `ComplexEventQuery` keep a `minSentiment` or `maxSentiment` of `0` in the filter; it was dropped as if unset.
  - TypeScript users can set options that were published as `undefined`-only in the `.d.ts`: `RequestArticlesConceptAggr`'s `conceptCountPerType`, `RequestStorySimilarStories`' `conceptInfoList`, `dateStart`, `dateEnd` and `lang`, `GetRecentEvents`' `mandatoryLang`, and `GetRecentArticles`' `mandatorySourceLocation` and `lang`. No runtime change.
 
 ## [v10.1.0](https://www.npmjs.com/package/eventregistry/v/10.1.0) (2026-11-11)
