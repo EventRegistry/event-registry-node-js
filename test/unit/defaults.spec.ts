@@ -10,7 +10,7 @@ describe("EventRegistry defaults", () => {
         expect(er.getHost()).toBe("https://eventregistry.org");
         expect(er.getHostAnalytics()).toBe("https://analytics.eventregistry.org");
         expect(er.getMinDelayBetweenRequests()).toBe(0.5);
-        expect(er.getRepeatFailedRequestCount()).toBe(-1);
+        expect(er.getRepeatFailedRequestCount()).toBe(5);
     });
 
     it("allows overriding host to http", () => {

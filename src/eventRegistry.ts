@@ -116,7 +116,7 @@ export class EventRegistry {
         hostAnalytics: "https://analytics.eventregistry.org",
         logging: false,
         minDelayBetweenRequests: 0.5,
-        repeatFailedRequestCount: -1,
+        repeatFailedRequestCount: 5,
         verboseOutput: false,
         allowUseOfArchive: true
     };
@@ -259,7 +259,7 @@ export class EventRegistry {
     }
 
     public getRepeatFailedRequestCount(): number {
-        return this.config.repeatFailedRequestCount ?? -1;
+        return this.config.repeatFailedRequestCount ?? 5;
     }
 
     /**

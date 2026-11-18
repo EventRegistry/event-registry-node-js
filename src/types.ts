@@ -101,7 +101,8 @@ export namespace ER {
         /**
          * If a request fails (for example, because ER is down),
          * what is the max number of times the request should be repeated.
-         * @default -1
+         * Use -1 to retry indefinitely.
+         * @default 5
          */
         repeatFailedRequestCount?: number;
         /**
