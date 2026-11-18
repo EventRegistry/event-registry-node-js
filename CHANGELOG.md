@@ -16,7 +16,6 @@ Additive release on top of `10.0.0`; nothing was removed or renamed. **The class
  - API reference generated with TypeDoc and published to GitHub Pages (`npm run docs`).
  - [AGENT-RECIPES.md](AGENT-RECIPES.md) and a runnable `examples/agentRecipesExamples.ts` for the suggest, scan, triage, retrieve workflow.
  - CI imports the ESM build in Bun and in workerd (through Miniflare) and constructs the client. Supported runtimes are listed in the README.
- - A weekly workflow re-records the test fixtures against the live API and publishes the diff as an artifact. It never commits or merges.
 
 **Changed**
  - The package imports `node:fs` and `node:path` (was `fs` and `path`). Behaviour on Node is identical; on Cloudflare Workers the `nodejs_compat` flag is required.
