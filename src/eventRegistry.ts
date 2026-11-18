@@ -1100,7 +1100,7 @@ export class EventRegistry {
  */
 export class ArticleMapper {
     private er: EventRegistry;
-    private articleUrlToUri: Record<string, unknown> = {};
+    private readonly articleUrlToUri = new Map<string, unknown>();
     private rememberMappings = true;
 
     constructor(er: EventRegistry, rememberMapping = true) {
@@ -1115,13 +1115,13 @@ export class ArticleMapper {
      * @param articleUrl string containing the article url
      */
     public async getArticleUri(articleUrl: string) {
-        if (this.articleUrlToUri.hasOwnProperty(articleUrl)) {
-            return this.articleUrlToUri[articleUrl];
+        if (this.articleUrlToUri.has(articleUrl)) {
+            return this.articleUrlToUri.get(articleUrl);
         }
         const response = await this.er.getArticleUris(articleUrl);
         const value = response?.[articleUrl];
         if (this.rememberMappings && value) {
-            this.articleUrlToUri = { ...this.articleUrlToUri, [articleUrl]: value };
+            this.articleUrlToUri.set(articleUrl, value);
         }
         return value;
     }
