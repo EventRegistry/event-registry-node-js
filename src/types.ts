@@ -1027,7 +1027,7 @@ export namespace ER {
              *  - "keepOnlyHasDuplicates" (return only the articles that have been later copied by others)
              *  - "keepAll" (no filtering, default)
              */
-            hasDuplicateFilter?: "skipDuplicates" | "keepOnlyDuplicates" | "keepAll";
+            hasDuplicateFilter?: "skipHasDuplicates" | "keepOnlyHasDuplicates" | "keepAll";
             /**
              * Some articles describe a known event and some don't. This filter allows you to filter the resulting articles based on this criteria.
              * Possible values are:
