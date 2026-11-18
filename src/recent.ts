@@ -11,7 +11,7 @@ export class GetRecentEvents extends QueryParamsBase {
     constructor(er: EventRegistry, { mandatoryLang = undefined,
                                      mandatoryLocation = true,
                                      returnInfo = new ReturnInfo()
-                                   } = {}) {
+                                   }: { mandatoryLang?: string | string[]; mandatoryLocation?: boolean; returnInfo?: ReturnInfo } = {}) {
         super();
         this.er = er;
         this.setVal("recentActivityEventsMandatoryLocation", mandatoryLocation);
@@ -59,7 +59,7 @@ export class GetRecentArticles extends QueryParamsBase {
                                      lang = undefined,
                                      returnInfo = new ReturnInfo(),
                                      ...kwargs
-                                   } = {}) {
+                                   }: { mandatorySourceLocation?: boolean; lang?: string | string[]; returnInfo?: ReturnInfo } = {}) {
         super();
         this.er = er;
         this.setVal("recentActivityArticlesMandatorySourceLocation", mandatorySourceLocation);

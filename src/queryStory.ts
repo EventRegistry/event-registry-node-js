@@ -120,6 +120,13 @@ export class RequestStorySimilarStories extends RequestStory {
                   lang = [],
                   returnInfo = new ReturnInfo(),
                   ...unsupported
+                }: {
+                    conceptInfoList?: { uri: string; wgt: number }[];
+                    count?: number;
+                    dateStart?: string | Date;
+                    dateEnd?: string | Date;
+                    lang?: string | string[];
+                    returnInfo?: ReturnInfo;
                 } = {}) {
         super();
         if (Object.keys(unsupported).length > 0) {

@@ -341,6 +341,12 @@ export class RequestArticlesConceptAggr extends RequestArticles {
                  articlesSampleSize = 10000,
                  returnInfo = new ReturnInfo(),
                  ...unsupported
+                }: {
+                    conceptCount?: number;
+                    conceptCountPerType?: number;
+                    conceptScoring?: string;
+                    articlesSampleSize?: number;
+                    returnInfo?: ReturnInfo;
                 } = {}) {
         super();
         if (Object.keys(unsupported).length !== 0) {
