@@ -908,7 +908,7 @@ export class EventRegistry {
     }
 
     /**
-     * Return a list of SDG uris. Note: Industries can only be used when querying mentions (QueryMentions, QueryMentionsIter)
+     * Return a list of SDG uris. Note: SDGs can only be used when querying mentions (QueryMentions, QueryMentionsIter)
      */
     public async getSdgUris() {
         const request = await this.jsonRequest("/api/v1/eventType/sdg/getItems");
@@ -1077,7 +1077,7 @@ export class EventRegistry {
     }
 
     /**
-     * Return information about the latest imported article
+     * Return the list of source groups
      */
     public async getSourceGroups() {
         const request = await this.jsonRequest("/api/v1/sourceGroup/getSourceGroups", { action: "getSourceGroups"});
