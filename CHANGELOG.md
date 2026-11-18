@@ -2,6 +2,19 @@
 
 This log contains changes specific to the NodeJS SDK.
 
+## Unreleased
+
+**Breaking**
+ - The default `repeatFailedRequestCount` is now `5` (was `-1`, retry indefinitely), so a down API no longer hangs a call forever. Set `repeatFailedRequestCount: -1` to keep the old behaviour. Needs a major version when released.
+
+**Added**
+ - `throwOnError` config option: failed calls throw (`ErApiError` for HTTP failures) instead of resolving to `{ error }`. Off by default.
+ - `suggestAuthors`, `suggestEventTypes` and `suggestIndustries` also take `{ page, count }` as the second argument, and `suggestSourcesAtCoordinate` takes `{ count }` as the fourth. The positional forms still work. Extra parameters are now sent correctly (the old `...otherParams` rest array was spread as numeric keys).
+ - `retryDelayMs` and `maxRetryDelayMs` are part of the client config type.
+
+**Changed**
+ - A malformed `settings.json` now reports the file and the parse error. Unsupported-parameter warnings go through one logger helper. Iterators buffer pages and `jsonRequest` and `jsonRequestAnalytics` share one request path; behaviour is unchanged.
+
 ## [v10.1.0](https://www.npmjs.com/package/eventregistry/v/10.1.0) (2026-11-11)
 
 Additive release on top of `10.0.0`; nothing was removed or renamed. **The classic class-based API is permanent**: it carries no `@deprecated` tags and there is no plan to remove it. See [MIGRATION.md](MIGRATION.md#the-classic-api-is-permanent).

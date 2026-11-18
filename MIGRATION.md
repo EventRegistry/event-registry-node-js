@@ -145,7 +145,7 @@ The library's own source now compiles under TypeScript `strict` mode. Consequenc
 
 - **Node.js 18+ is a hard requirement** — `fetch`/`Headers`/`AbortController` are global built-ins starting with Node 18. There is no polyfill bundled.
 - Axios is no longer a dependency — smaller install, no transitive Axios CVEs to track.
-- Stop-status-code list (`204`, `400`, `401`, `403`, `530`) does not retry. Transient HTTP/network failures still retry (`repeatFailedRequestCount: -1` by default). Invalid JSON bodies and JSON parse failures on HTTP 200 fail immediately instead of looping.
+- Stop-status-code list (`204`, `400`, `401`, `403`, `530`) does not retry. Transient HTTP/network failures still retry (`repeatFailedRequestCount: 5` by default since the unreleased major, `-1` before; set `-1` to retry indefinitely). Invalid JSON bodies and JSON parse failures on HTTP 200 fail immediately instead of looping.
 - If you were reaching into Axios-specific error shapes (`error.response`, `error.isAxiosError`, interceptors, etc.) anywhere in your own error handling, update those call sites — `jsonRequest` still swallows transport failures into `{ error: string, … }` rather than throwing an Axios error. `getLastHeaders()` is a Fetch `Headers` object.
 
 ## 5. Logging: Winston removed, `Logger`/`LogLevel` API unchanged

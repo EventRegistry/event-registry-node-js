@@ -94,7 +94,8 @@ Key options (`ER.Config` in `src/types.ts`):
 | `hostAnalytics` | `https://analytics.eventregistry.org` | Analytics host; constructor value can override |
 | `logging` | `false` | Write logs to `logs/` directory |
 | `minDelayBetweenRequests` | `0.5` (seconds) | Throttle between requests |
-| `repeatFailedRequestCount` | `-1` | Retry transient failures indefinitely |
+| `repeatFailedRequestCount` | `5` | Retry transient failures this many times (`-1` = indefinitely) |
+| `throwOnError` | `false` | Throw (`ErApiError` or `Error`) instead of resolving to `{ error }` |
 | `allowUseOfArchive` | `true` | Allow archive queries on iterators |
 
 Logging level: `er.logger.logLevel = LogLevel.DEBUG` after construction.
