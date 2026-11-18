@@ -372,6 +372,9 @@ export class EventRegistry {
             this.logger.error("Request did not return with the 'data' property.");
         }
         const data = request?.data || {} as ER.Response<T>;
+        if (this.config.throwOnError && typeof data.error === "string" && data.error) {
+            throw (data as { apiError?: ErApiError }).apiError ?? new Error(data.error);
+        }
         if (this.config.validate) {
             const issues = validateResponse(data);
             if (issues.length > 0) {

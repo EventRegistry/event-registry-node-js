@@ -68,6 +68,12 @@ export namespace ER {
          */
         validate?: boolean;
         /**
+         * Throw when a call fails instead of resolving to `{ error }`. HTTP failures throw `ErApiError`, other failures a plain `Error`.
+         * Off by default so existing `if (response.error)` checks keep working.
+         * @default false
+         */
+        throwOnError?: boolean;
+        /**
          * Token budget for this client. Once the tokens reported by the API since construction (or `usage.reset()`)
          * plus the last reported cost of the same endpoint would exceed it, calls throw `ErBudgetExceededError`
          * before any request is sent. The cost of a call is only known afterwards, so the guard can overshoot by one call.
