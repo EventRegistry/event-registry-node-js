@@ -58,14 +58,15 @@ export class QueryIterationEngine<TItem> implements AsyncIterable<TItem> {
     }
 
     private async iterate(): Promise<void> {
-        if (this.current) {
-            this.callback(this.current);
-            this.index += 1;
-        } else if (!await this.getNextBatch()) {
-            this.doneCallback(this.errorMessage);
-            return;
+        for (;;) {
+            if (this.current) {
+                this.callback(this.current);
+                this.index += 1;
+            } else if (!await this.getNextBatch()) {
+                this.doneCallback(this.errorMessage);
+                return;
+            }
         }
-        return this.iterate();
     }
 
     public async getNextBatch(): Promise<boolean> {
@@ -84,7 +85,9 @@ export class QueryIterationEngine<TItem> implements AsyncIterable<TItem> {
             const extractedSize = maxItems !== -1 ? maxItems - this.returnedSoFar : results.length;
             const extracted = results.slice(0, extractedSize).filter(Boolean);
             this.returnedSoFar += extracted.length;
-            this.items = [...this.items, ...extracted];
+            // Only the current page is buffered, so consumed items can be garbage collected.
+            this.items = extracted;
+            this.index = 0;
             return true;
         } catch (err) {
             if (isCancellation(err, this.options.signal)) {
