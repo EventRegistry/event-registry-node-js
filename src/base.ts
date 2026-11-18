@@ -39,14 +39,20 @@ export class QueryParamsBase {
      * Encode datetime into UTC ISO format which can be sent to ER.
      */
     public static encodeDateTime(val: string | Date, format?: string): string {
-        const date = val instanceof Date ? val : new Date(val);
+        // As in the Python SDK, a datetime string without a zone is UTC, not local time.
+        const zoneless = typeof val === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?$/.test(val);
+        const date = val instanceof Date ? val : new Date(zoneless ? `${val}Z` : val);
         if (isNaN(date.getTime())) {
             throw new Error("Datetime was not recognizable. Use `new Date()` or string in ISO format");
         }
         if (format === "YYYY-MM-DD") {
             return date.toISOString().slice(0, 10);
         }
-        return date.toISOString();
+        if (zoneless) {
+            return val;
+        }
+        // The API takes UTC without a zone suffix, which is what the Python SDK sends.
+        return date.toISOString().replace(/(\.000)?Z$/, "");
     }
 
     /**

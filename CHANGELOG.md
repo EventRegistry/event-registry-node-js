@@ -26,6 +26,7 @@ Also contains everything listed under `10.1.0` below, which was never published 
  - `new QueryMentions()` without `requestedResult` asks for the mention list (`RequestMentionsInfo`), like the other queries and the Python SDK. It sent no `resultType` before.
  - `QueryMentions` has the same two fixes as `QueryEvents` below: it sends `ignoreKeywords` as `ignoreKeyword`, and sends `sourceOper` / `sourceGroupOper`.
  - `QueryEvents` sends `ignoreKeywords` under the `ignoreKeyword` key the API reads (it was sent as `ignoreKeywords` and ignored), and sends `sourceOper` / `sourceGroupOper`, so `QueryItems.AND` on `sourceUri` or `sourceGroupUri` works instead of throwing. Both match `QueryArticles` and the Python SDK.
+ - Recent-activity times (`updatesAfterTm`, `updatesUntilTm`) are sent in UTC without a zone suffix (`2026-01-01T10:00:00`), as the Python SDK sends them. A datetime string without a zone is now read as UTC. Before, it was read as local time, so the time sent was shifted on machines outside UTC.
  - `ComplexArticleQuery` and `ComplexEventQuery` keep a `minSentiment` or `maxSentiment` of `0` in the filter; it was dropped as if unset.
  - TypeScript users can set options that were published as `undefined`-only in the `.d.ts`: `RequestArticlesConceptAggr`'s `conceptCountPerType`, `RequestStorySimilarStories`' `conceptInfoList`, `dateStart`, `dateEnd` and `lang`, `GetRecentEvents`' `mandatoryLang`, and `GetRecentArticles`' `mandatorySourceLocation` and `lang`. No runtime change.
 

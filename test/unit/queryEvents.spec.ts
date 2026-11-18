@@ -267,7 +267,7 @@ describe("RequestEvents result types", () => {
             recentActivityEventsMinAvgCosSim: 0,
         });
         expect(new RequestEventsRecentActivity({ updatesAfterTm: "2026-01-01T10:00:00Z", returnInfo: new ReturnInfo() }).params).toMatchObject({
-            recentActivityEventsUpdatesAfterTm: "2026-01-01T10:00:00.000Z",
+            recentActivityEventsUpdatesAfterTm: "2026-01-01T10:00:00",
         });
         expect(new RequestEventsRecentActivity({ updatesAfterMinsAgo: 5, mandatoryLocation: false, minAvgCosSim: 0.3 }).params).toMatchObject({
             recentActivityEventsUpdatesAfterMinsAgo: 5,

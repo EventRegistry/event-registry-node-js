@@ -248,7 +248,7 @@ describe("RequestArticles result types", () => {
             recentActivityArticlesNewsUpdatesAfterUri: "n1",
             recentActivityArticlesBlogUpdatesAfterUri: "b1",
             recentActivityArticlesPrUpdatesAfterUri: "p1",
-            recentActivityArticlesUpdatesAfterTm: "2026-01-01T10:00:00.000Z",
+            recentActivityArticlesUpdatesAfterTm: "2026-01-01T10:00:00",
             recentActivityArticlesUpdatesUntilMinsAgo: 5,
             recentActivityArticlesMandatorySourceLocation: true,
         });
@@ -256,7 +256,7 @@ describe("RequestArticles result types", () => {
         expect(new RequestArticlesRecentActivity({ updatesafterBlogUri: "old", updatesAfterBlogUri: "new" }).params.recentActivityArticlesBlogUpdatesAfterUri).toBe("new");
         expect(new RequestArticlesRecentActivity({ updatesAfterMinsAgo: 10, updatesUntilTm: "2026-01-02T00:00:00Z" }).params).toMatchObject({
             recentActivityArticlesUpdatesAfterMinsAgo: 10,
-            recentActivityArticlesUpdatesUntilTm: "2026-01-02T00:00:00.000Z",
+            recentActivityArticlesUpdatesUntilTm: "2026-01-02T00:00:00",
         });
         expect(() => new RequestArticlesRecentActivity({ updatesAfterTm: "2026-01-01", updatesAfterMinsAgo: 5 })).toThrow(/not both/);
         expect(() => new RequestArticlesRecentActivity({ updatesUntilTm: "2026-01-01", updatesUntilMinsAgo: 5 })).toThrow(/not both/);

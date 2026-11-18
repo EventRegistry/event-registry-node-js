@@ -218,14 +218,14 @@ describe("RequestMentions result types", () => {
         });
         expect(req.params).toMatchObject({
             recentActivityMentionsMaxMentionCount: 100,
-            recentActivityMentionsUpdatesAfterTm: "2026-01-01T00:00:00.000Z",
+            recentActivityMentionsUpdatesAfterTm: "2026-01-01T00:00:00",
             recentActivityMentionsUpdatesUntilMinsAgo: 3,
             recentActivityMentionsUpdatesAfterUri: "m9",
             recentActivityMentionsMandatorySourceLocation: true,
         });
         const other = new RequestMentionsRecentActivity({ updatesAfterMinsAgo: 7, updatesUntilTm: "2026-01-02T00:00:00Z" });
         expect(other.params.recentActivityMentionsUpdatesAfterMinsAgo).toBe(7);
-        expect(other.params.recentActivityMentionsUpdatesUntilTm).toBe("2026-01-02T00:00:00.000Z");
+        expect(other.params.recentActivityMentionsUpdatesUntilTm).toBe("2026-01-02T00:00:00");
     });
 });
 
