@@ -408,76 +408,18 @@ export class EventRegistry {
     }
 
     public async jsonRequestAnalytics<T = unknown>(path: string, parameters?: Record<string, unknown>, headers?: Record<string, unknown>, cookies?: Record<string, unknown>, options?: ER.RequestOptions): Promise<ErHttpResponse<T>> {
-        let request: ErHttpResponse<T>;
-        const scope = this.composeCallScope(options);
-        await this.acquireLock(scope);
-        try {
-            await this.waitForTurn(scope.signal);
-            this.usage.assertWithinBudget(path);
-            parameters = {
-                ...parameters,
-                ...(this.extraParams || {}),
-                apiKey: this.config?.apiKey
-            };
-            let requestHeaders: Record<string, string> = {...(headers as Record<string, string> || {})};
-            if (!!headers) {
-                requestHeaders = {...(headers as Record<string, string>)};
-            }
-            if (!!cookies) {
-                const cookieString = Object.keys(cookies).map((key) => key + "=" + String(cookies[key])).join(";") + ";";
-                requestHeaders = {...requestHeaders, Cookie: cookieString};
-            }
-            try {
-                request = await erFetch<T>({
-                    url: `${this.config.hostAnalytics}${path}`,
-                    method: "POST",
-                    body: parameters,
-                    headers: requestHeaders,
-                    signal: scope.signal,
-                    timeoutMs: 600_000,
-                    retry: this.config.repeatFailedRequestCount,
-                    retryDelayMs: this.config.retryDelayMs,
-                    maxRetryDelayMs: this.config.maxRetryDelayMs,
-                    stopStatusCodes: this.stopStatusCodes
-                });
-            } finally {
-                this.lastQueryTime = Date.now();
-            }
-            this.headers = request.headers;
-            this.usage.record(path, request.headers);
-            if (request?.status !== 200) {
-                throw new Error(request?.statusText);
-            }
-            const errorMessage = (request?.data as Record<string, string>)?.error || "";
-            if (errorMessage) {
-                throw new Error(errorMessage);
-            }
-        } catch (error: unknown) {
-            if (error instanceof ErBudgetExceededError) {
-                throw error;
-            }
-            if (scope.signal?.aborted) {
-                throw scope.signal.reason;
-            }
-            request = this.createErrorResponse<T>(error);
-            const err = error as { stack?: string; message?: string; response?: { status?: number; statusText?: string; data?: unknown }; errno?: unknown };
-            if (this.config.verboseOutput) {
-                this.logger.error("Event Registry Analytics exception while executing the request.");
-                if (err && err.stack && err.message) {
-                    this.logger.error(err.message);
-                } else {
-                    this.logger.error(`${err?.response?.status}: ${err?.response?.statusText} => ${String(err?.response?.data)}`);
-                }
-            }
-            // try to print out the error that should be passed by in case the server is down or responds with errors
-            if (this.config?.logging) {
-                this.logger.error(String(err?.errno ?? error));
-            }
-        } finally {
-            this.lock.release();
-            scope.dispose();
+        const requestHeaders: Record<string, string> = { ...(headers as Record<string, string> | undefined) };
+        if (cookies) {
+            requestHeaders.Cookie = Object.keys(cookies).map((key) => key + "=" + String(cookies[key])).join(";") + ";";
         }
-        return request;
+        return this.send<T>({
+            label: "Event Registry Analytics",
+            url: `${this.config.hostAnalytics}${path}`,
+            path,
+            parameters,
+            headers: requestHeaders,
+            options
+        });
     }
 
     /**
@@ -486,33 +428,64 @@ export class EventRegistry {
      * @param parameters Optional parameters to be included in the request
      */
     public async jsonRequest<T = unknown>(path: string, parameters?: Record<string, unknown>, allowUseOfArchive: boolean = this.config.allowUseOfArchive ?? true, options?: ER.RequestOptions): Promise<ErHttpResponse<T>> {
+        return this.send<T>({
+            label: "Event Registry",
+            url: `${this.config.host}${path}`,
+            path,
+            parameters,
+            allowUseOfArchive,
+            options,
+            budgeted: path !== USAGE_PATH,
+            logged: true,
+            readsRateLimit: true
+        });
+    }
+
+    /**
+     * Shared by `jsonRequest` and `jsonRequestAnalytics`: queue behind the lock, honour the minimum delay and
+     * the token budget, POST with retries, record usage, and turn failures into an error response.
+     */
+    private async send<T>(spec: {
+        label: string;
+        url: string;
+        path: string;
+        parameters?: Record<string, unknown>;
+        headers?: Record<string, string>;
+        allowUseOfArchive?: boolean;
+        options?: ER.RequestOptions;
+        budgeted?: boolean;
+        logged?: boolean;
+        readsRateLimit?: boolean;
+    }): Promise<ErHttpResponse<T>> {
+        const { label, url, path, headers, options, allowUseOfArchive = true, budgeted = true } = spec;
         let request: ErHttpResponse<T>;
         const scope = this.composeCallScope(options);
         await this.acquireLock(scope);
         try {
             await this.waitForTurn(scope.signal);
-            if (path !== USAGE_PATH) {
+            if (budgeted) {
                 this.usage.assertWithinBudget(path);
             }
-            if (this._logRequests) {
-                if (Object.keys(parameters || {}).length > 0) {
-                    this.logger.logRequest("# " + JSON.stringify(parameters) + "\n");
+            if (spec.logged && this._logRequests) {
+                if (Object.keys(spec.parameters || {}).length > 0) {
+                    this.logger.logRequest("# " + JSON.stringify(spec.parameters) + "\n");
                 }
                 this.logger.logRequest(path + "\n\n");
             }
-            parameters = {
-                ...parameters,
+            let parameters: Record<string, unknown> = {
+                ...spec.parameters,
                 ...(this.extraParams || {}),
                 apiKey: this.config?.apiKey
             };
             if (!allowUseOfArchive) {
-                parameters = {...parameters, forceMaxDataTimeWindow: 31};
+                parameters = { ...parameters, forceMaxDataTimeWindow: 31 };
             }
             try {
                 request = await erFetch<T>({
-                    url: `${this.config.host}${path}`,
+                    url,
                     method: "POST",
                     body: parameters,
+                    headers,
                     signal: scope.signal,
                     timeoutMs: 600_000,
                     retry: this.config.repeatFailedRequestCount,
@@ -528,11 +501,13 @@ export class EventRegistry {
             if (request?.status !== 200) {
                 throw new Error(request?.statusText);
             }
-            if (this.getLastHeader("warning")) {
-                this.logger.warn(`WARNING: ${this.getLastHeader("warning")}`);
+            if (spec.readsRateLimit) {
+                if (this.getLastHeader("warning")) {
+                    this.logger.warn(`WARNING: ${this.getLastHeader("warning")}`);
+                }
+                this.dailyAvailableRequests = Number(this.getLastHeader("x-ratelimit-limit", "-1"));
+                this.remainingAvailableRequests = Number(this.getLastHeader("x-ratelimit-remaining", "-1"));
             }
-            this.dailyAvailableRequests = Number(this.getLastHeader("x-ratelimit-limit", "-1"));
-            this.remainingAvailableRequests = Number(this.getLastHeader("x-ratelimit-remaining", "-1"));
             const errorMessage = (request?.data as Record<string, string>)?.error || "";
             if (errorMessage) {
                 throw new Error(errorMessage);
@@ -546,15 +521,15 @@ export class EventRegistry {
             }
             request = this.createErrorResponse<T>(error);
             const err = error as { stack?: string; message?: string; response?: { status?: number; statusText?: string; data?: unknown }; errno?: unknown };
-            // try to print out the error that should be passed by in case the server is down or responds with errors
             if (this.config.verboseOutput) {
-                this.logger.error("Event Registry exception while executing the request.");
+                this.logger.error(`${label} exception while executing the request.`);
                 if (err && err.stack && err.message) {
                     this.logger.error(err.message);
                 } else {
                     this.logger.error(`${err?.response?.status}: ${err?.response?.statusText} => ${String(err?.response?.data)}`);
                 }
             }
+            // try to print out the error that should be passed by in case the server is down or responds with errors
             if (this.config?.logging) {
                 this.logger.error(String(err?.errno ?? error));
             }
