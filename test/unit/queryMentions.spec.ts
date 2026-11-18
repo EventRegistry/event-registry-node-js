@@ -82,7 +82,7 @@ describe("QueryMentions parameters", () => {
             lang: "eng",
             dateStart: "2026-01-02",
             dateEnd: "2026-01-05",
-            ignoreKeywords: "spam",
+            ignoreKeyword: "spam",
             ignoreLang: "deu",
             showDuplicates: true,
             startSourceRankPercentile: 10,
@@ -92,10 +92,18 @@ describe("QueryMentions parameters", () => {
             minSentenceIndex: 1,
             maxSentenceIndex: 4,
         });
+        expect(params).not.toHaveProperty("ignoreKeywords");
+    });
+
+    it("sends the source operators, so AND on sources works", () => {
+        expect(new QueryMentions({
+            sourceUri: QueryItems.AND(["s1", "s2"]),
+            sourceGroupUri: QueryItems.AND(["g1", "g2"]),
+        }).getQueryParams()).toMatchObject({ sourceOper: "and", sourceGroupOper: "and" });
     });
 
     it("rejects an AND operator on a field that only supports OR", () => {
-        expect(() => new QueryMentions({ sourceUri: QueryItems.AND(["s1", "s2"]) })).toThrow(/invalid operator/);
+        expect(() => new QueryMentions({ sourceLocationUri: QueryItems.AND(["s1", "s2"]) })).toThrow(/invalid operator/);
     });
 
     it("validates source rank percentiles", () => {

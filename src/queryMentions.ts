@@ -53,9 +53,9 @@ export class QueryMentions extends Query<RequestMentions> {
         this.setQueryArrVal(keywords, "keyword", "keywordOper", "and");
         this.setQueryArrVal(conceptUri, "conceptUri", "conceptOper", "and");
         this.setQueryArrVal(categoryUri, "categoryUri", "categoryOper", "or");
-        this.setQueryArrVal(sourceUri, "sourceUri", undefined, "or");
+        this.setQueryArrVal(sourceUri, "sourceUri", "sourceOper", "or");
         this.setQueryArrVal(sourceLocationUri, "sourceLocationUri", undefined, "or");
-        this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", undefined, "or");
+        this.setQueryArrVal(sourceGroupUri, "sourceGroupUri", "sourceGroupOper", "or");
         this.setQueryArrVal(industryUri, "industryUri", "industryOper", "or");
         this.setQueryArrVal(sdgUri, "sdgUri", undefined, "or");
         this.setQueryArrVal(sasbUri, "sasbUri", undefined, "or");
@@ -70,7 +70,7 @@ export class QueryMentions extends Query<RequestMentions> {
         }
 
         this.setQueryArrVal(ignoreEventTypeUri, "ignoreEventTypeUri", undefined, "or");
-        this.setQueryArrVal(ignoreKeywords, "ignoreKeywords", undefined, "or");
+        this.setQueryArrVal(ignoreKeywords, "ignoreKeyword", undefined, "or");
         this.setQueryArrVal(ignoreConceptUri, "ignoreConceptUri", undefined, "or");
         this.setQueryArrVal(ignoreCategoryUri, "ignoreCategoryUri", undefined, "or");
         this.setQueryArrVal(ignoreSourceUri, "ignoreSourceUri", undefined, "or");
