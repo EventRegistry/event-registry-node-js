@@ -136,7 +136,11 @@ export class EventRegistry {
         const settingsPath = config.settingsFName || "settings.json";
         let fileSettings: ER.Config = {};
         if (fs && fs.existsSync(settingsPath)) {
-            fileSettings = JSON.parse(fs.readFileSync(settingsPath, "utf8"));
+            try {
+                fileSettings = JSON.parse(fs.readFileSync(settingsPath, "utf8"));
+            } catch (err) {
+                throw new Error(`Could not read the settings file '${settingsPath}': ${err instanceof Error ? err.message : String(err)}`);
+            }
         }
 
         this.config = {
