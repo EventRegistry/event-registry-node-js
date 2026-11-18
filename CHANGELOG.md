@@ -19,6 +19,8 @@ Also contains everything listed under `10.1.0` below, which was never published 
 
 **Fixed**
  - `new RequestMentionsConceptAggr()` no longer throws with its defaults: `mentionsSampleSize` now defaults to `20000` (was `100000`, above the `20000` cap).
+ - `TopicPage.loadTopicPageFromER()` starts from a clean definition; concepts, keywords and settings added earlier no longer leak into the loaded page.
+ - `TopicPage.loadTopicPageFromDefinition()` and `loadTopicPageFromFile()` accept definitions that carry `startSourceRankPercentile` or `endSourceRankPercentile`, so a saved definition with source rank limits loads again instead of being ignored.
 
 ## [v10.1.0](https://www.npmjs.com/package/eventregistry/v/10.1.0) (2026-11-11)
 

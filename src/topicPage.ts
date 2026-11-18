@@ -37,11 +37,15 @@ export class TopicPage extends QueryParamsBase {
     }
 
     private isTopicPage(definition: object): definition is ER.TopicPage {
-        return Object.keys(this.emptyTopicPage).sort().toString() === Object.keys(definition).sort().toString();
+        const required = Object.keys(this.emptyTopicPage);
+        const allowed = new Set([...required, "startSourceRankPercentile", "endSourceRankPercentile"]);
+        const keys = Object.keys(definition);
+        return required.every((key) => keys.includes(key)) && keys.every((key) => allowed.has(key));
     }
 
+    // A fresh copy each time: setters and add* methods mutate this.topicPage in place.
     private createEmptyTopicPage(): ER.TopicPage {
-        return this.emptyTopicPage;
+        return structuredClone(this.emptyTopicPage);
     }
 
     /**
