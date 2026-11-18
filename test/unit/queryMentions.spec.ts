@@ -40,9 +40,16 @@ function jsonBody(fetchMock: ReturnType<typeof vi.fn>, call = 0): Record<string,
 describe("QueryMentions parameters", () => {
     afterEach(() => vi.restoreAllMocks());
 
-    it("sends only the action when no filters or result type are given", () => {
+    it("sends only the action and the default mention list when no filters or result type are given", () => {
         const params = new QueryMentions().getQueryParams();
-        expect(params).toEqual({ action: "getMentions" });
+        expect(params).toEqual({
+            action: "getMentions",
+            resultType: "mentions",
+            mentionsPage: 1,
+            mentionsCount: 100,
+            mentionsSortBy: "date",
+            mentionsSortByAsc: false,
+        });
         expect(params.startSourceRankPercentile).toBeUndefined();
         expect(params.endSourceRankPercentile).toBeUndefined();
         expect(params.minSentiment).toBeUndefined();

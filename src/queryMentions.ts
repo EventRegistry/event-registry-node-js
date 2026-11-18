@@ -45,7 +45,7 @@ export class QueryMentions extends Query<RequestMentions> {
             maxSentiment = 1,
             minSentenceIndex,
             maxSentenceIndex,
-            requestedResult = new RequestMentions()
+            requestedResult = new RequestMentionsInfo()
         } = args;
 
         this.setVal("action", "getMentions");
