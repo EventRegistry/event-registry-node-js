@@ -105,6 +105,17 @@ export namespace ER {
          */
         repeatFailedRequestCount?: number;
         /**
+         * Base of the exponential backoff between retries, in milliseconds. Attempt n waits about
+         * `retryDelayMs * 2^n` (with jitter), capped at `maxRetryDelayMs`.
+         * @default 5000
+         */
+        retryDelayMs?: number;
+        /**
+         * Upper bound for a single wait between retries, in milliseconds (also caps a `Retry-After` header).
+         * @default 30000
+         */
+        maxRetryDelayMs?: number;
+        /**
          * If true, additional info about errors etc. will be printed to console.
          */
         verboseOutput?: boolean;

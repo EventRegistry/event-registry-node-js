@@ -111,3 +111,25 @@ describe("erFetch retries", () => {
         expect(calls).toBe(1);
     });
 });
+
+describe("EventRegistry retry config", () => {
+    afterEach(() => {
+        vi.unstubAllGlobals();
+    });
+
+    it("passes retryDelayMs to the retry loop", async () => {
+        const { EventRegistry } = await import("../../src");
+        let calls = 0;
+        vi.stubGlobal("fetch", vi.fn(async () => {
+            calls += 1;
+            return calls < 3
+                ? new Response("err", { status: 500, statusText: "Error" })
+                : new Response(JSON.stringify({ ok: true }), { status: 200 });
+        }));
+        const er = new EventRegistry({ minDelayBetweenRequests: 0, settingsFName: "no-settings.json", retryDelayMs: 1, maxRetryDelayMs: 2 });
+        const started = Date.now();
+        await er.jsonRequest("/api/v1/x", {});
+        expect(calls).toBe(3);
+        expect(Date.now() - started).toBeLessThan(2000);
+    });
+});

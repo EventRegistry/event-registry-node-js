@@ -435,7 +435,8 @@ export class EventRegistry {
                     signal: scope.signal,
                     timeoutMs: 600_000,
                     retry: this.config.repeatFailedRequestCount,
-                    retryDelayMs: 5000,
+                    retryDelayMs: this.config.retryDelayMs,
+                    maxRetryDelayMs: this.config.maxRetryDelayMs,
                     stopStatusCodes: this.stopStatusCodes
                 });
             } finally {
@@ -514,7 +515,8 @@ export class EventRegistry {
                     signal: scope.signal,
                     timeoutMs: 600_000,
                     retry: this.config.repeatFailedRequestCount,
-                    retryDelayMs: 5000,
+                    retryDelayMs: this.config.retryDelayMs,
+                    maxRetryDelayMs: this.config.maxRetryDelayMs,
                     stopStatusCodes: this.stopStatusCodes
                 });
             } finally {
