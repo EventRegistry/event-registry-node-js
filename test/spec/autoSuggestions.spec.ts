@@ -17,17 +17,6 @@ describe("Auto Suggest", () => {
         expect(await er.getNewsSourceUri("bbc")).toEqual("bbc.com");
     });
 
-    // Highly dependant on the database used.
-    xit("should return a pr source", async () => {
-        expect(await er.getNewsSourceUri("Business Wire")).toEqual("businesswire.com");
-        expect(await er.getNewsSourceUri("dailypolitical.com")).toEqual("dailypolitical.com");
-    });
-
-    // Highly dependant on the database used.
-    xit("should return a blog source", async () => {
-        expect(await er.getNewsSourceUri("topix.com")).toEqual("topix.com");
-    });
-
     it("should return a source from the specified place", async () => {
         const sources = await er.suggestSourcesAtPlace(await er.getConceptUri("New York City")) as unknown[];
         expect(sources.length).toBeGreaterThan(0);

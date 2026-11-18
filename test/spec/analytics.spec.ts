@@ -1,4 +1,4 @@
-import { Analytics, ER, sleep } from "../../src/index";
+import { Analytics } from "../../src/index";
 import { Utils } from "./utils";
 
 describe("Analytics", () => {
@@ -85,63 +85,6 @@ describe("Analytics", () => {
         expect(info).toHaveProperty("date");
         expect(info).toHaveProperty("datetime");
         expect(info).toHaveProperty("image");
-    });
-
-    // Disabled: trainTopicCreateTopic creates persistent trained-topic state on the live account
-    // and consumes metered/quota-limited analytics calls on every run.
-    xit("should train topic", async () => {
-        const response1 = await analytics.trainTopicCreateTopic("my topic2");
-        if (response1?.error) {
-            if (parseInt(response1.error?.response?.status ?? "0") >= 500) {
-                console.error(response1.error?.message);
-                return;
-            }
-        }
-        expect(response1).toHaveProperty("uri");
-        const uri = response1["uri"] as string;
-        // tslint:disable-next-line:max-line-length
-        await analytics.trainTopicAddDocument(uri, "Facebook has removed 18 accounts and 52 pages associated with the Myanmar military, including the page of its commander-in-chief, after a UN report accused the armed forces of genocide and war crimes.");
-        // tslint:disable-next-line:max-line-length
-        await analytics.trainTopicAddDocument(uri, "Emmanuel Macron’s climate commitment to “make this planet great again” has come under attack after his environment minister dramatically quit, saying the French president was not doing enough on climate and other environmental goals.");
-        // tslint:disable-next-line:max-line-length
-        await analytics.trainTopicAddDocument(uri, "Theresa May claimed that a no-deal Brexit “wouldn’t be the end of the world” as she sought to downplay a controversial warning made by Philip Hammond last week that it would cost £80bn in extra borrowing and inhibit long-term economic growth.");
-        // check that we can also get the topic later on
-        const response3 = await analytics.trainTopicGetTrainedTopic(uri);
-        if (response3?.error) {
-            if (parseInt(response3.error?.response?.status ?? "0") >= 500) {
-                console.error(response3.error?.message);
-                return;
-            }
-        }
-        expect(response3).toHaveProperty("topic");
-        const topic2 = response3["topic"] as ER.TopicPage;
-        expect(topic2).toHaveProperty("concepts");
-        expect((topic2.concepts || []).length).toBeGreaterThan(0);
-        expect(topic2).toHaveProperty("categories");
-        expect((topic2.categories || []).length).toBeGreaterThan(0);
-    });
-
-    // Disabled: trainTopicOnTweets creates persistent trained-topic state on the live account,
-    // consumes metered/quota-limited analytics calls, and depends on live external tweet data.
-    xit("should train topic on twitter", async () => {
-        const response1 = await analytics.trainTopicOnTweets("@SeanEllis", {maxConcepts: 50, maxCategories: 20, maxTweets: 400});
-        if (response1?.error) {
-            if (parseInt(response1.error?.response?.status ?? "0") >= 500) {
-                console.error(response1.error?.message);
-                return;
-            }
-        }
-        expect(response1).toHaveProperty("uri");
-        const uri = response1["uri"] as string;
-        await sleep(5 * 1000);
-        const response2 = await analytics.trainTopicGetTrainedTopic(uri);
-        if (response2?.error) {
-            if (parseInt(response2.error?.response?.status ?? "0") >= 500) {
-                console.error(response2.error?.message);
-                return;
-            }
-        }
-        expect(response2).toHaveProperty("topic");
     });
 
 });
