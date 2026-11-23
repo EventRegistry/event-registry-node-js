@@ -18,6 +18,7 @@ Also contains everything listed under `10.1.0` below, which was never published 
  - A malformed `settings.json` now reports the file and the parse error. Unsupported-parameter warnings go through one logger helper. Iterators buffer pages and `jsonRequest` and `jsonRequestAnalytics` share one request path; behaviour is unchanged.
 
 **Fixed**
+ - `throwOnError` applies to every request, not only `execQuery()`: suggesters (`suggestConcepts`, …), URI lookups (`getConceptUri`, …), analytics calls and other `jsonRequest` / `jsonRequestAnalytics` callers throw on failure instead of resolving to `{ error }`.
  - `new RequestMentionsConceptAggr()` no longer throws with its defaults: `mentionsSampleSize` now defaults to `20000` (was `100000`, above the `20000` cap).
  - `TopicPage.loadTopicPageFromER()` starts from a clean definition; concepts, keywords and settings added earlier no longer leak into the loaded page.
  - `TopicPage.loadTopicPageFromDefinition()` and `loadTopicPageFromFile()` accept definitions that carry `startSourceRankPercentile` or `endSourceRankPercentile`, so a saved definition with source rank limits loads again instead of being ignored.

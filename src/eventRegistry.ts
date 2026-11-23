@@ -381,9 +381,6 @@ export class EventRegistry {
             this.logger.error("Request did not return with the 'data' property.");
         }
         const data = request?.data || {} as ER.Response<T>;
-        if (this.config.throwOnError && typeof data.error === "string" && data.error) {
-            throw (data as { apiError?: ErApiError }).apiError ?? new Error(data.error);
-        }
         if (this.config.validate) {
             const issues = validateResponse(data);
             if (issues.length > 0) {
@@ -531,7 +528,6 @@ export class EventRegistry {
             if (scope.signal?.aborted) {
                 throw scope.signal.reason;
             }
-            request = this.createErrorResponse<T>(error);
             const err = error as { stack?: string; message?: string; response?: { status?: number; statusText?: string; data?: unknown }; errno?: unknown };
             if (this.config.verboseOutput) {
                 this.logger.error(`${label} exception while executing the request.`);
@@ -545,6 +541,10 @@ export class EventRegistry {
             if (this.config?.logging) {
                 this.logger.error(String(err?.errno ?? error));
             }
+            if (this.config.throwOnError) {
+                throw error;
+            }
+            request = this.createErrorResponse<T>(error);
         } finally {
             this.lock.release();
             scope.dispose();

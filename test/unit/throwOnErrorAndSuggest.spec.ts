@@ -26,6 +26,25 @@ describe("throwOnError", () => {
         stubFetch(400, { error: "bad query" });
         await expect(newEr(true).execQuery(query)).rejects.toThrow(/bad query/);
     });
+
+    it("throws from suggesters, URI lookups and analytics when enabled", async () => {
+        stubFetch(400, { error: "bad query" });
+        const er = newEr(true);
+        await expect(er.suggestConcepts("x")).rejects.toThrow(/bad query/);
+        await expect(er.getConceptUri("x")).rejects.toThrow(/bad query/);
+        await expect(er.jsonRequestAnalytics("/api/v1/detectLanguage", { text: "x" })).rejects.toThrow(/bad query/);
+    });
+
+    it("throws when a 200 response carries an error when enabled", async () => {
+        stubFetch(200, { error: "no access" });
+        await expect(newEr(true).suggestConcepts("x")).rejects.toThrow(/no access/);
+    });
+
+    it("keeps resolving to { error } outside execQuery by default", async () => {
+        stubFetch(400, { error: "bad query" });
+        const response = await newEr().jsonRequest<{ error?: string }>("/api/v1/suggestConceptsFast", { prefix: "x" });
+        expect(response.data.error).toContain("bad query");
+    });
 });
 
 describe("suggesters accept positional and args-object forms", () => {
