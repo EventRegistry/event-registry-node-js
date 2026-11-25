@@ -2,7 +2,7 @@
 
 This log contains changes specific to the NodeJS SDK.
 
-## [v11.0.0](https://www.npmjs.com/package/eventregistry/v/11.0.0) (2026-11-18)
+## [v11.0.0](https://www.npmjs.com/package/eventregistry/v/11.0.0) (2026-11-25)
 
 Also contains everything listed under `10.1.0` below, which was never published to npm.
 
